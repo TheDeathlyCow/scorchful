@@ -1,31 +1,32 @@
 {
 	"schemaVersion": 1,
-	"id": "modid",
+	"id": "scorchful",
 	"version": "${version}",
-	"name": "Example mod",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Scorchful",
+	"description": "Burning to death - one block at a time",
 	"authors": [
-		"Me!"
+		"TheDeathlyCow"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://modrinth.com/mod/frostiful",
+		"sources": "https://github.com/TheDeathlyCow/scorchful",
+		"issues": "https://github.com/TheDeathlyCow/scorchful/issues"
 	},
-	"license": "CC0-1.0",
-	"icon": "assets/modid/icon.png",
+	"license": "All rights reserved",
+	"icon": "assets/scorchful/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.example.ExampleMod"
+			"com.github.thedeathlycow.scorchful.Scorchful"
 		],
 		"client": [
-			"com.example.ExampleModClient"
+			"com.github.thedeathlycow.scorchful.ScorchfulClient"
 		]
 	},
 	"mixins": [
-		"modid.mixins.json",
+		"scorchful.mixins.json",
 		{
-			"config": "modid.client.mixins.json",
+			"config": "scorchful.client.mixins.json",
 			"environment": "client"
 		}
 	],

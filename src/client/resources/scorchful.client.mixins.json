@@ -1,9 +1,9 @@
 {
 	"required": true,
-	"package": "com.example.mixin.client",
+	"package": "com.github.thedeathlycow.scorchful.mixin.client",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
-		"ExampleClientMixin"
+		"ScorchfulClientMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
