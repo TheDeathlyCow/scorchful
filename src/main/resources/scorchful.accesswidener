@@ -1,0 +1,5 @@
+accessWidener	v1  named
+### Classes ###
+
+# Heart Type needed to mixin to render health bar
+accessible class net/minecraft/client/gui/hud/InGameHud$HeartType

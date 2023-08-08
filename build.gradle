@@ -32,6 +32,8 @@ loom {
 		}
 	}
 
+	accessWidenerPath = file("src/main/resources/scorchful.accesswidener")
+
 }
 
 dependencies {
