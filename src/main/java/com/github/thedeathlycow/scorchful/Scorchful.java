@@ -14,5 +14,6 @@ public class Scorchful implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Hello Fabric world!");
+		// hello nerjal
 	}
 }
