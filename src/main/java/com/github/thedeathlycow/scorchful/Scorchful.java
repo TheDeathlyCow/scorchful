@@ -2,6 +2,8 @@ package com.github.thedeathlycow.scorchful;
 
 import com.github.thedeathlycow.scorchful.temperature.LivingEntityThermooEventListeners;
 import com.github.thedeathlycow.scorchful.temperature.PlayerThermooEventListeners;
+import com.github.thedeathlycow.thermoo.api.temperature.event.LivingEntityEnvironmentEvents;
+import com.github.thedeathlycow.thermoo.api.temperature.event.LivingEntityTemperatureEvents;
 import com.github.thedeathlycow.thermoo.api.temperature.event.PlayerEnvironmentEvents;
 import net.fabricmc.api.ModInitializer;
 
@@ -25,6 +27,7 @@ public class Scorchful implements ModInitializer {
 	public void onInitialize() {
 		LOGGER.info("Hello Fabric world!");
 
+		registerThermooEventListeners();
 	}
 
 	private void registerThermooEventListeners() {
@@ -34,5 +37,7 @@ public class Scorchful implements ModInitializer {
 
 		PlayerEnvironmentEvents.TICK_BIOME_TEMPERATURE_CHANGE.register(playerEvents::applyPassiveHeating);
 
+		LivingEntityEnvironmentEvents.TICK_HEAT_EFFECTS.register(entityEvents::tickHeatEffects);
+		LivingEntityEnvironmentEvents.TICK_IN_WET_LOCATION.register(entityEvents::tickWetChange);
 	}
 }

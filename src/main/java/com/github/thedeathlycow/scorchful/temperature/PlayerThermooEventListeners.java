@@ -26,7 +26,7 @@ public class PlayerThermooEventListeners {
         final boolean doPassiveHeating = true;
 
         final boolean canApplyChange = (changeAmount < 0 && player.thermoo$canFreeze())
-                || (changeAmount > 0 && player.thermoo$canOverheat() && player.thermoo$getTemperatureScale() >= 1.0);
+                || (changeAmount > 0 && player.thermoo$canOverheat() && player.thermoo$getTemperatureScale() <= 1.0);
 
         if (doPassiveHeating && canApplyChange) {
             float modifier = 0f;
