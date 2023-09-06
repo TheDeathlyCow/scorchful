@@ -15,6 +15,10 @@ public class HeatingConfig implements ConfigData {
 
     int heatPerSkylightLevel = 2;
 
+    float minTempForScorching = 1f;
+
+    int netherWarmRate = 3;
+
     public int getMaxTemperaturePerTick() {
         return maxTemperaturePerTick;
     }
@@ -29,5 +33,13 @@ public class HeatingConfig implements ConfigData {
 
     public int getHeatPerSkylightLevel() {
         return heatPerSkylightLevel;
+    }
+
+    public float getMinTempForScorching() {
+        return minTempForScorching;
+    }
+
+    public int getNetherWarmRate() {
+        return netherWarmRate;
     }
 }

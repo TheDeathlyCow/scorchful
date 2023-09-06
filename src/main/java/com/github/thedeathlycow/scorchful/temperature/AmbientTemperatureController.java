@@ -5,12 +5,15 @@ import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentController;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentControllerDecorator;
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBiomeTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.dimension.DimensionType;
 
 public class AmbientTemperatureController extends EnvironmentControllerDecorator {
 
@@ -27,26 +30,53 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
     public int getFloorTemperature(LivingEntity entity, World world, BlockState state, BlockPos pos) {
         if (state.isIn(SBlockTags.HEAVY_ICE)) {
             ScorchfulConfig config = Scorchful.getConfig();
-            return config.heatingConfig.getCoolingFromIce();
+            return -config.heatingConfig.getCoolingFromIce();
         } else {
             return controller.getFloorTemperature(entity, world, state, pos);
         }
     }
 
     @Override
-    public int getHeatAtLocation(World world, BlockPos pos) {
+    public int getEnvironmentTemperatureForPlayer(PlayerEntity player, int localTemperature) {
+        if (player.thermoo$isCold() && localTemperature < 0) {
+            return controller.getEnvironmentTemperatureForPlayer(player, localTemperature);
+        }
+
+        return localTemperature;
+    }
+
+    @Override
+    public int getLocalTemperatureChange(World world, BlockPos pos) {
+        DimensionType dimensionType = world.getDimension();
+
+        if (dimensionType.natural()) {
+            return getTempInOverworld(world, pos);
+        } else if (dimensionType.ultrawarm()) {
+            return Scorchful.getConfig().heatingConfig.getNetherWarmRate();
+        } else {
+            return controller.getLocalTemperatureChange(world, pos);
+        }
+    }
+
+    private int getTempInOverworld(World world, BlockPos pos) {
+        var biome = world.getBiome(pos);
+        int warmth = controller.getLocalTemperatureChange(world, pos);
+        ScorchfulConfig config = Scorchful.getConfig();
+
+        if (!biome.isIn(ConventionalBiomeTags.CLIMATE_HOT)) {
+            return warmth;
+        }
+
         int darkness = world.getAmbientDarkness();
         int skylight = world.getLightLevel(LightType.SKY, pos) - darkness;
 
-        ScorchfulConfig config = Scorchful.getConfig();
         int minLevel = config.heatingConfig.getGetMinSkyLightLevelForHeat();
 
-        int warmth = controller.getHeatAtLocation(world, pos);
         if (skylight >= minLevel) {
             warmth += config.heatingConfig.getHeatPerSkylightLevel() * (skylight - minLevel);
         }
 
-        return warmth;
-
+        return Math.min(warmth, config.heatingConfig.getMaxTemperaturePerTick());
     }
+
 }
