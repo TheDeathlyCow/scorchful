@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful;
 
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
@@ -28,6 +29,11 @@ public class BurningHeartsOverlay {
     }
 
     public void drawHeartOverlayBar(DrawContext context, PlayerEntity player) {
+
+        ScorchfulConfig config = Scorchful.getConfig();
+        if (!config.clientConfig.doBurningHeartOverlay()) {
+            return;
+        }
 
         int fireHeartPoints = getNumFirePoints(player);
         int fireHearts = getNumFireHeartsFromPoints(fireHeartPoints);
