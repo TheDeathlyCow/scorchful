@@ -1,12 +1,12 @@
 package com.github.thedeathlycow.scorchful;
 
-import com.github.thedeathlycow.scorchful.temperature.LivingEntityThermooEventListeners;
-import com.github.thedeathlycow.scorchful.temperature.PlayerThermooEventListeners;
-import com.github.thedeathlycow.thermoo.api.temperature.event.LivingEntityEnvironmentEvents;
-import com.github.thedeathlycow.thermoo.api.temperature.event.LivingEntityTemperatureEvents;
-import com.github.thedeathlycow.thermoo.api.temperature.event.PlayerEnvironmentEvents;
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.scorchful.temperature.AttributeController;
+import com.github.thedeathlycow.scorchful.temperature.PlayerAttributeController;
+import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentControllerInitializeEvent;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
-
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Contract;
 import org.slf4j.Logger;
@@ -25,19 +25,22 @@ public class Scorchful implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		LOGGER.info("Hello Fabric world!");
+		AutoConfig.register(ScorchfulConfig.class, GsonConfigSerializer::new);
 
-		registerThermooEventListeners();
+		this.registerThermooEventListeners();
+		LOGGER.info("Scorchful initialized!");
 	}
 
+	public static ScorchfulConfig getConfig() {
+		return AutoConfig.getConfigHolder(ScorchfulConfig.class).getConfig();
+	}
+
+
 	private void registerThermooEventListeners() {
-
-		var playerEvents = new PlayerThermooEventListeners();
-		var entityEvents = new LivingEntityThermooEventListeners();
-
-		PlayerEnvironmentEvents.TICK_BIOME_TEMPERATURE_CHANGE.register(playerEvents::applyPassiveHeating);
-
-		LivingEntityEnvironmentEvents.TICK_HEAT_EFFECTS.register(entityEvents::tickHeatEffects);
-		LivingEntityEnvironmentEvents.TICK_IN_WET_LOCATION.register(entityEvents::tickWetChange);
+		EnvironmentControllerInitializeEvent.EVENT.register(AttributeController::new);
+		EnvironmentControllerInitializeEvent.EVENT.register(
+				EnvironmentControllerInitializeEvent.MODIFY_PHASE,
+				PlayerAttributeController::new
+		);
 	}
 }
