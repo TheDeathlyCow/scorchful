@@ -34,13 +34,9 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
     }
 
     @Override
-    public int getEnvironmentTemperatureForPlayer(PlayerEntity player, int localTemperature) {
-        return super.getEnvironmentTemperatureForPlayer(player, localTemperature);
-    }
-
-    @Override
     public int getHeatAtLocation(World world, BlockPos pos) {
-        int skylight = world.getLightLevel(LightType.SKY, pos) - world.getAmbientDarkness();
+        int darkness = world.getAmbientDarkness();
+        int skylight = world.getLightLevel(LightType.SKY, pos) - darkness;
 
         ScorchfulConfig config = Scorchful.getConfig();
         int minLevel = config.heatingConfig.getGetMinSkyLightLevelForHeat();

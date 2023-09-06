@@ -46,11 +46,6 @@ public class Scorchful implements ModInitializer {
 
 		EnvironmentControllerInitializeEvent.EVENT.register(AmbientTemperatureController::new);
 
-		// disable if frostiful is enabled - this is basically just a copy of that
-		// so let the configs not have to deal with load order
-		if (!ScorchfulIntegrations.isModLoaded(ScorchfulIntegrations.FROSTIFUL_ID)) {
-			EnvironmentControllerInitializeEvent.EVENT.register(FrostifulTemperatureController::new);
-		}
 		EnvironmentControllerInitializeEvent.EVENT.register(
 				EnvironmentControllerInitializeEvent.MODIFY_PHASE,
 				ScorchfulModifyTemperatureController::new
