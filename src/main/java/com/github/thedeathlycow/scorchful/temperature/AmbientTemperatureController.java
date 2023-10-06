@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.temperature;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentController;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentControllerDecorator;
@@ -9,6 +10,7 @@ import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBiomeTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
@@ -50,7 +52,7 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         DimensionType dimensionType = world.getDimension();
 
         if (dimensionType.natural()) {
-            return getTempInOverworld(world, pos);
+            return getNaturalWorldTemperatureChange(world, pos);
         } else if (dimensionType.ultrawarm()) {
             return Scorchful.getConfig().heatingConfig.getNetherWarmRate();
         } else {
@@ -58,25 +60,28 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         }
     }
 
-    private int getTempInOverworld(World world, BlockPos pos) {
-        var biome = world.getBiome(pos);
+    private int getNaturalWorldTemperatureChange(World world, BlockPos pos) {
+        // initialize to base
         int warmth = controller.getLocalTemperatureChange(world, pos);
+
+        RegistryEntry<Biome> biome = world.getBiome(pos);
         ScorchfulConfig config = Scorchful.getConfig();
 
-        if (!biome.isIn(ConventionalBiomeTags.CLIMATE_HOT)) {
-            return warmth;
+        if (biome.isIn(ConventionalBiomeTags.CLIMATE_HOT) || biome.value().getTemperature() >= 0.95f) {
+            int skylight = world.getLightLevel(LightType.SKY, pos) - world.getAmbientDarkness();
+
+            int minLevel = config.heatingConfig.getGetMinSkyLightLevelForHeat();
+
+            if (skylight >= minLevel) {
+                warmth += config.heatingConfig.getHeatFromSun();
+
+                if (biome.isIn(SBiomeTags.SCORCHING_BIOMES)) {
+                    warmth += config.heatingConfig.getScorchingBiomeHeatIncrease();
+                }
+            }
         }
 
-        int darkness = world.getAmbientDarkness();
-        int skylight = world.getLightLevel(LightType.SKY, pos) - darkness;
-
-        int minLevel = config.heatingConfig.getGetMinSkyLightLevelForHeat();
-
-        if (skylight >= minLevel) {
-            warmth += config.heatingConfig.getHeatPerSkylightLevel() * (skylight - minLevel);
-        }
-
-        return Math.min(warmth, config.heatingConfig.getMaxTemperaturePerTick());
+        return warmth;
     }
 
 }

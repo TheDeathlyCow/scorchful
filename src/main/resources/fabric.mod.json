@@ -21,6 +21,9 @@
 		],
 		"client": [
 			"com.github.thedeathlycow.scorchful.ScorchfulClient"
+		],
+		"modmenu": [
+			"com.github.thedeathlycow.scorchful.ScorchfulModMenu"
 		]
 	},
 	"mixins": [

@@ -45,10 +45,5 @@ public class Scorchful implements ModInitializer {
 
 
 		EnvironmentControllerInitializeEvent.EVENT.register(AmbientTemperatureController::new);
-
-		EnvironmentControllerInitializeEvent.EVENT.register(
-				EnvironmentControllerInitializeEvent.MODIFY_PHASE,
-				ScorchfulModifyTemperatureController::new
-		);
 	}
 }

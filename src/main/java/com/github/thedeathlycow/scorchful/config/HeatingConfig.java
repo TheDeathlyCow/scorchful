@@ -7,21 +7,16 @@ import me.shedaniel.autoconfig.annotation.Config;
 @Config(name = Scorchful.MODID + ".heating_config")
 public class HeatingConfig implements ConfigData {
 
-    int maxTemperaturePerTick = 3;
-
     int coolingFromIce = 12;
 
     int getMinSkyLightLevelForHeat = 13;
 
-    int heatPerSkylightLevel = 2;
+    int heatFromSun = 1;
 
-    float minTempForScorching = 1f;
+    int scorchingBiomeHeatIncrease = 1;
+
 
     int netherWarmRate = 3;
-
-    public int getMaxTemperaturePerTick() {
-        return maxTemperaturePerTick;
-    }
 
     public int getCoolingFromIce() {
         return coolingFromIce;
@@ -31,12 +26,12 @@ public class HeatingConfig implements ConfigData {
         return getMinSkyLightLevelForHeat;
     }
 
-    public int getHeatPerSkylightLevel() {
-        return heatPerSkylightLevel;
+    public int getHeatFromSun() {
+        return heatFromSun;
     }
 
-    public float getMinTempForScorching() {
-        return minTempForScorching;
+    public int getScorchingBiomeHeatIncrease() {
+        return scorchingBiomeHeatIncrease;
     }
 
     public int getNetherWarmRate() {
