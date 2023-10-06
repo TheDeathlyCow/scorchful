@@ -1,0 +1,29 @@
+{
+    "type": "thermoo:status_effect",
+    "entity": {
+        "condition": "minecraft:reference",
+        "name": "scorchful:can_heat"
+    },
+    "temperature_scale_range": {
+        "min": 0.99
+    },
+    "config": {
+        "effects": [
+            {
+                "amplifier": 1,
+                "duration": 20,
+                "effect": "minecraft:hunger"
+            },
+            {
+                "amplifier": 1,
+                "duration": 20,
+                "effect": "minecraft:weakness"
+            },
+            {
+                "amplifier": 0,
+                "duration": 200,
+                "effect": "minecraft:nausea"
+            }
+        ]
+    }
+}

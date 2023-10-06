@@ -4,6 +4,7 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
+import com.github.thedeathlycow.thermoo.api.ThermooTags;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentController;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentControllerDecorator;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBiomeTags;
@@ -67,7 +68,7 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         RegistryEntry<Biome> biome = world.getBiome(pos);
         ScorchfulConfig config = Scorchful.getConfig();
 
-        if (biome.isIn(ConventionalBiomeTags.CLIMATE_HOT) || biome.value().getTemperature() >= 0.95f) {
+        if (biome.isIn(SBiomeTags.WARM_BIOMES) || biome.value().getTemperature() >= 0.95f) {
             int skylight = world.getLightLevel(LightType.SKY, pos) - world.getAmbientDarkness();
 
             int minLevel = config.heatingConfig.getGetMinSkyLightLevelForHeat();

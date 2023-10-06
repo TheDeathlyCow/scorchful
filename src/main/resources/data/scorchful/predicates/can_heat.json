@@ -1,0 +1,7 @@
+{
+    "condition": "minecraft:inverted",
+    "term": {
+        "condition": "minecraft:reference",
+        "name": "scorchful:benefits_from_heat"
+    }
+}
