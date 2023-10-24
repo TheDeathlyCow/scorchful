@@ -24,6 +24,9 @@
 		],
 		"modmenu": [
 			"com.github.thedeathlycow.scorchful.ScorchfulModMenu"
+		],
+		"cardinal-components-entity": [
+			"com.github.thedeathlycow.scorchful.components.ScorchfulComponents"
 		]
 	},
 	"mixins": [
@@ -42,5 +45,10 @@
 	"suggests": {
 		"another-mod": "*"
 	},
-	"accessWidener": "scorchful.accesswidener"
+	"accessWidener": "scorchful.accesswidener",
+	"custom": {
+		"cardinal-components": [
+			"scorchful:player"
+		]
+	}
 }
