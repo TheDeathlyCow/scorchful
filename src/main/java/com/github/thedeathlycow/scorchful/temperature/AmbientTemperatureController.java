@@ -4,14 +4,13 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
-import com.github.thedeathlycow.thermoo.api.ThermooTags;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentController;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentControllerDecorator;
-import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBiomeTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.server.world.ServerChunkManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
@@ -19,6 +18,12 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionType;
 
 public class AmbientTemperatureController extends EnvironmentControllerDecorator {
+
+
+    private static final int BLOCK_LIGHT_DIVISOR = 4;
+    private static final int HEAT_HEIGHT_SLOPE = -5;
+    private static final int MAX_HEAT_FROM_HEIGHT = 3;
+
 
     /**
      * Constructs a decorator out of a base controller
@@ -54,11 +59,33 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
 
         if (dimensionType.natural()) {
             return getNaturalWorldTemperatureChange(world, pos);
-        } else if (dimensionType.ultrawarm()) {
-            return Scorchful.getConfig().heatingConfig.getNetherWarmRate();
+        } else if (world.getDimension().ultrawarm()) {
+            return getNetherTemperatureChange(world, pos);
         } else {
             return controller.getLocalTemperatureChange(world, pos);
         }
+    }
+
+    private int getNetherTemperatureChange(World world, BlockPos pos) {
+        int blockLight = world.getLightLevel(LightType.BLOCK, pos);
+
+        // assume no sea level
+        int distanceToLavaLevel = Integer.MAX_VALUE;
+
+        // generally this should be true, since we always execute on the server
+        if (world.getChunkManager() instanceof ServerChunkManager serverChunkManager) {
+            int height = pos.getY();
+            int seaLevel = serverChunkManager.getChunkGenerator().getSeaLevel();
+
+            distanceToLavaLevel = Math.max(height - seaLevel, 0);
+        }
+
+        return Math.max(
+                blockLight / BLOCK_LIGHT_DIVISOR,
+                distanceToLavaLevel != 0
+                        ? ((distanceToLavaLevel / HEAT_HEIGHT_SLOPE) + MAX_HEAT_FROM_HEIGHT)
+                        : MAX_HEAT_FROM_HEIGHT
+        );
     }
 
     private int getNaturalWorldTemperatureChange(World world, BlockPos pos) {
