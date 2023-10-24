@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.temperature;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.config.HeatingConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
@@ -8,6 +9,7 @@ import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentController;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentControllerDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerChunkManager;
@@ -32,6 +34,23 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
      */
     public AmbientTemperatureController(EnvironmentController controller) {
         super(controller);
+    }
+
+    @Override
+    public int getTemperatureEffectsChange(LivingEntity entity) {
+        // dont mess with frostiful
+        if (!entity.thermoo$isWarm()) {
+            return controller.getTemperatureEffectsChange(entity);
+        }
+
+        int change = 0;
+        HeatingConfig config = Scorchful.getConfig().heatingConfig;
+
+        if (entity.isOnFire() && !entity.isFireImmune() && !entity.hasStatusEffect(StatusEffects.FIRE_RESISTANCE)) {
+            change += config.getOnFireWarmRate();
+        }
+
+        return change;
     }
 
     @Override

@@ -15,8 +15,7 @@ public class HeatingConfig implements ConfigData {
 
     int scorchingBiomeHeatIncrease = 1;
 
-
-    int netherWarmRate = 3;
+    int onFireWarmRate = 4;
 
     public int getCoolingFromIce() {
         return coolingFromIce;
@@ -34,7 +33,7 @@ public class HeatingConfig implements ConfigData {
         return scorchingBiomeHeatIncrease;
     }
 
-    public int getNetherWarmRate() {
-        return netherWarmRate;
+    public int getOnFireWarmRate() {
+        return onFireWarmRate;
     }
 }
