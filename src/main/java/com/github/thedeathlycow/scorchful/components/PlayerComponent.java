@@ -54,14 +54,16 @@ public class PlayerComponent implements Component, ServerTickingComponent {
 
     @Override
     public void serverTick() {
-        this.tickWater();
+        if (this.provider.thermoo$isWarm()) {
+            this.tickWater();
+        }
+        int wetTicks = this.provider.thermoo$getWetTicks();
+        if (wetTicks > 0) {
+            this.provider.thermoo$setWetTicks(wetTicks - 1);
+        }
     }
 
     private void tickWater() {
-        if (this.provider.thermoo$isCold()) {
-            return;
-        }
-
         HeatingConfig config = Scorchful.getConfig().heatingConfig;
 
         if (this.water > 0) {
@@ -71,9 +73,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
             );
         }
 
-        int wetTicks = this.provider.thermoo$getWetTicks();
-        if (wetTicks > 0) {
-            this.provider.thermoo$setWetTicks(wetTicks - 1);
+        if (this.provider.thermoo$isWet()) {
             this.provider.thermoo$addTemperature(config.getTemperatureFromWetness());
         }
     }
