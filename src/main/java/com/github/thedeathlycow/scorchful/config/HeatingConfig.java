@@ -23,7 +23,7 @@ public class HeatingConfig implements ConfigData {
 
     int waterFromQuenchingFood = 50;
 
-    int waterFromWaterAndPotions = 250;
+    int waterFromDrinking = 250;
 
     public int getCoolingFromIce() {
         return coolingFromIce;
@@ -57,7 +57,7 @@ public class HeatingConfig implements ConfigData {
         return waterFromQuenchingFood;
     }
 
-    public int getWaterFromPotions() {
-        return waterFromWaterAndPotions;
+    public int getWaterFromDrinking() {
+        return waterFromDrinking;
     }
 }

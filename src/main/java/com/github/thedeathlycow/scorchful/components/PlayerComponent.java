@@ -54,7 +54,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
 
     @Override
     public void serverTick() {
-        if (this.provider.thermoo$isWarm()) {
+        if (!this.provider.thermoo$isCold()) {
             this.tickWater();
         }
         int wetTicks = this.provider.thermoo$getWetTicks();

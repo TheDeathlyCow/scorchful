@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful;
 
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.scorchful.registry.SItems;
 import com.github.thedeathlycow.scorchful.server.ThirstCommand;
 import com.github.thedeathlycow.scorchful.temperature.*;
 import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentControllerInitializeEvent;
@@ -33,6 +34,7 @@ public class Scorchful implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		AutoConfig.register(ScorchfulConfig.class, GsonConfigSerializer::new);
+		SItems.registerItems();
 		CommandRegistrationCallback.EVENT.register(
 				(dispatcher, registryAccess, environment) -> {
 					ThirstCommand.register(dispatcher);

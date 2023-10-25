@@ -23,7 +23,7 @@ public class ConsumePotionMixin {
         if (user.isPlayer()) {
             HeatingConfig config = Scorchful.getConfig().heatingConfig;
             ScorchfulComponents.PLAYER.get(user)
-                    .addWater(config.getWaterFromPotions());
+                    .addWater(config.getWaterFromDrinking());
         }
     }
 
