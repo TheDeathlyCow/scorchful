@@ -12,8 +12,8 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 
-public class WaterSatchelItem extends Item {
-    public WaterSatchelItem(Settings settings) {
+public class WaterSkinItem extends Item {
+    public WaterSkinItem(Settings settings) {
         super(settings);
     }
 
