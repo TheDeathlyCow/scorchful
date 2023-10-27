@@ -25,6 +25,11 @@ public class HeatingConfig implements ConfigData {
 
     int waterFromDrinking = 250;
 
+    int rainWetnessIncrease = 1;
+    int touchingWaterWetnessIncrease = 5;
+    int dryRate = 1;
+    int onFireDryDate = 50;
+
     public int getCoolingFromIce() {
         return coolingFromIce;
     }
@@ -60,4 +65,21 @@ public class HeatingConfig implements ConfigData {
     public int getWaterFromDrinking() {
         return waterFromDrinking;
     }
+
+    public int getRainWetnessIncrease() {
+        return rainWetnessIncrease;
+    }
+
+    public int getTouchingWaterWetnessIncrease() {
+        return touchingWaterWetnessIncrease;
+    }
+
+    public int getDryRate() {
+        return dryRate;
+    }
+
+    public int getOnFireDryDate() {
+        return onFireDryDate;
+    }
+
 }
