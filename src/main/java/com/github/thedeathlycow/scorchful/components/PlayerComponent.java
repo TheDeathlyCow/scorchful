@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 
 public class PlayerComponent implements Component, ServerTickingComponent {
 
-    public static final int MAX_WATER = 1000;
+    public static final int MAX_WATER = 300;
 
     private static final String WATER_KEY = "body_water";
 
@@ -57,10 +57,6 @@ public class PlayerComponent implements Component, ServerTickingComponent {
     public void serverTick() {
         if (!this.provider.thermoo$isCold()) {
             this.tickWater();
-        }
-        int wetTicks = this.provider.thermoo$getWetTicks();
-        if (wetTicks > 0) {
-            this.provider.thermoo$setWetTicks(wetTicks - 1);
         }
     }
 

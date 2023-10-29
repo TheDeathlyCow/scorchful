@@ -7,13 +7,13 @@ import me.shedaniel.autoconfig.annotation.Config;
 @Config(name = Scorchful.MODID + ".thirst_config")
 public class ThirstConfig implements ConfigData {
 
-    int wetnessFromBodyWater = 1;
+    int wetnessFromBodyWater = 2;
 
     int temperatureFromWetness = -3;
 
-    int waterFromQuenchingFood = 50;
+    int waterFromQuenchingFood = 15;
 
-    int waterFromDrinking = 250;
+    int waterFromDrinking = 100;
 
     int rainWetnessIncrease = 1;
 
