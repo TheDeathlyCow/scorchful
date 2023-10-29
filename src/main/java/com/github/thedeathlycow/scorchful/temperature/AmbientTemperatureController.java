@@ -26,6 +26,10 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
     private static final int HEAT_HEIGHT_SLOPE = -5;
     private static final int MAX_HEAT_FROM_HEIGHT = 3;
 
+    private static final int SKY_LIGHT_BELOW_FOR_SHADE = 2;
+
+    private static final int SHADE_COOLING = 1;
+
 
     /**
      * Constructs a decorator out of a base controller
@@ -125,6 +129,8 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
                 if (biome.isIn(SBiomeTags.SCORCHING_BIOMES)) {
                     warmth += config.heatingConfig.getScorchingBiomeHeatIncrease();
                 }
+            } else if (skylight <= minLevel - SKY_LIGHT_BELOW_FOR_SHADE) {
+                warmth -= SHADE_COOLING;
             }
         }
 

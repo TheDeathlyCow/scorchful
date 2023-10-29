@@ -12,6 +12,8 @@ public class SBiomeTags {
 
     public static final TagKey<Biome> SCORCHING_BIOMES = SBiomeTags.register("scorching_biomes");
 
+    public static final TagKey<Biome> HUMID_BIOMES = SBiomeTags.register("humid_biomes");
+
     public static TagKey<Biome> register(String id) {
         return TagKey.of(RegistryKeys.BIOME, new Identifier(Scorchful.MODID, id));
     }

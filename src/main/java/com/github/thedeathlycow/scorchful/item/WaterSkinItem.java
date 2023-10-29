@@ -23,7 +23,7 @@ public class WaterSkinItem extends Item {
             return stack;
         }
 
-        ScorchfulComponents.PLAYER.get(user).addWater(Scorchful.getConfig().heatingConfig.getWaterFromDrinking());
+        ScorchfulComponents.PLAYER.get(user).addWater(Scorchful.getConfig().thirstConfig.getWaterFromDrinking());
         stack.damage(1, user,  p -> p.sendToolBreakStatus(user.getActiveHand()));
 
         return stack;

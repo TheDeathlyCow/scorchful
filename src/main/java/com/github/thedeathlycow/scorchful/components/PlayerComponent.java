@@ -2,14 +2,15 @@ package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.HeatingConfig;
-import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
+import com.github.thedeathlycow.scorchful.config.ThirstConfig;
+import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
 
 public class PlayerComponent implements Component, ServerTickingComponent {
 
@@ -64,7 +65,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
     }
 
     private void tickWater() {
-        HeatingConfig config = Scorchful.getConfig().heatingConfig;
+        ThirstConfig config = Scorchful.getConfig().thirstConfig;
 
         if (this.water > 0) {
             this.water--;
@@ -74,7 +75,14 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         }
 
         if (this.provider.thermoo$isWet()) {
-            this.provider.thermoo$addTemperature(config.getTemperatureFromWetness());
+
+            int temperatureChange = config.getTemperatureFromWetness();
+            World world = this.provider.getWorld();
+            if (world.getBiome(this.provider.getBlockPos()).isIn(SBiomeTags.HUMID_BIOMES)) {
+                temperatureChange = MathHelper.floor(temperatureChange * config.getHumidBiomeWetEfficieny());
+            }
+
+            this.provider.thermoo$addTemperature(temperatureChange);
         }
     }
 

@@ -33,7 +33,7 @@ public class WetTickController extends EnvironmentControllerDecorator {
 
             // dry off slowly when not being wetted
             if (soakChange <= 0 && entity.thermoo$isWet()) {
-                soakChange = -config.heatingConfig.getDryRate();
+                soakChange = -config.thirstConfig.getDryRate();
             }
 
             // increase drying from block light
@@ -43,7 +43,7 @@ public class WetTickController extends EnvironmentControllerDecorator {
             }
 
             if (entity.isOnFire()) {
-                soakChange -= config.heatingConfig.getOnFireDryDate();
+                soakChange -= config.thirstConfig.getOnFireDryDate();
             }
 
             return soakChange;
@@ -71,12 +71,12 @@ public class WetTickController extends EnvironmentControllerDecorator {
 
             // add wetness from rain
             if (invoker.scorchful_invokeIsBeingRainedOn()) {
-                soakChange += config.heatingConfig.getRainWetnessIncrease();
+                soakChange += config.thirstConfig.getRainWetnessIncrease();
             }
 
             // add wetness when touching, but not submerged in, water
             if (entity.isTouchingWater() || entity.getBlockStateAtPos().isOf(Blocks.WATER_CAULDRON)) {
-                soakChange += config.heatingConfig.getTouchingWaterWetnessIncrease();
+                soakChange += config.thirstConfig.getTouchingWaterWetnessIncrease();
             }
 
             // immediately soak players in water

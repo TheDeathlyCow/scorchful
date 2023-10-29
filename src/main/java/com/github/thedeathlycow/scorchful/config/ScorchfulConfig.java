@@ -13,4 +13,7 @@ public class ScorchfulConfig extends PartitioningSerializer.GlobalData {
 
     @ConfigEntry.Gui.CollapsibleObject
     public HeatingConfig heatingConfig = new HeatingConfig();
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public ThirstConfig thirstConfig = new ThirstConfig();
 }

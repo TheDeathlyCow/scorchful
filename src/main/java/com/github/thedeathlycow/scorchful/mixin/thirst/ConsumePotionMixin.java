@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.mixin.thirst;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.HeatingConfig;
+import com.github.thedeathlycow.scorchful.config.ThirstConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PotionItem;
@@ -21,7 +22,7 @@ public class ConsumePotionMixin {
     )
     private void scorchful_onPotionConsumed(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
         if (user.isPlayer()) {
-            HeatingConfig config = Scorchful.getConfig().heatingConfig;
+            ThirstConfig config = Scorchful.getConfig().thirstConfig;
             ScorchfulComponents.PLAYER.get(user)
                     .addWater(config.getWaterFromDrinking());
         }
