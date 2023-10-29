@@ -1,4 +1,7 @@
 {
     "itemGroup.scorchful": "Scorchful",
-    "item.scorchful.water_skin": "Waterskin"
+    "item.scorchful.water_skin": "Waterskin",
+    
+    "death.attack.scorchful.heat": "%1$s couldn't handle the heat",
+    "death.attack.scorchful.heat.player": "%1$s couldn't handle the heat of %2$s"
 }

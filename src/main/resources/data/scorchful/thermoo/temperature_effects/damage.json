@@ -10,6 +10,6 @@
     "config": {
         "amount": 1,
         "damage_interval": 20,
-        "damage_type": "minecraft:hot_floor"
+        "damage_type": "scorchful:heat"
     }
 }
