@@ -5,10 +5,10 @@
         "name": "scorchful:can_heat"
     },
     "temperature_scale_range": {
-        "max": -0.99
+        "min": 0.99
     },
     "config": {
-        "amount": 2,
+        "amount": 1,
         "damage_interval": 20,
         "damage_type": "minecraft:hot_floor"
     }
