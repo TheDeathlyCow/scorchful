@@ -1,0 +1,15 @@
+{
+    "type": "thermoo:damage",
+    "entity": {
+        "condition": "minecraft:reference",
+        "name": "scorchful:can_heat"
+    },
+    "temperature_scale_range": {
+        "max": -0.99
+    },
+    "config": {
+        "amount": 2,
+        "damage_interval": 20,
+        "damage_type": "minecraft:hot_floor"
+    }
+}
