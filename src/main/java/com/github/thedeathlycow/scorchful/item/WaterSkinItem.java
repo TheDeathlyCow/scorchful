@@ -71,7 +71,6 @@ public class WaterSkinItem extends Item {
         }
 
         ScorchfulComponents.PLAYER.get(user).addWater(Scorchful.getConfig().thirstConfig.getWaterFromDrinking());
-
         stack.setDamage(stack.getDamage() + 1);
 
         return stack;
