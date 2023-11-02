@@ -6,7 +6,8 @@
         "BiomeAccessor",
         "thirst.ConsumeFoodMixin",
         "thirst.ConsumePotionMixin",
-        "thirst.EntityInvoker"
+        "thirst.EntityInvoker",
+        "thirst.PotionEntityMixin"
     ],
     "injectors": {
         "defaultRequire": 1

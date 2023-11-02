@@ -119,13 +119,15 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         ScorchfulConfig config = Scorchful.getConfig();
 
         if (biome.isIn(SBiomeTags.WARM_BIOMES) || biome.value().getTemperature() >= 0.95f) {
-            int skylight = world.getLightLevel(LightType.SKY, pos) - world.getAmbientDarkness();
+            int skylight = world.getLightLevel(LightType.SKY, pos);
+            int skylightWithDarkness = skylight - world.getAmbientDarkness(); // adjusted with night and weather
 
             int minLevel = config.heatingConfig.getGetMinSkyLightLevelForHeat();
 
-            if (skylight >= minLevel) {
+            if (skylightWithDarkness >= minLevel) {
                 warmth += config.heatingConfig.getHeatFromSun();
 
+                // make the sun scorching, but don't have ambient temperature
                 if (biome.isIn(SBiomeTags.SCORCHING_BIOMES)) {
                     warmth += config.heatingConfig.getScorchingBiomeHeatIncrease();
                 }
