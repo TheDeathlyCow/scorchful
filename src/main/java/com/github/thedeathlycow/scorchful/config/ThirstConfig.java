@@ -13,7 +13,7 @@ public class ThirstConfig implements ConfigData {
 
     int waterFromQuenchingFood = 15;
 
-    int waterFromDrinking = 100;
+    int waterFromDrinking = 150;
 
     int rainWetnessIncrease = 1;
 

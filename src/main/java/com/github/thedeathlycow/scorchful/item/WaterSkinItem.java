@@ -1,16 +1,24 @@
 package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.components.PlayerComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
+import com.github.thedeathlycow.scorchful.registry.SItemGroups;
+import com.github.thedeathlycow.scorchful.registry.SItems;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.CauldronBlock;
+import net.minecraft.block.LeveledCauldronBlock;
+import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsage;
+import net.minecraft.item.*;
+import net.minecraft.potion.PotionUtil;
+import net.minecraft.potion.Potions;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
@@ -22,8 +30,22 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
 public class WaterSkinItem extends Item {
+
     public WaterSkinItem(Settings settings) {
         super(settings);
+        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(
+                this,
+                (state, world, pos, player, hand, stack) -> {
+                    if (!world.isClient) {
+                        this.fill(stack, player);
+                        player.incrementStat(Stats.USE_CAULDRON);
+                        LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
+                        world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                        world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
+                    }
+                    return ActionResult.success(world.isClient);
+                }
+        );
     }
 
     public static boolean isUsable(ItemStack stack) {

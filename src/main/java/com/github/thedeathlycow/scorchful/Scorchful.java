@@ -24,7 +24,7 @@ public class Scorchful implements ModInitializer {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
 
-	public static final int CONFIG_VERSION = 0;
+	public static final int CONFIG_VERSION = 1;
 
 	@Contract("_->new")
 	public static Identifier id(String path) {
