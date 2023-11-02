@@ -15,7 +15,7 @@ public class HeatingConfig implements ConfigData {
 
     int scorchingBiomeHeatIncrease = 1;
 
-    int onFireWarmRate = 4;
+    int onFireWarmRate = 24;
 
     public int getCoolingFromIce() {
         return coolingFromIce;

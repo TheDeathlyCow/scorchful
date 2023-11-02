@@ -4,6 +4,7 @@
         "condition": "minecraft:reference",
         "name": "scorchful:can_heat"
     },
+    "entity_type": "minecraft:player",
     "temperature_scale_range": {
         "min": 0.75
     },
