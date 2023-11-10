@@ -14,6 +14,7 @@ public class SItemGroups {
             .displayName(Text.translatable("itemGroup.scorchful"))
             .entries((context, entries) -> {
                 entries.add(new ItemStack(SItems.WATER_SKIN));
+                entries.add(new ItemStack(SItems.STRAW_HAT));
             }).build();
 
     public static void registerAll() {

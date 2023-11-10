@@ -3,11 +3,13 @@ package com.github.thedeathlycow.scorchful.temperature;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.HeatingConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.scorchful.registry.SItems;
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentController;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentControllerDecorator;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -71,6 +73,10 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
     public int getEnvironmentTemperatureForPlayer(PlayerEntity player, int localTemperature) {
         if (player.thermoo$isCold() && localTemperature < 0) {
             return controller.getEnvironmentTemperatureForPlayer(player, localTemperature);
+        }
+
+        if (player.getEquippedStack(EquipmentSlot.HEAD).isOf(SItems.STRAW_HAT)) {
+            return localTemperature - 1;
         }
 
         return localTemperature;
