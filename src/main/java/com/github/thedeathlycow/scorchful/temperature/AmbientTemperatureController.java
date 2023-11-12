@@ -75,8 +75,16 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
             return controller.getEnvironmentTemperatureForPlayer(player, localTemperature);
         }
 
-        if (player.getEquippedStack(EquipmentSlot.HEAD).isOf(SItems.STRAW_HAT)) {
-            return localTemperature - 1;
+        if (localTemperature > 0) {
+            RegistryEntry<Biome> biome = player.getWorld().getBiome(player.getBlockPos());
+
+            boolean hasHatShade = biome.isIn(SBiomeTags.SCORCHING_BIOMES)
+                    && player.getEquippedStack(EquipmentSlot.HEAD).isOf(SItems.STRAW_HAT);
+
+            if (hasHatShade) {
+                int scorchingHeat = Scorchful.getConfig().heatingConfig.getScorchingBiomeHeatIncrease();
+                return localTemperature - scorchingHeat;
+            }
         }
 
         return localTemperature;
