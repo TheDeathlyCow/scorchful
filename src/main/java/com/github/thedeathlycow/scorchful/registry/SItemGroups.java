@@ -12,8 +12,8 @@ import org.jetbrains.annotations.Contract;
 
 public class SItemGroups {
     public static final ItemGroup SCORCHFUL = FabricItemGroup.builder()
-            .icon(() -> new ItemStack(SItems.WATER_SKIN))
-            .displayName(Text.translatable("itemGroup.scorchful"))
+            .icon(SItemGroups::makeFilledWaterSkin)
+            .displayName(Text.translatable("item_group.scorchful"))
             .entries((context, entries) -> {
                 entries.add(new ItemStack(SItems.WATER_SKIN));
                 entries.add(makeFilledWaterSkin());
