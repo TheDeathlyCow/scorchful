@@ -1,16 +1,16 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        " # ",
-        "#W#",
-        " # "
+        " #I",
+        "# #",
+        "## "
     ],
     "key": {
         "#": {
-            "item": "minecraft:rabbit_hide"
+            "item": "minecraft:leather"
         },
-        "W": {
-            "item": "minecraft:water_bucket"
+        "I": {
+            "item": "minecraft:iron_ingot"
         }
     },
     "result": {

@@ -14,7 +14,7 @@ public class SItems {
 
     public static final Item WATER_SKIN = new WaterSkinItem(
             new FabricItemSettings()
-                    .maxDamage(10)
+                    .maxCount(1)
     );
 
     public static final Item STRAW_HAT = new ArmorItem(SArmorMaterials.STRAW, ArmorItem.Type.HELMET, new FabricItemSettings());

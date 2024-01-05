@@ -1,7 +1,15 @@
 {
-    "itemGroup.scorchful": "Scorchful",
+    "item_group.scorchful": "Scorchful",
+    
     "item.scorchful.water_skin": "Waterskin",
+    "item.scorchful.water_skin.empty": "Empty Waterskin",
+    "item.scorchful.water_skin.partially_filled": "Partially Filled Waterskin",
+    "item.scorchful.water_skin.filled": "Filled Waterskin",
+    "item.scorchful.water_skin.tooltip.count": "Drinks Remaining %1$s / %2$s",
+    "item.scorchful.water_skin.tooltip.empty": "Empty",
     
     "death.attack.scorchful.heat": "%1$s couldn't handle the heat",
-    "death.attack.scorchful.heat.player": "%1$s couldn't handle the heat of %2$s"
+    "death.attack.scorchful.heat.player": "%1$s couldn't handle the heat of %2$s",
+    
+    "subtitles.item.scorchful.water_skin.fill": "Waterskin fills"
 }

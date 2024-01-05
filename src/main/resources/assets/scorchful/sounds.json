@@ -1,0 +1,11 @@
+{
+    "item.scorchful.water_skin.fill": {
+        "sounds": [
+            "scorchful:item/water_skin/fill1",
+            "scorchful:item/water_skin/fill2",
+            "scorchful:item/water_skin/fill3",
+            "scorchful:item/water_skin/fill4"
+        ],
+        "subtitle": "subtitles.item.scorchful.water_skin.fill"
+    }
+}
