@@ -1,6 +1,14 @@
 {
     "parent": "minecraft:item/generated",
     "textures": {
-        "layer0": "scorchful:item/water_skin"
-    }
+        "layer0": "scorchful:item/water_skin/full"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "scorchful:is_drink_empty": 1
+            },
+            "model": "scorchful:item/empty_water_skin"
+        }
+    ]
 }
