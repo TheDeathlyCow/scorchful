@@ -118,35 +118,37 @@ public class WaterSkinItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
 
-        ItemStack itemStack = user.getStackInHand(hand);
-        if (isUsable(itemStack)) {
+        ItemStack stack = user.getStackInHand(hand);
+        if (isUsable(stack)) {
             ItemUsage.consumeHeldItem(world, user, hand);
         }
 
         BlockHitResult blockHitResult = Item.raycast(world, user, RaycastContext.FluidHandling.SOURCE_ONLY);
         if (blockHitResult.getType() == HitResult.Type.BLOCK) {
-            BlockPos blockPos = blockHitResult.getBlockPos();
-            if (!world.canPlayerModifyAt(user, blockPos)) {
-                return TypedActionResult.pass(itemStack);
+            BlockPos hitPos = blockHitResult.getBlockPos();
+
+            if (!world.canPlayerModifyAt(user, hitPos) || getNumDrinks(stack) >= MAX_DRINKS) {
+                return TypedActionResult.pass(stack);
             }
-            if (world.getFluidState(blockPos).isIn(FluidTags.WATER)) {
+
+            if (world.getFluidState(hitPos).isIn(FluidTags.WATER)) {
                 world.playSound(
                         user,
                         user.getX(), user.getY(), user.getZ(),
                         SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL,
                         1.0f, 1.0f
                 );
-                world.emitGameEvent(user, GameEvent.FLUID_PICKUP, blockPos);
+                world.emitGameEvent(user, GameEvent.FLUID_PICKUP, hitPos);
 
-                this.fill(itemStack, user, MAX_DRINKS);
+                this.fill(stack, user, MAX_DRINKS);
 
                 return TypedActionResult.success(
-                        itemStack,
+                        stack,
                         world.isClient()
                 );
             }
         }
-        return TypedActionResult.pass(itemStack);
+        return TypedActionResult.pass(stack);
     }
 
     @Override
