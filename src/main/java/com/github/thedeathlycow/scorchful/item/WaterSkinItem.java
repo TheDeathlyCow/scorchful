@@ -124,7 +124,7 @@ public class WaterSkinItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
-        if (ScorchfulComponents.PLAYER.get(user).isBelowMax() && hasDrink(stack)) {
+        if (hasDrink(stack)) {
             return ItemUsage.consumeHeldItem(world, user, hand);
         }
 

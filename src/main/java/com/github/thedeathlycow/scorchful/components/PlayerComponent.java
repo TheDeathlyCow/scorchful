@@ -36,11 +36,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
     }
 
     public void addWater(int amount) {
-        this.water = Math.max(this.water + amount, 0);
-    }
-
-    public boolean isBelowMax() {
-        return this.water < MAX_WATER;
+        this.water = MathHelper.clamp(this.water + amount, 0, MAX_WATER);
     }
 
     @Override
