@@ -2,6 +2,9 @@
     "itemGroup.scorchful": "Scorchful",
     
     "item.scorchful.water_skin": "Waterskin",
+    "item.scorchful.water_skin.empty": "Empty Waterskin",
+    "item.scorchful.water_skin.partially_filled": "Partially Filled Waterskin",
+    "item.scorchful.water_skin.filled": "Filled Waterskin",
     "item.scorchful.water_skin.tooltip.count": "Drinks Remaining %1$s / %2$s",
     "item.scorchful.water_skin.tooltip.empty": "Empty",
     

@@ -89,6 +89,17 @@ public class WaterSkinItem extends Item {
     }
 
     @Override
+    public String getTranslationKey(ItemStack stack) {
+        int numDrinks = getNumDrinks(stack);
+
+        return switch (numDrinks) {
+            case 0 -> "item.scorchful.water_skin.empty";
+            case MAX_DRINKS -> "item.scorchful.water_skin.filled";
+            default -> "item.scorchful.water_skin.partially_filled";
+        };
+    }
+
+    @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         int numDrinks = getNumDrinks(stack);
 
