@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
+import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeveledCauldronBlock;
@@ -12,13 +13,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
-import net.minecraft.item.MilkBucketItem;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
@@ -124,35 +122,16 @@ public class WaterSkinItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
+
+        TypedActionResult<ItemStack> refillResult = this.tryRefill(world, user, stack);
+        if (refillResult != null) {
+            return refillResult;
+        }
+
         if (hasDrink(stack)) {
             return ItemUsage.consumeHeldItem(world, user, hand);
         }
 
-        BlockHitResult blockHitResult = Item.raycast(world, user, RaycastContext.FluidHandling.SOURCE_ONLY);
-        if (blockHitResult.getType() == HitResult.Type.BLOCK) {
-            BlockPos hitPos = blockHitResult.getBlockPos();
-
-            if (!world.canPlayerModifyAt(user, hitPos) || getNumDrinks(stack) >= MAX_DRINKS) {
-                return TypedActionResult.pass(stack);
-            }
-
-            if (world.getFluidState(hitPos).isIn(FluidTags.WATER)) {
-                world.playSound(
-                        user,
-                        user.getX(), user.getY(), user.getZ(),
-                        SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL,
-                        1.0f, 1.0f
-                );
-                world.emitGameEvent(user, GameEvent.FLUID_PICKUP, hitPos);
-
-                this.fill(stack, user, MAX_DRINKS);
-
-                return TypedActionResult.success(
-                        stack,
-                        world.isClient()
-                );
-            }
-        }
         return TypedActionResult.pass(stack);
     }
 
@@ -202,9 +181,32 @@ public class WaterSkinItem extends Item {
         return MathHelper.hsvToRgb(210f / 360f, saturationValue, saturationValue);
     }
 
-    private void fill(ItemStack stack, PlayerEntity player, int amount) {
+    protected void fill(ItemStack stack, PlayerEntity player, World world, BlockPos sourcePos, int amount) {
+        player.playSound(SSoundEvents.ITEM_WATER_SKIN_FILL, 1.0f, 1.0f);
+        world.emitGameEvent(null, GameEvent.FLUID_PICKUP, sourcePos);
         player.incrementStat(Stats.USED.getOrCreateStat(this));
         this.addDrinks(stack, amount);
+    }
+
+    @Nullable
+    private TypedActionResult<ItemStack> tryRefill(World world, PlayerEntity user, ItemStack stack) {
+        BlockHitResult blockHitResult = Item.raycast(world, user, RaycastContext.FluidHandling.SOURCE_ONLY);
+        if (blockHitResult.getType() == HitResult.Type.BLOCK) {
+            BlockPos hitPos = blockHitResult.getBlockPos();
+
+            if (!world.canPlayerModifyAt(user, hitPos) || getNumDrinks(stack) >= MAX_DRINKS) {
+                return null;
+            }
+
+            if (world.getFluidState(hitPos).isIn(FluidTags.WATER)) {
+                this.fill(stack, user, world, hitPos, MAX_DRINKS);
+                return TypedActionResult.success(
+                        stack,
+                        world.isClient()
+                );
+            }
+        }
+        return null;
     }
 
     private ActionResult onCauldronInteract(
@@ -219,13 +221,10 @@ public class WaterSkinItem extends Item {
             return ActionResult.PASS;
         }
 
+        this.fill(stack, player, world, pos, 1);
         if (!world.isClient) {
-            this.fill(stack, player, 1);
             player.incrementStat(Stats.USE_CAULDRON);
             LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
-
-            world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0f, 1.0f);
-            world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
         }
         return ActionResult.success(world.isClient);
     }

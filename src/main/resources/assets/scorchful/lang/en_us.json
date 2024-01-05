@@ -9,5 +9,7 @@
     "item.scorchful.water_skin.tooltip.empty": "Empty",
     
     "death.attack.scorchful.heat": "%1$s couldn't handle the heat",
-    "death.attack.scorchful.heat.player": "%1$s couldn't handle the heat of %2$s"
+    "death.attack.scorchful.heat.player": "%1$s couldn't handle the heat of %2$s",
+    
+    "subtitles.item.scorchful.water_skin.fill": "Waterskin fills"
 }
