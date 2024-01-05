@@ -1,23 +1,18 @@
 package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.components.PlayerComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
-import com.github.thedeathlycow.scorchful.registry.SItemGroups;
-import com.github.thedeathlycow.scorchful.registry.SItems;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.CauldronBlock;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsage;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
-import net.minecraft.potion.PotionUtil;
-import net.minecraft.potion.Potions;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -57,10 +52,6 @@ public class WaterSkinItem extends Item {
         CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(this, this::onCauldronInteract);
     }
 
-    public static float getFill(ItemStack stack) {
-        return ((float) getNumDrinks(stack)) / MAX_DRINKS;
-    }
-
     public static int getNumDrinks(ItemStack stack) {
         NbtCompound nbt = stack.getSubNbt(DRINK_NBT_KEY);
         if (nbt == null || !nbt.contains(COUNT_NBT_KEY, NbtElement.INT_TYPE)) {
@@ -69,11 +60,19 @@ public class WaterSkinItem extends Item {
         return nbt.getInt(COUNT_NBT_KEY);
     }
 
-    public boolean addDrinks(ItemStack stack, int value) {
+    public static float getFill(ItemStack stack) {
+        return (float) getNumDrinks(stack) / MAX_DRINKS;
+    }
+
+    public static boolean hasDrink(ItemStack stack) {
+        return getNumDrinks(stack) > 0;
+    }
+
+    public void addDrinks(ItemStack stack, int value) {
         NbtCompound nbt = stack.getSubNbt(DRINK_NBT_KEY);
 
         if (!stack.isOf(this)) {
-            return false;
+            return;
         }
 
         if (nbt == null) {
@@ -87,13 +86,10 @@ public class WaterSkinItem extends Item {
 
         int currentDrinks = nbt.getInt(COUNT_NBT_KEY);
         nbt.putInt(COUNT_NBT_KEY, MathHelper.clamp(currentDrinks + value, 0, MAX_DRINKS));
-
-        return true;
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-
         int numDrinks = getNumDrinks(stack);
 
         MutableText text = numDrinks > 0
@@ -111,15 +107,10 @@ public class WaterSkinItem extends Item {
         return true;
     }
 
-    public static boolean isUsable(ItemStack stack) {
-        return getNumDrinks(stack) > 0;
-    }
-
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-
         ItemStack stack = user.getStackInHand(hand);
-        if (isUsable(stack)) {
+        if (hasDrink(stack)) {
             ItemUsage.consumeHeldItem(world, user, hand);
         }
 
@@ -153,7 +144,7 @@ public class WaterSkinItem extends Item {
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        if (!user.isPlayer() || !isUsable(stack)) {
+        if (!user.isPlayer() || !hasDrink(stack)) {
             return stack;
         }
 
@@ -165,17 +156,37 @@ public class WaterSkinItem extends Item {
 
     @Override
     public int getMaxUseTime(ItemStack stack) {
-        return isUsable(stack) ? 32 : 0;
+        return hasDrink(stack) ? 32 : 0;
     }
 
     @Override
     public UseAction getUseAction(ItemStack stack) {
-        return isUsable(stack) ? UseAction.DRINK : UseAction.NONE;
+        return hasDrink(stack) ? UseAction.DRINK : UseAction.NONE;
+    }
+
+    @Override
+    public boolean isItemBarVisible(ItemStack stack) {
+        int numDrinks = getNumDrinks(stack);
+        return numDrinks > 0 && numDrinks < MAX_DRINKS;
+    }
+
+    @Override
+    public int getItemBarStep(ItemStack stack) {
+        return Math.round(((float) getNumDrinks(stack) / MAX_DRINKS) * 13.0f);
+    }
+
+    @Override
+    public int getItemBarColor(ItemStack stack) {
+        float fill = Math.max(0.0f, getFill(stack));
+
+        float saturationValue = MathHelper.clampedMap(fill, 0f, 1f, 0.5f, 1.0f);
+
+        return MathHelper.hsvToRgb(210f / 360f, saturationValue, saturationValue);
     }
 
     private void fill(ItemStack stack, PlayerEntity player, int amount) {
         player.incrementStat(Stats.USED.getOrCreateStat(this));
-        addDrinks(stack, amount);
+        this.addDrinks(stack, amount);
     }
 
     private ActionResult onCauldronInteract(
@@ -194,7 +205,7 @@ public class WaterSkinItem extends Item {
             this.fill(stack, player, 1);
             player.incrementStat(Stats.USE_CAULDRON);
             LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
-            // TODO: change this to a new sound
+
             world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0f, 1.0f);
             world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
         }
