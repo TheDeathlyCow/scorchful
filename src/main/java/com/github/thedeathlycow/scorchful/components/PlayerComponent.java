@@ -63,7 +63,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
     private void tickWater() {
         ThirstConfig config = Scorchful.getConfig().thirstConfig;
 
-        if (this.water > 0 && this.provider.thermoo$isWarm()) {
+        if (this.water > 0 && this.provider.thermoo$getTemperature() > 0) {
             this.water--;
             this.provider.thermoo$setWetTicks(this.provider.thermoo$getWetTicks() + config.getWetnessFromBodyWater());
         }

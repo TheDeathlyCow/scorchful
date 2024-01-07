@@ -39,7 +39,7 @@ import java.util.List;
 
 public class WaterSkinItem extends Item {
 
-    public static final int MAX_DRINKS = 10;
+    public static final int MAX_DRINKS = 16;
     private static final String DRINK_NBT_KEY = "drinks";
 
     private static final String COUNT_NBT_KEY = "count";
