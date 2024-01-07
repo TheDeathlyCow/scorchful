@@ -199,7 +199,7 @@ public class WaterSkinItem extends Item {
             }
 
             if (world.getFluidState(hitPos).isIn(FluidTags.WATER)) {
-                this.fill(stack, user, world, hitPos, 1);
+                this.fill(stack, user, world, hitPos, 4);
                 return TypedActionResult.success(
                         stack,
                         world.isClient()
