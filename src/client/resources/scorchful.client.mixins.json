@@ -4,7 +4,8 @@
     "compatibilityLevel": "JAVA_17",
     "client": [
         "DrippingWetPlayerMixin",
-        "FireHeartsMixin"
+        "FireHeartsMixin",
+        "HeadFeatureRendererMixin"
     ],
     "injectors": {
         "defaultRequire": 1

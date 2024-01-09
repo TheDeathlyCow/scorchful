@@ -2,8 +2,10 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.SArmorMaterials;
+import com.github.thedeathlycow.scorchful.item.SunHatItem;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -16,7 +18,11 @@ public class SItems {
                     .maxCount(1)
     );
 
-    public static final Item SUN_HAT = new ArmorItem(SArmorMaterials.STRAW, ArmorItem.Type.HELMET, new FabricItemSettings());
+    public static final Item SUN_HAT = new SunHatItem(
+            new FabricItemSettings()
+                    .equipmentSlot(stack -> EquipmentSlot.HEAD)
+                    .maxCount(1)
+    );
 
     public static void registerItems() {
         register("water_skin", WATER_SKIN);
