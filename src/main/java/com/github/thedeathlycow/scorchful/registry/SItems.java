@@ -6,7 +6,6 @@ import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
@@ -17,11 +16,11 @@ public class SItems {
                     .maxCount(1)
     );
 
-    public static final Item STRAW_HAT = new ArmorItem(SArmorMaterials.STRAW, ArmorItem.Type.HELMET, new FabricItemSettings());
+    public static final Item SUN_HAT = new ArmorItem(SArmorMaterials.STRAW, ArmorItem.Type.HELMET, new FabricItemSettings());
 
     public static void registerItems() {
         register("water_skin", WATER_SKIN);
-        register("straw_hat", STRAW_HAT);
+        register("sun_hat", SUN_HAT);
     }
 
     private static void register(String id, Item item) {

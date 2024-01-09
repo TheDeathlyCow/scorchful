@@ -8,6 +8,8 @@
     "item.scorchful.water_skin.tooltip.count": "Drinks Remaining %1$s / %2$s",
     "item.scorchful.water_skin.tooltip.empty": "Empty",
     
+    "item.scorchful.sun_hat": "Sun Hat",
+    
     "death.attack.scorchful.heat": "%1$s couldn't handle the heat",
     "death.attack.scorchful.heat.player": "%1$s couldn't handle the heat of %2$s",
     

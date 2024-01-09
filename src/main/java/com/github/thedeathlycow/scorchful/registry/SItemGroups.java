@@ -17,7 +17,7 @@ public class SItemGroups {
             .entries((context, entries) -> {
                 entries.add(new ItemStack(SItems.WATER_SKIN));
                 entries.add(makeFilledWaterSkin());
-                entries.add(new ItemStack(SItems.STRAW_HAT));
+                entries.add(new ItemStack(SItems.SUN_HAT));
             }).build();
 
     public static void registerAll() {

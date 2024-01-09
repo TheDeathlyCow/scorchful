@@ -79,7 +79,7 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
             RegistryEntry<Biome> biome = player.getWorld().getBiome(player.getBlockPos());
 
             boolean hasHatShade = biome.isIn(SBiomeTags.SCORCHING_BIOMES)
-                    && player.getEquippedStack(EquipmentSlot.HEAD).isOf(SItems.STRAW_HAT);
+                    && player.getEquippedStack(EquipmentSlot.HEAD).isOf(SItems.SUN_HAT);
 
             if (hasHatShade) {
                 int scorchingHeat = Scorchful.getConfig().heatingConfig.getScorchingBiomeHeatIncrease();
