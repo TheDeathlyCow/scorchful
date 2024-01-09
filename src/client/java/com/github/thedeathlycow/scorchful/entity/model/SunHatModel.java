@@ -24,11 +24,11 @@ public class SunHatModel<T extends LivingEntity> extends BipedEntityModel<T> {
                 ModelPartBuilder.create()
                         .uv(0, 0)
                         .cuboid(
-                                -7.0F, -5.0F, -7.0F,
-                                14.0F, 0.0F, 14.0F,
+                                -8.0F, -5.0F, -8.0F,
+                                16.0F, 0.0F, 16.0F,
                                 Dilation.NONE
                         )
-                        .uv(0, 14)
+                        .uv(0, 16)
                         .cuboid(
                                 -4.0F, -9.0F, -4.0F,
                                 8.0F, 4.0F, 8.0F,
