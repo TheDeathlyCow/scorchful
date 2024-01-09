@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
@@ -30,6 +31,8 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
@@ -40,6 +43,8 @@ import java.util.List;
 public class WaterSkinItem extends Item {
 
     public static final int MAX_DRINKS = 16;
+    public static final int DRINK_TIME_TICKS = 32;
+    private static final int START_DRINK_PARTICLES = DRINK_TIME_TICKS - 10;
     private static final String DRINK_NBT_KEY = "drinks";
 
     private static final String COUNT_NBT_KEY = "count";
@@ -136,6 +141,14 @@ public class WaterSkinItem extends Item {
     }
 
     @Override
+    public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
+        super.usageTick(world, user, stack, remainingUseTicks);
+        if (world.isClient && remainingUseTicks < START_DRINK_PARTICLES) {
+            spawnWaterParticles(world, user, 2);
+        }
+    }
+
+    @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         if (!user.isPlayer() || !hasDrink(stack)) {
             return stack;
@@ -143,17 +156,19 @@ public class WaterSkinItem extends Item {
 
         if (user instanceof ServerPlayerEntity serverPlayer) {
             Criteria.CONSUME_ITEM.trigger(serverPlayer, stack);
-        }
 
-        ScorchfulComponents.PLAYER.get(user).addWater(Scorchful.getConfig().thirstConfig.getWaterFromDrinking());
-        this.addDrinks(stack, -1);
+            ScorchfulComponents.PLAYER.get(user).addWater(Scorchful.getConfig().thirstConfig.getWaterFromDrinking());
+            if (!serverPlayer.isCreative()) {
+                this.addDrinks(stack, -1);
+            }
+        }
 
         return super.finishUsing(stack, world, user);
     }
 
     @Override
     public int getMaxUseTime(ItemStack stack) {
-        return hasDrink(stack) ? 32 : 0;
+        return hasDrink(stack) ? DRINK_TIME_TICKS : 0;
     }
 
     @Override
@@ -164,12 +179,17 @@ public class WaterSkinItem extends Item {
     @Override
     public boolean isItemBarVisible(ItemStack stack) {
         int numDrinks = getNumDrinks(stack);
-        return numDrinks > 0 && numDrinks < MAX_DRINKS;
+        return numDrinks < MAX_DRINKS;
     }
 
     @Override
     public int getItemBarStep(ItemStack stack) {
-        return Math.round(((float) getNumDrinks(stack) / MAX_DRINKS) * 13.0f);
+        int numDrinks = getNumDrinks(stack);
+        if (numDrinks == 0) {
+            return 0;
+        }
+
+        return Math.round(((float) numDrinks / MAX_DRINKS) * 13.0f);
     }
 
     @Override
@@ -227,6 +247,29 @@ public class WaterSkinItem extends Item {
             LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
         }
         return ActionResult.success(world.isClient);
+    }
+
+    private static void spawnWaterParticles(World world, LivingEntity entity, int count) {
+        Random random = entity.getRandom();
+
+        for (int i = 0; i < count; i++) {
+
+            var velocity = new Vec3d((random.nextFloat() - 0.5) * 0.1, Math.random() * 0.1 + 1, 0);
+            velocity = velocity.rotateX(-entity.getPitch() * (MathHelper.PI / 180f));
+            velocity = velocity.rotateY(-entity.getYaw() * (MathHelper.PI / 180f));
+
+            double y = -random.nextFloat() * 0.6 - 0.3;
+            var postion = new Vec3d((random.nextFloat() - 0.5) * 0.3, y, 0.6);
+            postion = postion.rotateX(-entity.getPitch() * (MathHelper.PI / 180f));
+            postion = postion.rotateY(-entity.getYaw() * (MathHelper.PI / 180f));
+            postion = postion.add(entity.getX(), entity.getEyeY(), entity.getZ());
+
+            world.addParticle(
+                    ParticleTypes.SPLASH,
+                    postion.x, postion.y, postion.z,
+                    velocity.x, velocity.y + 1, velocity.z
+            );
+        }
     }
 
 
