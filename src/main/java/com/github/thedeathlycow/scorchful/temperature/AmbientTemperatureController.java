@@ -76,14 +76,16 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         }
 
         if (localTemperature > 0) {
-            RegistryEntry<Biome> biome = player.getWorld().getBiome(player.getBlockPos());
+            ScorchfulConfig config = Scorchful.getConfig();
 
-            boolean hasHatShade = biome.isIn(SBiomeTags.SCORCHING_BIOMES)
+            int sunLight = player.getWorld().getLightLevel(LightType.SKY, player.getBlockPos());
+
+            boolean hasHatShade = sunLight >= config.heatingConfig.getGetMinSkyLightLevelForHeat()
                     && player.getEquippedStack(EquipmentSlot.HEAD).isOf(SItems.SUN_HAT);
 
             if (hasHatShade) {
-                int scorchingHeat = Scorchful.getConfig().heatingConfig.getScorchingBiomeHeatIncrease();
-                return localTemperature - scorchingHeat;
+                int shading = config.heatingConfig.getSunHatShadeTemperatureChange();
+                return localTemperature + shading;
             }
         }
 
