@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.temperature;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.HeatingConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.scorchful.item.SunHatItem;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
@@ -81,7 +82,7 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
             int sunLight = player.getWorld().getLightLevel(LightType.SKY, player.getBlockPos());
 
             boolean hasHatShade = sunLight >= config.heatingConfig.getGetMinSkyLightLevelForHeat()
-                    && player.getEquippedStack(EquipmentSlot.HEAD).isOf(SItems.SUN_HAT);
+                    && SunHatItem.isWearingSunHat(player);
 
             if (hasHatShade) {
                 int shading = config.heatingConfig.getSunHatShadeTemperatureChange();

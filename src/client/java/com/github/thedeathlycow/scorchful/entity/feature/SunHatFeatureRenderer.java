@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.entity.feature;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.entity.model.SunHatModel;
+import com.github.thedeathlycow.scorchful.item.SunHatItem;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -38,7 +39,7 @@ public class SunHatFeatureRenderer<T extends LivingEntity, M extends BipedEntity
             float tickDelta, float animationProgress,
             float headYaw, float headPitch
     ) {
-        if (entity.getEquippedStack(EquipmentSlot.HEAD).isOf(SItems.SUN_HAT)) {
+        if (SunHatItem.isWearingSunHat(entity)) {
             this.getContextModel().copyBipedStateTo(this.model);
             VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(TEXTURE));
             this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, 1.0f);

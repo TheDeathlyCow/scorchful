@@ -6,8 +6,14 @@ public class ScorchfulIntegrations {
 
     public static final String FROSTIFUL_ID = "frostiful";
 
+    public static final String TRINKETS_ID = "trinkets";
+
 
     public static boolean isModLoaded(String id) {
         return FabricLoader.getInstance().isModLoaded(id);
+    }
+
+    private ScorchfulIntegrations() {
+        
     }
 }

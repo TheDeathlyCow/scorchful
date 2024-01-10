@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.hud;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ClientConfig;
+import com.github.thedeathlycow.scorchful.item.SunHatItem;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -22,7 +23,7 @@ public class ShadeOverlay {
     ) {
 
 
-        if ( player != null && player.getEquippedStack(EquipmentSlot.HEAD).isOf(SItems.SUN_HAT)) {
+        if (player != null && SunHatItem.isWearingSunHat(player)) {
             ClientConfig config = Scorchful.getConfig().clientConfig;
             if (config.isSunHatShading()) {
                 renderCallback.accept(context, config.getSunHatShadeOpacity());
