@@ -5,9 +5,10 @@
     "client": [
         "DrippingWetPlayerMixin",
         "FireHeartsMixin",
-        "HeadFeatureRendererMixin"
+        "HeadFeatureRendererMixin",
+        "InGameHudMixin"
     ],
     "injectors": {
         "defaultRequire": 1
-	}
+    }
 }
