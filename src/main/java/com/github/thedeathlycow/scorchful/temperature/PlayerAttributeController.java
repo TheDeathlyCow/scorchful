@@ -7,6 +7,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 
 public class PlayerAttributeController extends EnvironmentControllerDecorator {
+
+    public static final double PLAYER_MAX_TEMP_MODIFIER = 10.0;
+
     /**
      * Constructs a decorator out of a base controller
      *
@@ -21,7 +24,7 @@ public class PlayerAttributeController extends EnvironmentControllerDecorator {
         double base = super.getBaseValueForAttribute(attribute, entity);
 
         if (ThermooAttributes.MAX_TEMPERATURE == attribute && entity.isPlayer()) {
-            base += 5;
+            base += PLAYER_MAX_TEMP_MODIFIER;
         }
 
         return base;
