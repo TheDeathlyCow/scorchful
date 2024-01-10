@@ -17,7 +17,8 @@ public class SunHatModel<T extends LivingEntity> extends BipedEntityModel<T> {
     }
 
     public static TexturedModelData getTexturedModelData() {
-        ModelData modelData = BipedEntityModel.getModelData(Dilation.NONE, 0.0f);
+        Dilation dilation = Dilation.NONE;
+        ModelData modelData = BipedEntityModel.getModelData(dilation, 0.0f);
         ModelPartData root = modelData.getRoot();
         root.addChild(
                 EntityModelPartNames.HEAD,
@@ -26,13 +27,13 @@ public class SunHatModel<T extends LivingEntity> extends BipedEntityModel<T> {
                         .cuboid(
                                 -8.0F, -5.0F, -8.0F,
                                 16.0F, 0.0F, 16.0F,
-                                Dilation.NONE
+                                dilation.add(0.1f, 0f, 0.1f)
                         )
                         .uv(0, 16)
                         .cuboid(
                                 -4.0F, -9.0F, -4.0F,
                                 8.0F, 4.0F, 8.0F,
-                                Dilation.NONE
+                                dilation.add(0.1f)
                         ),
                 ModelTransform.pivot(0.0F, 24.0F, 0.0F)
         );
