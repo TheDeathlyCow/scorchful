@@ -1,7 +1,6 @@
 package com.github.thedeathlycow.scorchful.mixin.client;
 
-import com.github.thedeathlycow.scorchful.BurningHeartsOverlay;
-import net.minecraft.client.MinecraftClient;
+import com.github.thedeathlycow.scorchful.hud.BurningHeartsOverlay;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,5 +1,6 @@
-package com.github.thedeathlycow.scorchful;
+package com.github.thedeathlycow.scorchful.hud;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

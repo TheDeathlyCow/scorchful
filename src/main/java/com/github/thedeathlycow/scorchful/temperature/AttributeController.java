@@ -8,6 +8,8 @@ import net.minecraft.entity.attribute.EntityAttribute;
 
 public class AttributeController extends EnvironmentControllerDecorator {
 
+    private static final double BASE_MAX_TEMPERATURE = 80.0;
+
     /**
      * Constructs a decorator out of a base controller
      *
@@ -21,8 +23,8 @@ public class AttributeController extends EnvironmentControllerDecorator {
     public double getBaseValueForAttribute(EntityAttribute attribute, LivingEntity entity) {
         double value = super.getBaseValueForAttribute(attribute, entity);
 
-        if (ThermooAttributes.MAX_TEMPERATURE == attribute) {
-            value = 40;
+        if (attribute == ThermooAttributes.MAX_TEMPERATURE) {
+            value = BASE_MAX_TEMPERATURE;
         }
 
         return value;

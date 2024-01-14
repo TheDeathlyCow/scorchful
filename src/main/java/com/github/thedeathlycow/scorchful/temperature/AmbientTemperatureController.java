@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.temperature;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.HeatingConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.scorchful.item.SunHatItem;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
@@ -76,14 +77,16 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         }
 
         if (localTemperature > 0) {
-            RegistryEntry<Biome> biome = player.getWorld().getBiome(player.getBlockPos());
+            ScorchfulConfig config = Scorchful.getConfig();
 
-            boolean hasHatShade = biome.isIn(SBiomeTags.SCORCHING_BIOMES)
-                    && player.getEquippedStack(EquipmentSlot.HEAD).isOf(SItems.STRAW_HAT);
+            int sunLight = player.getWorld().getLightLevel(LightType.SKY, player.getBlockPos());
+
+            boolean hasHatShade = sunLight >= config.heatingConfig.getGetMinSkyLightLevelForHeat()
+                    && SunHatItem.isWearingSunHat(player);
 
             if (hasHatShade) {
-                int scorchingHeat = Scorchful.getConfig().heatingConfig.getScorchingBiomeHeatIncrease();
-                return localTemperature - scorchingHeat;
+                int shading = config.heatingConfig.getSunHatShadeTemperatureChange();
+                return localTemperature + shading;
             }
         }
 

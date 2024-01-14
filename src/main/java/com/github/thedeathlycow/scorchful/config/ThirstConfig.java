@@ -9,7 +9,7 @@ public class ThirstConfig implements ConfigData {
 
     int wetnessFromBodyWater = 2;
 
-    int temperatureFromWetness = -6;
+    int temperatureFromWetness = -12;
 
     int waterFromQuenchingFood = 15;
 
