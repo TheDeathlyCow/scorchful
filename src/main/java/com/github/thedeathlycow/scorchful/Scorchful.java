@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful;
 
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.scorchful.event.ScorchfulLivingEntityEvents;
 import com.github.thedeathlycow.scorchful.registry.SItemGroups;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
@@ -9,11 +10,13 @@ import com.github.thedeathlycow.scorchful.temperature.AmbientTemperatureControll
 import com.github.thedeathlycow.scorchful.temperature.AttributeController;
 import com.github.thedeathlycow.scorchful.temperature.PlayerAttributeController;
 import com.github.thedeathlycow.scorchful.temperature.WetTickController;
+import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentControllerInitializeEvent;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Contract;
 import org.slf4j.Logger;
@@ -44,6 +47,18 @@ public class Scorchful implements ModInitializer {
         CommandRegistrationCallback.EVENT.register(
                 (dispatcher, registryAccess, environment) -> {
                     ThirstCommand.register(dispatcher);
+                }
+        );
+
+        // custom scorchful event
+        ScorchfulLivingEntityEvents.ON_DAMAGED.register(
+                (entity, source, amount) -> {
+                    if (source.isOf(DamageTypes.FIREBALL) || source.isOf(DamageTypes.UNATTRIBUTED_FIREBALL)) {
+                        entity.thermoo$addTemperature(
+                                Scorchful.getConfig().heatingConfig.getFireballHeat(),
+                                HeatingModes.ACTIVE
+                        );
+                    }
                 }
         );
 

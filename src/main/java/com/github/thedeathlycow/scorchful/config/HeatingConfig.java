@@ -19,6 +19,8 @@ public class HeatingConfig implements ConfigData {
 
     int onFireWarmRate = 48;
 
+    int fireballHeat = 2000;
+
     public int getCoolingFromIce() {
         return coolingFromIce;
     }
@@ -43,6 +45,7 @@ public class HeatingConfig implements ConfigData {
         return onFireWarmRate;
     }
 
-
-
+    public int getFireballHeat() {
+        return fireballHeat;
+    }
 }

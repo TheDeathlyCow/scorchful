@@ -4,6 +4,7 @@
     "compatibilityLevel": "JAVA_17",
     "mixins": [
         "BiomeAccessor",
+        "LivingEntityMixin",
         "thirst.ConsumeFoodMixin",
         "thirst.ConsumePotionMixin",
         "thirst.EntityInvoker",
