@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
 public class BurningHeartsOverlay {
@@ -47,7 +48,8 @@ public class BurningHeartsOverlay {
             boolean isHalfHeart = m + 1 >= fireHearts && (fireHeartPoints & 1) == 1; // is odd check
 
             int u = isHalfHeart ? 9 : 0;
-            context.drawTexture(HEART_OVERLAY_TEXTURE, x, y, u, 0, 9, 10, 18, 10);
+
+            context.drawTexture(HEART_OVERLAY_TEXTURE, x, y, u, 0, 9, 10, 18, 30);
         }
     }
 
@@ -81,6 +83,22 @@ public class BurningHeartsOverlay {
 
         return Math.min(MAX_FIRE_HEARTS, frozenHealthHearts);
     }
+
+    public void drawEngulfedHeart(
+            DrawContext context,
+            BurningHeartType type,
+            int x, int y,
+            boolean halfHeart
+    ) {
+        context.drawTexture(
+                HEART_OVERLAY_TEXTURE,
+                x, y - 1,
+                halfHeart ? 9 : 0, type.textureV,
+                9, 10,
+                18, 30
+        );
+    }
+
 
     private BurningHeartsOverlay() {
     }
