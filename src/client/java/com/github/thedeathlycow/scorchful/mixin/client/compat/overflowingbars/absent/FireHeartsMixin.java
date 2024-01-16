@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.mixin.client;
+package com.github.thedeathlycow.scorchful.mixin.client.compat.overflowingbars.absent;
 
 import com.github.thedeathlycow.scorchful.hud.BurningHeartType;
 import com.github.thedeathlycow.scorchful.hud.BurningHeartsOverlay;
@@ -15,11 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-/**
- * @deprecated Add compats in from Frostiful
- */
 @Mixin(InGameHud.class)
-@Deprecated
 public class FireHeartsMixin {
 
 	@Nullable
@@ -41,6 +37,24 @@ public class FireHeartsMixin {
 			boolean blinking, CallbackInfo ci
 	) {
 		scorchful$heartType = BurningHeartType.forPlayer(player);
+	}
+
+	@Inject(
+			method = "drawHeart",
+			at = @At("HEAD"),
+			cancellable = true
+	)
+	private void drawEngulfedHearts(DrawContext context, InGameHud.HeartType type, int x, int y, int v, boolean blinking, boolean halfHeart, CallbackInfo ci) {
+		if (type != InGameHud.HeartType.NORMAL || scorchful$heartType == null) {
+			return;
+		}
+		BurningHeartsOverlay.INSTANCE.drawEngulfedHeart(
+				context,
+				scorchful$heartType,
+				x, y,
+				halfHeart
+		);
+		ci.cancel();
 	}
 
 	@Inject(
@@ -98,24 +112,6 @@ public class FireHeartsMixin {
 				context,
 				player
 		);
-	}
-
-	@Inject(
-			method = "drawHeart",
-			at = @At("HEAD"),
-			cancellable = true
-	)
-	private void drawEngulfedHearts(DrawContext context, InGameHud.HeartType type, int x, int y, int v, boolean blinking, boolean halfHeart, CallbackInfo ci) {
-		if (type != InGameHud.HeartType.NORMAL || scorchful$heartType == null) {
-			return;
-		}
-		BurningHeartsOverlay.INSTANCE.drawEngulfedHeart(
-				context,
-				scorchful$heartType,
-				x, y,
-				halfHeart
-		);
-		ci.cancel();
 	}
 
 }

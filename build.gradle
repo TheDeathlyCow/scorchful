@@ -24,6 +24,17 @@ repositories {
 		name = "Ladysnake Mods"
 		url = 'https://maven.ladysnake.org/releases'
 	}
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = "Modrinth"
+				url = "https://api.modrinth.com/maven"
+			}
+		}
+		filter {
+			includeGroup "maven.modrinth"
+		}
+	}
 }
 
 loom {
@@ -72,6 +83,9 @@ dependencies {
 	include "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
 
 	modCompileOnly "dev.emi:trinkets:${project.trinkets_version}"
+
+	modCompileOnly("maven.modrinth:overflowing-bars:${project.overflowing_bars_version}") { transitive = false }
+	modCompileOnly("maven.modrinth:colorful-hearts:${project.colorful_hearts_version}") { transitive = false }
 }
 
 processResources {

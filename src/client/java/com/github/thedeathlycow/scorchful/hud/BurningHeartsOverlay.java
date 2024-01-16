@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.hud;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -9,7 +10,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
 public class BurningHeartsOverlay {
@@ -64,20 +64,18 @@ public class BurningHeartsOverlay {
 
         final float playerMaxHealth = player.getMaxHealth();
 
-        // number of half cold hearts
-        int frozenHealthPoints;
+        // number of half burning hearts
+        int burningHealthPoints;
         // match the number of cold hearts to the display if hearts render is altered
-//        if (FrostifulIntegrations.isHeartsRenderOverridden()) {
-//            // 20 is the (expected) maximum number of health points that the render mod will display
-//            frozenHealthPoints = (int) (freezingProgress * Math.min(MAX_COLD_HEARTS, playerMaxHealth));
-//        } else {
-//        }
+        if (ScorchfulIntegrations.isHeartsRenderOverridden()) {
+            // 20 is the (expected) maximum number of health points that the render mod will display
+            burningHealthPoints = (int) (tempScale * Math.min(MAX_FIRE_HEARTS, playerMaxHealth));
+        } else {
+            // max cold hearts is multiplied by 2 to covert to points
+            burningHealthPoints = (int) (tempScale * Math.min(MAX_FIRE_HEARTS * 2.0f, playerMaxHealth));
+        }
 
-
-        // max cold hearts is multiplied by 2 to covert to points
-        frozenHealthPoints = (int) (tempScale * Math.min(MAX_FIRE_HEARTS * 2.0f, playerMaxHealth));
-
-        return frozenHealthPoints;
+        return burningHealthPoints;
     }
 
     public int getNumFireHeartsFromPoints(int fireHealthPoints) {

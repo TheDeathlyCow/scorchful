@@ -2,11 +2,14 @@
     "required": true,
     "package": "com.github.thedeathlycow.scorchful.mixin.client",
     "compatibilityLevel": "JAVA_17",
+    "plugin": "com.github.thedeathlycow.scorchful.mixin.client.compat.Plugin",
     "client": [
         "DrippingWetPlayerMixin",
-        "FireHeartsMixin",
         "HeadFeatureRendererMixin",
-        "InGameHudMixin"
+        "InGameHudMixin",
+        "compat.colorfulhearts.present.FireHeartsColorfulHeartsMixin",
+        "compat.overflowingbars.absent.FireHeartsMixin",
+        "compat.overflowingbars.present.FireHeartsOverflowingBarsMixin"
     ],
     "injectors": {
         "defaultRequire": 1
