@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.hud;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -18,6 +19,9 @@ public class BurningHeartsOverlay {
 
     public static final Identifier HEART_OVERLAY_TEXTURE = Scorchful.id("textures/gui/fire_heart_overlay.png");
     public static final int MAX_FIRE_HEARTS = 20;
+
+    private static final int TEXTURE_WIDTH = 18;
+    private static final int TEXTURE_HEIGHT = 30;
 
     private final int[] heartXPositions = new int[MAX_FIRE_HEARTS];
     private final int[] heartYPositions = new int[MAX_FIRE_HEARTS];
@@ -47,7 +51,8 @@ public class BurningHeartsOverlay {
             boolean isHalfHeart = m + 1 >= fireHearts && (fireHeartPoints & 1) == 1; // is odd check
 
             int u = isHalfHeart ? 9 : 0;
-            context.drawTexture(HEART_OVERLAY_TEXTURE, x, y, u, 0, 9, 10, 18, 10);
+
+            context.drawTexture(HEART_OVERLAY_TEXTURE, x, y, u, 0, 9, 10, TEXTURE_WIDTH, TEXTURE_HEIGHT);
         }
     }
 
@@ -59,20 +64,18 @@ public class BurningHeartsOverlay {
 
         final float playerMaxHealth = player.getMaxHealth();
 
-        // number of half cold hearts
-        int frozenHealthPoints;
+        // number of half burning hearts
+        int burningHealthPoints;
         // match the number of cold hearts to the display if hearts render is altered
-//        if (FrostifulIntegrations.isHeartsRenderOverridden()) {
-//            // 20 is the (expected) maximum number of health points that the render mod will display
-//            frozenHealthPoints = (int) (freezingProgress * Math.min(MAX_COLD_HEARTS, playerMaxHealth));
-//        } else {
-//        }
+        if (ScorchfulIntegrations.isHeartsRenderOverridden()) {
+            // 20 is the (expected) maximum number of health points that the render mod will display
+            burningHealthPoints = (int) (tempScale * Math.min(MAX_FIRE_HEARTS, playerMaxHealth));
+        } else {
+            // max cold hearts is multiplied by 2 to covert to points
+            burningHealthPoints = (int) (tempScale * Math.min(MAX_FIRE_HEARTS * 2.0f, playerMaxHealth));
+        }
 
-
-        // max cold hearts is multiplied by 2 to covert to points
-        frozenHealthPoints = (int) (tempScale * Math.min(MAX_FIRE_HEARTS * 2.0f, playerMaxHealth));
-
-        return frozenHealthPoints;
+        return burningHealthPoints;
     }
 
     public int getNumFireHeartsFromPoints(int fireHealthPoints) {
@@ -81,6 +84,22 @@ public class BurningHeartsOverlay {
 
         return Math.min(MAX_FIRE_HEARTS, frozenHealthHearts);
     }
+
+    public void drawEngulfedHeart(
+            DrawContext context,
+            BurningHeartType type,
+            int x, int y,
+            boolean halfHeart
+    ) {
+        context.drawTexture(
+                HEART_OVERLAY_TEXTURE,
+                x, y - 1,
+                halfHeart ? 9 : 0, type.textureV,
+                9, 10,
+                TEXTURE_WIDTH, TEXTURE_HEIGHT
+        );
+    }
+
 
     private BurningHeartsOverlay() {
     }
