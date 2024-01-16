@@ -20,6 +20,9 @@ public class BurningHeartsOverlay {
     public static final Identifier HEART_OVERLAY_TEXTURE = Scorchful.id("textures/gui/fire_heart_overlay.png");
     public static final int MAX_FIRE_HEARTS = 20;
 
+    private static final int TEXTURE_WIDTH = 18;
+    private static final int TEXTURE_HEIGHT = 30;
+
     private final int[] heartXPositions = new int[MAX_FIRE_HEARTS];
     private final int[] heartYPositions = new int[MAX_FIRE_HEARTS];
 
@@ -49,7 +52,7 @@ public class BurningHeartsOverlay {
 
             int u = isHalfHeart ? 9 : 0;
 
-            context.drawTexture(HEART_OVERLAY_TEXTURE, x, y, u, 0, 9, 10, 18, 30);
+            context.drawTexture(HEART_OVERLAY_TEXTURE, x, y, u, 0, 9, 10, TEXTURE_WIDTH, TEXTURE_HEIGHT);
         }
     }
 
@@ -95,7 +98,7 @@ public class BurningHeartsOverlay {
                 x, y - 1,
                 halfHeart ? 9 : 0, type.textureV,
                 9, 10,
-                18, 30
+                TEXTURE_WIDTH, TEXTURE_HEIGHT
         );
     }
 
