@@ -5,6 +5,7 @@ import com.github.thedeathlycow.scorchful.event.ScorchfulLivingEntityEvents;
 import com.github.thedeathlycow.scorchful.registry.SItemGroups;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
+import com.github.thedeathlycow.scorchful.registry.STemperatureEffects;
 import com.github.thedeathlycow.scorchful.server.ThirstCommand;
 import com.github.thedeathlycow.scorchful.temperature.AmbientTemperatureController;
 import com.github.thedeathlycow.scorchful.temperature.AttributeController;
@@ -43,6 +44,7 @@ public class Scorchful implements ModInitializer {
         SItems.registerItems();
         SItemGroups.registerAll();
         SSoundEvents.registerAll();
+        STemperatureEffects.registerAll();
 
         CommandRegistrationCallback.EVENT.register(
                 (dispatcher, registryAccess, environment) -> {
