@@ -11,9 +11,9 @@
     "item.scorchful.sun_hat": "Sun Hat",
     "item.scorchful.sun_hat.tooltip": "Reduces heat from the Sun when worn",
     
-    "item.scorchful.tooltip.refreshing": "Refreshing ⬛",
-    "item.scorchful.tooltip.sustaining": "Sustaining ⬛⬛",
-    "item.scorchful.tooltip.hydrating": "Hydrating ⬛⬛⬛",
+    "item.scorchful.tooltip.refreshing": "Refreshing \uD83C\uDF0A",
+    "item.scorchful.tooltip.sustaining": "Sustaining \uD83C\uDF0A\uD83C\uDF0A",
+    "item.scorchful.tooltip.hydrating": "Hydrating \uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
     
     "death.attack.scorchful.heat": "%1$s couldn't handle the heat",
     "death.attack.scorchful.heat.player": "%1$s couldn't handle the heat of %2$s",

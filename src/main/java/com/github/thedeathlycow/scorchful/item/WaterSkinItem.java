@@ -1,7 +1,5 @@
 package com.github.thedeathlycow.scorchful.item;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
@@ -42,6 +40,9 @@ import java.util.List;
 
 public class WaterSkinItem extends Item {
 
+    public static final Style TOOLTIP_STYLE = Style.EMPTY
+            .withColor(TextColor.parse("aqua"));
+
     public static final int MAX_DRINKS = 16;
     public static final int DRINK_TIME_TICKS = 32;
     private static final int START_DRINK_PARTICLES = DRINK_TIME_TICKS - 10;
@@ -49,9 +50,6 @@ public class WaterSkinItem extends Item {
 
     private static final String COUNT_NBT_KEY = "count";
 
-
-    private static final Style TOOLTIP_STYLE = Style.EMPTY
-            .withColor(TextColor.parse("aqua"));
 
     public WaterSkinItem(Settings settings) {
         super(settings);

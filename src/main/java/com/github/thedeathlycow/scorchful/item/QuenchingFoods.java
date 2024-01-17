@@ -18,9 +18,6 @@ import java.util.function.ToIntFunction;
 
 public class QuenchingFoods {
 
-    private static final Style TOOLTIP_STYLE = Style.EMPTY
-            .withColor(TextColor.parse("blue"));
-
     public static void appendTooltip(ItemStack stack, List<Text> tooltip) {
         appendTooltip(stack, tooltip, QuenchingLevel.forItem(stack));
     }
@@ -45,17 +42,17 @@ public class QuenchingFoods {
     public enum QuenchingLevel {
         REFRESHING(
                 SItemTags.IS_REFRESHING,
-                Text.translatable("item.scorchful.tooltip.refreshing").setStyle(TOOLTIP_STYLE),
+                Text.translatable("item.scorchful.tooltip.refreshing").setStyle(WaterSkinItem.TOOLTIP_STYLE),
                 ThirstConfig::getWaterFromRefreshingFood
         ),
         SUSTAINING(
                 SItemTags.IS_SUSTAINING,
-                Text.translatable("item.scorchful.tooltip.sustaining").setStyle(TOOLTIP_STYLE),
+                Text.translatable("item.scorchful.tooltip.sustaining").setStyle(WaterSkinItem.TOOLTIP_STYLE),
                 ThirstConfig::getWaterFromSustainingFood
         ),
         HYDRATING(
                 SItemTags.IS_HYDRATING,
-                Text.translatable("item.scorchful.tooltip.hydrating").setStyle(TOOLTIP_STYLE),
+                Text.translatable("item.scorchful.tooltip.hydrating").setStyle(WaterSkinItem.TOOLTIP_STYLE),
                 ThirstConfig::getWaterFromHydratingFood
         );
 
