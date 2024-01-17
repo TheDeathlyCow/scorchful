@@ -8,6 +8,14 @@
         "minecraft:suspicious_stew",
         {
             "required": false,
+            "id": "#c:soups"
+        },
+        {
+            "required": false,
+            "id": "#c:stews"
+        },
+        {
+            "required": false,
             "id": "farmersdelight:beef_stew"
         },
         {
