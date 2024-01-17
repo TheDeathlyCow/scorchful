@@ -1,0 +1,38 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:melon_slice",
+        "minecraft:mushroom_stew",
+        "minecraft:rabbit_stew",
+        "minecraft:beetroot_soup",
+        "minecraft:suspicious_stew",
+        {
+            "required": false,
+            "id": "farmersdelight:beef_stew"
+        },
+        {
+            "required": false,
+            "id": "farmersdelight:chicken_soup"
+        },
+        {
+            "required": false,
+            "id": "farmersdelight:vegetable_soup"
+        },
+        {
+            "required": false,
+            "id": "farmersdelight:fish_stew"
+        },
+        {
+            "required": false,
+            "id": "farmersdelight:pumpkin_soup"
+        },
+        {
+            "required": false,
+            "id": "farmersdelight:baked_cod_stew"
+        },
+        {
+            "required": false,
+            "id": "farmersdelight:noodle_soup"
+        }
+    ]
+}

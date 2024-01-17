@@ -109,14 +109,16 @@ public class WaterSkinItem extends Item {
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         int numDrinks = getNumDrinks(stack);
 
+        if (numDrinks > 0) {
+            super.appendTooltip(stack, world, tooltip, context);
+        }
+
         MutableText text = numDrinks > 0
                 ? Text.translatable("item.scorchful.water_skin.tooltip.count", numDrinks, MAX_DRINKS)
                 : Text.translatable("item.scorchful.water_skin.tooltip.empty");
-
         text.setStyle(TOOLTIP_STYLE);
-        tooltip.add(text);
 
-        super.appendTooltip(stack, world, tooltip, context);
+        tooltip.add(text);
     }
 
     @Override
@@ -156,8 +158,6 @@ public class WaterSkinItem extends Item {
 
         if (user instanceof ServerPlayerEntity serverPlayer) {
             Criteria.CONSUME_ITEM.trigger(serverPlayer, stack);
-
-            ScorchfulComponents.PLAYER.get(user).addWater(Scorchful.getConfig().thirstConfig.getWaterFromDrinking());
             if (!serverPlayer.isCreative()) {
                 this.addDrinks(stack, -1);
             }

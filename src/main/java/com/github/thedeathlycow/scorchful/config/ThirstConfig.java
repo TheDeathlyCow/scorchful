@@ -11,9 +11,11 @@ public class ThirstConfig implements ConfigData {
 
     int temperatureFromWetness = -12;
 
-    int waterFromQuenchingFood = 15;
+    int waterFromRefreshingFood = 15;
 
-    int waterFromDrinking = 150;
+    int waterFromSustainingFood = 30;
+
+    int waterFromHydratingFood = 60;
 
     int soakingFromSplashPotions = 300;
 
@@ -35,12 +37,16 @@ public class ThirstConfig implements ConfigData {
         return temperatureFromWetness;
     }
 
-    public int getWaterFromQuenchingFood() {
-        return waterFromQuenchingFood;
+    public int getWaterFromRefreshingFood() {
+        return waterFromRefreshingFood;
     }
 
-    public int getWaterFromDrinking() {
-        return waterFromDrinking;
+    public int getWaterFromSustainingFood() {
+        return waterFromSustainingFood;
+    }
+
+    public int getWaterFromHydratingFood() {
+        return waterFromHydratingFood;
     }
 
     public int getSoakingFromSplashPotions() {

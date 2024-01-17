@@ -1,0 +1,31 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:potion",
+        "scorchful:water_skin",
+        {
+            "required": false,
+            "id": "#c:milk_buckets"
+        },
+        {
+            "required": false,
+            "id": "#c:milk"
+        },
+        {
+            "required": false,
+            "id": "farmersdelight:milk_bottle"
+        },
+        {
+            "required": false,
+            "id": "farmersdelight:hot_cocoa"
+        },
+        {
+            "required": false,
+            "id": "farmersdelight:melon_juice"
+        },
+        {
+            "required": false,
+            "id": "farmersdelight:apple_cider"
+        }
+    ]
+}

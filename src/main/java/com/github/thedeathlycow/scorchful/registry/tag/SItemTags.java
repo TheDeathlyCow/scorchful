@@ -7,7 +7,11 @@ import net.minecraft.registry.tag.TagKey;
 
 public class SItemTags {
 
-    public static final TagKey<Item> QUENCHING_FOODS = of("quenching_foods");
+    public static final TagKey<Item> IS_REFRESHING = of("is_refreshing");
+
+    public static final TagKey<Item> IS_SUSTAINING = of("is_sustaining");
+
+    public static final TagKey<Item> IS_HYDRATING = of("is_hydrating");
 
     private static TagKey<Item> of(String path) {
         return TagKey.of(RegistryKeys.ITEM, Scorchful.id(path));

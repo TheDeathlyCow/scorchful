@@ -9,7 +9,7 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 public class UpdateConfig implements ConfigData {
 
     @ConfigEntry.Gui.Excluded
-    public int currentConfigVersion = Scorchful.CONFIG_VERSION;
+    int currentConfigVersion = Scorchful.CONFIG_VERSION;
 
     @ConfigEntry.Gui.Tooltip(count = 3)
     boolean enableConfigUpdates = true;
