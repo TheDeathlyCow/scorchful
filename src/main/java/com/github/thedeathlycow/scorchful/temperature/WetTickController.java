@@ -69,6 +69,11 @@ public class WetTickController extends EnvironmentControllerDecorator {
             EntityInvoker invoker = (EntityInvoker) entity;
 
 
+            // immediately soak players in water
+            if (entity.isSubmergedInWater() || invoker.scorchful_invokeIsInsideBubbleColumn()) {
+                return entity.thermoo$getMaxWetTicks();
+            }
+
             // add wetness from rain
             if (invoker.scorchful_invokeIsBeingRainedOn()) {
                 soakChange += config.thirstConfig.getRainWetnessIncrease();
@@ -77,11 +82,6 @@ public class WetTickController extends EnvironmentControllerDecorator {
             // add wetness when touching, but not submerged in, water
             if (entity.isTouchingWater() || entity.getBlockStateAtPos().isOf(Blocks.WATER_CAULDRON)) {
                 soakChange += config.thirstConfig.getTouchingWaterWetnessIncrease();
-            }
-
-            // immediately soak players in water
-            if (entity.isSubmergedInWater() || invoker.scorchful_invokeIsInsideBubbleColumn()) {
-                soakChange = entity.thermoo$getMaxWetTicks();
             }
 
             return soakChange;

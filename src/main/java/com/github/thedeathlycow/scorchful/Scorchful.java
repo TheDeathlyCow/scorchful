@@ -14,6 +14,8 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Contract;
@@ -61,6 +63,7 @@ public class Scorchful implements ModInitializer {
                     }
                 }
         );
+
 
         this.registerThermooEventListeners();
 

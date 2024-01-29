@@ -7,15 +7,13 @@ import me.shedaniel.autoconfig.annotation.Config;
 @Config(name = Scorchful.MODID + ".thirst_config")
 public class ThirstConfig implements ConfigData {
 
-    int wetnessFromBodyWater = 2;
-
     int temperatureFromWetness = -12;
 
-    int waterFromRefreshingFood = 15;
+    int waterFromRefreshingFood = 30;
 
-    int waterFromSustainingFood = 30;
+    int waterFromSustainingFood = 60;
 
-    int waterFromHydratingFood = 60;
+    int waterFromHydratingFood = 120;
 
     int soakingFromSplashPotions = 300;
 
@@ -29,9 +27,9 @@ public class ThirstConfig implements ConfigData {
 
     float humidBiomeSweatEfficiency = 1f / 6f;
 
-    public int getWetnessFromBodyWater() {
-        return wetnessFromBodyWater;
-    }
+    float minRehydrationEfficiency = 0f;
+
+    float maxRehydrationEfficiency = 0.75f;
 
     public int getTemperatureFromWetness() {
         return temperatureFromWetness;
@@ -71,5 +69,13 @@ public class ThirstConfig implements ConfigData {
 
     public float getHumidBiomeSweatEfficiency() {
         return humidBiomeSweatEfficiency;
+    }
+
+    public float getMinRehydrationEfficiency() {
+        return minRehydrationEfficiency;
+    }
+
+    public float getMaxRehydrationEfficiency() {
+        return maxRehydrationEfficiency;
     }
 }
