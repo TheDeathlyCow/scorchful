@@ -15,11 +15,18 @@
     "item.scorchful.tooltip.sustaining": "Sustaining \uD83C\uDF0A\uD83C\uDF0A",
     "item.scorchful.tooltip.hydrating": "Hydrating \uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
     
+    
+    "enchantment.scorchful.rehydration": "Rehydration",
+    "enchantment.scorchful.rehydration.desc": "Replenishes body water lost from sweating",
+    
+    
     "death.attack.scorchful.heat": "%1$s couldn't handle the heat",
     "death.attack.scorchful.heat.player": "%1$s couldn't handle the heat of %2$s",
     
+    
     "subtitles.item.scorchful.water_skin.fill": "Waterskin fills",
     "subtitles.thermoo.temperature_effect.scorchful.heartbeat": "Heart beats",
+    
     
     "text.autoconfig.scorchful.option.clientConfig": "Client Config",
     "text.autoconfig.scorchful.option.clientConfig.doBurningHeartOverlay": "Do burning heart overlay",
