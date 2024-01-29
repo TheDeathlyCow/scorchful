@@ -9,7 +9,7 @@ public class HeatingConfig implements ConfigData {
 
     int coolingFromIce = 24;
 
-    int getMinSkyLightLevelForHeat = 13;
+    int minSkyLightLevelForHeat = 13;
 
     int heatFromSun = 2;
 
@@ -25,8 +25,8 @@ public class HeatingConfig implements ConfigData {
         return coolingFromIce;
     }
 
-    public int getGetMinSkyLightLevelForHeat() {
-        return getMinSkyLightLevelForHeat;
+    public int getMinSkyLightLevelForHeat() {
+        return minSkyLightLevelForHeat;
     }
 
     public int getHeatFromSun() {

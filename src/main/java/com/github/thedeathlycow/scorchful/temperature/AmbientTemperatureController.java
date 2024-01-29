@@ -4,13 +4,11 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.HeatingConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.item.SunHatItem;
-import com.github.thedeathlycow.scorchful.registry.SItems;
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentController;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentControllerDecorator;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -81,7 +79,7 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
 
             int sunLight = player.getWorld().getLightLevel(LightType.SKY, player.getBlockPos());
 
-            boolean hasHatShade = sunLight >= config.heatingConfig.getGetMinSkyLightLevelForHeat()
+            boolean hasHatShade = sunLight >= config.heatingConfig.getMinSkyLightLevelForHeat()
                     && SunHatItem.isWearingSunHat(player);
 
             if (hasHatShade) {
@@ -139,7 +137,7 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
             int skylight = world.getLightLevel(LightType.SKY, pos);
             int skylightWithDarkness = skylight - world.getAmbientDarkness(); // adjusted with night and weather
 
-            int minLevel = config.heatingConfig.getGetMinSkyLightLevelForHeat();
+            int minLevel = config.heatingConfig.getMinSkyLightLevelForHeat();
 
             if (skylightWithDarkness >= minLevel) {
                 warmth += config.heatingConfig.getHeatFromSun();

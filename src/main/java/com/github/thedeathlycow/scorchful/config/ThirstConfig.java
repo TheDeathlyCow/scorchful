@@ -27,7 +27,7 @@ public class ThirstConfig implements ConfigData {
 
     int onFireDryDate = 50;
 
-    float humidBiomeWetEfficieny = 1f / 6f;
+    float humidBiomeSweatEfficiency = 1f / 6f;
 
     public int getWetnessFromBodyWater() {
         return wetnessFromBodyWater;
@@ -69,7 +69,7 @@ public class ThirstConfig implements ConfigData {
         return onFireDryDate;
     }
 
-    public float getHumidBiomeWetEfficieny() {
-        return humidBiomeWetEfficieny;
+    public float getHumidBiomeSweatEfficiency() {
+        return humidBiomeSweatEfficiency;
     }
 }

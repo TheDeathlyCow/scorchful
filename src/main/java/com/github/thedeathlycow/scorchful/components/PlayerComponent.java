@@ -1,7 +1,6 @@
 package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.config.HeatingConfig;
 import com.github.thedeathlycow.scorchful.config.ThirstConfig;
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import dev.onyxstudios.cca.api.v3.component.Component;
@@ -73,7 +72,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
             int temperatureChange = config.getTemperatureFromWetness();
             World world = this.provider.getWorld();
             if (world.getBiome(this.provider.getBlockPos()).isIn(SBiomeTags.HUMID_BIOMES)) {
-                temperatureChange = MathHelper.floor(temperatureChange * config.getHumidBiomeWetEfficieny());
+                temperatureChange = MathHelper.floor(temperatureChange * config.getHumidBiomeSweatEfficiency());
             }
 
             this.provider.thermoo$addTemperature(temperatureChange);
