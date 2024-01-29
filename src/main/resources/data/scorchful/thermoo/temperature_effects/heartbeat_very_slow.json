@@ -1,0 +1,19 @@
+{
+    "type": "scorchful:sound",
+    "entity": {
+        "condition": "minecraft:reference",
+        "name": "scorchful:can_heat"
+    },
+    "entity_type": "minecraft:player",
+    "temperature_scale_range": {
+        "min": 0.5,
+        "max": 0.75
+    },
+    "config": {
+        "interval": 66,
+        "sound": "scorchful:thermoo.temperature_effect.scorchful.heartbeat",
+        "volume": 1,
+        "pitch": 1,
+        "only_play_to_source": true
+    }
+}

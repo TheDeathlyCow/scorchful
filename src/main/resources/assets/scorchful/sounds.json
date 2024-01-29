@@ -7,5 +7,11 @@
             "scorchful:item/water_skin/fill4"
         ],
         "subtitle": "subtitles.item.scorchful.water_skin.fill"
+    },
+    "thermoo.temperature_effect.scorchful.heartbeat": {
+        "sounds": [
+            "scorchful:entity/heartbeat"
+        ],
+        "subtitle": "subtitles.thermoo.temperature_effect.scorchful.heartbeat"
     }
 }

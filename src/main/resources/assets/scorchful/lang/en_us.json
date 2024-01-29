@@ -18,5 +18,6 @@
     "death.attack.scorchful.heat": "%1$s couldn't handle the heat",
     "death.attack.scorchful.heat.player": "%1$s couldn't handle the heat of %2$s",
     
-    "subtitles.item.scorchful.water_skin.fill": "Waterskin fills"
+    "subtitles.item.scorchful.water_skin.fill": "Waterskin fills",
+    "subtitles.thermoo.temperature_effect.scorchful.heartbeat": "Heart beats"
 }
