@@ -22,40 +22,46 @@ public class PlayerComponent implements Component, ServerTickingComponent {
 
     private static final String WATER_KEY = "body_water";
 
+    private static final String REHYDRATION_DRINK_KEY = "rehydration_drink";
+
 
     private final PlayerEntity provider;
 
-    private int water = 0;
+    private int waterDrunk = 0;
 
-    private int capturedWater = 0;
+    private int rehydrationDrink = 0;
 
     public PlayerComponent(PlayerEntity provider) {
         this.provider = provider;
     }
 
-    public PlayerEntity getProvider() {
-        return provider;
+    public int getWaterDrunk() {
+        return waterDrunk;
     }
 
-    public int getWater() {
-        return water;
-    }
-
-    public void addWater(int amount) {
-        this.water = MathHelper.clamp(this.water + amount, 0, MAX_WATER);
+    public void drink(int amount) {
+        this.waterDrunk = MathHelper.clamp(this.waterDrunk + amount, 0, MAX_WATER);
     }
 
     @Override
     public void readFromNbt(NbtCompound tag) {
         if (tag.contains(WATER_KEY, NbtElement.INT_TYPE)) {
-            this.water = tag.getInt(WATER_KEY);
+            this.waterDrunk = tag.getInt(WATER_KEY);
+        }
+
+        if (tag.contains(REHYDRATION_DRINK_KEY, NbtElement.INT_TYPE)) {
+            this.rehydrationDrink = tag.getInt(REHYDRATION_DRINK_KEY);
         }
     }
 
     @Override
     public void writeToNbt(NbtCompound tag) {
-        if (this.water > 0) {
-            tag.putInt(WATER_KEY, this.water);
+        if (this.waterDrunk > 0) {
+            tag.putInt(WATER_KEY, this.waterDrunk);
+        }
+
+        if (this.rehydrationDrink > 0) {
+            tag.putInt(REHYDRATION_DRINK_KEY, this.rehydrationDrink);
         }
     }
 
@@ -70,8 +76,8 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         ThirstConfig config = Scorchful.getConfig().thirstConfig;
 
         // sweating: move body water to wetness
-        if (this.water > 0 && this.provider.thermoo$getTemperature() > 0) {
-            this.water--;
+        if (this.waterDrunk > 0 && this.provider.thermoo$getTemperature() > 0) {
+            this.waterDrunk--;
             this.provider.thermoo$setWetTicks(this.provider.thermoo$getWetTicks() + 1);
         }
 
@@ -88,7 +94,6 @@ public class PlayerComponent implements Component, ServerTickingComponent {
             if (temperatureChange < 0) {
                 this.tickRehydration(config);
             }
-            //TODO: drying should maybe be moved here
         }
     }
 
@@ -96,7 +101,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         int rehydrationLevel = SEnchantmentHelper.getTotalRehydrationForPlayer(this.provider);
 
         if (rehydrationLevel == 0) {
-            this.capturedWater = 0;
+            this.rehydrationDrink = 0;
             return;
         }
 
@@ -107,9 +112,9 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         // However, some of that water is lost, based on the total level of Rehydration.
 
         int rehydrationCapacity = config.getWaterFromHydratingFood();
-        this.capturedWater = Math.min(this.capturedWater + 1, rehydrationCapacity);
+        this.rehydrationDrink = Math.min(this.rehydrationDrink + 1, rehydrationCapacity);
 
-        if (capturedWater == rehydrationCapacity && this.water <= 1) {
+        if (rehydrationDrink == rehydrationCapacity && this.waterDrunk <= 1) {
             this.rehydrate(config, rehydrationLevel);
         }
     }
@@ -118,14 +123,14 @@ public class PlayerComponent implements Component, ServerTickingComponent {
 
         float efficiency = getRehydrationEfficiency(
                 rehydrationLevel,
-                config.getMinRehydrationEfficiency(), config.getMaxRehydrationEfficiency()
+                0f, config.getMaxRehydrationEfficiency()
         );
-        int addedWater = MathHelper.floor(this.capturedWater * efficiency);
+        int drinkToAdd = MathHelper.floor(this.rehydrationDrink * efficiency);
 
-        this.addWater(addedWater);
-        this.capturedWater = 0;
+        this.rehydrationDrink = 0;
 
-        if (addedWater > 0 && this.provider.getWorld() instanceof ServerWorld serverWorld) {
+        if (drinkToAdd > 0 && this.provider.getWorld() instanceof ServerWorld serverWorld) {
+            this.drink(drinkToAdd);
             this.playRehydrationEffects(serverWorld);
         }
     }

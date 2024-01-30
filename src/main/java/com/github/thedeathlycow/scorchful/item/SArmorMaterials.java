@@ -1,6 +1,5 @@
 package com.github.thedeathlycow.scorchful.item;
 
-import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
@@ -12,6 +11,7 @@ import net.minecraft.util.Util;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public enum SArmorMaterials implements ArmorMaterial {
 
@@ -33,12 +33,15 @@ public enum SArmorMaterials implements ArmorMaterial {
             0.0f,
             () -> Ingredient.ofItems(Items.WHEAT)
     );
-    private static final Map<ArmorItem.Type, Integer> BASE_DURABILITY = Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-        map.put(ArmorItem.Type.BOOTS, 13);
-        map.put(ArmorItem.Type.LEGGINGS, 15);
-        map.put(ArmorItem.Type.CHESTPLATE, 16);
-        map.put(ArmorItem.Type.HELMET, 11);
-    });
+    private static final Map<ArmorItem.Type, Integer> BASE_DURABILITY = Util.make(
+            new EnumMap<>(ArmorItem.Type.class),
+            map -> {
+                map.put(ArmorItem.Type.BOOTS, 13);
+                map.put(ArmorItem.Type.LEGGINGS, 15);
+                map.put(ArmorItem.Type.CHESTPLATE, 16);
+                map.put(ArmorItem.Type.HELMET, 11);
+            }
+    );
     private final String name;
     private final int durabilityMultiplier;
     private final Map<ArmorItem.Type, Integer> protectionAmounts;
@@ -64,7 +67,7 @@ public enum SArmorMaterials implements ArmorMaterial {
         this.equipSound = equipSound;
         this.toughness = toughness;
         this.knockbackResistance = knockbackResistance;
-        this.repairIngredientSupplier = Suppliers.memoize(repairIngredientSupplier);
+        this.repairIngredientSupplier = Suppliers.memoize(repairIngredientSupplier::get);
     }
 
     @Override

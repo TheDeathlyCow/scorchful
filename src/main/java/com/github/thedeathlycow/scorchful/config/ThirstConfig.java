@@ -27,8 +27,6 @@ public class ThirstConfig implements ConfigData {
 
     float humidBiomeSweatEfficiency = 1f / 6f;
 
-    float minRehydrationEfficiency = 0f;
-
     float maxRehydrationEfficiency = 0.75f;
 
     public int getTemperatureFromWetness() {
@@ -69,10 +67,6 @@ public class ThirstConfig implements ConfigData {
 
     public float getHumidBiomeSweatEfficiency() {
         return humidBiomeSweatEfficiency;
-    }
-
-    public float getMinRehydrationEfficiency() {
-        return minRehydrationEfficiency;
     }
 
     public float getMaxRehydrationEfficiency() {
