@@ -138,7 +138,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
     private void playRehydrationEffects(ServerWorld serverWorld) {
         Vec3d pos = this.provider.getPos();
 
-        if (!this.provider.isSilent()) {
+        if (!this.provider.isSilent() && !this.provider.isSneaking()) {
             serverWorld.playSound(
                     null,
                     this.provider.getBlockPos(),
