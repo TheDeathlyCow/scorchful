@@ -8,10 +8,19 @@
         ],
         "subtitle": "subtitles.item.scorchful.water_skin.fill"
     },
-    "thermoo.temperature_effect.scorchful.heartbeat": {
+    "temperature_effect.scorchful.heartbeat": {
         "sounds": [
             "scorchful:entity/heartbeat"
         ],
-        "subtitle": "subtitles.thermoo.temperature_effect.scorchful.heartbeat"
+        "subtitle": "subtitles.temperature_effect.scorchful.heartbeat"
+    },
+    "enchantment.scorchful.rehydration": {
+        "sounds": [
+            "item/bottle/fill1",
+            "item/bottle/fill2",
+            "item/bottle/fill3",
+            "item/bottle/fill4"
+        ],
+        "subtitle": "subtitles.enchantment.scorchful.rehydration"
     }
 }

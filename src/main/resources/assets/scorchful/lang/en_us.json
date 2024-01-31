@@ -15,11 +15,19 @@
     "item.scorchful.tooltip.sustaining": "Sustaining \uD83C\uDF0A\uD83C\uDF0A",
     "item.scorchful.tooltip.hydrating": "Hydrating \uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
     
+    
+    "enchantment.scorchful.rehydration": "Rehydration",
+    "enchantment.scorchful.rehydration.desc": "Replenishes body water lost from sweating",
+    
+    
     "death.attack.scorchful.heat": "%1$s couldn't handle the heat",
     "death.attack.scorchful.heat.player": "%1$s couldn't handle the heat of %2$s",
     
+    
     "subtitles.item.scorchful.water_skin.fill": "Waterskin fills",
-    "subtitles.thermoo.temperature_effect.scorchful.heartbeat": "Heart beats",
+    "subtitles.temperature_effect.scorchful.heartbeat": "Heart beats",
+    "subtitles.enchantment.scorchful.rehydration": "Player Rehydrates",
+    
     
     "text.autoconfig.scorchful.option.clientConfig": "Client Config",
     "text.autoconfig.scorchful.option.clientConfig.doBurningHeartOverlay": "Do burning heart overlay",
@@ -36,17 +44,18 @@
     "text.autoconfig.scorchful.option.heatingConfig.fireballHeat": "Fireball strike heat",
     
     "text.autoconfig.scorchful.option.thirstConfig": "Thirst Config",
-    "text.autoconfig.scorchful.option.thirstConfig.wetnessFromBodyWater": "Wetness from Body Water",
     "text.autoconfig.scorchful.option.thirstConfig.temperatureFromWetness": "Temperature from Wetness",
     "text.autoconfig.scorchful.option.thirstConfig.waterFromRefreshingFood": "Water from Refreshing food",
     "text.autoconfig.scorchful.option.thirstConfig.waterFromSustainingFood": "Water from Sustaining food",
     "text.autoconfig.scorchful.option.thirstConfig.waterFromHydratingFood": "Water from Hydrating food",
+    "text.autoconfig.scorchful.option.thirstConfig.rehydrationDrinkSize": "Rehydration drink size",
     "text.autoconfig.scorchful.option.thirstConfig.soakingFromSplashPotions": "Soaking from Splash Potions",
     "text.autoconfig.scorchful.option.thirstConfig.rainWetnessIncrease": "Rain wetness increase per tick",
     "text.autoconfig.scorchful.option.thirstConfig.touchingWaterWetnessIncrease": "Touching water wetness increase per tick",
     "text.autoconfig.scorchful.option.thirstConfig.dryRate": "Dry rate",
     "text.autoconfig.scorchful.option.thirstConfig.onFireDryDate": "On fire dry rate",
     "text.autoconfig.scorchful.option.thirstConfig.humidBiomeSweatEfficiency": "Humid biome sweating efficiency",
+    "text.autoconfig.scorchful.option.thirstConfig.maxRehydrationEfficiency": "Maximum Rehydration Enchantment efficiency",
     
     "text.autoconfig.scorchful.option.updateConfig": "Update Config",
     "text.autoconfig.scorchful.option.updateConfig.currentConfigVersion": "Current config version",

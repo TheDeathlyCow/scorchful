@@ -2,10 +2,7 @@ package com.github.thedeathlycow.scorchful.server;
 
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
 
@@ -40,7 +37,7 @@ public class ThirstCommand {
             ServerCommandSource source,
             PlayerEntity target
     ) {
-        return ScorchfulComponents.PLAYER.get(target).getWater();
+        return ScorchfulComponents.PLAYER.get(target).getWaterDrunk();
     }
 
 }

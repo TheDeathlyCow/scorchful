@@ -8,9 +8,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.text.TextColor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -35,7 +33,7 @@ public class QuenchingFoods {
     public static void onConsume(LivingEntity user, ItemStack stack, @Nullable QuenchingLevel level) {
         if (level != null && user.isPlayer()) {
             ScorchfulComponents.PLAYER.get(user)
-                    .addWater(level.waterProvider.applyAsInt(Scorchful.getConfig().thirstConfig));
+                    .drink(level.waterProvider.applyAsInt(Scorchful.getConfig().thirstConfig));
         }
     }
 

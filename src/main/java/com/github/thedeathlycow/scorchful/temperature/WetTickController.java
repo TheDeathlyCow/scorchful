@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.temperature;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.mixin.thirst.EntityInvoker;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentController;
@@ -46,6 +47,10 @@ public class WetTickController extends EnvironmentControllerDecorator {
                 soakChange -= config.thirstConfig.getOnFireDryDate();
             }
 
+            if (soakChange < 0 && entity.isPlayer()) {
+                ScorchfulComponents.PLAYER.get(entity).tickRehydration(config.thirstConfig);
+            }
+
             return soakChange;
         }
     }
@@ -69,6 +74,11 @@ public class WetTickController extends EnvironmentControllerDecorator {
             EntityInvoker invoker = (EntityInvoker) entity;
 
 
+            // immediately soak players in water
+            if (entity.isSubmergedInWater() || invoker.scorchful_invokeIsInsideBubbleColumn()) {
+                return entity.thermoo$getMaxWetTicks();
+            }
+
             // add wetness from rain
             if (invoker.scorchful_invokeIsBeingRainedOn()) {
                 soakChange += config.thirstConfig.getRainWetnessIncrease();
@@ -77,11 +87,6 @@ public class WetTickController extends EnvironmentControllerDecorator {
             // add wetness when touching, but not submerged in, water
             if (entity.isTouchingWater() || entity.getBlockStateAtPos().isOf(Blocks.WATER_CAULDRON)) {
                 soakChange += config.thirstConfig.getTouchingWaterWetnessIncrease();
-            }
-
-            // immediately soak players in water
-            if (entity.isSubmergedInWater() || invoker.scorchful_invokeIsInsideBubbleColumn()) {
-                soakChange = entity.thermoo$getMaxWetTicks();
             }
 
             return soakChange;
