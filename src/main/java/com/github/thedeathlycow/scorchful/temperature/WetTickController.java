@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.temperature;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.mixin.thirst.EntityInvoker;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentController;
@@ -82,6 +83,10 @@ public class WetTickController extends EnvironmentControllerDecorator {
             // add wetness when touching, but not submerged in, water
             if (entity.isTouchingWater() || entity.getBlockStateAtPos().isOf(Blocks.WATER_CAULDRON)) {
                 soakChange += config.thirstConfig.getTouchingWaterWetnessIncrease();
+            }
+
+            if (soakChange < 0) {
+                ScorchfulComponents.PLAYER.get(this).tickRehydration(config.thirstConfig);
             }
 
             return soakChange;

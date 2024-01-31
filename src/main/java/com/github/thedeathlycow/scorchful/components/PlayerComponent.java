@@ -90,14 +90,10 @@ public class PlayerComponent implements Component, ServerTickingComponent {
             }
 
             this.provider.thermoo$addTemperature(temperatureChange);
-
-            if (temperatureChange < 0) {
-                this.tickRehydration(config);
-            }
         }
     }
 
-    private void tickRehydration(ThirstConfig config) {
+    public void tickRehydration(ThirstConfig config) {
         int rehydrationLevel = SEnchantmentHelper.getTotalRehydrationForPlayer(this.provider);
 
         if (rehydrationLevel == 0) {
