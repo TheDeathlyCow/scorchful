@@ -11,7 +11,7 @@
     },
     "config": {
         "interval": 11,
-        "sound": "scorchful:thermoo.temperature_effect.scorchful.heartbeat",
+        "sound": "scorchful:temperature_effect.scorchful.heartbeat",
         "volume": 1,
         "pitch": 1,
         "only_play_to_source": true

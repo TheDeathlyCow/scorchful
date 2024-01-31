@@ -25,7 +25,8 @@
     
     
     "subtitles.item.scorchful.water_skin.fill": "Waterskin fills",
-    "subtitles.thermoo.temperature_effect.scorchful.heartbeat": "Heart beats",
+    "subtitles.temperature_effect.scorchful.heartbeat": "Heart beats",
+    "subtitles.enchantment.scorchful.rehydration": "Player Rehydrates",
     
     
     "text.autoconfig.scorchful.option.clientConfig": "Client Config",

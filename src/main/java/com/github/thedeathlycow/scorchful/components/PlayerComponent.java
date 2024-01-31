@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.components;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ThirstConfig;
 import com.github.thedeathlycow.scorchful.enchantment.SEnchantmentHelper;
+import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
@@ -138,7 +139,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
             serverWorld.playSound(
                     null,
                     this.provider.getBlockPos(),
-                    SoundEvents.ITEM_BOTTLE_FILL,
+                    SSoundEvents.REHYDRATE,
                     this.provider.getSoundCategory()
             );
         }
