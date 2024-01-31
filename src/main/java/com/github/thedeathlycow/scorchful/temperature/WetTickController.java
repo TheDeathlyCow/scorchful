@@ -47,6 +47,10 @@ public class WetTickController extends EnvironmentControllerDecorator {
                 soakChange -= config.thirstConfig.getOnFireDryDate();
             }
 
+            if (soakChange < 0 && entity.isPlayer()) {
+                ScorchfulComponents.PLAYER.get(entity).tickRehydration(config.thirstConfig);
+            }
+
             return soakChange;
         }
     }
@@ -83,10 +87,6 @@ public class WetTickController extends EnvironmentControllerDecorator {
             // add wetness when touching, but not submerged in, water
             if (entity.isTouchingWater() || entity.getBlockStateAtPos().isOf(Blocks.WATER_CAULDRON)) {
                 soakChange += config.thirstConfig.getTouchingWaterWetnessIncrease();
-            }
-
-            if (soakChange < 0) {
-                ScorchfulComponents.PLAYER.get(this).tickRehydration(config.thirstConfig);
             }
 
             return soakChange;

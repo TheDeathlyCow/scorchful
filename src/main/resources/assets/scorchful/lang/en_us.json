@@ -47,6 +47,7 @@
     "text.autoconfig.scorchful.option.thirstConfig.waterFromRefreshingFood": "Water from Refreshing food",
     "text.autoconfig.scorchful.option.thirstConfig.waterFromSustainingFood": "Water from Sustaining food",
     "text.autoconfig.scorchful.option.thirstConfig.waterFromHydratingFood": "Water from Hydrating food",
+    "text.autoconfig.scorchful.option.thirstConfig.rehydrationDrinkSize": "Rehydration drink size",
     "text.autoconfig.scorchful.option.thirstConfig.soakingFromSplashPotions": "Soaking from Splash Potions",
     "text.autoconfig.scorchful.option.thirstConfig.rainWetnessIncrease": "Rain wetness increase per tick",
     "text.autoconfig.scorchful.option.thirstConfig.touchingWaterWetnessIncrease": "Touching water wetness increase per tick",

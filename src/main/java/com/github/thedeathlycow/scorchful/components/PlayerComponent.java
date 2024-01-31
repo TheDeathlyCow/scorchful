@@ -107,7 +107,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         // When the drink is full, the player is given back all the water in the drink as *body* water.
         // However, some of that water is lost, based on the total level of Rehydration.
 
-        int rehydrationCapacity = config.getWaterFromHydratingFood();
+        int rehydrationCapacity = config.getRehydrationDrinkSize();
         this.rehydrationDrink = Math.min(this.rehydrationDrink + 1, rehydrationCapacity);
 
         if (rehydrationDrink == rehydrationCapacity && this.waterDrunk <= 1) {
