@@ -47,7 +47,7 @@ public class WetTickController extends EnvironmentControllerDecorator {
                 soakChange -= config.thirstConfig.getOnFireDryDate();
             }
 
-            if (soakChange < 0 && entity.isPlayer()) {
+            if (soakChange < 0 && entity.isPlayer() && entity.isWet()) {
                 ScorchfulComponents.PLAYER.get(entity).tickRehydration(config.thirstConfig);
             }
 
