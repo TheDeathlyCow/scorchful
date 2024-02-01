@@ -5,6 +5,7 @@ import com.github.thedeathlycow.scorchful.item.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
@@ -30,10 +31,16 @@ public class SItems {
             Items.GLASS_BOTTLE::getDefaultStack
     );
 
+    public static final Item WARPED_LILY = new BlockItem(
+            SBlocks.WARPED_LILY,
+            new FabricItemSettings()
+    );
+
     public static void registerItems() {
         register("water_skin", WATER_SKIN);
         register("sun_hat", SUN_HAT);
         register("cactus_juice", CACTUS_JUICE);
+        register("warped_lily", WARPED_LILY);
     }
 
     private static void register(String id, Item item) {
