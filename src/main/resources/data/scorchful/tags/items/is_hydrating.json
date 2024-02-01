@@ -3,6 +3,7 @@
     "values": [
         "minecraft:potion",
         "scorchful:water_skin",
+        "scorchful:cactus_juice",
         {
             "required": false,
             "id": "#c:milk_buckets"

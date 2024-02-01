@@ -10,6 +10,7 @@
     
     "item.scorchful.sun_hat": "Sun Hat",
     "item.scorchful.sun_hat.tooltip": "Reduces heat from the Sun when worn",
+    "item.scorchful.cactus_juice": "Bottle of Cactus Juice",
     
     "item.scorchful.tooltip.refreshing": "Refreshing \uD83C\uDF0A",
     "item.scorchful.tooltip.sustaining": "Sustaining \uD83C\uDF0A\uD83C\uDF0A",
@@ -22,6 +23,10 @@
     
     "death.attack.scorchful.heat": "%1$s couldn't handle the heat",
     "death.attack.scorchful.heat.player": "%1$s couldn't handle the heat of %2$s",
+    
+    
+    "advancement.scorchful.adventure.drink_cactus_juice.title": "It's the Quenchiest!",
+    "advancement.scorchful.adventure.drink_cactus_juice.description": "Drink a Bottle of Cactus Juice",
     
     
     "subtitles.item.scorchful.water_skin.fill": "Waterskin fills",

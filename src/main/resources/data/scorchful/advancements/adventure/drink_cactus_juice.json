@@ -1,0 +1,39 @@
+{
+    "display": {
+        "icon": {
+            "item": "scorchful:cactus_juice"
+        },
+        "title": {
+            "translate": "advancement.scorchful.adventure.drink_cactus_juice.title"
+        },
+        "description": {
+            "translate": "advancement.scorchful.adventure.drink_cactus_juice.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "minecraft:adventure/root",
+    "criteria": {
+        "drink_cactus_juice": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "scorchful:cactus_juice"
+                    ]
+                }
+            }
+        }
+    },
+    "requirements": [
+        [
+            "drink_cactus_juice"
+        ]
+    ],
+    "rewards": {
+        "function": "scorchful:apply_nausea",
+        "experience": 10
+    }
+}

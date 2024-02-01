@@ -18,6 +18,7 @@ public class SItemGroups {
                 entries.add(new ItemStack(SItems.WATER_SKIN));
                 entries.add(makeFilledWaterSkin());
                 entries.add(new ItemStack(SItems.SUN_HAT));
+                entries.add(new ItemStack(SItems.CACTUS_JUICE));
             }).build();
 
     public static void registerAll() {
