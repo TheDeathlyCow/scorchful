@@ -20,6 +20,7 @@ public class SItemGroups {
                 entries.add(new ItemStack(SItems.SUN_HAT));
                 entries.add(new ItemStack(SItems.CACTUS_JUICE));
                 entries.add(new ItemStack(SItems.CRIMSON_LILY));
+                entries.add(new ItemStack(SItems.ROOTED_CRIMSON_NYLIUM));
             }).build();
 
     public static void registerAll() {

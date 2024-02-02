@@ -1,0 +1,8 @@
+{
+    "parent": "minecraft:block/cube_bottom_top",
+    "textures": {
+        "bottom": "scorchful:block/rooted_netherrack",
+        "side": "scorchful:block/rooted_crimson_nylium/side",
+        "top": "scorchful:block/rooted_crimson_nylium/top"
+    }
+}
