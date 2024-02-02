@@ -5,6 +5,7 @@
         {
             "required": false,
             "id": "#thermoo:benefits_from_heat"
-        }
+        },
+        "minecraft:enderman"
     ]
 }
