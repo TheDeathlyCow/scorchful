@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.block;
 
+import com.github.thedeathlycow.scorchful.particle.SpurtingWaterParticleEffect;
 import com.github.thedeathlycow.scorchful.registry.SParticleTypes;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
@@ -102,16 +103,16 @@ public class CrimsonLilyBlock extends Block {
             Random random = world.getRandom();
             Vec3d center = pos.toCenterPos();
 
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < 40; i++) {
 
                 double x = center.x + (random.nextDouble() / 3) - (1.0 / 6.0);
                 double y = center.y;
                 double z = center.z + (random.nextDouble() / 3) - (1.0 / 6.0);
 
                 world.addParticle(
-                        SParticleTypes.SPURTING_WATER,
+                        new SpurtingWaterParticleEffect(i),
                         x, y, z,
-                        0, 100.0, 0
+                        0, 0, 0
                 );
             }
         }
