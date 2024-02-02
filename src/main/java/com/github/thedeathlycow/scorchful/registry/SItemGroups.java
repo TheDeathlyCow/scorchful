@@ -19,7 +19,7 @@ public class SItemGroups {
                 entries.add(makeFilledWaterSkin());
                 entries.add(new ItemStack(SItems.SUN_HAT));
                 entries.add(new ItemStack(SItems.CACTUS_JUICE));
-                entries.add(new ItemStack(SItems.WARPED_LILY));
+                entries.add(new ItemStack(SItems.CRIMSON_LILY));
             }).build();
 
     public static void registerAll() {

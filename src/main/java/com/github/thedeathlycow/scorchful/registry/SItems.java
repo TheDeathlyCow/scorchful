@@ -4,7 +4,6 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -31,8 +30,8 @@ public class SItems {
             Items.GLASS_BOTTLE::getDefaultStack
     );
 
-    public static final Item WARPED_LILY = new BlockItem(
-            SBlocks.WARPED_LILY,
+    public static final Item CRIMSON_LILY = new BlockItem(
+            SBlocks.CRIMSON_LILY,
             new FabricItemSettings()
     );
 
@@ -40,7 +39,7 @@ public class SItems {
         register("water_skin", WATER_SKIN);
         register("sun_hat", SUN_HAT);
         register("cactus_juice", CACTUS_JUICE);
-        register("warped_lily", WARPED_LILY);
+        register("crimson_lily", CRIMSON_LILY);
     }
 
     private static void register(String id, Item item) {

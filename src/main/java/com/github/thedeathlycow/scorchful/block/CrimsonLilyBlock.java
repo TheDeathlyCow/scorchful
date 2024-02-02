@@ -10,13 +10,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
-public class WarpedLilyBlock extends Block {
+public class CrimsonLilyBlock extends Block {
 
     public static final EnumProperty<WaterSaturationLevel> WATER_SATURATION_LEVEL = EnumProperty.of(
             "water_level", WaterSaturationLevel.class
     );
 
-    public WarpedLilyBlock(Settings settings) {
+    public CrimsonLilyBlock(Settings settings) {
         super(settings);
         this.setDefaultState(
                 this.getStateManager().getDefaultState()
