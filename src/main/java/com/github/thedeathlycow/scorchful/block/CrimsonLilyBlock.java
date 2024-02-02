@@ -3,15 +3,20 @@ package com.github.thedeathlycow.scorchful.block;
 import com.github.thedeathlycow.scorchful.particle.SpurtingWaterParticleEffect;
 import com.github.thedeathlycow.scorchful.registry.SParticleTypes;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
+import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
+import com.github.thedeathlycow.thermoo.api.ThermooTags;
 import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.IntProperty;
@@ -87,34 +92,53 @@ public class CrimsonLilyBlock extends Block {
             return;
         }
         if (!world.isClient) {
-            world.playSound(
-                    null,
-                    pos,
-                    SSoundEvents.CRIMSON_LILY_SQUELCH,
-                    SoundCategory.BLOCKS
-            );
-
-            if (entity instanceof Soakable soakable) {
-                soakable.thermoo$addWetTicks(soakable.thermoo$getMaxWetTicks());
-            }
-
-            world.setBlockState(pos, state.with(WATER_SATURATION_LEVEL, 0));
+            soakEntity(state, world, pos, entity);
         } else {
-            Random random = world.getRandom();
-            Vec3d center = pos.toCenterPos();
+            createSplash(world, pos);
+        }
+    }
 
-            for (int i = 0; i < 40; i++) {
+    private static void soakEntity(BlockState state, World world, BlockPos pos, Entity entity) {
+        world.playSound(
+                null,
+                pos,
+                SSoundEvents.CRIMSON_LILY_SQUELCH,
+                SoundCategory.BLOCKS
+        );
 
-                double x = center.x + (random.nextDouble() / 3) - (1.0 / 6.0);
-                double y = center.y;
-                double z = center.z + (random.nextDouble() / 3) - (1.0 / 6.0);
+        if (entity instanceof Soakable soakable) {
+            soakable.thermoo$addWetTicks(soakable.thermoo$getMaxWetTicks());
+        }
 
-                world.addParticle(
-                        new SpurtingWaterParticleEffect(i),
-                        x, y, z,
-                        0, 0, 0
-                );
-            }
+        if (entity.getType().isIn(SEntityTypeTags.CRIMSON_LILY_HURTS)) {
+            entity.damage(
+                    world.getDamageSources().generic(),
+                    10f
+            );
+            entity.playSound(
+                    SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE,
+                    1f, 1f
+            );
+        }
+
+        world.setBlockState(pos, state.with(WATER_SATURATION_LEVEL, 0));
+    }
+
+    private static void createSplash(World world, BlockPos pos) {
+        Random random = world.getRandom();
+        Vec3d center = pos.toCenterPos();
+
+        for (int i = 0; i < 40; i++) {
+
+            double x = center.x + (random.nextDouble() / 3) - (1.0 / 6.0);
+            double y = center.y;
+            double z = center.z + (random.nextDouble() / 3) - (1.0 / 6.0);
+
+            world.addParticle(
+                    new SpurtingWaterParticleEffect(i),
+                    x, y, z,
+                    0, 0, 0
+            );
         }
     }
 

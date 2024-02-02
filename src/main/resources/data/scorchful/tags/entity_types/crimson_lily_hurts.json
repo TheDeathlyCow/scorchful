@@ -1,0 +1,10 @@
+{
+    "replace": false,
+    "values": [
+        "#minecraft:freeze_hurts_extra_types",
+        {
+            "required": false,
+            "id": "#thermoo:benefits_from_heat"
+        }
+    ]
+}
