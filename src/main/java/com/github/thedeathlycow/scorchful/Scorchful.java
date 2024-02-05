@@ -9,14 +9,13 @@ import com.github.thedeathlycow.scorchful.temperature.AmbientTemperatureControll
 import com.github.thedeathlycow.scorchful.temperature.AttributeController;
 import com.github.thedeathlycow.scorchful.temperature.PlayerAttributeController;
 import com.github.thedeathlycow.scorchful.temperature.WetTickController;
+import com.github.thedeathlycow.scorchful.worldgen.NetherBiomeModifications;
 import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentControllerInitializeEvent;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Contract;
@@ -41,12 +40,15 @@ public class Scorchful implements ModInitializer {
         AutoConfig.register(ScorchfulConfig.class, GsonConfigSerializer::new);
         ScorchfulConfig.updateConfig(AutoConfig.getConfigHolder(ScorchfulConfig.class));
 
+        SBlocks.registerBlocks();
         SItems.registerItems();
         SItemGroups.registerAll();
         SSoundEvents.registerAll();
         STemperatureEffects.registerAll();
         SEnchantments.registerAll();
         RehydrationEnchantment.addToNetherLoot();
+        SParticleTypes.registerAll();
+        NetherBiomeModifications.placeFeaturesInBiomes();
 
         CommandRegistrationCallback.EVENT.register(
                 (dispatcher, registryAccess, environment) -> {

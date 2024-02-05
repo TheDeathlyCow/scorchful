@@ -1,0 +1,21 @@
+{
+    "variants": {
+        "": [
+            {
+                "model": "scorchful:block/rooted_netherrack"
+            },
+            {
+                "model": "scorchful:block/rooted_netherrack",
+                "y": 90
+            },
+            {
+                "model": "scorchful:block/rooted_netherrack",
+                "y": 180
+            },
+            {
+                "model": "scorchful:block/rooted_netherrack",
+                "y": 270
+            }
+        ]
+    }
+}

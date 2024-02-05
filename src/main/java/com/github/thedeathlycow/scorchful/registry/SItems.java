@@ -4,7 +4,7 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ArmorItem;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
@@ -30,10 +30,29 @@ public class SItems {
             Items.GLASS_BOTTLE::getDefaultStack
     );
 
+    public static final Item CRIMSON_LILY = new BlockItem(
+            SBlocks.CRIMSON_LILY,
+            new FabricItemSettings()
+    );
+
+    public static final Item ROOTED_NETHERRACK = new BlockItem(
+            SBlocks.ROOTED_NETHERRACK,
+            new FabricItemSettings()
+    );
+
+    public static final Item ROOTED_CRIMSON_NYLIUM = new BlockItem(
+            SBlocks.ROOTED_CRIMSON_NYLIUM,
+            new FabricItemSettings()
+    );
+
+
     public static void registerItems() {
         register("water_skin", WATER_SKIN);
         register("sun_hat", SUN_HAT);
         register("cactus_juice", CACTUS_JUICE);
+        register("crimson_lily", CRIMSON_LILY);
+        register("rooted_netherrack", ROOTED_NETHERRACK);
+        register("rooted_crimson_nylium", ROOTED_CRIMSON_NYLIUM);
     }
 
     private static void register(String id, Item item) {

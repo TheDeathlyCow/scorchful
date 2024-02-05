@@ -17,6 +17,10 @@
     "item.scorchful.tooltip.hydrating": "Hydrating \uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
     
     
+    "block.scorchful.crimson_lily": "Crimson Lily",
+    "block.scorchful.rooted_netherrack": "Rooted Netherrack",
+    "block.scorchful.rooted_crimson_nylium": "Rooted Crimson Nylium",
+    
     "enchantment.scorchful.rehydration": "Rehydration",
     "enchantment.scorchful.rehydration.desc": "Replenishes body water lost from sweating",
     
@@ -32,7 +36,7 @@
     "subtitles.item.scorchful.water_skin.fill": "Waterskin fills",
     "subtitles.temperature_effect.scorchful.heartbeat": "Heart beats",
     "subtitles.enchantment.scorchful.rehydration": "Player Rehydrates",
-    
+    "subtitles.block.scorchful.crimson_lily.squelch": "Crimson Lily Squelches",
     
     "text.autoconfig.scorchful.option.clientConfig": "Client Config",
     "text.autoconfig.scorchful.option.clientConfig.doBurningHeartOverlay": "Do burning heart overlay",
