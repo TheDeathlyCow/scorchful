@@ -1,0 +1,15 @@
+{
+    "feature": "scorchful:crimson_lily",
+    "placement": [
+        {
+            "type": "minecraft:count_on_every_layer",
+            "count": 4
+        },
+        {
+            "type": "minecraft:in_square"
+        },
+        {
+            "type": "minecraft:biome"
+        }
+    ]
+}
