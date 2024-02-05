@@ -9,6 +9,8 @@ public class SBlockTags {
 
     public static final TagKey<Block> HEAVY_ICE = of("heavy_ice");
 
+    public static final TagKey<Block> NETHER_LILY_CAN_ABSORB_WATER = of("nether_lily_can_absorb_water");
+
     private static TagKey<Block> of(String path) {
         return TagKey.of(RegistryKeys.BLOCK, Scorchful.id(path));
     }

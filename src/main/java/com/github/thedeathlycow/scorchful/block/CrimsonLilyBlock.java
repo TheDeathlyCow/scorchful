@@ -1,22 +1,22 @@
 package com.github.thedeathlycow.scorchful.block;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.particle.SpurtingWaterParticleEffect;
-import com.github.thedeathlycow.scorchful.registry.SParticleTypes;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
+import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
-import com.github.thedeathlycow.thermoo.api.ThermooTags;
 import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -27,6 +27,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.dimension.DimensionType;
 
 @SuppressWarnings("deprecation")
 public class CrimsonLilyBlock extends Block {
@@ -69,7 +70,7 @@ public class CrimsonLilyBlock extends Block {
 
     @Override
     public boolean hasRandomTicks(BlockState state) {
-        return state.get(WATER_SATURATION_LEVEL) != 3;
+        return state.get(WATER_SATURATION_LEVEL) < 3;
     }
 
     @Override
@@ -97,7 +98,30 @@ public class CrimsonLilyBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        super.randomTick(state, world, pos, random);
+
+        if (world.isClient) {
+            return;
+        }
+
+        DimensionType dimension = world.getDimension();
+        if (dimension.ultrawarm()) {
+            BlockState below = world.getBlockState(pos.down());
+            if (below.isIn(SBlockTags.NETHER_LILY_CAN_ABSORB_WATER)) {
+                this.tryGrow(state, world, pos, random);
+            }
+        } else {
+            this.tryGrow(state, world, pos, random);
+        }
+    }
+
+    private void tryGrow(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        int saturation = state.get(WATER_SATURATION_LEVEL);
+        if (saturation >= 3 || random.nextInt(7) != 0) {
+            return;
+        }
+
+        Scorchful.LOGGER.debug("Grew a nether lily at {}", pos);
+        world.setBlockState(pos, state.with(WATER_SATURATION_LEVEL, saturation + 1), Block.NOTIFY_LISTENERS);
     }
 
     @Override
