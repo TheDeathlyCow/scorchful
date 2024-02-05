@@ -19,6 +19,17 @@ public class NetherBiomeModifications {
 
         modification.add(
                 ModificationPhase.ADDITIONS,
+                BiomeSelectors.tag(SBiomeTags.HAS_FEATURE_SPARSE_ROOTED_CRIMSON_LILY),
+                (biomeSelectionContext, biomeModificationContext) -> {
+                    biomeModificationContext.getGenerationSettings().addFeature(
+                            GenerationStep.Feature.VEGETAL_DECORATION,
+                            placedFeatureRegistryKey("sparse_rooted_crimson_lily")
+                    );
+                }
+        );
+
+        modification.add(
+                ModificationPhase.ADDITIONS,
                 BiomeSelectors.tag(SBiomeTags.HAS_FEATURE_ROOTED_CRIMSON_LILY),
                 (biomeSelectionContext, biomeModificationContext) -> {
                     biomeModificationContext.getGenerationSettings().addFeature(
@@ -27,7 +38,6 @@ public class NetherBiomeModifications {
                     );
                 }
         );
-
     }
 
     private static RegistryKey<PlacedFeature> placedFeatureRegistryKey(String id) {

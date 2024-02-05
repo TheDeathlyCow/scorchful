@@ -24,6 +24,11 @@ public class SBlocks {
                     .ticksRandomly()
     );
 
+    public static final Block ROOTED_NETHERRACK = new RootedNyliumBlock(
+            FabricBlockSettings.copyOf(Blocks.NETHERRACK),
+            Blocks.CRIMSON_ROOTS::getDefaultState
+    );
+
     public static final Block ROOTED_CRIMSON_NYLIUM = new RootedNyliumBlock(
             FabricBlockSettings.copyOf(Blocks.CRIMSON_NYLIUM),
             Blocks.CRIMSON_ROOTS::getDefaultState
@@ -31,6 +36,7 @@ public class SBlocks {
 
     public static void registerBlocks() {
         register("crimson_lily", CRIMSON_LILY);
+        register("rooted_netherrack", ROOTED_NETHERRACK);
         register("rooted_crimson_nylium", ROOTED_CRIMSON_NYLIUM);
     }
 

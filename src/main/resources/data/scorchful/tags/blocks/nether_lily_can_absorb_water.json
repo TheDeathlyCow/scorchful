@@ -2,6 +2,7 @@
     "replace": false,
     "values": [
         "scorchful:rooted_crimson_nylium",
-        "minecraft:rooted_dirt"
+        "minecraft:rooted_dirt",
+        "scorchful:rooted_netherrack"
     ]
 }

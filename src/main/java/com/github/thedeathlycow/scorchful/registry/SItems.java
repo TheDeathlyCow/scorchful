@@ -35,16 +35,23 @@ public class SItems {
             new FabricItemSettings()
     );
 
+    public static final Item ROOTED_NETHERRACK = new BlockItem(
+            SBlocks.ROOTED_NETHERRACK,
+            new FabricItemSettings()
+    );
+
     public static final Item ROOTED_CRIMSON_NYLIUM = new BlockItem(
             SBlocks.ROOTED_CRIMSON_NYLIUM,
             new FabricItemSettings()
     );
+
 
     public static void registerItems() {
         register("water_skin", WATER_SKIN);
         register("sun_hat", SUN_HAT);
         register("cactus_juice", CACTUS_JUICE);
         register("crimson_lily", CRIMSON_LILY);
+        register("rooted_netherrack", ROOTED_NETHERRACK);
         register("rooted_crimson_nylium", ROOTED_CRIMSON_NYLIUM);
     }
 
