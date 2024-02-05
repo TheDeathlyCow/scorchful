@@ -14,6 +14,8 @@ public class SBiomeTags {
 
     public static final TagKey<Biome> HUMID_BIOMES = SBiomeTags.register("humid_biomes");
 
+    public static final TagKey<Biome> HAS_FEATURE_ROOTED_CRIMSON_LILY = SBiomeTags.register("has_feature/rooted_crimson_lily");
+
     public static TagKey<Biome> register(String id) {
         return TagKey.of(RegistryKeys.BIOME, new Identifier(Scorchful.MODID, id));
     }

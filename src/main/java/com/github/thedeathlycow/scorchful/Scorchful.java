@@ -9,6 +9,7 @@ import com.github.thedeathlycow.scorchful.temperature.AmbientTemperatureControll
 import com.github.thedeathlycow.scorchful.temperature.AttributeController;
 import com.github.thedeathlycow.scorchful.temperature.PlayerAttributeController;
 import com.github.thedeathlycow.scorchful.temperature.WetTickController;
+import com.github.thedeathlycow.scorchful.worldgen.NetherBiomeModifications;
 import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentControllerInitializeEvent;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -47,6 +48,7 @@ public class Scorchful implements ModInitializer {
         SEnchantments.registerAll();
         RehydrationEnchantment.addToNetherLoot();
         SParticleTypes.registerAll();
+        NetherBiomeModifications.placeFeaturesInBiomes();
 
         CommandRegistrationCallback.EVENT.register(
                 (dispatcher, registryAccess, environment) -> {
