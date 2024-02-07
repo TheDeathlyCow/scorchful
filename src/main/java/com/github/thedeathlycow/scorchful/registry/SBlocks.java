@@ -44,11 +44,17 @@ public class SBlocks {
             Blocks.CRIMSON_ROOTS::getDefaultState
     );
 
+    public static final Block ROOTED_WARPED_NYLIUM = new RootedNyliumBlock(
+            FabricBlockSettings.copyOf(Blocks.WARPED_NYLIUM),
+            Blocks.WARPED_ROOTS::getDefaultState
+    );
+
     public static void registerBlocks() {
         register("crimson_lily", CRIMSON_LILY);
         register("warped_lily", WARPED_LILY);
         register("rooted_netherrack", ROOTED_NETHERRACK);
         register("rooted_crimson_nylium", ROOTED_CRIMSON_NYLIUM);
+        register("rooted_warped_nylium", ROOTED_WARPED_NYLIUM);
     }
 
     private static void register(String id, Block block) {

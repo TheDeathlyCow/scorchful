@@ -23,6 +23,7 @@ public class SItemGroups {
                 entries.add(new ItemStack(SItems.WARPED_LILY));
                 entries.add(new ItemStack(SItems.ROOTED_NETHERRACK));
                 entries.add(new ItemStack(SItems.ROOTED_CRIMSON_NYLIUM));
+                entries.add(new ItemStack(SItems.ROOTED_WARPED_NYLIUM));
             }).build();
 
     public static void registerAll() {

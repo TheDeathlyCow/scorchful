@@ -12,6 +12,7 @@ import net.minecraft.world.chunk.light.ChunkLightProvider;
 
 import java.util.function.Supplier;
 
+@SuppressWarnings("deprecation")
 public class RootedNyliumBlock extends Block implements Fertilizable {
 
     private final Supplier<BlockState> rootsProvider;

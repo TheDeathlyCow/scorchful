@@ -1,0 +1,21 @@
+{
+    "variants": {
+        "": [
+            {
+                "model": "scorchful:block/rooted_warped_nylium"
+            },
+            {
+                "model": "scorchful:block/rooted_warped_nylium",
+                "y": 90
+            },
+            {
+                "model": "scorchful:block/rooted_warped_nylium",
+                "y": 180
+            },
+            {
+                "model": "scorchful:block/rooted_warped_nylium",
+                "y": 270
+            }
+        ]
+    }
+}
