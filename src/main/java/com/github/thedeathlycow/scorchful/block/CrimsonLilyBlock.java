@@ -13,6 +13,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
+@SuppressWarnings("deprecation")
 public class CrimsonLilyBlock extends NetherLilyBlock {
 
     public CrimsonLilyBlock(Settings settings) {
