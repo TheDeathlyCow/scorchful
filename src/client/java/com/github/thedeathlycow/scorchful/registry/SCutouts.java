@@ -7,6 +7,7 @@ public class SCutouts {
 
     public static void registerCutouts() {
         BlockRenderLayerMap.INSTANCE.putBlock(SBlocks.CRIMSON_LILY, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(SBlocks.WARPED_LILY, RenderLayer.getCutout());
     }
 
     private SCutouts() {

@@ -1,0 +1,7 @@
+{
+	"parent": "scorchful:block/nether_lily",
+	"textures": {
+		"0": "scorchful:block/warped_lily",
+		"particle": "scorchful:block/warped_lily"
+	}
+}
