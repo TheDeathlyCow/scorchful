@@ -1,5 +1,5 @@
 {
-    "feature": "scorchful:rooted_crimson_lily",
+    "feature": "scorchful:sparse_crimson_lily_patch",
     "placement": [
         {
             "type": "minecraft:count_on_every_layer",
@@ -7,7 +7,7 @@
         },
         {
             "type": "minecraft:rarity_filter",
-            "chance": 2
+            "chance": 12
         },
         {
             "type": "minecraft:biome"
