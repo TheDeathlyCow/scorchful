@@ -23,7 +23,7 @@ public class HeatingConfig implements ConfigData {
 
     double defaultArmorHeatResistance = -0.5;
 
-    double harmfulArmorHeatResistance = -1.0;
+    double veryHarmfulArmorHeatResistance = -1.0;
 
     double protectiveArmorHeatResistance = 0.75;
 
@@ -59,8 +59,8 @@ public class HeatingConfig implements ConfigData {
         return defaultArmorHeatResistance;
     }
 
-    public double getHarmfulArmorHeatResistance() {
-        return harmfulArmorHeatResistance;
+    public double getVeryHarmfulArmorHeatResistance() {
+        return veryHarmfulArmorHeatResistance;
     }
 
     public double getProtectiveArmorHeatResistance() {

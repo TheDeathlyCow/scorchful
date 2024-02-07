@@ -49,7 +49,7 @@ public class HeatResistantArmourTagApplicator implements ModifyItemAttributeModi
             if (stack.isIn(SItemTags.HEAT_PROTECTIVE)) {
                 amount = config.getProtectiveArmorHeatResistance();
             } else if (stack.isIn(SItemTags.HEAT_VERY_HARMFUL)) {
-                amount = config.getHarmfulArmorHeatResistance();
+                amount = config.getVeryHarmfulArmorHeatResistance();
             } else if (stack.isIn(SItemTags.HEAT_NEUTRAL)) {
                 amount = Double.NaN;
             }
