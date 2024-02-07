@@ -51,6 +51,9 @@
     "text.autoconfig.scorchful.option.heatingConfig.sunHatShadeTemperatureChange": "Sun Hat",
     "text.autoconfig.scorchful.option.heatingConfig.onFireWarmRate": "On fire warm rate",
     "text.autoconfig.scorchful.option.heatingConfig.fireballHeat": "Fireball strike heat",
+    "text.autoconfig.scorchful.option.heatingConfig.defaultArmorHeatResistance": "Default armor piece heat resistance",
+    "text.autoconfig.scorchful.option.heatingConfig.harmfulArmorHeatResistance": "Harmfully warm armor piece heat resistance",
+    "text.autoconfig.scorchful.option.heatingConfig.protectiveArmorHeatResistance": "Thermally protective armor piece heat resistance",
     
     "text.autoconfig.scorchful.option.thirstConfig": "Thirst Config",
     "text.autoconfig.scorchful.option.thirstConfig.temperatureFromWetness": "Temperature from Wetness",

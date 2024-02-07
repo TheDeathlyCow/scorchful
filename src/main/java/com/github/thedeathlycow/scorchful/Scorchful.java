@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.enchantment.RehydrationEnchantment;
 import com.github.thedeathlycow.scorchful.event.ScorchfulLivingEntityEvents;
+import com.github.thedeathlycow.scorchful.item.HeatResistantArmourTagApplicator;
 import com.github.thedeathlycow.scorchful.registry.*;
 import com.github.thedeathlycow.scorchful.server.ThirstCommand;
 import com.github.thedeathlycow.scorchful.temperature.AmbientTemperatureController;
@@ -16,6 +17,7 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.item.v1.ModifyItemAttributeModifiersCallback;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Contract;
@@ -55,6 +57,7 @@ public class Scorchful implements ModInitializer {
                     ThirstCommand.register(dispatcher);
                 }
         );
+        ModifyItemAttributeModifiersCallback.EVENT.register(new HeatResistantArmourTagApplicator());
 
         // custom scorchful event
         ScorchfulLivingEntityEvents.ON_DAMAGED.register(

@@ -1,0 +1,14 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:turtle_helmet",
+        "minecraft:netherite_chestplate",
+        "minecraft:netherite_helmet",
+        "minecraft:netherite_boots",
+        "minecraft:netherite_leggings",
+        {
+            "required": false,
+            "id": "#ad_astra:heat_resistant_armor"
+        }
+    ]
+}

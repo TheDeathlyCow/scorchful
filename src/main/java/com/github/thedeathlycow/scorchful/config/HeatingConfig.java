@@ -21,6 +21,12 @@ public class HeatingConfig implements ConfigData {
 
     int fireballHeat = 2000;
 
+    double defaultArmorHeatResistance = -0.5;
+
+    double harmfulArmorHeatResistance = -1.0;
+
+    double protectiveArmorHeatResistance = 0.75;
+
     public int getCoolingFromIce() {
         return coolingFromIce;
     }
@@ -47,5 +53,17 @@ public class HeatingConfig implements ConfigData {
 
     public int getFireballHeat() {
         return fireballHeat;
+    }
+
+    public double getDefaultArmorHeatResistance() {
+        return defaultArmorHeatResistance;
+    }
+
+    public double getHarmfulArmorHeatResistance() {
+        return harmfulArmorHeatResistance;
+    }
+
+    public double getProtectiveArmorHeatResistance() {
+        return protectiveArmorHeatResistance;
     }
 }
