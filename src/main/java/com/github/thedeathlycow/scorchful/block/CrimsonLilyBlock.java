@@ -1,23 +1,39 @@
 package com.github.thedeathlycow.scorchful.block;
 
+import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.particle.SpurtingWaterParticleEffect;
+import com.github.thedeathlycow.scorchful.registry.SItems;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
+import com.github.thedeathlycow.scorchful.registry.SStats;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
 import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsage;
+import net.minecraft.item.Items;
+import net.minecraft.potion.PotionUtil;
+import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
+
+import java.util.Map;
 
 @SuppressWarnings("deprecation")
 public class CrimsonLilyBlock extends NetherLilyBlock {
 
-    public CrimsonLilyBlock(Settings settings) {
-        super(settings);
+
+    public CrimsonLilyBlock(Settings settings, Map<Item, NetherLilyBehaviour> behaviorMap) {
+        super(settings, behaviorMap);
     }
 
     @Override
@@ -44,6 +60,10 @@ public class CrimsonLilyBlock extends NetherLilyBlock {
             soakable.thermoo$addWetTicks(soakable.thermoo$getMaxWetTicks());
         }
 
+        if (entity instanceof PlayerEntity player) {
+            player.incrementStat(SStats.SOAKED_BY_CRIMSON_LILY);
+        }
+
         if (entity.getType().isIn(SEntityTypeTags.CRIMSON_LILY_HURTS)) {
             entity.damage(
                     world.getDamageSources().generic(),
@@ -55,7 +75,7 @@ public class CrimsonLilyBlock extends NetherLilyBlock {
             );
         }
 
-        world.setBlockState(pos, state.with(WATER_SATURATION_LEVEL, 0));
+        NetherLilyBlock.setWater(state, world, pos, 0);
     }
 
     private static void createSplash(World world, BlockPos pos) {

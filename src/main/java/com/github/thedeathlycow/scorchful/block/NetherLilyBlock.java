@@ -6,11 +6,11 @@ import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
 import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
@@ -18,6 +18,9 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -28,6 +31,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.event.GameEvent;
+
+import java.util.Map;
 
 @SuppressWarnings("deprecation")
 public class NetherLilyBlock extends Block {
@@ -42,12 +48,17 @@ public class NetherLilyBlock extends Block {
     );
 
 
-    public NetherLilyBlock(Settings settings) {
+    private final Map<Item, NetherLilyBehaviour> behaviorMap;
+
+    public NetherLilyBlock(Settings settings, Map<Item, NetherLilyBehaviour> behaviorMap) {
         super(settings);
-        this.setDefaultState(
-                this.getStateManager().getDefaultState()
-                        .with(WATER_SATURATION_LEVEL, 0)
-        );
+        this.behaviorMap = behaviorMap;
+    }
+
+    public static void setWater(BlockState state, World world, BlockPos pos, int level) {
+        BlockState blockState = state.with(WATER_SATURATION_LEVEL, level);
+        world.setBlockState(pos, blockState);
+        world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(blockState));
     }
 
     @Override
@@ -66,6 +77,13 @@ public class NetherLilyBlock extends Block {
             return Blocks.AIR.getDefaultState();
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+    }
+
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        ItemStack itemStack = player.getStackInHand(hand);
+        NetherLilyBehaviour behaviour = this.behaviorMap.get(itemStack.getItem());
+        return behaviour.interact(state, world, pos, player, hand, itemStack);
     }
 
     @Override

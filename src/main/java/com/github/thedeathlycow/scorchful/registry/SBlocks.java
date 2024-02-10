@@ -1,10 +1,7 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.block.CrimsonLilyBlock;
-import com.github.thedeathlycow.scorchful.block.NetherLilyBlock;
-import com.github.thedeathlycow.scorchful.block.RootedNyliumBlock;
-import com.github.thedeathlycow.scorchful.block.WarpedLilyBlock;
+import com.github.thedeathlycow.scorchful.block.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -24,17 +21,19 @@ public class SBlocks {
                     .noCollision()
                     .sounds(BlockSoundGroup.WEEPING_VINES)
                     .pistonBehavior(PistonBehavior.DESTROY)
-                    .ticksRandomly()
+                    .ticksRandomly(),
+            NetherLilyBehaviours.CRIMSON_LILY_BEHAVIOUR
     );
 
-    public static final Block WARPED_LILY = new WarpedLilyBlock(
+    public static final Block WARPED_LILY = new NetherLilyBlock(
             FabricBlockSettings.create()
                     .mapColor(MapColor.CYAN)
                     .breakInstantly()
                     .noCollision()
                     .sounds(BlockSoundGroup.WEEPING_VINES)
                     .pistonBehavior(PistonBehavior.DESTROY)
-                    .ticksRandomly()
+                    .ticksRandomly(),
+            NetherLilyBehaviours.WARPED_LILY_BEHAVIOUR
     );
 
     public static final Block ROOTED_NETHERRACK = new NetherrackBlock(FabricBlockSettings.copyOf(Blocks.NETHERRACK));
