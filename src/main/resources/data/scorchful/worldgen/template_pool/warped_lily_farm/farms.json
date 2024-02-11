@@ -1,0 +1,20 @@
+{
+    "fallback": "minecraft:empty",
+    "elements": [
+        {
+            "weight": 2,
+            "element": {
+                "element_type": "minecraft:single_pool_element",
+                "projection": "rigid",
+                "location": "scorchful:warped_lily_farm/farm_patch",
+                "processors": "scorchful:randomize_warped_lily"
+            }
+        },
+        {
+            "weight": 2,
+            "element": {
+                "element_type": "minecraft:empty_pool_element"
+            }
+        }
+    ]
+}
