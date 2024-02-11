@@ -44,7 +44,6 @@ public class WaterSkinItem extends DrinkItem {
 
     public static final int MAX_DRINKS = 16;
     private static final String DRINK_NBT_KEY = "drinks";
-
     private static final String COUNT_NBT_KEY = "count";
 
     public WaterSkinItem(Settings settings) {
@@ -208,7 +207,9 @@ public class WaterSkinItem extends DrinkItem {
             }
 
             if (world.getFluidState(hitPos).isIn(FluidTags.WATER)) {
-                this.fill(stack, user, world, hitPos, 4);
+                if (!world.isClient) {
+                    this.fill(stack, user, world, hitPos, 4);
+                }
                 return TypedActionResult.success(
                         stack,
                         world.isClient()
