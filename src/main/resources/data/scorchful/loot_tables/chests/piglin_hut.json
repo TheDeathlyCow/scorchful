@@ -103,6 +103,29 @@
                     ]
                 }
             ]
+        },
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "minecraft:book",
+                    "functions": [
+                        {
+                            "function": "minecraft:enchant_randomly",
+                            "enchantments": [
+                                "scorchful:rehydration"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:random_chance",
+                            "chance": 0.2
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
