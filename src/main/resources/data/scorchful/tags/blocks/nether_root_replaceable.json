@@ -3,6 +3,7 @@
     "values": [
         "minecraft:netherrack",
         "#minecraft:nylium",
-        "scorchful:rooted_netherrack"
+        "scorchful:rooted_netherrack",
+        "scorchful:rooted_warped_nylium"
     ]
 }

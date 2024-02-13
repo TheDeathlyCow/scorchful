@@ -1,0 +1,14 @@
+{
+    "structures": [
+        {
+            "structure": "scorchful:warped_lily_farm",
+            "weight": 1
+        }
+    ],
+    "placement": {
+        "type": "minecraft:random_spread",
+        "salt": 30084232,
+        "spacing": 6,
+        "separation": 2
+    }
+}

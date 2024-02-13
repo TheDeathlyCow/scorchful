@@ -1,7 +1,8 @@
 package com.github.thedeathlycow.scorchful.item;
 
+import com.github.thedeathlycow.scorchful.block.NetherLilyBlock;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
-import net.minecraft.advancement.criterion.Criteria;
+import com.github.thedeathlycow.scorchful.registry.SStats;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
@@ -10,12 +11,12 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsage;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
@@ -29,8 +30,6 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
@@ -45,7 +44,6 @@ public class WaterSkinItem extends DrinkItem {
 
     public static final int MAX_DRINKS = 16;
     private static final String DRINK_NBT_KEY = "drinks";
-
     private static final String COUNT_NBT_KEY = "count";
 
     public WaterSkinItem(Settings settings) {
@@ -187,7 +185,12 @@ public class WaterSkinItem extends DrinkItem {
     }
 
     protected void fill(ItemStack stack, PlayerEntity player, World world, BlockPos sourcePos, int amount) {
-        player.playSound(SSoundEvents.ITEM_WATER_SKIN_FILL, 1.0f, 1.0f);
+        world.playSound(
+                null,
+                player.getBlockPos(),
+                SSoundEvents.ITEM_WATER_SKIN_FILL, SoundCategory.PLAYERS,
+                1.0f, 1.0f
+        );
         world.emitGameEvent(null, GameEvent.FLUID_PICKUP, sourcePos);
         player.incrementStat(Stats.USED.getOrCreateStat(this));
         this.addDrinks(stack, amount);
@@ -204,7 +207,9 @@ public class WaterSkinItem extends DrinkItem {
             }
 
             if (world.getFluidState(hitPos).isIn(FluidTags.WATER)) {
-                this.fill(stack, user, world, hitPos, 4);
+                if (!world.isClient) {
+                    this.fill(stack, user, world, hitPos, 4);
+                }
                 return TypedActionResult.success(
                         stack,
                         world.isClient()
@@ -226,10 +231,34 @@ public class WaterSkinItem extends DrinkItem {
             return ActionResult.PASS;
         }
 
-        this.fill(stack, player, world, pos, 1);
         if (!world.isClient) {
+            this.fill(stack, player, world, pos, 1);
             player.incrementStat(Stats.USE_CAULDRON);
             LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
+        }
+        return ActionResult.success(world.isClient);
+    }
+
+    public ActionResult onWarpedLilyInteract(
+            BlockState state,
+            World world,
+            BlockPos pos,
+            PlayerEntity player,
+            Hand hand,
+            ItemStack stack
+    ) {
+        if (getNumDrinks(stack) >= MAX_DRINKS) {
+            return ActionResult.PASS;
+        }
+
+        if (state.get(NetherLilyBlock.WATER_SATURATION_LEVEL) < 3) {
+            return ActionResult.FAIL;
+        }
+
+        if (!world.isClient) {
+            this.fill(stack, player, world, pos, 1);
+            player.incrementStat(SStats.USE_WARPED_LILY);
+            NetherLilyBlock.setWater(state, world, pos, 0);
         }
         return ActionResult.success(world.isClient);
     }

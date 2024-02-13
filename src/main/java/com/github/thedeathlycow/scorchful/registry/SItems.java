@@ -35,6 +35,11 @@ public class SItems {
             new FabricItemSettings()
     );
 
+    public static final Item WARPED_LILY = new BlockItem(
+            SBlocks.WARPED_LILY,
+            new FabricItemSettings()
+    );
+
     public static final Item ROOTED_NETHERRACK = new BlockItem(
             SBlocks.ROOTED_NETHERRACK,
             new FabricItemSettings()
@@ -45,14 +50,20 @@ public class SItems {
             new FabricItemSettings()
     );
 
+    public static final Item ROOTED_WARPED_NYLIUM = new BlockItem(
+            SBlocks.ROOTED_WARPED_NYLIUM,
+            new FabricItemSettings()
+    );
 
     public static void registerItems() {
         register("water_skin", WATER_SKIN);
         register("sun_hat", SUN_HAT);
         register("cactus_juice", CACTUS_JUICE);
         register("crimson_lily", CRIMSON_LILY);
+        register("warped_lily", WARPED_LILY);
         register("rooted_netherrack", ROOTED_NETHERRACK);
         register("rooted_crimson_nylium", ROOTED_CRIMSON_NYLIUM);
+        register("rooted_warped_nylium", ROOTED_WARPED_NYLIUM);
     }
 
     private static void register(String id, Item item) {

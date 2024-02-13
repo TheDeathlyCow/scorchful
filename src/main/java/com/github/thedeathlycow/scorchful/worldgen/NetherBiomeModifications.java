@@ -19,22 +19,22 @@ public class NetherBiomeModifications {
 
         modification.add(
                 ModificationPhase.ADDITIONS,
-                BiomeSelectors.tag(SBiomeTags.HAS_FEATURE_SPARSE_ROOTED_CRIMSON_LILY),
+                BiomeSelectors.tag(SBiomeTags.HAS_FEATURE_SPARSE_CRIMSON_LILY_PATCH),
                 (biomeSelectionContext, biomeModificationContext) -> {
                     biomeModificationContext.getGenerationSettings().addFeature(
                             GenerationStep.Feature.VEGETAL_DECORATION,
-                            placedFeatureRegistryKey("sparse_rooted_crimson_lily")
+                            placedFeatureRegistryKey("sparse_crimson_lily_patch")
                     );
                 }
         );
 
         modification.add(
                 ModificationPhase.ADDITIONS,
-                BiomeSelectors.tag(SBiomeTags.HAS_FEATURE_ROOTED_CRIMSON_LILY),
+                BiomeSelectors.tag(SBiomeTags.HAS_FEATURE_CRIMSON_LILY_PATCH),
                 (biomeSelectionContext, biomeModificationContext) -> {
                     biomeModificationContext.getGenerationSettings().addFeature(
                             GenerationStep.Feature.VEGETAL_DECORATION,
-                            placedFeatureRegistryKey("rooted_crimson_lily")
+                            placedFeatureRegistryKey("crimson_lily_patch")
                     );
                 }
         );

@@ -18,8 +18,10 @@
     
     
     "block.scorchful.crimson_lily": "Crimson Lily",
+    "block.scorchful.warped_lily": "Warped Lily",
     "block.scorchful.rooted_netherrack": "Rooted Netherrack",
     "block.scorchful.rooted_crimson_nylium": "Rooted Crimson Nylium",
+    "block.scorchful.rooted_warped_nylium": "Rooted Warped Nylium",
     
     "enchantment.scorchful.rehydration": "Rehydration",
     "enchantment.scorchful.rehydration.desc": "Replenishes body water lost from sweating",
@@ -37,6 +39,11 @@
     "subtitles.temperature_effect.scorchful.heartbeat": "Heart beats",
     "subtitles.enchantment.scorchful.rehydration": "Player Rehydrates",
     "subtitles.block.scorchful.crimson_lily.squelch": "Crimson Lily Squelches",
+    
+    
+    "stat.scorchful.fill_crimson_lily": "Filled Crimson Lily",
+    "stat.scorchful.soaked_by_crimson_lily": "Soaked by Crimson Lily",
+    "stat.scorchful.use_warped_lily": "Harvested Warped Lily",
     
     "text.autoconfig.scorchful.option.clientConfig": "Client Config",
     "text.autoconfig.scorchful.option.clientConfig.doBurningHeartOverlay": "Do burning heart overlay",

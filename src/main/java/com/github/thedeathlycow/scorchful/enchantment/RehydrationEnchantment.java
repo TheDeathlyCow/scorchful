@@ -71,8 +71,6 @@ public class RehydrationEnchantment extends Enchantment {
                     }
                 }
         );
-
-        addToLoot(new Identifier("chests/nether_bridge"), 8f / 100f);
     }
 
     private static void addToLoot(Identifier lootTable, float chance) {
