@@ -14,6 +14,10 @@ public class SBiomeTags {
 
     public static final TagKey<Biome> HUMID_BIOMES = SBiomeTags.register("humid_biomes");
 
+    public static final TagKey<Biome> HAS_SAND_STORMS = SBiomeTags.register("has_sand_storms");
+
+    public static final TagKey<Biome> HAS_RED_SAND_STORMS = SBiomeTags.register("has_red_sand_storms");
+
     public static final TagKey<Biome> HAS_FEATURE_CRIMSON_LILY_PATCH = SBiomeTags.register("has_feature/crimson_lily_patch");
     public static final TagKey<Biome> HAS_FEATURE_SPARSE_CRIMSON_LILY_PATCH = SBiomeTags.register("has_feature/sparse_crimson_lily_patch");
 

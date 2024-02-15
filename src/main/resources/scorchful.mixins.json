@@ -5,6 +5,7 @@
     "mixins": [
         "BiomeAccessor",
         "LivingEntityMixin",
+        "server.SandAccumulationServerWorldMixin",
         "thirst.ConsumeItemCriterionMixin",
         "thirst.EntityInvoker",
         "thirst.ItemMixin",
