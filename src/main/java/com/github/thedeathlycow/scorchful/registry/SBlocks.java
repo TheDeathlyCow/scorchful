@@ -3,10 +3,7 @@ package com.github.thedeathlycow.scorchful.registry;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.block.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.NetherrackBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -48,12 +45,22 @@ public class SBlocks {
             Blocks.WARPED_ROOTS::getDefaultState
     );
 
+    public static final Block SAND_PILE = new SandPileBlock(
+            FabricBlockSettings.copyOf(Blocks.SAND)
+                    .replaceable()
+                    .notSolid()
+                    .requiresTool()
+                    .blockVision((state, world, pos) -> state.get(SnowBlock.LAYERS) >= 8)
+                    .pistonBehavior(PistonBehavior.DESTROY)
+    );
+
     public static void registerBlocks() {
         register("crimson_lily", CRIMSON_LILY);
         register("warped_lily", WARPED_LILY);
         register("rooted_netherrack", ROOTED_NETHERRACK);
         register("rooted_crimson_nylium", ROOTED_CRIMSON_NYLIUM);
         register("rooted_warped_nylium", ROOTED_WARPED_NYLIUM);
+        register("sand_pile", SAND_PILE);
     }
 
     private static void register(String id, Block block) {

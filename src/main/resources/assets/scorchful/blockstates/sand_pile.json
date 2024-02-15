@@ -1,0 +1,28 @@
+{
+    "variants": {
+        "layers=1": {
+            "model": "scorchful:block/sand_pile/height2"
+        },
+        "layers=2": {
+            "model": "scorchful:block/sand_pile/height4"
+        },
+        "layers=3": {
+            "model": "scorchful:block/sand_pile/height6"
+        },
+        "layers=4": {
+            "model": "scorchful:block/sand_pile/height8"
+        },
+        "layers=5": {
+            "model": "scorchful:block/sand_pile/height10"
+        },
+        "layers=6": {
+            "model": "scorchful:block/sand_pile/height12"
+        },
+        "layers=7": {
+            "model": "scorchful:block/sand_pile/height14"
+        },
+        "layers=8": {
+            "model": "minecraft:block/sand"
+        }
+    }
+}
