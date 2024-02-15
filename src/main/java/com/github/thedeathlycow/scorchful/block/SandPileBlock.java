@@ -4,11 +4,13 @@ import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import net.minecraft.block.*;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -59,7 +61,14 @@ public class SandPileBlock extends FallingBlock {
         }
 
         return Block.isFaceFullSquare(anchorState.getCollisionShape(world, pos.down()), Direction.UP)
-                || (anchorState.isOf(this) && anchorState.get(LAYERS) == 8);
+                || (anchorState.getBlock() instanceof SandPileBlock) && anchorState.get(LAYERS) >= MAX_LAYERS;
+    }
+
+    @Override
+    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if (!this.canPlaceAt(state, world, pos)) {
+            super.scheduledTick(state, world, pos, random);
+        }
     }
 
     @Override
