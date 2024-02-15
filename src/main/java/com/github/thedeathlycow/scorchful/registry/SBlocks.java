@@ -46,18 +46,20 @@ public class SBlocks {
     );
 
     public static final Block SAND_PILE = new SandPileBlock(
+            0xDBD3A0,
             FabricBlockSettings.copyOf(Blocks.SAND)
                     .replaceable()
                     .notSolid()
-                    .blockVision((state, world, pos) -> state.get(SnowBlock.LAYERS) >= 8)
+                    .blockVision((state, world, pos) -> state.get(SnowBlock.LAYERS) >= SandPileBlock.MAX_LAYERS)
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
 
     public static final Block RED_SAND_PILE = new SandPileBlock(
+            0xA95821,
             FabricBlockSettings.copyOf(Blocks.RED_SAND)
                     .replaceable()
                     .notSolid()
-                    .blockVision((state, world, pos) -> state.get(SnowBlock.LAYERS) >= 8)
+                    .blockVision((state, world, pos) -> state.get(SnowBlock.LAYERS) >= SandPileBlock.MAX_LAYERS)
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
 
