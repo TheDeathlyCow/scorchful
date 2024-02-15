@@ -49,7 +49,6 @@ public class SBlocks {
             FabricBlockSettings.copyOf(Blocks.SAND)
                     .replaceable()
                     .notSolid()
-                    .requiresTool()
                     .blockVision((state, world, pos) -> state.get(SnowBlock.LAYERS) >= 8)
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
@@ -58,7 +57,6 @@ public class SBlocks {
             FabricBlockSettings.copyOf(Blocks.RED_SAND)
                     .replaceable()
                     .notSolid()
-                    .requiresTool()
                     .blockVision((state, world, pos) -> state.get(SnowBlock.LAYERS) >= 8)
                     .pistonBehavior(PistonBehavior.DESTROY)
     );

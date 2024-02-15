@@ -147,27 +147,8 @@
                                     }
                                 }
                             ]
-                        },
-                        {
-                            "type": "minecraft:item",
-                            "name": "minecraft:red_sand"
                         }
                     ]
-                }
-            ],
-            "conditions": [
-                {
-                    "condition": "minecraft:match_tool",
-                    "predicate": {
-                        "enchantments": [
-                            {
-                                "enchantment": "minecraft:silk_touch",
-                                "levels": {
-                                    "min": 1
-                                }
-                            }
-                        ]
-                    }
                 }
             ]
         }
