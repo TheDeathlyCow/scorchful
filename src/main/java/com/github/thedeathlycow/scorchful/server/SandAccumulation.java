@@ -43,14 +43,13 @@ public class SandAccumulation {
         RegistryEntry<Biome> biome = world.getBiome(startPos);
 
         if (biome.isIn(SBiomeTags.HAS_SAND_STORMS)) {
-            placeSand(world, chunk, startPos, SBlocks.SAND_PILE);
+            placeSand(world, startPos, SBlocks.SAND_PILE);
         } else if (biome.isIn(SBiomeTags.HAS_RED_SAND_STORMS)) {
-            // TODO: replace with red sand pile
-            placeSand(world, chunk, startPos, SBlocks.SAND_PILE);
+            placeSand(world, startPos, SBlocks.RED_SAND_PILE);
         }
     }
 
-    private static void placeSand(ServerWorld world, WorldChunk chunk, BlockPos startPos, Block sandPileBlock) {
+    private static void placeSand(ServerWorld world, BlockPos startPos, Block sandPileBlock) {
         BlockState sandPile = sandPileBlock.getDefaultState();
         if (canSetSand(world, startPos, sandPile)) {
             world.setBlockState(startPos, sandPileBlock.getDefaultState());

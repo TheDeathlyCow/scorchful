@@ -54,6 +54,15 @@ public class SBlocks {
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
 
+    public static final Block RED_SAND_PILE = new SandPileBlock(
+            FabricBlockSettings.copyOf(Blocks.RED_SAND)
+                    .replaceable()
+                    .notSolid()
+                    .requiresTool()
+                    .blockVision((state, world, pos) -> state.get(SnowBlock.LAYERS) >= 8)
+                    .pistonBehavior(PistonBehavior.DESTROY)
+    );
+
     public static void registerBlocks() {
         register("crimson_lily", CRIMSON_LILY);
         register("warped_lily", WARPED_LILY);
@@ -61,6 +70,7 @@ public class SBlocks {
         register("rooted_crimson_nylium", ROOTED_CRIMSON_NYLIUM);
         register("rooted_warped_nylium", ROOTED_WARPED_NYLIUM);
         register("sand_pile", SAND_PILE);
+        register("red_sand_pile", RED_SAND_PILE);
     }
 
     private static void register(String id, Block block) {

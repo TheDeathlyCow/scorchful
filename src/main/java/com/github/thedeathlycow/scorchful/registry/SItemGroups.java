@@ -25,6 +25,7 @@ public class SItemGroups {
                 entries.add(new ItemStack(SItems.ROOTED_CRIMSON_NYLIUM));
                 entries.add(new ItemStack(SItems.ROOTED_WARPED_NYLIUM));
                 entries.add(new ItemStack(SItems.SAND_PILE));
+                entries.add(new ItemStack(SItems.RED_SAND_PILE));
             }).build();
 
     public static void registerAll() {

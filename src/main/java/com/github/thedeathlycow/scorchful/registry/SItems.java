@@ -60,6 +60,11 @@ public class SItems {
             new FabricItemSettings()
     );
 
+    public static final Item RED_SAND_PILE = new BlockItem(
+            SBlocks.RED_SAND_PILE,
+            new FabricItemSettings()
+    );
+
     public static void registerItems() {
         register("water_skin", WATER_SKIN);
         register("sun_hat", SUN_HAT);
@@ -70,6 +75,7 @@ public class SItems {
         register("rooted_crimson_nylium", ROOTED_CRIMSON_NYLIUM);
         register("rooted_warped_nylium", ROOTED_WARPED_NYLIUM);
         register("sand_pile", SAND_PILE);
+        register("red_sand_pile", RED_SAND_PILE);
     }
 
     private static void register(String id, Item item) {
