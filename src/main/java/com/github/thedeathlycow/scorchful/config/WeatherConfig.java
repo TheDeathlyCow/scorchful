@@ -9,7 +9,13 @@ public class WeatherConfig implements ConfigData {
 
     boolean doSandPileAccumulation = true;
 
+    int sandPileAccumulationHeight = 1;
+
     public boolean isSandPileAccumulationEnabled() {
         return doSandPileAccumulation;
+    }
+
+    public int getSandPileAccumulationHeight() {
+        return sandPileAccumulationHeight;
     }
 }
