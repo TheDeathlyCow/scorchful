@@ -1,10 +1,7 @@
 {
     "replace": false,
     "values": [
-        "minecraft:desert",
-        {
-            "required": false,
-            "id": "#c:desert"
-        }
+        "#scorchful:has_regular_sand_storms",
+        "#scorchful:has_red_sand_storms"
     ]
 }

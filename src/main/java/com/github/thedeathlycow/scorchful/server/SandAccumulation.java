@@ -45,9 +45,9 @@ public class SandAccumulation {
 
         RegistryEntry<Biome> biome = world.getBiome(startPos);
 
-        if (biome.isIn(SBiomeTags.HAS_SAND_STORMS)) {
+        if (Sandstorms.hasRegularSandStorms(biome)) {
             placeSand(world, startPos, SBlocks.SAND_PILE, accumulationHeight);
-        } else if (biome.isIn(SBiomeTags.HAS_RED_SAND_STORMS)) {
+        } else if (Sandstorms.hasRedSandStorms(biome)) {
             placeSand(world, startPos, SBlocks.RED_SAND_PILE, accumulationHeight);
         }
     }
