@@ -9,18 +9,44 @@ import net.minecraft.world.biome.Biome;
 
 public class Sandstorms {
 
-    public static boolean isSandStorming(World world, BlockPos pos) {
+    public enum SandstormType {
+        NONE,
+        REGULAR,
+        RED
+    }
+
+    /**
+     * Determines if the position in the world has an active sand storm.
+     *
+     * @param world
+     * @param pos
+     * @return Returns {@link SandstormType#NONE} if it is not sand storming at the position in the world.
+     * Returns {@link SandstormType#REGULAR} if it is raining in a desert and {@link SandstormType#RED} if it is raining
+     * in a badlands.
+     */
+    public static SandstormType getCurrentSandStorm(World world, BlockPos pos) {
         if (!world.isRaining()) {
-            return false;
+            return SandstormType.NONE;
         }
         if (!world.isSkyVisible(pos)) {
-            return false;
+            return SandstormType.NONE;
         }
         if (world.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos).getY() > pos.getY()) {
-            return false;
+            return SandstormType.NONE;
         }
         RegistryEntry<Biome> biome = world.getBiome(pos);
-        return hasSandStorms(biome);
+        if (hasRegularSandStorms(biome)) {
+            return SandstormType.REGULAR;
+        } else if (hasRedSandStorms(biome)) {
+            return SandstormType.RED;
+        } else {
+            return SandstormType.NONE;
+        }
+    }
+
+    public static boolean isSandStorming(World world, BlockPos pos) {
+        return world.isRaining()
+                && hasSandStorms(world.getBiome(pos));
     }
 
     /**
