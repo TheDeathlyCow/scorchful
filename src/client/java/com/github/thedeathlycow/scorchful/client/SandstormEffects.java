@@ -91,10 +91,14 @@ public class SandstormEffects {
             Entity focused = camera.getFocusedEntity();
             World world = focused.getWorld();
             BlockPos pos = camera.getBlockPos();
-            if (Sandstorms.isSandStorming(world, pos)) {
-                fogData.fogStart = 4f;
-                fogData.fogEnd = 16f;
-                fogData.fogShape = FogShape.SPHERE;
+            if (Sandstorms.hasSandStorms(world.getBiome(pos))) {
+                float rainGradient = world.getRainGradient(1f);
+                fogData.fogStart = MathHelper.lerp(rainGradient, fogData.fogStart, 4f);
+                fogData.fogEnd = MathHelper.lerp(rainGradient, fogData.fogEnd, 16f);
+
+                if (rainGradient > 0.75f) {
+                    fogData.fogShape = FogShape.SPHERE;
+                }
             }
         }
     }
