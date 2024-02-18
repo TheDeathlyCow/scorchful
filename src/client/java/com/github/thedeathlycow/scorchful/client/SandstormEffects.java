@@ -29,6 +29,12 @@ public class SandstormEffects {
 
     public static final Vector3f REGULAR_SANDSTORM_FOG_COLOR = Vec3d.unpackRgb(0xD9AA84).toVector3f();
 
+    private static final float START_FOG_SPHERE_RAIN_GRADIENT = 0.75f;
+
+    private static final float FOG_START = 4f;
+
+    private static final float FOG_END = 16f;
+
     public static void onClientWorldTick(ClientWorld clientWorld) {
         if (!clientWorld.isRaining()) {
             return;
@@ -91,14 +97,17 @@ public class SandstormEffects {
             World world = focused.getWorld();
             BlockPos pos = camera.getBlockPos();
             if (Sandstorms.hasSandStorms(world.getBiome(pos))) {
-                float rainGradient = world.getRainGradient(1f);
-                fogData.fogStart = MathHelper.lerp(rainGradient, fogData.fogStart, 4f);
-                fogData.fogEnd = MathHelper.lerp(rainGradient, fogData.fogEnd, 16f);
-
-                if (rainGradient > 0.75f) {
-                    fogData.fogShape = FogShape.SPHERE;
-                }
+                updateFogRadius(fogData, world.getRainGradient(1f));
             }
+        }
+    }
+
+    private static void updateFogRadius(BackgroundRenderer.FogData fogData, float rainGradient) {
+        fogData.fogStart = MathHelper.lerp(rainGradient, fogData.fogStart, FOG_START);
+        fogData.fogEnd = MathHelper.lerp(rainGradient, fogData.fogEnd, FOG_END);
+
+        if (rainGradient > START_FOG_SPHERE_RAIN_GRADIENT) {
+            fogData.fogShape = FogShape.SPHERE;
         }
     }
 
