@@ -21,11 +21,14 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 @Mixin(BackgroundRenderer.class)
 public class BackgroundRendererMixin { //NOSONAR
 
-    @Shadow private static float red;
+    @Shadow
+    private static float red;
 
-    @Shadow private static float green;
+    @Shadow
+    private static float green;
 
-    @Shadow private static float blue;
+    @Shadow
+    private static float blue;
 
     @Inject(
             method = "render",
@@ -43,13 +46,14 @@ public class BackgroundRendererMixin { //NOSONAR
             float skyDarkness,
             CallbackInfo ci
     ) {
-        BlockPos pos = camera.getBlockPos();
-        if (Sandstorms.isSandStorming(world, pos)) {
-            float gradient = world.getRainGradient(1f);
-            red = MathHelper.lerp(gradient, red, SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR.x);
-            green = MathHelper.lerp(gradient, green, SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR.y);
-            blue = MathHelper.lerp(gradient, blue, SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR.z);
-        }
+        SandstormEffects.getFogColor(
+                world, camera.getBlockPos(),
+                red, green, blue
+        ).ifPresent(color -> {
+            red = color.x;
+            green = color.y;
+            blue = color.z;
+        });
     }
 
     @Inject(
@@ -62,26 +66,17 @@ public class BackgroundRendererMixin { //NOSONAR
             locals = LocalCapture.CAPTURE_FAILEXCEPTION
     )
     private static void setFogDistanceForSandstorm( //NOSONAR
-            Camera camera,
-            BackgroundRenderer.FogType fogType,
-            float viewDistance,
-            boolean thickFog,
-            float tickDelta,
-            CallbackInfo ci,
-            CameraSubmersionType cameraSubmersionType,
-            Entity entity,
-            BackgroundRenderer.FogData fogData
+                                                    Camera camera,
+                                                    BackgroundRenderer.FogType fogType,
+                                                    float viewDistance,
+                                                    boolean thickFog,
+                                                    float tickDelta,
+                                                    CallbackInfo ci,
+                                                    CameraSubmersionType cameraSubmersionType,
+                                                    Entity entity,
+                                                    BackgroundRenderer.FogData fogData
     ) {
-        if (cameraSubmersionType == CameraSubmersionType.NONE) {
-            Entity focused = camera.getFocusedEntity();
-            World world = focused.getWorld();
-            BlockPos pos = camera.getBlockPos();
-            if (Sandstorms.isSandStorming(world, pos)) {
-                fogData.fogStart = 4f;
-                fogData.fogEnd = 16f;
-                fogData.fogShape = FogShape.SPHERE;
-            }
-        }
+        SandstormEffects.updateFogDistance(camera, viewDistance, cameraSubmersionType, fogData);
     }
 
 }
