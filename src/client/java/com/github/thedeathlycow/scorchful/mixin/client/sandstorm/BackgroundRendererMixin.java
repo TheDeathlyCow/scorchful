@@ -9,12 +9,12 @@ import net.minecraft.client.render.FogShape;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
@@ -45,9 +45,10 @@ public class BackgroundRendererMixin { //NOSONAR
     ) {
         BlockPos pos = camera.getBlockPos();
         if (Sandstorms.isSandStorming(world, pos)) {
-            red = SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR.x;
-            green = SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR.y;
-            blue = SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR.z;
+            float gradient = world.getRainGradient(1f);
+            red = MathHelper.lerp(gradient, red, SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR.x);
+            green = MathHelper.lerp(gradient, green, SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR.y);
+            blue = MathHelper.lerp(gradient, blue, SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR.z);
         }
     }
 

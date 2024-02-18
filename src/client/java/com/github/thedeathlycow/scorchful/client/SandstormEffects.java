@@ -19,7 +19,6 @@ import org.joml.Vector3f;
 
 public class SandstormEffects {
 
-    public static final Vec3d REGULAR_SANDSTORM_SKY_COLOR = Vec3d.unpackRgb(0xDBD3A0);
     public static final Vector3f REGULAR_SANDSTORM_FOG_COLOR = Vec3d.unpackRgb(0xD9AA84).toVector3f();
 
     public static void onClientWorldTick(ClientWorld clientWorld) {
