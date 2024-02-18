@@ -9,7 +9,8 @@
         "InGameHudMixin",
         "compat.colorfulhearts.present.FireHeartsColorfulHeartsMixin",
         "compat.overflowingbars.absent.FireHeartsMixin",
-        "compat.overflowingbars.present.FireHeartsOverflowingBarsMixin"
+        "compat.overflowingbars.present.FireHeartsOverflowingBarsMixin",
+        "sandstorm.BackgroundRendererMixin"
     ],
     "injectors": {
         "defaultRequire": 1

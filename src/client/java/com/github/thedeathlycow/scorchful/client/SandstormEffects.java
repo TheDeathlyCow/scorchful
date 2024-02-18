@@ -3,20 +3,24 @@ package com.github.thedeathlycow.scorchful.client;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ClientConfig;
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.entity.Entity;
 import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.World;
 import org.joml.Vector3f;
 
 public class SandstormEffects {
 
-    private static final Vector3f COLOR = Vec3d.unpackRgb(0xDBD3A0).toVector3f();
+    public static final Vec3d REGULAR_SANDSTORM_SKY_COLOR = Vec3d.unpackRgb(0xDBD3A0);
+    public static final Vector3f REGULAR_SANDSTORM_FOG_COLOR = Vec3d.unpackRgb(0xD9AA84).toVector3f();
 
     public static void onClientWorldTick(ClientWorld clientWorld) {
         if (!clientWorld.isRaining()) {
@@ -41,7 +45,7 @@ public class SandstormEffects {
 
         final BlockPos cameraPos = camera.getBlockPos();
         final BlockPos.Mutable pos = new BlockPos.Mutable();
-        final ParticleEffect particle = new DustParticleEffect(COLOR, config.getSandStormParticleScale());
+        final ParticleEffect particle = new DustParticleEffect(REGULAR_SANDSTORM_FOG_COLOR, config.getSandStormParticleScale());
         final int rarity = config.getSandStormParticleRarity();
         final int cameraY = cameraPos.getY();
         final float particleVelocity = config.getSandStormParticleVelocity();
@@ -55,6 +59,7 @@ public class SandstormEffects {
             }
         }
     }
+
 
     private static void addParticle(ClientWorld world, ParticleEffect particle, BlockPos pos, int rarity, float velocity) {
         if (Sandstorms.isSandStorming(world, pos) && world.random.nextInt(rarity) == 0) {
