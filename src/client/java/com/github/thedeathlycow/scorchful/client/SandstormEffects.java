@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.client;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ClientConfig;
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
+import com.github.thedeathlycow.scorchful.util.SMth;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -73,9 +74,7 @@ public class SandstormEffects {
         if (Sandstorms.isSandStorming(world, cameraPos)) {
             var color = new Vector3f(baseRed, baseGreen, baseBlue);
             float gradient = world.getRainGradient(1f);
-            color.x = MathHelper.lerp(gradient, color.x, SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR.x);
-            color.y = MathHelper.lerp(gradient, color.y, SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR.y);
-            color.z = MathHelper.lerp(gradient, color.z, SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR.z);
+            SMth.lerpMutable(gradient, color, SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR, color);
             return Optional.of(color);
         }
         return Optional.empty();
@@ -102,7 +101,6 @@ public class SandstormEffects {
             }
         }
     }
-
 
     private static void addParticle(ClientWorld world, ParticleEffect particle, BlockPos pos, int rarity, float velocity) {
         if (Sandstorms.isSandStorming(world, pos) && world.random.nextInt(rarity) == 0) {
