@@ -112,8 +112,9 @@ public class SandstormEffects {
                 final var baseRadius = new Vec3d(fogData.fogStart, fogData.fogEnd, 0);
                 final var fogRadius = new Vec3d(FOG_START, FOG_END, 0);
 
-                // tri lerp fog radii to make less jarring biome transition
-                Vec3d radius = CubicSampler.sampleColor(camera.getPos(), (x, y, z) -> {
+                // tri lerp fog distances to make less jarring biome transition
+                // start is stored in X and end in Y
+                Vec3d fogDistances = CubicSampler.sampleColor(camera.getPos(), (x, y, z) -> {
                     samplePos.set(x, y, z);
                     if (Sandstorms.hasSandStorms(world.getBiome(samplePos))) {
                         return fogRadius;
@@ -121,14 +122,15 @@ public class SandstormEffects {
                     return baseRadius;
                 });
 
-                updateFogRadius(fogData, radius, world.getRainGradient(1f));
+                // lerp fog distances for smooth transition when weather changes
+                updateFogRadius(fogData, fogDistances, world.getRainGradient(1f));
             }
         }
     }
 
-    private static void updateFogRadius(BackgroundRenderer.FogData fogData, Vec3d fogRadii, float rainGradient) {
-        fogData.fogStart = MathHelper.lerp(rainGradient, fogData.fogStart, (float) fogRadii.x);
-        fogData.fogEnd = MathHelper.lerp(rainGradient, fogData.fogEnd, (float) fogRadii.y);
+    private static void updateFogRadius(BackgroundRenderer.FogData fogData, Vec3d fogDistances, float rainGradient) {
+        fogData.fogStart = MathHelper.lerp(rainGradient, fogData.fogStart, (float) fogDistances.x);
+        fogData.fogEnd = MathHelper.lerp(rainGradient, fogData.fogEnd, (float) fogDistances.y);
 
         if (rainGradient > START_FOG_SPHERE_RAIN_GRADIENT) {
             fogData.fogShape = FogShape.SPHERE;
