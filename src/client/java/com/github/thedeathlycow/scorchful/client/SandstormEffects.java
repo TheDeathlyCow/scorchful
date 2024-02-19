@@ -102,9 +102,10 @@ public class SandstormEffects {
             CameraSubmersionType cameraSubmersionType,
             BackgroundRenderer.FogData fogData
     ) {
-        if (cameraSubmersionType == CameraSubmersionType.NONE) {
-            Entity focused = camera.getFocusedEntity();
-            World world = focused.getWorld();
+        Entity focused = camera.getFocusedEntity();
+        World world = focused.getWorld();
+        final float rainGradient = world.getRainGradient(1f);
+        if (cameraSubmersionType == CameraSubmersionType.NONE && rainGradient > 0f) {
             BlockPos pos = camera.getBlockPos();
             if (Sandstorms.hasSandStorms(world.getBiome(pos))) {
 
@@ -123,7 +124,7 @@ public class SandstormEffects {
                 });
 
                 // lerp fog distances for smooth transition when weather changes
-                updateFogRadius(fogData, fogDistances, world.getRainGradient(1f));
+                updateFogRadius(fogData, fogDistances, rainGradient);
             }
         }
     }
