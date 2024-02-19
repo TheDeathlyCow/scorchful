@@ -14,12 +14,14 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.particle.ParticleEffect;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.CubicSampler;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import org.joml.Vector3f;
 
 import java.util.Optional;
@@ -74,11 +76,11 @@ public class SandstormEffects {
     }
 
     public static Optional<Vec3d> getFogColor(
-            ClientWorld world, BlockPos cameraPos,
+            ClientWorld world, Camera camera,
             float baseRed, float baseGreen, float baseBlue,
             float tickDelta
     ) {
-        if (Sandstorms.isSandStorming(world, cameraPos)) {
+        if (Sandstorms.isSandStorming(world, camera.getBlockPos())) {
             var color = new Vec3d(baseRed, baseGreen, baseBlue);
             float gradient = world.getRainGradient(1f);
 
@@ -89,7 +91,21 @@ public class SandstormEffects {
                     0.0F, 1.0F
             );
 
-            color = world.getDimensionEffects().adjustFogColor(color, skyAngle);
+            final Vec3d sandStormColor = color;
+            var samplePos = new BlockPos.Mutable();
+            color = CubicSampler.sampleColor(
+                    camera.getPos(),
+                    (x, y, z) -> {
+                        samplePos.set(x, y, z);
+                        RegistryEntry<Biome> biome = world.getBiome(samplePos);
+                        return world.getDimensionEffects().adjustFogColor(
+                                Sandstorms.hasSandStorms(biome)
+                                        ? sandStormColor
+                                        : Vec3d.unpackRgb((biome.value()).getFogColor()),
+                                skyAngle
+                        );
+                    }
+            );
 
             return Optional.of(color);
         }

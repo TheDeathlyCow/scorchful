@@ -42,7 +42,7 @@ public class BackgroundRendererMixin { //NOSONAR
             CallbackInfo ci
     ) {
         SandstormEffects.getFogColor(
-                world, camera.getBlockPos(),
+                world, camera,
                 red, green, blue,
                 tickDelta
         ).ifPresent(color -> {
