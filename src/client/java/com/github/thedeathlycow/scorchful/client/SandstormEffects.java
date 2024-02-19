@@ -33,9 +33,9 @@ public class SandstormEffects {
 
     private static final float START_FOG_SPHERE_RAIN_GRADIENT = 0.75f;
 
-    private static final float FOG_START = 4f;
+    private static final float FOG_START = 16f;
 
-    private static final float FOG_END = 16f;
+    private static final float FOG_END = 64f;
 
     public static void onClientWorldTick(ClientWorld clientWorld) {
         if (!clientWorld.isRaining()) {
@@ -80,10 +80,9 @@ public class SandstormEffects {
             float baseRed, float baseGreen, float baseBlue,
             float tickDelta
     ) {
-        if (Sandstorms.isSandStorming(world, camera.getBlockPos())) {
+        float gradient = world.getRainGradient(1f);
+        if (gradient > 0f && Sandstorms.hasSandStorms(world.getBiome(camera.getBlockPos()))) {
             var color = new Vec3d(baseRed, baseGreen, baseBlue);
-            float gradient = world.getRainGradient(1f);
-
             color = SMth.lerp(gradient, color, SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR);
 
             float skyAngle = MathHelper.clamp(
