@@ -1,16 +1,11 @@
 package com.github.thedeathlycow.scorchful.mixin.client.sandstorm;
 
 import com.github.thedeathlycow.scorchful.client.SandstormEffects;
-import com.github.thedeathlycow.scorchful.server.Sandstorms;
 import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.CameraSubmersionType;
-import net.minecraft.client.render.FogShape;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -48,11 +43,12 @@ public class BackgroundRendererMixin { //NOSONAR
     ) {
         SandstormEffects.getFogColor(
                 world, camera.getBlockPos(),
-                red, green, blue
+                red, green, blue,
+                tickDelta
         ).ifPresent(color -> {
-            red = color.x;
-            green = color.y;
-            blue = color.z;
+            red = (float) color.x;
+            green = (float) color.y;
+            blue = (float) color.z;
         });
     }
 

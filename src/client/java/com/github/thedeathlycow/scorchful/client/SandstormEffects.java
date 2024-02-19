@@ -27,7 +27,8 @@ import java.util.Optional;
 
 public class SandstormEffects {
 
-    public static final Vector3f REGULAR_SANDSTORM_FOG_COLOR = Vec3d.unpackRgb(0xD9AA84).toVector3f();
+    public static final Vec3d REGULAR_SANDSTORM_FOG_COLOR = Vec3d.unpackRgb(0xD9AA84);
+    public static final Vector3f REGULAR_SANDSTORM_PARTICLE_COLOR = Vec3d.unpackRgb(0xD9AA84).toVector3f();
 
     private static final float START_FOG_SPHERE_RAIN_GRADIENT = 0.75f;
 
@@ -58,7 +59,7 @@ public class SandstormEffects {
 
         final BlockPos cameraPos = camera.getBlockPos();
         final BlockPos.Mutable pos = new BlockPos.Mutable();
-        final ParticleEffect particle = new DustParticleEffect(REGULAR_SANDSTORM_FOG_COLOR, config.getSandStormParticleScale());
+        final ParticleEffect particle = new DustParticleEffect(REGULAR_SANDSTORM_PARTICLE_COLOR, config.getSandStormParticleScale());
         final int rarity = config.getSandStormParticleRarity();
         final int cameraY = cameraPos.getY();
         final float particleVelocity = config.getSandStormParticleVelocity();
@@ -73,14 +74,24 @@ public class SandstormEffects {
         }
     }
 
-    public static Optional<Vector3f> getFogColor(
-            World world, BlockPos cameraPos,
-            float baseRed, float baseGreen, float baseBlue
+    public static Optional<Vec3d> getFogColor(
+            ClientWorld world, BlockPos cameraPos,
+            float baseRed, float baseGreen, float baseBlue,
+            float tickDelta
     ) {
         if (Sandstorms.isSandStorming(world, cameraPos)) {
-            var color = new Vector3f(baseRed, baseGreen, baseBlue);
+            var color = new Vec3d(baseRed, baseGreen, baseBlue);
             float gradient = world.getRainGradient(1f);
-            SMth.lerpMutable(gradient, color, SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR, color);
+
+            color = SMth.lerp(gradient, color, SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR);
+
+            float skyAngle = MathHelper.clamp(
+                    MathHelper.cos(world.getSkyAngle(tickDelta) * 2 * MathHelper.PI) * 2.0F + 0.5F,
+                    0.0F, 1.0F
+            );
+
+            color = world.getDimensionEffects().adjustFogColor(color, skyAngle);
+
             return Optional.of(color);
         }
         return Optional.empty();
