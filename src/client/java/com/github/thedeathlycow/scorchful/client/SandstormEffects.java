@@ -4,7 +4,6 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ClientConfig;
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
 import com.github.thedeathlycow.scorchful.util.SMth;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.BackgroundRenderer;
@@ -15,12 +14,12 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.particle.ParticleEffect;
+import net.minecraft.util.CubicSampler;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
 import java.util.Optional;
@@ -108,14 +107,28 @@ public class SandstormEffects {
             World world = focused.getWorld();
             BlockPos pos = camera.getBlockPos();
             if (Sandstorms.hasSandStorms(world.getBiome(pos))) {
-                updateFogRadius(fogData, world.getRainGradient(1f));
+
+                var samplePos = new BlockPos.Mutable();
+                final var baseRadius = new Vec3d(fogData.fogStart, fogData.fogEnd, 0);
+                final var fogRadius = new Vec3d(FOG_START, FOG_END, 0);
+
+                // tri lerp fog radii to make less jarring biome transition
+                Vec3d radius = CubicSampler.sampleColor(camera.getPos(), (x, y, z) -> {
+                    samplePos.set(x, y, z);
+                    if (Sandstorms.hasSandStorms(world.getBiome(samplePos))) {
+                        return fogRadius;
+                    }
+                    return baseRadius;
+                });
+
+                updateFogRadius(fogData, radius, world.getRainGradient(1f));
             }
         }
     }
 
-    private static void updateFogRadius(BackgroundRenderer.FogData fogData, float rainGradient) {
-        fogData.fogStart = MathHelper.lerp(rainGradient, fogData.fogStart, FOG_START);
-        fogData.fogEnd = MathHelper.lerp(rainGradient, fogData.fogEnd, FOG_END);
+    private static void updateFogRadius(BackgroundRenderer.FogData fogData, Vec3d fogRadii, float rainGradient) {
+        fogData.fogStart = MathHelper.lerp(rainGradient, fogData.fogStart, (float) fogRadii.x);
+        fogData.fogEnd = MathHelper.lerp(rainGradient, fogData.fogEnd, (float) fogRadii.y);
 
         if (rainGradient > START_FOG_SPHERE_RAIN_GRADIENT) {
             fogData.fogShape = FogShape.SPHERE;

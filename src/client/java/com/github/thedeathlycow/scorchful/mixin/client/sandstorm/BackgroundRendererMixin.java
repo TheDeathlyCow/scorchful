@@ -61,16 +61,16 @@ public class BackgroundRendererMixin { //NOSONAR
             ),
             locals = LocalCapture.CAPTURE_FAILEXCEPTION
     )
-    private static void setFogDistanceForSandstorm( //NOSONAR
-                                                    Camera camera,
-                                                    BackgroundRenderer.FogType fogType,
-                                                    float viewDistance,
-                                                    boolean thickFog,
-                                                    float tickDelta,
-                                                    CallbackInfo ci,
-                                                    CameraSubmersionType cameraSubmersionType,
-                                                    Entity entity,
-                                                    BackgroundRenderer.FogData fogData
+    private static void setFogDistanceForSandstorm(
+            Camera camera,
+            BackgroundRenderer.FogType fogType,
+            float viewDistance,
+            boolean thickFog,
+            float tickDelta,
+            CallbackInfo ci,
+            CameraSubmersionType cameraSubmersionType,
+            Entity entity,
+            BackgroundRenderer.FogData fogData
     ) {
         SandstormEffects.updateFogDistance(camera, viewDistance, cameraSubmersionType, fogData);
     }
