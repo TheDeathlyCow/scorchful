@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.client;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ClientConfig;
+import com.github.thedeathlycow.scorchful.particle.DustGrainParticleEffect;
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
 import com.github.thedeathlycow.scorchful.util.SMth;
 import net.minecraft.client.MinecraftClient;
@@ -12,7 +13,6 @@ import net.minecraft.client.render.CameraSubmersionType;
 import net.minecraft.client.render.FogShape;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
-import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.CubicSampler;
@@ -55,12 +55,13 @@ public class SandstormEffects {
             return; // no player or camera for whatever reason
         }
 
-
         // main particle loop
-
         final BlockPos cameraPos = camera.getBlockPos();
         final BlockPos.Mutable pos = new BlockPos.Mutable();
-        final ParticleEffect particle = new DustParticleEffect(REGULAR_SANDSTORM_PARTICLE_COLOR, config.getSandStormParticleScale());
+        final ParticleEffect particle = new DustGrainParticleEffect(
+                REGULAR_SANDSTORM_PARTICLE_COLOR,
+                config.getSandStormParticleScale()
+        );
         final int rarity = config.getSandStormParticleRarity();
         final int cameraY = cameraPos.getY();
         final float particleVelocity = config.getSandStormParticleVelocity();

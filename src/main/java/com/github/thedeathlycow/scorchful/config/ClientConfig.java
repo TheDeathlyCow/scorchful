@@ -16,11 +16,11 @@ public class ClientConfig implements ConfigData {
 
     boolean enableSandstormParticles = true;
 
-    int sandStormParticleRenderDistance = 10;
+    int sandStormParticleRenderDistance = 20;
 
-    int sandStormParticleRarity = 20;
+    int sandStormParticleRarity = 80;
 
-    float sandStormParticleVelocity = -0.25f;
+    float sandStormParticleVelocity = -0.5f;
 
     float sandStormParticleScale = 10f;
 
