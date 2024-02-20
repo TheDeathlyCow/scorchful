@@ -10,7 +10,8 @@
         "compat.colorfulhearts.present.FireHeartsColorfulHeartsMixin",
         "compat.overflowingbars.absent.FireHeartsMixin",
         "compat.overflowingbars.present.FireHeartsOverflowingBarsMixin",
-        "sandstorm.BackgroundRendererMixin"
+        "sandstorm.BackgroundRendererMixin",
+        "sandstorm.WorldRendererMixin"
     ],
     "injectors": {
         "defaultRequire": 1

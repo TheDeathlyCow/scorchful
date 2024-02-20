@@ -35,6 +35,11 @@ public class SandstormEffects {
 
     private static final float PARTICLE_SCALE = 10f;
 
+    public static boolean shouldCancelClouds(ClientWorld world, BlockPos pos) {
+        return world.getRainGradient(1f) > SandstormEffects.START_FOG_SPHERE_RAIN_GRADIENT
+                && Sandstorms.hasSandStorms(world.getBiome(pos));
+    }
+
     public static void onClientWorldTick(ClientWorld clientWorld) {
         if (!clientWorld.isRaining()) {
             return;
@@ -84,17 +89,17 @@ public class SandstormEffects {
 
         float gradient = world.getRainGradient(1f);
         if (gradient > 0f && Sandstorms.hasSandStorms(world.getBiome(camera.getBlockPos()))) {
-            var color = new Vec3d(baseRed, baseGreen, baseBlue);
-            color = SMth.lerp(gradient, color, SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR);
+            final var normalColor = new Vec3d(baseRed, baseGreen, baseBlue);
+            Vec3d adjustedColor = SMth.lerp(gradient, normalColor, SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR);
 
             float skyAngle = MathHelper.clamp(
                     MathHelper.cos(world.getSkyAngle(tickDelta) * 2 * MathHelper.PI) * 2.0F + 0.5F,
                     0.0F, 1.0F
             );
 
-            final Vec3d sandStormColor = color;
+            final Vec3d sandStormColor = adjustedColor;
             var samplePos = new BlockPos.Mutable();
-            color = CubicSampler.sampleColor(
+            adjustedColor = CubicSampler.sampleColor(
                     camera.getPos(),
                     (x, y, z) -> {
                         samplePos.set(x, y, z);
@@ -102,13 +107,13 @@ public class SandstormEffects {
                         return world.getDimensionEffects().adjustFogColor(
                                 Sandstorms.hasSandStorms(biome)
                                         ? sandStormColor
-                                        : Vec3d.unpackRgb((biome.value()).getFogColor()),
+                                        : normalColor,
                                 skyAngle
                         );
                     }
             );
 
-            return Optional.of(color);
+            return Optional.of(adjustedColor);
         }
         return Optional.empty();
     }
