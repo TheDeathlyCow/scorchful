@@ -16,13 +16,18 @@ public class ClientConfig implements ConfigData {
 
     boolean enableSandstormParticles = true;
 
+    boolean enableSandstormFog = true;
+
     int sandStormParticleRenderDistance = 20;
 
     int sandStormParticleRarity = 80;
 
     float sandStormParticleVelocity = -0.5f;
 
-    float sandStormParticleScale = 10f;
+    float sandStormFogStart = 16f;
+
+    float sandStormFogEnd = 64f;
+
 
     public boolean isSunHatShading() {
         return doSunHatShading;
@@ -40,6 +45,10 @@ public class ClientConfig implements ConfigData {
         return enableSandstormParticles;
     }
 
+    public boolean isSandstormFogEnabled() {
+        return enableSandstormFog;
+    }
+
     public int getSandStormParticleRenderDistance() {
         return sandStormParticleRenderDistance;
     }
@@ -52,7 +61,11 @@ public class ClientConfig implements ConfigData {
         return sandStormParticleVelocity;
     }
 
-    public float getSandStormParticleScale() {
-        return sandStormParticleScale;
+    public float getSandStormFogStart() {
+        return sandStormFogStart;
+    }
+
+    public float getSandStormFogEnd() {
+        return sandStormFogEnd;
     }
 }

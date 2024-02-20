@@ -51,6 +51,13 @@
     "text.autoconfig.scorchful.option.clientConfig.doBurningHeartOverlay": "Do burning heart overlay",
     "text.autoconfig.scorchful.option.clientConfig.doSunHatShading": "Do Sun Hat shading",
     "text.autoconfig.scorchful.option.clientConfig.sunHatShadeOpacity": "Sun Hat shade opacity",
+    "text.autoconfig.scorchful.option.clientConfig.enableSandstormParticles": "Enable sandstorm particles",
+    "text.autoconfig.scorchful.option.clientConfig.enableSandstormFog": "Enable sandstorm fog",
+    "text.autoconfig.scorchful.option.clientConfig.sandStormParticleRenderDistance": "Sandstorm particle render distance",
+    "text.autoconfig.scorchful.option.clientConfig.sandStormParticleRarity": "Sandstorm particle rarity",
+    "text.autoconfig.scorchful.option.clientConfig.sandStormParticleVelocity": "Sandstorm particle Z axis velocity",
+    "text.autoconfig.scorchful.option.clientConfig.sandStormFogStart": "Sandstorm fog start distance",
+    "text.autoconfig.scorchful.option.clientConfig.sandStormFogEnd": "Sandstorm fog end distance",
     
     "text.autoconfig.scorchful.option.heatingConfig": "Heating Config",
     "text.autoconfig.scorchful.option.heatingConfig.coolingFromIce": "Cooling from ice",

@@ -33,9 +33,7 @@ public class SandstormEffects {
 
     private static final float START_FOG_SPHERE_RAIN_GRADIENT = 0.75f;
 
-    private static final float FOG_START = 16f;
-
-    private static final float FOG_END = 64f;
+    private static final float PARTICLE_SCALE = 10f;
 
     public static void onClientWorldTick(ClientWorld clientWorld) {
         if (!clientWorld.isRaining()) {
@@ -58,10 +56,7 @@ public class SandstormEffects {
         // main particle loop
         final BlockPos cameraPos = camera.getBlockPos();
         final BlockPos.Mutable pos = new BlockPos.Mutable();
-        final ParticleEffect particle = new DustGrainParticleEffect(
-                REGULAR_SANDSTORM_PARTICLE_COLOR,
-                config.getSandStormParticleScale()
-        );
+        final ParticleEffect particle = new DustGrainParticleEffect(REGULAR_SANDSTORM_PARTICLE_COLOR, PARTICLE_SCALE);
         final int rarity = config.getSandStormParticleRarity();
         final int cameraY = cameraPos.getY();
         final float particleVelocity = config.getSandStormParticleVelocity();
@@ -81,6 +76,12 @@ public class SandstormEffects {
             float baseRed, float baseGreen, float baseBlue,
             float tickDelta
     ) {
+        ClientConfig config = Scorchful.getConfig().clientConfig;
+
+        if (!config.isSandstormFogEnabled()) {
+            return Optional.empty();
+        }
+
         float gradient = world.getRainGradient(1f);
         if (gradient > 0f && Sandstorms.hasSandStorms(world.getBiome(camera.getBlockPos()))) {
             var color = new Vec3d(baseRed, baseGreen, baseBlue);
@@ -118,6 +119,12 @@ public class SandstormEffects {
             CameraSubmersionType cameraSubmersionType,
             BackgroundRenderer.FogData fogData
     ) {
+        ClientConfig config = Scorchful.getConfig().clientConfig;
+
+        if (!config.isSandstormFogEnabled()) {
+            return;
+        }
+
         Entity focused = camera.getFocusedEntity();
         World world = focused.getWorld();
         final float rainGradient = world.getRainGradient(1f);
@@ -127,7 +134,11 @@ public class SandstormEffects {
 
                 var samplePos = new BlockPos.Mutable();
                 final var baseRadius = new Vec3d(fogData.fogStart, fogData.fogEnd, 0);
-                final var fogRadius = new Vec3d(FOG_START, FOG_END, 0);
+                final var fogRadius = new Vec3d(
+                        config.getSandStormFogStart(),
+                        config.getSandStormFogEnd(),
+                        0
+                );
 
                 // tri lerp fog distances to make less jarring biome transition
                 // start is stored in X and end in Y
