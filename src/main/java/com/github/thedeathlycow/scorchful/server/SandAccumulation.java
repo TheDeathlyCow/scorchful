@@ -39,7 +39,7 @@ public class SandAccumulation {
 
         final ChunkPos chunkPos = chunk.getPos();
         final BlockPos startPos = world.getTopPosition(
-                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                Heightmap.Type.MOTION_BLOCKING,
                 world.getRandomPosInChunk(chunkPos.getStartX(), 0, chunkPos.getStartZ(), 15)
         );
 
