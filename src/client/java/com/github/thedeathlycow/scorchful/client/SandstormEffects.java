@@ -6,7 +6,6 @@ import com.github.thedeathlycow.scorchful.particle.DustGrainParticleEffect;
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
 import com.github.thedeathlycow.scorchful.util.SMth;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.CameraSubmersionType;
@@ -40,7 +39,7 @@ public class SandstormEffects {
                 && Sandstorms.hasSandStorms(world.getBiome(pos));
     }
 
-    public static void onClientWorldTick(ClientWorld clientWorld) {
+    public static void tickSandstormParticles(ClientWorld clientWorld) {
         if (!clientWorld.isRaining()) {
             return;
         }
@@ -52,10 +51,9 @@ public class SandstormEffects {
         }
 
         final MinecraftClient gameClient = MinecraftClient.getInstance();
-        final ClientPlayerEntity mainPlayer = gameClient.player;
         final Camera camera = gameClient.gameRenderer.getCamera();
-        if (mainPlayer == null || camera == null) {
-            return; // no player or camera for whatever reason
+        if (camera == null) {
+            return; // no camera for whatever reason
         }
 
         // main particle loop
@@ -92,6 +90,7 @@ public class SandstormEffects {
             final var normalColor = new Vec3d(baseRed, baseGreen, baseBlue);
             Vec3d adjustedColor = SMth.lerp(gradient, normalColor, SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR);
 
+            // idk why the game does this transformation but ill do it here too for consistency
             float skyAngle = MathHelper.clamp(
                     MathHelper.cos(world.getSkyAngle(tickDelta) * 2 * MathHelper.PI) * 2.0F + 0.5F,
                     0.0F, 1.0F

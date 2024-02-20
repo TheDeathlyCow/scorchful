@@ -11,11 +11,14 @@ public class SSoundEvents {
     public static final SoundEvent TEMPERATURE_EFFECT_HEARTBEAT = create("temperature_effect.scorchful.heartbeat");
     public static final SoundEvent REHYDRATE = create("enchantment.scorchful.rehydration");
     public static final SoundEvent CRIMSON_LILY_SQUELCH = create("block.scorchful.crimson_lily.squelch");
+    public static final SoundEvent WEATHER_SANDSTORM = create("weather.sandstorm");
+
     public static void registerAll() {
         register(ITEM_WATER_SKIN_FILL);
         register(TEMPERATURE_EFFECT_HEARTBEAT);
         register(REHYDRATE);
         register(CRIMSON_LILY_SQUELCH);
+        register(WEATHER_SANDSTORM);
     }
 
     private static void register(SoundEvent event) {
