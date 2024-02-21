@@ -22,7 +22,7 @@ public class ClientConfig implements ConfigData {
 
     int sandStormParticleRarity = 80;
 
-    float sandStormParticleVelocity = -0.5f;
+    float sandStormParticleVelocity = -1f;
 
     float sandStormFogStart = 16f;
 

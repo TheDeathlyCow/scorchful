@@ -63,6 +63,12 @@ public class SBlocks {
                     .pistonBehavior(PistonBehavior.DESTROY)
     );
 
+    public static final Block SAND_CAULDRON = new SandCauldronBlock(
+            FabricBlockSettings.copyOf(Blocks.CAULDRON),
+            SandCauldronBlock.REGULAR_SANDSTORM_PREDICATE,
+            SandCauldronBehaviours.SAND_CAULDRON_BEHAVIOUR
+    );
+
     public static void registerBlocks() {
         register("crimson_lily", CRIMSON_LILY);
         register("warped_lily", WARPED_LILY);
@@ -71,6 +77,7 @@ public class SBlocks {
         register("rooted_warped_nylium", ROOTED_WARPED_NYLIUM);
         register("sand_pile", SAND_PILE);
         register("red_sand_pile", RED_SAND_PILE);
+        register("sand_cauldron", SAND_CAULDRON);
     }
 
     private static void register(String id, Block block) {

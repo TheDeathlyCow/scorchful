@@ -1,0 +1,13 @@
+{
+    "variants": {
+        "level=1": {
+            "model": "scorchful:block/sand_cauldron/level1"
+        },
+        "level=2": {
+            "model": "scorchful:block/sand_cauldron/level2"
+        },
+        "level=3": {
+            "model": "scorchful:block/sand_cauldron/full"
+        }
+    }
+}
