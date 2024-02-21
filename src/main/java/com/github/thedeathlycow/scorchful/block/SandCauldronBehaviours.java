@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -105,7 +106,9 @@ public class SandCauldronBehaviours {
     ) {
         if (!world.isClient) {
             Item item = stack.getItem();
-            stack.decrement(1);
+            if (!player.isCreative()) {
+                stack.decrement(1);
+            }
             player.incrementStat(Stats.FILL_CAULDRON);
             player.incrementStat(Stats.USED.getOrCreateStat(item));
             world.setBlockState(pos, state);
@@ -136,7 +139,12 @@ public class SandCauldronBehaviours {
     ) {
         if (!world.isClient) {
             Item item = stack.getItem();
-            player.getInventory().insertStack(output);
+
+            PlayerInventory inventory = player.getInventory();
+            if (!player.isCreative() || !inventory.contains(output)) {
+                inventory.insertStack(output);
+            }
+
             player.incrementStat(Stats.USE_CAULDRON);
             player.incrementStat(Stats.USED.getOrCreateStat(item));
             world.setBlockState(pos, Blocks.CAULDRON.getDefaultState());
