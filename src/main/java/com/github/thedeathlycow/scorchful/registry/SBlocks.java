@@ -69,6 +69,12 @@ public class SBlocks {
             SandCauldronBehaviours.EMPTY_SAND_CAULDRON
     );
 
+    public static final Block RED_SAND_CAULDRON = new SandCauldronBlock(
+            FabricBlockSettings.copyOf(Blocks.CAULDRON),
+            SandCauldronBlock.RED_SANDSTORM_PREDICATE,
+            SandCauldronBehaviours.EMPTY_RED_SAND_CAULDRON
+    );
+
     public static void registerBlocks() {
         register("crimson_lily", CRIMSON_LILY);
         register("warped_lily", WARPED_LILY);
@@ -78,6 +84,7 @@ public class SBlocks {
         register("sand_pile", SAND_PILE);
         register("red_sand_pile", RED_SAND_PILE);
         register("sand_cauldron", SAND_CAULDRON);
+        register("red_sand_cauldron", RED_SAND_CAULDRON);
     }
 
     private static void register(String id, Block block) {

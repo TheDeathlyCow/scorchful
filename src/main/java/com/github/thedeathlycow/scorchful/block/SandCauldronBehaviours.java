@@ -36,11 +36,31 @@ public class SandCauldronBehaviours {
         );
     };
 
+    public static final CauldronBehavior EMPTY_RED_SAND_CAULDRON = (state, world, pos, player, hand, stack) -> {
+        return emptyBlockFromCauldron(
+                state,
+                world,
+                pos,
+                player,
+                stack,
+                Items.RED_SAND.getDefaultStack(),
+                SoundEvents.BLOCK_SAND_PLACE
+        );
+    };
+
     public static void registerAll() {
         CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(
                 Items.SAND,
                 fillWithSand(
                         SBlocks.SAND_CAULDRON.getDefaultState()
+                                .with(SandCauldronBlock.LEVEL, SandCauldronBlock.MAX_LEVEL)
+                )
+        );
+
+        CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(
+                Items.RED_SAND,
+                fillWithSand(
+                        SBlocks.RED_SAND_CAULDRON.getDefaultState()
                                 .with(SandCauldronBlock.LEVEL, SandCauldronBlock.MAX_LEVEL)
                 )
         );
