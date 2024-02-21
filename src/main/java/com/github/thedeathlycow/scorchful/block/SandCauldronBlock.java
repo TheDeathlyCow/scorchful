@@ -5,14 +5,16 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.item.Item;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.event.GameEvent;
 
-import java.util.Map;
 import java.util.function.Predicate;
 
 public class SandCauldronBlock extends LeveledCauldronBlock {
@@ -29,22 +31,25 @@ public class SandCauldronBlock extends LeveledCauldronBlock {
 
     private final Predicate<Sandstorms.SandstormType> sandstormPredicate;
 
+    private final CauldronBehavior filledInteraction;
+
     /**
      * Constructs a leveled cauldron block.
      *
      * @param settings
      * @param sandstormPredicate a predicate that checks what type of sandstorm can fill this cauldron
-     * @param behaviorMap        the map containing cauldron behaviors for each item
+     * @param filledInteraction  the behaviour for emptying the cauldron
      * @apiNote The precipitation predicates are compared using identity comparisons in some cases,
      * so callers should typically use {@link #RAIN_PREDICATE} and {@link #SNOW_PREDICATE} if applicable.
      */
     public SandCauldronBlock(
             Settings settings,
             Predicate<Sandstorms.SandstormType> sandstormPredicate,
-            Map<Item, CauldronBehavior> behaviorMap
+            CauldronBehavior filledInteraction
     ) {
-        super(settings, precipitation -> false, behaviorMap);
+        super(settings, precipitation -> false, SandCauldronBehaviours.NO_CAULDRON_BEHAVIOURS);
         this.sandstormPredicate = sandstormPredicate;
+        this.filledInteraction = filledInteraction;
     }
 
     @Override
@@ -66,6 +71,15 @@ public class SandCauldronBlock extends LeveledCauldronBlock {
         BlockState filled = state.cycle(LEVEL);
         world.setBlockState(pos, filled);
         world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(filled));
+    }
+
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (this.isFull(state)) {
+            return this.filledInteraction.interact(state, world, pos, player, hand, player.getStackInHand(hand));
+        } else {
+            return ActionResult.PASS;
+        }
     }
 
     @Override

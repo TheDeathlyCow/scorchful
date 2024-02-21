@@ -66,7 +66,7 @@ public class SBlocks {
     public static final Block SAND_CAULDRON = new SandCauldronBlock(
             FabricBlockSettings.copyOf(Blocks.CAULDRON),
             SandCauldronBlock.REGULAR_SANDSTORM_PREDICATE,
-            SandCauldronBehaviours.SAND_CAULDRON_BEHAVIOUR
+            SandCauldronBehaviours.EMPTY_SAND_CAULDRON
     );
 
     public static void registerBlocks() {
