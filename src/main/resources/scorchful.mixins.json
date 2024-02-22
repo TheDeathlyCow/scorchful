@@ -6,6 +6,7 @@
         "BiomeAccessor",
         "CauldronBlockMixin",
         "LivingEntityMixin",
+        "PointOfInterestTypesMixin",
         "server.SandAccumulationServerWorldMixin",
         "thirst.ConsumeItemCriterionMixin",
         "thirst.EntityInvoker",
