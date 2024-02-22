@@ -52,25 +52,30 @@ public class SandCauldronBlock extends LeveledCauldronBlock {
         this.filledInteraction = filledInteraction;
     }
 
-    @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        // stub: don't extinguish entities on fire
+    public static boolean canFillWithSand(World world, Sandstorms.SandstormType sandstormType) {
+        return switch (sandstormType) {
+            case RED, REGULAR -> world.getRandom().nextFloat() < FILL_WITH_SAND_CHANCE;
+            default -> false;
+        };
     }
 
     @Override
     public void precipitationTick(BlockState state, World world, BlockPos pos, Biome.Precipitation precipitation) {
-        if (world.getRandom().nextFloat() >= FILL_WITH_SAND_CHANCE || state.get(LEVEL) == MAX_LEVEL) {
-            return;
-        }
-
         Sandstorms.SandstormType type = Sandstorms.getCurrentSandStorm(world, pos);
-        if (!this.sandstormPredicate.test(type)) {
+
+        if (!this.sandstormPredicate.test(type) || !canFillWithSand(world, type) || state.get(LEVEL) == MAX_LEVEL) {
             return;
         }
 
         BlockState filled = state.cycle(LEVEL);
         world.setBlockState(pos, filled);
         world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(filled));
+    }
+
+
+    @Override
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+        // stub: don't extinguish entities on fire
     }
 
     @Override

@@ -31,7 +31,7 @@ public class Sandstorms {
         if (!world.isSkyVisible(pos)) {
             return SandstormType.NONE;
         }
-        if (world.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos).getY() > pos.getY()) {
+        if (world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, pos).getY() > pos.getY()) {
             return SandstormType.NONE;
         }
         RegistryEntry<Biome> biome = world.getBiome(pos);
