@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful;
 
 import com.github.thedeathlycow.scorchful.block.NetherLilyBehaviours;
+import com.github.thedeathlycow.scorchful.block.SandCauldronBehaviours;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.enchantment.RehydrationEnchantment;
 import com.github.thedeathlycow.scorchful.event.ScorchfulLivingEntityEvents;
@@ -53,6 +54,7 @@ public class Scorchful implements ModInitializer {
         SParticleTypes.registerAll();
         NetherBiomeModifications.placeFeaturesInBiomes();
         SStats.registerAll();
+        SandCauldronBehaviours.registerAll();
         NetherLilyBehaviours.registerBehaviours();
 
         CommandRegistrationCallback.EVENT.register(

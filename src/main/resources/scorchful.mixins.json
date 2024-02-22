@@ -4,7 +4,10 @@
     "compatibilityLevel": "JAVA_17",
     "mixins": [
         "BiomeAccessor",
+        "CauldronBlockMixin",
         "LivingEntityMixin",
+        "PointOfInterestTypesMixin",
+        "server.SandAccumulationServerWorldMixin",
         "thirst.ConsumeItemCriterionMixin",
         "thirst.EntityInvoker",
         "thirst.ItemMixin",

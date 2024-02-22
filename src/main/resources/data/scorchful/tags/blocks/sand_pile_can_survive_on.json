@@ -1,0 +1,8 @@
+{
+    "values": [
+        "minecraft:honey_block",
+        "minecraft:soul_sand",
+        "minecraft:mud",
+        "#minecraft:snow_layer_can_survive_on"
+    ]
+}

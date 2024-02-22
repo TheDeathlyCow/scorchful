@@ -49,7 +49,12 @@ public class SpurtingWaterParticle extends SpriteBillboardParticle {
 
         @Nullable
         @Override
-        public Particle createParticle(SpurtingWaterParticleEffect parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        public Particle createParticle(
+                SpurtingWaterParticleEffect parameters,
+                ClientWorld world,
+                double x, double y, double z,
+                double velocityX, double velocityY, double velocityZ
+        ) {
             var particle = new SpurtingWaterParticle(
                     world,
                     x, y, z,

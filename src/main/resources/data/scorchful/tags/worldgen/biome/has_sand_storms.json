@@ -1,0 +1,7 @@
+{
+    "replace": false,
+    "values": [
+        "#scorchful:has_regular_sand_storms",
+        "#scorchful:has_red_sand_storms"
+    ]
+}

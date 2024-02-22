@@ -28,5 +28,19 @@
             "scorchful:block/squelch"
         ],
         "subtitle": "subtitles.block.scorchful.crimson_lily.squelch"
+    },
+    "weather.sandstorm": {
+        "sounds": [
+            "scorchful:weather/sandstorm/sandstorm1",
+            "scorchful:weather/sandstorm/sandstorm2",
+            "scorchful:weather/sandstorm/sandstorm3",
+            "scorchful:weather/sandstorm/sandstorm4",
+            "scorchful:weather/sandstorm/sandstorm5",
+            "scorchful:weather/sandstorm/sandstorm6",
+            "scorchful:weather/sandstorm/sandstorm7",
+            "scorchful:weather/sandstorm/sandstorm8",
+            "scorchful:weather/sandstorm/sandstorm9"
+        ],
+        "subtitle": "subtitles.weather.scorchful.sandstorm"
     }
 }

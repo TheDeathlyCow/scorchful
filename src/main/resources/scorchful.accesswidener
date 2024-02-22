@@ -6,3 +6,5 @@ accessible class net/minecraft/client/gui/hud/InGameHud$HeartType
 
 # Accesss weather
 accessible    class    net/minecraft/world/biome/Biome$Weather
+
+accessible class net/minecraft/client/render/BackgroundRenderer$FogData
