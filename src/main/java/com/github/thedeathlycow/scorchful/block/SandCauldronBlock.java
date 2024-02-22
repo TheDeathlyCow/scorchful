@@ -7,6 +7,8 @@ import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -72,10 +74,9 @@ public class SandCauldronBlock extends LeveledCauldronBlock {
         world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(filled));
     }
 
-
     @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        // stub: don't extinguish entities on fire
+    public Item asItem() {
+        return Items.CAULDRON;
     }
 
     @Override
@@ -85,6 +86,11 @@ public class SandCauldronBlock extends LeveledCauldronBlock {
         } else {
             return ActionResult.PASS;
         }
+    }
+
+    @Override
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+        // stub: don't extinguish entities on fire
     }
 
     @Override
