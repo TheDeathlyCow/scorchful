@@ -24,34 +24,34 @@ public class SandAccumulation {
 
 
     public static void tickChunk(ServerWorld world, WorldChunk chunk, int randomTickSpeed) {
+        // choose position
         final ChunkPos chunkPos = chunk.getPos();
         final BlockPos topPos = world.getTopPosition(
                 Heightmap.Type.MOTION_BLOCKING,
                 world.getRandomPosInChunk(chunkPos.getStartX(), 0, chunkPos.getStartZ(), 15)
         );
 
-        WeatherConfig config = Scorchful.getConfig().weatherConfig;
-
+        // control fail conditions
         Sandstorms.SandstormType sandstorm = Sandstorms.getCurrentSandStorm(world, topPos);
-
         if (sandstorm == Sandstorms.SandstormType.NONE) {
             return;
         }
-
         Random random = world.random;
         if (random.nextInt(16) != 0) {
             return;
         }
 
+        // sand pile placement
         Block sandPile = null;
+        WeatherConfig config = Scorchful.getConfig().weatherConfig;
         if (Objects.requireNonNull(sandstorm) == Sandstorms.SandstormType.REGULAR) {
             sandPile = SBlocks.SAND_PILE;
         } else if (sandstorm == Sandstorms.SandstormType.RED) {
             sandPile = SBlocks.RED_SAND_PILE;
         }
-
         placeSandPile(world, topPos, sandPile, config);
 
+        // cauldron tick
         BlockPos groundPos = topPos.down();
         BlockState groundState = world.getBlockState(groundPos);
         Block groundBlock = groundState.getBlock();
@@ -59,7 +59,7 @@ public class SandAccumulation {
     }
 
     public static boolean cauldronSandstormTick(BlockState state, World world, BlockPos pos) {
-        Sandstorms.SandstormType sandstorm = Sandstorms.getCurrentSandStorm(world, pos);
+        Sandstorms.SandstormType sandstorm = Sandstorms.getCurrentSandStorm(world, pos.up());
 
         return switch (sandstorm) {
             case REGULAR -> {

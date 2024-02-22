@@ -61,7 +61,7 @@ public class SandCauldronBlock extends LeveledCauldronBlock {
 
     @Override
     public void precipitationTick(BlockState state, World world, BlockPos pos, Biome.Precipitation precipitation) {
-        Sandstorms.SandstormType type = Sandstorms.getCurrentSandStorm(world, pos);
+        Sandstorms.SandstormType type = Sandstorms.getCurrentSandStorm(world, pos.up());
 
         if (!this.sandstormPredicate.test(type) || !canFillWithSand(world, type) || state.get(LEVEL) == MAX_LEVEL) {
             return;
