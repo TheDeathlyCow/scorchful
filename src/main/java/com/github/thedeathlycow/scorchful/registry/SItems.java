@@ -4,6 +4,7 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -65,6 +66,24 @@ public class SItems {
             new FabricItemSettings()
     );
 
+    public static final Item TURTLE_CHESTPLATE = new ArmorItem(
+            ScorchfulTurtleArmorMaterial.INSTANCE,
+            ArmorItem.Type.CHESTPLATE,
+            new FabricItemSettings()
+    );
+
+    public static final Item TURTLE_LEGGINGS = new ArmorItem(
+            ScorchfulTurtleArmorMaterial.INSTANCE,
+            ArmorItem.Type.LEGGINGS,
+            new FabricItemSettings()
+    );
+
+    public static final Item TURTLE_BOOTS = new ArmorItem(
+            ScorchfulTurtleArmorMaterial.INSTANCE,
+            ArmorItem.Type.BOOTS,
+            new FabricItemSettings()
+    );
+
     public static void registerItems() {
         register("water_skin", WATER_SKIN);
         register("sun_hat", SUN_HAT);
@@ -76,6 +95,9 @@ public class SItems {
         register("rooted_warped_nylium", ROOTED_WARPED_NYLIUM);
         register("sand_pile", SAND_PILE);
         register("red_sand_pile", RED_SAND_PILE);
+        register("turtle_chestplate", TURTLE_CHESTPLATE);
+        register("turtle_leggings", TURTLE_LEGGINGS);
+        register("turtle_boots", TURTLE_BOOTS);
     }
 
     private static void register(String id, Item item) {

@@ -5,6 +5,7 @@ import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
@@ -17,13 +18,20 @@ public class SItemGroups {
             .entries((context, entries) -> {
                 entries.add(new ItemStack(SItems.WATER_SKIN));
                 entries.add(makeFilledWaterSkin());
-                entries.add(new ItemStack(SItems.SUN_HAT));
                 entries.add(new ItemStack(SItems.CACTUS_JUICE));
+
+                entries.add(new ItemStack(SItems.SUN_HAT));
+                entries.add(new ItemStack(Items.TURTLE_HELMET));
+                entries.add(new ItemStack(SItems.TURTLE_CHESTPLATE));
+                entries.add(new ItemStack(SItems.TURTLE_LEGGINGS));
+                entries.add(new ItemStack(SItems.TURTLE_BOOTS));
+
                 entries.add(new ItemStack(SItems.CRIMSON_LILY));
                 entries.add(new ItemStack(SItems.WARPED_LILY));
                 entries.add(new ItemStack(SItems.ROOTED_NETHERRACK));
                 entries.add(new ItemStack(SItems.ROOTED_CRIMSON_NYLIUM));
                 entries.add(new ItemStack(SItems.ROOTED_WARPED_NYLIUM));
+
                 entries.add(new ItemStack(SItems.SAND_PILE));
                 entries.add(new ItemStack(SItems.RED_SAND_PILE));
             }).build();

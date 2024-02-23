@@ -12,6 +12,10 @@
     "item.scorchful.sun_hat.tooltip": "Reduces heat from the Sun when worn",
     "item.scorchful.cactus_juice": "Bottle of Cactus Juice",
     
+    "item.scorchful.turtle_chestplate": "Turtle Carapace",
+    "item.scorchful.turtle_leggings": "Turtle Knee Pads",
+    "item.scorchful.turtle_boots": "Turtle Flippers",
+    
     "item.scorchful.tooltip.refreshing": "Refreshing \uD83C\uDF0A",
     "item.scorchful.tooltip.sustaining": "Sustaining \uD83C\uDF0A\uD83C\uDF0A",
     "item.scorchful.tooltip.hydrating": "Hydrating \uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
@@ -26,6 +30,7 @@
     "block.scorchful.red_sand_pile": "Red Sand Pile",
     "block.scorchful.sand_cauldron": "Sand Cauldron",
     "block.scorchful.red_sand_cauldron": "Red Sand Cauldron",
+    
     
     "enchantment.scorchful.rehydration": "Rehydration",
     "enchantment.scorchful.rehydration.desc": "Replenishes body water lost from sweating",
