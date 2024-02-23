@@ -1,10 +1,6 @@
 {
     "replace": false,
     "values": [
-        "minecraft:turtle_helmet",
-        "scorchful:turtle_chestplate",
-        "scorchful:turtle_leggings",
-        "scorchful:turtle_boots",
         "minecraft:netherite_chestplate",
         "minecraft:netherite_helmet",
         "minecraft:netherite_boots",

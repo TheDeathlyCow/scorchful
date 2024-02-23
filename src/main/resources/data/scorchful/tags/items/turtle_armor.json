@@ -1,0 +1,9 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:turtle_helmet",
+        "scorchful:turtle_chestplate",
+        "scorchful:turtle_leggings",
+        "scorchful:turtle_boots"
+    ]
+}

@@ -46,12 +46,14 @@ public class HeatResistantArmourTagApplicator implements ModifyItemAttributeModi
             HeatingConfig config = Scorchful.getConfig().heatingConfig;
             // make negative by default
             double amount = config.getDefaultArmorHeatResistance();
-            if (stack.isIn(SItemTags.HEAT_PROTECTIVE)) {
+            if (stack.isIn(SItemTags.HEAT_VERY_PROTECTIVE)) {
+                amount = config.getVeryProtectiveArmorHeatResistance();
+            } if (stack.isIn(SItemTags.HEAT_PROTECTIVE)) {
                 amount = config.getProtectiveArmorHeatResistance();
             } else if (stack.isIn(SItemTags.HEAT_VERY_HARMFUL)) {
                 amount = config.getVeryHarmfulArmorHeatResistance();
             } else if (stack.isIn(SItemTags.HEAT_NEUTRAL)) {
-                amount = Double.NaN;
+                amount = Double.NaN; // I'm very distrustful of floats, so I use NaN instead of 0
             }
 
             if (!Double.isNaN(amount)) {
@@ -66,14 +68,5 @@ public class HeatResistantArmourTagApplicator implements ModifyItemAttributeModi
                 );
             }
         }
-    }
-
-    private record SlotAttributeConfig(
-            UUID modifierId,
-            double protectiveAmount,
-            double harmfulAmount,
-            double baseAmount
-    ) {
-
     }
 }

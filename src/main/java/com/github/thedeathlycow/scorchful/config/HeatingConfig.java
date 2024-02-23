@@ -27,7 +27,9 @@ public class HeatingConfig implements ConfigData {
 
     double veryHarmfulArmorHeatResistance = -1.0;
 
-    double protectiveArmorHeatResistance = 0.75;
+    double protectiveArmorHeatResistance = 0.5;
+
+    double veryProtectiveArmorHeatResistance = 1.0;
 
     public boolean isTurtleArmorEffectsEnabled() {
         return enableTurtleArmorEffects;
@@ -71,5 +73,9 @@ public class HeatingConfig implements ConfigData {
 
     public double getProtectiveArmorHeatResistance() {
         return protectiveArmorHeatResistance;
+    }
+
+    public double getVeryProtectiveArmorHeatResistance() {
+        return veryProtectiveArmorHeatResistance;
     }
 }

@@ -17,6 +17,8 @@ public class SItemTags {
 
     public static final TagKey<Item> HEAT_PROTECTIVE = of("heat_resistance/protective");
 
+    public static final TagKey<Item> HEAT_VERY_PROTECTIVE = of("heat_resistance/very_protective");
+
     public static final TagKey<Item> HEAT_VERY_HARMFUL = of("heat_resistance/very_harmful");
 
     public static final TagKey<Item> IS_SUN_PROTECTING_HAT = of("is_sun_protecting_hat");
