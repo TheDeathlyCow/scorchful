@@ -62,6 +62,7 @@
     "text.autoconfig.scorchful.option.clientConfig.sunHatShadeOpacity": "Sun Hat shade opacity",
     "text.autoconfig.scorchful.option.clientConfig.enableSandstormParticles": "Enable sandstorm particles",
     "text.autoconfig.scorchful.option.clientConfig.enableSandstormFog": "Enable sandstorm fog",
+    "text.autoconfig.scorchful.option.clientConfig.enableSandstormSounds": "Enable sandstorm sounds",
     "text.autoconfig.scorchful.option.clientConfig.sandStormParticleRenderDistance": "Sandstorm particle render distance",
     "text.autoconfig.scorchful.option.clientConfig.sandStormParticleRarity": "Sandstorm particle rarity",
     "text.autoconfig.scorchful.option.clientConfig.sandStormParticleVelocity": "Sandstorm particle Z axis velocity",

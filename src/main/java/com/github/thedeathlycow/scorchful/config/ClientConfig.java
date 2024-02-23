@@ -18,6 +18,8 @@ public class ClientConfig implements ConfigData {
 
     boolean enableSandstormFog = true;
 
+    boolean enableSandstormSounds = true;
+
     int sandStormParticleRenderDistance = 20;
 
     int sandStormParticleRarity = 60;
@@ -47,6 +49,10 @@ public class ClientConfig implements ConfigData {
 
     public boolean isSandstormFogEnabled() {
         return enableSandstormFog;
+    }
+
+    public boolean isSandstormSoundsEnabled() {
+        return enableSandstormSounds;
     }
 
     public int getSandStormParticleRenderDistance() {

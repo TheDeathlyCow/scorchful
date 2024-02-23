@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.client;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
 import net.minecraft.client.MinecraftClient;
@@ -22,6 +23,11 @@ public class SandstormSounds {
     private int timer = 0;
 
     public void tick(ClientWorld world) {
+
+        if (!Scorchful.getConfig().clientConfig.isSandstormSoundsEnabled()) {
+            return;
+        }
+
         final MinecraftClient gameClient = MinecraftClient.getInstance();
         final Camera camera = gameClient.gameRenderer.getCamera();
         if (camera == null) {
