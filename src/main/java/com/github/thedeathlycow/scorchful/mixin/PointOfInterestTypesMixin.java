@@ -31,7 +31,7 @@ public class PointOfInterestTypesMixin {
     )
     private static Set<BlockState> registerSandCauldronsToLeatherworker(Set<BlockState> states) {
 
-        if (states == CAULDRONS) {
+        if (states.containsAll(CAULDRONS)) {
             return ImmutableSet.<BlockState>builder()
                     .addAll(states)
                     .addAll(SPointsOfInterest.SAND_CAULDRONS)
