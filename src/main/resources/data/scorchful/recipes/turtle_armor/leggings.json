@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "pattern": [
+        "###",
+        "# #",
+        "# #"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:scute"
+        }
+    },
+    "result": {
+        "item": "scorchful:turtle_leggings"
+    }
+}
