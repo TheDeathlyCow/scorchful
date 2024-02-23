@@ -1,0 +1,73 @@
+{
+    "display": {
+        "icon": {
+            "item": "scorchful:turtle_chestplate",
+            "nbt": "{Damage:0}"
+        },
+        "title": {
+            "translate": "advancements.scorchful.husbandry.obtain_turtle_armor.title"
+        },
+        "description": {
+            "translate": "advancements.scorchful.husbandry.obtain_turtle_armor.description"
+        }
+    },
+    "parent": "minecraft:husbandry/breed_an_animal",
+    "criteria": {
+        "turtle_helmet": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "minecraft:turtle_helmet"
+                        ]
+                    }
+                ]
+            }
+        },
+        "turtle_chestplate": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "scorchful:turtle_chestplate"
+                        ]
+                    }
+                ]
+            }
+        },
+        "turtle_leggings": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "scorchful:turtle_leggings"
+                        ]
+                    }
+                ]
+            }
+        },
+        "turtle_boots": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "scorchful:turtle_boots"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "turtle_helmet",
+            "turtle_chestplate",
+            "turtle_leggings",
+            "turtle_boots"
+        ]
+    ]
+}

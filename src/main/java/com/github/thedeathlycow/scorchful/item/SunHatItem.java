@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
-import com.github.thedeathlycow.scorchful.registry.SItems;
+import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
@@ -34,11 +34,11 @@ public class SunHatItem extends Item implements Equipment {
         boolean isWearingInTrinketSlot = false;
         if (ScorchfulIntegrations.isModLoaded(ScorchfulIntegrations.TRINKETS_ID)) {
             isWearingInTrinketSlot = TrinketsApi.getTrinketComponent(entity)
-                    .map(trinketComponent -> trinketComponent.isEquipped(SItems.SUN_HAT))
+                    .map(trinketComponent -> trinketComponent.isEquipped(stack -> stack.isIn(SItemTags.IS_SUN_PROTECTING_HAT)))
                     .orElse(false);
         }
         return isWearingInTrinketSlot
-                || entity.getEquippedStack(EquipmentSlot.HEAD).isOf(SItems.SUN_HAT);
+                || entity.getEquippedStack(EquipmentSlot.HEAD).isIn(SItemTags.IS_SUN_PROTECTING_HAT);
     }
 
     @Override

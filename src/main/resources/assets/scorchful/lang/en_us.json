@@ -12,6 +12,10 @@
     "item.scorchful.sun_hat.tooltip": "Reduces heat from the Sun when worn",
     "item.scorchful.cactus_juice": "Bottle of Cactus Juice",
     
+    "item.scorchful.turtle_chestplate": "Turtle Carapace",
+    "item.scorchful.turtle_leggings": "Turtle Knee Pads",
+    "item.scorchful.turtle_boots": "Turtle Flippers",
+    
     "item.scorchful.tooltip.refreshing": "Refreshing \uD83C\uDF0A",
     "item.scorchful.tooltip.sustaining": "Sustaining \uD83C\uDF0A\uD83C\uDF0A",
     "item.scorchful.tooltip.hydrating": "Hydrating \uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
@@ -27,6 +31,7 @@
     "block.scorchful.sand_cauldron": "Sand Cauldron",
     "block.scorchful.red_sand_cauldron": "Red Sand Cauldron",
     
+    
     "enchantment.scorchful.rehydration": "Rehydration",
     "enchantment.scorchful.rehydration.desc": "Replenishes body water lost from sweating",
     
@@ -37,7 +42,8 @@
     
     "advancement.scorchful.adventure.drink_cactus_juice.title": "It's the Quenchiest!",
     "advancement.scorchful.adventure.drink_cactus_juice.description": "Drink a Bottle of Cactus Juice",
-    
+    "advancements.scorchful.husbandry.obtain_turtle_armor.title": "Duck and Cover",
+    "advancements.scorchful.husbandry.obtain_turtle_armor.description": "Obtain a piece of Turtle Armor",
     
     "subtitles.item.scorchful.water_skin.fill": "Waterskin fills",
     "subtitles.temperature_effect.scorchful.heartbeat": "Heart beats",
@@ -63,6 +69,7 @@
     "text.autoconfig.scorchful.option.clientConfig.sandStormFogEnd": "Sandstorm fog end distance",
     
     "text.autoconfig.scorchful.option.heatingConfig": "Heating Config",
+    "text.autoconfig.scorchful.option.heatingConfig.enableTurtleArmorEffects": "Enable Turtle Armor status effects (doesn't apply to helmet)",
     "text.autoconfig.scorchful.option.heatingConfig.coolingFromIce": "Cooling from ice",
     "text.autoconfig.scorchful.option.heatingConfig.minSkyLightLevelForHeat": "Minimum sky light level for heat",
     "text.autoconfig.scorchful.option.heatingConfig.heatFromSun": "Heat from the Sun",
@@ -73,6 +80,7 @@
     "text.autoconfig.scorchful.option.heatingConfig.defaultArmorHeatResistance": "Default armor piece heat resistance",
     "text.autoconfig.scorchful.option.heatingConfig.veryHarmfulArmorHeatResistance": "Very warm armor piece heat resistance",
     "text.autoconfig.scorchful.option.heatingConfig.protectiveArmorHeatResistance": "Thermally protective armor piece heat resistance",
+    "text.autoconfig.scorchful.option.heatingConfig.veryProtectiveArmorHeatResistance": "Very thermally protective armor piece heat resistance",
     
     "text.autoconfig.scorchful.option.thirstConfig": "Thirst Config",
     "text.autoconfig.scorchful.option.thirstConfig.temperatureFromWetness": "Temperature from Wetness",
