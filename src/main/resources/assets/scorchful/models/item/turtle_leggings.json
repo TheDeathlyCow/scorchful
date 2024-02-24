@@ -2,5 +2,67 @@
     "parent": "minecraft:item/generated",
     "textures": {
         "layer0": "scorchful:item/turtle_leggings"
-    }
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "trim_type": 0.1
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/leggings/quartz_trim"
+        },
+        {
+            "predicate": {
+                "trim_type": 0.2
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/leggings/iron_trim"
+        },
+        {
+            "predicate": {
+                "trim_type": 0.3
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/leggings/netherite_trim"
+        },
+        {
+            "predicate": {
+                "trim_type": 0.4
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/leggings/redstone_trim"
+        },
+        {
+            "predicate": {
+                "trim_type": 0.5
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/leggings/copper_trim"
+        },
+        {
+            "predicate": {
+                "trim_type": 0.6
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/leggings/gold_trim"
+        },
+        {
+            "predicate": {
+                "trim_type": 0.7
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/leggings/emerald_trim"
+        },
+        {
+            "predicate": {
+                "trim_type": 0.8
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/leggings/diamond_trim"
+        },
+        {
+            "predicate": {
+                "trim_type": 0.9
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/leggings/lapis_trim"
+        },
+        {
+            "predicate": {
+                "trim_type": 1
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/leggings/amethyst_trim"
+        }
+    ]
 }

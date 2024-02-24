@@ -2,5 +2,67 @@
     "parent": "minecraft:item/generated",
     "textures": {
         "layer0": "scorchful:item/turtle_boots"
-    }
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "trim_type": 0.1
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/boots/quartz_trim"
+        },
+        {
+            "predicate": {
+                "trim_type": 0.2
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/boots/iron_trim"
+        },
+        {
+            "predicate": {
+                "trim_type": 0.3
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/boots/netherite_trim"
+        },
+        {
+            "predicate": {
+                "trim_type": 0.4
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/boots/redstone_trim"
+        },
+        {
+            "predicate": {
+                "trim_type": 0.5
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/boots/copper_trim"
+        },
+        {
+            "predicate": {
+                "trim_type": 0.6
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/boots/gold_trim"
+        },
+        {
+            "predicate": {
+                "trim_type": 0.7
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/boots/emerald_trim"
+        },
+        {
+            "predicate": {
+                "trim_type": 0.8
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/boots/diamond_trim"
+        },
+        {
+            "predicate": {
+                "trim_type": 0.9
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/boots/lapis_trim"
+        },
+        {
+            "predicate": {
+                "trim_type": 1
+            },
+            "model": "scorchful:item/trimmed_turtle_armor/boots/amethyst_trim"
+        }
+    ]
 }
