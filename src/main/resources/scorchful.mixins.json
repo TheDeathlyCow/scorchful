@@ -10,7 +10,6 @@
         "PointOfInterestTypesMixin",
         "server.SandAccumulationServerWorldMixin",
         "thirst.ConsumeItemCriterionMixin",
-        "thirst.EntityInvoker",
         "thirst.ItemMixin",
         "thirst.LivingEntityMixin",
         "thirst.PotionEntityMixin",

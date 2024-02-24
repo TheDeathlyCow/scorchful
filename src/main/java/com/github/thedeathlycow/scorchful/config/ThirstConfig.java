@@ -19,9 +19,7 @@ public class ThirstConfig implements ConfigData {
 
     int soakingFromSplashPotions = 300;
 
-    int rainWetnessIncrease = 1;
-
-    int touchingWaterWetnessIncrease = 5;
+    int touchingWaterWetnessIncrease = 1;
 
     int dryRate = 1;
 
@@ -53,10 +51,6 @@ public class ThirstConfig implements ConfigData {
 
     public int getSoakingFromSplashPotions() {
         return soakingFromSplashPotions;
-    }
-
-    public int getRainWetnessIncrease() {
-        return rainWetnessIncrease;
     }
 
     public int getTouchingWaterWetnessIncrease() {
