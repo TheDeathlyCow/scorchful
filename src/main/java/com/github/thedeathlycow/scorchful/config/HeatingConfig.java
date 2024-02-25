@@ -19,7 +19,7 @@ public class HeatingConfig implements ConfigData {
 
     int heatFromSun = 2;
 
-    int scorchingBiomeHeatIncrease = 2;
+    int scorchingBiomeHeatIncrease = 1;
 
     int sunHatShadeTemperatureChange = -1;
 
