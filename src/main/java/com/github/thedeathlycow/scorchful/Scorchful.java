@@ -15,6 +15,7 @@ import com.github.thedeathlycow.scorchful.temperature.WetTickController;
 import com.github.thedeathlycow.scorchful.worldgen.NetherBiomeModifications;
 import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentControllerInitializeEvent;
+import com.github.thedeathlycow.thermoo.api.temperature.event.PlayerEnvironmentEvents;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
@@ -88,6 +89,23 @@ public class Scorchful implements ModInitializer {
 
 
     private void registerThermooEventListeners() {
+        PlayerEnvironmentEvents.CAN_APPLY_PASSIVE_TEMPERATURE_CHANGE.register(
+                (change, player) -> {
+
+                    if (change < 0 && player.thermoo$isCold()) {
+                        return true;
+                    }
+
+                    ScorchfulConfig config = getConfig();
+
+                    if (!config.heatingConfig.doPassiveHeating()) {
+                        return false;
+                    } else {
+                        return player.thermoo$getTemperatureScale() < config.heatingConfig.getMaxPassiveHeatingScale();
+                    }
+                }
+        );
+
         EnvironmentControllerInitializeEvent.EVENT.register(AttributeController::new);
         EnvironmentControllerInitializeEvent.EVENT.register(
                 EnvironmentControllerInitializeEvent.MODIFY_PHASE,

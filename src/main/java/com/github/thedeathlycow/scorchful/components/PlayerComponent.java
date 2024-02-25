@@ -1,18 +1,22 @@
 package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
+import com.github.thedeathlycow.scorchful.config.ModIntegrationConfig;
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.ThirstConfig;
 import com.github.thedeathlycow.scorchful.enchantment.SEnchantmentHelper;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
+import net.dehydration.access.ThirstManagerAccess;
+import net.dehydration.thirst.ThirstManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -69,28 +73,46 @@ public class PlayerComponent implements Component, ServerTickingComponent {
     @Override
     public void serverTick() {
         if (!this.provider.thermoo$isCold()) {
-            this.tickWater();
+            this.tickWater(this.provider);
         }
     }
 
-    private void tickWater() {
-        ThirstConfig config = Scorchful.getConfig().thirstConfig;
+    private void tickWater(PlayerEntity player) {
+        ScorchfulConfig config = Scorchful.getConfig();
+        ThirstConfig thirstConfig = config.thirstConfig;
 
         // sweating: move body water to wetness
-        if (this.waterDrunk > 0 && this.provider.thermoo$getTemperature() > 0) {
-            this.waterDrunk--;
-            this.provider.thermoo$setWetTicks(this.provider.thermoo$getWetTicks() + 1);
+        if (ScorchfulIntegrations.isModLoaded(ScorchfulIntegrations.DEHYDRATION_ID)) {
+            this.tickSweatDehydration(config.integrationConfig, player);
+        } else {
+            this.tickSweatNormal(player);
         }
 
         // cooling: move wetness to temperature
-        if (this.provider.thermoo$isWet()) {
-            int temperatureChange = config.getTemperatureFromWetness();
-            World world = this.provider.getWorld();
-            if (world.getBiome(this.provider.getBlockPos()).isIn(SBiomeTags.HUMID_BIOMES)) {
-                temperatureChange = MathHelper.floor(temperatureChange * config.getHumidBiomeSweatEfficiency());
+        if (player.thermoo$isWet()) {
+            int temperatureChange = thirstConfig.getTemperatureFromWetness();
+            World world = player.getWorld();
+            if (world.getBiome(player.getBlockPos()).isIn(SBiomeTags.HUMID_BIOMES)) {
+                temperatureChange = MathHelper.floor(temperatureChange * thirstConfig.getHumidBiomeSweatEfficiency());
             }
 
-            this.provider.thermoo$addTemperature(temperatureChange);
+            player.thermoo$addTemperature(temperatureChange);
+        }
+    }
+
+    private void tickSweatNormal(PlayerEntity player) {
+        if (this.waterDrunk > 0 && player.thermoo$getTemperature() > 0) {
+            this.waterDrunk--;
+            player.thermoo$setWetTicks(player.thermoo$getWetTicks() + 1);
+        }
+    }
+
+    private void tickSweatDehydration(ModIntegrationConfig config, PlayerEntity player) {
+        ThirstManager thirstManager = ((ThirstManagerAccess) player).getThirstManager();
+        if (thirstManager.getThirstLevel() > config.getMinWaterLevelForSweat()
+                && player.thermoo$getTemperature() > 0) {
+            thirstManager.addDehydration(config.getDehydrationConsumedBySweat());
+            player.thermoo$setWetTicks(player.thermoo$getWetTicks() + 1);
         }
     }
 

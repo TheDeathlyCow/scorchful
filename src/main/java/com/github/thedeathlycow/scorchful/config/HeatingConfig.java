@@ -7,6 +7,10 @@ import me.shedaniel.autoconfig.annotation.Config;
 @Config(name = Scorchful.MODID + ".heating_config")
 public class HeatingConfig implements ConfigData {
 
+    boolean doPassiveHeating = true;
+
+    float maxPassiveHeatingScale = 1.0f;
+
     boolean enableTurtleArmorEffects = true;
 
     int coolingFromIce = 24;
@@ -32,6 +36,14 @@ public class HeatingConfig implements ConfigData {
     double veryProtectiveArmorHeatResistance = 1.0;
 
     int waterBreathingDurationPerTurtleArmorPieceSeconds = 10;
+
+    public boolean doPassiveHeating() {
+        return doPassiveHeating;
+    }
+
+    public float getMaxPassiveHeatingScale() {
+        return maxPassiveHeatingScale;
+    }
 
     public boolean isTurtleArmorEffectsEnabled() {
         return enableTurtleArmorEffects;

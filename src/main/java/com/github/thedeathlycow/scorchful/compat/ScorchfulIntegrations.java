@@ -12,8 +12,14 @@ public class ScorchfulIntegrations {
 
     public static final String OVERFLOWING_BARS_ID = "overflowingbars";
 
+    public static final String DEHYDRATION_ID = "dehydration";
+
     public static boolean isHeartsRenderOverridden() {
         return isModLoaded(COLORFUL_HEARTS_ID) || isModLoaded(OVERFLOWING_BARS_ID);
+    }
+
+    public static boolean isThirstModLoaded() {
+        return isModLoaded(DEHYDRATION_ID);
     }
 
     public static boolean isModLoaded(String id) {
@@ -21,6 +27,6 @@ public class ScorchfulIntegrations {
     }
 
     private ScorchfulIntegrations() {
-        
+
     }
 }

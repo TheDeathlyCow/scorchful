@@ -44,7 +44,10 @@
 		"thermoo": ">=2.1.0"
 	},
 	"suggests": {
-		"another-mod": "*"
+		"frostiful": "*"
+	},
+	"breaks": {
+		"toughasnails": "*"
 	},
 	"accessWidener": "scorchful.accesswidener",
 	"custom": {

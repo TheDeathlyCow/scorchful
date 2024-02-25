@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.ThirstConfig;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
@@ -21,7 +22,7 @@ public class QuenchingFoods {
     }
 
     public static void appendTooltip(ItemStack stack, List<Text> tooltip, @Nullable QuenchingLevel level) {
-        if (level != null) {
+        if (level != null && !ScorchfulIntegrations.isThirstModLoaded()) {
             tooltip.add(level.tooltipText);
         }
     }
@@ -31,6 +32,11 @@ public class QuenchingFoods {
     }
 
     public static void onConsume(LivingEntity user, ItemStack stack, @Nullable QuenchingLevel level) {
+
+        if (ScorchfulIntegrations.isThirstModLoaded()) {
+            return;
+        }
+
         if (level != null && user.isPlayer()) {
             ScorchfulComponents.PLAYER.get(user)
                     .drink(level.waterProvider.applyAsInt(Scorchful.getConfig().thirstConfig));

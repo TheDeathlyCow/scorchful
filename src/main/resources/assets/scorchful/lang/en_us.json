@@ -70,6 +70,8 @@
     "text.autoconfig.scorchful.option.clientConfig.sandStormFogEnd": "Sandstorm fog end distance",
     
     "text.autoconfig.scorchful.option.heatingConfig": "Heating Config",
+    "text.autoconfig.scorchful.option.heatingConfig.doPassiveHeating": "Do passive heating",
+    "text.autoconfig.scorchful.option.heatingConfig.maxPassiveHeatingScale": "Max passive heating percent (0-1)",
     "text.autoconfig.scorchful.option.heatingConfig.enableTurtleArmorEffects": "Enable Turtle Armor status effects (doesn't apply to helmet)",
     "text.autoconfig.scorchful.option.heatingConfig.coolingFromIce": "Cooling from ice",
     "text.autoconfig.scorchful.option.heatingConfig.minSkyLightLevelForHeat": "Minimum sky light level for heat",
@@ -100,6 +102,10 @@
     "text.autoconfig.scorchful.option.weatherConfig": "Weather Config",
     "text.autoconfig.scorchful.option.weatherConfig.doSandPileAccumulation": "Do Sand Pile accumulation",
     "text.autoconfig.scorchful.option.weatherConfig.sandPileAccumulationHeight": "Sand Pile accumulation height",
+    
+    "text.autoconfig.scorchful.option.integrationConfig": "Mod Integrations Config",
+    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConsumedBySweat": "Dehydration points consumed by sweat per tick (requires Dehydration)",
+    "text.autoconfig.scorchful.option.integrationConfig.minWaterLevelForSweat": "Minimum water level required for sweating (requires Dehydration)",
     
     "text.autoconfig.scorchful.option.updateConfig": "Update Config",
     "text.autoconfig.scorchful.option.updateConfig.currentConfigVersion": "Current config version",

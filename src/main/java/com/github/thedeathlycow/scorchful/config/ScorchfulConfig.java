@@ -22,6 +22,9 @@ public class ScorchfulConfig extends PartitioningSerializer.GlobalData {
     public WeatherConfig weatherConfig = new WeatherConfig();
 
     @ConfigEntry.Gui.CollapsibleObject
+    public ModIntegrationConfig integrationConfig = new ModIntegrationConfig();
+
+    @ConfigEntry.Gui.CollapsibleObject
     public UpdateConfig updateConfig = new UpdateConfig();
 
     public static void updateConfig(ConfigHolder<ScorchfulConfig> configHolder) {
