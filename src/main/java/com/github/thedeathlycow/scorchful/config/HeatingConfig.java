@@ -31,6 +31,8 @@ public class HeatingConfig implements ConfigData {
 
     double veryProtectiveArmorHeatResistance = 1.0;
 
+    int waterBreathingDurationPerTurtleArmorPieceSeconds = 10;
+
     public boolean isTurtleArmorEffectsEnabled() {
         return enableTurtleArmorEffects;
     }
@@ -77,5 +79,9 @@ public class HeatingConfig implements ConfigData {
 
     public double getVeryProtectiveArmorHeatResistance() {
         return veryProtectiveArmorHeatResistance;
+    }
+
+    public int getWaterBreathingDurationPerTurtleArmorPieceSeconds() {
+        return waterBreathingDurationPerTurtleArmorPieceSeconds;
     }
 }

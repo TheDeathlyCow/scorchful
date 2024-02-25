@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.mixin;
 
-import com.github.thedeathlycow.scorchful.item.TurtleArmourTickHandler;
+import com.github.thedeathlycow.scorchful.item.TurtleArmorEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -11,11 +11,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class PlayerEntityMixin {
 
     @Inject(
-            method = "tick",
-            at = @At("TAIL")
+            method = "updateTurtleHelmet",
+            at = @At("HEAD"),
+            cancellable = true
     )
-    private void onTick(CallbackInfo ci) {
-        TurtleArmourTickHandler.tick((PlayerEntity) (Object) this);
+    private void scorchfulTurtleArmorUpdate(CallbackInfo ci) {
+        TurtleArmorEffects.update((PlayerEntity) (Object) this);
+        ci.cancel();
     }
 
 }

@@ -23,6 +23,8 @@ public class SItemTags {
 
     public static final TagKey<Item> IS_SUN_PROTECTING_HAT = of("is_sun_protecting_hat");
 
+    public static final TagKey<Item> TURTLE_ARMOR = of("turtle_armor");
+
     private static TagKey<Item> of(String path) {
         return TagKey.of(RegistryKeys.ITEM, Scorchful.id(path));
     }
