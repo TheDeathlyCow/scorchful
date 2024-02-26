@@ -60,34 +60,32 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
 
     @Override
     public int getFloorTemperature(LivingEntity entity, World world, BlockState state, BlockPos pos) {
-        if (state.isIn(SBlockTags.HEAVY_ICE)) {
+        int base = controller.getFloorTemperature(entity, world, state, pos);
+        if (state.isIn(SBlockTags.HEAVY_ICE) && entity.thermoo$isWarm()) {
             ScorchfulConfig config = Scorchful.getConfig();
-            return -config.heatingConfig.getCoolingFromIce();
+            return base - config.heatingConfig.getCoolingFromIce();
         } else {
-            return controller.getFloorTemperature(entity, world, state, pos);
+            return base;
         }
     }
 
     @Override
     public int getEnvironmentTemperatureForPlayer(PlayerEntity player, int localTemperature) {
-        if (player.thermoo$isCold() && localTemperature < 0) {
+        if (localTemperature < 0) {
             return controller.getEnvironmentTemperatureForPlayer(player, localTemperature);
         }
 
-        if (localTemperature > 0) {
-            ScorchfulConfig config = Scorchful.getConfig();
+        ScorchfulConfig config = Scorchful.getConfig();
 
-            int sunLight = player.getWorld().getLightLevel(LightType.SKY, player.getBlockPos());
+        int sunLight = player.getWorld().getLightLevel(LightType.SKY, player.getBlockPos());
 
-            boolean hasHatShade = sunLight >= config.heatingConfig.getMinSkyLightLevelForHeat()
-                    && SunHatItem.isWearingSunHat(player);
+        boolean hasHatShade = sunLight >= config.heatingConfig.getMinSkyLightLevelForHeat()
+                && SunHatItem.isWearingSunHat(player);
 
-            if (hasHatShade) {
-                int shading = config.heatingConfig.getSunHatShadeTemperatureChange();
-                return localTemperature + shading;
-            }
+        if (hasHatShade) {
+            int shading = config.heatingConfig.getSunHatShadeTemperatureChange();
+            return localTemperature + shading;
         }
-
         return localTemperature;
     }
 

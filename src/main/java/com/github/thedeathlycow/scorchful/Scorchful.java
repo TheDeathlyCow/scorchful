@@ -23,6 +23,7 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.item.v1.ModifyItemAttributeModifiersCallback;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Contract;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,8 +92,7 @@ public class Scorchful implements ModInitializer {
     private void registerThermooEventListeners() {
         PlayerEnvironmentEvents.CAN_APPLY_PASSIVE_TEMPERATURE_CHANGE.register(
                 (change, player) -> {
-
-                    if (change < 0 && player.thermoo$isCold()) {
+                    if (change < 0) {
                         return true;
                     }
 
