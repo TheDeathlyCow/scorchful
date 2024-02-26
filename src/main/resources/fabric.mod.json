@@ -3,7 +3,7 @@
 	"id": "scorchful",
 	"version": "${version}",
 	"name": "Scorchful",
-	"description": "Burning to death - one block at a time",
+	"description": "A mod focused on Heat based survival and combat.",
 	"authors": [
 		"TheDeathlyCow"
 	],
