@@ -33,7 +33,7 @@ public class SunHatModel<T extends LivingEntity> extends BipedEntityModel<T> {
                         .cuboid(
                                 -4.0F, -9.0F, -4.0F,
                                 8.0F, 4.0F, 8.0F,
-                                dilation.add(0.1f)
+                                dilation.add(0.5f)
                         ),
                 ModelTransform.pivot(0.0F, 24.0F, 0.0F)
         );
