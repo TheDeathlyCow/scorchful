@@ -13,18 +13,18 @@ import org.jetbrains.annotations.Contract;
 
 public class SItemGroups {
     public static final ItemGroup SCORCHFUL = FabricItemGroup.builder()
-            .icon(SItemGroups::makeFilledWaterSkin)
+            .icon(() -> new ItemStack(SItems.SUN_HAT))
             .displayName(Text.translatable("item_group.scorchful"))
             .entries((context, entries) -> {
-                entries.add(new ItemStack(SItems.WATER_SKIN));
-                entries.add(makeFilledWaterSkin());
-                entries.add(new ItemStack(SItems.CACTUS_JUICE));
-
                 entries.add(new ItemStack(SItems.SUN_HAT));
                 entries.add(new ItemStack(Items.TURTLE_HELMET));
                 entries.add(new ItemStack(SItems.TURTLE_CHESTPLATE));
                 entries.add(new ItemStack(SItems.TURTLE_LEGGINGS));
                 entries.add(new ItemStack(SItems.TURTLE_BOOTS));
+
+                entries.add(new ItemStack(SItems.WATER_SKIN));
+                entries.add(makeFilledWaterSkin());
+                entries.add(new ItemStack(SItems.CACTUS_JUICE));
 
                 entries.add(new ItemStack(SItems.CRIMSON_LILY));
                 entries.add(new ItemStack(SItems.WARPED_LILY));
