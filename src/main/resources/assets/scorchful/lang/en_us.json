@@ -102,6 +102,7 @@
     "text.autoconfig.scorchful.option.weatherConfig": "Weather Config",
     "text.autoconfig.scorchful.option.weatherConfig.doSandPileAccumulation": "Do Sand Pile accumulation",
     "text.autoconfig.scorchful.option.weatherConfig.sandPileAccumulationHeight": "Sand Pile accumulation height",
+    "text.autoconfig.scorchful.option.weatherConfig.sandstormSlownessAmountPercent": "Sandstorm Slowness amount (percent from -1 to +1)",
     
     "text.autoconfig.scorchful.option.integrationConfig": "Mod Integrations Config",
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConsumedBySweat": "Dehydration points consumed by sweat per tick (requires Dehydration)",
