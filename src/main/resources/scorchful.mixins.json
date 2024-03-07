@@ -8,6 +8,7 @@
         "LivingEntityMixin",
         "PlayerEntityMixin",
         "PointOfInterestTypesMixin",
+        "compat.frostiful.absent.EntityMixin",
         "server.SandAccumulationServerWorldMixin",
         "thirst.ConsumeItemCriterionMixin",
         "thirst.ItemMixin",
