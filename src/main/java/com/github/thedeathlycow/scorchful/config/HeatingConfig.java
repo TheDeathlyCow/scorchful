@@ -25,6 +25,8 @@ public class HeatingConfig implements ConfigData {
 
     int onFireWarmRate = 48;
 
+    int powderSnowCoolRate = 24;
+
     int fireballHeat = 2000;
 
     double defaultArmorHeatResistance = -0.5;
@@ -71,6 +73,10 @@ public class HeatingConfig implements ConfigData {
 
     public int getOnFireWarmRate() {
         return onFireWarmRate;
+    }
+
+    public int getPowderSnowCoolRate() {
+        return powderSnowCoolRate;
     }
 
     public int getFireballHeat() {

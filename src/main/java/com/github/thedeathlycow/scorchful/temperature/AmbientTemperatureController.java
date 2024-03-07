@@ -55,6 +55,10 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
             change += config.getOnFireWarmRate();
         }
 
+        if (entity.wasInPowderSnow && entity.thermoo$canFreeze()) {
+            change -= config.getPowderSnowCoolRate();
+        }
+
         return change;
     }
 
@@ -71,7 +75,7 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
 
     @Override
     public int getEnvironmentTemperatureForPlayer(PlayerEntity player, int localTemperature) {
-        if (localTemperature < 0) {
+        if (localTemperature < 0 || !player.thermoo$canOverheat()) {
             return controller.getEnvironmentTemperatureForPlayer(player, localTemperature);
         }
 

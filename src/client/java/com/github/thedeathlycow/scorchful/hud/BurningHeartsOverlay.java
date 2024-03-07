@@ -52,7 +52,7 @@ public class BurningHeartsOverlay {
 
             int u = isHalfHeart ? 9 : 0;
 
-            context.drawTexture(HEART_OVERLAY_TEXTURE, x, y, u, 0, 9, 10);
+            context.drawTexture(HEART_OVERLAY_TEXTURE, x, y, u, 0, 9, 10, TEXTURE_WIDTH, TEXTURE_HEIGHT);
         }
     }
 
