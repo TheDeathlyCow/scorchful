@@ -14,77 +14,60 @@ import net.minecraft.world.LightType;
 public class WetTickController extends EnvironmentControllerDecorator {
 
     public WetTickController(EnvironmentController controller) {
-        super(new DryingController(new WettingController(controller)));
+        super(controller);
     }
 
-    private static class DryingController extends EnvironmentControllerDecorator {
+    @Override
+    public int getSoakChange(Soakable soakable) {
 
-        private DryingController(EnvironmentController controller) {
-            super(controller);
+        if (!(soakable instanceof LivingEntity entity)) {
+            return 0;
         }
 
-        @Override
-        public int getSoakChange(Soakable soakable) {
-            int soakChange = controller.getSoakChange(soakable);
+        ScorchfulConfig config = Scorchful.getConfig();
+        int soakChange = this.getWetChange(entity, config);
+        soakChange = this.getDryChange(entity, config, soakChange);
 
-            if (!(soakable instanceof LivingEntity entity)) {
-                return soakChange;
-            }
-            ScorchfulConfig config = Scorchful.getConfig();
-
-            // dry off slowly when not being wetted
-            if (soakChange <= 0 && entity.thermoo$isWet()) {
-                soakChange = -config.thirstConfig.getDryRate();
-            }
-
-            // increase drying from block light
-            int blockLightLevel = entity.getWorld().getLightLevel(LightType.BLOCK, entity.getBlockPos());
-            if (blockLightLevel > 0) {
-                soakChange -= blockLightLevel / 4;
-            }
-
-            if (entity.isOnFire()) {
-                soakChange -= config.thirstConfig.getOnFireDryDate();
-            }
-
-            if (soakChange < 0 && entity.isPlayer() && entity.isWet()) {
-                ScorchfulComponents.PLAYER.get(entity).tickRehydration(config.thirstConfig);
-            }
-
-            return soakChange;
-        }
+        return soakChange;
     }
 
-    private static class WettingController extends EnvironmentControllerDecorator {
-
-        private WettingController(EnvironmentController controller) {
-            super(controller);
+    private int getDryChange(LivingEntity entity, ScorchfulConfig config, int wetChange) {
+        // dry off slowly when not being wetted
+        if (wetChange <= 0 && entity.thermoo$isWet()) {
+            wetChange = -config.thirstConfig.getDryRate();
         }
 
-        @Override
-        public int getSoakChange(Soakable soakable) {
-
-            int soakChange = 0;
-
-            if (!(soakable instanceof LivingEntity entity)) {
-                return soakChange;
-            }
-
-            ScorchfulConfig config = Scorchful.getConfig();
-
-            // immediately soak players in water
-            if (entity.isSubmergedIn(FluidTags.WATER)) {
-                return entity.thermoo$getMaxWetTicks();
-            }
-
-            // add wetness when touching, but not submerged in, water or rain
-            if (entity.isTouchingWaterOrRain() || entity.getBlockStateAtPos().isOf(Blocks.WATER_CAULDRON)) {
-                soakChange += config.thirstConfig.getTouchingWaterWetnessIncrease();
-            }
-
-            return soakChange;
+        // increase drying from block light
+        int blockLightLevel = entity.getWorld().getLightLevel(LightType.BLOCK, entity.getBlockPos());
+        if (blockLightLevel > 0) {
+            wetChange -= blockLightLevel / 4;
         }
 
+        if (entity.isOnFire()) {
+            wetChange -= config.thirstConfig.getOnFireDryDate();
+        }
+
+        if (wetChange < 0 && entity.isPlayer() && entity.isWet()) {
+            ScorchfulComponents.PLAYER.get(entity).tickRehydration(config.thirstConfig);
+        }
+
+        return wetChange;
+    }
+
+    private int getWetChange(LivingEntity entity, ScorchfulConfig config) {
+        int soakChange = 0;
+
+        // immediately soak players in water
+        if (entity.isSubmergedIn(FluidTags.WATER)) {
+            return entity.thermoo$getMaxWetTicks();
+        }
+
+        // add wetness when touching, but not submerged in, water or rain
+        if (entity.isTouchingWaterOrRain() || entity.getBlockStateAtPos().isOf(Blocks.WATER_CAULDRON)) {
+            soakChange += config.thirstConfig.getTouchingWaterWetnessIncrease();
+        }
+
+        return soakChange;
     }
 
 }
