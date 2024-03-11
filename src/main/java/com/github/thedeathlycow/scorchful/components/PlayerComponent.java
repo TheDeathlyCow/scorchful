@@ -90,7 +90,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
 
         // cooling: move wetness to temperature
         if (player.thermoo$isWet()) {
-            int temperatureChange = thirstConfig.getTemperatureFromWetness();
+            int temperatureChange = MathHelper.floor(thirstConfig.getTemperatureFromWetness() * player.thermoo$getSoakedScale());
             World world = player.getWorld();
             if (world.getBiome(player.getBlockPos()).isIn(SBiomeTags.HUMID_BIOMES)) {
                 temperatureChange = MathHelper.floor(temperatureChange * thirstConfig.getHumidBiomeSweatEfficiency());
