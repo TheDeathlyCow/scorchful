@@ -103,7 +103,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
     private void tickSweatNormal(PlayerEntity player) {
         if (this.waterDrunk > 0 && player.thermoo$getTemperature() > 0) {
             this.waterDrunk--;
-            player.thermoo$setWetTicks(player.thermoo$getWetTicks() + 1);
+            player.thermoo$addWetTicks(2);
         }
     }
 
