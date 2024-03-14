@@ -24,7 +24,7 @@ public class ModIntegrationConfig implements ConfigData {
      * <p>
      * Don't lose water to sweat when below this level.
      */
-    int minWaterLevelForSweat = 6;
+    int minWaterLevelForSweat = 17;
 
     public float getDehydrationConsumedBySweat() {
         return dehydrationConsumedBySweat;
