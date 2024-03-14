@@ -1,0 +1,116 @@
+{
+    "item_group.scorchful": "焦土",
+    
+    "item.scorchful.water_skin": "革制水袋",
+    "item.scorchful.water_skin.empty": "空革制水袋",
+    "item.scorchful.water_skin.partially_filled": "装有部分水的革制水袋",
+    "item.scorchful.water_skin.filled": "装满水的革制水袋",
+    "item.scorchful.water_skin.tooltip.count": "剩余水量 %1$s / %2$s",
+    "item.scorchful.water_skin.tooltip.empty": "空",
+    
+    "item.scorchful.sun_hat": "太阳帽",
+    "item.scorchful.sun_hat.tooltip": "穿戴后减少太阳带来的热量",
+    "item.scorchful.cactus_juice": "仙人掌汁",
+    
+    "item.scorchful.turtle_chestplate": "海龟胸甲",
+    "item.scorchful.turtle_leggings": "海龟护膝",
+    "item.scorchful.turtle_boots": "海龟脚蹼",
+    
+    "item.scorchful.tooltip.refreshing": "凉爽\uD83C\uDF0A",
+    "item.scorchful.tooltip.sustaining": "支持\uD83C\uDF0A\uD83C\uDF0A",
+    "item.scorchful.tooltip.hydrating": "补水\uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
+    
+    
+    "block.scorchful.crimson_lily": "绯红百合",
+    "block.scorchful.warped_lily": "诡异百合",
+    "block.scorchful.rooted_netherrack": "缠根下界岩",
+    "block.scorchful.rooted_crimson_nylium": "缠根绯红菌岩",
+    "block.scorchful.rooted_warped_nylium": "缠根诡异菌岩",
+    "block.scorchful.sand_pile": "沙堆",
+    "block.scorchful.red_sand_pile": "红沙堆",
+    "block.scorchful.sand_cauldron": "装着沙子的锅",
+    "block.scorchful.red_sand_cauldron": "装着红沙的锅",
+    
+    
+    "enchantment.scorchful.rehydration": "补水",
+    "enchantment.scorchful.rehydration.desc": "补充因出汗而流失的身体水分",
+    
+    
+    "death.attack.scorchful.heat": "%1$s中暑了",
+    "death.attack.scorchful.heat.player": "%1$s因%2$s中暑",
+    
+    
+    "advancement.scorchful.adventure.drink_cactus_juice.title": "解渴贵族",
+    "advancement.scorchful.adventure.drink_cactus_juice.description": "喝一杯仙人掌汁",
+    "advancements.scorchful.husbandry.obtain_turtle_armor.title": "卧倒并掩护",
+    "advancements.scorchful.husbandry.obtain_turtle_armor.description": "拥有一件海龟盔甲",
+    
+    "subtitles.item.scorchful.water_skin.fill": "水壶",
+    "subtitles.temperature_effect.scorchful.heartbeat": "心跳",
+    "subtitles.enchantment.scorchful.rehydration": "湿润",
+    "subtitles.block.scorchful.crimson_lily.squelch": "绯红百合：扑哧",
+    "subtitles.weather.scorchful.sandstorm": "刮风",
+    
+    
+    "stat.scorchful.fill_crimson_lily": "填满绯红百合",
+    "stat.scorchful.soaked_by_crimson_lily": "被绯红百合淋湿",
+    "stat.scorchful.use_warped_lily": "收获诡异百合",
+    
+    "text.autoconfig.scorchful.option.clientConfig": "客户端配置",
+    "text.autoconfig.scorchful.option.clientConfig.doBurningHeartOverlay": "血条显示燃烧",
+    "text.autoconfig.scorchful.option.clientConfig.doSunHatShading": "太阳帽着色",
+    "text.autoconfig.scorchful.option.clientConfig.sunHatShadeOpacity": "太阳帽着色不透明度",
+    "text.autoconfig.scorchful.option.clientConfig.enableSandstormParticles": "启用沙暴粒子",
+    "text.autoconfig.scorchful.option.clientConfig.enableSandstormFog": "启用沙暴迷雾",
+    "text.autoconfig.scorchful.option.clientConfig.enableSandstormSounds": "启用沙暴音效",
+    "text.autoconfig.scorchful.option.clientConfig.sandStormParticleRenderDistance": "沙暴粒子渲染距离",
+    "text.autoconfig.scorchful.option.clientConfig.sandStormParticleRarity": "减少沙暴粒子",
+    "text.autoconfig.scorchful.option.clientConfig.sandStormParticleVelocity": "沙暴粒子Z轴速度",
+    "text.autoconfig.scorchful.option.clientConfig.sandStormFogStart": "沙暴迷雾起始距离",
+    "text.autoconfig.scorchful.option.clientConfig.sandStormFogEnd": "沙暴迷雾终止距离",
+    
+    "text.autoconfig.scorchful.option.heatingConfig": "升温配置",
+    "text.autoconfig.scorchful.option.heatingConfig.doPassiveHeating": "被动升温",
+    "text.autoconfig.scorchful.option.heatingConfig.maxPassiveHeatingScale": "最高被动升温百分比范围（0-1）",
+    "text.autoconfig.scorchful.option.heatingConfig.enableTurtleArmorEffects": "启用海龟盔甲状态效果（不应用于头盔）",
+    "text.autoconfig.scorchful.option.heatingConfig.coolingFromIce": "从冰块降低体温",
+    "text.autoconfig.scorchful.option.heatingConfig.minSkyLightLevelForHeat": "最低天空光照等级所能提供的热量",
+    "text.autoconfig.scorchful.option.heatingConfig.heatFromSun": "太阳提供的热量",
+    "text.autoconfig.scorchful.option.heatingConfig.scorchingBiomeHeatIncrease": "焦土生物群系热量增加",
+    "text.autoconfig.scorchful.option.heatingConfig.sunHatShadeTemperatureChange": "太阳帽",
+    "text.autoconfig.scorchful.option.heatingConfig.onFireWarmRate": "着火时温暖速率",
+    "text.autoconfig.scorchful.option.heatingConfig.fireballHeat": "火焰弹温度",
+    "text.autoconfig.scorchful.option.heatingConfig.defaultArmorHeatResistance": "默认每件盔甲升温抗性",
+    "text.autoconfig.scorchful.option.heatingConfig.veryHarmfulArmorHeatResistance": "每件特别保暖盔甲升温抗性",
+    "text.autoconfig.scorchful.option.heatingConfig.protectiveArmorHeatResistance": "每件阻热盔甲升温抗性",
+    "text.autoconfig.scorchful.option.heatingConfig.veryProtectiveArmorHeatResistance": "每件特别阻热盔甲升温抗性",
+    "text.autoconfig.scorchful.option.heatingConfig.waterBreathingDurationPerTurtleArmorPieceSeconds": "每件海龟盔甲的水下呼吸持续时间（秒）",
+    
+    "text.autoconfig.scorchful.option.thirstConfig": "口渴配置",
+    "text.autoconfig.scorchful.option.thirstConfig.temperatureFromWetness": "湿度产生的温度",
+    "text.autoconfig.scorchful.option.thirstConfig.waterFromRefreshingFood": "凉爽食物提供的水分",
+    "text.autoconfig.scorchful.option.thirstConfig.waterFromSustainingFood": "支持食物提供的水分",
+    "text.autoconfig.scorchful.option.thirstConfig.waterFromHydratingFood": "补水食物提供的水分",
+    "text.autoconfig.scorchful.option.thirstConfig.rehydrationDrinkSize": "补水饮料提供的水分",
+    "text.autoconfig.scorchful.option.thirstConfig.soakingFromSplashPotions": "浸润在喷溅药水时提供的水分",
+    "text.autoconfig.scorchful.option.thirstConfig.touchingWaterWetnessIncrease": "每次触水或淋雨时湿度增加",
+    "text.autoconfig.scorchful.option.thirstConfig.dryRate": "干燥速率",
+    "text.autoconfig.scorchful.option.thirstConfig.onFireDryDate": "着火时干燥速率",
+    "text.autoconfig.scorchful.option.thirstConfig.humidBiomeSweatEfficiency": "潮湿生物群落出汗效率",
+    "text.autoconfig.scorchful.option.thirstConfig.maxRehydrationEfficiency": "最高补水效率",
+    
+    "text.autoconfig.scorchful.option.weatherConfig": "天气配置",
+    "text.autoconfig.scorchful.option.weatherConfig.doSandPileAccumulation": "形成沙堆",
+    "text.autoconfig.scorchful.option.weatherConfig.sandPileAccumulationHeight": "沙堆堆积高度",
+    
+    "text.autoconfig.scorchful.option.integrationConfig": "模组集成配置",
+    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConsumedBySweat": "每次出汗消耗的水分值（需要脱水模组）。",
+    "text.autoconfig.scorchful.option.integrationConfig.minWaterLevelForSweat": "出汗所需的最低水分值（需要脱水模组）",
+    
+    "text.autoconfig.scorchful.option.updateConfig": "更新配置",
+    "text.autoconfig.scorchful.option.updateConfig.currentConfigVersion": "当前配置版本",
+    "text.autoconfig.scorchful.option.updateConfig.enableConfigUpdates": "启用配置自动升级",
+    "text.autoconfig.scorchful.option.updateConfig.enableConfigUpdates.@Tooltip[0]": "启用后，无论何时都会自动更新配置。",
+    "text.autoconfig.scorchful.option.updateConfig.enableConfigUpdates.@Tooltip[1]": "模组会更改默认值。",
+    "text.autoconfig.scorchful.option.updateConfig.enableConfigUpdates.@Tooltip[2]": "建议整合包关闭此功能。"
+}
