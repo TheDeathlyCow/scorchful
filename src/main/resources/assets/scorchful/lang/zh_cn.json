@@ -1,11 +1,11 @@
 {
     "item_group.scorchful": "焦土",
     
-    "item.scorchful.water_skin": "水分值",
-    "item.scorchful.water_skin.empty": "清空水分值",
-    "item.scorchful.water_skin.partially_filled": "部分补充水分值",
-    "item.scorchful.water_skin.filled": "完全补充水分值",
-    "item.scorchful.water_skin.tooltip.count": "剩余水分值 %1$s / %2$s",
+    "item.scorchful.water_skin": "革制水袋",
+    "item.scorchful.water_skin.empty": "空革制水袋",
+    "item.scorchful.water_skin.partially_filled": "装有部分水的革制水袋",
+    "item.scorchful.water_skin.filled": "装满水的革制水袋",
+    "item.scorchful.water_skin.tooltip.count": "剩余水 %1$s / %2$s",
     "item.scorchful.water_skin.tooltip.empty": "空的",
     
     "item.scorchful.sun_hat": "太阳帽",
