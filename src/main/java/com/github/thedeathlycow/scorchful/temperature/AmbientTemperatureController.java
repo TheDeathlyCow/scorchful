@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.temperature;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.compat.SeasonsIntegration;
 import com.github.thedeathlycow.scorchful.config.HeatingConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.item.SunHatItem;
@@ -81,10 +82,14 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
 
         ScorchfulConfig config = Scorchful.getConfig();
 
-        int sunLight = player.getWorld().getLightLevel(LightType.SKY, player.getBlockPos());
+        World world = player.getWorld();
+        int sunLight = world.getLightLevel(LightType.SKY, player.getBlockPos());
+        RegistryEntry<Biome> biome = world.getBiome(player.getBlockPos());
+        SeasonsIntegration.AdaptedSeason season = SeasonsIntegration.getSeason(world);
 
         boolean hasHatShade = sunLight >= config.heatingConfig.getMinSkyLightLevelForHeat()
-                && SunHatItem.isWearingSunHat(player);
+                && SunHatItem.isWearingSunHat(player)
+                && isScorching(biome, season);
 
         if (hasHatShade) {
             int shading = config.heatingConfig.getSunHatShadeTemperatureChange();
@@ -136,6 +141,7 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         ScorchfulConfig config = Scorchful.getConfig();
 
         if (biome.isIn(SBiomeTags.WARM_BIOMES) || biome.value().getTemperature() >= 0.95f) {
+            SeasonsIntegration.AdaptedSeason season = SeasonsIntegration.getSeason(world);
             int skylight = world.getLightLevel(LightType.SKY, pos);
             int skylightWithDarkness = skylight - world.getAmbientDarkness(); // adjusted with night and weather
 
@@ -145,7 +151,7 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
                 warmth += config.heatingConfig.getHeatFromSun();
 
                 // make the sun scorching, but don't have ambient temperature
-                if (biome.isIn(SBiomeTags.SCORCHING_BIOMES)) {
+                if (isScorching(biome, season)) {
                     warmth += config.heatingConfig.getScorchingBiomeHeatIncrease();
                 }
             } else if (skylight <= minLevel - SKY_LIGHT_BELOW_FOR_SHADE) {
@@ -154,6 +160,11 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         }
 
         return warmth;
+    }
+
+    private static boolean isScorching(RegistryEntry<Biome> biome, SeasonsIntegration.AdaptedSeason season) {
+        return season == SeasonsIntegration.AdaptedSeason.SUMMER
+                || (biome.isIn(SBiomeTags.SCORCHING_BIOMES) && season != SeasonsIntegration.AdaptedSeason.WINTER);
     }
 
 }
