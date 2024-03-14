@@ -13,21 +13,21 @@ public class HeatingConfig implements ConfigData {
 
     boolean enableTurtleArmorEffects = true;
 
-    int coolingFromIce = 24;
+    int coolingFromIce = 12;
 
     int minSkyLightLevelForHeat = 13;
 
-    int heatFromSun = 2;
+    int heatFromSun = 1;
 
     int scorchingBiomeHeatIncrease = 1;
 
     int sunHatShadeTemperatureChange = -1;
 
-    int onFireWarmRate = 48;
+    int onFireWarmRate = 24;
 
-    int powderSnowCoolRate = 24;
+    int powderSnowCoolRate = 12;
 
-    int fireballHeat = 2000;
+    int fireballHeat = 1000;
 
     double defaultArmorHeatResistance = -0.5;
 
