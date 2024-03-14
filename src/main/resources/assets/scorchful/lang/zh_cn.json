@@ -112,5 +112,5 @@
     "text.autoconfig.scorchful.option.updateConfig.enableConfigUpdates": "允许配置自动升级",
     "text.autoconfig.scorchful.option.updateConfig.enableConfigUpdates.@Tooltip[0]": "启用后，无论何时都会自动更新配置。",
     "text.autoconfig.scorchful.option.updateConfig.enableConfigUpdates.@Tooltip[1]": "mod会更改默认值。",
-    "text.autoconfig.scorchful.option.updateConfig.enableConfigUpdates.@Tooltip[2]": "建议 modpack 关闭此功能。"
+    "text.autoconfig.scorchful.option.updateConfig.enableConfigUpdates.@Tooltip[2]": "建议整合包关闭此功能。"
 }
