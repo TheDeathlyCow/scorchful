@@ -25,7 +25,7 @@ public class HeatingConfig implements ConfigData {
 
     int onFireWarmRate = 24;
 
-    int powderSnowCoolRate = 12;
+    int powderSnowCoolRate = 24;
 
     int fireballHeat = 1000;
 
