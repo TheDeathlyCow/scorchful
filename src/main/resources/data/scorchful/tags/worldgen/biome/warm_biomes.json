@@ -3,6 +3,7 @@
     "values": [
         "#c:climate_hot",
         "minecraft:beach",
-        "minecraft:warm_ocean"
+        "minecraft:warm_ocean",
+        "minecraft:mangrove_swamp"
     ]
 }
