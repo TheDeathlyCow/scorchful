@@ -88,6 +88,8 @@ dependencies {
 	modCompileOnly("maven.modrinth:colorful-hearts:${project.colorful_hearts_version}") { transitive = false }
 
 	modCompileOnly("maven.modrinth:dehydration:${project.dehydration_version}") { transitive = false }
+
+	modCompileOnly("maven.modrinth:fabric-seasons:${project.fabric_seasons_version}") { transitive = false }
 }
 
 processResources {

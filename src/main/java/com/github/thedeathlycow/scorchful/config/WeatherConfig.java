@@ -11,11 +11,17 @@ public class WeatherConfig implements ConfigData {
 
     int sandPileAccumulationHeight = 1;
 
+    double sandstormSlownessAmountPercent = -0.3;
+
     public boolean isSandPileAccumulationEnabled() {
         return doSandPileAccumulation;
     }
 
     public int getSandPileAccumulationHeight() {
         return sandPileAccumulationHeight;
+    }
+
+    public double getSandstormSlownessAmountPercent() {
+        return sandstormSlownessAmountPercent;
     }
 }

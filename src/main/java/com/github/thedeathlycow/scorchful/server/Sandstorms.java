@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.server;
 
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
@@ -68,7 +69,6 @@ public class Sandstorms {
     public static boolean hasRedSandStorms(RegistryEntry<Biome> biome) {
         return !biome.value().hasPrecipitation() && biome.isIn(SBiomeTags.HAS_RED_SAND_STORMS);
     }
-
 
     private Sandstorms() {
 

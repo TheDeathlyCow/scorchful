@@ -79,6 +79,7 @@
     "text.autoconfig.scorchful.option.heatingConfig.scorchingBiomeHeatIncrease": "Scorching biome heat increase",
     "text.autoconfig.scorchful.option.heatingConfig.sunHatShadeTemperatureChange": "Sun Hat",
     "text.autoconfig.scorchful.option.heatingConfig.onFireWarmRate": "On fire warm rate",
+    "text.autoconfig.scorchful.option.heatingConfig.powderSnowCoolRate": "Powder Snow cool rate when warm",
     "text.autoconfig.scorchful.option.heatingConfig.fireballHeat": "Fireball strike heat",
     "text.autoconfig.scorchful.option.heatingConfig.defaultArmorHeatResistance": "Default armor piece heat resistance",
     "text.autoconfig.scorchful.option.heatingConfig.veryHarmfulArmorHeatResistance": "Very warm armor piece heat resistance",
@@ -102,6 +103,7 @@
     "text.autoconfig.scorchful.option.weatherConfig": "Weather Config",
     "text.autoconfig.scorchful.option.weatherConfig.doSandPileAccumulation": "Do Sand Pile accumulation",
     "text.autoconfig.scorchful.option.weatherConfig.sandPileAccumulationHeight": "Sand Pile accumulation height",
+    "text.autoconfig.scorchful.option.weatherConfig.sandstormSlownessAmountPercent": "Sandstorm Slowness amount (percent from -1 to +1)",
     
     "text.autoconfig.scorchful.option.integrationConfig": "Mod Integrations Config",
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConsumedBySweat": "Dehydration points consumed by sweat per tick (requires Dehydration)",

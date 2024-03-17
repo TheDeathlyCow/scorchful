@@ -9,13 +9,13 @@ public class ThirstConfig implements ConfigData {
 
     int temperatureFromWetness = -12;
 
-    int waterFromRefreshingFood = 30;
+    int waterFromRefreshingFood = 60;
 
-    int waterFromSustainingFood = 60;
+    int waterFromSustainingFood = 120;
 
-    int waterFromHydratingFood = 120;
+    int waterFromHydratingFood = 300;
 
-    int rehydrationDrinkSize = 120;
+    int rehydrationDrinkSize = 300;
 
     int soakingFromSplashPotions = 300;
 

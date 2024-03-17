@@ -10,7 +10,6 @@ import com.github.thedeathlycow.scorchful.registry.*;
 import com.github.thedeathlycow.scorchful.server.ThirstCommand;
 import com.github.thedeathlycow.scorchful.temperature.AmbientTemperatureController;
 import com.github.thedeathlycow.scorchful.temperature.AttributeController;
-import com.github.thedeathlycow.scorchful.temperature.PlayerAttributeController;
 import com.github.thedeathlycow.scorchful.temperature.WetTickController;
 import com.github.thedeathlycow.scorchful.worldgen.NetherBiomeModifications;
 import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
@@ -23,7 +22,6 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.item.v1.ModifyItemAttributeModifiersCallback;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Contract;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +32,7 @@ public class Scorchful implements ModInitializer {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
 
-    public static final int CONFIG_VERSION = 2;
+    public static final int CONFIG_VERSION = 3;
 
     @Contract("_->new")
     public static Identifier id(String path) {
@@ -107,11 +105,6 @@ public class Scorchful implements ModInitializer {
         );
 
         EnvironmentControllerInitializeEvent.EVENT.register(AttributeController::new);
-        EnvironmentControllerInitializeEvent.EVENT.register(
-                EnvironmentControllerInitializeEvent.MODIFY_PHASE,
-                PlayerAttributeController::new
-        );
-
         EnvironmentControllerInitializeEvent.EVENT.register(AmbientTemperatureController::new);
         EnvironmentControllerInitializeEvent.EVENT.register(WetTickController::new);
     }

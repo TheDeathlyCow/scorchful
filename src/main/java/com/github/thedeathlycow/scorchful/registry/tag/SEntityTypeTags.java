@@ -10,6 +10,8 @@ public class SEntityTypeTags {
 
     public static final TagKey<EntityType<?>> CRIMSON_LILY_HURTS = of("crimson_lily_hurts");
 
+    public static final TagKey<EntityType<?>> DOES_NOT_SLOW_IN_SANDSTORM = of("does_not_slow_in_sandstorm");
+
     private static TagKey<EntityType<?>> of(String path) {
         return TagKey.of(RegistryKeys.ENTITY_TYPE, Scorchful.id(path));
     }
