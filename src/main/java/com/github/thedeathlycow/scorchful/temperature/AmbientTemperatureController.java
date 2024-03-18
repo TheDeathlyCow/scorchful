@@ -52,7 +52,7 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         int change = 0;
         HeatingConfig config = Scorchful.getConfig().heatingConfig;
 
-        if (entity.isOnFire() && !entity.isFireImmune() && !entity.hasStatusEffect(StatusEffects.FIRE_RESISTANCE)) {
+        if (entity.isOnFire() && !entity.isFireImmune()) {
             change += config.getOnFireWarmRate();
         }
 
