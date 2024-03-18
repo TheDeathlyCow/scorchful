@@ -14,9 +14,7 @@ public class Cooling {
         if (entity.thermoo$getTemperature() > 0 && entity.thermoo$isWet()) {
             ThirstConfig config = Scorchful.getConfig().thirstConfig;
 
-            int temperatureChange = MathHelper.floor(
-                    config.getTemperatureFromWetness() * entity.thermoo$getSoakedScale()
-            );
+            int temperatureChange = config.getTemperatureFromWetness();
             World world = entity.getWorld();
             if (world.getBiome(entity.getBlockPos()).isIn(SBiomeTags.HUMID_BIOMES)) {
                 temperatureChange = MathHelper.floor(temperatureChange * config.getHumidBiomeSweatEfficiency());
