@@ -1,0 +1,25 @@
+{
+    "condition": "minecraft:all_of",
+    "terms": [
+        {
+            "condition": "minecraft:reference",
+            "name": "scorchful:can_heat"
+        },
+        {
+            "condition": "minecraft:inverted",
+            "term": {
+                "condition": "minecraft:entity_properties",
+                "entity": "this",
+                "predicate": {
+                    "effects": {
+                        "minecraft:fire_resistance": {
+                            "duration": {
+                                "min": 1
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
