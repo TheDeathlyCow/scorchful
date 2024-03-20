@@ -39,6 +39,12 @@ public class HeatingConfig implements ConfigData {
 
     int waterBreathingDurationPerTurtleArmorPieceSeconds = 10;
 
+    int lightLevelPerHeatInNether = 4;
+
+    int blocksAboveLavaOceanPerHeatInNether = 5;
+
+    int maxHeatFromLavaOceanInNether = 3;
+
     public boolean doPassiveHeating() {
         return doPassiveHeating;
     }
@@ -101,5 +107,17 @@ public class HeatingConfig implements ConfigData {
 
     public int getWaterBreathingDurationPerTurtleArmorPieceSeconds() {
         return waterBreathingDurationPerTurtleArmorPieceSeconds;
+    }
+
+    public int getLightLevelPerHeatInNether() {
+        return lightLevelPerHeatInNether;
+    }
+
+    public int getBlocksAboveLavaOceanPerHeatInNether() {
+        return blocksAboveLavaOceanPerHeatInNether;
+    }
+
+    public int getMaxHeatFromLavaOceanInNether() {
+        return maxHeatFromLavaOceanInNether;
     }
 }

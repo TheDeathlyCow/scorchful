@@ -86,6 +86,9 @@
     "text.autoconfig.scorchful.option.heatingConfig.protectiveArmorHeatResistance": "Thermally protective armor piece heat resistance",
     "text.autoconfig.scorchful.option.heatingConfig.veryProtectiveArmorHeatResistance": "Very thermally protective armor piece heat resistance",
     "text.autoconfig.scorchful.option.heatingConfig.waterBreathingDurationPerTurtleArmorPieceSeconds": "Water breathing duration per worn piece of Turtle Armor (seconds)",
+    "text.autoconfig.scorchful.option.heatingConfig.lightLevelPerHeatInNether": "Light level per heat increase (in The Nether)",
+    "text.autoconfig.scorchful.option.heatingConfig.blocksAboveLavaOceanPerHeatInNether": "Blocks above Lava Ocean per heat increase (in The Nether)",
+    "text.autoconfig.scorchful.option.heatingConfig.maxHeatFromLavaOceanInNether": "Maximum heat from Lava Ocean (in The Nether)",
     
     "text.autoconfig.scorchful.option.thirstConfig": "Thirst Config",
     "text.autoconfig.scorchful.option.thirstConfig.temperatureFromWetness": "Temperature from Wetness",
