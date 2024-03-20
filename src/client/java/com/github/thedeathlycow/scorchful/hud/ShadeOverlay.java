@@ -21,9 +21,7 @@ public class ShadeOverlay {
             @Nullable ClientPlayerEntity player,
             BiConsumer<DrawContext, Float> renderCallback
     ) {
-
-
-        if (player != null && SunHatItem.isWearingSunHat(player)) {
+        if (player != null && !player.isUsingSpyglass() && SunHatItem.isWearingSunHat(player)) {
             ClientConfig config = Scorchful.getConfig().clientConfig;
             if (config.isSunHatShading()) {
                 renderCallback.accept(context, config.getSunHatShadeOpacity());
