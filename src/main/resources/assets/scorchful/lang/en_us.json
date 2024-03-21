@@ -79,6 +79,7 @@
     "text.autoconfig.scorchful.option.heatingConfig.scorchingBiomeHeatIncrease": "Scorching biome heat increase",
     "text.autoconfig.scorchful.option.heatingConfig.sunHatShadeTemperatureChange": "Sun Hat",
     "text.autoconfig.scorchful.option.heatingConfig.onFireWarmRate": "On fire warm rate",
+    "text.autoconfig.scorchful.option.heatingConfig.onFireWarmRateWithFireResistance": "On fire warm rate with Fire Resistance",
     "text.autoconfig.scorchful.option.heatingConfig.powderSnowCoolRate": "Powder Snow cool rate when warm",
     "text.autoconfig.scorchful.option.heatingConfig.fireballHeat": "Fireball strike heat",
     "text.autoconfig.scorchful.option.heatingConfig.defaultArmorHeatResistance": "Default armor piece heat resistance",

@@ -11,6 +11,7 @@ import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentController;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentControllerDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerChunkManager;
@@ -46,8 +47,12 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         int change = 0;
         HeatingConfig config = Scorchful.getConfig().heatingConfig;
 
-        if (entity.isOnFire() && !entity.isFireImmune()) {
-            change += config.getOnFireWarmRate();
+        if (entity.thermoo$canOverheat() && entity.isOnFire() && !entity.isFireImmune()) {
+            int onFireChange = entity.hasStatusEffect(StatusEffects.FIRE_RESISTANCE)
+                    ? config.getOnFireWarmRateWithFireResistance()
+                    : config.getOnFireWarmRate();
+
+            change += onFireChange;
         }
 
         if (entity.wasInPowderSnow && entity.thermoo$canFreeze()) {
