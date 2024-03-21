@@ -32,9 +32,7 @@ public abstract class InGameHudMixin {
         ShadeOverlay.renderShadeOverlay(
                 context,
                 client.player,
-                (ctx, opacity) -> {
-                    this.renderOverlay(ctx, ShadeOverlay.SHADE_OVERLAY, opacity);
-                }
+                (ctx, opacity) -> this.renderOverlay(ctx, ShadeOverlay.SHADE_OVERLAY, opacity)
         );
     }
 

@@ -25,6 +25,8 @@ public class HeatingConfig implements ConfigData {
 
     int onFireWarmRate = 24;
 
+    int onFireWarmRateWithFireResistance = 6;
+
     int powderSnowCoolRate = 24;
 
     int fireballHeat = 1000;
@@ -38,6 +40,12 @@ public class HeatingConfig implements ConfigData {
     double veryProtectiveArmorHeatResistance = 1.0;
 
     int waterBreathingDurationPerTurtleArmorPieceSeconds = 10;
+
+    int lightLevelPerHeatInNether = 4;
+
+    int blocksAboveLavaOceanPerHeatInNether = 5;
+
+    int maxHeatFromLavaOceanInNether = 3;
 
     public boolean doPassiveHeating() {
         return doPassiveHeating;
@@ -75,6 +83,10 @@ public class HeatingConfig implements ConfigData {
         return onFireWarmRate;
     }
 
+    public int getOnFireWarmRateWithFireResistance() {
+        return onFireWarmRateWithFireResistance;
+    }
+
     public int getPowderSnowCoolRate() {
         return powderSnowCoolRate;
     }
@@ -101,5 +113,17 @@ public class HeatingConfig implements ConfigData {
 
     public int getWaterBreathingDurationPerTurtleArmorPieceSeconds() {
         return waterBreathingDurationPerTurtleArmorPieceSeconds;
+    }
+
+    public int getLightLevelPerHeatInNether() {
+        return lightLevelPerHeatInNether;
+    }
+
+    public int getBlocksAboveLavaOceanPerHeatInNether() {
+        return blocksAboveLavaOceanPerHeatInNether;
+    }
+
+    public int getMaxHeatFromLavaOceanInNether() {
+        return maxHeatFromLavaOceanInNether;
     }
 }

@@ -23,11 +23,6 @@ import net.minecraft.world.dimension.DimensionType;
 
 public class AmbientTemperatureController extends EnvironmentControllerDecorator {
 
-
-    private static final int BLOCK_LIGHT_DIVISOR = 4;
-    private static final int HEAT_HEIGHT_SLOPE = -5;
-    private static final int MAX_HEAT_FROM_HEIGHT = 3;
-
     private static final int SKY_LIGHT_BELOW_FOR_SHADE = 2;
 
     private static final int SHADE_COOLING = 1;
@@ -52,8 +47,12 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         int change = 0;
         HeatingConfig config = Scorchful.getConfig().heatingConfig;
 
-        if (entity.isOnFire() && !entity.isFireImmune() && !entity.hasStatusEffect(StatusEffects.FIRE_RESISTANCE)) {
-            change += config.getOnFireWarmRate();
+        if (entity.thermoo$canOverheat() && entity.isOnFire() && !entity.isFireImmune()) {
+            int onFireChange = entity.hasStatusEffect(StatusEffects.FIRE_RESISTANCE)
+                    ? config.getOnFireWarmRateWithFireResistance()
+                    : config.getOnFireWarmRate();
+
+            change += onFireChange;
         }
 
         if (entity.wasInPowderSnow && entity.thermoo$canFreeze()) {
@@ -125,11 +124,14 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
             distanceToLavaLevel = Math.max(height - seaLevel, 0);
         }
 
+        HeatingConfig config = Scorchful.getConfig().heatingConfig;
+        int maxHeatFromHeight = config.getMaxHeatFromLavaOceanInNether();
+
         return Math.max(
-                blockLight / BLOCK_LIGHT_DIVISOR,
+                blockLight / config.getLightLevelPerHeatInNether(),
                 distanceToLavaLevel != 0
-                        ? ((distanceToLavaLevel / HEAT_HEIGHT_SLOPE) + MAX_HEAT_FROM_HEIGHT)
-                        : MAX_HEAT_FROM_HEIGHT
+                        ? ((distanceToLavaLevel / -config.getBlocksAboveLavaOceanPerHeatInNether()) + maxHeatFromHeight)
+                        : maxHeatFromHeight
         );
     }
 

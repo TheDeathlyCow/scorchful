@@ -79,24 +79,12 @@ public class PlayerComponent implements Component, ServerTickingComponent {
 
     private void tickWater(PlayerEntity player) {
         ScorchfulConfig config = Scorchful.getConfig();
-        ThirstConfig thirstConfig = config.thirstConfig;
 
         // sweating: move body water to wetness
         if (ScorchfulIntegrations.isModLoaded(ScorchfulIntegrations.DEHYDRATION_ID)) {
             this.tickSweatDehydration(config.integrationConfig, player);
         } else {
             this.tickSweatNormal(player);
-        }
-
-        // cooling: move wetness to temperature
-        if (player.thermoo$isWet()) {
-            int temperatureChange = MathHelper.floor(thirstConfig.getTemperatureFromWetness() * player.thermoo$getSoakedScale());
-            World world = player.getWorld();
-            if (world.getBiome(player.getBlockPos()).isIn(SBiomeTags.HUMID_BIOMES)) {
-                temperatureChange = MathHelper.floor(temperatureChange * thirstConfig.getHumidBiomeSweatEfficiency());
-            }
-
-            player.thermoo$addTemperature(temperatureChange);
         }
     }
 

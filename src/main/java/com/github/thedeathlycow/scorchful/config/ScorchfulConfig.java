@@ -10,6 +10,9 @@ import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
 public class ScorchfulConfig extends PartitioningSerializer.GlobalData {
 
     @ConfigEntry.Gui.CollapsibleObject
+    public UpdateConfig updateConfig = new UpdateConfig();
+
+    @ConfigEntry.Gui.CollapsibleObject
     public ClientConfig clientConfig = new ClientConfig();
 
     @ConfigEntry.Gui.CollapsibleObject
@@ -23,9 +26,6 @@ public class ScorchfulConfig extends PartitioningSerializer.GlobalData {
 
     @ConfigEntry.Gui.CollapsibleObject
     public ModIntegrationConfig integrationConfig = new ModIntegrationConfig();
-
-    @ConfigEntry.Gui.CollapsibleObject
-    public UpdateConfig updateConfig = new UpdateConfig();
 
     public static void updateConfig(ConfigHolder<ScorchfulConfig> configHolder) {
         UpdateConfig config = configHolder.getConfig().updateConfig;

@@ -32,7 +32,7 @@ public class Scorchful implements ModInitializer {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
 
-    public static final int CONFIG_VERSION = 3;
+    public static final int CONFIG_VERSION = 4;
 
     @Contract("_->new")
     public static Identifier id(String path) {
