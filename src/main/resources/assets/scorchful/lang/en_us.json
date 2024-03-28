@@ -104,6 +104,9 @@
     "text.autoconfig.scorchful.option.thirstConfig.humidBiomeSweatEfficiency": "Humid biome sweating efficiency",
     "text.autoconfig.scorchful.option.thirstConfig.maxRehydrationEfficiency": "Maximum Rehydration Enchantment efficiency",
     
+    "text.autoconfig.scorchful.option.combatConfig": "Combat Config",
+    "text.autoconfig.scorchful.option.combatConfig.fireBallThrownType": "Fire Charge thrown type",
+    
     "text.autoconfig.scorchful.option.weatherConfig": "Weather Config",
     "text.autoconfig.scorchful.option.weatherConfig.doSandPileAccumulation": "Do Sand Pile accumulation",
     "text.autoconfig.scorchful.option.weatherConfig.sandPileAccumulationHeight": "Sand Pile accumulation height",

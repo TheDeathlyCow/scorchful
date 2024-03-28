@@ -22,6 +22,9 @@ public class ScorchfulConfig extends PartitioningSerializer.GlobalData {
     public ThirstConfig thirstConfig = new ThirstConfig();
 
     @ConfigEntry.Gui.CollapsibleObject
+    public CombatConfig combatConfig = new CombatConfig();
+
+    @ConfigEntry.Gui.CollapsibleObject
     public WeatherConfig weatherConfig = new WeatherConfig();
 
     @ConfigEntry.Gui.CollapsibleObject
