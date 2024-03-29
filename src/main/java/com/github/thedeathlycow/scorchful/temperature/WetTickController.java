@@ -78,7 +78,7 @@ public class WetTickController extends EnvironmentControllerDecorator {
         int rehydrationLevel = SEnchantmentHelper.getTotalRehydrationForPlayer(player);
         PlayerComponent component = ScorchfulComponents.PLAYER.get(player);
         if (rehydrationLevel > 0) {
-            boolean dehydrationLoaded = ScorchfulIntegrations.isModLoaded(ScorchfulIntegrations.DEHYDRATION_ID);
+            boolean dehydrationLoaded = ScorchfulIntegrations.isDehydrationLoaded();
             if (wetChange < 0 && player.getRandom().nextBoolean()) {
                 component.tickRehydrationWaterRecapture(config, dehydrationLoaded);
             }

@@ -22,7 +22,7 @@ public class QuenchingFoods {
     }
 
     public static void appendTooltip(ItemStack stack, List<Text> tooltip, @Nullable QuenchingLevel level) {
-        if (level != null && !ScorchfulIntegrations.isThirstModLoaded()) {
+        if (level != null && !ScorchfulIntegrations.isDehydrationLoaded()) {
             tooltip.add(level.tooltipText);
         }
     }
@@ -33,7 +33,7 @@ public class QuenchingFoods {
 
     public static void onConsume(LivingEntity user, ItemStack stack, @Nullable QuenchingLevel level) {
 
-        if (ScorchfulIntegrations.isThirstModLoaded()) {
+        if (ScorchfulIntegrations.isDehydrationLoaded()) {
             return;
         }
 

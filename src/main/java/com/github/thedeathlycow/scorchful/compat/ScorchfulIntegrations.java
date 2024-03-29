@@ -20,7 +20,7 @@ public class ScorchfulIntegrations {
         return isModLoaded(COLORFUL_HEARTS_ID) || isModLoaded(OVERFLOWING_BARS_ID);
     }
 
-    public static boolean isThirstModLoaded() {
+    public static boolean isDehydrationLoaded() {
         return isModLoaded(DEHYDRATION_ID);
     }
 

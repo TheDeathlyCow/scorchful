@@ -77,7 +77,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         ScorchfulConfig config = Scorchful.getConfig();
 
         // sweating: move body water to wetness
-        if (ScorchfulIntegrations.isModLoaded(ScorchfulIntegrations.DEHYDRATION_ID)) {
+        if (ScorchfulIntegrations.isDehydrationLoaded()) {
             this.tickSweatDehydration(config.integrationConfig.dehydrationConfig, player);
         } else {
             this.tickSweatNormal(player);
