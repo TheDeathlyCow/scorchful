@@ -28,8 +28,7 @@ public class ScorchfulConfig extends PartitioningSerializer.GlobalData {
     public ThirstConfig thirstConfig = new ThirstConfig();
 
     @ConfigEntry.Gui.CollapsibleObject
-    @ConfigEntry.Gui.Tooltip
-    public DehydrationConfig dehydrationConfig = new DehydrationConfig();
+    public ModIntegrationConfig integrationConfig = new ModIntegrationConfig();
 
     public static void updateConfig(ConfigHolder<ScorchfulConfig> configHolder) {
         UpdateConfig config = configHolder.getConfig().updateConfig;

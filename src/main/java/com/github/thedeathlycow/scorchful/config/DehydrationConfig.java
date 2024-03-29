@@ -4,12 +4,13 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 
+/**
+ * Config for changes to thirst system when using Dehydration
+ */
 @Config(name = Scorchful.MODID + ".dehydrationConfig")
 public class DehydrationConfig implements ConfigData {
 
     /**
-     * Requires Dehydration
-     * <p>
      * A direct equivalent would be set this to 8/30:
      * 4 dehydration points reduces water level by 1, and
      * water level is out of 20 * 4 = 80, while waterDrunk is out of 300, so 1 water level is 2/30 of waterDrunk
@@ -20,23 +21,15 @@ public class DehydrationConfig implements ConfigData {
     float dehydrationConsumedBySweat = 0.5f / 30f;
 
     /**
-     * Requires Dehydration
-     * <p>
      * Don't lose water to sweat when below this level.
      */
     int minWaterLevelForSweat = 16;
 
-    /**
-     * Requires Dehydration
-     */
     int rehydrationWaterAddedPerLevel = 1;
 
-    /**
-     * Requires Dehydration
-     */
-    int minWaterLevelToRehydrate = 14;
+    int rehydrationDrinkSize = 1000;
 
-    int rehydrationDrinkSizeDehydration = 1000;
+    int temperaturePerWetness = 3;
 
     public float getDehydrationConsumedBySweat() {
         return dehydrationConsumedBySweat;
@@ -50,11 +43,11 @@ public class DehydrationConfig implements ConfigData {
         return rehydrationWaterAddedPerLevel;
     }
 
-    public int getMinWaterLevelToRehydrate() {
-        return minWaterLevelToRehydrate;
+    public int getRehydrationDrinkSize() {
+        return rehydrationDrinkSize;
     }
 
-    public int getRehydrationDrinkSizeDehydration() {
-        return rehydrationDrinkSizeDehydration;
+    public int getTemperaturePerWetness() {
+        return temperaturePerWetness;
     }
 }

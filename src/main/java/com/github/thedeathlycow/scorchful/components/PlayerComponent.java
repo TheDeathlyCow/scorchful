@@ -78,7 +78,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
 
         // sweating: move body water to wetness
         if (ScorchfulIntegrations.isModLoaded(ScorchfulIntegrations.DEHYDRATION_ID)) {
-            this.tickSweatDehydration(config.dehydrationConfig, player);
+            this.tickSweatDehydration(config.integrationConfig.dehydrationConfig, player);
         } else {
             this.tickSweatNormal(player);
         }
@@ -148,12 +148,13 @@ public class PlayerComponent implements Component, ServerTickingComponent {
     private void rehydrateWithDehydration(ScorchfulConfig config, int rehydrationLevel) {
         ThirstManager thirstManager = ((ThirstManagerAccess) this.provider).getThirstManager();
 
+        DehydrationConfig dehydrationConfig = config.integrationConfig.dehydrationConfig;
         // dont drink if dont have to - prevents rehydration spam
-        if (thirstManager.getThirstLevel() > config.dehydrationConfig.getMinWaterLevelToRehydrate()) {
+        if (thirstManager.getThirstLevel() > dehydrationConfig.getMinWaterLevelForSweat()) {
             return;
         }
 
-        int waterToAdd = rehydrationLevel * config.dehydrationConfig.getRehydrationWaterAddedPerLevel();
+        int waterToAdd = rehydrationLevel * dehydrationConfig.getRehydrationWaterAddedPerLevel();
 
         if (waterToAdd > 0 && this.provider.getWorld() instanceof ServerWorld serverWorld) {
             thirstManager.add(waterToAdd);
@@ -195,6 +196,6 @@ public class PlayerComponent implements Component, ServerTickingComponent {
     private static int getRehydrationDrinkSize(ScorchfulConfig config, boolean dehydrationLoaded) {
         return dehydrationLoaded
                 ? config.thirstConfig.getRehydrationDrinkSize()
-                : config.dehydrationConfig.getRehydrationDrinkSizeDehydration();
+                : config.integrationConfig.dehydrationConfig.getRehydrationDrinkSize();
     }
 }

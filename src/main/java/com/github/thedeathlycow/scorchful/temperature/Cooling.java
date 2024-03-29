@@ -4,6 +4,7 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.ThirstConfig;
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
+import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -20,7 +21,7 @@ public class Cooling {
                 temperatureChange = MathHelper.floor(temperatureChange * config.getHumidBiomeSweatEfficiency());
             }
 
-            entity.thermoo$addTemperature(temperatureChange);
+            entity.thermoo$addTemperature(temperatureChange, HeatingModes.PASSIVE);
         }
     }
 
