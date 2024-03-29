@@ -115,6 +115,7 @@
     "text.autoconfig.scorchful.option.integrationConfig": "Mod Integrations Config",
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConsumedBySweat": "Dehydration points consumed by sweat per tick (requires Dehydration)",
     "text.autoconfig.scorchful.option.integrationConfig.minWaterLevelForSweat": "Minimum water level required for sweating (requires Dehydration)",
+    "text.autoconfig.scorchful.option.integrationConfig.maxThirstAddedByRehydration": "Maximum thirst added by Rehydration (requires Dehydration)",
     
     "text.autoconfig.scorchful.option.updateConfig": "Update Config",
     "text.autoconfig.scorchful.option.updateConfig.currentConfigVersion": "Current config version",
