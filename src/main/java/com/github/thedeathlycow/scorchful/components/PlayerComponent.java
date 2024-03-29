@@ -4,10 +4,8 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.config.ModIntegrationConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.scorchful.config.ThirstConfig;
 import com.github.thedeathlycow.scorchful.enchantment.SEnchantmentHelper;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
-import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
 import net.dehydration.access.ThirstManagerAccess;
@@ -19,7 +17,6 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 
 public class PlayerComponent implements Component, ServerTickingComponent {
 
@@ -100,7 +97,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         if (thirstManager.getThirstLevel() > config.getMinWaterLevelForSweat()
                 && player.thermoo$getTemperature() > 0) {
             thirstManager.addDehydration(config.getDehydrationConsumedBySweat());
-            player.thermoo$setWetTicks(player.thermoo$getWetTicks() + 1);
+            player.thermoo$addWetTicks(2);
         }
     }
 
@@ -121,7 +118,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         int rehydrationCapacity = config.thirstConfig.getRehydrationDrinkSize();
         this.rehydrationDrink = Math.min(this.rehydrationDrink + 1, rehydrationCapacity);
 
-        if (rehydrationDrink == rehydrationCapacity && this.waterDrunk <= 1) {
+        if (rehydrationDrink == rehydrationCapacity) {
             if (ScorchfulIntegrations.isModLoaded(ScorchfulIntegrations.DEHYDRATION_ID)) {
                 this.rehydrateWithDehydration(config, rehydrationLevel);
             } else {
@@ -131,6 +128,10 @@ public class PlayerComponent implements Component, ServerTickingComponent {
     }
 
     private void rehydrate(ScorchfulConfig config, int rehydrationLevel) {
+        // dont drink if dont have to - prevents rehydration spam
+        if (this.waterDrunk > 1) {
+            return;
+        }
 
         float efficiency = getRehydrationEfficiency(
                 rehydrationLevel,
@@ -138,15 +139,21 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         );
         int drinkToAdd = MathHelper.floor(this.rehydrationDrink * efficiency);
 
-        this.rehydrationDrink = 0;
-
         if (drinkToAdd > 0 && this.provider.getWorld() instanceof ServerWorld serverWorld) {
             this.drink(drinkToAdd);
             this.playRehydrationEffects(serverWorld);
+            this.rehydrationDrink = 0;
         }
     }
 
     private void rehydrateWithDehydration(ScorchfulConfig config, int rehydrationLevel) {
+        ThirstManager thirstManager = ((ThirstManagerAccess) this.provider).getThirstManager();
+
+        // dont drink if dont have to - prevents rehydration spam
+        if (thirstManager.getThirstLevel() > config.integrationConfig.getMinWaterLevelToRehydrate()) {
+            return;
+        }
+
         float efficiency = getRehydrationEfficiency(
                 rehydrationLevel,
                 0f, config.thirstConfig.getMaxRehydrationEfficiency()
@@ -158,9 +165,9 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         );
 
         if (waterToAdd > 0 && this.provider.getWorld() instanceof ServerWorld serverWorld) {
-            ThirstManager thirstManager = ((ThirstManagerAccess) this.provider).getThirstManager();
             thirstManager.add(waterToAdd);
             this.playRehydrationEffects(serverWorld);
+            this.rehydrationDrink = 0;
         }
     }
 
