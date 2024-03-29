@@ -154,9 +154,10 @@ public class PlayerComponent implements Component, ServerTickingComponent {
             return;
         }
 
-        int waterToAdd = rehydrationLevel * dehydrationConfig.getRehydrationWaterAddedPerLevel();
+        int waterToAdd = this.provider.getRandom()
+                .nextBetween(0, rehydrationLevel * dehydrationConfig.getRehydrationWaterAddedPerLevel());
 
-        if (waterToAdd > 0 && this.provider.getWorld() instanceof ServerWorld serverWorld) {
+        if (this.provider.getWorld() instanceof ServerWorld serverWorld) {
             thirstManager.add(waterToAdd);
             this.playRehydrationEffects(serverWorld);
             this.resetRehydration();
@@ -195,7 +196,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
 
     private static int getRehydrationDrinkSize(ScorchfulConfig config, boolean dehydrationLoaded) {
         return dehydrationLoaded
-                ? config.thirstConfig.getRehydrationDrinkSize()
-                : config.integrationConfig.dehydrationConfig.getRehydrationDrinkSize();
+                ? config.integrationConfig.dehydrationConfig.getRehydrationDrinkSize()
+                : config.thirstConfig.getRehydrationDrinkSize();
     }
 }

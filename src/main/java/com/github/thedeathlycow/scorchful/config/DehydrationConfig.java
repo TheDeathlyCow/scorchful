@@ -18,7 +18,7 @@ public class DehydrationConfig implements ConfigData {
      * However, due to increased effects of water provided by Dehydration - this drains too fast. So, it is set to a
      * quarter of the direct equivalent draining speed.
      */
-    float dehydrationConsumedBySweat = 0.5f / 30f;
+    float dehydrationConsumedBySweat = 1f / 30f;
 
     /**
      * Don't lose water to sweat when below this level.
@@ -27,9 +27,9 @@ public class DehydrationConfig implements ConfigData {
 
     int rehydrationWaterAddedPerLevel = 1;
 
-    int rehydrationDrinkSize = 1000;
+    int rehydrationDrinkSize = 300;
 
-    int temperaturePerWetness = 3;
+    int temperatureFromWetness = -4;
 
     public float getDehydrationConsumedBySweat() {
         return dehydrationConsumedBySweat;
@@ -47,7 +47,7 @@ public class DehydrationConfig implements ConfigData {
         return rehydrationDrinkSize;
     }
 
-    public int getTemperaturePerWetness() {
-        return temperaturePerWetness;
+    public int getTemperatureFromWetness() {
+        return temperatureFromWetness;
     }
 }

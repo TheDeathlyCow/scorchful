@@ -120,7 +120,7 @@
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.minWaterLevelForSweat": "Minimum water level required for sweating",
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.rehydrationWaterAddedPerLevel": "Water added per level of Rehydration",
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.rehydrationDrinkSize": "Rehydration drink size override",
-    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.temperaturePerWetness": "Temperature from Wetness override",
+    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.temperatureFromWetness": "Temperature from Wetness override",
     
     "text.autoconfig.scorchful.option.updateConfig": "Update Config",
     "text.autoconfig.scorchful.option.updateConfig.currentConfigVersion": "Current config version",
