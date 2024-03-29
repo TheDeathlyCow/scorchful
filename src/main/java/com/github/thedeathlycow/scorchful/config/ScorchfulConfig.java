@@ -19,16 +19,17 @@ public class ScorchfulConfig extends PartitioningSerializer.GlobalData {
     public HeatingConfig heatingConfig = new HeatingConfig();
 
     @ConfigEntry.Gui.CollapsibleObject
-    public ThirstConfig thirstConfig = new ThirstConfig();
-
-    @ConfigEntry.Gui.CollapsibleObject
     public CombatConfig combatConfig = new CombatConfig();
 
     @ConfigEntry.Gui.CollapsibleObject
     public WeatherConfig weatherConfig = new WeatherConfig();
 
     @ConfigEntry.Gui.CollapsibleObject
-    public ModIntegrationConfig integrationConfig = new ModIntegrationConfig();
+    public ThirstConfig thirstConfig = new ThirstConfig();
+
+    @ConfigEntry.Gui.CollapsibleObject
+    @ConfigEntry.Gui.Tooltip
+    public DehydrationConfig dehydrationConfig = new DehydrationConfig();
 
     public static void updateConfig(ConfigHolder<ScorchfulConfig> configHolder) {
         UpdateConfig config = configHolder.getConfig().updateConfig;

@@ -2,9 +2,8 @@ package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
-import com.github.thedeathlycow.scorchful.config.ModIntegrationConfig;
+import com.github.thedeathlycow.scorchful.config.DehydrationConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.scorchful.enchantment.SEnchantmentHelper;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
@@ -79,7 +78,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
 
         // sweating: move body water to wetness
         if (ScorchfulIntegrations.isModLoaded(ScorchfulIntegrations.DEHYDRATION_ID)) {
-            this.tickSweatDehydration(config.integrationConfig, player);
+            this.tickSweatDehydration(config.dehydrationConfig, player);
         } else {
             this.tickSweatNormal(player);
         }
@@ -92,7 +91,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         }
     }
 
-    private void tickSweatDehydration(ModIntegrationConfig config, PlayerEntity player) {
+    private void tickSweatDehydration(DehydrationConfig config, PlayerEntity player) {
         ThirstManager thirstManager = ((ThirstManagerAccess) player).getThirstManager();
         if (thirstManager.getThirstLevel() > config.getMinWaterLevelForSweat()
                 && player.thermoo$getTemperature() > 0) {
@@ -101,30 +100,30 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         }
     }
 
-    public void tickRehydration(ScorchfulConfig config) {
-        int rehydrationLevel = SEnchantmentHelper.getTotalRehydrationForPlayer(this.provider);
+    // REHYDRATION EXPLANATION
+    // The Rehydration enchantment builds up a drink whenever the player loses wetness (not body water) to cooling
+    // That drink is the same size as a hydrating drink.
+    // When the drink is full, the player is given back all the water in the drink as *body* water.
+    // However, some of that water is lost, based on the total level of Rehydration.
 
-        if (rehydrationLevel == 0) {
-            this.rehydrationDrink = 0;
-            return;
-        }
-
-        // REHYDRATION EXPLANATION
-        // The Rehydration enchantment builds up a drink whenever the player loses wetness (not body water) to cooling
-        // That drink is the same size as a hydrating drink.
-        // When the drink is full, the player is given back all the water in the drink as *body* water.
-        // However, some of that water is lost, based on the total level of Rehydration.
-
-        int rehydrationCapacity = config.thirstConfig.getRehydrationDrinkSize();
+    public void tickRehydrationWaterRecapture(ScorchfulConfig config, boolean dehydrationLoaded) {
+        int rehydrationCapacity = getRehydrationDrinkSize(config, dehydrationLoaded);
         this.rehydrationDrink = Math.min(this.rehydrationDrink + 1, rehydrationCapacity);
+    }
 
-        if (rehydrationDrink == rehydrationCapacity) {
-            if (ScorchfulIntegrations.isModLoaded(ScorchfulIntegrations.DEHYDRATION_ID)) {
+    public void tickRehydration(ScorchfulConfig config, int rehydrationLevel, boolean dehydrationLoaded) {
+        int rehydrationCapacity = getRehydrationDrinkSize(config, dehydrationLoaded);
+        if (rehydrationDrink >= rehydrationCapacity) {
+            if (dehydrationLoaded) {
                 this.rehydrateWithDehydration(config, rehydrationLevel);
             } else {
                 this.rehydrate(config, rehydrationLevel);
             }
         }
+    }
+
+    public void resetRehydration() {
+        this.rehydrationDrink = 0;
     }
 
     private void rehydrate(ScorchfulConfig config, int rehydrationLevel) {
@@ -142,7 +141,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         if (drinkToAdd > 0 && this.provider.getWorld() instanceof ServerWorld serverWorld) {
             this.drink(drinkToAdd);
             this.playRehydrationEffects(serverWorld);
-            this.rehydrationDrink = 0;
+            this.resetRehydration();
         }
     }
 
@@ -150,24 +149,16 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         ThirstManager thirstManager = ((ThirstManagerAccess) this.provider).getThirstManager();
 
         // dont drink if dont have to - prevents rehydration spam
-        if (thirstManager.getThirstLevel() > config.integrationConfig.getMinWaterLevelToRehydrate()) {
+        if (thirstManager.getThirstLevel() > config.dehydrationConfig.getMinWaterLevelToRehydrate()) {
             return;
         }
 
-        float efficiency = getRehydrationEfficiency(
-                rehydrationLevel,
-                0f, config.thirstConfig.getMaxRehydrationEfficiency()
-        );
-
-        int waterToAdd = MathHelper.lerp(
-                efficiency,
-                0, config.integrationConfig.getMaxThirstAddedByRehydration()
-        );
+        int waterToAdd = rehydrationLevel * config.dehydrationConfig.getRehydrationWaterAddedPerLevel();
 
         if (waterToAdd > 0 && this.provider.getWorld() instanceof ServerWorld serverWorld) {
             thirstManager.add(waterToAdd);
             this.playRehydrationEffects(serverWorld);
-            this.rehydrationDrink = 0;
+            this.resetRehydration();
         }
     }
 
@@ -199,5 +190,11 @@ public class PlayerComponent implements Component, ServerTickingComponent {
 
     private static float getRehydrationEfficiency(int rehydrationLevel, float min, float max) {
         return MathHelper.lerp(rehydrationLevel / 4f, min, max);
+    }
+
+    private static int getRehydrationDrinkSize(ScorchfulConfig config, boolean dehydrationLoaded) {
+        return dehydrationLoaded
+                ? config.thirstConfig.getRehydrationDrinkSize()
+                : config.dehydrationConfig.getRehydrationDrinkSizeDehydration();
     }
 }

@@ -112,11 +112,11 @@
     "text.autoconfig.scorchful.option.weatherConfig.sandPileAccumulationHeight": "Sand Pile accumulation height",
     "text.autoconfig.scorchful.option.weatherConfig.sandstormSlownessAmountPercent": "Sandstorm Slowness amount (percent from -1 to +1)",
     
-    "text.autoconfig.scorchful.option.integrationConfig": "Mod Integrations Config",
-    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConsumedBySweat": "Dehydration points consumed by sweat per tick (requires Dehydration)",
-    "text.autoconfig.scorchful.option.integrationConfig.minWaterLevelForSweat": "Minimum water level required for sweating (requires Dehydration)",
-    "text.autoconfig.scorchful.option.integrationConfig.maxThirstAddedByRehydration": "Maximum thirst added by Rehydration (requires Dehydration)",
-    "text.autoconfig.scorchful.option.integrationConfig.minWaterLevelToRehydrate": "Minimum water level to rehydrate (requires Dehydration)",
+    "text.autoconfig.scorchful.option.dehydrationConfig": "Dehydration Config",
+    "text.autoconfig.scorchful.option.dehydrationConfig.dehydrationConsumedBySweat": "Dehydration points consumed by sweat per tick (requires Dehydration)",
+    "text.autoconfig.scorchful.option.dehydrationConfig.minWaterLevelForSweat": "Minimum water level required for sweating (requires Dehydration)",
+    "text.autoconfig.scorchful.option.dehydrationConfig.rehydrationWaterAddedPerLevel": "Water added per level of Rehydration (requires Dehydration)",
+    "text.autoconfig.scorchful.option.dehydrationConfig.minWaterLevelToRehydrate": "Minimum water level to rehydrate (requires Dehydration)",
     
     "text.autoconfig.scorchful.option.updateConfig": "Update Config",
     "text.autoconfig.scorchful.option.updateConfig.currentConfigVersion": "Current config version",

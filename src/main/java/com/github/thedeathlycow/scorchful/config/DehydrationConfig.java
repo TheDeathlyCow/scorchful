@@ -4,8 +4,8 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 
-@Config(name = Scorchful.MODID + ".modIntegrationConfig")
-public class ModIntegrationConfig implements ConfigData {
+@Config(name = Scorchful.MODID + ".dehydrationConfig")
+public class DehydrationConfig implements ConfigData {
 
     /**
      * Requires Dehydration
@@ -17,7 +17,7 @@ public class ModIntegrationConfig implements ConfigData {
      * However, due to increased effects of water provided by Dehydration - this drains too fast. So, it is set to a
      * quarter of the direct equivalent draining speed.
      */
-    float dehydrationConsumedBySweat = 1f / 30f;
+    float dehydrationConsumedBySweat = 0.5f / 30f;
 
     /**
      * Requires Dehydration
@@ -29,12 +29,14 @@ public class ModIntegrationConfig implements ConfigData {
     /**
      * Requires Dehydration
      */
-    int maxThirstAddedByRehydration = 4;
+    int rehydrationWaterAddedPerLevel = 1;
 
     /**
      * Requires Dehydration
      */
-    int minWaterLevelToRehydrate = 10;
+    int minWaterLevelToRehydrate = 14;
+
+    int rehydrationDrinkSizeDehydration = 1000;
 
     public float getDehydrationConsumedBySweat() {
         return dehydrationConsumedBySweat;
@@ -44,11 +46,15 @@ public class ModIntegrationConfig implements ConfigData {
         return minWaterLevelForSweat;
     }
 
-    public int getMaxThirstAddedByRehydration() {
-        return maxThirstAddedByRehydration;
+    public int getRehydrationWaterAddedPerLevel() {
+        return rehydrationWaterAddedPerLevel;
     }
 
     public int getMinWaterLevelToRehydrate() {
         return minWaterLevelToRehydrate;
+    }
+
+    public int getRehydrationDrinkSizeDehydration() {
+        return rehydrationDrinkSizeDehydration;
     }
 }
