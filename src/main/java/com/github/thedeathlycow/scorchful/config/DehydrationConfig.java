@@ -29,7 +29,7 @@ public class DehydrationConfig implements ConfigData {
 
     int rehydrationDrinkSize = 300;
 
-    int temperatureFromWetness = -4;
+    int temperatureFromWetness = -5;
 
     public float getDehydrationConsumedBySweat() {
         return dehydrationConsumedBySweat;
