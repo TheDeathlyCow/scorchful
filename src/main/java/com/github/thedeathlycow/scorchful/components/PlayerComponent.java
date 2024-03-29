@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 
 public class PlayerComponent implements Component, ServerTickingComponent {
 
-    public static final int MAX_WATER = 600;
+    public static final int MAX_WATER = 300;
 
     private static final String WATER_KEY = "body_water";
 
@@ -104,7 +104,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         }
     }
 
-    public void tickRehydration(ThirstConfig config) {
+    public void tickRehydration(ScorchfulConfig config) {
         int rehydrationLevel = SEnchantmentHelper.getTotalRehydrationForPlayer(this.provider);
 
         if (rehydrationLevel == 0) {
@@ -118,19 +118,23 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         // When the drink is full, the player is given back all the water in the drink as *body* water.
         // However, some of that water is lost, based on the total level of Rehydration.
 
-        int rehydrationCapacity = config.getRehydrationDrinkSize();
+        int rehydrationCapacity = config.thirstConfig.getRehydrationDrinkSize();
         this.rehydrationDrink = Math.min(this.rehydrationDrink + 1, rehydrationCapacity);
 
         if (rehydrationDrink == rehydrationCapacity && this.waterDrunk <= 1) {
-            this.rehydrate(config, rehydrationLevel);
+            if (ScorchfulIntegrations.isModLoaded(ScorchfulIntegrations.DEHYDRATION_ID)) {
+                this.rehydrateWithDehydration(config, rehydrationLevel);
+            } else {
+                this.rehydrate(config, rehydrationLevel);
+            }
         }
     }
 
-    private void rehydrate(ThirstConfig config, int rehydrationLevel) {
+    private void rehydrate(ScorchfulConfig config, int rehydrationLevel) {
 
         float efficiency = getRehydrationEfficiency(
                 rehydrationLevel,
-                0f, config.getMaxRehydrationEfficiency()
+                0f, config.thirstConfig.getMaxRehydrationEfficiency()
         );
         int drinkToAdd = MathHelper.floor(this.rehydrationDrink * efficiency);
 
@@ -138,6 +142,24 @@ public class PlayerComponent implements Component, ServerTickingComponent {
 
         if (drinkToAdd > 0 && this.provider.getWorld() instanceof ServerWorld serverWorld) {
             this.drink(drinkToAdd);
+            this.playRehydrationEffects(serverWorld);
+        }
+    }
+
+    private void rehydrateWithDehydration(ScorchfulConfig config, int rehydrationLevel) {
+        float efficiency = getRehydrationEfficiency(
+                rehydrationLevel,
+                0f, config.thirstConfig.getMaxRehydrationEfficiency()
+        );
+
+        int waterToAdd = MathHelper.lerp(
+                efficiency,
+                0, config.integrationConfig.getMaxThirstAddedByRehydration()
+        );
+
+        if (waterToAdd > 0 && this.provider.getWorld() instanceof ServerWorld serverWorld) {
+            ThirstManager thirstManager = ((ThirstManagerAccess) this.provider).getThirstManager();
+            thirstManager.add(waterToAdd);
             this.playRehydrationEffects(serverWorld);
         }
     }
