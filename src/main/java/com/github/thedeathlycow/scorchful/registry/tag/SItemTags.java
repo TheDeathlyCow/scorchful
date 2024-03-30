@@ -13,6 +13,8 @@ public class SItemTags {
 
     public static final TagKey<Item> IS_HYDRATING = of("is_hydrating");
 
+    public static final TagKey<Item> IS_PARCHING = of("is_parching");
+
     public static final TagKey<Item> HEAT_NEUTRAL = of("heat_resistance/neutral");
 
     public static final TagKey<Item> HEAT_PROTECTIVE = of("heat_resistance/protective");

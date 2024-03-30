@@ -2,12 +2,9 @@ package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
-import com.github.thedeathlycow.scorchful.config.ModIntegrationConfig;
+import com.github.thedeathlycow.scorchful.config.DehydrationConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.scorchful.config.ThirstConfig;
-import com.github.thedeathlycow.scorchful.enchantment.SEnchantmentHelper;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
-import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
 import net.dehydration.access.ThirstManagerAccess;
@@ -19,11 +16,10 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 
 public class PlayerComponent implements Component, ServerTickingComponent {
 
-    public static final int MAX_WATER = 600;
+    public static final int MAX_WATER = 300;
 
     private static final String WATER_KEY = "body_water";
 
@@ -81,8 +77,8 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         ScorchfulConfig config = Scorchful.getConfig();
 
         // sweating: move body water to wetness
-        if (ScorchfulIntegrations.isModLoaded(ScorchfulIntegrations.DEHYDRATION_ID)) {
-            this.tickSweatDehydration(config.integrationConfig, player);
+        if (ScorchfulIntegrations.isDehydrationLoaded()) {
+            this.tickSweatDehydration(config.integrationConfig.dehydrationConfig, player);
         } else {
             this.tickSweatNormal(player);
         }
@@ -95,50 +91,76 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         }
     }
 
-    private void tickSweatDehydration(ModIntegrationConfig config, PlayerEntity player) {
+    private void tickSweatDehydration(DehydrationConfig config, PlayerEntity player) {
         ThirstManager thirstManager = ((ThirstManagerAccess) player).getThirstManager();
         if (thirstManager.getThirstLevel() > config.getMinWaterLevelForSweat()
                 && player.thermoo$getTemperature() > 0) {
             thirstManager.addDehydration(config.getDehydrationConsumedBySweat());
-            player.thermoo$setWetTicks(player.thermoo$getWetTicks() + 1);
+            player.thermoo$addWetTicks(2);
         }
     }
 
-    public void tickRehydration(ThirstConfig config) {
-        int rehydrationLevel = SEnchantmentHelper.getTotalRehydrationForPlayer(this.provider);
+    // REHYDRATION EXPLANATION
+    // The Rehydration enchantment builds up a drink whenever the player loses wetness (not body water) to cooling
+    // That drink is the same size as a hydrating drink.
+    // When the drink is full, the player is given back all the water in the drink as *body* water.
+    // However, some of that water is lost, based on the total level of Rehydration.
 
-        if (rehydrationLevel == 0) {
-            this.rehydrationDrink = 0;
+    public void tickRehydrationWaterRecapture(ScorchfulConfig config, boolean dehydrationLoaded) {
+        int rehydrationCapacity = config.getRehydrationDrinkSize(dehydrationLoaded);
+        this.rehydrationDrink = Math.min(this.rehydrationDrink + 1, rehydrationCapacity);
+    }
+
+    public void tickRehydration(ScorchfulConfig config, int rehydrationLevel, boolean dehydrationLoaded) {
+        int rehydrationCapacity = config.getRehydrationDrinkSize(dehydrationLoaded);
+        if (rehydrationDrink >= rehydrationCapacity) {
+            if (dehydrationLoaded) {
+                this.rehydrateWithDehydration(config, rehydrationLevel);
+            } else {
+                this.rehydrate(config, rehydrationLevel);
+            }
+        }
+    }
+
+    public void resetRehydration() {
+        this.rehydrationDrink = 0;
+    }
+
+    private void rehydrate(ScorchfulConfig config, int rehydrationLevel) {
+        // dont drink if dont have to - prevents rehydration spam
+        if (this.waterDrunk > 1) {
             return;
         }
 
-        // REHYDRATION EXPLANATION
-        // The Rehydration enchantment builds up a drink whenever the player loses wetness (not body water) to cooling
-        // That drink is the same size as a hydrating drink.
-        // When the drink is full, the player is given back all the water in the drink as *body* water.
-        // However, some of that water is lost, based on the total level of Rehydration.
-
-        int rehydrationCapacity = config.getRehydrationDrinkSize();
-        this.rehydrationDrink = Math.min(this.rehydrationDrink + 1, rehydrationCapacity);
-
-        if (rehydrationDrink == rehydrationCapacity && this.waterDrunk <= 1) {
-            this.rehydrate(config, rehydrationLevel);
-        }
-    }
-
-    private void rehydrate(ThirstConfig config, int rehydrationLevel) {
-
         float efficiency = getRehydrationEfficiency(
                 rehydrationLevel,
-                0f, config.getMaxRehydrationEfficiency()
+                0f, config.thirstConfig.getMaxRehydrationEfficiency()
         );
         int drinkToAdd = MathHelper.floor(this.rehydrationDrink * efficiency);
-
-        this.rehydrationDrink = 0;
 
         if (drinkToAdd > 0 && this.provider.getWorld() instanceof ServerWorld serverWorld) {
             this.drink(drinkToAdd);
             this.playRehydrationEffects(serverWorld);
+            this.resetRehydration();
+        }
+    }
+
+    private void rehydrateWithDehydration(ScorchfulConfig config, int rehydrationLevel) {
+        ThirstManager thirstManager = ((ThirstManagerAccess) this.provider).getThirstManager();
+
+        DehydrationConfig dehydrationConfig = config.integrationConfig.dehydrationConfig;
+        // dont drink if dont have to - prevents rehydration spam
+        if (thirstManager.getThirstLevel() > dehydrationConfig.getMinWaterLevelForSweat()) {
+            return;
+        }
+
+        int waterToAdd = this.provider.getRandom()
+                .nextBetween(0, rehydrationLevel * dehydrationConfig.getMaxRehydrationWaterAddedPerLevel());
+
+        if (this.provider.getWorld() instanceof ServerWorld serverWorld) {
+            thirstManager.add(waterToAdd);
+            this.playRehydrationEffects(serverWorld);
+            this.resetRehydration();
         }
     }
 

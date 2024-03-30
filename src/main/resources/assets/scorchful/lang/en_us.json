@@ -19,6 +19,7 @@
     "item.scorchful.tooltip.refreshing": "Refreshing \uD83C\uDF0A",
     "item.scorchful.tooltip.sustaining": "Sustaining \uD83C\uDF0A\uD83C\uDF0A",
     "item.scorchful.tooltip.hydrating": "Hydrating \uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
+    "item.scorchful.tooltip.parching": "Parching ☀",
     
     
     "block.scorchful.crimson_lily": "Crimson Lily",
@@ -96,6 +97,7 @@
     "text.autoconfig.scorchful.option.thirstConfig.waterFromRefreshingFood": "Water from Refreshing food",
     "text.autoconfig.scorchful.option.thirstConfig.waterFromSustainingFood": "Water from Sustaining food",
     "text.autoconfig.scorchful.option.thirstConfig.waterFromHydratingFood": "Water from Hydrating food",
+    "text.autoconfig.scorchful.option.thirstConfig.waterFromParchingFood": "Water from Parching food",
     "text.autoconfig.scorchful.option.thirstConfig.rehydrationDrinkSize": "Rehydration drink size",
     "text.autoconfig.scorchful.option.thirstConfig.soakingFromSplashPotions": "Soaking from Splash Potions",
     "text.autoconfig.scorchful.option.thirstConfig.touchingWaterWetnessIncrease": "Touching water or rain wetness increase per tick",
@@ -104,15 +106,21 @@
     "text.autoconfig.scorchful.option.thirstConfig.humidBiomeSweatEfficiency": "Humid biome sweating efficiency",
     "text.autoconfig.scorchful.option.thirstConfig.maxRehydrationEfficiency": "Maximum Rehydration Enchantment efficiency",
     
+    "text.autoconfig.scorchful.option.combatConfig": "Combat Config",
+    "text.autoconfig.scorchful.option.combatConfig.fireBallThrownType": "Fire Charge thrown type",
+    
     "text.autoconfig.scorchful.option.weatherConfig": "Weather Config",
     "text.autoconfig.scorchful.option.weatherConfig.doSandPileAccumulation": "Do Sand Pile accumulation",
     "text.autoconfig.scorchful.option.weatherConfig.sandPileAccumulationHeight": "Sand Pile accumulation height",
     "text.autoconfig.scorchful.option.weatherConfig.sandstormSlownessAmountPercent": "Sandstorm Slowness amount (percent from -1 to +1)",
     
-    "text.autoconfig.scorchful.option.integrationConfig": "Mod Integrations Config",
-    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConsumedBySweat": "Dehydration points consumed by sweat per tick (requires Dehydration)",
-    "text.autoconfig.scorchful.option.integrationConfig.minWaterLevelForSweat": "Minimum water level required for sweating (requires Dehydration)",
+    "text.autoconfig.scorchful.option.integrationConfig": "Mod Integration Config",
     
+    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig": "Dehydration Config",
+    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.@Tooltip": "Requires Dehydration to have any effect",
+    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.minWaterLevelForSweat": "Minimum water level required for sweating",
+    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.maxRehydrationWaterAddedPerLevel": "Maximum water added per level of Rehydration",
+
     "text.autoconfig.scorchful.option.updateConfig": "Update Config",
     "text.autoconfig.scorchful.option.updateConfig.currentConfigVersion": "Current config version",
     "text.autoconfig.scorchful.option.updateConfig.enableConfigUpdates": "Enable config auto updates",

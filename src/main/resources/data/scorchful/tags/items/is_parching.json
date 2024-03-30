@@ -1,0 +1,77 @@
+{
+    "replace": false,
+    "values": [
+        {
+            "required": false,
+            "id": "#vinery:wine"
+        },
+        {
+            "required": false,
+            "id": "vinery:mead"
+        },
+        {
+            "required": false,
+            "id": "beachparty:honey_cocktail"
+        },
+        {
+            "required": false,
+            "id": "beachparty:melon_cocktail"
+        },
+        {
+            "required": false,
+            "id": "beachparty:pumpkin_cocktail"
+        },
+        {
+            "required": false,
+            "id": "beachparty:cocoa_cocktail"
+        },
+        {
+            "required": false,
+            "id": "beachparty:sweetberries_cocktail"
+        },
+        {
+            "required": false,
+            "id": "beachparty:coconut_cocktail"
+        },
+        {
+            "required": false,
+            "id": "brewery:beer_wheat"
+        },
+        {
+            "required": false,
+            "id": "brewery:beer_barley"
+        },
+        {
+            "required": false,
+            "id": "brewery:beer_hops"
+        },
+        {
+            "required": false,
+            "id": "brewery:beer_haley"
+        },
+        {
+            "required": false,
+            "id": "brewery:whiskey_jojannik"
+        },
+        {
+            "required": false,
+            "id": "brewery:whiskey_lilitusinglemalt"
+        },
+        {
+            "required": false,
+            "id": "brewery:whiskey_cristelwalker"
+        },
+        {
+            "required": false,
+            "id": "brewery:whiskey_maggoallen"
+        },
+        {
+            "required": false,
+            "id": "brewery:whiskey_carrasconlabel"
+        },
+        {
+            "required": false,
+            "id": "herbalbrews:coffee"
+        }
+    ]
+}

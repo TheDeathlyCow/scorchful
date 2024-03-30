@@ -19,10 +19,13 @@ public class ScorchfulConfig extends PartitioningSerializer.GlobalData {
     public HeatingConfig heatingConfig = new HeatingConfig();
 
     @ConfigEntry.Gui.CollapsibleObject
-    public ThirstConfig thirstConfig = new ThirstConfig();
+    public CombatConfig combatConfig = new CombatConfig();
 
     @ConfigEntry.Gui.CollapsibleObject
     public WeatherConfig weatherConfig = new WeatherConfig();
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public ThirstConfig thirstConfig = new ThirstConfig();
 
     @ConfigEntry.Gui.CollapsibleObject
     public ModIntegrationConfig integrationConfig = new ModIntegrationConfig();
@@ -38,5 +41,11 @@ public class ScorchfulConfig extends PartitioningSerializer.GlobalData {
             Scorchful.LOGGER.info("The Scorchful Config has been reset due to an update to the default values. " +
                     "You may disable these updates if you don't want this to happen.");
         }
+    }
+
+    public int getRehydrationDrinkSize(boolean dehydrationLoaded) {
+        return dehydrationLoaded
+                ? this.integrationConfig.dehydrationConfig.getRehydrationDrinkSize()
+                : this.thirstConfig.getRehydrationDrinkSize();
     }
 }

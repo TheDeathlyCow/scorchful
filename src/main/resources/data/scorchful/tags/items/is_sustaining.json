@@ -41,6 +41,42 @@
         {
             "required": false,
             "id": "farmersdelight:noodle_soup"
+        },
+        {
+            "required": false,
+            "id": "beachparty:chocolate_milkshake"
+        },
+        {
+            "required": false,
+            "id": "beachparty:coconut_milkshake"
+        },
+        {
+            "required": false,
+            "id": "beachparty:sweetberry_milkshake"
+        },
+        {
+            "required": false,
+            "id": "candlelight:tomato_soup"
+        },
+        {
+            "required": false,
+            "id": "candlelight:mushroom_soup"
+        },
+        {
+            "required": false,
+            "id": "herbalbrews:milk_coffee"
+        },
+        {
+            "required": false,
+            "id": "herbalbrews:armor_flask"
+        },
+        {
+            "required": false,
+            "id": "herbalbrews:damage_flask"
+        },
+        {
+            "required": false,
+            "id": "herbalbrews:feral_flask"
         }
     ]
 }

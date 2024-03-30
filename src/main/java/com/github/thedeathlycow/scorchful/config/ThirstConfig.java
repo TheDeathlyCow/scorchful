@@ -15,7 +15,9 @@ public class ThirstConfig implements ConfigData {
 
     int waterFromHydratingFood = 300;
 
-    int rehydrationDrinkSize = 300;
+    int waterFromParchingFood = -120;
+
+    int rehydrationDrinkSize = 120;
 
     int soakingFromSplashPotions = 300;
 
@@ -43,6 +45,10 @@ public class ThirstConfig implements ConfigData {
 
     public int getWaterFromHydratingFood() {
         return waterFromHydratingFood;
+    }
+
+    public int getWaterFromParchingFood() {
+        return waterFromParchingFood;
     }
 
     public int getRehydrationDrinkSize() {
