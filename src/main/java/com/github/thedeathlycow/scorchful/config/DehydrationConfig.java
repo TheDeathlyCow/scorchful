@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.config;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.components.PlayerComponent;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 
@@ -11,43 +12,36 @@ import me.shedaniel.autoconfig.annotation.Config;
 public class DehydrationConfig implements ConfigData {
 
     /**
-     * A direct equivalent would be set this to 8/30:
-     * 4 dehydration points reduces water level by 1, and
-     * water level is out of 20 * 4 = 80, while waterDrunk is out of 300, so 1 water level is 2/30 of waterDrunk
-     * <p>
-     * However, due to increased effects of water provided by Dehydration - this drains too fast. So, it is set to a
-     * quarter of the direct equivalent draining speed.
-     */
-    float dehydrationConsumedBySweat = 1f / 30f;
-
-    /**
      * Don't lose water to sweat when below this level.
      */
     int minWaterLevelForSweat = 16;
 
-    int rehydrationWaterAddedPerLevel = 1;
+    int maxRehydrationWaterAddedPerLevel = 1;
 
-    int rehydrationDrinkSize = 300;
-
-    int temperatureFromWetness = -5;
-
+    /**
+     * How this value was derived:
+     * <p>
+     * Scorchful only takes 4 points of thirst. 4 points of dehydration per thirst so 4 * 4 = 16 dehydration points.
+     * <p>
+     * There are 300 body water points in Scorchful.
+     * <p>
+     * 16 dehydration points = 300 body water points. So the conversion factor is 16 dp / 300 bw.
+     */
     public float getDehydrationConsumedBySweat() {
-        return dehydrationConsumedBySweat;
+        // adapt based on size of bar
+        float pointRange = (20f - minWaterLevelForSweat) * 4f;
+        return pointRange / PlayerComponent.MAX_WATER;
     }
 
     public int getMinWaterLevelForSweat() {
         return minWaterLevelForSweat;
     }
 
-    public int getRehydrationWaterAddedPerLevel() {
-        return rehydrationWaterAddedPerLevel;
+    public int getMaxRehydrationWaterAddedPerLevel() {
+        return maxRehydrationWaterAddedPerLevel;
     }
 
     public int getRehydrationDrinkSize() {
-        return rehydrationDrinkSize;
-    }
-
-    public int getTemperatureFromWetness() {
-        return temperatureFromWetness;
+        return PlayerComponent.MAX_WATER;
     }
 }

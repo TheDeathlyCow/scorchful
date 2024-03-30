@@ -107,12 +107,12 @@ public class PlayerComponent implements Component, ServerTickingComponent {
     // However, some of that water is lost, based on the total level of Rehydration.
 
     public void tickRehydrationWaterRecapture(ScorchfulConfig config, boolean dehydrationLoaded) {
-        int rehydrationCapacity = getRehydrationDrinkSize(config, dehydrationLoaded);
+        int rehydrationCapacity = config.getRehydrationDrinkSize(dehydrationLoaded);
         this.rehydrationDrink = Math.min(this.rehydrationDrink + 1, rehydrationCapacity);
     }
 
     public void tickRehydration(ScorchfulConfig config, int rehydrationLevel, boolean dehydrationLoaded) {
-        int rehydrationCapacity = getRehydrationDrinkSize(config, dehydrationLoaded);
+        int rehydrationCapacity = config.getRehydrationDrinkSize(dehydrationLoaded);
         if (rehydrationDrink >= rehydrationCapacity) {
             if (dehydrationLoaded) {
                 this.rehydrateWithDehydration(config, rehydrationLevel);
@@ -155,7 +155,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         }
 
         int waterToAdd = this.provider.getRandom()
-                .nextBetween(0, rehydrationLevel * dehydrationConfig.getRehydrationWaterAddedPerLevel());
+                .nextBetween(0, rehydrationLevel * dehydrationConfig.getMaxRehydrationWaterAddedPerLevel());
 
         if (this.provider.getWorld() instanceof ServerWorld serverWorld) {
             thirstManager.add(waterToAdd);
@@ -192,11 +192,5 @@ public class PlayerComponent implements Component, ServerTickingComponent {
 
     private static float getRehydrationEfficiency(int rehydrationLevel, float min, float max) {
         return MathHelper.lerp(rehydrationLevel / 4f, min, max);
-    }
-
-    private static int getRehydrationDrinkSize(ScorchfulConfig config, boolean dehydrationLoaded) {
-        return dehydrationLoaded
-                ? config.integrationConfig.dehydrationConfig.getRehydrationDrinkSize()
-                : config.thirstConfig.getRehydrationDrinkSize();
     }
 }

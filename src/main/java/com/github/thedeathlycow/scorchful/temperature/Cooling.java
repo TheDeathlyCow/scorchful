@@ -15,10 +15,7 @@ public class Cooling {
         if (entity.thermoo$getTemperature() > 0 && entity.thermoo$isWet()) {
             ScorchfulConfig config = Scorchful.getConfig();
 
-            int temperatureChange = ScorchfulIntegrations.isDehydrationLoaded()
-                    ? config.integrationConfig.dehydrationConfig.getTemperatureFromWetness()
-                    : config.thirstConfig.getTemperatureFromWetness();
-
+            int temperatureChange = config.thirstConfig.getTemperatureFromWetness();
             World world = entity.getWorld();
             if (world.getBiome(entity.getBlockPos()).isIn(SBiomeTags.HUMID_BIOMES)) {
                 float efficiency = config.thirstConfig.getHumidBiomeSweatEfficiency();
