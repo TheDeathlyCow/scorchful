@@ -42,6 +42,9 @@ public class WaterSkinItem extends DrinkItem {
     public static final Style TOOLTIP_STYLE = Style.EMPTY
             .withColor(TextColor.parse("aqua"));
 
+    public static final Style PARCHING_STYLE = Style.EMPTY
+            .withColor(TextColor.parse("red"));
+
     public static final int MAX_DRINKS = 16;
     private static final String DRINK_NBT_KEY = "drinks";
     private static final String COUNT_NBT_KEY = "count";

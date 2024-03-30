@@ -19,6 +19,7 @@
     "item.scorchful.tooltip.refreshing": "Refreshing \uD83C\uDF0A",
     "item.scorchful.tooltip.sustaining": "Sustaining \uD83C\uDF0A\uD83C\uDF0A",
     "item.scorchful.tooltip.hydrating": "Hydrating \uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
+    "item.scorchful.tooltip.parching": "Parching ☀",
     
     
     "block.scorchful.crimson_lily": "Crimson Lily",
@@ -96,6 +97,7 @@
     "text.autoconfig.scorchful.option.thirstConfig.waterFromRefreshingFood": "Water from Refreshing food",
     "text.autoconfig.scorchful.option.thirstConfig.waterFromSustainingFood": "Water from Sustaining food",
     "text.autoconfig.scorchful.option.thirstConfig.waterFromHydratingFood": "Water from Hydrating food",
+    "text.autoconfig.scorchful.option.thirstConfig.waterFromParchingFood": "Water from Parching food",
     "text.autoconfig.scorchful.option.thirstConfig.rehydrationDrinkSize": "Rehydration drink size",
     "text.autoconfig.scorchful.option.thirstConfig.soakingFromSplashPotions": "Soaking from Splash Potions",
     "text.autoconfig.scorchful.option.thirstConfig.touchingWaterWetnessIncrease": "Touching water or rain wetness increase per tick",

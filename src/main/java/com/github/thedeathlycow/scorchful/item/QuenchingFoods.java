@@ -44,6 +44,11 @@ public class QuenchingFoods {
     }
 
     public enum QuenchingLevel {
+        PARCHING(
+                SItemTags.IS_PARCHING,
+                Text.translatable("item.scorchful.tooltip.parching").setStyle(WaterSkinItem.PARCHING_STYLE),
+                ThirstConfig::getWaterFromParchingFood
+        ),
         REFRESHING(
                 SItemTags.IS_REFRESHING,
                 Text.translatable("item.scorchful.tooltip.refreshing").setStyle(WaterSkinItem.TOOLTIP_STYLE),
