@@ -12,6 +12,10 @@
         "minecraft:glow_berries",
         {
             "required": false,
+            "id": "#c:berries"
+        },
+        {
+            "required": false,
             "id": "farmersdelight:melon_popsicle"
         },
         {
@@ -49,6 +53,54 @@
         {
             "required": false,
             "id": "vinery:cherry"
+        },
+        {
+            "required": false,
+            "id": "bakery:strawberry"
+        },
+        {
+            "required": false,
+            "id": "beachparty:open_coconut"
+        },
+        {
+            "required": false,
+            "id": "beachparty:icecream_melon"
+        },
+        {
+            "required": false,
+            "id": "beachparty:icecream_sweetberries"
+        },
+        {
+            "required": false,
+            "id": "beachparty:icecream_chocolate"
+        },
+        {
+            "required": false,
+            "id": "beachparty:icecream_cactus"
+        },
+        {
+            "required": false,
+            "id": "beachparty:icecream_coconut"
+        },
+        {
+            "required": false,
+            "id": "beachparty:chocolate_icecream"
+        },
+        {
+            "required": false,
+            "id": "beachparty:coconut_icecream"
+        },
+        {
+            "required": false,
+            "id": "beachparty:sweetberry_icecream"
+        },
+        {
+            "required": false,
+            "id": "beachparty:raw_mussel_meat"
+        },
+        {
+            "required": false,
+            "id": "candlelight:tomato"
         }
     ]
 }

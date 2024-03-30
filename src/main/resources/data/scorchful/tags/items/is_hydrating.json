@@ -27,6 +27,62 @@
         {
             "required": false,
             "id": "farmersdelight:apple_cider"
+        },
+        {
+            "required": false,
+            "id": "#vinery:grapejuice"
+        },
+        {
+            "required": false,
+            "id": "vinery:apple_juice"
+        },
+        {
+            "required": false,
+            "id": "beachparty:refreshing_drink"
+        },
+        {
+            "required": false,
+            "id": "herbalbrews:green_tea"
+        },
+        {
+            "required": false,
+            "id": "herbalbrews:black_tea"
+        },
+        {
+            "required": false,
+            "id": "herbalbrews:hibiscus_tea"
+        },
+        {
+            "required": false,
+            "id": "herbalbrews:lavender_tea"
+        },
+        {
+            "required": false,
+            "id": "herbalbrews:yerba_mate_tea"
+        },
+        {
+            "required": false,
+            "id": "herbalbrews:rooibos_tea"
+        },
+        {
+            "required": false,
+            "id": "herbalbrews:oolong_tea"
+        },
+        {
+            "required": false,
+            "id": "herbalbrews:armor_flask_big"
+        },
+        {
+            "required": false,
+            "id": "herbalbrews:damage_flask_big"
+        },
+        {
+            "required": false,
+            "id": "herbalbrews:feral_flask_big"
+        },
+        {
+            "required": false,
+            "id": "#meadow:wooden_milk_bucket"
         }
     ]
 }
