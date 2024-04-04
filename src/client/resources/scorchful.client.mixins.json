@@ -7,9 +7,7 @@
         "DrippingWetPlayerMixin",
         "HeadFeatureRendererMixin",
         "InGameHudMixin",
-        "compat.colorfulhearts.present.FireHeartsColorfulHeartsMixin",
-        "compat.overflowingbars.absent.FireHeartsMixin",
-        "compat.overflowingbars.present.FireHeartsOverflowingBarsMixin",
+        "EngulfedHeartsMixin",
         "sandstorm.BackgroundRendererMixin",
         "sandstorm.WorldRendererMixin"
     ],
