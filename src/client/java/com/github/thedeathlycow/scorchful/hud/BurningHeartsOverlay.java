@@ -72,7 +72,7 @@ public class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.Render
 
     private static int getNumBurningPoints(@NotNull PlayerEntity player, int maxDisplayHealth) {
         float overheatProgress = player.thermoo$getTemperatureScale();
-        return MathHelper.ceil(overheatProgress * maxDisplayHealth);
+        return Math.round(overheatProgress * maxDisplayHealth);
     }
 
     private static int getNumBurningHeartsFromPoints(int burningPoints) {
