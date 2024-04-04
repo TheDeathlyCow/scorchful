@@ -4,6 +4,7 @@ import com.github.thedeathlycow.scorchful.client.SandstormEffects;
 import com.github.thedeathlycow.scorchful.client.SandstormSounds;
 import com.github.thedeathlycow.scorchful.hud.BurningHeartsOverlay;
 import com.github.thedeathlycow.scorchful.hud.SoakingDisplay;
+import com.github.thedeathlycow.scorchful.hud.SoakingUnderlay;
 import com.github.thedeathlycow.scorchful.item.SModelPredicates;
 import com.github.thedeathlycow.scorchful.registry.SCutouts;
 import com.github.thedeathlycow.scorchful.registry.SEntityModelLayers;
@@ -29,6 +30,7 @@ public class ScorchfulClient implements ClientModInitializer {
         ClientTickEvents.END_WORLD_TICK.register(SandstormSounds.INSTANCE::tick);
         SParticleFactories.registerFactories();
         HudRenderCallback.EVENT.register(new SoakingDisplay());
+        StatusBarOverlayRenderEvents.AFTER_HEALTH_BAR.register(new SoakingUnderlay());
         StatusBarOverlayRenderEvents.AFTER_HEALTH_BAR.register(BurningHeartsOverlay.INSTANCE);
     }
 

@@ -1,41 +1,13 @@
 package com.github.thedeathlycow.scorchful.hud;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2i;
 
-@Environment(EnvType.CLIENT)
-public class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.RenderHealthBarCallback  {
-
-    public static final BurningHeartsOverlay INSTANCE = new BurningHeartsOverlay();
-
-    public static final Identifier HEART_OVERLAY_TEXTURE = Scorchful.id("textures/gui/fire_heart_overlay.png");
-
-    public static final int TEXTURE_WIDTH = 18;
-    public static final int TEXTURE_HEIGHT = 40;
-
-    public void drawEngulfedHeart(
-            DrawContext context,
-            BurningHeartType type,
-            int x, int y,
-            boolean halfHeart
-    ) {
-        context.drawTexture(
-                HEART_OVERLAY_TEXTURE,
-                x, y - 1,
-                halfHeart ? 9 : 0, type.textureV,
-                9, 10,
-                TEXTURE_WIDTH, TEXTURE_HEIGHT
-        );
-    }
-
+public class SoakingUnderlay implements StatusBarOverlayRenderEvents.RenderHealthBarCallback {
     @Override
     public void render(
             DrawContext context,
@@ -43,7 +15,7 @@ public class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.Render
             Vector2i[] heartPositions,
             int displayHealth, int maxDisplayHealth
     ) {
-        if (player.thermoo$isCold()) {
+        if (!player.thermoo$isWet()) {
             return;
         }
 
@@ -60,27 +32,23 @@ public class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.Render
 
             int u = isHalfHeart ? 9 : 0;
             context.drawTexture(
-                    HEART_OVERLAY_TEXTURE,
+                    BurningHeartsOverlay.HEART_OVERLAY_TEXTURE,
                     pos.x, pos.y - 1,
-                    u, 0,
+                    u, 30,
                     9, 10,
-                    TEXTURE_WIDTH, TEXTURE_HEIGHT
+                    BurningHeartsOverlay.TEXTURE_WIDTH, BurningHeartsOverlay.TEXTURE_HEIGHT
             );
         }
 
     }
 
     private static int getNumBurningPoints(@NotNull PlayerEntity player, int maxDisplayHealth) {
-        float overheatProgress = player.thermoo$getTemperatureScale();
+        float overheatProgress = player.thermoo$getSoakedScale();
         return MathHelper.ceil(overheatProgress * maxDisplayHealth);
     }
 
     private static int getNumBurningHeartsFromPoints(int burningPoints) {
         // number of whole hearts
         return MathHelper.ceil(burningPoints / 2.0f);
-    }
-
-
-    private BurningHeartsOverlay() {
     }
 }
