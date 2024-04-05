@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2i;
 
 @Environment(EnvType.CLIENT)
-public class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.RenderHealthBarCallback  {
+public class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.RenderHealthBarCallback {
 
     public static final BurningHeartsOverlay INSTANCE = new BurningHeartsOverlay();
 
