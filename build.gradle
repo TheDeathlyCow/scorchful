@@ -84,9 +84,6 @@ dependencies {
 
 	modCompileOnly "dev.emi:trinkets:${project.trinkets_version}"
 
-	modCompileOnly("maven.modrinth:overflowing-bars:${project.overflowing_bars_version}") { transitive = false }
-	modCompileOnly("maven.modrinth:colorful-hearts:${project.colorful_hearts_version}") { transitive = false }
-
 	modCompileOnly("maven.modrinth:dehydration:${project.dehydration_version}") { transitive = false }
 
 	modCompileOnly("maven.modrinth:fabric-seasons:${project.fabric_seasons_version}") { transitive = false }
