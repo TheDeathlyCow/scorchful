@@ -1,13 +1,24 @@
 package com.github.thedeathlycow.scorchful.hud;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2i;
 
 public class SoakingUnderlay implements StatusBarOverlayRenderEvents.RenderHealthBarCallback {
+
+    public static final SoakingUnderlay INSTANCE = new SoakingUnderlay();
+
+    public static final Identifier TEXTURE = Scorchful.id("textures/gui/soaking_overlay.png");
+
+    public static final int TEXTURE_WIDTH = 9;
+    public static final int TEXTURE_HEIGHT = 10;
+
+
     @Override
     public void render(
             DrawContext context,
@@ -30,13 +41,13 @@ public class SoakingUnderlay implements StatusBarOverlayRenderEvents.RenderHealt
             // number of frozen health points
             boolean isHalfHeart = i + 1 >= burningHealthHearts && (burningHealthPoints & 1) == 1; // is odd check
 
-            int u = isHalfHeart ? 9 : 0;
+            int width = isHalfHeart ? 5 : 9;
             context.drawTexture(
-                    BurningHeartsOverlay.HEART_OVERLAY_TEXTURE,
+                    TEXTURE,
                     pos.x, pos.y - 1,
-                    u, 30,
-                    9, 10,
-                    BurningHeartsOverlay.TEXTURE_WIDTH, BurningHeartsOverlay.TEXTURE_HEIGHT
+                    0, 0,
+                    width, 10,
+                    TEXTURE_WIDTH, TEXTURE_HEIGHT
             );
         }
 
@@ -50,5 +61,9 @@ public class SoakingUnderlay implements StatusBarOverlayRenderEvents.RenderHealt
     private static int getNumBurningHeartsFromPoints(int burningPoints) {
         // number of whole hearts
         return MathHelper.ceil(burningPoints / 2.0f);
+    }
+
+    private SoakingUnderlay() {
+
     }
 }

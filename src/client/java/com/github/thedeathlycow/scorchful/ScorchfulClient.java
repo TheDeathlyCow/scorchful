@@ -29,8 +29,7 @@ public class ScorchfulClient implements ClientModInitializer {
         ClientTickEvents.END_WORLD_TICK.register(SandstormEffects::tickSandstormParticles);
         ClientTickEvents.END_WORLD_TICK.register(SandstormSounds.INSTANCE::tick);
         SParticleFactories.registerFactories();
-        HudRenderCallback.EVENT.register(new SoakingDisplay());
-        StatusBarOverlayRenderEvents.AFTER_HEALTH_BAR.register(new SoakingUnderlay());
+        StatusBarOverlayRenderEvents.AFTER_HEALTH_BAR.register(SoakingUnderlay.INSTANCE);
         StatusBarOverlayRenderEvents.AFTER_HEALTH_BAR.register(BurningHeartsOverlay.INSTANCE);
     }
 

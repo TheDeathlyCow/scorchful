@@ -14,7 +14,7 @@ import org.joml.Vector2i;
 
 public class SoakingDisplay implements HudRenderCallback {
 
-    public static final Identifier TEXTURE = Scorchful.id("textures/gui/soaking_icon.png");
+    public static final Identifier TEXTURE = Scorchful.id("textures/gui/soaking_overlay.png");
 
     public static final int SPRITE_WIDTH = 9;
     public static final int SPRITE_HEIGHT = 9;

@@ -19,7 +19,7 @@ public class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.Render
     public static final Identifier HEART_OVERLAY_TEXTURE = Scorchful.id("textures/gui/fire_heart_overlay.png");
 
     public static final int TEXTURE_WIDTH = 18;
-    public static final int TEXTURE_HEIGHT = 40;
+    public static final int TEXTURE_HEIGHT = 30;
 
     public void drawEngulfedHeart(
             DrawContext context,
