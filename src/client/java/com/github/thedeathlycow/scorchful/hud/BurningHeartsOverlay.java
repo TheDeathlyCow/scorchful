@@ -1,6 +1,8 @@
 package com.github.thedeathlycow.scorchful.hud;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.ScorchfulClient;
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -44,7 +46,8 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
             Vector2i[] heartPositions,
             int displayHealth, int maxDisplayHealth
     ) {
-        if (player.thermoo$isCold()) {
+        ScorchfulConfig config = Scorchful.getConfig();
+        if (!config.clientConfig.doBurningHeartOverlay() || player.thermoo$isCold()) {
             return;
         }
 
