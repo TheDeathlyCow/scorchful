@@ -17,7 +17,38 @@ public final class MountHealthOverlay implements StatusBarOverlayRenderEvents.Re
             Vector2i[] mountHeartPositions,
             int displayMountHealth, int maxDisplayMountHealth
     ) {
+        if (mount.thermoo$isCold()) {
+            return;
+        }
 
+        int burningHealthPoints = BurningHeartsOverlay.getNumBurningPoints(mount, maxDisplayMountHealth);
+        int burningHealthHearts = BurningHeartsOverlay.getNumBurningHeartsFromPoints(burningHealthPoints);
+        for (int i = 0; i < burningHealthHearts; i++) {
+            Vector2i pos = mountHeartPositions[i];
+            if (pos == null) {
+                continue;
+            }
+            boolean isHalfHeart = i + 1 >= burningHealthHearts && (burningHealthPoints & 1) == 1; // is odd check
+
+            if (isHalfHeart) {
+                // flips the half heart around, since animal hearts are backwards
+                context.drawTexture(
+                        BurningHeartsOverlay.HEART_OVERLAY_TEXTURE,
+                        pos.x + 4, pos.y - 1,
+                        4, 0,
+                        5, 10,
+                        BurningHeartsOverlay.TEXTURE_WIDTH, BurningHeartsOverlay.TEXTURE_HEIGHT
+                );
+            } else {
+                context.drawTexture(
+                        BurningHeartsOverlay.HEART_OVERLAY_TEXTURE,
+                        pos.x, pos.y - 1,
+                        0, 0,
+                        9, 10,
+                        BurningHeartsOverlay.TEXTURE_WIDTH, BurningHeartsOverlay.TEXTURE_HEIGHT
+                );
+            }
+        }
     }
 
     private MountHealthOverlay() {
