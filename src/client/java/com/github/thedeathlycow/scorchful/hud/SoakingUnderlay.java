@@ -9,7 +9,7 @@ import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2i;
 
-public class SoakingUnderlay implements StatusBarOverlayRenderEvents.RenderHealthBarCallback {
+public final class SoakingUnderlay implements StatusBarOverlayRenderEvents.RenderHealthBarCallback {
 
     public static final SoakingUnderlay INSTANCE = new SoakingUnderlay();
 

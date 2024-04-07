@@ -5,6 +5,7 @@ import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
@@ -12,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2i;
 
 @Environment(EnvType.CLIENT)
-public class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.RenderHealthBarCallback {
+public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.RenderHealthBarCallback {
 
     public static final BurningHeartsOverlay INSTANCE = new BurningHeartsOverlay();
 
@@ -70,12 +71,12 @@ public class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.Render
 
     }
 
-    private static int getNumBurningPoints(@NotNull PlayerEntity player, int maxDisplayHealth) {
-        float overheatProgress = player.thermoo$getTemperatureScale();
+    static int getNumBurningPoints(@NotNull LivingEntity entity, int maxDisplayHealth) {
+        float overheatProgress = entity.thermoo$getTemperatureScale();
         return Math.round(overheatProgress * maxDisplayHealth);
     }
 
-    private static int getNumBurningHeartsFromPoints(int burningPoints) {
+    static int getNumBurningHeartsFromPoints(int burningPoints) {
         // number of whole hearts
         return MathHelper.ceil(burningPoints / 2.0f);
     }
