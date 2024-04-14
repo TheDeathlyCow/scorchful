@@ -4,33 +4,10 @@
     ],
     "passes": [
         {
-            "name": "notch",
+            "name": "scorchful_box_blur",
             "intarget": "minecraft:main",
-            "outtarget": "swap",
-            "auxtargets": [
-                {
-                    "name": "DitherSampler",
-                    "id": "dither",
-                    "width": 4,
-                    "height": 4,
-                    "bilinear": false
-                }
-            ]
+            "outtarget": "swap"
         },
-        {
-            "name": "blit",
-            "intarget": "swap",
-            "outtarget": "minecraft:main"
-        },
-        {
-            "name": "color_convolve",
-            "intarget": "minecraft:main",
-            "outtarget": "swap",
-            "uniforms": [
-                { "name": "Saturation", "values": [ 0.3 ] }
-            ]
-        },
-        
         {
             "name": "blit",
             "intarget": "swap",
