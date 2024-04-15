@@ -32,7 +32,7 @@ vec3 blur(vec2 centerPos, vec2 direction, float radius) {
 }
 
 void main() {
-    float intensity = sin(Frequency * Time * PI * 2.0);
+    float intensity = 1;//sin(Frequency * Time * PI * 2.0);
     if (intensity < 0.0) {
         // just copy colour if no blur
         fragColor = texture(DiffuseSampler, texCoord);

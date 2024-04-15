@@ -4,9 +4,9 @@
     ],
     "passes": [
         {
-            "name": "scorchful_periodic_blur",
             "intarget": "minecraft:main",
             "outtarget": "swap",
+            "name": "scorchful_periodic_blur",
             "uniforms": [
                 {
                     "name": "BlurDirection",
@@ -19,9 +19,9 @@
             ]
         },
         {
-            "name": "blit",
             "intarget": "swap",
-            "outtarget": "minecraft:main"
+            "outtarget": "minecraft:main",
+            "name": "scorchful_wobble"
         }
     ]
 }
