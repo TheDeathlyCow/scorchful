@@ -10,7 +10,7 @@ import net.minecraft.util.Colors;
 
 public class SStatusEffects {
 
-    public static final StatusEffect HEAT_STROKE = new HeatStrokeEffect(StatusEffectCategory.HARMFUL, Colors.RED);
+    public static final StatusEffect HEAT_STROKE = new HeatStrokeEffect(StatusEffectCategory.HARMFUL, 0xff1500);
 
     public static void registerAll() {
         register("heat_stroke", HEAT_STROKE);
