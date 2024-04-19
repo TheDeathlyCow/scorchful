@@ -37,6 +37,9 @@
     "enchantment.scorchful.rehydration.desc": "Replenishes body water lost from sweating",
     
     
+    "effect.scorchful.heat_stroke": "Heat Stroke",
+    
+    
     "death.attack.scorchful.heat": "%1$s couldn't handle the heat",
     "death.attack.scorchful.heat.player": "%1$s couldn't handle the heat of %2$s",
     
