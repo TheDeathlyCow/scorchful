@@ -2,13 +2,17 @@ package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
+import com.github.thedeathlycow.scorchful.components.PlayerComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.ThirstConfig;
+import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,9 +41,14 @@ public class QuenchingFoods {
             return;
         }
 
-        if (level != null && user.isPlayer()) {
-            ScorchfulComponents.PLAYER.get(user)
-                    .drink(level.waterProvider.applyAsInt(Scorchful.getConfig().thirstConfig));
+        if (level != null && user instanceof PlayerEntity player) {
+            PlayerComponent component = ScorchfulComponents.PLAYER.get(player);
+            component.drink(level.waterProvider.applyAsInt(Scorchful.getConfig().thirstConfig));
+
+            if (component.getWaterDrunk() >= PlayerComponent.MAX_WATER - 25) {
+                player.playSound(SSoundEvents.ENTITY_GULP, player.getSoundCategory(), 1f, 1f);
+            }
+
         }
     }
 
