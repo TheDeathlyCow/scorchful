@@ -1,0 +1,16 @@
+{
+    "type": "thermoo:status_effect",
+    "entity_type": "minecraft:strider",
+    "temperature_scale_range": {
+        "min": 0.99
+    },
+    "config": {
+        "effects": [
+            {
+                "amplifier": 2,
+                "duration": 200,
+                "effect": "minecraft:regeneration"
+            }
+        ]
+    }
+}
