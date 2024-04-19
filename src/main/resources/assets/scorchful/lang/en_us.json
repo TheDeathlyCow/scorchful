@@ -37,6 +37,9 @@
     "enchantment.scorchful.rehydration.desc": "Replenishes body water lost from sweating",
     
     
+    "effect.scorchful.heat_stroke": "Heat Stroke",
+    
+    
     "death.attack.scorchful.heat": "%1$s couldn't handle the heat",
     "death.attack.scorchful.heat.player": "%1$s couldn't handle the heat of %2$s",
     
@@ -51,7 +54,7 @@
     "subtitles.enchantment.scorchful.rehydration": "Player Rehydrates",
     "subtitles.block.scorchful.crimson_lily.squelch": "Crimson Lily Squelches",
     "subtitles.weather.scorchful.sandstorm": "Wind blows",
-    
+    "subtitles.scorchful.entity.gulp": "Player gulps",
     
     "stat.scorchful.fill_crimson_lily": "Filled Crimson Lily",
     "stat.scorchful.soaked_by_crimson_lily": "Soaked by Crimson Lily",
@@ -60,6 +63,8 @@
     "text.autoconfig.scorchful.option.clientConfig": "Client Config",
     "text.autoconfig.scorchful.option.clientConfig.doBurningHeartOverlay": "Do burning heart overlay",
     "text.autoconfig.scorchful.option.clientConfig.doSunHatShading": "Do Sun Hat shading",
+    "text.autoconfig.scorchful.option.clientConfig.enableHeatStrokePostProcessing": "Enable heat stroke post processing",
+    "text.autoconfig.scorchful.option.clientConfig.enableHeatStrokePostProcessing.@Tooltip": "Enables effects like blur and wavey-ness from the Heat Stroke status effect. May increase lag without a dedicated GPU.",
     "text.autoconfig.scorchful.option.clientConfig.sunHatShadeOpacity": "Sun Hat shade opacity",
     "text.autoconfig.scorchful.option.clientConfig.enableSandstormParticles": "Enable sandstorm particles",
     "text.autoconfig.scorchful.option.clientConfig.enableSandstormFog": "Enable sandstorm fog",
@@ -81,6 +86,8 @@
     "text.autoconfig.scorchful.option.heatingConfig.sunHatShadeTemperatureChange": "Sun Hat",
     "text.autoconfig.scorchful.option.heatingConfig.onFireWarmRate": "On fire warm rate",
     "text.autoconfig.scorchful.option.heatingConfig.onFireWarmRateWithFireResistance": "On fire warm rate with Fire Resistance",
+    "text.autoconfig.scorchful.option.heatingConfig.inLavaWarmRate": "In lava warm rate",
+    "text.autoconfig.scorchful.option.heatingConfig.striderOutOfLavaCoolRate": "Strider out of lava cool rate",
     "text.autoconfig.scorchful.option.heatingConfig.powderSnowCoolRate": "Powder Snow cool rate when warm",
     "text.autoconfig.scorchful.option.heatingConfig.fireballHeat": "Fireball strike heat",
     "text.autoconfig.scorchful.option.heatingConfig.defaultArmorHeatResistance": "Default armor piece heat resistance",

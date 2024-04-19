@@ -2,7 +2,7 @@
     "type": "thermoo:status_effect",
     "entity": {
         "condition": "minecraft:reference",
-        "name": "scorchful:is_nausea_affected"
+        "name": "scorchful:is_heat_stroke_affected"
     },
     "entity_type": "minecraft:player",
     "temperature_scale_range": {
@@ -12,8 +12,8 @@
         "effects": [
             {
                 "amplifier": 0,
-                "duration": 200,
-                "effect": "minecraft:nausea"
+                "duration": 40,
+                "effect": "scorchful:heat_stroke"
             }
         ]
     }

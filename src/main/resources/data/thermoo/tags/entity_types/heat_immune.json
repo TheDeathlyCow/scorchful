@@ -1,0 +1,16 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:husk",
+        {
+            "replace": false,
+            "id": "#c:bosses"
+        },
+        "minecraft:camel",
+        "minecraft:wither_skeleton",
+        "minecraft:wither",
+        "minecraft:ender_dragon",
+        "minecraft:warden",
+        "minecraft:ghast"
+    ]
+}

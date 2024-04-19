@@ -52,6 +52,7 @@ public class Scorchful implements ModInitializer {
         SSoundEvents.registerAll();
         STemperatureEffects.registerAll();
         SEnchantments.registerAll();
+        SStatusEffects.registerAll();
         RehydrationEnchantment.addToNetherLoot();
         SParticleTypes.registerAll();
         NetherBiomeModifications.placeFeaturesInBiomes();

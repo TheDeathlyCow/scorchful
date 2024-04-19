@@ -42,5 +42,11 @@
             "scorchful:weather/sandstorm/sandstorm9"
         ],
         "subtitle": "subtitles.weather.scorchful.sandstorm"
+    },
+    "entity.gulp": {
+        "sounds": [
+            "scorchful:entity/gulp"
+        ],
+        "subtitle": "subtitles.scorchful.entity.gulp"
     }
 }

@@ -1,0 +1,27 @@
+{
+    "targets": [
+        "swap"
+    ],
+    "passes": [
+        {
+            "intarget": "minecraft:main",
+            "outtarget": "swap",
+            "name": "scorchful_periodic_blur",
+            "uniforms": [
+                {
+                    "name": "BlurDirection",
+                    "values": [ 1.0, 0.0 ]
+                },
+                {
+                    "name": "BlurRadius",
+                    "values": [ 20.0 ]
+                }
+            ]
+        },
+        {
+            "intarget": "swap",
+            "outtarget": "minecraft:main",
+            "name": "scorchful_wobble"
+        }
+    ]
+}

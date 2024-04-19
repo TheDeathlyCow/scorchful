@@ -10,6 +10,8 @@ import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentController;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentControllerDecorator;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -49,6 +51,12 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
                     : config.getOnFireWarmRate();
 
             change += onFireChange;
+        }
+
+        if (entity.isInLava()) {
+            change += config.getInLavaWarmRate();
+        } else if (entity.getType() == EntityType.STRIDER) {
+            change -= config.getStriderOutOfLavaCoolRate();
         }
 
         if (entity.wasInPowderSnow && entity.thermoo$canFreeze()) {
