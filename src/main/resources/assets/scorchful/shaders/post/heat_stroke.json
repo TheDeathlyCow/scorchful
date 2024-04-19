@@ -21,7 +21,7 @@
         {
             "intarget": "swap",
             "outtarget": "minecraft:main",
-            "name": "blit"
+            "name": "scorchful_wobble"
         }
     ]
 }

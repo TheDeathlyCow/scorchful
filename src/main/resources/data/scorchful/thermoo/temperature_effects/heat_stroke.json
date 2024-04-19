@@ -12,7 +12,7 @@
         "effects": [
             {
                 "amplifier": 0,
-                "duration": 600,
+                "duration": 40,
                 "effect": "scorchful:heat_stroke"
             }
         ]
