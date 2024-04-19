@@ -3,7 +3,7 @@
     "values": [
         "minecraft:blaze",
         "minecraft:magma_cube",
-        "minecraft:stray",
+        "minecraft:strider",
         "#minecraft:freeze_hurts_extra_types"
     ]
 }
