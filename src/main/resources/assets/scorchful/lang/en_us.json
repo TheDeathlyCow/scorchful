@@ -60,6 +60,8 @@
     "text.autoconfig.scorchful.option.clientConfig": "Client Config",
     "text.autoconfig.scorchful.option.clientConfig.doBurningHeartOverlay": "Do burning heart overlay",
     "text.autoconfig.scorchful.option.clientConfig.doSunHatShading": "Do Sun Hat shading",
+    "text.autoconfig.scorchful.option.clientConfig.enableHeatStrokePostProcessing": "Enable heat stroke post processing",
+    "text.autoconfig.scorchful.option.clientConfig.enableHeatStrokePostProcessing.@Tooltip": "Enables effects like blur and wavey-ness from the Heat Stroke status effect. May increase lag without a dedicated GPU.",
     "text.autoconfig.scorchful.option.clientConfig.sunHatShadeOpacity": "Sun Hat shade opacity",
     "text.autoconfig.scorchful.option.clientConfig.enableSandstormParticles": "Enable sandstorm particles",
     "text.autoconfig.scorchful.option.clientConfig.enableSandstormFog": "Enable sandstorm fog",

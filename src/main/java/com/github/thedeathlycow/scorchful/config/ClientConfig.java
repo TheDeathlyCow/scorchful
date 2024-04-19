@@ -4,6 +4,7 @@ package com.github.thedeathlycow.scorchful.config;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 @Config(name = Scorchful.MODID + ".client_config")
 public class ClientConfig implements ConfigData {
@@ -11,6 +12,9 @@ public class ClientConfig implements ConfigData {
     boolean doBurningHeartOverlay = true;
 
     boolean doSunHatShading = true;
+
+    @ConfigEntry.Gui.Tooltip
+    boolean enableHeatStrokePostProcessing = true;
 
     float sunHatShadeOpacity = 0.2f;
 
@@ -37,6 +41,10 @@ public class ClientConfig implements ConfigData {
 
     public float getSunHatShadeOpacity() {
         return sunHatShadeOpacity;
+    }
+
+    public boolean enableHeatStrokePostProcessing() {
+        return enableHeatStrokePostProcessing;
     }
 
     public boolean doBurningHeartOverlay() {

@@ -1,6 +1,8 @@
 package com.github.thedeathlycow.scorchful.client;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.ScorchfulClient;
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.mixin.client.GameRendererAccessor;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import net.fabricmc.api.EnvType;
@@ -16,13 +18,15 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public class HeatStrokeEffects {
 
-    public static final float HALF_MINUTE_TICKS = 30f;
-
-    public static final String TIME_UNIFORM_NAME = "ScorchfulHalfMinuteTime";
-
     private static final Identifier HEAT_STROKE_SHADER_ID = Scorchful.id("shaders/post/heat_stroke.json");
 
     public static void onEffectAdded(EntityStatusEffectS2CPacket packet, ClientWorld world, MinecraftClient client) {
+
+        ScorchfulConfig config = Scorchful.getConfig();
+        if (client.gameRenderer.getPostProcessor() != null || !config.clientConfig.enableHeatStrokePostProcessing()) {
+            return;
+        }
+
         if (packet.getEffectId() == SStatusEffects.HEAT_STROKE) {
             Entity entity = world.getEntityById(packet.getEntityId());
             if (entity instanceof ClientPlayerEntity player && player.isMainPlayer()) {
