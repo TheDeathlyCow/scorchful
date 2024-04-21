@@ -5,6 +5,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.network.packet.s2c.play.EntityStatusEffectS2CPacket;
+import net.minecraft.network.packet.s2c.play.PlayerRespawnS2CPacket;
 import net.minecraft.network.packet.s2c.play.RemoveEntityStatusEffectS2CPacket;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -37,6 +38,14 @@ public class ClientPlayNetworkHandlerMixin {
     )
     private void onEffectRemoved(RemoveEntityStatusEffectS2CPacket packet, CallbackInfo ci) {
         HeatStrokeEffects.onEffectRemoved(packet, this.world, this.client);
+    }
+
+    @Inject(
+            method = "onPlayerRespawn",
+            at = @At("TAIL")
+    )
+    private void onPlayerRespawn(PlayerRespawnS2CPacket packet, CallbackInfo ci) {
+        HeatStrokeEffects.onPlayerRespawn(packet, this.world, this.client);
     }
 
 }

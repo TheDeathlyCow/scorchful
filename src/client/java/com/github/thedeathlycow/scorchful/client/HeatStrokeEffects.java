@@ -11,7 +11,9 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.s2c.play.EntityStatusEffectS2CPacket;
+import net.minecraft.network.packet.s2c.play.PlayerRespawnS2CPacket;
 import net.minecraft.network.packet.s2c.play.RemoveEntityStatusEffectS2CPacket;
 import net.minecraft.util.Identifier;
 
@@ -42,6 +44,13 @@ public class HeatStrokeEffects {
             if (entity instanceof ClientPlayerEntity player && player.isMainPlayer()) {
                 client.gameRenderer.disablePostProcessor();
             }
+        }
+    }
+
+    public static void onPlayerRespawn(PlayerRespawnS2CPacket packet, ClientWorld world, MinecraftClient client) {
+        ScorchfulConfig config = Scorchful.getConfig();
+        if (client.gameRenderer.getPostProcessor() != null && config.clientConfig.enableHeatStrokePostProcessing()) {
+            client.gameRenderer.disablePostProcessor();
         }
     }
 
