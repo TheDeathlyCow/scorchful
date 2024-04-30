@@ -57,12 +57,6 @@ public class WetTickController extends EnvironmentControllerDecorator {
             wetChange = -config.thirstConfig.getDryRate();
         }
 
-        // increase drying from block light
-        int blockLightLevel = entity.getWorld().getLightLevel(LightType.BLOCK, entity.getBlockPos());
-        if (blockLightLevel > 0) {
-            wetChange -= blockLightLevel / 4;
-        }
-
         if (entity.isOnFire()) {
             wetChange -= config.thirstConfig.getOnFireDryDate();
         }
