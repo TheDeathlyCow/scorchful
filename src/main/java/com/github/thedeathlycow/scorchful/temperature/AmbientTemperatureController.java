@@ -131,8 +131,12 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         HeatingConfig config = Scorchful.getConfig().heatingConfig;
         int maxHeatFromHeight = config.getMaxHeatFromLavaOceanInNether();
 
+        int lightPerHeat = config.getLightLevelPerHeatInNether();
+        int minLight = config.getMinLightLevelForHeatInNether();
+        int blockLightHeat = Math.max((blockLight - minLight + lightPerHeat) / lightPerHeat, 0);
+
         return Math.max(
-                blockLight / config.getLightLevelPerHeatInNether(),
+                blockLightHeat,
                 distanceToLavaLevel != 0
                         ? ((distanceToLavaLevel / -config.getBlocksAboveLavaOceanPerHeatInNether()) + maxHeatFromHeight)
                         : maxHeatFromHeight

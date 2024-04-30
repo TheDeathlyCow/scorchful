@@ -47,6 +47,8 @@ public class HeatingConfig implements ConfigData {
 
     int lightLevelPerHeatInNether = 4;
 
+    int minLightLevelForHeatInNether = 11;
+
     int blocksAboveLavaOceanPerHeatInNether = 5;
 
     int maxHeatFromLavaOceanInNether = 3;
@@ -129,6 +131,10 @@ public class HeatingConfig implements ConfigData {
 
     public int getLightLevelPerHeatInNether() {
         return lightLevelPerHeatInNether;
+    }
+
+    public int getMinLightLevelForHeatInNether() {
+        return minLightLevelForHeatInNether;
     }
 
     public int getBlocksAboveLavaOceanPerHeatInNether() {
