@@ -50,7 +50,7 @@ public class SandCauldronBehaviours {
     };
 
     public static void registerAll() {
-        CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(
+        CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.map().put(
                 Items.SAND,
                 fillWithSand(
                         SBlocks.SAND_CAULDRON.getDefaultState()
@@ -58,7 +58,7 @@ public class SandCauldronBehaviours {
                 )
         );
 
-        CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(
+        CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.map().put(
                 Items.RED_SAND,
                 fillWithSand(
                         SBlocks.RED_SAND_CAULDRON.getDefaultState()

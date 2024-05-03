@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.5-SNAPSHOT'
+	id 'fabric-loom' version '1.6-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -85,8 +85,6 @@ dependencies {
 	modCompileOnly "dev.emi:trinkets:${project.trinkets_version}"
 
 	modCompileOnly("maven.modrinth:dehydration:${project.dehydration_version}") { transitive = false }
-
-	modCompileOnly("maven.modrinth:fabric-seasons:${project.fabric_seasons_version}") { transitive = false }
 }
 
 processResources {

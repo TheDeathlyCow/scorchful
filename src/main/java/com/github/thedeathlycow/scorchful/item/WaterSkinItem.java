@@ -22,10 +22,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.UseAction;
+import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -40,10 +37,10 @@ import java.util.List;
 public class WaterSkinItem extends DrinkItem {
 
     public static final Style TOOLTIP_STYLE = Style.EMPTY
-            .withColor(TextColor.parse("aqua"));
+            .withColor(Formatting.AQUA);
 
     public static final Style PARCHING_STYLE = Style.EMPTY
-            .withColor(TextColor.parse("red"));
+            .withColor(Formatting.RED);
 
     public static final int MAX_DRINKS = 16;
     private static final String DRINK_NBT_KEY = "drinks";
@@ -51,7 +48,7 @@ public class WaterSkinItem extends DrinkItem {
 
     public WaterSkinItem(Settings settings) {
         super(settings);
-        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(this, this::onCauldronInteract);
+        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.map().put(this, this::onCauldronInteract);
     }
 
     public static int getNumDrinks(ItemStack stack) {
