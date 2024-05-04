@@ -37,13 +37,13 @@ public class SBlocks {
     public static final Block ROOTED_NETHERRACK = new NetherrackBlock(FabricBlockSettings.copyOf(Blocks.NETHERRACK));
 
     public static final Block ROOTED_CRIMSON_NYLIUM = new RootedNyliumBlock(
-            FabricBlockSettings.copyOf(Blocks.CRIMSON_NYLIUM),
-            Blocks.CRIMSON_ROOTS::getDefaultState
+            Blocks.CRIMSON_ROOTS,
+            FabricBlockSettings.copyOf(Blocks.CRIMSON_NYLIUM)
     );
 
     public static final Block ROOTED_WARPED_NYLIUM = new RootedNyliumBlock(
-            FabricBlockSettings.copyOf(Blocks.WARPED_NYLIUM),
-            Blocks.WARPED_ROOTS::getDefaultState
+            Blocks.WARPED_ROOTS,
+            FabricBlockSettings.copyOf(Blocks.WARPED_NYLIUM)
     );
 
     public static final Block SAND_PILE = new SandPileBlock(
