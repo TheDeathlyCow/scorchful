@@ -56,13 +56,16 @@ public abstract class InGameHudMixin {
         if (type != InGameHud.HeartType.NORMAL) {
             return;
         }
-        BurningHeartsOverlay.INSTANCE.drawEngulfedHeart(
+        boolean drawn = BurningHeartsOverlay.INSTANCE.drawEngulfedHeart(
                 context,
                 this.getCameraPlayer(),
                 x, y,
                 hardcore, half
         );
-        ci.cancel();
+
+        if (drawn) {
+            ci.cancel();
+        }
     }
 
 }

@@ -25,7 +25,7 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
     public static final int TEXTURE_WIDTH = 18;
     public static final int TEXTURE_HEIGHT = 30;
 
-    public void drawEngulfedHeart(
+    public boolean drawEngulfedHeart(
             DrawContext context,
             @Nullable PlayerEntity player,
             int x, int y,
@@ -40,7 +40,10 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
                     9, 10,
                     TEXTURE_WIDTH, TEXTURE_HEIGHT
             );
+
+            return true;
         }
+        return false;
     }
 
     @Override
