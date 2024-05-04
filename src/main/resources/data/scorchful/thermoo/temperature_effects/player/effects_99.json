@@ -1,5 +1,5 @@
 {
-    "type": "thermoo:status_effect",
+    "type": "thermoo:sequence",
     "entity": {
         "condition": "minecraft:reference",
         "name": "scorchful:can_heat"
@@ -9,16 +9,39 @@
         "min": 0.99
     },
     "config": {
-        "effects": [
+        "children": [
             {
-                "amplifier": 1,
-                "duration": 20,
-                "effect": "minecraft:hunger"
+                "type": "thermoo:status_effect",
+                "config": {
+                    "effects": [
+                        {
+                            "amplifier": 1,
+                            "duration": 20,
+                            "effect": "minecraft:hunger"
+                        },
+                        {
+                            "amplifier": 1,
+                            "duration": 20,
+                            "effect": "minecraft:weakness"
+                        }
+                    ]
+                }
             },
             {
-                "amplifier": 1,
-                "duration": 20,
-                "effect": "minecraft:weakness"
+                "type": "thermoo:status_effect",
+                "entity": {
+                    "condition": "minecraft:reference",
+                    "name": "scorchful:is_heat_stroke_affected"
+                },
+                "config": {
+                    "effects": [
+                        {
+                            "amplifier": 0,
+                            "duration": 40,
+                            "effect": "scorchful:heat_stroke"
+                        }
+                    ]
+                }
             }
         ]
     }
