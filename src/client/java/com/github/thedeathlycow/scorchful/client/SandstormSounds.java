@@ -24,7 +24,7 @@ public class SandstormSounds {
 
     public void tick(ClientWorld world) {
 
-        if (!Scorchful.getConfig().clientConfig.isSandstormSoundsEnabled()) {
+        if (world.getTickManager().isFrozen() || !Scorchful.getConfig().clientConfig.isSandstormSoundsEnabled()) {
             return;
         }
 
