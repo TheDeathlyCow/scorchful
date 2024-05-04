@@ -66,7 +66,7 @@ public class SandCauldronTests {
         context.checkBlockProperty(
                 cauldronPos,
                 SandCauldronBlock.LEVEL,
-                i -> i == 1,
+                i -> i == SandCauldronBlock.MIN_LEVEL,
                 "Sand Cauldron is not partially filled!"
         );
 
@@ -74,7 +74,8 @@ public class SandCauldronTests {
         context.useBlock(cauldronPos, mockPlayer);
 
         boolean hasSand = mockPlayer.getInventory().containsAny(stack -> stack.isOf(Items.SAND));
-        context.expectBlock(Blocks.CAULDRON, cauldronPos);
+        context.expectBlock(SBlocks.SAND_CAULDRON, cauldronPos);
+        context.expectBlockProperty(cauldronPos, SandCauldronBlock.LEVEL, SandCauldronBlock.MIN_LEVEL);
         context.assertFalse(hasSand, "Player should NOT have sand!");
         context.complete();
     }

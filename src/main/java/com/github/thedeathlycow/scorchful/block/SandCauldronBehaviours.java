@@ -74,17 +74,13 @@ public class SandCauldronBehaviours {
         );
 
         if (SAND_CAULDRON_BEHAVIOUR.map() instanceof Object2ObjectOpenHashMap<Item, CauldronBehavior> sandCauldronOpenMap) {
-            sandCauldronOpenMap.defaultReturnValue(
-                    EMPTY_SAND_CAULDRON
-            );
+            sandCauldronOpenMap.defaultReturnValue(EMPTY_SAND_CAULDRON);
         } else {
             Scorchful.LOGGER.error("Unable to register default sand cauldron behaviour");
         }
 
         if (RED_SAND_CAULDRON_BEHAVIOUR.map() instanceof Object2ObjectOpenHashMap<Item, CauldronBehavior> redSandCauldronOpenMap) {
-            redSandCauldronOpenMap.defaultReturnValue(
-                    EMPTY_RED_SAND_CAULDRON
-            );
+            redSandCauldronOpenMap.defaultReturnValue(EMPTY_RED_SAND_CAULDRON);
         } else {
             Scorchful.LOGGER.error("Unable to register default red sand cauldron behaviour");
         }
@@ -147,6 +143,10 @@ public class SandCauldronBehaviours {
             SoundEvent soundEvent
     ) {
         if (!world.isClient) {
+            if (state.contains(SandCauldronBlock.LEVEL) && state.get(SandCauldronBlock.LEVEL) < SandCauldronBlock.MAX_LEVEL) {
+                return ActionResult.FAIL;
+            }
+
             Item item = stack.getItem();
 
             PlayerInventory inventory = player.getInventory();
