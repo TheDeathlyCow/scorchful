@@ -256,7 +256,7 @@ public class WaterSkinItem extends DrinkItem {
         }
 
         if (!world.isClient) {
-            this.fill(stack, player, world, pos, 1);
+            this.fill(stack, player, world, pos, 4);
             player.incrementStat(SStats.USE_WARPED_LILY);
             NetherLilyBlock.setWater(state, world, pos, 0);
         }

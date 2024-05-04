@@ -134,7 +134,7 @@ public class NetherLilyBlock extends Block {
 
     private void tryGrow(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         int saturation = state.get(WATER_SATURATION_LEVEL);
-        if (saturation >= 3 || random.nextInt(7) != 0) {
+        if (saturation >= 3) {
             return;
         }
 
