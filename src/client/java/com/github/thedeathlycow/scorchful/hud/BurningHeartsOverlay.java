@@ -12,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Vector2i;
 
 @Environment(EnvType.CLIENT)
@@ -26,17 +27,20 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
 
     public void drawEngulfedHeart(
             DrawContext context,
-            BurningHeartType type,
+            @Nullable PlayerEntity player,
             int x, int y,
-            boolean halfHeart
+            boolean hardcore, boolean halfHeart
     ) {
-        context.drawTexture(
-                HEART_OVERLAY_TEXTURE,
-                x, y - 1,
-                halfHeart ? 9 : 0, type.textureV,
-                9, 10,
-                TEXTURE_WIDTH, TEXTURE_HEIGHT
-        );
+        BurningHeartType type = BurningHeartType.forPlayer(player, hardcore);
+        if (type != null) {
+            context.drawTexture(
+                    HEART_OVERLAY_TEXTURE,
+                    x, y - 1,
+                    halfHeart ? 9 : 0, type.textureV,
+                    9, 10,
+                    TEXTURE_WIDTH, TEXTURE_HEIGHT
+            );
+        }
     }
 
     @Override

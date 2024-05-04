@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.hud;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
+import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
 public enum BurningHeartType {
@@ -17,13 +18,16 @@ public enum BurningHeartType {
         this.textureV = textureV;
     }
 
-    public static BurningHeartType forPlayer(PlayerEntity player) {
-        int maxTemperature = player.thermoo$getMaxTemperature();
-        int temperature = player.thermoo$getTemperature();
-        if (temperature >= maxTemperature - 1) {
-            return player.getWorld().getLevelProperties().isHardcore()
-                    ? ENGULFED_HARDCORE
-                    : ENGULFED;
+    @Nullable
+    public static BurningHeartType forPlayer(@Nullable PlayerEntity player, boolean hardcore) {
+        if (player != null) {
+            int maxTemperature = player.thermoo$getMaxTemperature();
+            int temperature = player.thermoo$getTemperature();
+            if (temperature >= maxTemperature - 1) {
+                return hardcore
+                        ? ENGULFED_HARDCORE
+                        : ENGULFED;
+            }
         }
         return null;
     }
