@@ -1,14 +1,22 @@
 package com.github.thedeathlycow.scorchful.block;
 
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.block.AbstractCauldronBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -19,39 +27,46 @@ import net.minecraft.world.event.GameEvent;
 
 import java.util.function.Predicate;
 
-public class SandCauldronBlock extends LeveledCauldronBlock {
+public class SandCauldronBlock extends AbstractCauldronBlock {
 
-    public static final Predicate<Sandstorms.SandstormType> REGULAR_SANDSTORM_PREDICATE = sandstorm -> {
-        return sandstorm == Sandstorms.SandstormType.REGULAR;
-    };
+    public static final MapCodec<SandCauldronBlock> CODEC = RecordCodecBuilder.mapCodec(
+            instance -> instance.group(
+                            Sandstorms.SandstormType.CODEC
+                                    .fieldOf("sandstorm_type")
+                                    .forGetter(block -> block.sandstormType),
+                            CauldronBehavior.CODEC
+                                    .fieldOf("interactions")
+                                    .forGetter(block -> block.behaviorMap),
+                            createSettingsCodec()
+                    )
+                    .apply(instance, SandCauldronBlock::new)
+    );
 
-    public static final Predicate<Sandstorms.SandstormType> RED_SANDSTORM_PREDICATE = sandstorm -> {
-        return sandstorm == Sandstorms.SandstormType.RED;
-    };
+    public static final int MIN_LEVEL = 1;
+    public static final int MAX_LEVEL = 3;
+    public static final IntProperty LEVEL = Properties.LEVEL_3;
+    private static final int BASE_FLUID_HEIGHT = 6;
+    private static final double FLUID_HEIGHT_PER_LEVEL = 3.0;
 
     private static final float FILL_WITH_SAND_CHANCE = 0.1f;
 
-    private final Predicate<Sandstorms.SandstormType> sandstormPredicate;
-
-    private final CauldronBehavior filledInteraction;
+    private final Sandstorms.SandstormType sandstormType;
 
     /**
      * Constructs a leveled cauldron block.
      *
      * @param settings
-     * @param sandstormPredicate a predicate that checks what type of sandstorm can fill this cauldron
-     * @param filledInteraction  the behaviour for emptying the cauldron
-     * @apiNote The precipitation predicates are compared using identity comparisons in some cases,
-     * so callers should typically use {@link #RAIN_PREDICATE} and {@link #SNOW_PREDICATE} if applicable.
+     * @param sandstormType     The type of sandstorm this will fill in
+     * @param filledInteraction the behaviour for emptying the cauldron
+     * @param behaviorMap       other behaviours for this cauldron
      */
     public SandCauldronBlock(
-            Settings settings,
-            Predicate<Sandstorms.SandstormType> sandstormPredicate,
-            CauldronBehavior filledInteraction
+            Sandstorms.SandstormType sandstormType,
+            CauldronBehavior.CauldronBehaviorMap behaviorMap,
+            Settings settings
     ) {
-        super(settings, precipitation -> false, SandCauldronBehaviours.NO_CAULDRON_BEHAVIOURS);
-        this.sandstormPredicate = sandstormPredicate;
-        this.filledInteraction = filledInteraction;
+        super(settings, behaviorMap);
+        this.sandstormType = sandstormType;
     }
 
     public static boolean canFillWithSand(World world, Sandstorms.SandstormType sandstormType) {
@@ -62,10 +77,25 @@ public class SandCauldronBlock extends LeveledCauldronBlock {
     }
 
     @Override
+    public MapCodec<SandCauldronBlock> getCodec() {
+        return CODEC;
+    }
+
+    @Override
+    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+        return state.get(LEVEL);
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(LEVEL);
+    }
+
+    @Override
     public void precipitationTick(BlockState state, World world, BlockPos pos, Biome.Precipitation precipitation) {
         Sandstorms.SandstormType type = Sandstorms.getCurrentSandStorm(world, pos.up());
 
-        if (!this.sandstormPredicate.test(type) || !canFillWithSand(world, type) || state.get(LEVEL) == MAX_LEVEL) {
+        if (this.sandstormType != type || !canFillWithSand(world, type) || state.get(LEVEL) == MAX_LEVEL) {
             return;
         }
 
@@ -80,15 +110,6 @@ public class SandCauldronBlock extends LeveledCauldronBlock {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (this.isFull(state)) {
-            return this.filledInteraction.interact(state, world, pos, player, hand, player.getStackInHand(hand));
-        } else {
-            return ActionResult.PASS;
-        }
-    }
-
-    @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         // stub: don't extinguish entities on fire
     }
@@ -96,5 +117,15 @@ public class SandCauldronBlock extends LeveledCauldronBlock {
     @Override
     protected boolean canBeFilledByDripstone(Fluid fluid) {
         return false;
+    }
+
+    @Override
+    public boolean isFull(BlockState state) {
+        return state.get(LEVEL) == MAX_LEVEL;
+    }
+
+    @Override
+    protected double getFluidHeight(BlockState state) {
+        return (BASE_FLUID_HEIGHT + state.get(LEVEL) * FLUID_HEIGHT_PER_LEVEL) / 16.0;
     }
 }

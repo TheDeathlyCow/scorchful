@@ -1,8 +1,10 @@
 package com.github.thedeathlycow.scorchful.server;
 
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
+import com.mojang.serialization.Codec;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
@@ -10,10 +12,23 @@ import net.minecraft.world.biome.Biome;
 
 public class Sandstorms {
 
-    public enum SandstormType {
-        NONE,
-        REGULAR,
-        RED
+    public enum SandstormType implements StringIdentifiable {
+        NONE("no_sandstorm"),
+        REGULAR("regular_sandstorm"),
+        RED("red_sandstorm");
+
+        public static final Codec<SandstormType> CODEC = StringIdentifiable.createCodec(SandstormType::values);
+
+        private final String id;
+
+        SandstormType(String id) {
+            this.id = id;
+        }
+
+        @Override
+        public String asString() {
+            return this.id;
+        }
     }
 
     /**

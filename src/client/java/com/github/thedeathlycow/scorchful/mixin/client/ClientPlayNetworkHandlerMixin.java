@@ -20,9 +20,6 @@ public class ClientPlayNetworkHandlerMixin {
     @Shadow
     private ClientWorld world;
 
-    @Shadow
-    @Final
-    private MinecraftClient client;
 
     @Inject(
             method = "onEntityStatusEffect",

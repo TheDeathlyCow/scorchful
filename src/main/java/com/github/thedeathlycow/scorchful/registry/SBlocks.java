@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.block.*;
+import com.github.thedeathlycow.scorchful.server.Sandstorms;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
@@ -64,15 +65,15 @@ public class SBlocks {
     );
 
     public static final Block SAND_CAULDRON = new SandCauldronBlock(
-            FabricBlockSettings.copyOf(Blocks.CAULDRON),
-            SandCauldronBlock.REGULAR_SANDSTORM_PREDICATE,
-            SandCauldronBehaviours.EMPTY_SAND_CAULDRON
+            Sandstorms.SandstormType.REGULAR,
+            SandCauldronBehaviours.SAND_CAULDRON_BEHAVIOUR,
+            FabricBlockSettings.copyOf(Blocks.CAULDRON)
     );
 
     public static final Block RED_SAND_CAULDRON = new SandCauldronBlock(
-            FabricBlockSettings.copyOf(Blocks.CAULDRON),
-            SandCauldronBlock.RED_SANDSTORM_PREDICATE,
-            SandCauldronBehaviours.EMPTY_RED_SAND_CAULDRON
+            Sandstorms.SandstormType.RED,
+            SandCauldronBehaviours.RED_SAND_CAULDRON_BEHAVIOUR,
+            FabricBlockSettings.copyOf(Blocks.CAULDRON)
     );
 
     public static void registerBlocks() {
