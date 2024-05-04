@@ -73,6 +73,7 @@ public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEf
                                 .forGetter(Config::sound),
                         ThermooCodecs.createEnumCodec(SoundCategory.class)
                                 .fieldOf("category")
+                                .orElse(SoundCategory.MASTER)
                                 .forGetter(Config::category),
                         Codec.BOOL
                                 .fieldOf("only_play_to_source")
