@@ -13,25 +13,25 @@ import net.minecraft.sound.BlockSoundGroup;
 public class SBlocks {
 
     public static final Block CRIMSON_LILY = new CrimsonLilyBlock(
+            NetherLilyBehaviours.CRIMSON_LILY_BEHAVIOUR,
             FabricBlockSettings.create()
                     .mapColor(MapColor.DARK_RED)
                     .breakInstantly()
                     .noCollision()
                     .sounds(BlockSoundGroup.WEEPING_VINES)
                     .pistonBehavior(PistonBehavior.DESTROY)
-                    .ticksRandomly(),
-            NetherLilyBehaviours.CRIMSON_LILY_BEHAVIOUR
+                    .ticksRandomly()
     );
 
     public static final Block WARPED_LILY = new NetherLilyBlock(
+            NetherLilyBehaviours.WARPED_LILY_BEHAVIOUR,
             FabricBlockSettings.create()
                     .mapColor(MapColor.CYAN)
                     .breakInstantly()
                     .noCollision()
                     .sounds(BlockSoundGroup.WEEPING_VINES)
                     .pistonBehavior(PistonBehavior.DESTROY)
-                    .ticksRandomly(),
-            NetherLilyBehaviours.WARPED_LILY_BEHAVIOUR
+                    .ticksRandomly()
     );
 
     public static final Block ROOTED_NETHERRACK = new NetherrackBlock(FabricBlockSettings.copyOf(Blocks.NETHERRACK));

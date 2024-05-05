@@ -5,8 +5,12 @@ import com.github.thedeathlycow.scorchful.particle.SpurtingWaterParticleEffect;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
+import com.github.thedeathlycow.scorchful.server.Sandstorms;
 import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.*;
+import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -38,6 +42,17 @@ import java.util.Map;
 @SuppressWarnings("deprecation")
 public class NetherLilyBlock extends Block {
 
+    public static final MapCodec<NetherLilyBlock> CODEC = RecordCodecBuilder.mapCodec(
+            instance -> instance.group(
+                            NetherLilyBehaviour.CODEC
+                                    .fieldOf("behaviors")
+                                    .forGetter(block -> block.behaviorMap),
+                            createSettingsCodec()
+                    )
+                    .apply(instance, NetherLilyBlock::new)
+    );
+
+
     public static final int MIN_LEVEL = 0;
 
     public static final int MAX_LEVEL = 3;
@@ -54,7 +69,7 @@ public class NetherLilyBlock extends Block {
 
     private final NetherLilyBehaviour.NetherLilyBehaviourMap behaviorMap;
 
-    public NetherLilyBlock(Settings settings, NetherLilyBehaviour.NetherLilyBehaviourMap behaviorMap) {
+    public NetherLilyBlock(NetherLilyBehaviour.NetherLilyBehaviourMap behaviorMap, Settings settings) {
         super(settings);
         this.behaviorMap = behaviorMap;
     }
@@ -63,6 +78,11 @@ public class NetherLilyBlock extends Block {
         BlockState blockState = state.with(WATER_SATURATION_LEVEL, level);
         world.setBlockState(pos, blockState);
         world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(blockState));
+    }
+
+    @Override
+    protected MapCodec<? extends NetherLilyBlock> getCodec() {
+        return CODEC;
     }
 
     @Override
