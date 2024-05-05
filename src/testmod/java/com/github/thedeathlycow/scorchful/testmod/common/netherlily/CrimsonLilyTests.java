@@ -214,4 +214,35 @@ public class CrimsonLilyTests {
         context.complete();
     }
 
+    @GameTest(
+            templateName = "scorchful-test:nether_lily/crimson_wet"
+    )
+    public void using_water_skin_on_wet_crimson_lily_does_not_consume_skin(TestContext context) {
+        final BlockPos lilyPos = new BlockPos(2, 2, 2);
+        context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
+        context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
+
+        PlayerEntity player = context.createMockSurvivalPlayer();
+        var waterSkin = SItems.WATER_SKIN.getDefaultStack();
+        ((WaterSkinItem) SItems.WATER_SKIN).addDrinks(waterSkin, 1);
+        player.setStackInHand(Hand.MAIN_HAND, waterSkin);
+
+        BooleanSupplier isWaterSkinEmpty = () -> !WaterSkinItem.hasDrink(player.getStackInHand(Hand.MAIN_HAND));
+
+        context.assertFalse(
+                isWaterSkinEmpty.getAsBoolean(),
+                "Water skin should not start as empty"
+        );
+
+        context.useBlock(lilyPos, player);
+
+        context.assertFalse(
+                isWaterSkinEmpty.getAsBoolean(),
+                "Water skin should not be empty"
+        );
+        context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
+        context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
+        context.complete();
+    }
+
 }

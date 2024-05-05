@@ -26,6 +26,9 @@ public class NetherLilyBehaviours {
 
     private static final NetherLilyBehaviour ADD_WATER = (state, world, pos, player, hand, stack) -> {
         if (!world.isClient) {
+            if (state.get(NetherLilyBlock.WATER_SATURATION_LEVEL) >= NetherLilyBlock.MAX_LEVEL) {
+                return ActionResult.FAIL;
+            }
             Item item = stack.getItem();
             player.incrementStat(SStats.FILL_CRIMSON_LILY);
             player.incrementStat(Stats.USED.getOrCreateStat(item));
