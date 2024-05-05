@@ -1,11 +1,9 @@
 package com.github.thedeathlycow.scorchful.testmod.common.netherlily;
 
-import com.github.thedeathlycow.scorchful.block.CrimsonLilyBlock;
 import com.github.thedeathlycow.scorchful.block.NetherLilyBlock;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
 import com.github.thedeathlycow.scorchful.registry.SItems;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.test.GameTest;
@@ -30,14 +28,25 @@ public class WarpedLilyTests {
         player.setStackInHand(Hand.MAIN_HAND, Items.GLASS_BOTTLE.getDefaultStack());
 
         BooleanSupplier playerHasWaterBottle = () -> player.getInventory().containsAny(stack -> stack.isOf(Items.POTION));
+        BooleanSupplier playerHasGlassBottle = () -> player.getInventory().containsAny(stack -> stack.isOf(Items.GLASS_BOTTLE));
+
         context.assertFalse(
                 playerHasWaterBottle.getAsBoolean(),
                 "Newly created player should not have any water bottles"
         );
+        context.assertTrue(
+                playerHasGlassBottle.getAsBoolean(),
+                "Newly created player should have a glass bottle"
+        );
+
 
         context.useBlock(lilyPos, player);
 
         context.assertTrue(playerHasWaterBottle.getAsBoolean(), "Player should have a water bottle");
+        context.assertFalse(
+                playerHasGlassBottle.getAsBoolean(),
+                "Player should NOT have a glass bottle"
+        );
         context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
         context.complete();
@@ -55,14 +64,24 @@ public class WarpedLilyTests {
         player.setStackInHand(Hand.MAIN_HAND, Items.GLASS_BOTTLE.getDefaultStack());
 
         BooleanSupplier playerHasWaterBottle = () -> player.getInventory().containsAny(stack -> stack.isOf(Items.POTION));
+        BooleanSupplier playerHasGlassBottle = () -> player.getInventory().containsAny(stack -> stack.isOf(Items.GLASS_BOTTLE));
+
         context.assertFalse(
                 playerHasWaterBottle.getAsBoolean(),
                 "Newly created player should not have any water bottles"
+        );
+        context.assertTrue(
+                playerHasGlassBottle.getAsBoolean(),
+                "Newly created player should have a glass bottle"
         );
 
         context.useBlock(lilyPos, player);
 
         context.assertFalse(playerHasWaterBottle.getAsBoolean(), "Player should NOT have a water bottle");
+        context.assertTrue(
+                playerHasGlassBottle.getAsBoolean(),
+                "Player should have a glass bottle"
+        );
         context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
         context.complete();
@@ -80,14 +99,24 @@ public class WarpedLilyTests {
         player.setStackInHand(Hand.MAIN_HAND, Items.GLASS_BOTTLE.getDefaultStack());
 
         BooleanSupplier playerHasWaterBottle = () -> player.getInventory().containsAny(stack -> stack.isOf(Items.POTION));
+        BooleanSupplier playerHasGlassBottle = () -> player.getInventory().containsAny(stack -> stack.isOf(Items.GLASS_BOTTLE));
+
         context.assertFalse(
                 playerHasWaterBottle.getAsBoolean(),
                 "Newly created player should not have any water bottles"
+        );
+        context.assertTrue(
+                playerHasGlassBottle.getAsBoolean(),
+                "Newly created player should have a glass bottle"
         );
 
         context.useBlock(lilyPos, player);
 
         context.assertFalse(playerHasWaterBottle.getAsBoolean(), "Player should NOT have a water bottle");
+        context.assertTrue(
+                playerHasGlassBottle.getAsBoolean(),
+                "Player should have a glass bottle"
+        );
         context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, 2);
         context.complete();
