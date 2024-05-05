@@ -20,9 +20,9 @@ import java.util.Map;
 
 public class NetherLilyBehaviours {
 
-    public static final Map<Item, NetherLilyBehaviour> WARPED_LILY_BEHAVIOUR = NetherLilyBehaviour.createMap();
+    public static final NetherLilyBehaviour.NetherLilyBehaviourMap WARPED_LILY_BEHAVIOUR = NetherLilyBehaviour.createMap("scorchful_warped_lily");
 
-    public static final Map<Item, NetherLilyBehaviour> CRIMSON_LILY_BEHAVIOUR = NetherLilyBehaviour.createMap();
+    public static final NetherLilyBehaviour.NetherLilyBehaviourMap CRIMSON_LILY_BEHAVIOUR = NetherLilyBehaviour.createMap("scorchful_crimson_lily");
 
     private static final NetherLilyBehaviour ADD_WATER = (state, world, pos, player, hand, stack) -> {
         if (!world.isClient) {
@@ -45,7 +45,7 @@ public class NetherLilyBehaviours {
     };
 
     public static void registerBehaviours() {
-        WARPED_LILY_BEHAVIOUR.put(
+        WARPED_LILY_BEHAVIOUR.map().put(
                 Items.GLASS_BOTTLE,
                 (state, world, pos, player, hand, stack) -> {
 
@@ -73,9 +73,9 @@ public class NetherLilyBehaviours {
                     return ActionResult.success(world.isClient);
                 }
         );
-        WARPED_LILY_BEHAVIOUR.put(SItems.WATER_SKIN, ((WaterSkinItem) SItems.WATER_SKIN)::onWarpedLilyInteract);
+        WARPED_LILY_BEHAVIOUR.map().put(SItems.WATER_SKIN, ((WaterSkinItem) SItems.WATER_SKIN)::onWarpedLilyInteract);
 
-        CRIMSON_LILY_BEHAVIOUR.put(
+        CRIMSON_LILY_BEHAVIOUR.map().put(
                 Items.POTION,
                 (state, world, pos, player, hand, stack) -> {
 
@@ -91,7 +91,7 @@ public class NetherLilyBehaviours {
                     return result;
                 }
         );
-        CRIMSON_LILY_BEHAVIOUR.put(
+        CRIMSON_LILY_BEHAVIOUR.map().put(
                 SItems.WATER_SKIN,
                 (state, world, pos, player, hand, stack) -> {
 

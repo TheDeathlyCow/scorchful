@@ -52,9 +52,9 @@ public class NetherLilyBlock extends Block {
     );
 
 
-    private final Map<Item, NetherLilyBehaviour> behaviorMap;
+    private final NetherLilyBehaviour.NetherLilyBehaviourMap behaviorMap;
 
-    public NetherLilyBlock(Settings settings, Map<Item, NetherLilyBehaviour> behaviorMap) {
+    public NetherLilyBlock(Settings settings, NetherLilyBehaviour.NetherLilyBehaviourMap behaviorMap) {
         super(settings);
         this.behaviorMap = behaviorMap;
     }
@@ -86,7 +86,7 @@ public class NetherLilyBlock extends Block {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getStackInHand(hand);
-        NetherLilyBehaviour behaviour = this.behaviorMap.get(itemStack.getItem());
+        NetherLilyBehaviour behaviour = this.behaviorMap.map().get(itemStack.getItem());
         return behaviour.interact(state, world, pos, player, hand, itemStack);
     }
 

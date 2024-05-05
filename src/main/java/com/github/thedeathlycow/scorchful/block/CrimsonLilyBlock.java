@@ -32,7 +32,7 @@ import java.util.Map;
 public class CrimsonLilyBlock extends NetherLilyBlock {
 
 
-    public CrimsonLilyBlock(Settings settings, Map<Item, NetherLilyBehaviour> behaviorMap) {
+    public CrimsonLilyBlock(Settings settings, NetherLilyBehaviour.NetherLilyBehaviourMap behaviorMap) {
         super(settings, behaviorMap);
     }
 
