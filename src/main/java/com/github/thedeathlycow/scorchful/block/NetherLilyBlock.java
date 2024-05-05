@@ -38,8 +38,12 @@ import java.util.Map;
 @SuppressWarnings("deprecation")
 public class NetherLilyBlock extends Block {
 
+    public static final int MIN_LEVEL = 0;
+
+    public static final int MAX_LEVEL = 3;
+
     public static final IntProperty WATER_SATURATION_LEVEL = IntProperty.of(
-            "water_level", 0, 3
+            "water_level", MIN_LEVEL, MAX_LEVEL
     );
 
     private static final VoxelShape SHAPE = Block.createCuboidShape(
@@ -95,7 +99,7 @@ public class NetherLilyBlock extends Block {
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         int saturationLevel = state.get(WATER_SATURATION_LEVEL);
 
-        if (saturationLevel != 3) {
+        if (saturationLevel != MAX_LEVEL) {
             return;
         }
 
@@ -134,7 +138,7 @@ public class NetherLilyBlock extends Block {
 
     private void tryGrow(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         int saturation = state.get(WATER_SATURATION_LEVEL);
-        if (saturation >= 3) {
+        if (saturation >= MAX_LEVEL) {
             return;
         }
 

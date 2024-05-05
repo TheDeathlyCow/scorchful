@@ -8,7 +8,8 @@
     "entrypoints": {
         "fabric-gametest": [
             "com.github.thedeathlycow.scorchful.testmod.common.cauldron.CauldronInteractionTests",
-            "com.github.thedeathlycow.scorchful.testmod.common.cauldron.SandCauldronTests"
+            "com.github.thedeathlycow.scorchful.testmod.common.cauldron.SandCauldronTests",
+            "com.github.thedeathlycow.scorchful.testmod.common.netherlily.CrimsonLilyTests"
         ]
     }
 }
