@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.block.*;
+import com.github.thedeathlycow.scorchful.server.Sandstorms;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
@@ -12,37 +13,37 @@ import net.minecraft.sound.BlockSoundGroup;
 public class SBlocks {
 
     public static final Block CRIMSON_LILY = new CrimsonLilyBlock(
+            NetherLilyBehaviours.CRIMSON_LILY_BEHAVIOUR,
             FabricBlockSettings.create()
                     .mapColor(MapColor.DARK_RED)
                     .breakInstantly()
                     .noCollision()
                     .sounds(BlockSoundGroup.WEEPING_VINES)
                     .pistonBehavior(PistonBehavior.DESTROY)
-                    .ticksRandomly(),
-            NetherLilyBehaviours.CRIMSON_LILY_BEHAVIOUR
+                    .ticksRandomly()
     );
 
     public static final Block WARPED_LILY = new NetherLilyBlock(
+            NetherLilyBehaviours.WARPED_LILY_BEHAVIOUR,
             FabricBlockSettings.create()
                     .mapColor(MapColor.CYAN)
                     .breakInstantly()
                     .noCollision()
                     .sounds(BlockSoundGroup.WEEPING_VINES)
                     .pistonBehavior(PistonBehavior.DESTROY)
-                    .ticksRandomly(),
-            NetherLilyBehaviours.WARPED_LILY_BEHAVIOUR
+                    .ticksRandomly()
     );
 
     public static final Block ROOTED_NETHERRACK = new NetherrackBlock(FabricBlockSettings.copyOf(Blocks.NETHERRACK));
 
     public static final Block ROOTED_CRIMSON_NYLIUM = new RootedNyliumBlock(
-            FabricBlockSettings.copyOf(Blocks.CRIMSON_NYLIUM),
-            Blocks.CRIMSON_ROOTS::getDefaultState
+            Blocks.CRIMSON_ROOTS,
+            FabricBlockSettings.copyOf(Blocks.CRIMSON_NYLIUM)
     );
 
     public static final Block ROOTED_WARPED_NYLIUM = new RootedNyliumBlock(
-            FabricBlockSettings.copyOf(Blocks.WARPED_NYLIUM),
-            Blocks.WARPED_ROOTS::getDefaultState
+            Blocks.WARPED_ROOTS,
+            FabricBlockSettings.copyOf(Blocks.WARPED_NYLIUM)
     );
 
     public static final Block SAND_PILE = new SandPileBlock(
@@ -64,15 +65,15 @@ public class SBlocks {
     );
 
     public static final Block SAND_CAULDRON = new SandCauldronBlock(
-            FabricBlockSettings.copyOf(Blocks.CAULDRON),
-            SandCauldronBlock.REGULAR_SANDSTORM_PREDICATE,
-            SandCauldronBehaviours.EMPTY_SAND_CAULDRON
+            Sandstorms.SandstormType.REGULAR,
+            SandCauldronBehaviours.SAND_CAULDRON_BEHAVIOUR,
+            FabricBlockSettings.copyOf(Blocks.CAULDRON)
     );
 
     public static final Block RED_SAND_CAULDRON = new SandCauldronBlock(
-            FabricBlockSettings.copyOf(Blocks.CAULDRON),
-            SandCauldronBlock.RED_SANDSTORM_PREDICATE,
-            SandCauldronBehaviours.EMPTY_RED_SAND_CAULDRON
+            Sandstorms.SandstormType.RED,
+            SandCauldronBehaviours.RED_SAND_CAULDRON_BEHAVIOUR,
+            FabricBlockSettings.copyOf(Blocks.CAULDRON)
     );
 
     public static void registerBlocks() {

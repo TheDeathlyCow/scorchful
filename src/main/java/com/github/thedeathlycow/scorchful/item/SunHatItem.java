@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -24,7 +25,7 @@ public class SunHatItem extends Item implements Equipment {
 
     private static final Text TOOLTIP = Text.translatable(
             "item.scorchful.sun_hat.tooltip"
-    ).setStyle(Style.EMPTY.withColor(TextColor.parse("blue")));
+    ).setStyle(Style.EMPTY.withColor(Formatting.BLUE));
 
     public SunHatItem(Settings settings) {
         super(settings);

@@ -1,9 +1,13 @@
 package com.github.thedeathlycow.scorchful.block;
 
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.*;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
@@ -19,6 +23,16 @@ import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
 public class SandPileBlock extends FallingBlock {
+
+    public static final MapCodec<SandPileBlock> CODEC = RecordCodecBuilder.mapCodec(
+            instance -> instance.group(
+                            Codec.INT
+                                    .fieldOf("color")
+                                    .forGetter(b -> b.color),
+                            createSettingsCodec()
+                    )
+                    .apply(instance, SandPileBlock::new)
+    );
 
     public static final int MAX_LAYERS = 8;
     public static final IntProperty LAYERS = Properties.LAYERS;
@@ -62,6 +76,11 @@ public class SandPileBlock extends FallingBlock {
 
         return Block.isFaceFullSquare(anchorState.getCollisionShape(world, pos.down()), Direction.UP)
                 || (anchorState.getBlock() instanceof SandPileBlock) && anchorState.get(LAYERS) >= MAX_LAYERS;
+    }
+
+    @Override
+    protected MapCodec<? extends FallingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

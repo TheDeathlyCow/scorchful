@@ -6,7 +6,6 @@
     "client": [
         "ClientPlayNetworkHandlerMixin",
         "DrippingWetPlayerMixin",
-        "EngulfedHeartsMixin",
         "GameRendererAccessor",
         "HeadFeatureRendererMixin",
         "InGameHudMixin",

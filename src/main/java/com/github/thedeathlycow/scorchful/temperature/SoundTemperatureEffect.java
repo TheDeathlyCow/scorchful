@@ -1,22 +1,28 @@
 package com.github.thedeathlycow.scorchful.temperature;
 
+import com.github.thedeathlycow.thermoo.api.ThermooCodecs;
 import com.github.thedeathlycow.thermoo.api.temperature.effects.TemperatureEffect;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
-import com.mojang.serialization.JsonOps;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.floatprovider.FloatProvider;
 
 public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEffect.Config> {
+
+
+    /**
+     * @param configCodec Codec for the config type
+     */
+    public SoundTemperatureEffect(Codec<Config> configCodec) {
+        super(configCodec);
+    }
 
     @Override
     public void apply(LivingEntity victim, ServerWorld serverWorld, Config config) {
@@ -24,7 +30,7 @@ public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEf
             this.playSoundToSource(victim, serverWorld, config);
         } else {
             victim.playSound(
-                    config.sound.value(),
+                    config.sound,
                     config.volume.get(serverWorld.random),
                     config.pitch.get(serverWorld.random)
             );
@@ -36,15 +42,10 @@ public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEf
         return victim.age % config.interval == 0;
     }
 
-    @Override
-    public Config configFromJson(JsonElement json, JsonDeserializationContext context) throws JsonSyntaxException {
-        return Config.fromJson(json);
-    }
-
     private void playSoundToSource(LivingEntity victim, ServerWorld world, Config config) {
         if (victim instanceof ServerPlayerEntity serverPlayer) {
             var packet = new PlaySoundS2CPacket(
-                    config.sound,
+                    RegistryEntry.of(config.sound),
                     config.category,
                     victim.getX(), victim.getY(), victim.getZ(),
                     config.volume.get(world.random),
@@ -57,45 +58,38 @@ public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEf
     }
 
     public record Config(
-            RegistryEntry<SoundEvent> sound,
+            SoundEvent sound,
             SoundCategory category,
             boolean onlyPlayToSource,
             FloatProvider volume,
             FloatProvider pitch,
             int interval
     ) {
-        public static Config fromJson(JsonElement json) throws JsonSyntaxException {
-            JsonObject object = json.getAsJsonObject();
 
-            RegistryEntry<SoundEvent> sound = RegistryEntry.of(
-                    SoundEvent.of(
-                            new Identifier(object.get("sound").getAsString())
-                    )
-            );
-
-            SoundCategory category = object.has("category")
-                    ? SoundCategory.valueOf(object.get("category").getAsString().toLowerCase())
-                    : SoundCategory.MASTER;
-
-
-            boolean onlyPlayToSource = object.has("only_play_to_source")
-                    && object.get("only_play_to_source").getAsBoolean();
-
-
-            FloatProvider volume = FloatProvider.VALUE_CODEC.parse(JsonOps.INSTANCE, object.get("volume"))
-                    .getOrThrow(false, message -> {
-                        throw new JsonSyntaxException(message);
-                    });
-
-            FloatProvider pitch = FloatProvider.VALUE_CODEC.parse(JsonOps.INSTANCE, object.get("pitch"))
-                    .getOrThrow(false, message -> {
-                        throw new JsonSyntaxException(message);
-                    });
-
-            int interval = object.get("interval").getAsInt();
-
-            return new Config(sound, category, onlyPlayToSource, volume, pitch, interval);
-        }
+        public static final Codec<Config> CODEC = RecordCodecBuilder.create(
+                instance -> instance.group(
+                        Registries.SOUND_EVENT.getCodec()
+                                .fieldOf("sound")
+                                .forGetter(Config::sound),
+                        ThermooCodecs.createEnumCodec(SoundCategory.class)
+                                .fieldOf("category")
+                                .orElse(SoundCategory.MASTER)
+                                .forGetter(Config::category),
+                        Codec.BOOL
+                                .fieldOf("only_play_to_source")
+                                .orElse(false)
+                                .forGetter(Config::onlyPlayToSource),
+                        FloatProvider.VALUE_CODEC
+                                .fieldOf("volume")
+                                .forGetter(Config::volume),
+                        FloatProvider.VALUE_CODEC
+                                .fieldOf("pitch")
+                                .forGetter(Config::pitch),
+                        Codec.INT
+                                .fieldOf("interval")
+                                .forGetter(Config::interval)
+                ).apply(instance, Config::new)
+        );
     }
 
 }

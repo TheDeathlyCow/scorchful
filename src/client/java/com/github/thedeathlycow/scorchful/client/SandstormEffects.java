@@ -40,7 +40,7 @@ public class SandstormEffects {
     }
 
     public static void tickSandstormParticles(ClientWorld clientWorld) {
-        if (!clientWorld.isRaining()) {
+        if (!clientWorld.isRaining() || clientWorld.getTickManager().isFrozen()) {
             return;
         }
 

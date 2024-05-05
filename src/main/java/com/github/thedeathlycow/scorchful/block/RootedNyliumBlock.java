@@ -1,7 +1,12 @@
 package com.github.thedeathlycow.scorchful.block;
 
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
-import net.minecraft.block.*;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Fertilizable;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -10,16 +15,29 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.chunk.light.ChunkLightProvider;
 
-import java.util.function.Supplier;
-
 @SuppressWarnings("deprecation")
 public class RootedNyliumBlock extends Block implements Fertilizable {
 
-    private final Supplier<BlockState> rootsProvider;
+    public static final MapCodec<RootedNyliumBlock> CODEC = RecordCodecBuilder.mapCodec(
+            instance -> instance.group(
+                            Registries.BLOCK.getCodec()
+                                    .fieldOf("roots_plant_block")
+                                    .forGetter(b -> b.rootsPlantBlock),
+                            createSettingsCodec()
+                    )
+                    .apply(instance, RootedNyliumBlock::new)
+    );
 
-    public RootedNyliumBlock(Settings settings, Supplier<BlockState> rootsProvider) {
+    private final Block rootsPlantBlock;
+
+    public RootedNyliumBlock(Block rootPlantBlock, Settings settings) {
         super(settings);
-        this.rootsProvider = rootsProvider;
+        this.rootsPlantBlock = rootPlantBlock;
+    }
+
+    @Override
+    protected MapCodec<RootedNyliumBlock> getCodec() {
+        return CODEC;
     }
 
     @Override
@@ -30,7 +48,7 @@ public class RootedNyliumBlock extends Block implements Fertilizable {
     }
 
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
         return world.getBlockState(pos.up()).isAir();
     }
 
@@ -41,7 +59,7 @@ public class RootedNyliumBlock extends Block implements Fertilizable {
 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        world.setBlockState(pos.up(), this.rootsProvider.get());
+        world.setBlockState(pos.up(), this.rootsPlantBlock.getDefaultState());
     }
 
     private static boolean stayAlive(BlockState state, WorldView world, BlockPos pos) {

@@ -5,8 +5,12 @@ import com.github.thedeathlycow.scorchful.particle.SpurtingWaterParticleEffect;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
+import com.github.thedeathlycow.scorchful.server.Sandstorms;
 import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.*;
+import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -38,8 +42,23 @@ import java.util.Map;
 @SuppressWarnings("deprecation")
 public class NetherLilyBlock extends Block {
 
+    public static final MapCodec<NetherLilyBlock> CODEC = RecordCodecBuilder.mapCodec(
+            instance -> instance.group(
+                            NetherLilyBehaviour.CODEC
+                                    .fieldOf("behaviors")
+                                    .forGetter(block -> block.behaviorMap),
+                            createSettingsCodec()
+                    )
+                    .apply(instance, NetherLilyBlock::new)
+    );
+
+
+    public static final int MIN_LEVEL = 0;
+
+    public static final int MAX_LEVEL = 3;
+
     public static final IntProperty WATER_SATURATION_LEVEL = IntProperty.of(
-            "water_level", 0, 3
+            "water_level", MIN_LEVEL, MAX_LEVEL
     );
 
     private static final VoxelShape SHAPE = Block.createCuboidShape(
@@ -48,9 +67,9 @@ public class NetherLilyBlock extends Block {
     );
 
 
-    private final Map<Item, NetherLilyBehaviour> behaviorMap;
+    private final NetherLilyBehaviour.NetherLilyBehaviourMap behaviorMap;
 
-    public NetherLilyBlock(Settings settings, Map<Item, NetherLilyBehaviour> behaviorMap) {
+    public NetherLilyBlock(NetherLilyBehaviour.NetherLilyBehaviourMap behaviorMap, Settings settings) {
         super(settings);
         this.behaviorMap = behaviorMap;
     }
@@ -59,6 +78,11 @@ public class NetherLilyBlock extends Block {
         BlockState blockState = state.with(WATER_SATURATION_LEVEL, level);
         world.setBlockState(pos, blockState);
         world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(blockState));
+    }
+
+    @Override
+    protected MapCodec<? extends NetherLilyBlock> getCodec() {
+        return CODEC;
     }
 
     @Override
@@ -82,7 +106,7 @@ public class NetherLilyBlock extends Block {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getStackInHand(hand);
-        NetherLilyBehaviour behaviour = this.behaviorMap.get(itemStack.getItem());
+        NetherLilyBehaviour behaviour = this.behaviorMap.map().get(itemStack.getItem());
         return behaviour.interact(state, world, pos, player, hand, itemStack);
     }
 
@@ -95,7 +119,7 @@ public class NetherLilyBlock extends Block {
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         int saturationLevel = state.get(WATER_SATURATION_LEVEL);
 
-        if (saturationLevel != 3) {
+        if (saturationLevel != MAX_LEVEL) {
             return;
         }
 
@@ -134,7 +158,7 @@ public class NetherLilyBlock extends Block {
 
     private void tryGrow(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         int saturation = state.get(WATER_SATURATION_LEVEL);
-        if (saturation >= 3 || random.nextInt(7) != 0) {
+        if (saturation >= MAX_LEVEL) {
             return;
         }
 
