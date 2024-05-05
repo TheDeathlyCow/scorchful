@@ -37,22 +37,28 @@
 		}
 	],
 	"depends": {
-		"fabricloader": ">=0.15.7",
-		"minecraft": "~1.20.1",
+		"fabricloader": ">=0.15.10",
+		"minecraft": "1.20.4",
 		"java": ">=17",
-		"fabric-api": ">=0.91.0",
-		"thermoo": ">=2.3"
+		"fabric-api": ">=0.97.0",
+		"thermoo": ">=3.1.2"
 	},
 	"suggests": {
-		"frostiful": "*"
-	},
-	"breaks": {
-		"toughasnails": "*"
+		"frostiful": "*",
+		"thermoo-patches": "*"
 	},
 	"accessWidener": "scorchful.accesswidener",
 	"custom": {
 		"cardinal-components": [
 			"scorchful:player"
-		]
+		],
+		"modmenu": {
+			"links": {
+				"modmenu.discord": "https://discord.gg/aqASuWebRU",
+				"modmenu.wiki": "https://github.com/TheDeathlyCow/scorchful/wiki",
+				"modmenu.kofi": "https://ko-fi.com/thedeathlycow",
+				"modmenu.modrinth": "https://modrinth.com/mod/scorchful"
+			}
+		}
 	}
 }
