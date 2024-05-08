@@ -1,19 +1,14 @@
 {
     "parent": "minecraft:recipes/root",
     "criteria": {
-        "in_scorching_biome": {
+        "is_player_warm": {
             "trigger": "minecraft:location",
             "conditions": {
                 "player": [
                     {
-                        "condition": "minecraft:entity_properties",
-                        "entity": "this",
-                        "predicate": {
-                            "thermoo.temperature": {
-                                "scale": {
-                                    "min": 0.25
-                                }
-                            }
+                        "condition": "thermoo:temperature",
+                        "scale": {
+                            "min": 0.25
                         }
                     }
                 ]
@@ -28,7 +23,7 @@
     },
     "requirements": [
         [
-            "in_scorching_biome",
+            "is_player_warm",
             "has_the_recipe"
         ]
     ],
