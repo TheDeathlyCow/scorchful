@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.block.*;
+import com.github.thedeathlycow.scorchful.block.mirage.MirageBlock;
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
@@ -11,6 +12,15 @@ import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 
 public class SBlocks {
+
+    public static final Block MIRAGE_BLOCK = new MirageBlock(
+            FabricBlockSettings.create()
+                    .mapColor(MapColor.DARK_RED)
+                    .breakInstantly()
+                    .noCollision()
+                    .sounds(BlockSoundGroup.WEEPING_VINES)
+                    .pistonBehavior(PistonBehavior.DESTROY)
+    );
 
     public static final Block CRIMSON_LILY = new CrimsonLilyBlock(
             NetherLilyBehaviours.CRIMSON_LILY_BEHAVIOUR,

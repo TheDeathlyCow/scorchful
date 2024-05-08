@@ -47,6 +47,7 @@ public class Scorchful implements ModInitializer {
         ScorchfulConfig.updateConfig(AutoConfig.getConfigHolder(ScorchfulConfig.class));
 
         SBlocks.registerBlocks();
+        SBlockEntityTypes.registerAll();
         SItems.registerItems();
         SItemGroups.registerAll();
         SSoundEvents.registerAll();
