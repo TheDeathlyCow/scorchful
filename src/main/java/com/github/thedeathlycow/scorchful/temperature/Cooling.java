@@ -17,7 +17,7 @@ public class Cooling {
 
             int temperatureChange = config.thirstConfig.getTemperatureFromWetness();
             World world = entity.getWorld();
-            if (world.getBiome(entity.getBlockPos()).isIn(SBiomeTags.HUMID_BIOMES)) {
+            if (!entity.isSubmergedInWater() && world.getBiome(entity.getBlockPos()).isIn(SBiomeTags.HUMID_BIOMES)) {
                 float efficiency = config.thirstConfig.getHumidBiomeSweatEfficiency();
                 temperatureChange = MathHelper.floor(temperatureChange * efficiency);
             }
