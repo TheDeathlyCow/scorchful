@@ -24,6 +24,6 @@ public class MirageBlock extends BlockWithEntity {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new MirageBlockEntity(pos, state);
+        return null;
     }
 }

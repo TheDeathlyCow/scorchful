@@ -15,6 +15,11 @@ public class SBlocks {
 
     public static final Block MIRAGE_BLOCK = new MirageBlock(
             FabricBlockSettings.create()
+                    .mapColor(MapColor.DARK_RED)
+                    .breakInstantly()
+                    .noCollision()
+                    .sounds(BlockSoundGroup.WEEPING_VINES)
+                    .pistonBehavior(PistonBehavior.DESTROY)
     );
 
     public static final Block CRIMSON_LILY = new CrimsonLilyBlock(
@@ -82,7 +87,6 @@ public class SBlocks {
     );
 
     public static void registerBlocks() {
-        register("mirage_block", MIRAGE_BLOCK);
         register("crimson_lily", CRIMSON_LILY);
         register("warped_lily", WARPED_LILY);
         register("rooted_netherrack", ROOTED_NETHERRACK);
