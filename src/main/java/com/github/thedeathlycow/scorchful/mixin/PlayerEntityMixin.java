@@ -1,8 +1,7 @@
 package com.github.thedeathlycow.scorchful.mixin;
 
 import com.github.thedeathlycow.scorchful.item.TurtleArmorEffects;
-import com.github.thedeathlycow.scorchful.mirage.VisionSpawner;
-import net.minecraft.entity.LivingEntity;
+import com.github.thedeathlycow.scorchful.temperature.VisionSpawner;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

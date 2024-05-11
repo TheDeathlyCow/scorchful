@@ -50,6 +50,7 @@ public class Scorchful implements ModInitializer {
         SBlockEntityTypes.registerAll();
         SItems.registerItems();
         SItemGroups.registerAll();
+        SEntityTypes.registerAll();
         SSoundEvents.registerAll();
         STemperatureEffects.registerAll();
         SEnchantments.registerAll();
