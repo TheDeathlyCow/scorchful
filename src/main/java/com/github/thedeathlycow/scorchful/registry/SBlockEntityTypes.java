@@ -1,7 +1,6 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.block.mirage.MirageBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -10,13 +9,9 @@ import net.minecraft.registry.Registry;
 
 public class SBlockEntityTypes {
 
-    public static final BlockEntityType<MirageBlockEntity> MIRAGE = create(
-            MirageBlockEntity::new,
-            SBlocks.MIRAGE_BLOCK
-    );
+
 
     public static void registerAll() {
-        register("mirage", MIRAGE);
     }
 
     public static void register(String name, BlockEntityType<?> type) {
