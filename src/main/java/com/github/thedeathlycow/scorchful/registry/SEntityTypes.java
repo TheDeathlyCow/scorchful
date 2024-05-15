@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.entity.DesertVision;
+import com.github.thedeathlycow.scorchful.entity.DesertVisionEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
@@ -9,8 +9,8 @@ import net.minecraft.registry.Registry;
 
 public class SEntityTypes {
 
-    public static final EntityType<DesertVision> DESERT_VISION = EntityType.Builder.create(
-                    DesertVision::new,
+    public static final EntityType<DesertVisionEntity> DESERT_VISION = EntityType.Builder.create(
+                    DesertVisionEntity::new,
                     SpawnGroup.AMBIENT
             )
             .setDimensions(0.6f, 1.95f)
