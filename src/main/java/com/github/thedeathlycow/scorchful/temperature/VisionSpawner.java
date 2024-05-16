@@ -28,10 +28,10 @@ public class VisionSpawner {
         DesertVisionEntity vision = SEntityTypes.DESERT_VISION.create(serverWorld);
         BlockPos pos = cause.getBlockPos();
         vision.setPos(pos.getX(), pos.getY(), pos.getZ());
-        DesertVisionType visionType = DesertVisionType.choose(cause.getRandom());
-        vision.setVision(cause, visionType);
-
-        serverWorld.spawnEntity(vision);
+        if (serverWorld.spawnEntity(vision)) {
+            DesertVisionType visionType = DesertVisionType.choose(cause.getRandom());
+            vision.setVision(cause, visionType);
+        }
     }
 
 

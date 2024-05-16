@@ -1,11 +1,13 @@
 package com.github.thedeathlycow.scorchful.entity;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.mixin.BlockDisplayAccess;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.decoration.DisplayEntity;
+import net.minecraft.entity.mob.HuskEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtException;
@@ -16,20 +18,29 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class DesertVisionEntity extends Entity {
 
+    private static final String VISION_TYPE_NBT_KEY = "vision_type";
+
     @Nullable
     private DesertVisionType visionType = null;
-
-    private static final String VISION_TYPE_NBT_KEY = "vision_type";
 
     public DesertVisionEntity(EntityType<?> type, World world) {
         super(type, world);
     }
 
-    public void setVision(PlayerEntity cause, DesertVisionType visionType) {
+    @Override
+    protected void initDataTracker() {
+    }
+
+    public DesertVisionType getVisionType() {
+        return this.visionType;
+    }
+
+    public void setVision(PlayerEntity cause, @NotNull DesertVisionType visionType) {
         if (this.visionType != null) {
             throw new IllegalStateException("Desert vision type already set for " + this);
         }
@@ -41,14 +52,14 @@ public class DesertVisionEntity extends Entity {
             return;
         }
 
-        if (this.visionType == DesertVisionType.DESERT_WELL) {
-            spawnFakeDesertWell(this, (ServerWorld) this.getWorld(), this.getBlockPos());
+        switch (this.visionType) {
+            case DESERT_WELL -> this.spawnDesertWellVision(this, (ServerWorld) this.getWorld(), this.getBlockPos());
+            case HUSK -> this.spawnHuskVision((ServerWorld) this.getWorld(), this.getBlockPos());
         }
     }
 
     @Override
     public void remove(RemovalReason reason) {
-
         this.getPassengerList().forEach(passenger -> {
             if (passenger instanceof DisplayEntity.BlockDisplayEntity) {
                 passenger.remove(reason);
@@ -65,35 +76,36 @@ public class DesertVisionEntity extends Entity {
     }
 
     @Override
-    protected void initDataTracker() {
-
-    }
-
-    @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {
-
-        this.visionType = Util.getResult(
-                DesertVisionType.CODEC.decode(NbtOps.INSTANCE, nbt.get(VISION_TYPE_NBT_KEY)),
-                NbtException::new
-        ).getFirst();
+        String visionName = nbt.getString(VISION_TYPE_NBT_KEY);
+        try {
+            this.visionType = DesertVisionType.valueOf(visionName);
+        } catch (IllegalArgumentException e) {
+            Scorchful.LOGGER.error("Unknown desert vision type: " + visionName);
+            this.visionType = null;
+        }
     }
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt) {
-        nbt.put(
-                VISION_TYPE_NBT_KEY,
-                Util.getResult(
-                        DesertVisionType.CODEC.encode(
-                                this.visionType,
-                                NbtOps.INSTANCE,
-                                nbt
-                        ),
-                        NbtException::new
-                )
-        );
+        if (this.visionType != null) {
+            nbt.putString(
+                    VISION_TYPE_NBT_KEY,
+                    this.visionType.toString()
+            );
+        }
     }
 
-    private static void spawnFakeDesertWell(DesertVisionEntity desertVision, ServerWorld world, BlockPos blockPos) {
+    private void spawnHuskVision(ServerWorld world, BlockPos pos) {
+        HuskEntity entity = this.spawnAndRide(EntityType.HUSK, world, pos);
+        if (entity != null) {
+            entity.setInvulnerable(true);
+            entity.setAiDisabled(true);
+            entity.setNoGravity(true);
+        }
+    }
+
+    private void spawnDesertWellVision(DesertVisionEntity desertVision, ServerWorld world, BlockPos blockPos) {
         final BlockState sand = Blocks.SAND.getDefaultState();
         final BlockState slab = Blocks.SANDSTONE_SLAB.getDefaultState();
         final BlockState wall = Blocks.SANDSTONE.getDefaultState();
@@ -151,13 +163,21 @@ public class DesertVisionEntity extends Entity {
         }
     }
 
-    private static void setBlockState(DesertVisionEntity parent, ServerWorld world, BlockPos pos, BlockState state) {
-        var entity = EntityType.BLOCK_DISPLAY.create(world);
+    private void setBlockState(DesertVisionEntity parent, ServerWorld world, BlockPos pos, BlockState state) {
+        DisplayEntity.BlockDisplayEntity entity = spawnAndRide(EntityType.BLOCK_DISPLAY, world, pos);
         if (entity != null) {
             ((BlockDisplayAccess) entity).scorchful$setBlockState(state);
-            entity.startRiding(parent, true);
+        }
+    }
+
+    @Nullable
+    private <T extends Entity> T spawnAndRide(EntityType<T> type, ServerWorld world, BlockPos pos) {
+        T entity = type.create(world);
+        if (entity != null) {
+            entity.startRiding(this, true);
             entity.setPos(pos.getX(), pos.getY(), pos.getZ());
             world.spawnEntity(entity);
         }
+        return entity;
     }
 }
