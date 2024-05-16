@@ -30,6 +30,7 @@ public class DesertVisionEntity extends Entity {
 
     public DesertVisionEntity(EntityType<?> type, World world) {
         super(type, world);
+        this.setNoGravity(true);
     }
 
     @Override
