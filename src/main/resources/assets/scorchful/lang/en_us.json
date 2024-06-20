@@ -21,6 +21,7 @@
     "item.scorchful.tooltip.hydrating": "Hydrating \uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
     "item.scorchful.tooltip.parching": "Parching ☀",
     
+
     "block.scorchful.crimson_lily": "Crimson Lily",
     "block.scorchful.warped_lily": "Warped Lily",
     "block.scorchful.rooted_netherrack": "Rooted Netherrack",
@@ -31,13 +32,17 @@
     "block.scorchful.sand_cauldron": "Sand Cauldron",
     "block.scorchful.red_sand_cauldron": "Red Sand Cauldron",
     
+
     "enchantment.scorchful.rehydration": "Rehydration",
     "enchantment.scorchful.rehydration.desc": "Replenishes body water lost from sweating",
     
+
     "effect.scorchful.heat_stroke": "Heat Stroke",
     
+
     "death.attack.scorchful.heat": "%1$s couldn't handle the heat",
     "death.attack.scorchful.heat.player": "%1$s couldn't handle the heat of %2$s",
+    
     
     "advancement.scorchful.adventure.drink_cactus_juice.title": "It's the Quenchiest!",
     "advancement.scorchful.adventure.drink_cactus_juice.description": "Drink a Bottle of Cactus Juice",
