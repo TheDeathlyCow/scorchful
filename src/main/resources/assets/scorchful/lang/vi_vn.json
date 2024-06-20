@@ -21,6 +21,7 @@
   "item.scorchful.tooltip.hydrating": "Cung Cấp Nước \uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
   "item.scorchful.tooltip.parching": "Khô Khát ☀",
 
+
   "block.scorchful.crimson_lily": "Hoa Huệ Đỏ Thẫm",
   "block.scorchful.warped_lily": "Hoa Huệ Kỳ Dị",
   "block.scorchful.rooted_netherrack": "Netherrack Có Rễ",
@@ -31,14 +32,18 @@
   "block.scorchful.sand_cauldron": "Vạc Cát",
   "block.scorchful.red_sand_cauldron": "Vạc Cát Đỏ",
 
+
   "enchantment.scorchful.rehydration": "Tái Cung Cấp Nước",
   "enchantment.scorchful.rehydration.desc": "Bổ sung nước đã mất do đổ mồ hôi",
 
+
   "effect.scorchful.heat_stroke": "Sốc Nhiệt",
+
 
   "death.attack.scorchful.heat": "%1$s không thể chịu nổi cái nóng",
   "death.attack.scorchful.heat.player": "%1$s không thể chịu nổi cái nóng từ %2$s",
 
+  
   "advancement.scorchful.adventure.drink_cactus_juice.title": "Nó Làm Dịu Cơn Khát!",
   "advancement.scorchful.adventure.drink_cactus_juice.description": "Uống một bình nước ép xương rồng",
   "advancements.scorchful.husbandry.obtain_turtle_armor.title": "Che Chắn",
