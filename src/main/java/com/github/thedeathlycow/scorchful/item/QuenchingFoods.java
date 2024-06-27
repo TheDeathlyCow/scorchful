@@ -7,27 +7,33 @@ import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.ThirstConfig;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
 public class QuenchingFoods {
 
-    public static void appendTooltip(ItemStack stack, List<Text> tooltip) {
-        appendTooltip(stack, tooltip, QuenchingLevel.forItem(stack));
-    }
 
-    public static void appendTooltip(ItemStack stack, List<Text> tooltip, @Nullable QuenchingLevel level) {
+    public static void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip) {
+        QuenchingLevel level = QuenchingLevel.forItem(stack);
         if (level != null && !ScorchfulIntegrations.isDehydrationLoaded()) {
-            tooltip.add(level.tooltipText);
+            if (context.isAdvanced()) {
+                addTooltipBeforeAdvanced(stack, tooltip, level);
+            } else {
+                tooltip.add(level.tooltipText);
+            }
         }
     }
 
@@ -96,6 +102,18 @@ public class QuenchingFoods {
             }
 
             return null;
+        }
+    }
+
+    private static void addTooltipBeforeAdvanced(ItemStack stack, List<Text> tooltip, QuenchingLevel level) {
+        Identifier identifier = Registries.ITEM.getId(stack.getItem());
+        Text idAsText = Text.literal(identifier.toString());
+
+        for (int i = tooltip.size() - 1; i >= 0; i--) {
+            if (tooltip.get(i).contains(idAsText)) {
+                tooltip.add(i, level.tooltipText);
+                return;
+            }
         }
     }
 

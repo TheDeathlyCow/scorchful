@@ -11,10 +11,8 @@
         "compat.frostiful.absent.EntityMixin",
         "server.SandAccumulationServerWorldMixin",
         "thirst.ConsumeItemCriterionMixin",
-        "thirst.ItemMixin",
         "thirst.LivingEntityMixin",
-        "thirst.PotionEntityMixin",
-        "thirst.PotionItemMixin"
+        "thirst.PotionEntityMixin"
     ],
     "injectors": {
         "defaultRequire": 1
