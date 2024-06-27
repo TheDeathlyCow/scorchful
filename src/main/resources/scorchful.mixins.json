@@ -15,7 +15,8 @@
         "thirst.ItemMixin",
         "thirst.LivingEntityMixin",
         "thirst.PotionEntityMixin",
-        "thirst.PotionItemMixin"
+        "thirst.PotionItemMixin",
+        "vision.HuskEntityMixin"
     ],
     "injectors": {
         "defaultRequire": 1

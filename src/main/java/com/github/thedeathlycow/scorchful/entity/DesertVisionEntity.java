@@ -21,12 +21,17 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DesertVisionEntity extends Entity {
 
     private static final String VISION_TYPE_NBT_KEY = "vision_type";
 
     @Nullable
     private DesertVisionType visionType = null;
+
+    private final List<Entity> children = new ArrayList<>();
 
     public DesertVisionEntity(EntityType<?> type, World world) {
         super(type, world);
@@ -35,6 +40,11 @@ public class DesertVisionEntity extends Entity {
 
     @Override
     protected void initDataTracker() {
+    }
+
+    @Override
+    public boolean shouldSave() {
+        return false;
     }
 
     public DesertVisionType getVisionType() {
@@ -61,19 +71,8 @@ public class DesertVisionEntity extends Entity {
 
     @Override
     public void remove(RemovalReason reason) {
-        this.getPassengerList().forEach(passenger -> {
-            if (passenger instanceof DisplayEntity.BlockDisplayEntity) {
-                passenger.remove(reason);
-            }
-        });
-
+        this.children.forEach(Entity::discard);
         super.remove(reason);
-    }
-
-
-    @Override
-    public Vec3d getPassengerRidingPos(Entity passenger) {
-        return passenger.getPos();
     }
 
     @Override
@@ -175,7 +174,7 @@ public class DesertVisionEntity extends Entity {
     private <T extends Entity> T spawnAndRide(EntityType<T> type, ServerWorld world, BlockPos pos) {
         T entity = type.create(world);
         if (entity != null) {
-            entity.startRiding(this, true);
+            this.children.add(entity);
             entity.setPos(pos.getX(), pos.getY(), pos.getZ());
             world.spawnEntity(entity);
         }
