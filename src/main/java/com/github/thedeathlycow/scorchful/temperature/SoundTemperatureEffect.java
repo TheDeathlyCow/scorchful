@@ -1,20 +1,26 @@
 package com.github.thedeathlycow.scorchful.temperature;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.thermoo.api.ThermooCodecs;
 import com.github.thedeathlycow.thermoo.api.temperature.effects.TemperatureEffect;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.floatprovider.FloatProvider;
 
 public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEffect.Config> {
+
+
+    public static final Identifier PACKET_ID = Scorchful.id("play_sound_temperature_effect");
 
 
     /**
@@ -44,16 +50,17 @@ public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEf
 
     private void playSoundToSource(LivingEntity victim, ServerWorld world, Config config) {
         if (victim instanceof ServerPlayerEntity serverPlayer) {
-            var packet = new PlaySoundS2CPacket(
-                    RegistryEntry.of(config.sound),
-                    config.category,
-                    victim.getX(), victim.getY(), victim.getZ(),
-                    config.volume.get(world.random),
-                    config.pitch.get(world.random),
-                    world.getSeed()
-            );
+            var random = victim.getRandom();
 
-            serverPlayer.networkHandler.sendPacket(packet);
+            PacketByteBuf buf = PacketByteBufs.create();
+
+            config.sound.writeBuf(buf);
+            buf.writeEnumConstant(config.category);
+            buf.writeFloat(config.volume.get(random));
+            buf.writeFloat(config.pitch.get(random));
+            buf.writeLong(world.getSeed());
+
+            ServerPlayNetworking.send(serverPlayer, PACKET_ID, buf);
         }
     }
 
