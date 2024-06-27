@@ -13,6 +13,8 @@ public class ClientConfig implements ConfigData {
 
     boolean doSunHatShading = true;
 
+    boolean enableSoundTemperatureEffects = true;
+
     @ConfigEntry.Gui.Tooltip
     boolean enableHeatStrokePostProcessing = true;
 
@@ -41,6 +43,10 @@ public class ClientConfig implements ConfigData {
 
     public float getSunHatShadeOpacity() {
         return sunHatShadeOpacity;
+    }
+
+    public boolean enableSoundTemperatureEffects() {
+        return enableSoundTemperatureEffects;
     }
 
     public boolean enableHeatStrokePostProcessing() {

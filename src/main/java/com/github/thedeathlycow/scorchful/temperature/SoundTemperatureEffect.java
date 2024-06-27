@@ -9,6 +9,16 @@ import com.mojang.serialization.JsonOps;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
 import net.minecraft.registry.entry.RegistryEntry;
+import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.thermoo.api.ThermooCodecs;
+import com.github.thedeathlycow.thermoo.api.temperature.effects.TemperatureEffect;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -26,8 +36,7 @@ public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEf
             victim.playSound(
                     config.sound.value(),
                     config.volume.get(serverWorld.random),
-                    config.pitch.get(serverWorld.random)
-            );
+                    config.pitch.get(serverWorld.random));
         }
     }
 
@@ -43,16 +52,17 @@ public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEf
 
     private void playSoundToSource(LivingEntity victim, ServerWorld world, Config config) {
         if (victim instanceof ServerPlayerEntity serverPlayer) {
-            var packet = new PlaySoundS2CPacket(
-                    config.sound,
-                    config.category,
-                    victim.getX(), victim.getY(), victim.getZ(),
-                    config.volume.get(world.random),
-                    config.pitch.get(world.random),
-                    world.getSeed()
-            );
+            var random = victim.getRandom();
 
-            serverPlayer.networkHandler.sendPacket(packet);
+            PacketByteBuf buf = PacketByteBufs.create();
+
+            config.sound.writeBuf(buf);
+            buf.writeEnumConstant(config.category);
+            buf.writeFloat(config.volume.get(random));
+            buf.writeFloat(config.pitch.get(random));
+            buf.writeLong(world.getSeed());
+
+            ServerPlayNetworking.send(serverPlayer, PACKET_ID, buf);
         }
     }
 
@@ -62,25 +72,20 @@ public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEf
             boolean onlyPlayToSource,
             FloatProvider volume,
             FloatProvider pitch,
-            int interval
-    ) {
+            int interval) {
         public static Config fromJson(JsonElement json) throws JsonSyntaxException {
             JsonObject object = json.getAsJsonObject();
 
             RegistryEntry<SoundEvent> sound = RegistryEntry.of(
                     SoundEvent.of(
-                            new Identifier(object.get("sound").getAsString())
-                    )
-            );
+                            new Identifier(object.get("sound").getAsString())));
 
             SoundCategory category = object.has("category")
                     ? SoundCategory.valueOf(object.get("category").getAsString().toLowerCase())
                     : SoundCategory.MASTER;
 
-
             boolean onlyPlayToSource = object.has("only_play_to_source")
                     && object.get("only_play_to_source").getAsBoolean();
-
 
             FloatProvider volume = FloatProvider.VALUE_CODEC.parse(JsonOps.INSTANCE, object.get("volume"))
                     .getOrThrow(false, message -> {
