@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful;
 
+import com.github.thedeathlycow.scorchful.client.HeatStrokeShaderEffect;
 import com.github.thedeathlycow.scorchful.client.SandstormEffects;
 import com.github.thedeathlycow.scorchful.client.SandstormSounds;
 import com.github.thedeathlycow.scorchful.hud.BurningHeartsOverlay;
@@ -39,6 +40,7 @@ public class ScorchfulClient implements ClientModInitializer {
         StatusBarOverlayRenderEvents.AFTER_MOUNT_HEALTH_BAR.register(MountHealthOverlay.INSTANCE);
         ItemTooltipCallback.EVENT.register(QuenchingFoods::appendTooltip);
         ClientPlayNetworking.registerGlobalReceiver(SoundTemperatureEffect.PACKET_ID, SoundTemperatureEffectPacketListener.INSTANCE);
+        HeatStrokeShaderEffect.INSTANCE.initialize();
     }
 
 }
