@@ -6,7 +6,7 @@
         {
             "intarget": "minecraft:main",
             "outtarget": "swap",
-            "name": "scorchful_periodic_blur",
+            "name": "scorchful:periodic_blur",
             "uniforms": [
                 {
                     "name": "BlurDirection",
@@ -21,7 +21,7 @@
         {
             "intarget": "swap",
             "outtarget": "minecraft:main",
-            "name": "scorchful_wobble"
+            "name": "scorchful:wobble"
         }
     ]
 }

@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.mixin.client;
 
-import com.github.thedeathlycow.scorchful.client.HeatStrokeEffects;
+import com.github.thedeathlycow.scorchful.client.HeatStrokeShaderEffect;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientCommonNetworkHandler;
 import net.minecraft.client.network.ClientConnectionState;
@@ -10,7 +10,6 @@ import net.minecraft.network.ClientConnection;
 import net.minecraft.network.packet.s2c.play.EntityStatusEffectS2CPacket;
 import net.minecraft.network.packet.s2c.play.PlayerRespawnS2CPacket;
 import net.minecraft.network.packet.s2c.play.RemoveEntityStatusEffectS2CPacket;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -33,7 +32,7 @@ public abstract class ClientPlayNetworkHandlerMixin extends ClientCommonNetworkH
             at = @At("TAIL")
     )
     private void onEffectAdded(EntityStatusEffectS2CPacket packet, CallbackInfo ci) {
-        HeatStrokeEffects.onEffectAdded(packet, this.world, this.client);
+        HeatStrokeShaderEffect.INSTANCE.onEffectAdded(packet, this.world, this.client);
     }
 
     @Inject(
@@ -41,7 +40,7 @@ public abstract class ClientPlayNetworkHandlerMixin extends ClientCommonNetworkH
             at = @At("TAIL")
     )
     private void onEffectRemoved(RemoveEntityStatusEffectS2CPacket packet, CallbackInfo ci) {
-        HeatStrokeEffects.onEffectRemoved(packet, this.world, this.client);
+        HeatStrokeShaderEffect.INSTANCE.onEffectRemoved(packet, this.world, this.client);
     }
 
     @Inject(
@@ -49,7 +48,7 @@ public abstract class ClientPlayNetworkHandlerMixin extends ClientCommonNetworkH
             at = @At("TAIL")
     )
     private void onPlayerRespawn(PlayerRespawnS2CPacket packet, CallbackInfo ci) {
-        HeatStrokeEffects.onPlayerRespawn(packet, this.world, this.client);
+        HeatStrokeShaderEffect.INSTANCE.onPlayerRespawn(packet, this.world, this.client);
     }
 
 }

@@ -1,0 +1,138 @@
+{
+    "item_group.scorchful": "Scorchful",
+    
+    "item.scorchful.water_skin": "Leili",
+    "item.scorchful.water_skin.empty": "Tyhjä Leili",
+    "item.scorchful.water_skin.partially_filled": "Osittain Täytetty Leili",
+    "item.scorchful.water_skin.filled": "Täytetty Leili",
+    "item.scorchful.water_skin.tooltip.count": "Hörppyjä jäljellä %1$s / %2$s",
+    "item.scorchful.water_skin.tooltip.empty": "Tyhjä",
+    
+    "item.scorchful.sun_hat": "Hellehattu",
+    "item.scorchful.sun_hat.tooltip": "Vähentää lämpöä auringosta kun on päällä",
+    "item.scorchful.cactus_juice": "Kaktusmehupullo",
+    
+    "item.scorchful.turtle_chestplate": "Kilpikonnan Kilpi",
+    "item.scorchful.turtle_leggings": "Kilpikonnan polvisuojat",
+    "item.scorchful.turtle_boots": "Kilpikonnan räpylät",
+    
+    "item.scorchful.tooltip.refreshing": "Raikastavaa \uD83C\uDF0A",
+    "item.scorchful.tooltip.sustaining": "Ylläpitävää \uD83C\uDF0A\uD83C\uDF0A",
+    "item.scorchful.tooltip.hydrating": "Nesteyttävää \uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
+    "item.scorchful.tooltip.parching": "Kuivuttavaa ☀",
+    
+    
+    "block.scorchful.crimson_lily": "Karmiinililja",
+    "block.scorchful.warped_lily": "Kummalilja",
+    "block.scorchful.rooted_netherrack": "Juurtunut Netherrack",
+    "block.scorchful.rooted_crimson_nylium": "Juurtununt Karmiinisienirihmasto",
+    "block.scorchful.rooted_warped_nylium": "Juurtunut Kummasienirihmasto",
+    "block.scorchful.sand_pile": "Hiekkakasa",
+    "block.scorchful.red_sand_pile": "Punahiekkakasa",
+    "block.scorchful.sand_cauldron": "Hiekkapata",
+    "block.scorchful.red_sand_cauldron": "Punahiekkapata",
+    
+    
+    "enchantment.scorchful.rehydration": "Uudelleennesteytys",
+    "enchantment.scorchful.rehydration.desc": "Uudelleentäyttää kehon vettä mikä menetettiin hikoilemalla",
+    
+    
+    "effect.scorchful.heat_stroke": "Lämpöhalvaus",
+    
+    
+    "death.attack.scorchful.heat": "%1$s ei kestänyt lämpöä",
+    "death.attack.scorchful.heat.player": "%1$s ei voinut kestää lämpöä minkä %2$s tarjosi",
+    
+    
+    "advancement.scorchful.adventure.drink_cactus_juice.title": "Sammuttaa janon parhaiten!",
+    "advancement.scorchful.adventure.drink_cactus_juice.description": "Juo pullo kaktusmehua",
+    "advancements.scorchful.husbandry.obtain_turtle_armor.title": "Kummarru ja piiloudu",
+    "advancements.scorchful.husbandry.obtain_turtle_armor.description": "Hanki pala kilpikonnan haarniskaa",
+    
+    "subtitles.item.scorchful.water_skin.fill": "Leili täyttyy",
+    "subtitles.temperature_effect.scorchful.heartbeat": "Sydän sykkii",
+    "subtitles.enchantment.scorchful.rehydration": "Pelaaja uudelleennesteytyy",
+    "subtitles.block.scorchful.crimson_lily.squelch": "Karmiinililja tukahtuu",
+    "subtitles.weather.scorchful.sandstorm": "Tuuli puhaltaa",
+    "subtitles.scorchful.entity.gulp": "Pelaaja kulauttaa",
+    
+    "stat.scorchful.fill_crimson_lily": "Täytetty Karmiinililja",
+    "stat.scorchful.soaked_by_crimson_lily": "Kasteltiin läpimäräksi Karmiinililjalla",
+    "stat.scorchful.use_warped_lily": "Kerää vettä Kummaliljasta",
+    
+    "text.autoconfig.scorchful.option.clientConfig": "Asiakkaan Asetukset",
+    "text.autoconfig.scorchful.option.clientConfig.doBurningHeartOverlay": "Näytä palavat sydämmet päällimmäisenä",
+    "text.autoconfig.scorchful.option.clientConfig.doSunHatShading": "Hellehattu aiheuttaa varjoa",
+    "text.autoconfig.scorchful.option.clientConfig.enableHeatStrokePostProcessing": "Lämpöhalvauksen jälkikäsittelyt",
+    "text.autoconfig.scorchful.option.clientConfig.enableHeatStrokePostProcessing.@Tooltip": "Lämpöhalvaus aiheuttaa vaikutuksia kuin näytön sumentumista ja aaltoilua. Voi aiheuttaa viiveitä ilman hyvää GPUta.",
+    "text.autoconfig.scorchful.option.clientConfig.sunHatShadeOpacity": "Hellehatun varjon läpinäkymättömyys",
+    "text.autoconfig.scorchful.option.clientConfig.enableSandstormParticles": "Hiekkamyrskyn hiukkaset",
+    "text.autoconfig.scorchful.option.clientConfig.enableSandstormFog": "Hiekkamyrskyn sumuisuus",
+    "text.autoconfig.scorchful.option.clientConfig.enableSandstormSounds": "Hiekkamyrskyn äänet",
+    "text.autoconfig.scorchful.option.clientConfig.sandStormParticleRenderDistance": "Hiekkämyrskyhiukkasten näköetäisyys",
+    "text.autoconfig.scorchful.option.clientConfig.sandStormParticleRarity": "Hiekkämyrskyhiukkasten harvinaisuus",
+    "text.autoconfig.scorchful.option.clientConfig.sandStormParticleVelocity": "Hiekkamyskyhiukkasten Z-akselin nopeus",
+    "text.autoconfig.scorchful.option.clientConfig.sandStormFogStart": "Hiekkamyrskysumun aloitusetäisyys",
+    "text.autoconfig.scorchful.option.clientConfig.sandStormFogEnd": "Hiekkamyrskysumun loppuetäisyys",
+    
+    "text.autoconfig.scorchful.option.heatingConfig": "Lämmitysasetukset",
+    "text.autoconfig.scorchful.option.heatingConfig.doPassiveHeating": "Passiivinen lämmitys",
+    "text.autoconfig.scorchful.option.heatingConfig.maxPassiveHeatingScale": "Maksimi passiivisen lämmityksen prosentti (0-1)",
+    "text.autoconfig.scorchful.option.heatingConfig.enableTurtleArmorEffects": "Kilpikonnapanssarin tilavaikutukset",
+    "text.autoconfig.scorchful.option.heatingConfig.coolingFromIce": "Viilentymistä jäästä",
+    "text.autoconfig.scorchful.option.heatingConfig.minSkyLightLevelForHeat": "Minimi taivaanvalo lämmitystä varten",
+    "text.autoconfig.scorchful.option.heatingConfig.heatFromSun": "Lämpö auringosta",
+    "text.autoconfig.scorchful.option.heatingConfig.scorchingBiomeHeatIncrease": "Polttavan biomin lämpönousu",
+    "text.autoconfig.scorchful.option.heatingConfig.sunHatShadeTemperatureChange": "Hellehatun varjon lämpötilavaihto",
+    "text.autoconfig.scorchful.option.heatingConfig.onFireWarmRate": "Tulessa olevan lämmitystahti",
+    "text.autoconfig.scorchful.option.heatingConfig.onFireWarmRateWithFireResistance": "Tulessa olevan lämmitystahti Tulenkestävyyden kanssa",
+    "text.autoconfig.scorchful.option.heatingConfig.inLavaWarmRate": "Laavassa olevan lämmitystahti",
+    "text.autoconfig.scorchful.option.heatingConfig.striderOutOfLavaCoolRate": "Rämpijän viilennystahti kun pois laavasta",
+    "text.autoconfig.scorchful.option.heatingConfig.powderSnowCoolRate": "Puuterilumen viilennystahti kun lämmin",
+    "text.autoconfig.scorchful.option.heatingConfig.fireballHeat": "Tulipallon osuman lämpö",
+    "text.autoconfig.scorchful.option.heatingConfig.defaultArmorHeatResistance": "Perushaarniskan kuumuussuojelu"
+    "text.autoconfig.scorchful.option.heatingConfig.veryHarmfulArmorHeatResistance": "Hyvin lämpimän haarniskan kuumuussuojelu",
+    "text.autoconfig.scorchful.option.heatingConfig.protectiveArmorHeatResistance": "Lämpösuojelevan haarniskan kuumuussuojelu",
+    "text.autoconfig.scorchful.option.heatingConfig.veryProtectiveArmorHeatResistance": "Hyvin lämpösuojelevan haarniskan kuumuussuojelu",
+    "text.autoconfig.scorchful.option.heatingConfig.waterBreathingDurationPerTurtleArmorPieceSeconds": "Vedenhengityksen kesto per kilpikonnan haarniskan pala (sekunteissa)",
+    "text.autoconfig.scorchful.option.heatingConfig.lightLevelPerHeatInNether": "Valon taso per lämpönousu (Netherissä)",
+    "text.autoconfig.scorchful.option.heatingConfig.minLightLevelForHeatInNether": "Mini valotaso lämpeämiseen (Netherissä)",
+    "text.autoconfig.scorchful.option.heatingConfig.blocksAboveLavaOceanPerHeatInNether": "Palikat laavameren päällä per lämpönousu (Netherossä)",
+    "text.autoconfig.scorchful.option.heatingConfig.maxHeatFromLavaOceanInNether": "Maksimilämpö laavamerestä (Netherissä)",
+    
+    "text.autoconfig.scorchful.option.thirstConfig": "Janoasetukset",
+    "text.autoconfig.scorchful.option.thirstConfig.temperatureFromWetness": "Lämpötila märkäydestä",
+    "text.autoconfig.scorchful.option.thirstConfig.waterFromRefreshingFood": "Vesi raikastavasta ruoasta",
+    "text.autoconfig.scorchful.option.thirstConfig.waterFromSustainingFood": "Vesi ylläpitävästä ruoasta",
+    "text.autoconfig.scorchful.option.thirstConfig.waterFromHydratingFood": "Vesi nesteyttävästä ruoasta",
+    "text.autoconfig.scorchful.option.thirstConfig.waterFromParchingFood": "Vesi kuivattavasta ruoasta",
+    "text.autoconfig.scorchful.option.thirstConfig.rehydrationDrinkSize": "Uudelleennesteyttävän juoman koko",
+    "text.autoconfig.scorchful.option.thirstConfig.soakingFromSplashPotions": "Kastelu roiskahtavista juomista",
+    "text.autoconfig.scorchful.option.thirstConfig.touchingWaterWetnessIncrease": "Veden kosketuksen tai sadekastelun läpikastelu per tick",
+    "text.autoconfig.scorchful.option.thirstConfig.dryRate": "Kuivumistahti",
+    "text.autoconfig.scorchful.option.thirstConfig.onFireDryDate": "Tulessa olevan kuivumistahti",
+    "text.autoconfig.scorchful.option.thirstConfig.humidBiomeSweatEfficiency": "Kostean biomin hikoilutehokkuus",
+    "text.autoconfig.scorchful.option.thirstConfig.maxRehydrationEfficiency": "Maksimi Uudelleennesteytys-lumouksen tehokkuus",
+    
+    "text.autoconfig.scorchful.option.combatConfig": "Taisteluasetukset",
+    "text.autoconfig.scorchful.option.combatConfig.fireBallThrownType": "Tulipallo on heittettävä tyyppi",
+    
+    "text.autoconfig.scorchful.option.weatherConfig": "Sääasetukset",
+    "text.autoconfig.scorchful.option.weatherConfig.doSandPileAccumulation": "Hiekkakasoja kerääntyy",
+    "text.autoconfig.scorchful.option.weatherConfig.sandPileAccumulationHeight": "Hiekkakasojen kerääntymiskorkeus",
+    "text.autoconfig.scorchful.option.weatherConfig.sandstormSlownessAmountPercent": "Hiekkamyrskyn hidastusmäärä (prosentti -1 ja +1 välillä)",
+    
+    "text.autoconfig.scorchful.option.integrationConfig": "Modi-integrointiasetukset",
+    
+    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig": "Dehydration Asetukset",
+    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.@Tooltip": "Vaatii Dehydration-modit toimimaan",
+    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.minWaterLevelForSweat": "Minimi vesitaso vaadittu hikoiluun",
+    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.maxRehydrationWaterAddedPerLevel": "Maksimivesi lisätty yksi taso Uudelleennesteytystä",
+    
+    "text.autoconfig.scorchful.option.updateConfig": "Päivitysasetukset",
+    "text.autoconfig.scorchful.option.updateConfig.currentConfigVersion": "Nykyinen asetusversio",
+    "text.autoconfig.scorchful.option.updateConfig.enableConfigUpdates": "Pistä päälle automaattiset asetuspäivitykset",
+    "text.autoconfig.scorchful.option.updateConfig.enableConfigUpdates.@Tooltip[0]": "Kun päällä, automaattisesti päivittää asetuksia milloin tahansa",
+    "text.autoconfig.scorchful.option.updateConfig.enableConfigUpdates.@Tooltip[1]": "Modi tekee muutoksia perusasetuksille.",
+    "text.autoconfig.scorchful.option.updateConfig.enableConfigUpdates.@Tooltip[2]": "Se on suositeltu että Modpackit ottaa tämän asetuksen pois päältä"
+}

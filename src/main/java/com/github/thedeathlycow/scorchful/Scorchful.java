@@ -82,7 +82,6 @@ public class Scorchful implements ModInitializer {
                 }
         );
 
-
         this.registerThermooEventListeners();
 
         LOGGER.info("Scorchful initialized!");

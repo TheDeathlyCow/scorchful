@@ -5,6 +5,7 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
+import net.minecraft.util.math.MathHelper;
 
 @Config(name = Scorchful.MODID + ".client_config")
 public class ClientConfig implements ConfigData {
@@ -12,6 +13,8 @@ public class ClientConfig implements ConfigData {
     boolean doBurningHeartOverlay = true;
 
     boolean doSunHatShading = true;
+
+    boolean enableSoundTemperatureEffects = true;
 
     @ConfigEntry.Gui.Tooltip
     boolean enableHeatStrokePostProcessing = true;
@@ -43,6 +46,10 @@ public class ClientConfig implements ConfigData {
         return sunHatShadeOpacity;
     }
 
+    public boolean enableSoundTemperatureEffects() {
+        return enableSoundTemperatureEffects;
+    }
+
     public boolean enableHeatStrokePostProcessing() {
         return enableHeatStrokePostProcessing;
     }
@@ -68,7 +75,7 @@ public class ClientConfig implements ConfigData {
     }
 
     public int getSandStormParticleRarity() {
-        return Math.max(1, sandStormParticleRarity);
+        return sandStormParticleRarity;
     }
 
     public float getSandStormParticleVelocity() {
@@ -81,5 +88,11 @@ public class ClientConfig implements ConfigData {
 
     public float getSandStormFogEnd() {
         return sandStormFogEnd;
+    }
+
+    @Override
+    public void validatePostLoad() throws ValidationException {
+        this.sandStormParticleRarity = Math.max(1, this.sandStormParticleRarity);
+        this.sunHatShadeOpacity = MathHelper.clamp(this.sunHatShadeOpacity, 0f, 1f);
     }
 }

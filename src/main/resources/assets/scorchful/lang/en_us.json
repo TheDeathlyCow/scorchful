@@ -21,7 +21,7 @@
     "item.scorchful.tooltip.hydrating": "Hydrating \uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
     "item.scorchful.tooltip.parching": "Parching ☀",
     
-    
+
     "block.scorchful.crimson_lily": "Crimson Lily",
     "block.scorchful.warped_lily": "Warped Lily",
     "block.scorchful.rooted_netherrack": "Rooted Netherrack",
@@ -32,14 +32,14 @@
     "block.scorchful.sand_cauldron": "Sand Cauldron",
     "block.scorchful.red_sand_cauldron": "Red Sand Cauldron",
     
-    
+
     "enchantment.scorchful.rehydration": "Rehydration",
     "enchantment.scorchful.rehydration.desc": "Replenishes body water lost from sweating",
     
-    
+
     "effect.scorchful.heat_stroke": "Heat Stroke",
     
-    
+
     "death.attack.scorchful.heat": "%1$s couldn't handle the heat",
     "death.attack.scorchful.heat.player": "%1$s couldn't handle the heat of %2$s",
     
@@ -63,6 +63,7 @@
     "text.autoconfig.scorchful.option.clientConfig": "Client Config",
     "text.autoconfig.scorchful.option.clientConfig.doBurningHeartOverlay": "Do burning heart overlay",
     "text.autoconfig.scorchful.option.clientConfig.doSunHatShading": "Do Sun Hat shading",
+    "text.autoconfig.scorchful.option.clientConfig.enableSoundTemperatureEffects": "Enable sound temperature effects",
     "text.autoconfig.scorchful.option.clientConfig.enableHeatStrokePostProcessing": "Enable heat stroke post processing",
     "text.autoconfig.scorchful.option.clientConfig.enableHeatStrokePostProcessing.@Tooltip": "Enables effects like blur and wavey-ness from the Heat Stroke status effect. May increase lag without a dedicated GPU.",
     "text.autoconfig.scorchful.option.clientConfig.sunHatShadeOpacity": "Sun Hat shade opacity",
@@ -78,12 +79,12 @@
     "text.autoconfig.scorchful.option.heatingConfig": "Heating Config",
     "text.autoconfig.scorchful.option.heatingConfig.doPassiveHeating": "Do passive heating",
     "text.autoconfig.scorchful.option.heatingConfig.maxPassiveHeatingScale": "Max passive heating percent (0-1)",
-    "text.autoconfig.scorchful.option.heatingConfig.enableTurtleArmorEffects": "Enable Turtle Armor status effects (doesn't apply to helmet)",
+    "text.autoconfig.scorchful.option.heatingConfig.enableTurtleArmorEffects": "Enable Turtle Armor status effects",
     "text.autoconfig.scorchful.option.heatingConfig.coolingFromIce": "Cooling from ice",
     "text.autoconfig.scorchful.option.heatingConfig.minSkyLightLevelForHeat": "Minimum sky light level for heat",
     "text.autoconfig.scorchful.option.heatingConfig.heatFromSun": "Heat from the Sun",
     "text.autoconfig.scorchful.option.heatingConfig.scorchingBiomeHeatIncrease": "Scorching biome heat increase",
-    "text.autoconfig.scorchful.option.heatingConfig.sunHatShadeTemperatureChange": "Sun Hat",
+    "text.autoconfig.scorchful.option.heatingConfig.sunHatShadeTemperatureChange": "Sun Hat shade temperature change",
     "text.autoconfig.scorchful.option.heatingConfig.onFireWarmRate": "On fire warm rate",
     "text.autoconfig.scorchful.option.heatingConfig.onFireWarmRateWithFireResistance": "On fire warm rate with Fire Resistance",
     "text.autoconfig.scorchful.option.heatingConfig.inLavaWarmRate": "In lava warm rate",
@@ -128,7 +129,7 @@
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.@Tooltip": "Requires Dehydration to have any effect",
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.minWaterLevelForSweat": "Minimum water level required for sweating",
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.maxRehydrationWaterAddedPerLevel": "Maximum water added per level of Rehydration",
-
+    
     "text.autoconfig.scorchful.option.updateConfig": "Update Config",
     "text.autoconfig.scorchful.option.updateConfig.currentConfigVersion": "Current config version",
     "text.autoconfig.scorchful.option.updateConfig.enableConfigUpdates": "Enable config auto updates",

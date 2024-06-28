@@ -5,7 +5,7 @@
         "dstrgb": "one"
     },
     "vertex": "sobel",
-    "fragment": "scorchful_periodic_blur",
+    "fragment": "scorchful:periodic_blur",
     "attributes": [ "Position" ],
     "samplers": [
         { "name": "DiffuseSampler" }

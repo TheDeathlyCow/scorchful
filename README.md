@@ -12,11 +12,11 @@ The above mod pages and this Git repository are the only official sources for th
 
 ## Wiki
 
-The wiki is available at https://github.com/TheDeathlyCow/scorchful/wiki. However, this wiki is still being constructed. In the mean time, any questions about the content or mechanics of Scorchful should be directed to the `#help-scorchful` channel of my Discord: https://discord.gg/aqASuWebRU
+The wiki is available at https://github.com/TheDeathlyCow/scorchful/wiki. However, this wiki is still being constructed. In the meantime, any questions about the content or mechanics of Scorchful should be directed to the `#help-scorchful` channel of my Discord: https://discord.gg/aqASuWebRU
 
 ## Technical info
 
-Scorchful is a mod for [Minecraft: Java Edition](https://www.minecraft.net/en-us/store/minecraft-deluxe-collection-pc), written using the [Fabric Mod Loader](https://fabricmc.net/), with support also provided for the [Quilt Mod Loader](https://quiltmc.org/en/). Scorchful currently only supports Minecraft 1.20.1. Scorchful depends on [Fabric API](https://github.com/FabricMC/fabric), [Thermoo](https://github.com/TheDeathlyCow/thermoo/), and [Cloth Config](https://github.com/shedaniel/cloth-config), and has integrations for its sister mod, [Frostiful](https://github.com/TheDeathlyCow/frostiful/). If using Quilt, then Fabric API should be replaced with [Quilt Standard Libraries](https://github.com/QuiltMC/quilt-standard-libraries).
+Scorchful is a mod for [Minecraft: Java Edition](https://www.minecraft.net/en-us/store/minecraft-deluxe-collection-pc), written using the [Fabric Mod Loader](https://fabricmc.net/), with support also provided for the [Quilt Mod Loader](https://quiltmc.org/en/). Scorchful currently only supports Minecraft 1.20.4. Scorchful depends on [Fabric API](https://github.com/FabricMC/fabric), [Thermoo](https://github.com/TheDeathlyCow/thermoo/), and [Cloth Config](https://github.com/shedaniel/cloth-config), and has integrations for its sister mod, [Frostiful](https://github.com/TheDeathlyCow/frostiful/). If using Quilt, then Fabric API should be replaced with [Quilt Standard Libraries](https://github.com/QuiltMC/quilt-standard-libraries).
 
 ## License 
 
