@@ -50,7 +50,8 @@
 	"accessWidener": "scorchful.accesswidener",
 	"custom": {
 		"cardinal-components": [
-			"scorchful:player"
+			"scorchful:player",
+			"scorchful:entity"
 		],
 		"modmenu": {
 			"links": {

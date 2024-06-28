@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.entity;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.mixin.BlockDisplayAccess;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -174,6 +175,7 @@ public class DesertVisionEntity extends Entity {
     private <T extends Entity> T spawnAndRide(EntityType<T> type, ServerWorld world, BlockPos pos) {
         T entity = type.create(world);
         if (entity != null) {
+            ScorchfulComponents.ENTITY.get(entity).makeDesertVisionChild();
             this.children.add(entity);
             entity.setPos(pos.getX(), pos.getY(), pos.getZ());
             world.spawnEntity(entity);

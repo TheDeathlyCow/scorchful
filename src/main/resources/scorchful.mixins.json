@@ -6,6 +6,7 @@
         "BiomeAccessor",
         "BlockDisplayAccess",
         "CauldronBlockMixin",
+        "EntityMixin",
         "LivingEntityMixin",
         "PlayerEntityMixin",
         "PointOfInterestTypesMixin",
@@ -13,8 +14,7 @@
         "server.SandAccumulationServerWorldMixin",
         "thirst.ConsumeItemCriterionMixin",
         "thirst.LivingEntityMixin",
-        "thirst.PotionEntityMixin",
-        "vision.HuskEntityMixin"
+        "thirst.PotionEntityMixin"
     ],
     "injectors": {
         "defaultRequire": 1
