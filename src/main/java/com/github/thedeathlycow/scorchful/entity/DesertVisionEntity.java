@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.entity;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
+import com.github.thedeathlycow.scorchful.event.DesertVisionActivation;
 import com.github.thedeathlycow.scorchful.mixin.BlockDisplayAccess;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -24,10 +25,15 @@ public class DesertVisionEntity extends Entity {
 
     private static final String VISION_TYPE_NBT_KEY = "vision_type";
 
+    private static final double ACTIVATION_DISTANCE = 8.0;
+
     @Nullable
     private DesertVisionType visionType = null;
 
     private final List<Entity> children = new ArrayList<>();
+
+    @Nullable
+    private PlayerEntity cause;
 
     public DesertVisionEntity(EntityType<?> type, World world) {
         super(type, world);
@@ -47,6 +53,20 @@ public class DesertVisionEntity extends Entity {
         return this.visionType;
     }
 
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (this.cause == null) {
+            return;
+        }
+
+        if (this.squaredDistanceTo(this.cause) < ACTIVATION_DISTANCE * ACTIVATION_DISTANCE) {
+            DesertVisionActivation.EVENT.invoker().onActivated(this, this.cause);
+            this.discard();
+        }
+    }
+
     public void setVision(PlayerEntity cause, @NotNull DesertVisionType visionType) {
         if (this.visionType != null) {
             throw new IllegalStateException("Desert vision type already set for " + this);
@@ -63,6 +83,8 @@ public class DesertVisionEntity extends Entity {
             case DESERT_WELL -> this.spawnDesertWellVision(this, (ServerWorld) this.getWorld(), this.getBlockPos());
             case HUSK -> this.spawnHuskVision((ServerWorld) this.getWorld(), this.getBlockPos());
         }
+
+        this.cause = cause;
     }
 
     @Override
