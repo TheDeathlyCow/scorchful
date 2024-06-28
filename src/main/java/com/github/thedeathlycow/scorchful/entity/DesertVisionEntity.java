@@ -11,13 +11,8 @@ import net.minecraft.entity.decoration.DisplayEntity;
 import net.minecraft.entity.mob.HuskEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtException;
-import net.minecraft.nbt.NbtOps;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -107,45 +102,35 @@ public class DesertVisionEntity extends Entity {
     }
 
     private void spawnDesertWellVision(DesertVisionEntity desertVision, ServerWorld world, BlockPos blockPos) {
-        final BlockState sand = Blocks.SAND.getDefaultState();
+        blockPos = blockPos.down();
         final BlockState slab = Blocks.SANDSTONE_SLAB.getDefaultState();
         final BlockState wall = Blocks.SANDSTONE.getDefaultState();
-        final BlockState fluidInside = Blocks.WATER.getDefaultState();
 
-        for (int i = -2; i <= 0; ++i) {
-            for (int j = -2; j <= 2; ++j) {
-                for (int k = -2; k <= 2; ++k) {
-                    setBlockState(desertVision, world, blockPos.add(j, i, k), wall);
+        // base
+        for (int dy = -2; dy <= 0; ++dy) {
+            for (int dx = -2; dx <= 2; ++dx) {
+                for (int dz = -2; dz <= 2; ++dz) {
+                    setBlockState(desertVision, world, blockPos.add(dx, dy, dz), wall);
                 }
             }
         }
 
-        setBlockState(desertVision, world, blockPos, fluidInside);
-
-        for (Direction direction : Direction.Type.HORIZONTAL) {
-            setBlockState(desertVision, world, blockPos.offset(direction), fluidInside);
-        }
-
-        BlockPos blockPos2 = blockPos.down();
-        setBlockState(desertVision, world, blockPos2, sand);
-
-        for (Direction direction2 : Direction.Type.HORIZONTAL) {
-            setBlockState(desertVision, world, blockPos2.offset(direction2), sand);
-        }
-
-        for (int j = -2; j <= 2; ++j) {
-            for (int k = -2; k <= 2; ++k) {
-                if (j == -2 || j == 2 || k == -2 || k == 2) {
-                    setBlockState(desertVision, world, blockPos.add(j, 1, k), wall);
+        // edges / rim
+        for (int dx = -2; dx <= 2; ++dx) {
+            for (int dz = -2; dz <= 2; ++dz) {
+                if ((dx == -2 || dx == 2 || dz == -2 || dz == 2) && (dx != 0 && dz != 0)) {
+                    setBlockState(desertVision, world, blockPos.add(dx, 1, dz), wall);
                 }
             }
         }
 
+        // slabs on rim
         setBlockState(desertVision, world, blockPos.add(2, 1, 0), slab);
         setBlockState(desertVision, world, blockPos.add(-2, 1, 0), slab);
         setBlockState(desertVision, world, blockPos.add(0, 1, 2), slab);
         setBlockState(desertVision, world, blockPos.add(0, 1, -2), slab);
 
+        // little hat
         for (int j = -1; j <= 1; ++j) {
             for (int k = -1; k <= 1; ++k) {
                 if (j == 0 && k == 0) {
@@ -156,6 +141,7 @@ public class DesertVisionEntity extends Entity {
             }
         }
 
+        // corner pillars
         for (int j = 1; j <= 3; ++j) {
             setBlockState(desertVision, world, blockPos.add(-1, j, -1), wall);
             setBlockState(desertVision, world, blockPos.add(-1, j, 1), wall);
@@ -165,6 +151,11 @@ public class DesertVisionEntity extends Entity {
     }
 
     private void setBlockState(DesertVisionEntity parent, ServerWorld world, BlockPos pos, BlockState state) {
+
+        if (!world.getBlockState(pos).isReplaceable()) {
+            return;
+        }
+
         DisplayEntity.BlockDisplayEntity entity = spawnAndRide(EntityType.BLOCK_DISPLAY, world, pos);
         if (entity != null) {
             ((BlockDisplayAccess) entity).scorchful$setBlockState(state);
