@@ -28,6 +28,8 @@ import net.minecraft.util.math.floatprovider.FloatProvider;
 
 public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEffect.Config> {
 
+    public static final Identifier PACKET_ID = Scorchful.id("play_sound_temperature_effect");
+
     @Override
     public void apply(LivingEntity victim, ServerWorld serverWorld, Config config) {
         if (config.onlyPlayToSource) {
@@ -56,7 +58,7 @@ public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEf
 
             PacketByteBuf buf = PacketByteBufs.create();
 
-            config.sound.writeBuf(buf);
+            config.sound.value().writeBuf(buf);
             buf.writeEnumConstant(config.category);
             buf.writeFloat(config.volume.get(random));
             buf.writeFloat(config.pitch.get(random));
@@ -72,7 +74,9 @@ public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEf
             boolean onlyPlayToSource,
             FloatProvider volume,
             FloatProvider pitch,
-            int interval) {
+            int interval
+    ) {
+
         public static Config fromJson(JsonElement json) throws JsonSyntaxException {
             JsonObject object = json.getAsJsonObject();
 
@@ -101,6 +105,7 @@ public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEf
 
             return new Config(sound, category, onlyPlayToSource, volume, pitch, interval);
         }
+
     }
 
 }
