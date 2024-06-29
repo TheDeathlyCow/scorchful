@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 
 public class DesertVisionBurstEffects {
 
+    // TODO: call on set up
     public static void initialize() {
         DesertVisionActivation.EVENT.register(DesertVisionBurstEffects::applyEffects);
     }

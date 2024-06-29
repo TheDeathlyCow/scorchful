@@ -4,10 +4,14 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.event.DesertVisionActivation;
 import com.github.thedeathlycow.scorchful.mixin.BlockDisplayAccess;
+import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.decoration.DisplayEntity;
 import net.minecraft.entity.mob.HuskEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,10 +24,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public class DesertVisionEntity extends Entity {
 
     private static final String VISION_TYPE_NBT_KEY = "vision_type";
+    private static final String TTL_NBT_KEY = "time_to_live";
+    private static final String CAUSE_NBT_KEY = "causing_player";
 
     private static final double ACTIVATION_DISTANCE = 8.0;
 
@@ -32,8 +40,15 @@ public class DesertVisionEntity extends Entity {
 
     private final List<Entity> children = new ArrayList<>();
 
+    private static final TrackedData<Optional<UUID>> CAUSE = DataTracker.registerData(
+            DesertVisionEntity.class,
+            TrackedDataHandlerRegistry.OPTIONAL_UUID
+    );
+
+    private int timeToLive = 10 * 20; // 10 seconds
+
     @Nullable
-    private PlayerEntity cause;
+    private PlayerEntity cachedCause;
 
     public DesertVisionEntity(EntityType<?> type, World world) {
         super(type, world);
@@ -42,6 +57,7 @@ public class DesertVisionEntity extends Entity {
 
     @Override
     protected void initDataTracker() {
+        this.dataTracker.startTracking(CAUSE, Optional.empty());
     }
 
     @Override
@@ -57,14 +73,18 @@ public class DesertVisionEntity extends Entity {
     public void tick() {
         super.tick();
 
-        if (this.cause == null) {
-            return;
-        }
-
-        if (this.squaredDistanceTo(this.cause) < ACTIVATION_DISTANCE * ACTIVATION_DISTANCE) {
-            DesertVisionActivation.EVENT.invoker().onActivated(this, this.cause);
+        if (!this.tickCanLive()) {
             this.discard();
         }
+    }
+
+    @Nullable
+    public PlayerEntity getCause() {
+        Optional<UUID> causeid = this.dataTracker.get(CAUSE);
+        if (causeid.isPresent() && this.cachedCause == null) {
+            this.cachedCause = this.getWorld().getPlayerByUuid(causeid.get());
+        }
+        return this.cachedCause;
     }
 
     public void setVision(PlayerEntity cause, @NotNull DesertVisionType visionType) {
@@ -84,7 +104,7 @@ public class DesertVisionEntity extends Entity {
             case HUSK -> this.spawnHuskVision((ServerWorld) this.getWorld(), this.getBlockPos());
         }
 
-        this.cause = cause;
+        this.dataTracker.set(CAUSE, Optional.of(cause.getUuid()));
     }
 
     @Override
@@ -102,6 +122,15 @@ public class DesertVisionEntity extends Entity {
             Scorchful.LOGGER.error("Unknown desert vision type: " + visionName);
             this.visionType = null;
         }
+
+        this.timeToLive = nbt.getInt(TTL_NBT_KEY);
+
+        if (nbt.containsUuid(CAUSE_NBT_KEY)) {
+            this.dataTracker.set(CAUSE, Optional.of(nbt.getUuid(CAUSE_NBT_KEY)));
+        } else {
+            this.dataTracker.set(CAUSE, Optional.empty());
+        }
+        this.cachedCause = null;
     }
 
     @Override
@@ -112,6 +141,27 @@ public class DesertVisionEntity extends Entity {
                     this.visionType.toString()
             );
         }
+
+        nbt.putInt(TTL_NBT_KEY, this.timeToLive);
+        Optional<UUID> cause = this.dataTracker.get(CAUSE);
+        cause.ifPresent(uuid -> nbt.putUuid(CAUSE_NBT_KEY, uuid));
+    }
+
+    private boolean tickCanLive() {
+        Optional<UUID> cause = this.dataTracker.get(CAUSE);
+        if (!this.getWorld().isClient && this.timeToLive-- <= 0) {
+            return false;
+        } else if (cause.isPresent()) {
+            PlayerEntity causeEntity = this.getCause();
+            if (causeEntity != null) {
+                if (this.squaredDistanceTo(causeEntity) < ACTIVATION_DISTANCE * ACTIVATION_DISTANCE) {
+                    DesertVisionActivation.EVENT.invoker().onActivated(this, causeEntity);
+                    return false;
+                }
+                return causeEntity.hasStatusEffect(SStatusEffects.HEAT_STROKE);
+            }
+        }
+        return true;
     }
 
     private void spawnHuskVision(ServerWorld world, BlockPos pos) {
