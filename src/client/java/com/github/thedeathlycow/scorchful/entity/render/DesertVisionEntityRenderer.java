@@ -2,7 +2,6 @@ package com.github.thedeathlycow.scorchful.entity.render;
 
 import com.github.thedeathlycow.scorchful.entity.DesertVisionEntity;
 import com.github.thedeathlycow.scorchful.entity.DesertVisionType;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;

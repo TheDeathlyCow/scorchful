@@ -15,9 +15,9 @@ public class ScorchfulComponents implements EntityComponentInitializer {
             PlayerComponent.class
     );
 
-    public static final ComponentKey<EntityComponent> ENTITY = ComponentRegistry.getOrCreate(
-            Scorchful.id("entity"),
-            EntityComponent.class
+    public static final ComponentKey<DesertVisionChildComponent> DESERT_VISION_CHILD = ComponentRegistry.getOrCreate(
+            Scorchful.id("desert_vision_child"),
+            DesertVisionChildComponent.class
     );
 
 
@@ -30,8 +30,8 @@ public class ScorchfulComponents implements EntityComponentInitializer {
         );
         registry.registerFor(
                 Entity.class,
-                ENTITY,
-                EntityComponent::new
+                DESERT_VISION_CHILD,
+                DesertVisionChildComponent::new
         );
     }
 }

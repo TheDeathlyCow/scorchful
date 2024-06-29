@@ -51,7 +51,7 @@
 	"custom": {
 		"cardinal-components": [
 			"scorchful:player",
-			"scorchful:entity"
+			"scorchful:desert_vision_child"
 		],
 		"modmenu": {
 			"links": {

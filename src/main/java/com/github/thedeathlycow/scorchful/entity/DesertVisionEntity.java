@@ -111,21 +111,18 @@ public class DesertVisionEntity extends Entity {
         if (this.getVisionType() != null) {
             throw new IllegalStateException("Desert vision type already set for " + this);
         }
-
-
         World world = this.getWorld();
         if (world.isClient) {
             return;
         }
-
-//        switch (visionType) {
-//            case DESERT_WELL -> this.spawnDesertWellVision((ServerWorld) this.getWorld(), this.getBlockPos());
-//            case HUSK -> this.spawnHuskVision((ServerWorld) this.getWorld(), this.getBlockPos());
-//            case POPPY -> this.spawnPoppyVision((ServerWorld) this.getWorld(), this.getBlockPos());
-//        }
-
         this.dataTracker.set(CAUSE, Optional.of(cause.getUuid()));
         this.setVisionType(visionType);
+
+        switch (visionType) {
+            case DESERT_WELL -> this.spawnDesertWellVision((ServerWorld) this.getWorld(), this.getBlockPos());
+            case HUSK -> this.spawnHuskVision((ServerWorld) this.getWorld(), this.getBlockPos());
+            case POPPY -> this.spawnPoppyVision((ServerWorld) this.getWorld(), this.getBlockPos());
+        }
     }
 
     @Override
@@ -264,10 +261,14 @@ public class DesertVisionEntity extends Entity {
     private <T extends Entity> T spawnAndRide(EntityType<T> type, ServerWorld world, BlockPos pos) {
         T entity = type.create(world);
         if (entity != null) {
-            ScorchfulComponents.ENTITY.get(entity).makeDesertVisionChild();
+            ScorchfulComponents.DESERT_VISION_CHILD.get(entity).makeDesertVisionChild(this.getCause());
+            ScorchfulComponents.DESERT_VISION_CHILD.sync(entity);
+
             this.children.add(entity);
             entity.setPos(pos.getX(), pos.getY(), pos.getZ());
-            world.spawnEntity(entity);
+            if (!world.spawnEntity(entity)) {
+                return null;
+            }
         }
         return entity;
     }
