@@ -35,14 +35,16 @@ public class DesertVisionEntity extends Entity {
 
     private static final double ACTIVATION_DISTANCE = 8.0;
 
-    @Nullable
-    private DesertVisionType visionType = null;
-
     private final List<Entity> children = new ArrayList<>();
 
     private static final TrackedData<Optional<UUID>> CAUSE = DataTracker.registerData(
             DesertVisionEntity.class,
             TrackedDataHandlerRegistry.OPTIONAL_UUID
+    );
+
+    private static final TrackedData<Integer> VISION_TYPE_INDEX = DataTracker.registerData(
+            DesertVisionEntity.class,
+            TrackedDataHandlerRegistry.INTEGER
     );
 
     private int timeToLive = 10 * 20; // 10 seconds
@@ -58,6 +60,7 @@ public class DesertVisionEntity extends Entity {
     @Override
     protected void initDataTracker() {
         this.dataTracker.startTracking(CAUSE, Optional.empty());
+        this.dataTracker.startTracking(VISION_TYPE_INDEX, -1);
     }
 
     @Override
@@ -65,8 +68,20 @@ public class DesertVisionEntity extends Entity {
         return false;
     }
 
+    @Nullable
     public DesertVisionType getVisionType() {
-        return this.visionType;
+        int index = this.dataTracker.get(VISION_TYPE_INDEX);
+        return index >= 0
+                ? DesertVisionType.values()[index]
+                : null;
+    }
+
+    private void setVisionType(@Nullable DesertVisionType type) {
+        if (type == null) {
+            this.dataTracker.set(VISION_TYPE_INDEX, -1);
+        } else {
+            this.dataTracker.set(VISION_TYPE_INDEX, type.ordinal());
+        }
     }
 
     @Override
@@ -80,31 +95,31 @@ public class DesertVisionEntity extends Entity {
 
     @Nullable
     public PlayerEntity getCause() {
-        Optional<UUID> causeid = this.dataTracker.get(CAUSE);
-        if (causeid.isPresent() && this.cachedCause == null) {
-            this.cachedCause = this.getWorld().getPlayerByUuid(causeid.get());
+        Optional<UUID> causeID = this.dataTracker.get(CAUSE);
+        if (causeID.isPresent() && this.cachedCause == null) {
+            this.cachedCause = this.getWorld().getPlayerByUuid(causeID.get());
         }
         return this.cachedCause;
     }
 
     public void setVision(PlayerEntity cause, @NotNull DesertVisionType visionType) {
-        if (this.visionType != null) {
+        if (this.getVisionType() != null) {
             throw new IllegalStateException("Desert vision type already set for " + this);
         }
 
-        this.visionType = visionType;
 
         World world = this.getWorld();
         if (world.isClient) {
             return;
         }
 
-        switch (this.visionType) {
+        switch (visionType) {
             case DESERT_WELL -> this.spawnDesertWellVision(this, (ServerWorld) this.getWorld(), this.getBlockPos());
             case HUSK -> this.spawnHuskVision((ServerWorld) this.getWorld(), this.getBlockPos());
         }
 
         this.dataTracker.set(CAUSE, Optional.of(cause.getUuid()));
+        this.setVisionType(visionType);
     }
 
     @Override
@@ -117,10 +132,10 @@ public class DesertVisionEntity extends Entity {
     protected void readCustomDataFromNbt(NbtCompound nbt) {
         String visionName = nbt.getString(VISION_TYPE_NBT_KEY);
         try {
-            this.visionType = DesertVisionType.valueOf(visionName);
+            this.setVisionType(DesertVisionType.valueOf(visionName));
         } catch (IllegalArgumentException e) {
             Scorchful.LOGGER.error("Unknown desert vision type: " + visionName);
-            this.visionType = null;
+            this.setVisionType(null);
         }
 
         this.timeToLive = nbt.getInt(TTL_NBT_KEY);
@@ -135,10 +150,11 @@ public class DesertVisionEntity extends Entity {
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt) {
-        if (this.visionType != null) {
+        DesertVisionType visionType = this.getVisionType();
+        if (visionType != null) {
             nbt.putString(
                     VISION_TYPE_NBT_KEY,
-                    this.visionType.toString()
+                    visionType.toString()
             );
         }
 
