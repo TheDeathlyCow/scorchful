@@ -102,6 +102,11 @@ public class DesertVisionEntity extends Entity {
         return this.cachedCause;
     }
 
+    public boolean causeHasHeatStroke() {
+        PlayerEntity cause = this.getCause();
+        return cause != null && cause.hasStatusEffect(SStatusEffects.HEAT_STROKE);
+    }
+
     public void setVision(PlayerEntity cause, @NotNull DesertVisionType visionType) {
         if (this.getVisionType() != null) {
             throw new IllegalStateException("Desert vision type already set for " + this);
@@ -115,7 +120,7 @@ public class DesertVisionEntity extends Entity {
 
         switch (visionType) {
             case DESERT_WELL -> this.spawnDesertWellVision(this, (ServerWorld) this.getWorld(), this.getBlockPos());
-            case HUSK -> this.spawnHuskVision((ServerWorld) this.getWorld(), this.getBlockPos());
+//            case HUSK -> this.spawnHuskVision((ServerWorld) this.getWorld(), this.getBlockPos());
         }
 
         this.dataTracker.set(CAUSE, Optional.of(cause.getUuid()));
