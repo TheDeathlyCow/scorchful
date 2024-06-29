@@ -15,6 +15,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.decoration.DisplayEntity;
 import net.minecraft.entity.mob.HuskEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -122,6 +123,7 @@ public class DesertVisionEntity extends Entity {
             case DESERT_WELL -> this.spawnDesertWellVision((ServerWorld) this.getWorld(), this.getBlockPos());
             case HUSK -> this.spawnHuskVision((ServerWorld) this.getWorld(), this.getBlockPos());
             case POPPY -> this.spawnPoppyVision((ServerWorld) this.getWorld(), this.getBlockPos());
+            case BOAT -> this.spawnBoatVision((ServerWorld) this.getWorld(), this.getBlockPos());
         }
     }
 
@@ -181,6 +183,14 @@ public class DesertVisionEntity extends Entity {
             }
         }
         return true;
+    }
+
+    private void spawnBoatVision(ServerWorld world, BlockPos pos) {
+        BoatEntity entity = this.spawnAndRide(EntityType.BOAT, world, pos);
+        if (entity != null) {
+            entity.setInvulnerable(true);
+            entity.setNoGravity(true);
+        }
     }
 
     private void spawnPoppyVision(ServerWorld world, BlockPos pos) {

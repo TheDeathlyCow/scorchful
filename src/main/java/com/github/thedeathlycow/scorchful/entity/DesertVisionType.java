@@ -8,7 +8,8 @@ public enum DesertVisionType implements StringIdentifiable {
 
     DESERT_WELL("desert_well"),
     HUSK("husk"),
-    POPPY("poppy");
+    POPPY("poppy"),
+    BOAT("boat");
 
     public static final Codec<DesertVisionType> CODEC = StringIdentifiable.createCodec(DesertVisionType::values);
 
