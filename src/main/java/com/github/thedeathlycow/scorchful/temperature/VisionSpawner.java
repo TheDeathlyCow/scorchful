@@ -38,6 +38,7 @@ public class VisionSpawner {
     }
 
     private static BlockPos chooseVisionPos(ServerWorld serverWorld, BlockPos origin, Random random) {
+        // TODO: make the vision not spawn on top of the player
         int x = origin.getX() + random.nextBetween(-16 * 3, 16 * 3);
         int z = origin.getZ() + random.nextBetween(-16 * 3, 16 * 3);
         int y = serverWorld.getTopY(Heightmap.Type.WORLD_SURFACE, x, z);

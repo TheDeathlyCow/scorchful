@@ -119,8 +119,9 @@ public class DesertVisionEntity extends Entity {
         }
 
 //        switch (visionType) {
-//            case DESERT_WELL -> this.spawnDesertWellVision(this, (ServerWorld) this.getWorld(), this.getBlockPos());
-//            case HUSK ->this .spawnHuskVision((ServerWorld) this.getWorld(), this.getBlockPos());
+//            case DESERT_WELL -> this.spawnDesertWellVision((ServerWorld) this.getWorld(), this.getBlockPos());
+//            case HUSK -> this.spawnHuskVision((ServerWorld) this.getWorld(), this.getBlockPos());
+//            case POPPY -> this.spawnPoppyVision((ServerWorld) this.getWorld(), this.getBlockPos());
 //        }
 
         this.dataTracker.set(CAUSE, Optional.of(cause.getUuid()));
@@ -185,6 +186,10 @@ public class DesertVisionEntity extends Entity {
         return true;
     }
 
+    private void spawnPoppyVision(ServerWorld world, BlockPos pos) {
+        setBlockState(world, pos, Blocks.POPPY.getDefaultState());
+    }
+
     private void spawnHuskVision(ServerWorld world, BlockPos pos) {
         HuskEntity entity = this.spawnAndRide(EntityType.HUSK, world, pos);
         if (entity != null) {
@@ -194,7 +199,7 @@ public class DesertVisionEntity extends Entity {
         }
     }
 
-    private void spawnDesertWellVision(DesertVisionEntity desertVision, ServerWorld world, BlockPos blockPos) {
+    private void spawnDesertWellVision(ServerWorld world, BlockPos blockPos) {
         blockPos = blockPos.down();
         final BlockState slab = Blocks.SANDSTONE_SLAB.getDefaultState();
         final BlockState wall = Blocks.SANDSTONE.getDefaultState();
@@ -203,7 +208,7 @@ public class DesertVisionEntity extends Entity {
         for (int dy = -2; dy <= 0; ++dy) {
             for (int dx = -2; dx <= 2; ++dx) {
                 for (int dz = -2; dz <= 2; ++dz) {
-                    setBlockState(desertVision, world, blockPos.add(dx, dy, dz), wall);
+                    setBlockState(world, blockPos.add(dx, dy, dz), wall);
                 }
             }
         }
@@ -212,38 +217,38 @@ public class DesertVisionEntity extends Entity {
         for (int dx = -2; dx <= 2; ++dx) {
             for (int dz = -2; dz <= 2; ++dz) {
                 if ((dx == -2 || dx == 2 || dz == -2 || dz == 2) && (dx != 0 && dz != 0)) {
-                    setBlockState(desertVision, world, blockPos.add(dx, 1, dz), wall);
+                    setBlockState(world, blockPos.add(dx, 1, dz), wall);
                 }
             }
         }
 
         // slabs on rim
-        setBlockState(desertVision, world, blockPos.add(2, 1, 0), slab);
-        setBlockState(desertVision, world, blockPos.add(-2, 1, 0), slab);
-        setBlockState(desertVision, world, blockPos.add(0, 1, 2), slab);
-        setBlockState(desertVision, world, blockPos.add(0, 1, -2), slab);
+        setBlockState(world, blockPos.add(2, 1, 0), slab);
+        setBlockState(world, blockPos.add(-2, 1, 0), slab);
+        setBlockState(world, blockPos.add(0, 1, 2), slab);
+        setBlockState(world, blockPos.add(0, 1, -2), slab);
 
         // little hat
         for (int j = -1; j <= 1; ++j) {
             for (int k = -1; k <= 1; ++k) {
                 if (j == 0 && k == 0) {
-                    setBlockState(desertVision, world, blockPos.add(j, 4, k), wall);
+                    setBlockState(world, blockPos.add(j, 4, k), wall);
                 } else {
-                    setBlockState(desertVision, world, blockPos.add(j, 4, k), slab);
+                    setBlockState(world, blockPos.add(j, 4, k), slab);
                 }
             }
         }
 
         // corner pillars
         for (int j = 1; j <= 3; ++j) {
-            setBlockState(desertVision, world, blockPos.add(-1, j, -1), wall);
-            setBlockState(desertVision, world, blockPos.add(-1, j, 1), wall);
-            setBlockState(desertVision, world, blockPos.add(1, j, -1), wall);
-            setBlockState(desertVision, world, blockPos.add(1, j, 1), wall);
+            setBlockState(world, blockPos.add(-1, j, -1), wall);
+            setBlockState(world, blockPos.add(-1, j, 1), wall);
+            setBlockState(world, blockPos.add(1, j, -1), wall);
+            setBlockState(world, blockPos.add(1, j, 1), wall);
         }
     }
 
-    private void setBlockState(DesertVisionEntity parent, ServerWorld world, BlockPos pos, BlockState state) {
+    private void setBlockState(ServerWorld world, BlockPos pos, BlockState state) {
 
         if (!world.getBlockState(pos).isReplaceable()) {
             return;
