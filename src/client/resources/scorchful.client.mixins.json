@@ -6,7 +6,6 @@
     "client": [
         "ClientPlayNetworkHandlerMixin",
         "DrippingWetPlayerMixin",
-        "GameRendererAccessor",
         "HeadFeatureRendererMixin",
         "InGameHudMixin",
         "sandstorm.BackgroundRendererMixin",
