@@ -7,7 +7,8 @@ import net.minecraft.util.math.random.Random;
 public enum DesertVisionType implements StringIdentifiable {
 
     DESERT_WELL("desert_well"),
-    HUSK("husk");
+    HUSK("husk"),
+    POPPY("poppy");
 
     public static final Codec<DesertVisionType> CODEC = StringIdentifiable.createCodec(DesertVisionType::values);
 

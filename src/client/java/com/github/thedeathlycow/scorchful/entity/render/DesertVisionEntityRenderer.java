@@ -2,12 +2,16 @@ package com.github.thedeathlycow.scorchful.entity.render;
 
 import com.github.thedeathlycow.scorchful.entity.DesertVisionEntity;
 import com.github.thedeathlycow.scorchful.entity.DesertVisionType;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.render.Frustum;
+import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.block.BlockRenderManager;
+import net.minecraft.client.render.entity.DisplayEntityRenderer;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.HuskEntityRenderer;
-import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.HuskEntity;
@@ -15,17 +19,20 @@ import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
-import java.util.Objects;
-
 public class DesertVisionEntityRenderer extends EntityRenderer<DesertVisionEntity> {
 
     private HuskEntity dummyHusk = null;
 
     private final HuskEntityRenderer huskEntityRenderer;
+    private final BlockRenderManager blockRenderManager;
 
     public DesertVisionEntityRenderer(EntityRendererFactory.Context ctx) {
         super(ctx);
+        this.blockRenderManager = ctx.getBlockRenderManager();
         huskEntityRenderer = new HuskEntityRenderer(ctx);
+
+        ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> this.dummyHusk = null);
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> this.dummyHusk = null);
     }
 
     @Override
@@ -49,15 +56,31 @@ public class DesertVisionEntityRenderer extends EntityRenderer<DesertVisionEntit
     ) {
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
 
-        if (entity.getVisionType() == DesertVisionType.HUSK) {
-            huskEntityRenderer.render(
-                    getDummyHusk(entity.getWorld()),
-                    yaw,
-                    tickDelta,
-                    matrices,
-                    vertexConsumers,
-                    light
-            );
+        DesertVisionType visionType = entity.getVisionType();
+        if (visionType == null) {
+            return;
+        }
+
+        switch (visionType) {
+            case HUSK -> {
+                huskEntityRenderer.render(
+                        getDummyHusk(entity.getWorld()),
+                        yaw,
+                        tickDelta,
+                        matrices,
+                        vertexConsumers,
+                        light
+                );
+            }
+            case POPPY -> {
+                this.blockRenderManager.renderBlockAsEntity(
+                        Blocks.POPPY.getDefaultState(),
+                        matrices,
+                        vertexConsumers,
+                        light,
+                        OverlayTexture.DEFAULT_UV
+                );
+            }
         }
     }
 

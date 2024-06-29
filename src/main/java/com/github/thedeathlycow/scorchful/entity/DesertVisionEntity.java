@@ -118,10 +118,10 @@ public class DesertVisionEntity extends Entity {
             return;
         }
 
-        switch (visionType) {
-            case DESERT_WELL -> this.spawnDesertWellVision(this, (ServerWorld) this.getWorld(), this.getBlockPos());
-//            case HUSK -> this.spawnHuskVision((ServerWorld) this.getWorld(), this.getBlockPos());
-        }
+//        switch (visionType) {
+//            case DESERT_WELL -> this.spawnDesertWellVision(this, (ServerWorld) this.getWorld(), this.getBlockPos());
+//            case HUSK ->this .spawnHuskVision((ServerWorld) this.getWorld(), this.getBlockPos());
+//        }
 
         this.dataTracker.set(CAUSE, Optional.of(cause.getUuid()));
         this.setVisionType(visionType);
