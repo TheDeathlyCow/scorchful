@@ -17,7 +17,7 @@ public class EntityMixin {
     )
     private void cancelSaveIfDesertVisionChild(CallbackInfoReturnable<Boolean> cir) {
         Entity instance = (Entity) (Object) this;
-        if (ScorchfulComponents.DESERT_VISION_CHILD.get(instance).isDesertVisionChild()) {
+        if (ScorchfulComponents.ENTITY_DESERT_VISION.get(instance).hasDesertVision()) {
             cir.setReturnValue(false);
         }
     }

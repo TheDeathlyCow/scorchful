@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.temperature;
+package com.github.thedeathlycow.scorchful.temperature.desertvision;
 
 import com.github.thedeathlycow.scorchful.entity.DesertVisionEntity;
 import com.github.thedeathlycow.scorchful.entity.DesertVisionType;
