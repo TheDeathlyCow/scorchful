@@ -23,8 +23,8 @@ public class EntityRendererMixin<T extends Entity> {
             double x, double y, double z,
             CallbackInfoReturnable<Boolean> cir
     ) {
-        var component = ScorchfulComponents.DESERT_VISION_CHILD.get(entity);
-        if (component.isDesertVisionChild() && component.getCausingPlayerID() == null) {
+        var component = ScorchfulComponents.ENTITY_DESERT_VISION.get(entity);
+        if (component.hasDesertVision()) {
             cir.setReturnValue(false);
         }
     }

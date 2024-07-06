@@ -36,7 +36,6 @@ public class ScorchfulClient implements ClientModInitializer {
         StatusBarOverlayRenderEvents.AFTER_HEALTH_BAR.register(SoakingUnderlay.INSTANCE);
         StatusBarOverlayRenderEvents.AFTER_HEALTH_BAR.register(BurningHeartsOverlay.INSTANCE);
         StatusBarOverlayRenderEvents.AFTER_MOUNT_HEALTH_BAR.register(MountHealthOverlay.INSTANCE);
-        EntityRendererRegistry.register(SEntityTypes.DESERT_VISION, EmptyEntityRenderer::new);
         ItemTooltipCallback.EVENT.register(QuenchingFoods::appendTooltip);
         ClientPlayNetworking.registerGlobalReceiver(SoundTemperatureEffect.PACKET_ID,
                 SoundTemperatureEffectPacketListener.INSTANCE);

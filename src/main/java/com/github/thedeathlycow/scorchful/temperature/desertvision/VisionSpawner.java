@@ -1,8 +1,5 @@
 package com.github.thedeathlycow.scorchful.temperature.desertvision;
 
-import com.github.thedeathlycow.scorchful.entity.DesertVisionEntity;
-import com.github.thedeathlycow.scorchful.entity.DesertVisionType;
-import com.github.thedeathlycow.scorchful.registry.SEntityTypes;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -26,15 +23,15 @@ public class VisionSpawner {
     }
 
     private static void spawnDesertVision(ServerWorld serverWorld, PlayerEntity cause) {
-        DesertVisionEntity vision = SEntityTypes.DESERT_VISION.create(serverWorld);
-        if (vision != null) {
-            BlockPos pos = chooseVisionPos(serverWorld, cause.getBlockPos(), cause.getRandom());
-            vision.setPos(pos.getX(), pos.getY(), pos.getZ());
-            if (serverWorld.spawnEntity(vision)) {
-                DesertVisionType visionType = DesertVisionType.choose(cause.getRandom());
-                vision.setVision(cause, visionType);
-            }
-        }
+//        DesertVisionEntity vision = SEntityTypes.DESERT_VISION.create(serverWorld);
+//        if (vision != null) {
+//            BlockPos pos = chooseVisionPos(serverWorld, cause.getBlockPos(), cause.getRandom());
+//            vision.setPos(pos.getX(), pos.getY(), pos.getZ());
+//            if (serverWorld.spawnEntity(vision)) {
+//                DesertVisionType visionType = DesertVisionType.choose(cause.getRandom());
+//                vision.setVision(cause, visionType);
+//            }
+//        }
     }
 
     private static BlockPos chooseVisionPos(ServerWorld serverWorld, BlockPos origin, Random random) {

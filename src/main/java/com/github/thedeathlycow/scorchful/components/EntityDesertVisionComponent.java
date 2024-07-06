@@ -1,7 +1,9 @@
 package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.event.DesertVisionActivation;
+import com.github.thedeathlycow.scorchful.registry.SDesertVisionControllers;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
+import com.github.thedeathlycow.scorchful.temperature.desertvision.DesertVisionController;
 import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
@@ -26,6 +28,9 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
     @Nullable
     private PlayerEntity cause;
 
+    @Nullable
+    private DesertVisionController vision;
+
     private int timeToLive = 10 * 20;
 
     public EntityDesertVisionComponent(Entity provider) {
@@ -36,13 +41,9 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
         return this.cause != null;
     }
 
-    public void applyDesertVision(@NotNull PlayerEntity cause) {
+    public void applyDesertVision(@NotNull DesertVisionController vision, @NotNull PlayerEntity cause) {
         this.cause = cause;
-        provider.setInvulnerable(true);
-        provider.setNoGravity(true);
-        if (provider instanceof MobEntity mob) {
-            mob.setAiDisabled(true);
-        }
+        this.vision = vision;
     }
 
     @Override
@@ -81,7 +82,7 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
             return false;
         } else if (this.cause != null) {
             if (this.provider.squaredDistanceTo(cause) < ACTIVATION_DISTANCE * ACTIVATION_DISTANCE) {
-                DesertVisionActivation.EVENT.invoker().onActivated(null, cause);
+                DesertVisionActivation.EVENT.invoker().onActivated(vision, cause);
                 return false;
             }
             return cause.hasStatusEffect(SStatusEffects.HEAT_STROKE);
