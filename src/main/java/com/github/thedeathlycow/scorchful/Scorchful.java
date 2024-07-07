@@ -61,7 +61,7 @@ public class Scorchful implements ModInitializer {
         SStats.registerAll();
         SandCauldronBehaviours.registerAll();
         NetherLilyBehaviours.registerBehaviours();
-        SDesertVisionControllers.initialize();
+        SHeatVisions.initialize();
 
         CommandRegistrationCallback.EVENT.register(
                 (dispatcher, registryAccess, environment) -> {

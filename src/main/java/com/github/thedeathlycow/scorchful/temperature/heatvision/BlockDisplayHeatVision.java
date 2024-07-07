@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.temperature.desertvision;
+package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
 import com.github.thedeathlycow.scorchful.mixin.BlockDisplayAccess;
 import net.minecraft.block.BlockState;
@@ -12,11 +12,11 @@ import net.minecraft.world.biome.Biome;
 
 import java.util.function.Supplier;
 
-public class BlockDisplayDesertVisionController extends EntityDesertVisionController<DisplayEntity.BlockDisplayEntity> {
+public class BlockDisplayHeatVision extends EntityHeatVision<DisplayEntity.BlockDisplayEntity> {
 
     private final Supplier<BlockState> blockStateProvider;
 
-    public BlockDisplayDesertVisionController(TagKey<Biome> allowedBiomes, Supplier<BlockState> blockStateProvider) {
+    public BlockDisplayHeatVision(TagKey<Biome> allowedBiomes, Supplier<BlockState> blockStateProvider) {
         super(allowedBiomes, EntityType.BLOCK_DISPLAY);
         this.blockStateProvider = blockStateProvider;
     }

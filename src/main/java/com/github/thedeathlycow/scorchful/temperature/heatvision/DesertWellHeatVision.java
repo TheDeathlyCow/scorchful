@@ -1,15 +1,14 @@
-package com.github.thedeathlycow.scorchful.temperature.desertvision;
+package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
+import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.biome.Biome;
 
-public class DesertWellVisionController extends DesertVisionController {
+public class DesertWellHeatVision extends HeatVision {
 
-    public DesertWellVisionController(TagKey<Biome> allowedBiomes) {
-        super(allowedBiomes);
+    public DesertWellHeatVision() {
+        super(SBiomeTags.DESERT_VISION_BIOMES);
     }
 
     @Override

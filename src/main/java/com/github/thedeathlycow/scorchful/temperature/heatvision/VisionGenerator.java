@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.temperature.desertvision;
+package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
 import com.github.thedeathlycow.scorchful.registry.SRegistries;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
@@ -15,11 +15,11 @@ import java.util.Optional;
 
 public class VisionGenerator {
 
-    private final Map<RegistryKey<Biome>, List<DesertVisionController>> cache = new Object2ObjectOpenHashMap<>();
+    private final Map<RegistryKey<Biome>, List<HeatVision>> cache = new Object2ObjectOpenHashMap<>();
 
     @Nullable
-    public DesertVisionController chooseVision(ServerWorld serverWorld, BlockPos pos) {
-        List<DesertVisionController> controllers = this.getPossibleVisions(serverWorld.getBiome(pos));
+    public HeatVision chooseVision(ServerWorld serverWorld, BlockPos pos) {
+        List<HeatVision> controllers = this.getPossibleVisions(serverWorld.getBiome(pos));
         if (controllers.isEmpty()) {
             return null;
         }
@@ -27,7 +27,7 @@ public class VisionGenerator {
         return controllers.get(choice);
     }
 
-    private List<DesertVisionController> getPossibleVisions(RegistryEntry<Biome> biome) {
+    private List<HeatVision> getPossibleVisions(RegistryEntry<Biome> biome) {
         Optional<RegistryKey<Biome>> key = biome.getKey();
         if (key.isEmpty()) {
             return List.of();
@@ -36,8 +36,8 @@ public class VisionGenerator {
     }
 
 
-    private List<DesertVisionController> computeVisionsForBiome(RegistryEntry<Biome> biome) {
-        return SRegistries.DESERT_VISION_CONTROLLERS.stream()
+    private List<HeatVision> computeVisionsForBiome(RegistryEntry<Biome> biome) {
+        return SRegistries.HEAT_VISION.stream()
                 .filter(vision -> vision.canApplyToBiome(biome))
                 .toList();
     }

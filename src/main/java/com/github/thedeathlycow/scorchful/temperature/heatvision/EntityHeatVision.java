@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.temperature.desertvision;
+package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import net.minecraft.entity.Entity;
@@ -10,12 +10,12 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 
-public class EntityDesertVisionController<E extends Entity> extends DesertVisionController {
+public class EntityHeatVision<E extends Entity> extends HeatVision {
 
 
     private final EntityType<E> entityType;
 
-    public EntityDesertVisionController(TagKey<Biome> allowedBiomes, EntityType<E> entityType) {
+    public EntityHeatVision(TagKey<Biome> allowedBiomes, EntityType<E> entityType) {
         super(allowedBiomes);
         this.entityType = entityType;
     }

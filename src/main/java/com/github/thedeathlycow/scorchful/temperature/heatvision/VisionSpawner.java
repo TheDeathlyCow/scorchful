@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.temperature.desertvision;
+package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import com.github.thedeathlycow.scorchful.util.SMth;

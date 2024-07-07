@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.event;
 
-import com.github.thedeathlycow.scorchful.temperature.desertvision.DesertVisionController;
+import com.github.thedeathlycow.scorchful.temperature.heatvision.HeatVision;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,5 +20,5 @@ public interface DesertVisionActivation {
             }
     );
 
-    void onActivated(DesertVisionController vision, PlayerEntity player);
+    void onActivated(HeatVision vision, PlayerEntity player);
 }

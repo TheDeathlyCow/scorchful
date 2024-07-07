@@ -1,22 +1,21 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.temperature.desertvision.DesertVisionController;
-import com.github.thedeathlycow.scorchful.temperature.desertvision.DesertWellVisionController;
+import com.github.thedeathlycow.scorchful.temperature.heatvision.HeatVision;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 
 public class SRegistries {
 
-    public static final RegistryKey<Registry<DesertVisionController>> DESERT_VISION_CONTROLLERS_KEY = createRegistryKey(
-            "desert_vision_controllers"
+    public static final RegistryKey<Registry<HeatVision>> HEAT_VISION_KEY = createRegistryKey(
+            "heat_vision"
     );
 
 
-    public static final Registry<DesertVisionController> DESERT_VISION_CONTROLLERS =
+    public static final Registry<HeatVision> HEAT_VISION =
             FabricRegistryBuilder.createSimple(
-                    DESERT_VISION_CONTROLLERS_KEY
+                    HEAT_VISION_KEY
             ).buildAndRegister();
 
 

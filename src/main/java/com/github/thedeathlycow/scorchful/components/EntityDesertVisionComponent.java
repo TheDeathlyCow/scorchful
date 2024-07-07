@@ -2,14 +2,12 @@ package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.event.DesertVisionActivation;
-import com.github.thedeathlycow.scorchful.registry.SDesertVisionControllers;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
-import com.github.thedeathlycow.scorchful.temperature.desertvision.DesertVisionController;
+import com.github.thedeathlycow.scorchful.temperature.heatvision.HeatVision;
 import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
@@ -29,7 +27,7 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
     private PlayerEntity cause;
 
     @Nullable
-    private DesertVisionController vision;
+    private HeatVision vision;
 
     private int timeToLive = 10 * 20;
 
@@ -41,7 +39,7 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
         return this.cause != null;
     }
 
-    public void applyDesertVision(@NotNull DesertVisionController vision, @NotNull PlayerEntity cause) {
+    public void applyDesertVision(@NotNull HeatVision vision, @NotNull PlayerEntity cause) {
         this.cause = cause;
         this.vision = vision;
     }
@@ -88,7 +86,7 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
         } else if (this.timeToLive-- <= 0) {
             return false;
         } else {
-            double activationDistance = DesertVisionController.ACTIVATION_DISTANCE * DesertVisionController.ACTIVATION_DISTANCE;
+            double activationDistance = HeatVision.ACTIVATION_DISTANCE * HeatVision.ACTIVATION_DISTANCE;
             if (this.provider.squaredDistanceTo(cause) < activationDistance) {
                 DesertVisionActivation.EVENT.invoker().onActivated(this.vision, cause);
                 return false;
