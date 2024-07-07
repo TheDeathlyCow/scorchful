@@ -1,12 +1,18 @@
 package com.github.thedeathlycow.scorchful.temperature.desertvision;
 
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
+import com.github.thedeathlycow.scorchful.util.SMth;
+import com.github.thedeathlycow.thermoo.impl.Thermoo;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
+import org.joml.Vector2i;
 
 public class VisionSpawner {
 
@@ -19,27 +25,45 @@ public class VisionSpawner {
             return;
         }
 
-        if (player.age % 20 == 0 && player.getRandom().nextInt(10) == 0) {
-            spawnDesertVision((ServerWorld) world, player);
-        }
+        spawnDesertVision((ServerWorld) world, player);
     }
 
     private static void spawnDesertVision(ServerWorld serverWorld, PlayerEntity cause) {
-        var controller = generator.chooseVision();
-        if (controller != null) {
-            BlockPos pos = chooseVisionPos(serverWorld, cause.getBlockPos(), cause.getRandom());
-            controller.spawn(cause, serverWorld, pos);
-        }
+        BlockPos pos = chooseVisionPos(serverWorld, cause.getBlockPos(), cause.getRandom());
+        serverWorld.setBlockState(pos, Blocks.PINK_CONCRETE.getDefaultState(), Block.NOTIFY_ALL);
+//        var controller = generator.chooseVision();
+//        if (controller != null) {
+//            BlockPos pos = chooseVisionPos(serverWorld, cause.getBlockPos(), cause.getRandom());
+//            controller.spawn(cause, serverWorld, pos);
+//        }
     }
 
     private static BlockPos chooseVisionPos(ServerWorld serverWorld, BlockPos origin, Random random) {
-        // TODO: make the vision not spawn on top of the player
-        int x = origin.getX() + random.nextBetween(-16 * 3, 16 * 3);
-        int z = origin.getZ() + random.nextBetween(-16 * 3, 16 * 3);
-        int y = serverWorld.getTopY(Heightmap.Type.WORLD_SURFACE, x, z);
-        return new BlockPos(x, y, z);
+        var xz = generateXZ(random, origin.getX(), origin.getZ(), 16, 4);
+        int y = serverWorld.getTopY(Heightmap.Type.WORLD_SURFACE, xz.x, xz.y);
+        return new BlockPos(xz.x, y, xz.y);
     }
 
+    /**
+     * Generates points in a 2D doughnut distribution around the origin
+     * <p>
+     * Based on approach 1 from <a href="https://codegolf.stackexchange.com/questions/243774/random-point-from-a-2d-donut-distribution">this code golf challenge</a>
+     *
+     * @param random  random source
+     * @param xOrigin x origin
+     * @param yOrigin y origin
+     * @param radius  radius of the doughnut
+     * @param spread  how far from the radius points should spread (normally distributed)
+     * @return returns a new vector with point randomly sampled as described
+     */
+    private static Vector2i generateXZ(Random random, int xOrigin, int yOrigin, double radius, double spread) {
+        double a = MathHelper.nextDouble(random, 0, Math.PI * 2);
+        double b = SMth.nextGaussian(random, radius, spread);
+        return new Vector2i(
+                xOrigin + MathHelper.floor(b * Math.cos(a)),
+                yOrigin + MathHelper.floor(b * Math.sin(a))
+        );
+    }
 
     private VisionSpawner() {
     }
