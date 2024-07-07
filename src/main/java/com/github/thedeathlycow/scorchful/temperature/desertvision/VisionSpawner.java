@@ -28,9 +28,9 @@ public class VisionSpawner {
     }
 
     private static void spawnDesertVision(ServerWorld serverWorld, PlayerEntity cause) {
-        var controller = generator.chooseVision();
+        BlockPos pos = chooseVisionPos(serverWorld, cause.getBlockPos(), cause.getRandom());
+        var controller = generator.chooseVision(serverWorld, pos);
         if (controller != null) {
-            BlockPos pos = chooseVisionPos(serverWorld, cause.getBlockPos(), cause.getRandom());
             controller.spawn(cause, serverWorld, pos);
         }
     }
