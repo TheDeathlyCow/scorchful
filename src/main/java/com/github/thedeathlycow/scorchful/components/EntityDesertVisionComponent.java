@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.components;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.event.DesertVisionActivation;
 import com.github.thedeathlycow.scorchful.registry.SDesertVisionControllers;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
@@ -20,7 +21,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class EntityDesertVisionComponent implements Component, AutoSyncedComponent, ServerTickingComponent {
-
 
 
     private final Entity provider;
@@ -59,6 +59,8 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
     @Override
     public void writeSyncPacket(PacketByteBuf buf, ServerPlayerEntity recipient) {
         buf.writeOptional(Optional.ofNullable(cause), (pBuf, player) -> pBuf.writeUuid(player.getUuid()));
+
+        Scorchful.LOGGER.debug("Writing sync packet to entity desert vision");
     }
 
     @Override
@@ -68,26 +70,30 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
         this.cause = uuid != null
                 ? this.provider.getWorld().getPlayerByUuid(uuid)
                 : null;
+
+        Scorchful.LOGGER.debug("Applying sync packet to entity desert vision");
     }
 
     @Override
     public void serverTick() {
         if (!this.tickCanLive()) {
+            Scorchful.LOGGER.debug("Discarding entity desert vision " + this.provider);
             this.provider.discard();
         }
     }
 
     private boolean tickCanLive() {
-        if (this.timeToLive-- <= 0) {
+        if (this.cause == null) {
+            return true;
+        } else if (this.timeToLive-- <= 0) {
             return false;
-        } else if (this.cause != null) {
+        } else {
             double activationDistance = DesertVisionController.ACTIVATION_DISTANCE * DesertVisionController.ACTIVATION_DISTANCE;
             if (this.provider.squaredDistanceTo(cause) < activationDistance) {
-                DesertVisionActivation.EVENT.invoker().onActivated(vision, cause);
+                DesertVisionActivation.EVENT.invoker().onActivated(this.vision, cause);
                 return false;
             }
             return cause.hasStatusEffect(SStatusEffects.HEAT_STROKE);
         }
-        return true;
     }
 }
