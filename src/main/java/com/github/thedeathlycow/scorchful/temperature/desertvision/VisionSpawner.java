@@ -10,6 +10,8 @@ import net.minecraft.world.World;
 
 public class VisionSpawner {
 
+    private static final VisionGenerator generator = new VisionGenerator();
+
     public static void tick(PlayerEntity player) {
         World world = player.getWorld();
 
@@ -23,15 +25,11 @@ public class VisionSpawner {
     }
 
     private static void spawnDesertVision(ServerWorld serverWorld, PlayerEntity cause) {
-//        DesertVisionEntity vision = SEntityTypes.DESERT_VISION.create(serverWorld);
-//        if (vision != null) {
-//            BlockPos pos = chooseVisionPos(serverWorld, cause.getBlockPos(), cause.getRandom());
-//            vision.setPos(pos.getX(), pos.getY(), pos.getZ());
-//            if (serverWorld.spawnEntity(vision)) {
-//                DesertVisionType visionType = DesertVisionType.choose(cause.getRandom());
-//                vision.setVision(cause, visionType);
-//            }
-//        }
+        var controller = generator.chooseVision();
+        if (controller != null) {
+            BlockPos pos = chooseVisionPos(serverWorld, cause.getBlockPos(), cause.getRandom());
+            controller.spawn(cause, serverWorld, pos);
+        }
     }
 
     private static BlockPos chooseVisionPos(ServerWorld serverWorld, BlockPos origin, Random random) {
@@ -41,7 +39,6 @@ public class VisionSpawner {
         int y = serverWorld.getTopY(Heightmap.Type.WORLD_SURFACE, x, z);
         return new BlockPos(x, y, z);
     }
-
 
 
     private VisionSpawner() {

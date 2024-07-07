@@ -21,7 +21,7 @@ import java.util.UUID;
 
 public class EntityDesertVisionComponent implements Component, AutoSyncedComponent, ServerTickingComponent {
 
-    private static final double ACTIVATION_DISTANCE = 8.0;
+
 
     private final Entity provider;
 
@@ -81,7 +81,8 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
         if (this.timeToLive-- <= 0) {
             return false;
         } else if (this.cause != null) {
-            if (this.provider.squaredDistanceTo(cause) < ACTIVATION_DISTANCE * ACTIVATION_DISTANCE) {
+            double activationDistance = DesertVisionController.ACTIVATION_DISTANCE * DesertVisionController.ACTIVATION_DISTANCE;
+            if (this.provider.squaredDistanceTo(cause) < activationDistance) {
                 DesertVisionActivation.EVENT.invoker().onActivated(vision, cause);
                 return false;
             }

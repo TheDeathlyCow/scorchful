@@ -6,10 +6,8 @@ import net.minecraft.util.math.BlockPos;
 
 public interface DesertVisionController {
 
-    boolean spawn(PlayerEntity player, ServerWorld world, BlockPos pos);
+    double ACTIVATION_DISTANCE = 8.0;
 
-    default boolean canSpawn(PlayerEntity player, ServerWorld world, BlockPos pos) {
-        return true;
-    }
+    boolean spawn(PlayerEntity player, ServerWorld world, BlockPos pos);
 
 }

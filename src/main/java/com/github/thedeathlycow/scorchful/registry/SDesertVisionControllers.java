@@ -12,8 +12,7 @@ public class SDesertVisionControllers {
 
     public static final DesertVisionController HUSK = new EntityDesertVisionController<>(EntityType.HUSK);
     public static final DesertVisionController BOAT = new EntityDesertVisionController<>(EntityType.BOAT);
-
-    public static final DesertVisionController POPPY = new BlockDisplayDesertVisionController(Blocks.POPPY);
+    public static final DesertVisionController POPPY = new BlockDisplayDesertVisionController(Blocks.POPPY::getDefaultState);
 
 
     public static void initialize() {

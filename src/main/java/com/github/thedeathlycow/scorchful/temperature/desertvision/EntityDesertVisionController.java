@@ -18,11 +18,7 @@ public class EntityDesertVisionController<E extends Entity> implements DesertVis
     }
 
     @Override
-    public final boolean spawn(PlayerEntity player, ServerWorld world, BlockPos pos) {
-        if (!this.canSpawn(player, world, pos)) {
-            return false;
-        }
-
+    public boolean spawn(PlayerEntity player, ServerWorld world, BlockPos pos) {
         E entity = entityType.create(world);
 
         if (entity != null) {

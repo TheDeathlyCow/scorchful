@@ -18,10 +18,6 @@ public class DesertWellVisionController implements DesertVisionController {
         return false;
     }
 
-    @Override
-    public boolean canSpawn(PlayerEntity player, ServerWorld world, BlockPos pos) {
-        return DesertVisionController.super.canSpawn(player, world, pos);
-    }
 
 //    private void spawnDesertWellVision(ServerWorld world, BlockPos blockPos) {
 //        blockPos = blockPos.down();
