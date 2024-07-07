@@ -29,17 +29,15 @@ public class VisionSpawner {
     }
 
     private static void spawnDesertVision(ServerWorld serverWorld, PlayerEntity cause) {
-        BlockPos pos = chooseVisionPos(serverWorld, cause.getBlockPos(), cause.getRandom());
-        serverWorld.setBlockState(pos, Blocks.PINK_CONCRETE.getDefaultState(), Block.NOTIFY_ALL);
-//        var controller = generator.chooseVision();
-//        if (controller != null) {
-//            BlockPos pos = chooseVisionPos(serverWorld, cause.getBlockPos(), cause.getRandom());
-//            controller.spawn(cause, serverWorld, pos);
-//        }
+        var controller = generator.chooseVision();
+        if (controller != null) {
+            BlockPos pos = chooseVisionPos(serverWorld, cause.getBlockPos(), cause.getRandom());
+            controller.spawn(cause, serverWorld, pos);
+        }
     }
 
     private static BlockPos chooseVisionPos(ServerWorld serverWorld, BlockPos origin, Random random) {
-        var xz = generateXZ(random, origin.getX(), origin.getZ(), 16, 4);
+        var xz = generateXZ(random, origin.getX(), origin.getZ(), 32, 4);
         int y = serverWorld.getTopY(Heightmap.Type.WORLD_SURFACE, xz.x, xz.y);
         return new BlockPos(xz.x, y, xz.y);
     }
