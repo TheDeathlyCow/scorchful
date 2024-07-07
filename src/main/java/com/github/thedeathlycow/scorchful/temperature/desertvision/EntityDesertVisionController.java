@@ -5,15 +5,18 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.biome.Biome;
 
-public class EntityDesertVisionController<E extends Entity> implements DesertVisionController {
+public class EntityDesertVisionController<E extends Entity> extends DesertVisionController {
 
 
     private final EntityType<E> entityType;
 
-    public EntityDesertVisionController(EntityType<E> entityType) {
+    public EntityDesertVisionController(TagKey<Biome> allowedBiomes, EntityType<E> entityType) {
+        super(allowedBiomes);
         this.entityType = entityType;
     }
 

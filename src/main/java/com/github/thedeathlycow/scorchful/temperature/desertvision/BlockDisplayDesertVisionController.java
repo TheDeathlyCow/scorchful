@@ -5,8 +5,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.decoration.DisplayEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.biome.Biome;
 
 import java.util.function.Supplier;
 
@@ -14,8 +16,8 @@ public class BlockDisplayDesertVisionController extends EntityDesertVisionContro
 
     private final Supplier<BlockState> blockStateProvider;
 
-    public BlockDisplayDesertVisionController(Supplier<BlockState> blockStateProvider) {
-        super(EntityType.BLOCK_DISPLAY);
+    public BlockDisplayDesertVisionController(TagKey<Biome> allowedBiomes, Supplier<BlockState> blockStateProvider) {
+        super(allowedBiomes, EntityType.BLOCK_DISPLAY);
         this.blockStateProvider = blockStateProvider;
     }
 

@@ -1,18 +1,17 @@
 package com.github.thedeathlycow.scorchful.temperature.desertvision;
 
-import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
-import com.github.thedeathlycow.scorchful.mixin.BlockDisplayAccess;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.decoration.DisplayEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.biome.Biome;
 
-public class DesertWellVisionController implements DesertVisionController {
+public class DesertWellVisionController extends DesertVisionController {
+
+    public DesertWellVisionController(TagKey<Biome> allowedBiomes) {
+        super(allowedBiomes);
+    }
+
     @Override
     public boolean spawn(PlayerEntity player, ServerWorld world, BlockPos pos) {
         return false;

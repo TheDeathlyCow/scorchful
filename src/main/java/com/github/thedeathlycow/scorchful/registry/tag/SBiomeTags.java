@@ -23,6 +23,10 @@ public class SBiomeTags {
     public static final TagKey<Biome> HAS_FEATURE_CRIMSON_LILY_PATCH = SBiomeTags.register("has_feature/crimson_lily_patch");
     public static final TagKey<Biome> HAS_FEATURE_SPARSE_CRIMSON_LILY_PATCH = SBiomeTags.register("has_feature/sparse_crimson_lily_patch");
 
+    public static final TagKey<Biome> DESERT_VISION_BIOMES = SBiomeTags.register("heat_vision/desert");
+
+    public static final TagKey<Biome> NETHER_VISION_BIOMES = SBiomeTags.register("heat_vision/nether");
+
     public static TagKey<Biome> register(String id) {
         return TagKey.of(RegistryKeys.BIOME, new Identifier(Scorchful.MODID, id));
     }
