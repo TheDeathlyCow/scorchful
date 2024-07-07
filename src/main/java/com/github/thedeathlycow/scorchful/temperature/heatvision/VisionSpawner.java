@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import com.github.thedeathlycow.scorchful.util.SMth;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,6 +33,7 @@ public class VisionSpawner {
         var controller = generator.chooseVision(serverWorld, pos);
         if (controller != null) {
             controller.spawn(cause, serverWorld, pos);
+            Scorchful.LOGGER.debug("Spawned a desert vision at " + pos);
         }
     }
 

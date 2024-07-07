@@ -80,6 +80,10 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
         }
     }
 
+    public PlayerEntity getCause() {
+        return cause;
+    }
+
     private boolean tickCanLive() {
         if (this.cause == null) {
             return true;
