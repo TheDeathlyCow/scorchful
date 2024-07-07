@@ -26,9 +26,9 @@ public class EntityRendererMixin<T extends Entity> {
             CallbackInfoReturnable<Boolean> cir
     ) {
         var component = ScorchfulComponents.ENTITY_DESERT_VISION.get(entity);
-        PlayerEntity mainPlayer = MinecraftClient.getInstance().player;
-        if (mainPlayer != null && !mainPlayer.equals(component.getCause())) {
-            cir.setReturnValue(false);
+        if (component.hasDesertVision()) {
+            PlayerEntity mainPlayer = MinecraftClient.getInstance().player;
+            cir.setReturnValue(mainPlayer == null || mainPlayer.equals(component.getCause()));
         }
     }
 

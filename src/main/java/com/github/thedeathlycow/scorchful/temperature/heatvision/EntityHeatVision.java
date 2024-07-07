@@ -41,6 +41,7 @@ public class EntityHeatVision<E extends Entity> extends HeatVision {
     protected void initializeEntity(E entity) {
         entity.setInvulnerable(true);
         entity.setNoGravity(true);
+        entity.setSilent(true);
         if (entity instanceof MobEntity mob) {
             mob.setAiDisabled(true);
         }
