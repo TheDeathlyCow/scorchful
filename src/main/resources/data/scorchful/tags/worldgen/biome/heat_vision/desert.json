@@ -5,7 +5,6 @@
             "required": false,
             "id": "#c:desert"
         },
-        "minecraft:desert",
-        "minecraft:plains"
+        "minecraft:desert"
     ]
 }
