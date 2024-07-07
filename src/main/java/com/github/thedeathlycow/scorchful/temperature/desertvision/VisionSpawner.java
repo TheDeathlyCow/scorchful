@@ -2,9 +2,6 @@ package com.github.thedeathlycow.scorchful.temperature.desertvision;
 
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import com.github.thedeathlycow.scorchful.util.SMth;
-import com.github.thedeathlycow.thermoo.impl.Thermoo;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -25,7 +22,9 @@ public class VisionSpawner {
             return;
         }
 
-        spawnDesertVision((ServerWorld) world, player);
+        if (player.age % 20 == 0 && player.getRandom().nextInt(10) == 0) {
+            spawnDesertVision((ServerWorld) world, player);
+        }
     }
 
     private static void spawnDesertVision(ServerWorld serverWorld, PlayerEntity cause) {
