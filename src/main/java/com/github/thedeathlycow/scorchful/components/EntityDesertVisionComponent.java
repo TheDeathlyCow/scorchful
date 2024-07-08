@@ -30,7 +30,7 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
     @Nullable
     private HeatVision vision;
 
-    private int timeToLive = 10 * 20;
+    private int timeToLive = 30 * 20;
 
     public EntityDesertVisionComponent(Entity provider) {
         this.provider = provider;

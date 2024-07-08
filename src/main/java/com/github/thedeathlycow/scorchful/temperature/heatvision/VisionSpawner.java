@@ -73,7 +73,6 @@ public class VisionSpawner {
     }
 
     private static OptionalInt generateY(ServerWorld serverWorld, BlockPos playerOrigin, int visionX, int visionZ) {
-
         if (serverWorld.getDimension().hasCeiling()) {
             final int range = 5;
             var mutable = new BlockPos.Mutable(visionX, playerOrigin.getY() - range, visionZ);
