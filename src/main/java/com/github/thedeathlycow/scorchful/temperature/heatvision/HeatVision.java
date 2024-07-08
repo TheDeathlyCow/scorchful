@@ -9,7 +9,7 @@ import net.minecraft.world.biome.Biome;
 
 public abstract class HeatVision {
 
-    public static final double ACTIVATION_DISTANCE = 8.0;
+    public static final double ACTIVATION_DISTANCE = 4.0;
 
     private final TagKey<Biome> allowedBiomes;
 

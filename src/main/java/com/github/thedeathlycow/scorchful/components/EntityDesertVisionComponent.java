@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.event.DesertVisionActivation;
+import com.github.thedeathlycow.scorchful.event.HeatVisionActivation;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import com.github.thedeathlycow.scorchful.temperature.heatvision.HeatVision;
 import dev.onyxstudios.cca.api.v3.component.Component;
@@ -12,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -92,7 +93,12 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
         } else {
             double activationDistance = HeatVision.ACTIVATION_DISTANCE * HeatVision.ACTIVATION_DISTANCE;
             if (this.provider.squaredDistanceTo(cause) < activationDistance) {
-                DesertVisionActivation.EVENT.invoker().onActivated(this.vision, cause);
+                HeatVisionActivation.EVENT.invoker().onActivated(
+                        this.vision,
+                        (ServerWorld) this.provider.getWorld(),
+                        this.provider.getBlockPos(),
+                        cause
+                );
                 return false;
             }
             return cause.hasStatusEffect(SStatusEffects.HEAT_STROKE);
