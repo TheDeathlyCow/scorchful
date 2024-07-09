@@ -12,11 +12,6 @@
         "children": [
             {
                 "type": "scorchful:sound",
-                "entity": {
-                    "condition": "minecraft:reference",
-                    "name": "scorchful:can_heat"
-                },
-                "entity_type": "minecraft:player",
                 "temperature_scale_range": {
                     "max": 0.75
                 },
