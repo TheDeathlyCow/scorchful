@@ -1,0 +1,10 @@
+{
+    "replace": false,
+    "values": [
+        {
+            "required": false,
+            "id": "#c:desert"
+        },
+        "minecraft:desert"
+    ]
+}

@@ -12,7 +12,13 @@ public class CombatConfig implements ConfigData {
     @ConfigEntry.Gui.EnumHandler
     FireChargeThrower.FireballFactory fireBallThrownType = FireChargeThrower.FireballFactory.SMALL;
 
+    boolean enableDesertVisions = true;
+
     public FireChargeThrower.FireballFactory getFireBallThrownType() {
         return fireBallThrownType;
+    }
+
+    public boolean enableDesertVisions() {
+        return enableDesertVisions;
     }
 }

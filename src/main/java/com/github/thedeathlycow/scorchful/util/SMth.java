@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.util;
 
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import org.jetbrains.annotations.Contract;
 import org.joml.Vector3f;
 
@@ -11,6 +12,10 @@ public class SMth {
         output.x = MathHelper.lerp(delta, start.x, end.x);
         output.y = MathHelper.lerp(delta, start.y, end.y);
         output.z = MathHelper.lerp(delta, start.z, end.z);
+    }
+
+    public static double nextGaussian(Random random, double mean, double deviation) {
+        return mean + random.nextGaussian() * deviation;
     }
 
     @Contract("_,_,_->new")

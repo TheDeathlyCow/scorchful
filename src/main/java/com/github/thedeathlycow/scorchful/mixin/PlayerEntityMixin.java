@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.mixin;
 
 import com.github.thedeathlycow.scorchful.item.TurtleArmorEffects;
+import com.github.thedeathlycow.scorchful.temperature.heatvision.VisionSpawner;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,6 +19,14 @@ public class PlayerEntityMixin {
     private void scorchfulTurtleArmorUpdate(CallbackInfo ci) {
         TurtleArmorEffects.update((PlayerEntity) (Object) this);
         ci.cancel();
+    }
+
+    @Inject(
+            method = "tick",
+            at = @At("TAIL")
+    )
+    private void afterTick(CallbackInfo ci) {
+        VisionSpawner.tick((PlayerEntity) (Object) this);
     }
 
 }

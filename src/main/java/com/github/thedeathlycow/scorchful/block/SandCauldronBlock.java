@@ -27,6 +27,7 @@ import net.minecraft.world.event.GameEvent;
 
 import java.util.function.Predicate;
 
+
 public class SandCauldronBlock extends AbstractCauldronBlock {
 
     public static final MapCodec<SandCauldronBlock> CODEC = RecordCodecBuilder.mapCodec(
@@ -82,6 +83,7 @@ public class SandCauldronBlock extends AbstractCauldronBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return state.get(LEVEL);
     }

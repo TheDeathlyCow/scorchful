@@ -48,5 +48,11 @@
             "scorchful:entity/gulp"
         ],
         "subtitle": "subtitles.scorchful.entity.gulp"
+    },
+    "discover_vision": {
+        "sounds": [
+            "scorchful:discover_vision"
+        ],
+        "subtitle": "subtitles.scorchful.discover_vision"
     }
 }

@@ -7,6 +7,7 @@ import ladysnake.satin.api.managed.ManagedShaderEffect;
 import ladysnake.satin.api.managed.ShaderEffectManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
@@ -30,6 +31,9 @@ public final class HeatStrokeShaderEffect {
             if (enabled) {
                 HEAT_STROKE_SHADER.render(tickDelta);
             }
+        });
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
+            enabled = false;
         });
     }
 

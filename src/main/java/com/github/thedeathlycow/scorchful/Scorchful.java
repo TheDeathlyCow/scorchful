@@ -17,6 +17,7 @@ import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentControllerInitializeEvent;
 import com.github.thedeathlycow.thermoo.api.temperature.event.PlayerEnvironmentEvents;
 import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -25,6 +26,8 @@ import net.fabricmc.fabric.api.item.v1.ModifyItemAttributeModifiersCallback;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,6 +38,9 @@ public class Scorchful implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
 
     public static final int CONFIG_VERSION = 4;
+
+    @Nullable
+    private static ConfigHolder<ScorchfulConfig> configHolder = null;
 
     @Contract("_->new")
     public static Identifier id(String path) {
@@ -47,8 +53,10 @@ public class Scorchful implements ModInitializer {
         ScorchfulConfig.updateConfig(AutoConfig.getConfigHolder(ScorchfulConfig.class));
 
         SBlocks.registerBlocks();
+        SBlockEntityTypes.registerAll();
         SItems.registerItems();
         SItemGroups.registerAll();
+        SEntityTypes.registerAll();
         SSoundEvents.registerAll();
         STemperatureEffects.registerAll();
         SEnchantments.registerAll();
@@ -59,6 +67,7 @@ public class Scorchful implements ModInitializer {
         SStats.registerAll();
         SandCauldronBehaviours.registerAll();
         NetherLilyBehaviours.registerBehaviours();
+        SHeatVisions.initialize();
 
         CommandRegistrationCallback.EVENT.register(
                 (dispatcher, registryAccess, environment) -> {
@@ -85,8 +94,12 @@ public class Scorchful implements ModInitializer {
         LOGGER.info("Scorchful initialized!");
     }
 
+    @NotNull
     public static ScorchfulConfig getConfig() {
-        return AutoConfig.getConfigHolder(ScorchfulConfig.class).getConfig();
+        if (configHolder == null) {
+            configHolder = AutoConfig.getConfigHolder(ScorchfulConfig.class);
+        }
+        return configHolder.getConfig();
     }
 
 
