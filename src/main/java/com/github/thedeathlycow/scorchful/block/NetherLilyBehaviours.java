@@ -3,20 +3,17 @@ package com.github.thedeathlycow.scorchful.block;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import com.github.thedeathlycow.scorchful.registry.SStats;
-import net.minecraft.block.cauldron.CauldronBehavior;
+import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
-import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.world.event.GameEvent;
-
-import java.util.Map;
 
 public class NetherLilyBehaviours {
 
@@ -57,7 +54,11 @@ public class NetherLilyBehaviours {
                         Item item = stack.getItem();
                         player.setStackInHand(
                                 hand,
-                                ItemUsage.exchangeStack(stack, player, PotionUtil.setPotion(new ItemStack(Items.POTION), Potions.WATER))
+                                ItemUsage.exchangeStack(
+                                        stack,
+                                        player,
+                                        PotionContentsComponent.createStack(Items.POTION, Potions.WATER)
+                                )
                         );
                         player.incrementStat(SStats.USE_WARPED_LILY);
                         player.incrementStat(Stats.USED.getOrCreateStat(item));
