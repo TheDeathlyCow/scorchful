@@ -20,6 +20,11 @@ public class VisionSpawner {
     private static final VisionGenerator generator = new VisionGenerator();
 
     public static void tick(PlayerEntity player) {
+
+        if (!Scorchful.getConfig().combatConfig.enableDesertVisions()) {
+            return;
+        }
+
         World world = player.getWorld();
 
         if (world.isClient() || !player.hasStatusEffect(SStatusEffects.HEAT_STROKE)) {

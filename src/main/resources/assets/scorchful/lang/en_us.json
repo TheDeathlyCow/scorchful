@@ -118,6 +118,7 @@
     
     "text.autoconfig.scorchful.option.combatConfig": "Combat Config",
     "text.autoconfig.scorchful.option.combatConfig.fireBallThrownType": "Fire Charge thrown type",
+    "text.autoconfig.scorchful.option.combatConfig.enableDesertVisions": "Enable Desert Visions",
     
     "text.autoconfig.scorchful.option.weatherConfig": "Weather Config",
     "text.autoconfig.scorchful.option.weatherConfig.doSandPileAccumulation": "Do Sand Pile accumulation",
