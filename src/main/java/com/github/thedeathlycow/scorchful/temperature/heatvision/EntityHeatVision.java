@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.biome.Biome;
 
 public class EntityHeatVision<E extends Entity> extends HeatVision {
@@ -25,7 +26,7 @@ public class EntityHeatVision<E extends Entity> extends HeatVision {
         E entity = entityType.create(world);
 
         if (entity != null) {
-            entity.setPos(pos.getX(), pos.getY(), pos.getZ());
+            entity.refreshPositionAndAngles(pos, 0f, 0f);
             this.initializeEntity(entity);
             ScorchfulComponents.ENTITY_DESERT_VISION.get(entity).applyDesertVision(this, player);
             boolean spawned = world.spawnEntity(entity);

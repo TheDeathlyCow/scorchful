@@ -29,7 +29,11 @@ public abstract class HeatVision implements Weighted {
     }
 
     @Override
-    public Weight getWeight() {
+    public final Weight getWeight() {
         return this.weight;
+    }
+
+    public final int getWeightAsInt() {
+        return this.weight.getValue();
     }
 }

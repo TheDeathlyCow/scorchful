@@ -13,6 +13,7 @@ public class SSoundEvents {
     public static final SoundEvent CRIMSON_LILY_SQUELCH = create("block.scorchful.crimson_lily.squelch");
     public static final SoundEvent WEATHER_SANDSTORM = create("weather.sandstorm");
     public static final SoundEvent ENTITY_GULP = create("entity.gulp");
+    public static final SoundEvent DISCOVER_VISION = create("discover_vision");
 
     public static void registerAll() {
         register(ITEM_WATER_SKIN_FILL);
@@ -21,6 +22,7 @@ public class SSoundEvents {
         register(CRIMSON_LILY_SQUELCH);
         register(WEATHER_SANDSTORM);
         register(ENTITY_GULP);
+        register(DISCOVER_VISION);
     }
 
     private static void register(SoundEvent event) {
