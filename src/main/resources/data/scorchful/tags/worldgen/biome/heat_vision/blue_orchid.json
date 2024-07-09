@@ -3,11 +3,13 @@
     "values": [
         {
             "required": false,
-            "id": "#c:nether"
+            "id": "#c:desert"
         },
         {
             "required": false,
-            "id": "#minecraft:is_nether"
-        }
+            "id": "#c:badlands"
+        },
+        "minecraft:desert",
+        "#minecraft:is_badlands"
     ]
 }
