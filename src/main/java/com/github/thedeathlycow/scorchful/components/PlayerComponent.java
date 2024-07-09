@@ -5,6 +5,7 @@ import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.config.DehydrationConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
+import net.minecraft.registry.RegistryWrapper;
 import org.ladysnake.cca.api.v3.component.Component;
 import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
 import net.dehydration.access.ThirstManagerAccess;
@@ -45,7 +46,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
     }
 
     @Override
-    public void readFromNbt(NbtCompound tag) {
+    public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         if (tag.contains(WATER_KEY, NbtElement.INT_TYPE)) {
             this.waterDrunk = tag.getInt(WATER_KEY);
         }
@@ -56,7 +57,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag) {
+    public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         if (this.waterDrunk > 0) {
             tag.putInt(WATER_KEY, this.waterDrunk);
         }

@@ -4,6 +4,8 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.event.HeatVisionActivation;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import com.github.thedeathlycow.scorchful.temperature.heatvision.HeatVision;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.registry.RegistryWrapper;
 import org.ladysnake.cca.api.v3.component.Component;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
@@ -46,25 +48,25 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
     }
 
     @Override
-    public void readFromNbt(NbtCompound tag) {
+    public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         // visions should be transient, so not saved to NBT
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag) {
+    public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         // visions should be transient, so not saved to NBT
     }
 
     @Override
-    public void writeSyncPacket(PacketByteBuf buf, ServerPlayerEntity recipient) {
+    public void writeSyncPacket(RegistryByteBuf buf, ServerPlayerEntity recipient) {
         buf.writeOptional(Optional.ofNullable(cause), (pBuf, player) -> pBuf.writeUuid(player.getUuid()));
 
         Scorchful.LOGGER.debug("Writing sync packet to entity desert vision");
     }
 
     @Override
-    public void applySyncPacket(PacketByteBuf buf) {
-        UUID uuid = buf.readOptional(PacketByteBuf::readUuid).orElse(null);
+    public void applySyncPacket(RegistryByteBuf buf) {
+        UUID uuid = buf.readOptional(RegistryByteBuf::readUuid).orElse(null);
 
         this.cause = uuid != null
                 ? this.provider.getWorld().getPlayerByUuid(uuid)
