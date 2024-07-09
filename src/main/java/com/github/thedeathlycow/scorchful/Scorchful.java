@@ -44,7 +44,7 @@ public class Scorchful implements ModInitializer {
 
     @Contract("_->new")
     public static Identifier id(String path) {
-        return new Identifier(MODID, path);
+        return Identifier.of(MODID, path);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Scorchful implements ModInitializer {
         SSoundEvents.registerAll();
         STemperatureEffects.registerAll();
         SEnchantments.registerAll();
-        SStatusEffects.registerAll();
+        SStatusEffects.initialize();
         RehydrationEnchantment.addToNetherLoot();
         SParticleTypes.registerAll();
         NetherBiomeModifications.placeFeaturesInBiomes();

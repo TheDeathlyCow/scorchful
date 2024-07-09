@@ -47,7 +47,7 @@ public final class HeatStrokeShaderEffect {
     }
 
     public void onEffectRemoved(RemoveEntityStatusEffectS2CPacket packet, ClientWorld world, MinecraftClient client) {
-        if (packet.getEffectType() == SStatusEffects.HEAT_STROKE) {
+        if (packet.effect() == SStatusEffects.HEAT_STROKE) {
             Entity entity = packet.getEntity(world);
             if (entity instanceof ClientPlayerEntity player && player.isMainPlayer()) {
                 enabled = false;
