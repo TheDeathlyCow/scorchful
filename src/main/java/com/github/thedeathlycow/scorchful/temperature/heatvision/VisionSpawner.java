@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import org.joml.Vector2i;
 
@@ -22,6 +23,11 @@ public class VisionSpawner {
         World world = player.getWorld();
 
         if (world.isClient() || !player.hasStatusEffect(SStatusEffects.HEAT_STROKE)) {
+            return;
+        }
+
+        int sunLight = world.getLightLevel(LightType.SKY, player.getBlockPos()) - world.getAmbientDarkness();
+        if (sunLight < 14) {
             return;
         }
 
@@ -73,21 +79,7 @@ public class VisionSpawner {
     }
 
     private static OptionalInt generateY(ServerWorld serverWorld, BlockPos playerOrigin, int visionX, int visionZ) {
-        if (serverWorld.getDimension().hasCeiling()) {
-            final int range = 5;
-            var mutable = new BlockPos.Mutable(visionX, playerOrigin.getY() - range, visionZ);
-            for (int dy = -range; dy <= range; dy++) {
-                var state = serverWorld.getBlockState(mutable);
-                if (state.isAir() && !serverWorld.isOutOfHeightLimit(mutable)) {
-                    return OptionalInt.of(mutable.getY());
-                }
-                mutable.set(visionX, playerOrigin.getY() + dy, visionZ);
-            }
-
-            return OptionalInt.empty();
-        }
-
-        return OptionalInt.of(serverWorld.getTopY(Heightmap.Type.WORLD_SURFACE, visionX, visionZ));
+        return OptionalInt.of(serverWorld.getTopY(Heightmap.Type.MOTION_BLOCKING, visionX, visionZ));
     }
 
     private VisionSpawner() {
