@@ -16,8 +16,8 @@ public class BlockDisplayHeatVision extends EntityHeatVision<DisplayEntity.Block
 
     private final Supplier<BlockState> blockStateProvider;
 
-    public BlockDisplayHeatVision(TagKey<Biome> allowedBiomes, Supplier<BlockState> blockStateProvider) {
-        super(allowedBiomes, EntityType.BLOCK_DISPLAY);
+    public BlockDisplayHeatVision(TagKey<Biome> allowedBiomes, int weight, Supplier<BlockState> blockStateProvider) {
+        super(allowedBiomes, weight, EntityType.BLOCK_DISPLAY);
         this.blockStateProvider = blockStateProvider;
     }
 

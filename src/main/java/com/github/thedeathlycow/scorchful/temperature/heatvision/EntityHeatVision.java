@@ -15,8 +15,8 @@ public class EntityHeatVision<E extends Entity> extends HeatVision {
 
     private final EntityType<E> entityType;
 
-    public EntityHeatVision(TagKey<Biome> allowedBiomes, EntityType<E> entityType) {
-        super(allowedBiomes);
+    public EntityHeatVision(TagKey<Biome> allowedBiomes, int weight, EntityType<E> entityType) {
+        super(allowedBiomes, weight);
         this.entityType = entityType;
     }
 

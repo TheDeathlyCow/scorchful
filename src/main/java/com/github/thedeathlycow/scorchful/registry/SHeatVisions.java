@@ -14,30 +14,37 @@ public class SHeatVisions {
 
     public static final HeatVision HUSK = new EntityHeatVision<>(
             SBiomeTags.HEAT_VISION_HUSK,
+            6,
             EntityType.HUSK
     );
     public static final HeatVision BOAT = new EntityHeatVision<>(
             SBiomeTags.HEAT_VISION_BOAT,
+            6,
             EntityType.BOAT
     );
     public static final HeatVision POPPY = new BlockDisplayHeatVision(
             SBiomeTags.HEAT_VISION_POPPY,
+            3,
             Blocks.POPPY::getDefaultState
     );
     public static final HeatVision BLUE_ORCHID = new BlockDisplayHeatVision(
             SBiomeTags.HEAT_VISION_BLUE_ORCHID,
+            3,
             Blocks.BLUE_ORCHID::getDefaultState
     );
     public static final HeatVision SALMON = new EntityHeatVision<>(
             SBiomeTags.HEAT_VISION_SALMON,
+            2,
             EntityType.SALMON
     );
     public static final HeatVision COD = new EntityHeatVision<>(
             SBiomeTags.HEAT_VISION_COD,
+            2,
             EntityType.COD
     );
     public static final HeatVision SQUID = new EntityHeatVision<>(
             SBiomeTags.HEAT_VISION_SQUID,
+            2,
             EntityType.SQUID
     );
 

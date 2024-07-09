@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
 public class DesertWellHeatVision extends HeatVision {
 
     public DesertWellHeatVision() {
-        super(SBiomeTags.DESERT_VISION_BIOMES);
+        super(SBiomeTags.HEAT_VISION_HUSK, 1);
     }
 
     @Override

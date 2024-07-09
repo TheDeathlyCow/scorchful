@@ -5,6 +5,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.collection.Weighting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import org.jetbrains.annotations.Nullable;
@@ -23,8 +24,8 @@ public class VisionGenerator {
         if (controllers.isEmpty()) {
             return null;
         }
-        int choice = serverWorld.getRandom().nextInt(controllers.size());
-        return controllers.get(choice);
+
+        return Weighting.getRandom(serverWorld.getRandom(), controllers).orElseThrow(IllegalStateException::new);
     }
 
     private List<HeatVision> getPossibleVisions(RegistryEntry<Biome> biome) {
