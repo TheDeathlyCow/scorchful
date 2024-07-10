@@ -60,7 +60,7 @@ public abstract class DrinkItem extends Item {
         user.emitGameEvent(GameEvent.DRINK);
 
         if (!(user instanceof ServerPlayerEntity serverPlayer)) {
-            return null;
+            return super.finishUsing(stack, world, user);
         }
 
         Criteria.CONSUME_ITEM.trigger(serverPlayer, stack);

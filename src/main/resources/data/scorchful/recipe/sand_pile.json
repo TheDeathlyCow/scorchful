@@ -9,7 +9,7 @@
         }
     },
     "result": {
-        "item": "scorchful:sand_pile",
+        "id": "scorchful:sand_pile",
         "count": 6
     }
 }

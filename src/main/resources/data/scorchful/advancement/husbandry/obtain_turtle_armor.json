@@ -1,8 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "scorchful:turtle_chestplate",
-            "nbt": "{Damage:0}"
+            "id": "scorchful:turtle_chestplate"
         },
         "title": {
             "translate": "advancements.scorchful.husbandry.obtain_turtle_armor.title"
@@ -18,9 +17,7 @@
             "conditions": {
                 "items": [
                     {
-                        "items": [
-                            "minecraft:turtle_helmet"
-                        ]
+                        "id": "minecraft:turtle_helmet"
                     }
                 ]
             }
@@ -30,9 +27,7 @@
             "conditions": {
                 "items": [
                     {
-                        "items": [
-                            "scorchful:turtle_chestplate"
-                        ]
+                        "id": "scorchful:turtle_chestplate"
                     }
                 ]
             }
@@ -42,9 +37,7 @@
             "conditions": {
                 "items": [
                     {
-                        "items": [
-                            "scorchful:turtle_leggings"
-                        ]
+                        "id": "scorchful:turtle_leggings"
                     }
                 ]
             }
@@ -54,9 +47,7 @@
             "conditions": {
                 "items": [
                     {
-                        "items": [
-                            "scorchful:turtle_boots"
-                        ]
+                        "id": "scorchful:turtle_boots"
                     }
                 ]
             }

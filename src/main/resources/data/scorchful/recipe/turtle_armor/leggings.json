@@ -8,10 +8,10 @@
     ],
     "key": {
         "#": {
-            "item": "minecraft:scute"
+            "item": "minecraft:turtle_scute"
         }
     },
     "result": {
-        "item": "scorchful:turtle_leggings"
+        "id": "scorchful:turtle_leggings"
     }
 }

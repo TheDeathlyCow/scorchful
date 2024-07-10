@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "scorchful:cactus_juice"
+            "id": "scorchful:cactus_juice"
         },
         "title": {
             "translate": "advancement.scorchful.adventure.drink_cactus_juice.title"
@@ -20,9 +20,7 @@
             "trigger": "minecraft:consume_item",
             "conditions": {
                 "item": {
-                    "items": [
-                        "scorchful:cactus_juice"
-                    ]
+                    "id": "scorchful:cactus_juice"
                 }
             }
         }
