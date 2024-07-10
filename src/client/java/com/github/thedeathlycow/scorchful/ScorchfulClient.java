@@ -10,6 +10,7 @@ import com.github.thedeathlycow.scorchful.item.DrinkItemHelper;
 import com.github.thedeathlycow.scorchful.item.SModelPredicates;
 import com.github.thedeathlycow.scorchful.network.SoundTemperatureEffectPacketListener;
 import com.github.thedeathlycow.scorchful.registry.*;
+import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
 import com.github.thedeathlycow.scorchful.temperature.SoundTemperatureEffect;
 import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
 import net.fabricmc.api.ClientModInitializer;
@@ -28,15 +29,23 @@ public class ScorchfulClient implements ClientModInitializer {
         SEntityModelLayers.registerAll();
         SFeatureRenderers.registerAll();
         SCutouts.registerCutouts();
+
         ClientTickEvents.END_WORLD_TICK.register(SandstormEffects::tickSandstormParticles);
         ClientTickEvents.END_WORLD_TICK.register(SandstormSounds.INSTANCE::tick);
+
         SParticleFactories.registerFactories();
+
         StatusBarOverlayRenderEvents.AFTER_HEALTH_BAR.register(SoakingUnderlay.INSTANCE);
         StatusBarOverlayRenderEvents.AFTER_HEALTH_BAR.register(BurningHeartsOverlay.INSTANCE);
         StatusBarOverlayRenderEvents.AFTER_MOUNT_HEALTH_BAR.register(MountHealthOverlay.INSTANCE);
+
         ItemTooltipCallback.EVENT.register(DrinkItemHelper::appendTooltip);
-        ClientPlayNetworking.registerGlobalReceiver(SoundTemperatureEffect.PACKET_ID,
-                SoundTemperatureEffectPacketListener.INSTANCE);
+
+        ClientPlayNetworking.registerGlobalReceiver(
+                TemperatureSoundEventPacket.PACKET_ID,
+                new SoundTemperatureEffectPacketListener()
+        );
+
         HeatStrokeShaderEffect.INSTANCE.initialize();
     }
 

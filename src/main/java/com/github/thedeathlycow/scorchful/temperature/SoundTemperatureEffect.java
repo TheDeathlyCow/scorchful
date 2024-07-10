@@ -1,14 +1,13 @@
 package com.github.thedeathlycow.scorchful.temperature;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
 import com.github.thedeathlycow.thermoo.api.ThermooCodecs;
 import com.github.thedeathlycow.thermoo.api.temperature.effects.TemperatureEffect;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -52,15 +51,16 @@ public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEf
         if (victim instanceof ServerPlayerEntity serverPlayer) {
             var random = victim.getRandom();
 
-            PacketByteBuf buf = PacketByteBufs.create();
-
-            config.sound.writeBuf(buf);
-            buf.writeEnumConstant(config.category);
-            buf.writeFloat(config.volume.get(random));
-            buf.writeFloat(config.pitch.get(random));
-            buf.writeLong(world.getSeed());
-
-            ServerPlayNetworking.send(serverPlayer, PACKET_ID, buf);
+            ServerPlayNetworking.send(
+                    serverPlayer,
+                    new TemperatureSoundEventPacket(
+                            config.sound,
+                            config.category,
+                            config.volume.get(random),
+                            config.pitch.get(random),
+                            world.getSeed()
+                    )
+            );
         }
     }
 

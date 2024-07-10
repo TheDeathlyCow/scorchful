@@ -5,12 +5,11 @@ import com.github.thedeathlycow.scorchful.block.SandCauldronBehaviours;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.enchantment.RehydrationEnchantment;
 import com.github.thedeathlycow.scorchful.event.ScorchfulLivingEntityEvents;
-import com.github.thedeathlycow.scorchful.item.DrinkItem;
 import com.github.thedeathlycow.scorchful.item.DrinkItemHelper;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
-import com.github.thedeathlycow.scorchful.item.HeatResistantArmourTagApplicator;
 import com.github.thedeathlycow.scorchful.registry.*;
 import com.github.thedeathlycow.scorchful.server.ThirstCommand;
+import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
 import com.github.thedeathlycow.scorchful.temperature.AmbientTemperatureController;
 import com.github.thedeathlycow.scorchful.temperature.AttributeController;
 import com.github.thedeathlycow.scorchful.temperature.WetTickController;
@@ -25,7 +24,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
-import net.fabricmc.fabric.api.item.v1.ModifyItemAttributeModifiersCallback;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.util.TriState;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.util.Identifier;
@@ -82,7 +81,7 @@ public class Scorchful implements ModInitializer {
         );
         UseItemCallback.EVENT.register(new FireChargeThrower());
         DefaultItemComponentEvents.MODIFY.register(DrinkItemHelper::modifyDefaultComponents);
-        ModifyItemAttributeModifiersCallback.EVENT.register(new HeatResistantArmourTagApplicator());
+//        ModifyItemAttributeModifiersCallback.EVENT.register(new HeatResistantArmourTagApplicator());
 
         // custom scorchful event
         ScorchfulLivingEntityEvents.ON_DAMAGED.register(
@@ -97,6 +96,8 @@ public class Scorchful implements ModInitializer {
         );
 
         this.registerThermooEventListeners();
+
+        PayloadTypeRegistry.playS2C().register(TemperatureSoundEventPacket.PACKET_ID, TemperatureSoundEventPacket.PACKET_CODEC);
 
         LOGGER.info("Scorchful initialized!");
     }
