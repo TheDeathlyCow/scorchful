@@ -7,7 +7,7 @@
         "BlockDisplayAccess",
         "CauldronBlockMixin",
         "EntityMixin",
-        "ItemMixin",
+        "thirst.ItemMixin",
         "LivingEntityMixin",
         "PlayerEntityMixin",
         "PointOfInterestTypesMixin",

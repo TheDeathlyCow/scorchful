@@ -5,6 +5,8 @@ import com.github.thedeathlycow.scorchful.block.SandCauldronBehaviours;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.enchantment.RehydrationEnchantment;
 import com.github.thedeathlycow.scorchful.event.ScorchfulLivingEntityEvents;
+import com.github.thedeathlycow.scorchful.item.DrinkItem;
+import com.github.thedeathlycow.scorchful.item.DrinkItemHelper;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
 import com.github.thedeathlycow.scorchful.item.HeatResistantArmourTagApplicator;
 import com.github.thedeathlycow.scorchful.registry.*;
@@ -22,6 +24,7 @@ import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.item.v1.ModifyItemAttributeModifiersCallback;
 import net.fabricmc.fabric.api.util.TriState;
 import net.minecraft.entity.damage.DamageTypes;
@@ -78,6 +81,7 @@ public class Scorchful implements ModInitializer {
                 }
         );
         UseItemCallback.EVENT.register(new FireChargeThrower());
+        DefaultItemComponentEvents.MODIFY.register(DrinkItemHelper::modifyDefaultComponents);
         ModifyItemAttributeModifiersCallback.EVENT.register(new HeatResistantArmourTagApplicator());
 
         // custom scorchful event

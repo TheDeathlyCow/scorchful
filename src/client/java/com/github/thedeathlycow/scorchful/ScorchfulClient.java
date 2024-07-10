@@ -6,7 +6,7 @@ import com.github.thedeathlycow.scorchful.client.SandstormSounds;
 import com.github.thedeathlycow.scorchful.hud.BurningHeartsOverlay;
 import com.github.thedeathlycow.scorchful.hud.MountHealthOverlay;
 import com.github.thedeathlycow.scorchful.hud.SoakingUnderlay;
-import com.github.thedeathlycow.scorchful.item.QuenchingFoods;
+import com.github.thedeathlycow.scorchful.item.DrinkItemHelper;
 import com.github.thedeathlycow.scorchful.item.SModelPredicates;
 import com.github.thedeathlycow.scorchful.network.SoundTemperatureEffectPacketListener;
 import com.github.thedeathlycow.scorchful.registry.*;
@@ -18,8 +18,6 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.render.entity.EmptyEntityRenderer;
 
 @Environment(EnvType.CLIENT)
 public class ScorchfulClient implements ClientModInitializer {
@@ -36,7 +34,7 @@ public class ScorchfulClient implements ClientModInitializer {
         StatusBarOverlayRenderEvents.AFTER_HEALTH_BAR.register(SoakingUnderlay.INSTANCE);
         StatusBarOverlayRenderEvents.AFTER_HEALTH_BAR.register(BurningHeartsOverlay.INSTANCE);
         StatusBarOverlayRenderEvents.AFTER_MOUNT_HEALTH_BAR.register(MountHealthOverlay.INSTANCE);
-        ItemTooltipCallback.EVENT.register(QuenchingFoods::appendTooltip);
+        ItemTooltipCallback.EVENT.register(DrinkItemHelper::appendTooltip);
         ClientPlayNetworking.registerGlobalReceiver(SoundTemperatureEffect.PACKET_ID,
                 SoundTemperatureEffectPacketListener.INSTANCE);
         HeatStrokeShaderEffect.INSTANCE.initialize();

@@ -2,13 +2,10 @@ package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
-import com.github.thedeathlycow.scorchful.components.PlayerComponent;
-import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.ThirstConfig;
-import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
+import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
@@ -21,11 +18,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
-public class QuenchingFoods {
+public class DrinkItemHelper {
 
 
     public static void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipType tooltipType, List<Text> tooltip) {
-        QuenchingLevel level = QuenchingLevel.forItem(stack);
+        Level level = Level.forItem(stack);
         if (level != null && !ScorchfulIntegrations.isDehydrationLoaded()) {
             if (tooltipType.isAdvanced()) {
                 addTooltipBeforeAdvanced(stack, tooltip, level);
@@ -35,28 +32,19 @@ public class QuenchingFoods {
         }
     }
 
-    public static void onConsume(LivingEntity user, ItemStack stack) {
-        onConsume(user, stack, QuenchingLevel.forItem(stack));
-    }
-
-    public static void onConsume(LivingEntity user, ItemStack stack, @Nullable QuenchingLevel level) {
-
-        if (ScorchfulIntegrations.isDehydrationLoaded()) {
-            return;
-        }
-
-        if (level != null && user instanceof PlayerEntity player) {
-            PlayerComponent component = ScorchfulComponents.PLAYER.get(player);
-            component.drink(level.waterProvider.applyAsInt(Scorchful.getConfig().thirstConfig));
-
-            if (component.getWaterDrunk() >= PlayerComponent.MAX_WATER - 25) {
-                player.playSound(SSoundEvents.ENTITY_GULP, 1f, 1f);
-            }
-
+    public static void modifyDefaultComponents(DefaultItemComponentEvents.ModifyContext context) {
+        for (Level level: Level.values()) {
+            context.modify(
+                    item -> item.getRegistryEntry().isIn(level.tag),
+                    (builder, item) -> {
+                        ThirstConfig config = Scorchful.getConfig().thirstConfig;
+                        builder.add(SDataComponentTypes.DRINKING_WATER, level.getDrinkingWater(config));
+                    }
+            );
         }
     }
 
-    public enum QuenchingLevel {
+    public enum Level {
         PARCHING(
                 SItemTags.IS_PARCHING,
                 Text.translatable("item.scorchful.tooltip.parching").setStyle(WaterSkinItem.PARCHING_STYLE),
@@ -84,16 +72,16 @@ public class QuenchingFoods {
 
         public final ToIntFunction<ThirstConfig> waterProvider;
 
-        QuenchingLevel(TagKey<Item> tag, Text tooltipText, ToIntFunction<ThirstConfig> waterProvider) {
+        Level(TagKey<Item> tag, Text tooltipText, ToIntFunction<ThirstConfig> waterProvider) {
             this.tag = tag;
             this.tooltipText = tooltipText;
             this.waterProvider = waterProvider;
         }
 
         @Nullable
-        public static QuenchingLevel forItem(ItemStack stack) {
+        public static DrinkItemHelper.Level forItem(ItemStack stack) {
 
-            for (QuenchingLevel level : QuenchingLevel.values()) {
+            for (Level level : Level.values()) {
                 if (stack.isIn(level.tag)) {
                     return level;
                 }
@@ -101,9 +89,13 @@ public class QuenchingFoods {
 
             return null;
         }
+
+        public int getDrinkingWater(ThirstConfig config) {
+            return this.waterProvider.applyAsInt(config);
+        }
     }
 
-    private static void addTooltipBeforeAdvanced(ItemStack stack, List<Text> tooltip, QuenchingLevel level) {
+    private static void addTooltipBeforeAdvanced(ItemStack stack, List<Text> tooltip, Level level) {
         Identifier identifier = Registries.ITEM.getId(stack.getItem());
         Text idAsText = Text.literal(identifier.toString());
 
@@ -115,7 +107,7 @@ public class QuenchingFoods {
         }
     }
 
-    private QuenchingFoods() {
+    private DrinkItemHelper() {
 
     }
 

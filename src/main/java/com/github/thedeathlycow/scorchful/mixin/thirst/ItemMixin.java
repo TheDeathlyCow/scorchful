@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.mixin;
+package com.github.thedeathlycow.scorchful.mixin.thirst;
 
 import com.github.thedeathlycow.scorchful.item.DrinkItem;
 import net.minecraft.entity.LivingEntity;
