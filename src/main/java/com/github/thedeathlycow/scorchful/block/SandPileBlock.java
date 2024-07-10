@@ -4,10 +4,12 @@ import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.FallingBlock;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
@@ -21,7 +23,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("deprecation")
 public class SandPileBlock extends FallingBlock {
 
     public static final MapCodec<SandPileBlock> CODEC = RecordCodecBuilder.mapCodec(
@@ -57,7 +58,7 @@ public class SandPileBlock extends FallingBlock {
     }
 
     @Override
-    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
+    protected boolean canPathfindThrough(BlockState state, NavigationType type) {
         return switch (type) {
             case LAND -> state.get(LAYERS) < MAX_PATH_FINDING_LAYERS;
             case WATER, AIR -> false;
@@ -65,7 +66,7 @@ public class SandPileBlock extends FallingBlock {
     }
 
     @Override
-    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+    protected boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockState anchorState = world.getBlockState(pos.down());
         if (anchorState.isIn(SBlockTags.SAND_PILE_CANNOT_SURVIVE_ON)) {
             return false;
@@ -84,24 +85,24 @@ public class SandPileBlock extends FallingBlock {
     }
 
     @Override
-    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+    protected void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (!this.canPlaceAt(state, world, pos)) {
             super.scheduledTick(state, world, pos, random);
         }
     }
 
     @Override
-    public boolean hasSidedTransparency(BlockState state) {
+    protected boolean hasSidedTransparency(BlockState state) {
         return true;
     }
 
     @Override
-    public float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {
+    protected float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {
         return state.get(LAYERS) == MAX_LAYERS ? 0.2f : 1.0f;
     }
 
     @Override
-    public boolean canReplace(BlockState state, ItemPlacementContext context) {
+    protected boolean canReplace(BlockState state, ItemPlacementContext context) {
         int i = state.get(LAYERS);
         if (context.getStack().isOf(this.asItem()) && i < MAX_LAYERS) {
             if (context.canReplaceExisting()) {
@@ -129,22 +130,22 @@ public class SandPileBlock extends FallingBlock {
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return LAYERS_TO_SHAPE[state.get(LAYERS)];
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    protected VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return LAYERS_TO_SHAPE[state.get(LAYERS) - 1];
     }
 
     @Override
-    public VoxelShape getSidesShape(BlockState state, BlockView world, BlockPos pos) {
+    protected VoxelShape getSidesShape(BlockState state, BlockView world, BlockPos pos) {
         return LAYERS_TO_SHAPE[state.get(LAYERS)];
     }
 
     @Override
-    public VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    protected VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return LAYERS_TO_SHAPE[state.get(LAYERS)];
     }
 
