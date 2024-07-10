@@ -8,6 +8,7 @@ import net.minecraft.item.Items;
 import net.minecraft.test.GameTest;
 import net.minecraft.test.TestContext;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.GameMode;
 
 @SuppressWarnings("unused")
 public class SandCauldronTests {
@@ -23,7 +24,7 @@ public class SandCauldronTests {
                 () -> "Sand Cauldron not present!"
         );
 
-        final PlayerEntity mockPlayer = context.createMockSurvivalPlayer();
+        final PlayerEntity mockPlayer = context.createMockPlayer(GameMode.SURVIVAL);
         context.useBlock(cauldronPos, mockPlayer);
 
         boolean hasSand = mockPlayer.getInventory().containsAny(stack -> stack.isOf(Items.SAND));
@@ -43,7 +44,7 @@ public class SandCauldronTests {
                 () -> "Red Sand Cauldron not present!"
         );
 
-        final PlayerEntity mockPlayer = context.createMockSurvivalPlayer();
+        final PlayerEntity mockPlayer = context.createMockPlayer(GameMode.SURVIVAL);
         context.useBlock(cauldronPos, mockPlayer);
 
         boolean hasSand = mockPlayer.getInventory().containsAny(stack -> stack.isOf(Items.RED_SAND));
@@ -69,7 +70,7 @@ public class SandCauldronTests {
                 "Sand Cauldron is not partially filled!"
         );
 
-        final PlayerEntity mockPlayer = context.createMockSurvivalPlayer();
+        final PlayerEntity mockPlayer = context.createMockPlayer(GameMode.SURVIVAL);
         context.useBlock(cauldronPos, mockPlayer);
 
         boolean hasSand = mockPlayer.getInventory().containsAny(stack -> stack.isOf(Items.SAND));

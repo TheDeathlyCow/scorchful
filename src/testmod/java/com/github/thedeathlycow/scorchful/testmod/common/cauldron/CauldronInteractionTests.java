@@ -9,6 +9,7 @@ import net.minecraft.test.GameTest;
 import net.minecraft.test.TestContext;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.GameMode;
 
 @SuppressWarnings("unused")
 public class CauldronInteractionTests {
@@ -24,7 +25,7 @@ public class CauldronInteractionTests {
                 () -> "Cauldron not present!"
         );
 
-        final PlayerEntity mockPlayer = context.createMockSurvivalPlayer();
+        final PlayerEntity mockPlayer = context.createMockPlayer(GameMode.SURVIVAL);
         mockPlayer.setStackInHand(Hand.MAIN_HAND, Items.SAND.getDefaultStack());
 
         context.useBlock(cauldronPos, mockPlayer);
@@ -47,7 +48,7 @@ public class CauldronInteractionTests {
                 () -> "Cauldron not present!"
         );
 
-        final PlayerEntity mockPlayer = context.createMockSurvivalPlayer();
+        final PlayerEntity mockPlayer = context.createMockPlayer(GameMode.SURVIVAL);
         mockPlayer.setStackInHand(Hand.MAIN_HAND, Items.RED_SAND.getDefaultStack());
 
         context.useBlock(cauldronPos, mockPlayer);
