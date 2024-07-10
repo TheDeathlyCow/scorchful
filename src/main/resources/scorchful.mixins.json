@@ -3,7 +3,6 @@
     "package": "com.github.thedeathlycow.scorchful.mixin",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
-        "BiomeAccessor",
         "BlockDisplayAccess",
         "CauldronBlockMixin",
         "ComponentMapBuilderAccessor",
@@ -13,9 +12,7 @@
         "PointOfInterestTypesMixin",
         "compat.frostiful.absent.EntityMixin",
         "server.SandAccumulationServerWorldMixin",
-        "thirst.ConsumeItemCriterionMixin",
         "thirst.ItemMixin",
-        "thirst.LivingEntityMixin",
         "thirst.PotionEntityMixin"
     ],
     "injectors": {

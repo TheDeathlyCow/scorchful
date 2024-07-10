@@ -11,6 +11,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 public interface ComponentMapBuilderAccessor {
 
     @Accessor("components")
-    @Unique
     Reference2ObjectMap<ComponentType<?>, Object> scorchful$components();
+
 }
