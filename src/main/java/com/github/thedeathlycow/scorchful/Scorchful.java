@@ -3,7 +3,6 @@ package com.github.thedeathlycow.scorchful;
 import com.github.thedeathlycow.scorchful.block.NetherLilyBehaviours;
 import com.github.thedeathlycow.scorchful.block.SandCauldronBehaviours;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.scorchful.enchantment.RehydrationEnchantment;
 import com.github.thedeathlycow.scorchful.event.ScorchfulLivingEntityEvents;
 import com.github.thedeathlycow.scorchful.item.DrinkItemHelper;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
@@ -31,7 +30,6 @@ import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,9 +63,8 @@ public class Scorchful implements ModInitializer {
         SEntityTypes.registerAll();
         SSoundEvents.registerAll();
         STemperatureEffects.registerAll();
-        SEnchantments.registerAll();
         SStatusEffects.initialize();
-        RehydrationEnchantment.addToNetherLoot();
+        SEntityAttributes.initialize();
         SParticleTypes.registerAll();
         NetherBiomeModifications.placeFeaturesInBiomes();
         SStats.registerAll();

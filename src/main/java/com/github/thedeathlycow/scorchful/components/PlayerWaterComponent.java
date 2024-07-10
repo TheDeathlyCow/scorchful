@@ -18,7 +18,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
-public class PlayerComponent implements Component, ServerTickingComponent {
+public class PlayerWaterComponent implements Component, ServerTickingComponent {
 
     public static final int MAX_WATER = 300;
 
@@ -33,7 +33,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
 
     private int rehydrationDrink = 0;
 
-    public PlayerComponent(PlayerEntity provider) {
+    public PlayerWaterComponent(PlayerEntity provider) {
         this.provider = provider;
     }
 
@@ -112,13 +112,13 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         this.rehydrationDrink = Math.min(this.rehydrationDrink + 1, rehydrationCapacity);
     }
 
-    public void tickRehydration(ScorchfulConfig config, int rehydrationLevel, boolean dehydrationLoaded) {
+    public void tickRehydrationRefill(ScorchfulConfig config, double rehydrationEfficiency, boolean dehydrationLoaded) {
         int rehydrationCapacity = config.getRehydrationDrinkSize(dehydrationLoaded);
         if (rehydrationDrink >= rehydrationCapacity) {
             if (dehydrationLoaded) {
-                this.rehydrateWithDehydration(config, rehydrationLevel);
+                this.rehydrateWithDehydration(config, rehydrationEfficiency);
             } else {
-                this.rehydrate(config, rehydrationLevel);
+                this.rehydrate(config, rehydrationEfficiency);
             }
         }
     }
@@ -127,16 +127,13 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         this.rehydrationDrink = 0;
     }
 
-    private void rehydrate(ScorchfulConfig config, int rehydrationLevel) {
+    private void rehydrate(ScorchfulConfig config, double rehydrationEfficiency) {
         // dont drink if dont have to - prevents rehydration spam
         if (this.waterDrunk > 1) {
             return;
         }
 
-        float efficiency = getRehydrationEfficiency(
-                rehydrationLevel,
-                0f, config.thirstConfig.getMaxRehydrationEfficiency()
-        );
+        double efficiency = config.thirstConfig.getMaxRehydrationEfficiency() * rehydrationEfficiency;
         int drinkToAdd = MathHelper.floor(this.rehydrationDrink * efficiency);
 
         if (drinkToAdd > 0 && this.provider.getWorld() instanceof ServerWorld serverWorld) {
@@ -146,7 +143,7 @@ public class PlayerComponent implements Component, ServerTickingComponent {
         }
     }
 
-    private void rehydrateWithDehydration(ScorchfulConfig config, int rehydrationLevel) {
+    private void rehydrateWithDehydration(ScorchfulConfig config, double rehydrationEfficiency) {
         ThirstManager thirstManager = ((ThirstManagerAccess) this.provider).getThirstManager();
 
         DehydrationConfig dehydrationConfig = config.integrationConfig.dehydrationConfig;
@@ -155,10 +152,11 @@ public class PlayerComponent implements Component, ServerTickingComponent {
             return;
         }
 
-        int waterToAdd = this.provider.getRandom()
-                .nextBetween(0, rehydrationLevel * dehydrationConfig.getMaxRehydrationWaterAddedPerLevel());
-
         if (this.provider.getWorld() instanceof ServerWorld serverWorld) {
+            int maxWater = MathHelper.floor(
+                    rehydrationEfficiency * dehydrationConfig.getMaxRehydrationWaterAddedPerLevel()
+            );
+            int waterToAdd = this.provider.getRandom().nextBetween(0, maxWater);
             thirstManager.add(waterToAdd);
             this.playRehydrationEffects(serverWorld);
             this.resetRehydration();

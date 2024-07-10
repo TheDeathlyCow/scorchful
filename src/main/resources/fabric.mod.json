@@ -50,7 +50,7 @@
 	"accessWidener": "scorchful.accesswidener",
 	"custom": {
 		"cardinal-components": [
-			"scorchful:player",
+			"scorchful:player_water",
 			"scorchful:entity_desert_vision"
 		],
 		"modmenu": {

@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.config;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.components.PlayerComponent;
+import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 
@@ -30,7 +30,7 @@ public class DehydrationConfig implements ConfigData {
     public float getDehydrationConsumedBySweat() {
         // adapt based on size of bar
         float pointRange = (20f - minWaterLevelForSweat) * 4f;
-        return pointRange / PlayerComponent.MAX_WATER;
+        return pointRange / PlayerWaterComponent.MAX_WATER;
     }
 
     public int getMinWaterLevelForSweat() {
@@ -42,6 +42,6 @@ public class DehydrationConfig implements ConfigData {
     }
 
     public int getRehydrationDrinkSize() {
-        return PlayerComponent.MAX_WATER;
+        return PlayerWaterComponent.MAX_WATER;
     }
 }

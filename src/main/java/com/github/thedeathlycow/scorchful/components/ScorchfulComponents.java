@@ -10,9 +10,9 @@ import net.minecraft.entity.Entity;
 
 public class ScorchfulComponents implements EntityComponentInitializer {
 
-    public static final ComponentKey<PlayerComponent> PLAYER = ComponentRegistry.getOrCreate(
-            Scorchful.id("player"),
-            PlayerComponent.class
+    public static final ComponentKey<PlayerWaterComponent> PLAYER_WATER = ComponentRegistry.getOrCreate(
+            Scorchful.id("player_water"),
+            PlayerWaterComponent.class
     );
 
     public static final ComponentKey<EntityDesertVisionComponent> ENTITY_DESERT_VISION = ComponentRegistry.getOrCreate(
@@ -24,8 +24,8 @@ public class ScorchfulComponents implements EntityComponentInitializer {
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
         registry.registerForPlayers(
-                PLAYER,
-                PlayerComponent::new,
+                PLAYER_WATER,
+                PlayerWaterComponent::new,
                 RespawnCopyStrategy.LOSSLESS_ONLY
         );
         registry.registerFor(

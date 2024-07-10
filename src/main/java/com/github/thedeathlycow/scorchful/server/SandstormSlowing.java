@@ -61,7 +61,6 @@ public class SandstormSlowing {
             instance.addTemporaryModifier(
                     new EntityAttributeModifier(
                             ATTRIBUTE_ID,
-                            "Sandstorm slow",
                             value,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
                     )
