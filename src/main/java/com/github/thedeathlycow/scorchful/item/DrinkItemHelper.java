@@ -33,11 +33,11 @@ public class DrinkItemHelper {
     }
 
     public static void modifyDefaultComponents(DefaultItemComponentEvents.ModifyContext context) {
+        ThirstConfig config = Scorchful.getConfig().thirstConfig;
         for (Level level: Level.values()) {
             context.modify(
                     item -> item.getRegistryEntry().isIn(level.tag),
                     (builder, item) -> {
-                        ThirstConfig config = Scorchful.getConfig().thirstConfig;
                         builder.add(SDataComponentTypes.DRINKING_WATER, level.getDrinkingWater(config));
                     }
             );

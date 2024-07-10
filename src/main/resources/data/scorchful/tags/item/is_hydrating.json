@@ -4,6 +4,7 @@
         "minecraft:potion",
         "scorchful:water_skin",
         "scorchful:cactus_juice",
+        "minecraft:ominous_bottle",
         {
             "required": false,
             "id": "#c:milk_buckets"
