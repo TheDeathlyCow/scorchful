@@ -23,6 +23,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.item.v1.ModifyItemAttributeModifiersCallback;
+import net.fabricmc.fabric.api.util.TriState;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Contract;
@@ -107,16 +108,18 @@ public class Scorchful implements ModInitializer {
     private void registerThermooEventListeners() {
         PlayerEnvironmentEvents.CAN_APPLY_PASSIVE_TEMPERATURE_CHANGE.register(
                 (change, player) -> {
-                    if (change < 0) {
-                        return true;
+                    if (change <= 0) {
+                        return TriState.DEFAULT;
                     }
 
                     ScorchfulConfig config = getConfig();
 
                     if (!config.heatingConfig.doPassiveHeating()) {
-                        return false;
+                        return TriState.FALSE;
                     } else {
-                        return player.thermoo$getTemperatureScale() < config.heatingConfig.getMaxPassiveHeatingScale();
+                        return TriState.of(
+                                player.thermoo$getTemperatureScale() < config.heatingConfig.getMaxPassiveHeatingScale()
+                        );
                     }
                 }
         );
