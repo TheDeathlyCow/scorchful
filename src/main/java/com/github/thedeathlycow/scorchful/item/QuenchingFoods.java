@@ -7,29 +7,27 @@ import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.ThirstConfig;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
 public class QuenchingFoods {
 
 
-    public static void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip) {
+    public static void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipType tooltipType, List<Text> tooltip) {
         QuenchingLevel level = QuenchingLevel.forItem(stack);
         if (level != null && !ScorchfulIntegrations.isDehydrationLoaded()) {
-            if (context.isAdvanced()) {
+            if (tooltipType.isAdvanced()) {
                 addTooltipBeforeAdvanced(stack, tooltip, level);
             } else {
                 tooltip.add(level.tooltipText);
@@ -52,7 +50,7 @@ public class QuenchingFoods {
             component.drink(level.waterProvider.applyAsInt(Scorchful.getConfig().thirstConfig));
 
             if (component.getWaterDrunk() >= PlayerComponent.MAX_WATER - 25) {
-                player.playSound(SSoundEvents.ENTITY_GULP, player.getSoundCategory(), 1f, 1f);
+                player.playSound(SSoundEvents.ENTITY_GULP, 1f, 1f);
             }
 
         }

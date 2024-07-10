@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.registry;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 
@@ -26,9 +27,14 @@ public class SSoundEvents {
         register(DISCOVER_VISION);
     }
 
-    private static void register(SoundEvent event) {
-        Registry.register(Registries.SOUND_EVENT, event.getId(), event);
+    private static SoundEvent register(SoundEvent event) {
+        return Registry.register(Registries.SOUND_EVENT, event.getId(), event);
     }
+
+    private static RegistryEntry<SoundEvent> registerReference(SoundEvent event) {
+        return Registry.registerReference(Registries.SOUND_EVENT, event.getId(), event);
+    }
+
 
     private static SoundEvent create(String name) {
         return SoundEvent.of(Scorchful.id(name));
