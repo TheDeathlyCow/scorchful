@@ -60,8 +60,8 @@ public class HeatResistanceHelper {
 
     public enum HeatResistanceLevel {
         VERY_PROTECTIVE(SItemTags.HEAT_VERY_PROTECTIVE, CombatConfig::getVeryProtectiveArmorHeatResistance),
-        PROTECTIVE(SItemTags.HEAT_PROTECTIVE, CombatConfig::getVeryProtectiveArmorHeatResistance),
-        VERY_HARMFUL(SItemTags.HEAT_VERY_HARMFUL, CombatConfig::getVeryProtectiveArmorHeatResistance),
+        PROTECTIVE(SItemTags.HEAT_PROTECTIVE, CombatConfig::getProtectiveArmorHeatResistance),
+        VERY_HARMFUL(SItemTags.HEAT_VERY_HARMFUL, CombatConfig::getVeryHarmfulArmorHeatResistance),
         NEUTRAL(SItemTags.HEAT_NEUTRAL, c -> Double.NaN),
         DEFAULT(item -> true, CombatConfig::getDefaultArmorHeatResistance);
 
