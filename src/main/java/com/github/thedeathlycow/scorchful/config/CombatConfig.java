@@ -14,11 +14,39 @@ public class CombatConfig implements ConfigData {
 
     boolean enableDesertVisions = true;
 
+    @ConfigEntry.Gui.RequiresRestart
+    double defaultArmorHeatResistance = -0.5;
+
+    @ConfigEntry.Gui.RequiresRestart
+    double veryHarmfulArmorHeatResistance = -1.0;
+
+    @ConfigEntry.Gui.RequiresRestart
+    double protectiveArmorHeatResistance = 0.5;
+
+    @ConfigEntry.Gui.RequiresRestart
+    double veryProtectiveArmorHeatResistance = 1.0;
+
     public FireChargeThrower.FireballFactory getFireBallThrownType() {
         return fireBallThrownType;
     }
 
     public boolean enableDesertVisions() {
         return enableDesertVisions;
+    }
+
+    public double getDefaultArmorHeatResistance() {
+        return defaultArmorHeatResistance;
+    }
+
+    public double getVeryHarmfulArmorHeatResistance() {
+        return veryHarmfulArmorHeatResistance;
+    }
+
+    public double getProtectiveArmorHeatResistance() {
+        return protectiveArmorHeatResistance;
+    }
+
+    public double getVeryProtectiveArmorHeatResistance() {
+        return veryProtectiveArmorHeatResistance;
     }
 }

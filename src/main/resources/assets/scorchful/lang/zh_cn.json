@@ -80,10 +80,6 @@
     "text.autoconfig.scorchful.option.heatingConfig.sunHatShadeTemperatureChange": "太阳帽",
     "text.autoconfig.scorchful.option.heatingConfig.onFireWarmRate": "着火时温暖速率",
     "text.autoconfig.scorchful.option.heatingConfig.fireballHeat": "火焰弹温度",
-    "text.autoconfig.scorchful.option.heatingConfig.defaultArmorHeatResistance": "默认每件盔甲升温抗性",
-    "text.autoconfig.scorchful.option.heatingConfig.veryHarmfulArmorHeatResistance": "每件特别保暖盔甲升温抗性",
-    "text.autoconfig.scorchful.option.heatingConfig.protectiveArmorHeatResistance": "每件阻热盔甲升温抗性",
-    "text.autoconfig.scorchful.option.heatingConfig.veryProtectiveArmorHeatResistance": "每件特别阻热盔甲升温抗性",
     "text.autoconfig.scorchful.option.heatingConfig.waterBreathingDurationPerTurtleArmorPieceSeconds": "每件海龟盔甲的水下呼吸持续时间（秒）",
     
     "text.autoconfig.scorchful.option.thirstConfig": "口渴配置",
@@ -98,6 +94,11 @@
     "text.autoconfig.scorchful.option.thirstConfig.onFireDryDate": "着火时干燥速率",
     "text.autoconfig.scorchful.option.thirstConfig.humidBiomeSweatEfficiency": "潮湿生物群落出汗效率",
     "text.autoconfig.scorchful.option.thirstConfig.maxRehydrationEfficiency": "最高补水效率",
+    
+    "text.autoconfig.scorchful.option.combatConfig.defaultArmorHeatResistance": "默认每件盔甲升温抗性",
+    "text.autoconfig.scorchful.option.combatConfig.veryHarmfulArmorHeatResistance": "每件特别保暖盔甲升温抗性",
+    "text.autoconfig.scorchful.option.combatConfig.protectiveArmorHeatResistance": "每件阻热盔甲升温抗性",
+    "text.autoconfig.scorchful.option.combatConfig.veryProtectiveArmorHeatResistance": "每件特别阻热盔甲升温抗性",
     
     "text.autoconfig.scorchful.option.weatherConfig": "天气配置",
     "text.autoconfig.scorchful.option.weatherConfig.doSandPileAccumulation": "形成沙堆",

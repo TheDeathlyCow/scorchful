@@ -66,11 +66,11 @@ public class DrinkItemHelper {
                 ThirstConfig::getWaterFromHydratingFood
         );
 
-        public final TagKey<Item> tag;
+        private final TagKey<Item> tag;
 
-        public final Text tooltipText;
+        private final Text tooltipText;
 
-        public final ToIntFunction<ThirstConfig> waterProvider;
+        private final ToIntFunction<ThirstConfig> waterProvider;
 
         Level(TagKey<Item> tag, Text tooltipText, ToIntFunction<ThirstConfig> waterProvider) {
             this.tag = tag;

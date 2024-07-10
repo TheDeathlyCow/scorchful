@@ -90,10 +90,6 @@
     "text.autoconfig.scorchful.option.heatingConfig.striderOutOfLavaCoolRate": "Rämpijän viilennystahti kun pois laavasta",
     "text.autoconfig.scorchful.option.heatingConfig.powderSnowCoolRate": "Puuterilumen viilennystahti kun lämmin",
     "text.autoconfig.scorchful.option.heatingConfig.fireballHeat": "Tulipallon osuman lämpö",
-    "text.autoconfig.scorchful.option.heatingConfig.defaultArmorHeatResistance": "Perushaarniskan kuumuussuojelu"
-    "text.autoconfig.scorchful.option.heatingConfig.veryHarmfulArmorHeatResistance": "Hyvin lämpimän haarniskan kuumuussuojelu",
-    "text.autoconfig.scorchful.option.heatingConfig.protectiveArmorHeatResistance": "Lämpösuojelevan haarniskan kuumuussuojelu",
-    "text.autoconfig.scorchful.option.heatingConfig.veryProtectiveArmorHeatResistance": "Hyvin lämpösuojelevan haarniskan kuumuussuojelu",
     "text.autoconfig.scorchful.option.heatingConfig.waterBreathingDurationPerTurtleArmorPieceSeconds": "Vedenhengityksen kesto per kilpikonnan haarniskan pala (sekunteissa)",
     "text.autoconfig.scorchful.option.heatingConfig.lightLevelPerHeatInNether": "Valon taso per lämpönousu (Netherissä)",
     "text.autoconfig.scorchful.option.heatingConfig.minLightLevelForHeatInNether": "Mini valotaso lämpeämiseen (Netherissä)",
@@ -116,6 +112,10 @@
     
     "text.autoconfig.scorchful.option.combatConfig": "Taisteluasetukset",
     "text.autoconfig.scorchful.option.combatConfig.fireBallThrownType": "Tulipallo on heittettävä tyyppi",
+    "text.autoconfig.scorchful.option.combatConfig.defaultArmorHeatResistance": "Perushaarniskan kuumuussuojelu",
+    "text.autoconfig.scorchful.option.combatConfig.veryHarmfulArmorHeatResistance": "Hyvin lämpimän haarniskan kuumuussuojelu",
+    "text.autoconfig.scorchful.option.combatConfig.protectiveArmorHeatResistance": "Lämpösuojelevan haarniskan kuumuussuojelu",
+    "text.autoconfig.scorchful.option.combatConfig.veryProtectiveArmorHeatResistance": "Hyvin lämpösuojelevan haarniskan kuumuussuojelu",
     
     "text.autoconfig.scorchful.option.weatherConfig": "Sääasetukset",
     "text.autoconfig.scorchful.option.weatherConfig.doSandPileAccumulation": "Hiekkakasoja kerääntyy",

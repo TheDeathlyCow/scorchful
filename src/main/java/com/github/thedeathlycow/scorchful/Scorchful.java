@@ -7,6 +7,7 @@ import com.github.thedeathlycow.scorchful.enchantment.RehydrationEnchantment;
 import com.github.thedeathlycow.scorchful.event.ScorchfulLivingEntityEvents;
 import com.github.thedeathlycow.scorchful.item.DrinkItemHelper;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
+import com.github.thedeathlycow.scorchful.item.HeatResistanceHelper;
 import com.github.thedeathlycow.scorchful.registry.*;
 import com.github.thedeathlycow.scorchful.server.ThirstCommand;
 import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
@@ -42,7 +43,6 @@ public class Scorchful implements ModInitializer {
 
     public static final int CONFIG_VERSION = 4;
 
-    @Nullable
     private static ConfigHolder<ScorchfulConfig> configHolder = null;
 
     @Contract("_->new")
@@ -53,7 +53,8 @@ public class Scorchful implements ModInitializer {
     @Override
     public void onInitialize() {
         AutoConfig.register(ScorchfulConfig.class, GsonConfigSerializer::new);
-        ScorchfulConfig.updateConfig(AutoConfig.getConfigHolder(ScorchfulConfig.class));
+        configHolder = AutoConfig.getConfigHolder(ScorchfulConfig.class); //NOSONAR: this is correct usage for mods
+        ScorchfulConfig.updateConfig(configHolder);
 
         SBlocks.registerBlocks();
         SBlockEntityTypes.registerAll();
@@ -81,7 +82,7 @@ public class Scorchful implements ModInitializer {
         );
         UseItemCallback.EVENT.register(new FireChargeThrower());
         DefaultItemComponentEvents.MODIFY.register(DrinkItemHelper::modifyDefaultComponents);
-//        ModifyItemAttributeModifiersCallback.EVENT.register(new HeatResistantArmourTagApplicator());
+        DefaultItemComponentEvents.MODIFY.register(HeatResistanceHelper::modifyDefaultComponents);
 
         // custom scorchful event
         ScorchfulLivingEntityEvents.ON_DAMAGED.register(
@@ -104,9 +105,6 @@ public class Scorchful implements ModInitializer {
 
     @NotNull
     public static ScorchfulConfig getConfig() {
-        if (configHolder == null) {
-            configHolder = AutoConfig.getConfigHolder(ScorchfulConfig.class);
-        }
         return configHolder.getConfig();
     }
 

@@ -35,14 +35,6 @@ public class HeatingConfig implements ConfigData {
 
     int fireballHeat = 1000;
 
-    double defaultArmorHeatResistance = -0.5;
-
-    double veryHarmfulArmorHeatResistance = -1.0;
-
-    double protectiveArmorHeatResistance = 0.5;
-
-    double veryProtectiveArmorHeatResistance = 1.0;
-
     int waterBreathingDurationPerTurtleArmorPieceSeconds = 10;
 
     int lightLevelPerHeatInNether = 4;
@@ -107,22 +99,6 @@ public class HeatingConfig implements ConfigData {
 
     public int getFireballHeat() {
         return fireballHeat;
-    }
-
-    public double getDefaultArmorHeatResistance() {
-        return defaultArmorHeatResistance;
-    }
-
-    public double getVeryHarmfulArmorHeatResistance() {
-        return veryHarmfulArmorHeatResistance;
-    }
-
-    public double getProtectiveArmorHeatResistance() {
-        return protectiveArmorHeatResistance;
-    }
-
-    public double getVeryProtectiveArmorHeatResistance() {
-        return veryProtectiveArmorHeatResistance;
     }
 
     public int getWaterBreathingDurationPerTurtleArmorPieceSeconds() {
