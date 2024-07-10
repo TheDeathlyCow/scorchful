@@ -79,6 +79,10 @@ public abstract class DrinkItem extends Item {
     public static void applyWater(ItemStack stack, World world, LivingEntity user) {
         if (user instanceof ServerPlayerEntity serverPlayer && !ScorchfulIntegrations.isDehydrationLoaded()) {
             int water = stack.getOrDefault(SDataComponentTypes.DRINKING_WATER, 0);
+            if (water <= 0) {
+                return;
+            }
+
             PlayerWaterComponent component = ScorchfulComponents.PLAYER_WATER.get(serverPlayer);
             component.drink(water);
             if (component.getWaterDrunk() >= PlayerWaterComponent.MAX_WATER * 0.9) {

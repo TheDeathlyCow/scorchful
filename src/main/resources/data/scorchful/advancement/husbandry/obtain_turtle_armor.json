@@ -17,7 +17,9 @@
             "conditions": {
                 "items": [
                     {
-                        "id": "minecraft:turtle_helmet"
+                        "items": [
+                            "minecraft:turtle_helmet"
+                        ]
                     }
                 ]
             }
@@ -27,7 +29,9 @@
             "conditions": {
                 "items": [
                     {
-                        "id": "scorchful:turtle_chestplate"
+                        "items": [
+                            "scorchful:turtle_chestplate"
+                        ]
                     }
                 ]
             }
@@ -37,7 +41,9 @@
             "conditions": {
                 "items": [
                     {
-                        "id": "scorchful:turtle_leggings"
+                        "items": [
+                            "scorchful:turtle_leggings"
+                        ]
                     }
                 ]
             }
@@ -47,7 +53,9 @@
             "conditions": {
                 "items": [
                     {
-                        "id": "scorchful:turtle_boots"
+                        "items": [
+                            "scorchful:turtle_boots"
+                        ]
                     }
                 ]
             }
