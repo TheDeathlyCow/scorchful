@@ -1,27 +1,24 @@
 package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.block.NetherLilyBlock;
+import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.SStats;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.text.TextColor;
 import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -43,20 +40,31 @@ public class WaterSkinItem extends DrinkItem {
             .withColor(Formatting.RED);
 
     public static final int MAX_DRINKS = 16;
-    private static final String DRINK_NBT_KEY = "drinks";
-    private static final String COUNT_NBT_KEY = "count";
 
     public WaterSkinItem(Settings settings) {
         super(settings);
         CauldronBehavior.WATER_CAULDRON_BEHAVIOR.map().put(this, this::onCauldronInteract);
     }
 
-    public static int getNumDrinks(ItemStack stack) {
-        NbtCompound nbt = stack.getSubNbt(DRINK_NBT_KEY);
-        if (nbt == null || !nbt.contains(COUNT_NBT_KEY, NbtElement.INT_TYPE)) {
-            return 0;
+    @Override
+    protected ItemStack getPostConsumeStack(ItemStack stack, World world, ServerPlayerEntity serverPlayer) {
+        if (!serverPlayer.isCreative()) {
+            addDrinks(stack, -1);
         }
-        return nbt.getInt(COUNT_NBT_KEY);
+
+        return stack;
+    }
+
+    @Override
+    public ItemStack getDefaultStack() {
+        var itemStack = super.getDefaultStack();
+        itemStack.set(SDataComponentTypes.NUM_DRINKS, MAX_DRINKS);
+        itemStack.set(SDataComponentTypes.DRINKING_WATER, 0);
+        return itemStack;
+    }
+
+    public static int getNumDrinks(ItemStack stack) {
+        return stack.getOrDefault(SDataComponentTypes.NUM_DRINKS, 0);
     }
 
     public static float getFill(ItemStack stack) {
@@ -67,24 +75,12 @@ public class WaterSkinItem extends DrinkItem {
         return getNumDrinks(stack) > 0;
     }
 
-    public void addDrinks(ItemStack stack, int value) {
-        NbtCompound nbt = stack.getSubNbt(DRINK_NBT_KEY);
-
-        if (!stack.isOf(this)) {
-            return;
-        }
-
-        if (nbt == null) {
-            nbt = new NbtCompound();
-            stack.setSubNbt(DRINK_NBT_KEY, nbt);
-        }
-
-        if (!nbt.contains(COUNT_NBT_KEY, NbtElement.INT_TYPE)) {
-            nbt.putInt(COUNT_NBT_KEY, 0);
-        }
-
-        int currentDrinks = nbt.getInt(COUNT_NBT_KEY);
-        nbt.putInt(COUNT_NBT_KEY, MathHelper.clamp(currentDrinks + value, 0, MAX_DRINKS));
+    public static void addDrinks(ItemStack stack, int value) {
+        stack.apply(
+                SDataComponentTypes.NUM_DRINKS,
+                0,
+                currentDrinks -> MathHelper.clamp(currentDrinks + value, 0, MAX_DRINKS)
+        );
     }
 
     @Override
@@ -99,13 +95,12 @@ public class WaterSkinItem extends DrinkItem {
     }
 
 
-
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType tooltipType) {
         int numDrinks = getNumDrinks(stack);
 
         if (numDrinks > 0) {
-            super.appendTooltip(stack, world, tooltip, context);
+            super.appendTooltip(stack, context, tooltip, tooltipType);
         }
 
         MutableText text = numDrinks > 0
@@ -176,16 +171,6 @@ public class WaterSkinItem extends DrinkItem {
         return MathHelper.hsvToRgb(210f / 360f, saturationValue, saturationValue);
     }
 
-    @Override
-    protected ItemStack getPostConsumeStack(ItemStack stack, World world, ServerPlayerEntity serverPlayer) {
-
-        if (!serverPlayer.isCreative()) {
-            this.addDrinks(stack, -1);
-        }
-
-        return stack;
-    }
-
     protected void fill(ItemStack stack, PlayerEntity player, World world, BlockPos sourcePos, int amount) {
         world.playSound(
                 null,
@@ -195,7 +180,7 @@ public class WaterSkinItem extends DrinkItem {
         );
         world.emitGameEvent(null, GameEvent.FLUID_PICKUP, sourcePos);
         player.incrementStat(Stats.USED.getOrCreateStat(this));
-        this.addDrinks(stack, amount);
+        addDrinks(stack, amount);
     }
 
     @Nullable
@@ -221,7 +206,7 @@ public class WaterSkinItem extends DrinkItem {
         return null;
     }
 
-    private ActionResult onCauldronInteract(
+    private ItemActionResult onCauldronInteract(
             BlockState state,
             World world,
             BlockPos pos,
@@ -229,16 +214,13 @@ public class WaterSkinItem extends DrinkItem {
             Hand hand,
             ItemStack stack
     ) {
-        if (getNumDrinks(stack) >= MAX_DRINKS) {
-            return ActionResult.PASS;
-        }
 
         if (!world.isClient) {
             this.fill(stack, player, world, pos, 1);
             player.incrementStat(Stats.USE_CAULDRON);
             LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
         }
-        return ActionResult.success(world.isClient);
+        return ItemActionResult.success(world.isClient);
     }
 
     public ActionResult onWarpedLilyInteract(

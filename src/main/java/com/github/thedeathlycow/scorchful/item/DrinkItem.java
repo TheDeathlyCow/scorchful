@@ -1,15 +1,11 @@
 package com.github.thedeathlycow.scorchful.item;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.components.PlayerComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
-import com.github.thedeathlycow.scorchful.item.component.DrinkComponent;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -27,8 +23,6 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
-import java.util.Optional;
-
 public abstract class DrinkItem extends Item {
 
     public static final int DRINK_TIME_TICKS = 32;
@@ -38,16 +32,15 @@ public abstract class DrinkItem extends Item {
         super(settings);
     }
 
+    protected abstract ItemStack getPostConsumeStack(ItemStack stack, World world, ServerPlayerEntity serverPlayer);
+
+
     @Override
     public ItemStack getDefaultStack() {
         var itemStack = super.getDefaultStack();
-        itemStack.set(
-                SDataComponentTypes.DRINK,
-                new DrinkComponent(0, Optional.empty())
-        );
+        itemStack.set(SDataComponentTypes.DRINKING_WATER, 0);
         return itemStack;
     }
-
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
@@ -65,27 +58,33 @@ public abstract class DrinkItem extends Item {
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         user.emitGameEvent(GameEvent.DRINK);
+
         if (!(user instanceof ServerPlayerEntity serverPlayer)) {
-            return super.finishUsing(stack, world, user);
+            return null;
         }
 
         Criteria.CONSUME_ITEM.trigger(serverPlayer, stack);
-        serverPlayer.incrementStat(Stats.USED.getOrCreateStat(this));
+        serverPlayer.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
 
-        DrinkComponent drinkComponent = stack.getOrDefault(
-                SDataComponentTypes.DRINK,
-                DrinkComponent.DEFAULT
-        );
+        return this.getPostConsumeStack(super.finishUsing(stack, world, user), world, serverPlayer);
+    }
 
-        if (!ScorchfulIntegrations.isDehydrationLoaded()) {
+    /**
+     * Called from mixin. Applies water from drinking to the user.
+     *
+     * @param stack Stack being consumed
+     * @param world World of user
+     * @param user  Entity consuming the drink
+     */
+    public static void applyWater(ItemStack stack, World world, LivingEntity user) {
+        if (user instanceof ServerPlayerEntity serverPlayer && !ScorchfulIntegrations.isDehydrationLoaded()) {
+            int water = stack.getOrDefault(SDataComponentTypes.DRINKING_WATER, 0);
             PlayerComponent component = ScorchfulComponents.PLAYER.get(serverPlayer);
-            component.drink(drinkComponent.water());
+            component.drink(water);
             if (component.getWaterDrunk() >= PlayerComponent.MAX_WATER * 0.9) {
                 serverPlayer.playSound(SSoundEvents.ENTITY_GULP, 1f, 1f);
             }
         }
-
-        return drinkComponent.drinkingConvertsTo().orElse(ItemStack.EMPTY);
     }
 
     @Override
