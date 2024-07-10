@@ -6,9 +6,8 @@
     },
     "config": {
         "scale": 0.1,
-        "modifier_uuid": "ea305030-b7fa-4782-9682-9d55a0319236",
-        "name": "Strider warm speed",
+        "id": "scorchful:temperature_effect.strider_speed",
         "attribute_type": "minecraft:generic.movement_speed",
-        "operation": "addition"
+        "operation": "add_value"
     }
 }

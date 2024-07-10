@@ -21,6 +21,9 @@
     "item.scorchful.tooltip.hydrating": "Hydrating \uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
     "item.scorchful.tooltip.parching": "Parching ☀",
     
+    
+    "attribute.name.player.rehydration_efficiency": "Rehydration Efficiency",
+    
 
     "block.scorchful.crimson_lily": "Crimson Lily",
     "block.scorchful.warped_lily": "Warped Lily",
