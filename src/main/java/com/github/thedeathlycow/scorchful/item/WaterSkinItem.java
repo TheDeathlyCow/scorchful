@@ -98,6 +98,8 @@ public class WaterSkinItem extends DrinkItem {
         };
     }
 
+
+
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         int numDrinks = getNumDrinks(stack);
@@ -140,7 +142,7 @@ public class WaterSkinItem extends DrinkItem {
     }
 
     @Override
-    public int getMaxUseTime(ItemStack stack) {
+    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
         return hasDrink(stack) ? DrinkItem.DRINK_TIME_TICKS : 0;
     }
 
