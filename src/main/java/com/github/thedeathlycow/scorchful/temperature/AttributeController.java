@@ -5,6 +5,7 @@ import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentController;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentControllerDecorator;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.registry.entry.RegistryEntry;
 
 public class AttributeController extends EnvironmentControllerDecorator {
 
@@ -21,7 +22,7 @@ public class AttributeController extends EnvironmentControllerDecorator {
     }
 
     @Override
-    public double getBaseValueForAttribute(EntityAttribute attribute, LivingEntity entity) {
+    public double getBaseValueForAttribute(RegistryEntry<EntityAttribute> attribute, LivingEntity entity) {
         double value = super.getBaseValueForAttribute(attribute, entity);
 
         if (attribute == ThermooAttributes.MAX_TEMPERATURE) {

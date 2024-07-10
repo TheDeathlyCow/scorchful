@@ -7,6 +7,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -14,7 +15,7 @@ import java.util.UUID;
 
 public class SandstormSlowing {
 
-    private static final UUID ATTRIBUTE_ID = UUID.fromString("253995f0-1ab9-4a3c-a440-acf6fae80ee5");
+    private static final Identifier ATTRIBUTE_ID = Scorchful.id("sandstorm_slowing");
 
     public static boolean tickSandstormSlow(LivingEntity entity, boolean wasInSandstorm) {
 
@@ -62,7 +63,7 @@ public class SandstormSlowing {
                             ATTRIBUTE_ID,
                             "Sandstorm slow",
                             value,
-                            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
                     )
             );
         }
