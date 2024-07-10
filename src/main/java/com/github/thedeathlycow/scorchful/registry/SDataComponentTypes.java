@@ -2,7 +2,6 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
-import com.github.thedeathlycow.scorchful.item.component.DrinkComponent;
 import net.minecraft.component.ComponentType;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.Registries;

@@ -6,7 +6,7 @@ import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.item.SunHatItem;
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
-import com.github.thedeathlycow.thermoo.api.season.ThermooSeasons;
+import com.github.thedeathlycow.thermoo.api.season.ThermooSeason;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentController;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentControllerDecorator;
 import net.minecraft.block.BlockState;
@@ -88,7 +88,7 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         World world = player.getWorld();
         int sunLight = world.getLightLevel(LightType.SKY, player.getBlockPos());
         RegistryEntry<Biome> biome = world.getBiome(player.getBlockPos());
-        ThermooSeasons season = ThermooSeasons.getCurrentSeason(world).orElse(null);
+        ThermooSeason season = ThermooSeason.getCurrentSeason(world).orElse(null);
 
         boolean hasHatShade = sunLight >= config.heatingConfig.getMinSkyLightLevelForHeat()
                 && SunHatItem.isWearingSunHat(player)
@@ -151,7 +151,7 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         ScorchfulConfig config = Scorchful.getConfig();
 
         if (biome.isIn(SBiomeTags.WARM_BIOMES) || biome.value().getTemperature() >= 0.95f) {
-            ThermooSeasons season = ThermooSeasons.getCurrentSeason(world).orElse(null);
+            ThermooSeason season = ThermooSeason.getCurrentSeason(world).orElse(null);
             int skylight = world.getLightLevel(LightType.SKY, pos);
             int skylightWithDarkness = skylight - world.getAmbientDarkness(); // adjusted with night and weather
 
@@ -170,9 +170,9 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         return warmth;
     }
 
-    private static boolean isScorching(RegistryEntry<Biome> biome, @Nullable ThermooSeasons season) {
-        return season == ThermooSeasons.SUMMER
-                || (biome.isIn(SBiomeTags.SCORCHING_BIOMES) && season != ThermooSeasons.WINTER);
+    private static boolean isScorching(RegistryEntry<Biome> biome, @Nullable ThermooSeason season) {
+        return season == ThermooSeason.SUMMER
+                || (biome.isIn(SBiomeTags.SCORCHING_BIOMES) && season != ThermooSeason.WINTER);
     }
 
 }

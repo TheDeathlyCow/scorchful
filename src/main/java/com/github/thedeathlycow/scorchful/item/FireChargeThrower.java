@@ -77,7 +77,7 @@ public class FireChargeThrower implements UseItemCallback {
             public AbstractFireballEntity create(World world, PlayerEntity player, Vec3d velocity) {
                 return new SmallFireballEntity(
                         world, player,
-                        velocity.x, velocity.y, velocity.z
+                        velocity
                 );
             }
         },
@@ -87,7 +87,7 @@ public class FireChargeThrower implements UseItemCallback {
             public AbstractFireballEntity create(World world, PlayerEntity player, Vec3d velocity) {
                 return new FireballEntity(
                         world, player,
-                        velocity.x, velocity.y, velocity.z, 1
+                        velocity, 1
                 );
             }
         };
