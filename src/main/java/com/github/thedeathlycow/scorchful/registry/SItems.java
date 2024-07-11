@@ -75,18 +75,21 @@ public class SItems {
             SArmorMaterials.TURTLE,
             ArmorItem.Type.CHESTPLATE,
             new Item.Settings()
+                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(25))
     );
 
     public static final Item TURTLE_LEGGINGS = new ArmorItem(
             SArmorMaterials.TURTLE,
             ArmorItem.Type.LEGGINGS,
             new Item.Settings()
+                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(25))
     );
 
     public static final Item TURTLE_BOOTS = new ArmorItem(
             SArmorMaterials.TURTLE,
             ArmorItem.Type.BOOTS,
             new Item.Settings()
+                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(25))
     );
 
     public static void registerItems() {
