@@ -4,7 +4,6 @@ import com.github.thedeathlycow.scorchful.block.NetherLilyBehaviours;
 import com.github.thedeathlycow.scorchful.block.SandCauldronBehaviours;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.event.ScorchfulLivingEntityEvents;
-import com.github.thedeathlycow.scorchful.item.DrinkItemHelper;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
 import com.github.thedeathlycow.scorchful.item.HeatResistanceHelper;
 import com.github.thedeathlycow.scorchful.registry.*;
@@ -78,7 +77,6 @@ public class Scorchful implements ModInitializer {
                 }
         );
         UseItemCallback.EVENT.register(new FireChargeThrower());
-        DefaultItemComponentEvents.MODIFY.register(DrinkItemHelper::modifyDefaultComponents);
         DefaultItemComponentEvents.MODIFY.register(HeatResistanceHelper::modifyDefaultComponents);
 
         // custom scorchful event

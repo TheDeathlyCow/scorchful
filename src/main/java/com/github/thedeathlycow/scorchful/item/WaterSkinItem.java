@@ -59,7 +59,6 @@ public class WaterSkinItem extends DrinkItem {
     public ItemStack getDefaultStack() {
         var itemStack = super.getDefaultStack();
         itemStack.set(SDataComponentTypes.NUM_DRINKS, MAX_DRINKS);
-        itemStack.set(SDataComponentTypes.DRINKING_WATER, 0);
         return itemStack;
     }
 

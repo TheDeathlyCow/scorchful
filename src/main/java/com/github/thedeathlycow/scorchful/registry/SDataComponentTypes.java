@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
+import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import net.minecraft.component.ComponentType;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.Registries;
@@ -12,10 +13,10 @@ import java.util.function.UnaryOperator;
 
 public class SDataComponentTypes {
 
-    public static final ComponentType<Integer> DRINKING_WATER = create(
+    public static final ComponentType<DrinkLevelComponent> DRINK_LEVEL = create(
             builder -> builder
-                    .codec(Codecs.rangedInt(0, WaterSkinItem.MAX_DRINKS))
-                    .packetCodec(PacketCodecs.VAR_INT)
+                    .codec(DrinkLevelComponent.CODEC)
+                    .packetCodec(DrinkLevelComponent.PACKET_CODEC)
                     .cache()
     );
 
@@ -26,7 +27,7 @@ public class SDataComponentTypes {
     );
 
     public static void initialize() {
-        register("drinking_water", DRINKING_WATER);
+        register("drink_level", DRINK_LEVEL);
         register("num_drinks", NUM_DRINKS);
     }
 

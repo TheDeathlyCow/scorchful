@@ -1,8 +1,10 @@
 package com.github.thedeathlycow.scorchful.item;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
+import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import net.minecraft.advancement.criterion.Criteria;
@@ -34,11 +36,10 @@ public abstract class DrinkItem extends Item {
 
     protected abstract ItemStack getPostConsumeStack(ItemStack stack, World world, ServerPlayerEntity serverPlayer);
 
-
     @Override
     public ItemStack getDefaultStack() {
         var itemStack = super.getDefaultStack();
-        itemStack.set(SDataComponentTypes.DRINKING_WATER, 0);
+        itemStack.set(SDataComponentTypes.DRINK_LEVEL, DrinkLevelComponent.HYDRATING);
         return itemStack;
     }
 
@@ -78,13 +79,16 @@ public abstract class DrinkItem extends Item {
      */
     public static void applyWater(ItemStack stack, World world, LivingEntity user) {
         if (user instanceof ServerPlayerEntity serverPlayer && !ScorchfulIntegrations.isDehydrationLoaded()) {
-            int water = stack.getOrDefault(SDataComponentTypes.DRINKING_WATER, 0);
-            if (water <= 0) {
+            DrinkLevelComponent drink = stack.get(SDataComponentTypes.DRINK_LEVEL);
+            if (drink == null) {
                 return;
             }
 
             PlayerWaterComponent component = ScorchfulComponents.PLAYER_WATER.get(serverPlayer);
+
+            int water = drink.getDrinkingWater(Scorchful.getConfig().thirstConfig);
             component.drink(water);
+
             if (component.getWaterDrunk() >= PlayerWaterComponent.MAX_WATER * 0.9) {
                 serverPlayer.playSound(SSoundEvents.ENTITY_GULP, 1f, 1f);
             }
