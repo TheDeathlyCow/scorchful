@@ -69,10 +69,6 @@ public enum DrinkLevelComponent implements StringIdentifiable {
     }
 
     public static ItemStack applyToNewStack(ItemStack stack) {
-        if (stack.contains(SDataComponentTypes.DRINK_LEVEL)) {
-            return stack;
-        }
-
         DrinkLevelComponent level = byTag(stack);
         if (level != null) {
             stack.set(SDataComponentTypes.DRINK_LEVEL, level);
