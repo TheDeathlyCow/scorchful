@@ -12,16 +12,15 @@ public class ScorchfulItemEvents {
             CreateStack.class,
             listeners -> stack -> {
                 for (CreateStack listener : listeners) {
-                    stack = listener.onCreate(stack);
+                    listener.onCreate(stack);
                 }
-                return stack;
             }
     );
 
     @FunctionalInterface
     public interface CreateStack {
 
-        ItemStack onCreate(ItemStack stack);
+        void onCreate(ItemStack stack);
 
     }
 

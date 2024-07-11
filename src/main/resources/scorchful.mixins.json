@@ -5,7 +5,7 @@
     "mixins": [
         "CauldronBlockMixin",
         "EntityMixin",
-        "ItemMixin",
+        "ItemStackMixin",
         "LivingEntityMixin",
         "PlayerEntityMixin",
         "PointOfInterestTypesMixin",
@@ -13,7 +13,7 @@
         "accessor.ComponentMapBuilderAccessor",
         "compat.frostiful.absent.EntityMixin",
         "server.SandAccumulationServerWorldMixin",
-        "thirst.ItemMixin",
+        "thirst.ConsumeItemCriterionMixin",
         "thirst.PotionEntityMixin"
     ],
     "injectors": {

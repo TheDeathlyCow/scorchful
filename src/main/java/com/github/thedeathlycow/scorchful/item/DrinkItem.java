@@ -60,37 +60,35 @@ public abstract class DrinkItem extends Item {
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         user.emitGameEvent(GameEvent.DRINK);
 
-        if (!(user instanceof ServerPlayerEntity serverPlayer)) {
+        if (user instanceof ServerPlayerEntity serverPlayer) {
+            Criteria.CONSUME_ITEM.trigger(serverPlayer, stack);
+            serverPlayer.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
+            return this.getPostConsumeStack(super.finishUsing(stack, world, user), world, serverPlayer);
+        } else {
             return super.finishUsing(stack, world, user);
         }
-
-        Criteria.CONSUME_ITEM.trigger(serverPlayer, stack);
-        serverPlayer.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
-
-        return this.getPostConsumeStack(super.finishUsing(stack, world, user), world, serverPlayer);
     }
 
     /**
      * Called from mixin. Applies water from drinking to the user.
      *
-     * @param stack Stack being consumed
-     * @param world World of user
-     * @param user  Entity consuming the drink
+     * @param stack  Stack being consumed
+     * @param player Player consuming the drink
      */
-    public static void applyWater(ItemStack stack, World world, LivingEntity user) {
-        if (user instanceof ServerPlayerEntity serverPlayer && !ScorchfulIntegrations.isDehydrationLoaded()) {
+    public static void applyWater(ItemStack stack, ServerPlayerEntity player) {
+        if (!ScorchfulIntegrations.isDehydrationLoaded()) {
             DrinkLevelComponent drink = stack.get(SDataComponentTypes.DRINK_LEVEL);
             if (drink == null) {
                 return;
             }
 
-            PlayerWaterComponent component = ScorchfulComponents.PLAYER_WATER.get(serverPlayer);
+            PlayerWaterComponent component = ScorchfulComponents.PLAYER_WATER.get(player);
 
             int water = drink.getDrinkingWater(Scorchful.getConfig().thirstConfig);
             component.drink(water);
 
             if (component.getWaterDrunk() >= PlayerWaterComponent.MAX_WATER * 0.9) {
-                serverPlayer.playSound(SSoundEvents.ENTITY_GULP, 1f, 1f);
+                player.playSound(SSoundEvents.ENTITY_GULP, 1f, 1f);
             }
         }
     }
