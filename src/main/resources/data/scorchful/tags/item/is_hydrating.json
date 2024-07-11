@@ -7,11 +7,7 @@
         "minecraft:ominous_bottle",
         {
             "required": false,
-            "id": "#c:milk_buckets"
-        },
-        {
-            "required": false,
-            "id": "#c:milk"
+            "id": "#c:buckets/milk"
         },
         {
             "required": false,
