@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.mixin;
+package com.github.thedeathlycow.scorchful.mixin.accessor;
 
 import it.unimi.dsi.fastutil.objects.Reference2ObjectMap;
 import net.minecraft.component.ComponentMap;

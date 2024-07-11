@@ -3,9 +3,9 @@
     "package": "com.github.thedeathlycow.scorchful.mixin",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
-        "BlockDisplayAccess",
+        "accessor.BlockDisplayAccess",
         "CauldronBlockMixin",
-        "ComponentMapBuilderAccessor",
+        "accessor.ComponentMapBuilderAccessor",
         "EntityMixin",
         "LivingEntityMixin",
         "PlayerEntityMixin",

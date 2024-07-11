@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.mixin;
+package com.github.thedeathlycow.scorchful.mixin.accessor;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.decoration.DisplayEntity;

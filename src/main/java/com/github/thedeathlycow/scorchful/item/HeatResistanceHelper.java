@@ -2,7 +2,7 @@ package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.CombatConfig;
-import com.github.thedeathlycow.scorchful.mixin.ComponentMapBuilderAccessor;
+import com.github.thedeathlycow.scorchful.mixin.accessor.ComponentMapBuilderAccessor;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
