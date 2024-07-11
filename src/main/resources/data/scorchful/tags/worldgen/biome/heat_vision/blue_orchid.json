@@ -3,13 +3,18 @@
     "values": [
         {
             "required": false,
-            "id": "#c:desert"
+            "id": "#c:is_desert"
         },
         {
             "required": false,
-            "id": "#c:badlands"
+            "id": "#c:is_badlands"
+        },
+        {
+            "required": false,
+            "id": "#c:is_savanna"
         },
         "minecraft:desert",
-        "#minecraft:is_badlands"
+        "#minecraft:is_badlands",
+        "#minecraft:is_savanna"
     ]
 }

@@ -1,7 +1,7 @@
 {
     "replace": false,
     "values": [
-        "#c:climate_hot",
+        "#c:is_hot/overworld",
         "minecraft:beach",
         "minecraft:warm_ocean",
         "minecraft:mangrove_swamp"
