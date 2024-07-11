@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.item.component;
 
 import com.github.thedeathlycow.scorchful.config.ThirstConfig;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
+import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
@@ -65,6 +66,14 @@ public enum DrinkLevelComponent implements StringIdentifiable {
         this.tag = tag;
         this.tooltipText = tooltipText;
         this.waterProvider = waterProvider;
+    }
+
+    public static ItemStack applyToNewStack(ItemStack stack) {
+        DrinkLevelComponent level = byTag(stack);
+        if (level != null) {
+            stack.set(SDataComponentTypes.DRINK_LEVEL, level);
+        }
+        return stack;
     }
 
     @Nullable

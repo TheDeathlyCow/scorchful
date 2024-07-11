@@ -3,9 +3,11 @@ package com.github.thedeathlycow.scorchful;
 import com.github.thedeathlycow.scorchful.block.NetherLilyBehaviours;
 import com.github.thedeathlycow.scorchful.block.SandCauldronBehaviours;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
 import com.github.thedeathlycow.scorchful.event.ScorchfulLivingEntityEvents;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
 import com.github.thedeathlycow.scorchful.item.HeatResistanceHelper;
+import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.registry.*;
 import com.github.thedeathlycow.scorchful.server.ThirstCommand;
 import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
@@ -77,6 +79,7 @@ public class Scorchful implements ModInitializer {
                 }
         );
         UseItemCallback.EVENT.register(new FireChargeThrower());
+        ScorchfulItemEvents.GET_DEFAULT_STACK.register(DrinkLevelComponent::applyToNewStack);
         DefaultItemComponentEvents.MODIFY.register(HeatResistanceHelper::modifyDefaultComponents);
 
         // custom scorchful event

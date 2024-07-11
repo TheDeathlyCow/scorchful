@@ -13,6 +13,7 @@ import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
@@ -42,6 +43,7 @@ public class HeatResistanceHelper {
             double resistance = level.getHeatResistance(config);
 
             if (resistance != 0 && !Double.isNaN(resistance)) {
+
                 AttributeModifiersComponent modifiers = attributes
                         .with(
                                 ThermooAttributes.HEAT_RESISTANCE,
