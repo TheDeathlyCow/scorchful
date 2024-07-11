@@ -15,6 +15,7 @@ import com.github.thedeathlycow.scorchful.temperature.AmbientTemperatureControll
 import com.github.thedeathlycow.scorchful.temperature.AttributeController;
 import com.github.thedeathlycow.scorchful.temperature.WetTickController;
 import com.github.thedeathlycow.scorchful.worldgen.NetherBiomeModifications;
+import com.github.thedeathlycow.thermoo.api.armor.material.ArmorMaterialEvents;
 import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentControllerInitializeEvent;
 import com.github.thedeathlycow.thermoo.api.temperature.event.PlayerEnvironmentEvents;
@@ -24,7 +25,6 @@ import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
-import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.util.TriState;
 import net.minecraft.entity.damage.DamageTypes;
@@ -80,7 +80,7 @@ public class Scorchful implements ModInitializer {
         );
         UseItemCallback.EVENT.register(new FireChargeThrower());
         ScorchfulItemEvents.GET_DEFAULT_STACK.register(DrinkLevelComponent::applyToNewStack);
-        DefaultItemComponentEvents.MODIFY.register(HeatResistanceHelper::modifyDefaultComponents);
+        ArmorMaterialEvents.GET_HEAT_RESISTANCE.register(HeatResistanceHelper::getHeatResistance);
 
         // custom scorchful event
         ScorchfulLivingEntityEvents.ON_DAMAGED.register(
