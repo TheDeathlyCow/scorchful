@@ -13,27 +13,27 @@ import org.jetbrains.annotations.Contract;
 
 public class SItemGroups {
     public static final ItemGroup SCORCHFUL = FabricItemGroup.builder()
-            .icon(() -> new ItemStack(SItems.SUN_HAT))
+            .icon(SItems.SUN_HAT::getDefaultStack)
             .displayName(Text.translatable("item_group.scorchful"))
             .entries((context, entries) -> {
-                entries.add(new ItemStack(SItems.SUN_HAT));
-                entries.add(new ItemStack(Items.TURTLE_HELMET));
-                entries.add(new ItemStack(SItems.TURTLE_CHESTPLATE));
-                entries.add(new ItemStack(SItems.TURTLE_LEGGINGS));
-                entries.add(new ItemStack(SItems.TURTLE_BOOTS));
+                entries.add(SItems.SUN_HAT.getDefaultStack());
+                entries.add(Items.TURTLE_HELMET.getDefaultStack());
+                entries.add(SItems.TURTLE_CHESTPLATE.getDefaultStack());
+                entries.add(SItems.TURTLE_LEGGINGS.getDefaultStack());
+                entries.add(SItems.TURTLE_BOOTS.getDefaultStack());
 
-                entries.add(new ItemStack(SItems.WATER_SKIN));
+                entries.add(SItems.WATER_SKIN.getDefaultStack());
                 entries.add(makeFilledWaterSkin());
-                entries.add(new ItemStack(SItems.CACTUS_JUICE));
+                entries.add(SItems.CACTUS_JUICE.getDefaultStack());
 
-                entries.add(new ItemStack(SItems.CRIMSON_LILY));
-                entries.add(new ItemStack(SItems.WARPED_LILY));
-                entries.add(new ItemStack(SItems.ROOTED_NETHERRACK));
-                entries.add(new ItemStack(SItems.ROOTED_CRIMSON_NYLIUM));
-                entries.add(new ItemStack(SItems.ROOTED_WARPED_NYLIUM));
+                entries.add(SItems.CRIMSON_LILY.getDefaultStack());
+                entries.add(SItems.WARPED_LILY.getDefaultStack());
+                entries.add(SItems.ROOTED_NETHERRACK.getDefaultStack());
+                entries.add(SItems.ROOTED_CRIMSON_NYLIUM.getDefaultStack());
+                entries.add(SItems.ROOTED_WARPED_NYLIUM.getDefaultStack());
 
-                entries.add(new ItemStack(SItems.SAND_PILE));
-                entries.add(new ItemStack(SItems.RED_SAND_PILE));
+                entries.add(SItems.SAND_PILE.getDefaultStack());
+                entries.add(SItems.RED_SAND_PILE.getDefaultStack());
             }).build();
 
     public static void registerAll() {
@@ -42,8 +42,8 @@ public class SItemGroups {
 
     @Contract("->new")
     public static ItemStack makeFilledWaterSkin() {
-        var filledWaterSkin = new ItemStack(SItems.WATER_SKIN);
-        ((WaterSkinItem) SItems.WATER_SKIN).addDrinks(filledWaterSkin, WaterSkinItem.MAX_DRINKS);
+        var filledWaterSkin = SItems.WATER_SKIN.getDefaultStack();
+        WaterSkinItem.addDrinks(filledWaterSkin, WaterSkinItem.MAX_DRINKS);
         return filledWaterSkin;
     }
 

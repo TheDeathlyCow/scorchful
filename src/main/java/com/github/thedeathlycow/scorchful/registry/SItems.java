@@ -4,6 +4,7 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.SingleDrinkItem;
 import com.github.thedeathlycow.scorchful.item.SunHatItem;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
+import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
@@ -17,6 +18,8 @@ public class SItems {
     public static final Item WATER_SKIN = new WaterSkinItem(
             new Item.Settings()
                     .maxCount(1)
+                    .component(SDataComponentTypes.NUM_DRINKS, 0)
+                    .component(SDataComponentTypes.DRINK_LEVEL, DrinkLevelComponent.HYDRATING)
     );
 
     public static final Item SUN_HAT = new SunHatItem(
@@ -28,7 +31,8 @@ public class SItems {
     public static final Item CACTUS_JUICE = new SingleDrinkItem(
             new Item.Settings()
                     .maxCount(16)
-                    .recipeRemainder(Items.GLASS_BOTTLE),
+                    .recipeRemainder(Items.GLASS_BOTTLE)
+                    .component(SDataComponentTypes.DRINK_LEVEL, DrinkLevelComponent.HYDRATING),
             Items.GLASS_BOTTLE::getDefaultStack
     );
 
