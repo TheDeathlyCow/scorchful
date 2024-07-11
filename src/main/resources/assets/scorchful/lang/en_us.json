@@ -22,6 +22,14 @@
     "item.scorchful.tooltip.parching": "Parching ☀",
     
     
+    "tag.item.scorchful.is_hydrating": "Hydrating Food and Drink",
+    "tag.item.scorchful.is_parching": "Parching Food and Drink",
+    "tag.item.scorchful.is_refreshing": "Refreshing Food and Drink",
+    "tag.item.scorchful.is_sustaining": "Sustaining Food and Drink",
+    "tag.item.scorchful.sand_piles": "Sand Piles",
+    "tag.item.scorchful.turtle_armor": "Turtle Armor",
+    
+    
     "attribute.name.player.rehydration_efficiency": "Rehydration Efficiency",
     
 
