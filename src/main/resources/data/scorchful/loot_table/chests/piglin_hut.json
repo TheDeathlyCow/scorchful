@@ -113,15 +113,13 @@
                     "functions": [
                         {
                             "function": "minecraft:enchant_randomly",
-                            "enchantments": [
-                                "scorchful:rehydration"
-                            ]
+                            "options": "scorchful:rehydration"
                         }
                     ],
                     "conditions": [
                         {
                             "condition": "minecraft:random_chance",
-                            "chance": 0.2
+                            "chance": 0.5
                         }
                     ]
                 }
