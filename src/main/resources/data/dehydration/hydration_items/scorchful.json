@@ -1,14 +1,9 @@
 {
-    "2": {
-        "replace": false,
-        "items": [
-            "scorchful:cactus_juice"
-        ]
-    },
     "4": {
         "replace": false,
         "items": [
-            "scorchful:water_skin"
+            "scorchful:water_skin",
+            "scorchful:cactus_juice"
         ]
     }
 }
