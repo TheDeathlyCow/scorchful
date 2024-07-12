@@ -154,9 +154,9 @@ public class PlayerWaterComponent implements Component, ServerTickingComponent {
 
         if (this.provider.getWorld() instanceof ServerWorld serverWorld) {
             int maxWater = MathHelper.floor(
-                    rehydrationEfficiency * dehydrationConfig.getMaxRehydrationWaterAddedPerLevel()
+                    rehydrationEfficiency * dehydrationConfig.getMaxWaterLost()
             );
-            int waterToAdd = this.provider.getRandom().nextBetween(0, maxWater);
+            int waterToAdd = this.provider.getRandom().nextBetween(1, maxWater);
             thirstManager.add(waterToAdd);
             this.playRehydrationEffects(serverWorld);
             this.resetRehydration();

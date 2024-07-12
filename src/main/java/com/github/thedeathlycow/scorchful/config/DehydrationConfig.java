@@ -16,8 +16,6 @@ public class DehydrationConfig implements ConfigData {
      */
     int minWaterLevelForSweat = 16;
 
-    int maxRehydrationWaterAddedPerLevel = 1;
-
     /**
      * How this value was derived:
      * <p>
@@ -37,8 +35,8 @@ public class DehydrationConfig implements ConfigData {
         return minWaterLevelForSweat;
     }
 
-    public int getMaxRehydrationWaterAddedPerLevel() {
-        return maxRehydrationWaterAddedPerLevel;
+    public int getMaxWaterLost() {
+        return 20 - minWaterLevelForSweat;
     }
 
     public int getRehydrationDrinkSize() {

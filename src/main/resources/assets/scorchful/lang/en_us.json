@@ -142,7 +142,6 @@
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig": "Dehydration Config",
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.@Tooltip": "Requires Dehydration to have any effect",
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.minWaterLevelForSweat": "Minimum water level required for sweating",
-    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.maxRehydrationWaterAddedPerLevel": "Maximum water added per level of Rehydration",
     
     "text.autoconfig.scorchful.option.updateConfig": "Update Config",
     "text.autoconfig.scorchful.option.updateConfig.currentConfigVersion": "Current config version",
