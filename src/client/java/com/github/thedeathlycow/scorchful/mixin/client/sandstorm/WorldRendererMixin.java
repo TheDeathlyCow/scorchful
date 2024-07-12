@@ -20,11 +20,11 @@ public class WorldRendererMixin {
     @Shadow private @Nullable ClientWorld world;
 
     @Inject(
-            method = "renderClouds(Lnet/minecraft/client/util/math/MatrixStack;Lorg/joml/Matrix4f;FDDD)V",
+            method = "renderClouds",
             at = @At("HEAD"),
             cancellable = true
     )
-    private void cancelCloudsInSandstorms(MatrixStack matrices, Matrix4f projectionMatrix, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {
+    private void cancelCloudsInSandstorms(MatrixStack matrices, Matrix4f matrix4f, Matrix4f matrix4f2, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {
         if (this.world != null && SandstormEffects.shouldCancelClouds(this.world, BlockPos.ofFloored(cameraX, cameraY, cameraZ))) {
             ci.cancel();
         }

@@ -42,7 +42,7 @@ public class SunHatFeatureRenderer<T extends LivingEntity, M extends BipedEntity
         if (SunHatItem.isWearingSunHat(entity)) {
             this.getContextModel().copyBipedStateTo(this.model);
             VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(TEXTURE));
-            this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, 1.0f);
+            this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 0xffffffff);
         }
     }
 }

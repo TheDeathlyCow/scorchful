@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
-import com.github.thedeathlycow.scorchful.mixin.BlockDisplayAccess;
+import com.github.thedeathlycow.scorchful.mixin.accessor.BlockDisplayAccess;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.decoration.DisplayEntity;

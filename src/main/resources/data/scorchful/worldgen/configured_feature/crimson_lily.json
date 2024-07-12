@@ -6,10 +6,8 @@
             "property": "water_level",
             "values": {
                 "type": "minecraft:uniform",
-                "value": {
-                    "min_inclusive": 2,
-                    "max_inclusive": 3
-                }
+                "min_inclusive": 2,
+                "max_inclusive": 3
             },
             "source": {
                 "type": "minecraft:simple_state_provider",

@@ -32,7 +32,7 @@ public class SBiomeTags {
     public static final TagKey<Biome> HEAT_VISION_SQUID = SBiomeTags.register("heat_vision/squid");
 
     public static TagKey<Biome> register(String id) {
-        return TagKey.of(RegistryKeys.BIOME, new Identifier(Scorchful.MODID, id));
+        return TagKey.of(RegistryKeys.BIOME, Scorchful.id(id));
     }
 
     private SBiomeTags() {

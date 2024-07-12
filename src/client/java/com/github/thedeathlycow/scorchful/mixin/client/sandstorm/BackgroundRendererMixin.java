@@ -1,9 +1,9 @@
 package com.github.thedeathlycow.scorchful.mixin.client.sandstorm;
 
 import com.github.thedeathlycow.scorchful.client.SandstormEffects;
+import net.minecraft.block.enums.CameraSubmersionType;
 import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.CameraSubmersionType;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;

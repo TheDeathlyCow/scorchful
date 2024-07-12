@@ -22,6 +22,11 @@ public class DustGrainParticle extends AbstractDustParticle<DustGrainParticleEff
         this.velocityY = velocityY;
         this.velocityZ = velocityZ;
         this.gravityStrength = 1e-1f;
+
+        float multiplier = this.random.nextFloat() * 0.4F + 0.6F;
+        this.red = this.darken(parameters.getColor().x(), multiplier);
+        this.green = this.darken(parameters.getColor().y(), multiplier);
+        this.blue = this.darken(parameters.getColor().z(), multiplier);
     }
 
     @Environment(EnvType.CLIENT)

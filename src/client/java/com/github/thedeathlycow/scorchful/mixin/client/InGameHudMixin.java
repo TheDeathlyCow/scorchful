@@ -5,6 +5,7 @@ import com.github.thedeathlycow.scorchful.hud.ShadeOverlay;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
@@ -29,11 +30,11 @@ public abstract class InGameHudMixin {
             method = "render",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/network/ClientPlayerEntity;getFrozenTicks()I",
-                    shift = At.Shift.BEFORE
+                    target = "Lnet/minecraft/client/gui/LayeredDrawer;render(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/client/render/RenderTickCounter;)V",
+                    shift = At.Shift.AFTER
             )
     )
-    private void renderOverlays(DrawContext context, float tickDelta, CallbackInfo ci) {
+    private void renderOverlays(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         ShadeOverlay.renderShadeOverlay(
                 context,
                 client.player,

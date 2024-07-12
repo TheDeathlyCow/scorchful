@@ -37,11 +37,11 @@
 		}
 	],
 	"depends": {
-		"fabricloader": ">=0.15.10",
-		"minecraft": "1.20.4",
-		"java": ">=17",
-		"fabric-api": ">=0.97.0",
-		"thermoo": ">=3.1.2"
+		"fabricloader": ">=0.15.11",
+		"minecraft": "1.21",
+		"java": ">=21",
+		"fabric-api": ">=0.100.6",
+		"thermoo": ">=4.1"
 	},
 	"suggests": {
 		"frostiful": "*",
@@ -50,7 +50,7 @@
 	"accessWidener": "scorchful.accesswidener",
 	"custom": {
 		"cardinal-components": [
-			"scorchful:player",
+			"scorchful:player_water",
 			"scorchful:entity_desert_vision"
 		],
 		"modmenu": {

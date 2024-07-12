@@ -11,11 +11,13 @@ import net.minecraft.registry.Registry;
 public class SParticleTypes {
 
     public static final ParticleType<SpurtingWaterParticleEffect> SPURTING_WATER = FabricParticleTypes.complex(
-            SpurtingWaterParticleEffect.FACTORY
+            SpurtingWaterParticleEffect.CODEC,
+            SpurtingWaterParticleEffect.PACKET_CODEC
     );
 
     public static final ParticleType<DustGrainParticleEffect> DUST_GRAIN = FabricParticleTypes.complex(
-            DustGrainParticleEffect.FACTORY
+            DustGrainParticleEffect.CODEC,
+            DustGrainParticleEffect.PACKET_CODEC
     );
 
     public static void registerAll() {

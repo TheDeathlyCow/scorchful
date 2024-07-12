@@ -2,10 +2,10 @@ package com.github.thedeathlycow.scorchful.temperature;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
-import com.github.thedeathlycow.scorchful.components.PlayerComponent;
+import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.scorchful.enchantment.SEnchantmentHelper;
+import com.github.thedeathlycow.scorchful.registry.SEntityAttributes;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentController;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentControllerDecorator;
 import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
@@ -13,7 +13,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.world.LightType;
 
 public class WetTickController extends EnvironmentControllerDecorator {
 
@@ -69,14 +68,15 @@ public class WetTickController extends EnvironmentControllerDecorator {
     }
 
     private static void tickRehydration(PlayerEntity player, ScorchfulConfig config, int wetChange) {
-        int rehydrationLevel = SEnchantmentHelper.getTotalRehydrationForPlayer(player);
-        PlayerComponent component = ScorchfulComponents.PLAYER.get(player);
-        if (rehydrationLevel > 0) {
+        double rehydrationEfficiency = player.getAttributeValue(SEntityAttributes.REHYDRATION_EFFICIENCY);
+        PlayerWaterComponent component = ScorchfulComponents.PLAYER_WATER.get(player);
+
+        if (rehydrationEfficiency > 0) {
             boolean dehydrationLoaded = ScorchfulIntegrations.isDehydrationLoaded();
             if (wetChange < 0 && player.getRandom().nextBoolean()) {
                 component.tickRehydrationWaterRecapture(config, dehydrationLoaded);
             }
-            component.tickRehydration(config, rehydrationLevel, dehydrationLoaded);
+            component.tickRehydrationRefill(config, rehydrationEfficiency, dehydrationLoaded);
         } else {
             component.resetRehydration();
         }

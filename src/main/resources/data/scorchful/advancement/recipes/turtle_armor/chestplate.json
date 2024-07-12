@@ -1,0 +1,34 @@
+{
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+        "has_scute": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "minecraft:turtle_scute"
+                        ]
+                    }
+                ]
+            }
+        },
+        "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+                "recipe": "scorchful:turtle_armor/chestplate"
+            }
+        }
+    },
+    "requirements": [
+        [
+            "has_the_recipe",
+            "has_scute"
+        ]
+    ],
+    "rewards": {
+        "recipes": [
+            "scorchful:turtle_armor/chestplate"
+        ]
+    }
+}

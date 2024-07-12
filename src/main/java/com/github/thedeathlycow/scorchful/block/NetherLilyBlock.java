@@ -1,33 +1,25 @@
 package com.github.thedeathlycow.scorchful.block;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.particle.SpurtingWaterParticleEffect;
-import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
-import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
-import com.github.thedeathlycow.scorchful.server.Sandstorms;
-import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.*;
-import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.entity.Entity;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
@@ -36,8 +28,6 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.event.GameEvent;
-
-import java.util.Map;
 
 @SuppressWarnings("deprecation")
 public class NetherLilyBlock extends Block {
@@ -96,7 +86,11 @@ public class NetherLilyBlock extends Block {
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+    public BlockState getStateForNeighborUpdate(
+            BlockState state, Direction direction, BlockState neighborState,
+            WorldAccess world,
+            BlockPos pos, BlockPos neighborPos
+    ) {
         if (direction == Direction.DOWN && !this.canPlaceAt(state, world, pos)) {
             return Blocks.AIR.getDefaultState();
         }
@@ -104,10 +98,14 @@ public class NetherLilyBlock extends Block {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        ItemStack itemStack = player.getStackInHand(hand);
-        NetherLilyBehaviour behaviour = this.behaviorMap.map().get(itemStack.getItem());
-        return behaviour.interact(state, world, pos, player, hand, itemStack);
+    public ItemActionResult onUseWithItem(
+            ItemStack stack, BlockState state,
+            World world, BlockPos pos,
+            PlayerEntity player, Hand hand,
+            BlockHitResult hit
+    ) {
+        NetherLilyBehaviour behaviour = this.behaviorMap.map().get(stack.getItem());
+        return behaviour.interact(state, world, pos, player, hand, stack);
     }
 
     @Override

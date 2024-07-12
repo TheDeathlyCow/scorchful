@@ -1,0 +1,118 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:apple",
+        "minecraft:golden_apple",
+        "minecraft:enchanted_golden_apple",
+        "minecraft:cod",
+        "minecraft:salmon",
+        "minecraft:tropical_fish",
+        "minecraft:pufferfish",
+        "minecraft:sweet_berries",
+        "minecraft:glow_berries",
+        {
+            "required": false,
+            "id": "#c:foods/berry"
+        },
+        {
+            "required": false,
+            "id": "#c:foods/fruit"
+        },
+        {
+            "required": false,
+            "id": "#c:foods/vegetable"
+        },
+        {
+            "required": false,
+            "id": "#c:foods/raw_fish"
+        },
+        {
+            "required": false,
+            "id": "farmersdelight:melon_popsicle"
+        },
+        {
+            "required": false,
+            "id": "vinery:red_grape"
+        },
+        {
+            "required": false,
+            "id": "vinery:white_grape"
+        },
+        {
+            "required": false,
+            "id": "vinery:savanna_grapes_red"
+        },
+        {
+            "required": false,
+            "id": "vinery:savanna_grapes_white"
+        },
+        {
+            "required": false,
+            "id": "vinery:taiga_grapes_red"
+        },
+        {
+            "required": false,
+            "id": "vinery:taiga_grapes_white"
+        },
+        {
+            "required": false,
+            "id": "vinery:jungle_grapes_red"
+        },
+        {
+            "required": false,
+            "id": "vinery:jungle_grapes_white"
+        },
+        {
+            "required": false,
+            "id": "vinery:cherry"
+        },
+        {
+            "required": false,
+            "id": "bakery:strawberry"
+        },
+        {
+            "required": false,
+            "id": "beachparty:open_coconut"
+        },
+        {
+            "required": false,
+            "id": "beachparty:icecream_melon"
+        },
+        {
+            "required": false,
+            "id": "beachparty:icecream_sweetberries"
+        },
+        {
+            "required": false,
+            "id": "beachparty:icecream_chocolate"
+        },
+        {
+            "required": false,
+            "id": "beachparty:icecream_cactus"
+        },
+        {
+            "required": false,
+            "id": "beachparty:icecream_coconut"
+        },
+        {
+            "required": false,
+            "id": "beachparty:chocolate_icecream"
+        },
+        {
+            "required": false,
+            "id": "beachparty:coconut_icecream"
+        },
+        {
+            "required": false,
+            "id": "beachparty:sweetberry_icecream"
+        },
+        {
+            "required": false,
+            "id": "beachparty:raw_mussel_meat"
+        },
+        {
+            "required": false,
+            "id": "candlelight:tomato"
+        }
+    ]
+}

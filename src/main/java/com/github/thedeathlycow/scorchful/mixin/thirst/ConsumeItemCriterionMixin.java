@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.mixin.thirst;
 
-import com.github.thedeathlycow.scorchful.item.QuenchingFoods;
+import com.github.thedeathlycow.scorchful.item.DrinkItem;
 import net.minecraft.advancement.criterion.ConsumeItemCriterion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -11,11 +11,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ConsumeItemCriterion.class)
 public class ConsumeItemCriterionMixin {
+
     @Inject(
             method = "trigger",
             at = @At("HEAD")
     )
-    private void onItemConsumed(ServerPlayerEntity player, ItemStack stack, CallbackInfo ci) {
-        QuenchingFoods.onConsume(player, stack);
+    private void onTriggered(ServerPlayerEntity player, ItemStack stack, CallbackInfo ci) {
+        DrinkItem.applyWater(stack, player);
     }
+
+
 }

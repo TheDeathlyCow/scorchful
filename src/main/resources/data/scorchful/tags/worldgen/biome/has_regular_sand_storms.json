@@ -4,7 +4,7 @@
         "minecraft:desert",
         {
             "required": false,
-            "id": "#c:desert"
+            "id": "#c:is_desert"
         }
     ]
 }

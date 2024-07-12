@@ -63,13 +63,12 @@ public class SandstormSounds {
         BlockPos cameraPos = camera.getBlockPos();
 
         int dx = world.random.nextBetween(-MAX_XZ_OFFSET, MAX_SOUND_Y_DIFF);
+        int dy = world.random.nextBetween(-MAX_XZ_OFFSET, MAX_SOUND_Y_DIFF);
         int dz = world.random.nextBetween(-MAX_XZ_OFFSET, MAX_SOUND_Y_DIFF);
-        BlockPos soundPos = cameraPos.add(dx, 0, dz);
+        BlockPos soundPos = cameraPos.add(dx, dy, dz);
 
-        BlockPos topPos = world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, soundPos);
-
-        if (Math.abs(cameraPos.getY() - topPos.getY()) <= MAX_SOUND_Y_DIFF && Sandstorms.isSandStorming(world, topPos)) {
-            return Optional.of(topPos);
+        if (Sandstorms.getCurrentSandStorm(world, soundPos) != Sandstorms.SandstormType.NONE) {
+            return Optional.of(soundPos);
         }
 
         return Optional.empty();

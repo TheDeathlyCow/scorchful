@@ -3,20 +3,17 @@ package com.github.thedeathlycow.scorchful.block;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import com.github.thedeathlycow.scorchful.registry.SStats;
-import net.minecraft.block.cauldron.CauldronBehavior;
+import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
-import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
-import net.minecraft.util.ActionResult;
+import net.minecraft.util.ItemActionResult;
 import net.minecraft.world.event.GameEvent;
-
-import java.util.Map;
 
 public class NetherLilyBehaviours {
 
@@ -27,7 +24,7 @@ public class NetherLilyBehaviours {
     private static final NetherLilyBehaviour ADD_WATER = (state, world, pos, player, hand, stack) -> {
         if (!world.isClient) {
             if (state.get(NetherLilyBlock.WATER_SATURATION_LEVEL) >= NetherLilyBlock.MAX_LEVEL) {
-                return ActionResult.FAIL;
+                return ItemActionResult.FAIL;
             }
             Item item = stack.getItem();
             player.incrementStat(SStats.FILL_CRIMSON_LILY);
@@ -41,7 +38,7 @@ public class NetherLilyBehaviours {
             );
             world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
         }
-        return ActionResult.success(world.isClient);
+        return ItemActionResult.success(world.isClient);
     };
 
     public static void registerBehaviours() {
@@ -50,14 +47,18 @@ public class NetherLilyBehaviours {
                 (state, world, pos, player, hand, stack) -> {
 
                     if (state.get(NetherLilyBlock.WATER_SATURATION_LEVEL) < 3) {
-                        return ActionResult.FAIL;
+                        return ItemActionResult.FAIL;
                     }
 
                     if (!world.isClient) {
                         Item item = stack.getItem();
                         player.setStackInHand(
                                 hand,
-                                ItemUsage.exchangeStack(stack, player, PotionUtil.setPotion(new ItemStack(Items.POTION), Potions.WATER))
+                                ItemUsage.exchangeStack(
+                                        stack,
+                                        player,
+                                        PotionContentsComponent.createStack(Items.POTION, Potions.WATER)
+                                )
                         );
                         player.incrementStat(SStats.USE_WARPED_LILY);
                         player.incrementStat(Stats.USED.getOrCreateStat(item));
@@ -70,7 +71,7 @@ public class NetherLilyBehaviours {
                         );
                         world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
                     }
-                    return ActionResult.success(world.isClient);
+                    return ItemActionResult.success(world.isClient);
                 }
         );
         WARPED_LILY_BEHAVIOUR.map().put(SItems.WATER_SKIN, ((WaterSkinItem) SItems.WATER_SKIN)::onWarpedLilyInteract);
@@ -79,7 +80,7 @@ public class NetherLilyBehaviours {
                 Items.POTION,
                 (state, world, pos, player, hand, stack) -> {
 
-                    ActionResult result = ADD_WATER.interact(state, world, pos, player, hand, stack);
+                    ItemActionResult result = ADD_WATER.interact(state, world, pos, player, hand, stack);
 
                     if (!world.isClient && result.isAccepted()) {
                         player.setStackInHand(
@@ -94,20 +95,16 @@ public class NetherLilyBehaviours {
         CRIMSON_LILY_BEHAVIOUR.map().put(
                 SItems.WATER_SKIN,
                 (state, world, pos, player, hand, stack) -> {
-
-                    WaterSkinItem waterSkinItem = (WaterSkinItem) stack.getItem();
-
-                    ActionResult result;
+                    ItemActionResult result;
                     if (WaterSkinItem.hasDrink(stack)) {
                         result = ADD_WATER.interact(state, world, pos, player, hand, stack);
                     } else {
-                        result = ActionResult.PASS;
+                        result = ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
                     }
 
                     if (!world.isClient && result.isAccepted()) {
-                        waterSkinItem.addDrinks(stack, -1);
+                        WaterSkinItem.addDrinks(stack, -1);
                     }
-
                     return result;
                 }
         );

@@ -20,7 +20,7 @@ Steps to reproduce the behavior:
 A clear and concise description of what you expected to happen.
 
 **Game information (please complete)**
-- MC Version (1.20, 1.20.1, etc):
+- MC Version (1.20.1, 1.21, etc):
 - Loader (Fabric/Quilt or NeoForge with Connector): 
 
 **Logs**

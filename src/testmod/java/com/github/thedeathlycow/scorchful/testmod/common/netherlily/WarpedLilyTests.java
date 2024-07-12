@@ -10,6 +10,7 @@ import net.minecraft.test.GameTest;
 import net.minecraft.test.TestContext;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.GameMode;
 
 import java.util.function.BooleanSupplier;
 
@@ -24,7 +25,7 @@ public class WarpedLilyTests {
         context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
 
-        PlayerEntity player = context.createMockSurvivalPlayer();
+        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
         player.setStackInHand(Hand.MAIN_HAND, Items.GLASS_BOTTLE.getDefaultStack());
 
         BooleanSupplier playerHasWaterBottle = () -> player.getInventory().containsAny(stack -> stack.isOf(Items.POTION));
@@ -60,7 +61,7 @@ public class WarpedLilyTests {
         context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
 
-        PlayerEntity player = context.createMockSurvivalPlayer();
+        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
         player.setStackInHand(Hand.MAIN_HAND, Items.GLASS_BOTTLE.getDefaultStack());
 
         BooleanSupplier playerHasWaterBottle = () -> player.getInventory().containsAny(stack -> stack.isOf(Items.POTION));
@@ -95,7 +96,7 @@ public class WarpedLilyTests {
         context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, 2);
 
-        PlayerEntity player = context.createMockSurvivalPlayer();
+        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
         player.setStackInHand(Hand.MAIN_HAND, Items.GLASS_BOTTLE.getDefaultStack());
 
         BooleanSupplier playerHasWaterBottle = () -> player.getInventory().containsAny(stack -> stack.isOf(Items.POTION));
@@ -130,7 +131,7 @@ public class WarpedLilyTests {
         context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
 
-        PlayerEntity player = context.createMockSurvivalPlayer();
+        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
         player.setStackInHand(Hand.MAIN_HAND, SItems.WATER_SKIN.getDefaultStack());
 
         BooleanSupplier isWaterSkinEmpty = () -> {
@@ -158,7 +159,7 @@ public class WarpedLilyTests {
         context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
 
-        PlayerEntity player = context.createMockSurvivalPlayer();
+        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
         player.setStackInHand(Hand.MAIN_HAND, SItems.WATER_SKIN.getDefaultStack());
 
         BooleanSupplier isWaterSkinEmpty = () -> {

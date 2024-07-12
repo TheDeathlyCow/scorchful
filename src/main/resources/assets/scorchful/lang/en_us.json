@@ -21,6 +21,18 @@
     "item.scorchful.tooltip.hydrating": "Hydrating \uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
     "item.scorchful.tooltip.parching": "Parching ☀",
     
+    
+    "tag.item.scorchful.is_hydrating": "Hydrating Food and Drink",
+    "tag.item.scorchful.is_parching": "Parching Food and Drink",
+    "tag.item.scorchful.is_refreshing": "Refreshing Food and Drink",
+    "tag.item.scorchful.is_sustaining": "Sustaining Food and Drink",
+    "tag.item.scorchful.is_sun_protecting_hat": "Sun Protecting Hats",
+    "tag.item.scorchful.sand_piles": "Sand Piles",
+    "tag.item.scorchful.turtle_armor": "Turtle Armor",
+    
+    
+    "attribute.name.player.rehydration_efficiency": "Rehydration Efficiency",
+    
 
     "block.scorchful.crimson_lily": "Crimson Lily",
     "block.scorchful.warped_lily": "Warped Lily",
@@ -92,10 +104,6 @@
     "text.autoconfig.scorchful.option.heatingConfig.striderOutOfLavaCoolRate": "Strider out of lava cool rate",
     "text.autoconfig.scorchful.option.heatingConfig.powderSnowCoolRate": "Powder Snow cool rate when warm",
     "text.autoconfig.scorchful.option.heatingConfig.fireballHeat": "Fireball strike heat",
-    "text.autoconfig.scorchful.option.heatingConfig.defaultArmorHeatResistance": "Default armor piece heat resistance",
-    "text.autoconfig.scorchful.option.heatingConfig.veryHarmfulArmorHeatResistance": "Very warm armor piece heat resistance",
-    "text.autoconfig.scorchful.option.heatingConfig.protectiveArmorHeatResistance": "Thermally protective armor piece heat resistance",
-    "text.autoconfig.scorchful.option.heatingConfig.veryProtectiveArmorHeatResistance": "Very thermally protective armor piece heat resistance",
     "text.autoconfig.scorchful.option.heatingConfig.waterBreathingDurationPerTurtleArmorPieceSeconds": "Water breathing duration per worn piece of Turtle Armor (seconds)",
     "text.autoconfig.scorchful.option.heatingConfig.lightLevelPerHeatInNether": "Light level per heat increase (in The Nether)",
     "text.autoconfig.scorchful.option.heatingConfig.minLightLevelForHeatInNether": "Minimum light level for heat (in The Nether)",
@@ -119,6 +127,10 @@
     "text.autoconfig.scorchful.option.combatConfig": "Combat Config",
     "text.autoconfig.scorchful.option.combatConfig.fireBallThrownType": "Fire Charge thrown type",
     "text.autoconfig.scorchful.option.combatConfig.enableDesertVisions": "Enable Desert Visions",
+    "text.autoconfig.scorchful.option.combatConfig.defaultArmorHeatResistance": "Default armor piece heat resistance",
+    "text.autoconfig.scorchful.option.combatConfig.veryHarmfulArmorHeatResistance": "Very warm armor piece heat resistance",
+    "text.autoconfig.scorchful.option.combatConfig.protectiveArmorHeatResistance": "Thermally protective armor piece heat resistance",
+    "text.autoconfig.scorchful.option.combatConfig.veryProtectiveArmorHeatResistance": "Very thermally protective armor piece heat resistance",
     
     "text.autoconfig.scorchful.option.weatherConfig": "Weather Config",
     "text.autoconfig.scorchful.option.weatherConfig.doSandPileAccumulation": "Do Sand Pile accumulation",
@@ -130,7 +142,6 @@
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig": "Dehydration Config",
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.@Tooltip": "Requires Dehydration to have any effect",
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.minWaterLevelForSweat": "Minimum water level required for sweating",
-    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.maxRehydrationWaterAddedPerLevel": "Maximum water added per level of Rehydration",
     
     "text.autoconfig.scorchful.option.updateConfig": "Update Config",
     "text.autoconfig.scorchful.option.updateConfig.currentConfigVersion": "Current config version",

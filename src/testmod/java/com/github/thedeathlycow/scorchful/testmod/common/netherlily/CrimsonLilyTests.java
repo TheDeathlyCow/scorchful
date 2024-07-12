@@ -15,6 +15,7 @@ import net.minecraft.test.GameTest;
 import net.minecraft.test.TestContext;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.GameMode;
 
 import java.util.function.BooleanSupplier;
 
@@ -29,7 +30,7 @@ public class CrimsonLilyTests {
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, CrimsonLilyBlock.WATER_SATURATION_LEVEL, CrimsonLilyBlock.MAX_LEVEL);
 
-        PlayerEntity player = context.createMockSurvivalPlayer();
+        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
 
         BooleanSupplier isPlayerWet = player::thermoo$isWet;
 
@@ -52,7 +53,7 @@ public class CrimsonLilyTests {
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, CrimsonLilyBlock.WATER_SATURATION_LEVEL, CrimsonLilyBlock.MIN_LEVEL);
 
-        PlayerEntity player = context.createMockSurvivalPlayer();
+        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
 
         BooleanSupplier isPlayerWet = player::thermoo$isWet;
 
@@ -75,7 +76,7 @@ public class CrimsonLilyTests {
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, CrimsonLilyBlock.WATER_SATURATION_LEVEL, 2);
 
-        PlayerEntity player = context.createMockSurvivalPlayer();
+        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
 
         BooleanSupplier isPlayerWet = player::thermoo$isWet;
 
@@ -136,7 +137,7 @@ public class CrimsonLilyTests {
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
 
-        PlayerEntity player = context.createMockSurvivalPlayer();
+        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
         player.setStackInHand(Hand.MAIN_HAND, Items.POTION.getDefaultStack());
 
         BooleanSupplier playerHasWaterBottle = () -> player.getInventory().containsAny(stack -> stack.isOf(Items.POTION));
@@ -164,9 +165,9 @@ public class CrimsonLilyTests {
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
 
-        PlayerEntity player = context.createMockSurvivalPlayer();
+        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
         ItemStack filledWaterSkin = SItems.WATER_SKIN.getDefaultStack();
-        ((WaterSkinItem)SItems.WATER_SKIN).addDrinks(filledWaterSkin, 1);
+        WaterSkinItem.addDrinks(filledWaterSkin, 1);
         player.setStackInHand(Hand.MAIN_HAND, filledWaterSkin);
 
         BooleanSupplier isWaterSkinEmpty = () -> {
@@ -194,7 +195,7 @@ public class CrimsonLilyTests {
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
 
-        PlayerEntity player = context.createMockSurvivalPlayer();
+        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
         player.setStackInHand(Hand.MAIN_HAND, Items.POTION.getDefaultStack());
 
         BooleanSupplier playerHasWaterBottle = () -> player.getInventory().containsAny(stack -> stack.isOf(Items.POTION));
@@ -222,7 +223,7 @@ public class CrimsonLilyTests {
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
 
-        PlayerEntity player = context.createMockSurvivalPlayer();
+        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
         var waterSkin = SItems.WATER_SKIN.getDefaultStack();
         ((WaterSkinItem) SItems.WATER_SKIN).addDrinks(waterSkin, 1);
         player.setStackInHand(Hand.MAIN_HAND, waterSkin);

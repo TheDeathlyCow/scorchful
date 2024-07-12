@@ -42,7 +42,7 @@ public class ThirstCommand {
             ServerCommandSource source,
             PlayerEntity target
     ) {
-        return ScorchfulComponents.PLAYER.get(target).getWaterDrunk();
+        return ScorchfulComponents.PLAYER_WATER.get(target).getWaterDrunk();
     }
 
 }

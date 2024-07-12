@@ -90,10 +90,6 @@
   "text.autoconfig.scorchful.option.heatingConfig.striderOutOfLavaCoolRate": "Tỷ lệ làm mát khi rời khỏi dung nham của Strider",
   "text.autoconfig.scorchful.option.heatingConfig.powderSnowCoolRate": "Tỷ lệ làm mát từ tuyết khi ấm",
   "text.autoconfig.scorchful.option.heatingConfig.fireballHeat": "Nhiệt từ đòn tấn công cầu lửa",
-  "text.autoconfig.scorchful.option.heatingConfig.defaultArmorHeatResistance": "Khả năng chống nhiệt của giáp mặc định",
-  "text.autoconfig.scorchful.option.heatingConfig.veryHarmfulArmorHeatResistance": "Khả năng chống nhiệt của giáp rất nóng",
-  "text.autoconfig.scorchful.option.heatingConfig.protectiveArmorHeatResistance": "Khả năng chống nhiệt của giáp bảo vệ",
-  "text.autoconfig.scorchful.option.heatingConfig.veryProtectiveArmorHeatResistance": "Khả năng chống nhiệt của giáp bảo vệ rất cao",
   "text.autoconfig.scorchful.option.heatingConfig.waterBreathingDurationPerTurtleArmorPieceSeconds": "Thời gian thở dưới nước trên mỗi mảnh Giáp Rùa được mặc (giây)",
   "text.autoconfig.scorchful.option.heatingConfig.lightLevelPerHeatInNether": "Mức độ ánh sáng trên mỗi gia tăng nhiệt (trong The Nether)",
   "text.autoconfig.scorchful.option.heatingConfig.minLightLevelForHeatInNether": "Mức độ ánh sáng tối thiểu để sinh nhiệt (trong The Nether)",
@@ -116,6 +112,10 @@
 
   "text.autoconfig.scorchful.option.combatConfig": "Cấu hình Chiến đấu",
   "text.autoconfig.scorchful.option.combatConfig.fireBallThrownType": "Loại Quả Cầu Lửa ném",
+  "text.autoconfig.scorchful.option.combatConfig.defaultArmorHeatResistance": "Khả năng chống nhiệt của giáp mặc định",
+  "text.autoconfig.scorchful.option.combatConfig.veryHarmfulArmorHeatResistance": "Khả năng chống nhiệt của giáp rất nóng",
+  "text.autoconfig.scorchful.option.combatConfig.protectiveArmorHeatResistance": "Khả năng chống nhiệt của giáp bảo vệ",
+  "text.autoconfig.scorchful.option.combatConfig.veryProtectiveArmorHeatResistance": "Khả năng chống nhiệt của giáp bảo vệ rất cao",
 
   "text.autoconfig.scorchful.option.weatherConfig": "Cấu hình Thời tiết",
   "text.autoconfig.scorchful.option.weatherConfig.doSandPileAccumulation": "Bật tích lũy Đống Cát",
