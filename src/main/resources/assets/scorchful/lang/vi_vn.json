@@ -22,6 +22,18 @@
   "item.scorchful.tooltip.parching": "Khô Khát ☀",
 
 
+  "tag.item.scorchful.is_hydrating": "Thực Phẩm Và Đồ Uống Cấp Nước",
+  "tag.item.scorchful.is_parching": "Thực Phẩm Và Đồ Uống Gây Khát",
+  "tag.item.scorchful.is_refreshing": "Thực Phẩm Và Đồ Uống Giải Khát",
+  "tag.item.scorchful.is_sustaining": "Thực Phẩm Và Đồ Uống Duy Trì",
+  "tag.item.scorchful.is_sun_protecting_hat": "Mũ Bảo Vệ Khỏi Nắng",
+  "tag.item.scorchful.sand_piles": "Đống Cát",
+  "tag.item.scorchful.turtle_armor": "Giáp Rùa",
+
+
+  "attribute.name.player.rehydration_efficiency": "Hiệu Suất Tái Cấp Nước",
+
+
   "block.scorchful.crimson_lily": "Hoa Huệ Đỏ Thẫm",
   "block.scorchful.warped_lily": "Hoa Huệ Kỳ Dị",
   "block.scorchful.rooted_netherrack": "Netherrack Có Rễ",
@@ -55,6 +67,7 @@
   "subtitles.block.scorchful.crimson_lily.squelch": "Hoa Huệ Đỏ Thẫm nhai nhẹp",
   "subtitles.weather.scorchful.sandstorm": "Gió thổi",
   "subtitles.scorchful.entity.gulp": "Người chơi nuốt",
+  "subtitles.scorchful.discover_vision": "Người chơi phát hiện tầm nhìn",
 
   "stat.scorchful.fill_crimson_lily": "Đổ đầy Hoa Huệ Đỏ Thẫm",
   "stat.scorchful.soaked_by_crimson_lily": "Bị thấm bởi Hoa Huệ Đỏ Thẫm",
@@ -63,6 +76,7 @@
   "text.autoconfig.scorchful.option.clientConfig": "Cấu hình máy khách",
   "text.autoconfig.scorchful.option.clientConfig.doBurningHeartOverlay": "Hiệu ứng trái tim cháy",
   "text.autoconfig.scorchful.option.clientConfig.doSunHatShading": "Hiệu ứng đổ bóng từ Mũ Chống Nắng",
+  "text.autoconfig.scorchful.option.clientConfig.enableSoundTemperatureEffects": "Bật Hiệu Ứng Âm Thanh Nhiệt Độ",
   "text.autoconfig.scorchful.option.clientConfig.enableHeatStrokePostProcessing": "Bật xử lý hậu quả sốc nhiệt",
   "text.autoconfig.scorchful.option.clientConfig.enableHeatStrokePostProcessing.@Tooltip": "Bật các hiệu ứng như mờ và sóng từ trạng thái Sốc Nhiệt. Có thể gây lag nếu không có GPU chuyên dụng.",
   "text.autoconfig.scorchful.option.clientConfig.sunHatShadeOpacity": "Độ mờ của bóng từ Mũ Chống Nắng",
