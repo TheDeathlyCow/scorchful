@@ -41,7 +41,7 @@ public class Sandstorms {
      * in a badlands.
      */
     public static SandstormType getCurrentSandStorm(World world, BlockPos pos) {
-        if (!world.isRaining()) {
+        if (!world.isRaining() || world.hasRain(pos)) {
             return SandstormType.NONE;
         }
         if (!world.isSkyVisible(pos)) {
@@ -62,7 +62,8 @@ public class Sandstorms {
 
     public static boolean isSandStorming(World world, BlockPos pos) {
         return world.isRaining()
-                && hasSandStorms(world.getBiome(pos));
+                && hasSandStorms(world.getBiome(pos))
+                && !world.hasRain(pos);
     }
 
     /**

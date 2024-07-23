@@ -36,7 +36,7 @@ public class SandstormEffects {
 
     public static boolean shouldCancelClouds(ClientWorld world, BlockPos pos) {
         return world.getRainGradient(1f) > SandstormEffects.START_FOG_SPHERE_RAIN_GRADIENT
-                && Sandstorms.hasSandStorms(world.getBiome(pos));
+                && Sandstorms.isSandStorming(world, pos);
     }
 
     public static void tickSandstormParticles(ClientWorld clientWorld) {
@@ -86,7 +86,7 @@ public class SandstormEffects {
         }
 
         float gradient = world.getRainGradient(1f);
-        if (gradient > 0f && Sandstorms.hasSandStorms(world.getBiome(camera.getBlockPos()))) {
+        if (gradient > 0f && Sandstorms.isSandStorming(world, camera.getBlockPos())) {
             final var normalColor = new Vec3d(baseRed, baseGreen, baseBlue);
             Vec3d adjustedColor = SMth.lerp(gradient, normalColor, SandstormEffects.REGULAR_SANDSTORM_FOG_COLOR);
 
@@ -134,8 +134,7 @@ public class SandstormEffects {
         final float rainGradient = world.getRainGradient(1f);
         if (cameraSubmersionType == CameraSubmersionType.NONE && rainGradient > 0f) {
             BlockPos pos = camera.getBlockPos();
-            if (Sandstorms.hasSandStorms(world.getBiome(pos))) {
-
+            if (Sandstorms.isSandStorming(world, pos)) {
                 var samplePos = new BlockPos.Mutable();
                 final var baseRadius = new Vec3d(fogData.fogStart, fogData.fogEnd, 0);
                 final var fogRadius = new Vec3d(
