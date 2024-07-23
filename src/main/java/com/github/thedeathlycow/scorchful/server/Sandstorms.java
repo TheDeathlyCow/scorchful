@@ -40,14 +40,14 @@ public class Sandstorms {
      * Returns {@link SandstormType#REGULAR} if it is raining in a desert and {@link SandstormType#RED} if it is raining
      * in a badlands.
      */
-    public static SandstormType getCurrentSandStorm(World world, BlockPos pos) {
-        if (!world.isRaining() || world.hasRain(pos)) {
+    public static SandstormType getCurrentSandStorm(World world, BlockPos pos, boolean includeSurface) {
+        if (!world.isRaining() || (includeSurface && world.hasRain(pos))) {
             return SandstormType.NONE;
         }
-        if (!world.isSkyVisible(pos)) {
+        if (includeSurface && !world.isSkyVisible(pos)) {
             return SandstormType.NONE;
         }
-        if (world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, pos).getY() > pos.getY()) {
+        if (includeSurface && world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, pos).getY() > pos.getY()) {
             return SandstormType.NONE;
         }
         RegistryEntry<Biome> biome = world.getBiome(pos);
@@ -60,10 +60,12 @@ public class Sandstorms {
         }
     }
 
+    public static SandstormType getCurrentSandStorm(World world, BlockPos pos) {
+        return getCurrentSandStorm(world, pos, true);
+    }
+
     public static boolean isSandStorming(World world, BlockPos pos) {
-        return world.isRaining()
-                && hasSandStorms(world.getBiome(pos))
-                && !world.hasRain(pos);
+        return getCurrentSandStorm(world, pos, false) != SandstormType.NONE;
     }
 
     /**
