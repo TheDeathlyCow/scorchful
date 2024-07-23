@@ -1,0 +1,7 @@
+{
+    "replace": false,
+    "values": [
+        "#scorchful:temperature/spring/scorching",
+        "#scorchful:temperature/spring/warm"
+    ]
+}

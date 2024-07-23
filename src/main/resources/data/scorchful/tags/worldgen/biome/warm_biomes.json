@@ -1,9 +1,0 @@
-{
-    "replace": false,
-    "values": [
-        "#c:is_hot/overworld",
-        "minecraft:beach",
-        "minecraft:warm_ocean",
-        "minecraft:mangrove_swamp"
-    ]
-}

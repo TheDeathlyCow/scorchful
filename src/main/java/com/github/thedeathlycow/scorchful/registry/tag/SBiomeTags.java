@@ -8,10 +8,6 @@ import net.minecraft.world.biome.Biome;
 
 public class SBiomeTags {
 
-    public static final TagKey<Biome> WARM_BIOMES = SBiomeTags.register("warm_biomes");
-
-    public static final TagKey<Biome> SCORCHING_BIOMES = SBiomeTags.register("scorching_biomes");
-
     public static final TagKey<Biome> HUMID_BIOMES = SBiomeTags.register("humid_biomes");
 
     public static final TagKey<Biome> HAS_SAND_STORMS = SBiomeTags.register("has_sand_storms");
@@ -31,7 +27,7 @@ public class SBiomeTags {
     public static final TagKey<Biome> HEAT_VISION_COD = SBiomeTags.register("heat_vision/cod");
     public static final TagKey<Biome> HEAT_VISION_SQUID = SBiomeTags.register("heat_vision/squid");
 
-    public static TagKey<Biome> register(String id) {
+    static TagKey<Biome> register(String id) {
         return TagKey.of(RegistryKeys.BIOME, Scorchful.id(id));
     }
 

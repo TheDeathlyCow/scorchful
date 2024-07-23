@@ -3,12 +3,10 @@
     "values": [
         {
             "required": false,
-            "id": "#c:is_desert"
+            "id": "#scorchful:scorching_biomes"
         },
-        {
-            "required": false,
-            "id": "#c:is_badlands"
-        },
+        "#c:is_desert",
+        "#c:is_badlands",
         "minecraft:desert",
         "#minecraft:is_badlands"
     ]
