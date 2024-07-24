@@ -78,6 +78,7 @@
     
     "text.autoconfig.scorchful.option.heatingConfig": "Heating Config",
     "text.autoconfig.scorchful.option.heatingConfig.doPassiveHeating": "Do passive heating",
+    "text.autoconfig.scorchful.option.heatingConfig.passiveHeatingTickInterval": "Passive heating tick interval",
     "text.autoconfig.scorchful.option.heatingConfig.maxPassiveHeatingScale": "Max passive heating percent (0-1)",
     "text.autoconfig.scorchful.option.heatingConfig.enableTurtleArmorEffects": "Enable Turtle Armor status effects (doesn't apply to helmet)",
     "text.autoconfig.scorchful.option.heatingConfig.coolingFromIce": "Cooling from ice",

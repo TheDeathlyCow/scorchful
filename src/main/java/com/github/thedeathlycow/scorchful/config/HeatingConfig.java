@@ -9,6 +9,8 @@ public class HeatingConfig implements ConfigData {
 
     boolean doPassiveHeating = true;
 
+    int passiveHeatingTickInterval = 1;
+
     float maxPassiveHeatingScale = 1.0f;
 
     boolean enableTurtleArmorEffects = true;
@@ -55,6 +57,10 @@ public class HeatingConfig implements ConfigData {
 
     public boolean doPassiveHeating() {
         return doPassiveHeating;
+    }
+
+    public int getPassiveHeatingTickInterval() {
+        return passiveHeatingTickInterval;
     }
 
     public float getMaxPassiveHeatingScale() {
