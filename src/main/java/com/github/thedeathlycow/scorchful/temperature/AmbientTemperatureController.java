@@ -150,8 +150,11 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
 
         RegistryEntry<Biome> biome = world.getBiome(pos);
         ScorchfulConfig config = Scorchful.getConfig();
-        ThermooSeason season = ThermooSeason.getCurrentSeason(world)
-                .orElse(ThermooSeason.SPRING);
+
+        ThermooSeason season = config.integrationConfig.seasonsConfig.enableSeasonsIntegration()
+                ? ThermooSeason.getCurrentSeason(world).orElse(ThermooSeason.SPRING)
+                : ThermooSeason.SPRING;
+
         SeasonalBiomeTags tags = SeasonalBiomeTags.forSeason(season);
 
         if (biome.isIn(tags.warm()) || biome.value().getTemperature() >= 0.95f) {

@@ -139,10 +139,13 @@
     "text.autoconfig.scorchful.option.weatherConfig.sandstormSlownessAmountPercent": "Sandstorm Slowness amount (percent from -1 to +1)",
     
     "text.autoconfig.scorchful.option.integrationConfig": "Mod Integration Config",
-    
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig": "Dehydration Config",
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.@Tooltip": "Requires Dehydration to have any effect",
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.minWaterLevelForSweat": "Minimum water level required for sweating",
+    
+    "text.autoconfig.scorchful.option.integrationConfig.seasonsConfig": "Seasons Config",
+    "text.autoconfig.scorchful.option.integrationConfig.seasonsConfig.@Tooltip": "Requires Fabric Seasons or Serene Seasons AND Thermoo Patches",
+    "text.autoconfig.scorchful.option.integrationConfig.seasonsConfig.enableSeasonsIntegration": "Enable seasons integration",
     
     "text.autoconfig.scorchful.option.updateConfig": "Update Config",
     "text.autoconfig.scorchful.option.updateConfig.currentConfigVersion": "Current config version",

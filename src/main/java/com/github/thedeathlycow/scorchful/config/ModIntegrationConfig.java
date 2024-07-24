@@ -12,4 +12,8 @@ public class ModIntegrationConfig extends PartitioningSerializer.GlobalData {
     @ConfigEntry.Gui.Tooltip
     public DehydrationConfig dehydrationConfig = new DehydrationConfig();
 
+    @ConfigEntry.Gui.CollapsibleObject
+    @ConfigEntry.Gui.Tooltip
+    public SeasonsConfig seasonsConfig = new SeasonsConfig();
+
 }
