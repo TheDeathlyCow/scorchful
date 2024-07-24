@@ -3,7 +3,6 @@ package com.github.thedeathlycow.scorchful.registry;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.block.*;
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.registry.Registries;
@@ -14,7 +13,7 @@ public class SBlocks {
 
     public static final Block CRIMSON_LILY = new CrimsonLilyBlock(
             NetherLilyBehaviours.CRIMSON_LILY_BEHAVIOUR,
-            FabricBlockSettings.create()
+            AbstractBlock.Settings.create()
                     .mapColor(MapColor.DARK_RED)
                     .breakInstantly()
                     .noCollision()
@@ -25,7 +24,7 @@ public class SBlocks {
 
     public static final Block WARPED_LILY = new NetherLilyBlock(
             NetherLilyBehaviours.WARPED_LILY_BEHAVIOUR,
-            FabricBlockSettings.create()
+            AbstractBlock.Settings.create()
                     .mapColor(MapColor.CYAN)
                     .breakInstantly()
                     .noCollision()
@@ -34,21 +33,21 @@ public class SBlocks {
                     .ticksRandomly()
     );
 
-    public static final Block ROOTED_NETHERRACK = new NetherrackBlock(FabricBlockSettings.copyOf(Blocks.NETHERRACK));
+    public static final Block ROOTED_NETHERRACK = new NetherrackBlock(AbstractBlock.Settings.copy(Blocks.NETHERRACK));
 
     public static final Block ROOTED_CRIMSON_NYLIUM = new RootedNyliumBlock(
             Blocks.CRIMSON_ROOTS,
-            FabricBlockSettings.copyOf(Blocks.CRIMSON_NYLIUM)
+            AbstractBlock.Settings.copy(Blocks.CRIMSON_NYLIUM)
     );
 
     public static final Block ROOTED_WARPED_NYLIUM = new RootedNyliumBlock(
             Blocks.WARPED_ROOTS,
-            FabricBlockSettings.copyOf(Blocks.WARPED_NYLIUM)
+            AbstractBlock.Settings.copy(Blocks.WARPED_NYLIUM)
     );
 
     public static final Block SAND_PILE = new SandPileBlock(
             0xDBD3A0,
-            FabricBlockSettings.copyOf(Blocks.SAND)
+            AbstractBlock.Settings.copy(Blocks.SAND)
                     .replaceable()
                     .notSolid()
                     .blockVision((state, world, pos) -> state.get(SnowBlock.LAYERS) >= SandPileBlock.MAX_LAYERS)
@@ -57,7 +56,7 @@ public class SBlocks {
 
     public static final Block RED_SAND_PILE = new SandPileBlock(
             0xA95821,
-            FabricBlockSettings.copyOf(Blocks.RED_SAND)
+            AbstractBlock.Settings.copy(Blocks.RED_SAND)
                     .replaceable()
                     .notSolid()
                     .blockVision((state, world, pos) -> state.get(SnowBlock.LAYERS) >= SandPileBlock.MAX_LAYERS)
@@ -67,13 +66,13 @@ public class SBlocks {
     public static final Block SAND_CAULDRON = new SandCauldronBlock(
             Sandstorms.SandstormType.REGULAR,
             SandCauldronBehaviours.SAND_CAULDRON_BEHAVIOUR,
-            FabricBlockSettings.copyOf(Blocks.CAULDRON)
+            AbstractBlock.Settings.copy(Blocks.CAULDRON)
     );
 
     public static final Block RED_SAND_CAULDRON = new SandCauldronBlock(
             Sandstorms.SandstormType.RED,
             SandCauldronBehaviours.RED_SAND_CAULDRON_BEHAVIOUR,
-            FabricBlockSettings.copyOf(Blocks.CAULDRON)
+            AbstractBlock.Settings.copy(Blocks.CAULDRON)
     );
 
     public static void registerBlocks() {
