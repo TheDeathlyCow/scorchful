@@ -157,7 +157,7 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
 
         SeasonalBiomeTags tags = SeasonalBiomeTags.forSeason(season);
 
-        if (biome.isIn(tags.warm()) || biome.value().getTemperature() >= 0.95f) {
+        if (biome.isIn(tags.warm())) {
             int skylight = world.getLightLevel(LightType.SKY, pos);
             int skylightWithDarkness = skylight - world.getAmbientDarkness(); // adjusted with night and weather
 
