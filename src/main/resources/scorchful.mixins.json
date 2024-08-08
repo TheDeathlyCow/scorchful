@@ -10,6 +10,7 @@
         "MobEntityMixin",
         "PlayerEntityMixin",
         "PointOfInterestTypesMixin",
+        "TargetPredicateMixin",
         "accessor.BlockDisplayAccess",
         "accessor.ComponentMapBuilderAccessor",
         "compat.frostiful.absent.EntityMixin",
