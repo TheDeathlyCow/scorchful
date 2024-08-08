@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.client;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.config.ClientConfig;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -17,14 +18,19 @@ import org.ladysnake.satin.api.managed.ShaderEffectManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public final class ShaderStatusEffectManagers {
 
     private static final List<ShaderStatusEffectManager> TRACKED_MANAGERS = new ArrayList<>(2);
 
+    private static final ShaderStatusEffectManager HEAT_STROKE = createAndTrack(
+            Scorchful.id("shaders/post/heat_stroke.json"),
+            SStatusEffects.HEAT_STROKE,
+            ClientConfig::enableHeatStrokePostProcessing
+    );
+
     public static void initialize() {
-        create(Scorchful.id("shaders/post/heat_stroke.json"), SStatusEffects.HEAT_STROKE);
-//        create(Scorchful.id("shaders/post/fear.json"), SStatusEffects.FEAR);
         ShaderStatusEffectManagers.getTrackedManagers().forEach(manager -> {
             ShaderEffectRenderCallback.EVENT.register(manager);
             ClientPlayConnectionEvents.DISCONNECT.register(manager);
@@ -55,9 +61,17 @@ public final class ShaderStatusEffectManagers {
         ShaderStatusEffectManagers.getTrackedManagers().forEach(ShaderStatusEffectManager::onPlayerRespawn);
     }
 
-    public static ShaderStatusEffectManager create(Identifier shaderID, RegistryEntry<StatusEffect> potionEffect) {
+    public static ShaderStatusEffectManager createAndTrack(
+            Identifier shaderID,
+            RegistryEntry<StatusEffect> potionEffect,
+            Predicate<ClientConfig> enabledPredicate
+    ) {
         ManagedShaderEffect managedShaderEffect = ShaderEffectManager.getInstance().manage(shaderID);
-        var statusEffectShader = new ShaderStatusEffectManager(managedShaderEffect, potionEffect);
+        var statusEffectShader = new ShaderStatusEffectManager(
+                managedShaderEffect,
+                potionEffect,
+                enabledPredicate
+        );
         TRACKED_MANAGERS.add(statusEffectShader);
         return statusEffectShader;
     }
