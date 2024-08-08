@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.entity.effect;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -18,7 +19,7 @@ public class FearStatusEffect extends StatusEffect {
 
     public static double modifyDetectionDistance(LivingEntity target, double original) {
         return target.hasStatusEffect(SStatusEffects.FEAR)
-                ? 2.0 * original
+                ? Scorchful.getConfig().combatConfig.getFearDetectionRangeMultiplier() * original
                 : original;
     }
 
