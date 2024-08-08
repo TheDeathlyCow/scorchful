@@ -5,8 +5,8 @@
         "dstrgb": "one"
     },
     "vertex": "blit",
-    "fragment": "scorchful:periodic_blur",
-    "attributes": [ "Position" ],
+    "fragment": "scorchful:color_convolve_hsv",
+    "attributes": [  ],
     "samplers": [
         { "name": "DiffuseSampler" }
     ],
@@ -14,9 +14,6 @@
         { "name": "ProjMat",        "type": "matrix4x4", "count": 16,   "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
         { "name": "InSize",         "type": "float",     "count": 2,    "values": [ 1.0, 1.0 ] },
         { "name": "OutSize",        "type": "float",     "count": 2,    "values": [ 1.0, 1.0 ] },
-        { "name": "Time",           "type": "float",     "count": 1,    "values": [ 0.0 ] },
-        { "name": "Frequency",      "type": "float",     "count": 1,    "values": [ 1.0 ] },
-        { "name": "BlurRadius",     "type": "float",     "count": 1,    "values": [ 2.0 ] },
-        { "name": "BlurDirection",  "type": "float",     "count": 2,    "values": [ 1.0, 0.0 ] }
+        { "name": "ColorScaleHSV",  "type": "float",     "count": 3,    "values": [ 1.0, 0.5, 0.5 ] }
     ]
 }

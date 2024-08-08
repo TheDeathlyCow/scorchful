@@ -30,6 +30,12 @@ public final class ShaderStatusEffectManagers {
             ClientConfig::enableHeatStrokePostProcessing
     );
 
+    private static final ShaderStatusEffectManager FEAR = createAndTrack(
+            Scorchful.id("shaders/post/fear.json"),
+            SStatusEffects.FEAR,
+            ClientConfig::enableHeatStrokePostProcessing
+    );
+
     public static void initialize() {
         ShaderStatusEffectManagers.getTrackedManagers().forEach(manager -> {
             ShaderEffectRenderCallback.EVENT.register(manager);
