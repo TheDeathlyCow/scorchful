@@ -4,18 +4,19 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.WeatherConfig;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.UUID;
-
 public class SandstormSlowing {
 
-    private static final Identifier ATTRIBUTE_ID = Scorchful.id("sandstorm_slowing");
+    private static final Identifier SPEED_MODIFIER_ID = Scorchful.id("sandstorm_slowing");
+    private static final Identifier FOLLOW_RANGE_MODIFIER_ID = Scorchful.id("sandstorm_reduced_visibility");
 
     public static boolean tickSandstormSlow(LivingEntity entity, boolean wasInSandstorm) {
 
@@ -32,7 +33,7 @@ public class SandstormSlowing {
 
         if (Sandstorms.getCurrentSandStorm(world, pos) == Sandstorms.SandstormType.NONE) {
             if (wasInSandstorm) {
-                removeSlow(entity);
+                removeModifiers(entity);
             }
             return false;
         }
@@ -44,27 +45,56 @@ public class SandstormSlowing {
         return true;
     }
 
-    private static void removeSlow(LivingEntity entity) {
-        EntityAttributeInstance instance = entity.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
-        if (instance != null && instance.getModifier(ATTRIBUTE_ID) != null) {
-            instance.removeModifier(ATTRIBUTE_ID);
-        }
+    private static void removeModifiers(LivingEntity entity) {
+        removeModifier(entity, EntityAttributes.GENERIC_MOVEMENT_SPEED, SPEED_MODIFIER_ID);
+        removeModifier(entity, EntityAttributes.GENERIC_FOLLOW_RANGE, FOLLOW_RANGE_MODIFIER_ID);
     }
 
     private static void addSlow(LivingEntity entity) {
-        EntityAttributeInstance instance = entity.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+        WeatherConfig config = Scorchful.getConfig().weatherConfig;
+        addModifier(
+                entity,
+                EntityAttributes.GENERIC_MOVEMENT_SPEED,
+                SPEED_MODIFIER_ID,
+                config.getSandstormSlownessAmountPercent(),
+                EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+        );
+        addModifier(
+                entity,
+                EntityAttributes.GENERIC_FOLLOW_RANGE,
+                FOLLOW_RANGE_MODIFIER_ID,
+                config.getSandstormFollowRangeReductionPercent(),
+                EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+        );
+    }
+
+    private static void addModifier(
+            LivingEntity entity,
+            RegistryEntry<EntityAttribute> attribute,
+            Identifier modifierID,
+            double value,
+            EntityAttributeModifier.Operation operation
+    ) {
+        EntityAttributeInstance instance = entity.getAttributeInstance(attribute);
         if (instance != null) {
-
-            WeatherConfig config = Scorchful.getConfig().weatherConfig;
-            double value = config.getSandstormSlownessAmountPercent();
-
             instance.addTemporaryModifier(
                     new EntityAttributeModifier(
-                            ATTRIBUTE_ID,
+                            modifierID,
                             value,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                            operation
                     )
             );
+        }
+    }
+
+    private static void removeModifier(
+            LivingEntity entity,
+            RegistryEntry<EntityAttribute> attribute,
+            Identifier modifierID
+    ) {
+        EntityAttributeInstance instance = entity.getAttributeInstance(attribute);
+        if (instance != null && instance.getModifier(modifierID) != null) {
+            instance.removeModifier(modifierID);
         }
     }
 
