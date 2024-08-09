@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.registry;
 
+import com.github.thedeathlycow.scorchful.particle.BatParticle;
 import com.github.thedeathlycow.scorchful.particle.DustGrainParticle;
 import com.github.thedeathlycow.scorchful.particle.SpurtingWaterParticle;
 import net.fabricmc.api.EnvType;
@@ -13,6 +14,7 @@ public class SParticleFactories {
         ParticleFactoryRegistry instance = ParticleFactoryRegistry.getInstance();
         instance.register(SParticleTypes.SPURTING_WATER, SpurtingWaterParticle.Factory::new);
         instance.register(SParticleTypes.DUST_GRAIN, DustGrainParticle.Factory::new);
+        instance.register(SParticleTypes.BAT, BatParticle.Factory::new);
     }
 
     private SParticleFactories() {
