@@ -21,6 +21,10 @@
     "item.scorchful.tooltip.hydrating": "Hydrating \uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
     "item.scorchful.tooltip.parching": "Parching ☀",
     
+    "item.minecraft.potion.effect.scorchful.paranoia": "Potion of Paranoia",
+    "item.minecraft.splash_potion.effect.scorchful.paranoia": "Splash Potion of Paranoia",
+    "item.minecraft.lingering_potion.effect.scorchful.paranoia": "Lingering Potion of Paranoia",
+    "item.minecraft.tipped_arrow.effect.scorchful.paranoia": "Arrow of Paranoia",
     
     "tag.item.scorchful.is_hydrating": "Hydrating Food and Drink",
     "tag.item.scorchful.is_parching": "Parching Food and Drink",
