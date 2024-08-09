@@ -21,6 +21,10 @@
     "item.scorchful.tooltip.hydrating": "Hydrating \uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
     "item.scorchful.tooltip.parching": "Parching ☀",
     
+    "item.minecraft.potion.effect.scorchful.paranoia": "Potion of Paranoia",
+    "item.minecraft.splash_potion.effect.scorchful.paranoia": "Splash Potion of Paranoia",
+    "item.minecraft.lingering_potion.effect.scorchful.paranoia": "Lingering Potion of Paranoia",
+    "item.minecraft.tipped_arrow.effect.scorchful.paranoia": "Arrow of Paranoia",
     
     "tag.item.scorchful.is_hydrating": "Hydrating Food and Drink",
     "tag.item.scorchful.is_parching": "Parching Food and Drink",
@@ -50,6 +54,7 @@
     
 
     "effect.scorchful.heat_stroke": "Heat Stroke",
+    "effect.scorchful.fear": "Fear",
     
 
     "death.attack.scorchful.heat": "%1$s couldn't handle the heat",
@@ -60,6 +65,8 @@
     "advancement.scorchful.adventure.drink_cactus_juice.description": "Drink a Bottle of Cactus Juice",
     "advancements.scorchful.husbandry.obtain_turtle_armor.title": "Duck and Cover",
     "advancements.scorchful.husbandry.obtain_turtle_armor.description": "Obtain a piece of Turtle Armor",
+    "advancements.scorchful.adventure.shoot_paranoia_arrow.title": "The Mind Killer",
+    "advancements.scorchful.adventure.shoot_paranoia_arrow.description": "Be struck with Fear",
     
     "subtitles.item.scorchful.water_skin.fill": "Waterskin fills",
     "subtitles.temperature_effect.scorchful.heartbeat": "Heart beats",
@@ -79,6 +86,8 @@
     "text.autoconfig.scorchful.option.clientConfig.enableSoundTemperatureEffects": "Enable sound temperature effects",
     "text.autoconfig.scorchful.option.clientConfig.enableHeatStrokePostProcessing": "Enable heat stroke post processing",
     "text.autoconfig.scorchful.option.clientConfig.enableHeatStrokePostProcessing.@Tooltip": "Enables effects like blur and wavey-ness from the Heat Stroke status effect. May increase lag without a dedicated GPU.",
+    "text.autoconfig.scorchful.option.clientConfig.enableFearPostProcessing": "Enable fear post processing",
+    "text.autoconfig.scorchful.option.clientConfig.enableFearPostProcessing.@Tooltip": "Enables the screen darkening and desaturation from the Fear status effect. May increase lag without a dedicated GPU.",
     "text.autoconfig.scorchful.option.clientConfig.sunHatShadeOpacity": "Sun Hat shade opacity",
     "text.autoconfig.scorchful.option.clientConfig.enableSandstormParticles": "Enable sandstorm particles",
     "text.autoconfig.scorchful.option.clientConfig.enableSandstormFog": "Enable sandstorm fog",
@@ -132,11 +141,13 @@
     "text.autoconfig.scorchful.option.combatConfig.veryHarmfulArmorHeatResistance": "Very warm armor piece heat resistance",
     "text.autoconfig.scorchful.option.combatConfig.protectiveArmorHeatResistance": "Thermally protective armor piece heat resistance",
     "text.autoconfig.scorchful.option.combatConfig.veryProtectiveArmorHeatResistance": "Very thermally protective armor piece heat resistance",
+    "text.autoconfig.scorchful.option.combatConfig.fearDetectionRangeMultiplier": "Fear detection range multiplier",
     
     "text.autoconfig.scorchful.option.weatherConfig": "Weather Config",
     "text.autoconfig.scorchful.option.weatherConfig.doSandPileAccumulation": "Do Sand Pile accumulation",
     "text.autoconfig.scorchful.option.weatherConfig.sandPileAccumulationHeight": "Sand Pile accumulation height",
     "text.autoconfig.scorchful.option.weatherConfig.sandstormSlownessAmountPercent": "Sandstorm Slowness amount (percent from -1 to +1)",
+    "text.autoconfig.scorchful.option.weatherConfig.sandstormFollowRangeReductionPercent": "Sandstorm Follow Range reduction amount (percent from -1 to +1)",
     
     "text.autoconfig.scorchful.option.integrationConfig": "Mod Integration Config",
     "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig": "Dehydration Config",

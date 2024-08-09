@@ -1,8 +1,8 @@
 package com.github.thedeathlycow.scorchful;
 
-import com.github.thedeathlycow.scorchful.client.HeatStrokeShaderEffect;
 import com.github.thedeathlycow.scorchful.client.SandstormEffects;
 import com.github.thedeathlycow.scorchful.client.SandstormSounds;
+import com.github.thedeathlycow.scorchful.client.ShaderStatusEffectManagers;
 import com.github.thedeathlycow.scorchful.hud.BurningHeartsOverlay;
 import com.github.thedeathlycow.scorchful.hud.MountHealthOverlay;
 import com.github.thedeathlycow.scorchful.hud.SoakingUnderlay;
@@ -48,7 +48,7 @@ public class ScorchfulClient implements ClientModInitializer {
                 new SoundTemperatureEffectPacketListener()
         );
 
-        HeatStrokeShaderEffect.INSTANCE.initialize();
+        ShaderStatusEffectManagers.initialize();
     }
 
 }

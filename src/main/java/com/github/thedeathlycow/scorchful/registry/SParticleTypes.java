@@ -5,6 +5,7 @@ import com.github.thedeathlycow.scorchful.particle.DustGrainParticleEffect;
 import com.github.thedeathlycow.scorchful.particle.SpurtingWaterParticleEffect;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.particle.ParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
@@ -20,9 +21,12 @@ public class SParticleTypes {
             DustGrainParticleEffect.PACKET_CODEC
     );
 
+    public static final SimpleParticleType BAT = FabricParticleTypes.simple();
+
     public static void registerAll() {
         register("spurting_water", SPURTING_WATER);
         register("dust_grain", DUST_GRAIN);
+        register("bat", BAT);
     }
 
     private static void register(String name, ParticleType<?> particle) {

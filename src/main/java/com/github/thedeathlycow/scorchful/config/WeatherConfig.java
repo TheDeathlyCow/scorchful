@@ -13,6 +13,8 @@ public class WeatherConfig implements ConfigData {
 
     double sandstormSlownessAmountPercent = -0.3;
 
+    double sandstormFollowRangeReductionPercent = -0.5;
+
     public boolean isSandPileAccumulationEnabled() {
         return doSandPileAccumulation;
     }
@@ -23,5 +25,9 @@ public class WeatherConfig implements ConfigData {
 
     public double getSandstormSlownessAmountPercent() {
         return sandstormSlownessAmountPercent;
+    }
+
+    public double getSandstormFollowRangeReductionPercent() {
+        return sandstormFollowRangeReductionPercent;
     }
 }

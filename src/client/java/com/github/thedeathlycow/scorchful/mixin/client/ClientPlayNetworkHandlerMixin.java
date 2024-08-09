@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.mixin.client;
 
-import com.github.thedeathlycow.scorchful.client.HeatStrokeShaderEffect;
+import com.github.thedeathlycow.scorchful.client.ShaderStatusEffectManagers;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientCommonNetworkHandler;
 import net.minecraft.client.network.ClientConnectionState;
@@ -32,7 +32,7 @@ public abstract class ClientPlayNetworkHandlerMixin extends ClientCommonNetworkH
             at = @At("TAIL")
     )
     private void onEffectAdded(EntityStatusEffectS2CPacket packet, CallbackInfo ci) {
-        HeatStrokeShaderEffect.INSTANCE.onEffectAdded(packet, this.world, this.client);
+        ShaderStatusEffectManagers.onEffectAdded(packet, this.world);
     }
 
     @Inject(
@@ -40,7 +40,7 @@ public abstract class ClientPlayNetworkHandlerMixin extends ClientCommonNetworkH
             at = @At("TAIL")
     )
     private void onEffectRemoved(RemoveEntityStatusEffectS2CPacket packet, CallbackInfo ci) {
-        HeatStrokeShaderEffect.INSTANCE.onEffectRemoved(packet, this.world, this.client);
+        ShaderStatusEffectManagers.onEffectRemoved(packet, this.world);
     }
 
     @Inject(
@@ -48,7 +48,7 @@ public abstract class ClientPlayNetworkHandlerMixin extends ClientCommonNetworkH
             at = @At("TAIL")
     )
     private void onPlayerRespawn(PlayerRespawnS2CPacket packet, CallbackInfo ci) {
-        HeatStrokeShaderEffect.INSTANCE.onPlayerRespawn(packet, this.world, this.client);
+        ShaderStatusEffectManagers.onPlayerRespawn();
     }
 
 }

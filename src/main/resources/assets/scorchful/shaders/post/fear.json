@@ -1,0 +1,17 @@
+{
+    "targets": [
+        "swap"
+    ],
+    "passes": [
+        {
+            "intarget": "minecraft:main",
+            "outtarget": "swap",
+            "name": "scorchful:fear_color_convolve"
+        },
+        {
+            "intarget": "swap",
+            "outtarget": "minecraft:main",
+            "name": "blit"
+        }
+    ]
+}

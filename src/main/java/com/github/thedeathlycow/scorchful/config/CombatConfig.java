@@ -5,6 +5,7 @@ import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
+import net.minecraft.util.math.MathHelper;
 
 @Config(name = Scorchful.MODID + ".combat_config")
 public class CombatConfig implements ConfigData {
@@ -25,6 +26,8 @@ public class CombatConfig implements ConfigData {
 
     @ConfigEntry.Gui.RequiresRestart
     double veryProtectiveArmorHeatResistance = 1.0;
+
+    double fearDetectionRangeMultiplier = 2.0;
 
     public FireChargeThrower.FireballFactory getFireBallThrownType() {
         return fireBallThrownType;
@@ -48,5 +51,15 @@ public class CombatConfig implements ConfigData {
 
     public double getVeryProtectiveArmorHeatResistance() {
         return veryProtectiveArmorHeatResistance;
+    }
+
+    public double getFearDetectionRangeMultiplier() {
+        return fearDetectionRangeMultiplier;
+    }
+
+    @Override
+    public void validatePostLoad() throws ValidationException {
+        ConfigData.super.validatePostLoad();
+        this.fearDetectionRangeMultiplier = MathHelper.clamp(fearDetectionRangeMultiplier, 0, 128);
     }
 }

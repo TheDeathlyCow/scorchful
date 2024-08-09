@@ -4,7 +4,7 @@
         "srcrgb": "one",
         "dstrgb": "one"
     },
-    "vertex": "sobel",
+    "vertex": "blit",
     "fragment": "scorchful:wobble",
     "attributes": [ "Position" ],
     "samplers": [
