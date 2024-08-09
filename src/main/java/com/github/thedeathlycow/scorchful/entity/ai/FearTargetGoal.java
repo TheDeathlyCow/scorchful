@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.entity.ai;
 
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
+import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.NoPenaltyTargeting;
 import net.minecraft.entity.ai.goal.Goal;

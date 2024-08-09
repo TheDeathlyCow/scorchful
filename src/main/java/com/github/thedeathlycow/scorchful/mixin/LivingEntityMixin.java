@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.util.profiler.Profiler;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -69,6 +70,17 @@ public abstract class LivingEntityMixin extends Entity {
     )
     private double extendMobDetectionWhenFeared(double original) {
         return FearStatusEffect.modifyDetectionDistance((LivingEntity) (Object) this, original);
+    }
+
+    @Inject(
+            method = "canHaveStatusEffect",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    private void blockFear(StatusEffectInstance effect, CallbackInfoReturnable<Boolean> cir) {
+        if (!FearStatusEffect.canHaveFear((LivingEntity) (Object) this, effect)) {
+            cir.setReturnValue(false);
+        }
     }
 
 }
