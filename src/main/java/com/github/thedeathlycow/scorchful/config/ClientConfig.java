@@ -19,6 +19,9 @@ public class ClientConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip
     boolean enableHeatStrokePostProcessing = true;
 
+    @ConfigEntry.Gui.Tooltip
+    boolean enableFearPostProcessing = true;
+
     float sunHatShadeOpacity = 0.2f;
 
     boolean enableSandstormParticles = true;
@@ -52,6 +55,10 @@ public class ClientConfig implements ConfigData {
 
     public boolean enableHeatStrokePostProcessing() {
         return enableHeatStrokePostProcessing;
+    }
+
+    public boolean enableFearPostProcessing() {
+        return enableFearPostProcessing;
     }
 
     public boolean doBurningHeartOverlay() {

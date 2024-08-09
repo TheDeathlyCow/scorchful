@@ -33,7 +33,7 @@ public final class ShaderStatusEffectManagers {
     private static final ShaderStatusEffectManager FEAR = createAndTrack(
             Scorchful.id("shaders/post/fear.json"),
             SStatusEffects.FEAR,
-            ClientConfig::enableHeatStrokePostProcessing
+            ClientConfig::enableFearPostProcessing
     );
 
     public static void initialize() {
