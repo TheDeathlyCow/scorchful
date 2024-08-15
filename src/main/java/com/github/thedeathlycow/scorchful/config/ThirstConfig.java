@@ -27,7 +27,7 @@ public class ThirstConfig implements ConfigData {
 
     int onFireDryDate = 3;
 
-    float humidBiomeSweatEfficiency = 1f / 6f;
+    float humidBiomeSweatEfficiency = 1f / 3f;
 
     float maxRehydrationEfficiency = 0.75f;
 

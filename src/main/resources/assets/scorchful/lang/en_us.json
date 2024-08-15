@@ -157,6 +157,8 @@
     "text.autoconfig.scorchful.option.integrationConfig.seasonsConfig": "Seasons Config",
     "text.autoconfig.scorchful.option.integrationConfig.seasonsConfig.@Tooltip": "Requires Fabric Seasons or Serene Seasons AND Thermoo Patches",
     "text.autoconfig.scorchful.option.integrationConfig.seasonsConfig.enableSeasonsIntegration": "Enable seasons integration",
+    "text.autoconfig.scorchful.option.integrationConfig.seasonsConfig.wetSeasonHumidBiomeSweatEfficiency": "Wet Season humid biome sweat efficiency",
+    "text.autoconfig.scorchful.option.integrationConfig.seasonsConfig.drySeasonHumidBiomeSweatEfficiency": "Dry Season humid biome sweat efficiency",
     
     "text.autoconfig.scorchful.option.updateConfig": "Update Config",
     "text.autoconfig.scorchful.option.updateConfig.currentConfigVersion": "Current config version",
