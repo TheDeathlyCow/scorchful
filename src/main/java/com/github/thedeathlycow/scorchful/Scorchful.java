@@ -102,7 +102,7 @@ public class Scorchful implements ModInitializer {
 
                     int tickInterval = config.heatingConfig.getPassiveHeatingTickInterval();
                     if (tickInterval > 1 && player.age % tickInterval != 0) {
-                        return TriState.FALSE;
+                        return false;
                     }
 
                     if (!config.heatingConfig.doPassiveHeating()) {
