@@ -12,6 +12,8 @@ public class ClientConfig implements ConfigData {
 
     boolean doBurningHeartOverlay = true;
 
+    boolean doSoakingOverlay = true;
+
     boolean doSunHatShading = true;
 
     boolean enableSoundTemperatureEffects = true;
@@ -69,6 +71,10 @@ public class ClientConfig implements ConfigData {
 
     public boolean doBurningHeartOverlay() {
         return doBurningHeartOverlay;
+    }
+
+    public boolean doSoakingOverlay() {
+        return doSoakingOverlay;
     }
 
     public boolean isSandstormParticlesEnabled() {
