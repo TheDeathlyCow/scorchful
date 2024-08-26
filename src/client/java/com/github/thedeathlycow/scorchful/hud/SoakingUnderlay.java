@@ -26,7 +26,7 @@ public final class SoakingUnderlay implements StatusBarOverlayRenderEvents.Rende
             Vector2i[] heartPositions,
             int displayHealth, int maxDisplayHealth
     ) {
-        if (!player.thermoo$isWet()) {
+        if (!Scorchful.getConfig().clientConfig.doSoakingOverlay() || !player.thermoo$isWet()) {
             return;
         }
 

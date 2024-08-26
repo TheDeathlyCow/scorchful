@@ -62,6 +62,7 @@
     
     "text.autoconfig.scorchful.option.clientConfig": "Client Config",
     "text.autoconfig.scorchful.option.clientConfig.doBurningHeartOverlay": "Do burning heart overlay",
+    "text.autoconfig.scorchful.option.clientConfig.doSoakingOverlay": "Do soaking overlay",
     "text.autoconfig.scorchful.option.clientConfig.doSunHatShading": "Do Sun Hat shading",
     "text.autoconfig.scorchful.option.clientConfig.enableSoundTemperatureEffects": "Enable sound temperature effects",
     "text.autoconfig.scorchful.option.clientConfig.enableWetDripParticles": "Enable drip particles when wet",
