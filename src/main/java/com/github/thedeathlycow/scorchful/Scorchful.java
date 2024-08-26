@@ -17,6 +17,7 @@ import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentControllerInitializeEvent;
 import com.github.thedeathlycow.thermoo.api.temperature.event.PlayerEnvironmentEvents;
 import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -36,6 +37,8 @@ public class Scorchful implements ModInitializer {
 
     public static final int CONFIG_VERSION = 4;
 
+    private static ConfigHolder<ScorchfulConfig> configHolder;
+
     @Contract("_->new")
     public static Identifier id(String path) {
         return new Identifier(MODID, path);
@@ -44,7 +47,8 @@ public class Scorchful implements ModInitializer {
     @Override
     public void onInitialize() {
         AutoConfig.register(ScorchfulConfig.class, GsonConfigSerializer::new);
-        ScorchfulConfig.updateConfig(AutoConfig.getConfigHolder(ScorchfulConfig.class));
+        configHolder = AutoConfig.getConfigHolder(ScorchfulConfig.class);
+        ScorchfulConfig.updateConfig(configHolder);
 
         SBlocks.registerBlocks();
         SItems.registerItems();
@@ -87,7 +91,7 @@ public class Scorchful implements ModInitializer {
     }
 
     public static ScorchfulConfig getConfig() {
-        return AutoConfig.getConfigHolder(ScorchfulConfig.class).getConfig();
+        return configHolder.getConfig();
     }
 
 
