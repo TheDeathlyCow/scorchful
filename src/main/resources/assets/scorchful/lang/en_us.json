@@ -84,6 +84,7 @@
     "text.autoconfig.scorchful.option.clientConfig.doBurningHeartOverlay": "Do burning heart overlay",
     "text.autoconfig.scorchful.option.clientConfig.doSunHatShading": "Do Sun Hat shading",
     "text.autoconfig.scorchful.option.clientConfig.enableSoundTemperatureEffects": "Enable sound temperature effects",
+    "text.autoconfig.scorchful.option.clientConfig.enableWetDripParticles": "Enable drip particles when wet",
     "text.autoconfig.scorchful.option.clientConfig.enableHeatStrokePostProcessing": "Enable heat stroke post processing",
     "text.autoconfig.scorchful.option.clientConfig.enableHeatStrokePostProcessing.@Tooltip": "Enables effects like blur and wavey-ness from the Heat Stroke status effect. May increase lag without a dedicated GPU.",
     "text.autoconfig.scorchful.option.clientConfig.enableFearPostProcessing": "Enable fear post processing",
