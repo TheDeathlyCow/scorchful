@@ -15,6 +15,8 @@ public class ClientConfig implements ConfigData {
 
     boolean enableSoundTemperatureEffects = true;
 
+    boolean enableWetDripParticles = true;
+
     @ConfigEntry.Gui.Tooltip
     boolean enableHeatStrokePostProcessing = true;
 
@@ -47,6 +49,10 @@ public class ClientConfig implements ConfigData {
 
     public boolean enableSoundTemperatureEffects() {
         return enableSoundTemperatureEffects;
+    }
+
+    public boolean enableWetDripParticles() {
+        return enableWetDripParticles;
     }
 
     public boolean enableHeatStrokePostProcessing() {
