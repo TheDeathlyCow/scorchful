@@ -10,6 +10,7 @@ import com.github.thedeathlycow.scorchful.item.HeatResistanceHelper;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.item.loot.TurtleScuteLootTableModifier;
 import com.github.thedeathlycow.scorchful.registry.*;
+import com.github.thedeathlycow.scorchful.registry.tag.SDamageTypeTags;
 import com.github.thedeathlycow.scorchful.server.ThirstCommand;
 import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
 import com.github.thedeathlycow.scorchful.temperature.AmbientTemperatureController;
@@ -25,6 +26,7 @@ import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
@@ -86,9 +88,9 @@ public class Scorchful implements ModInitializer {
         ArmorMaterialEvents.GET_HEAT_RESISTANCE.register(HeatResistanceHelper::getHeatResistance);
 
         // custom scorchful event
-        ScorchfulLivingEntityEvents.ON_DAMAGED.register(
-                (entity, source, amount) -> {
-                    if (source.isOf(DamageTypes.FIREBALL) || source.isOf(DamageTypes.UNATTRIBUTED_FIREBALL)) {
+        ServerLivingEntityEvents.AFTER_DAMAGE.register(
+                (entity, source, baseDamageTaken, damageTaken, blocked) -> {
+                    if (!blocked && source.isIn(SDamageTypeTags.FIREBALL)) {
                         entity.thermoo$addTemperature(
                                 Scorchful.getConfig().heatingConfig.getFireballHeat(),
                                 HeatingModes.ACTIVE
