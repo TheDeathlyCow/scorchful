@@ -6,6 +6,8 @@ import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -17,7 +19,7 @@ public class FearStatusEffect extends StatusEffect {
     }
 
     public static boolean canHaveFear(LivingEntity entity) {
-        if (entity.getType().isIn(SEntityTypeTags.IMMUNE_TO_FEAR) || entity.hasStatusEffect(SStatusEffects.MESMERIZED)) {
+        if (entity.getType().isIn(SEntityTypeTags.IMMUNE_TO_FEAR)) {
             return false;
         } else {
             return entity.isPlayer() || entity instanceof PathAwareEntity;
@@ -33,6 +35,13 @@ public class FearStatusEffect extends StatusEffect {
         return target.hasStatusEffect(SStatusEffects.FEAR)
                 ? Scorchful.getConfig().combatConfig.getFearDetectionRangeMultiplier() * original
                 : original;
+    }
+
+    public static void onMesmerizedProc(LivingEntity mesmerized, LivingEntity mesmerizing) {
+        mesmerized.addStatusEffect(new StatusEffectInstance(SStatusEffects.FEAR, 60), mesmerizing);
+        DamageSource source = mesmerized.getWorld().getDamageSources()
+                        .mobAttack(mesmerizing);
+        mesmerized.damage(source, 10);
     }
 
 }

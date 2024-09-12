@@ -13,17 +13,17 @@ public class MesmerizedComponent implements Component, ServerTickingComponent {
 
     private final LivingEntity provider;
 
-    private Entity mesmerizedTarget;
+    private LivingEntity mesmerizedTarget;
 
     public MesmerizedComponent(LivingEntity provider) {
         this.provider = provider;
     }
 
-    public Entity getMesmerizedTarget() {
+    public LivingEntity getMesmerizedTarget() {
         return mesmerizedTarget;
     }
 
-    public void setMesmerizedTarget(Entity mesmerizedTarget) {
+    public void setMesmerizedTarget(LivingEntity mesmerizedTarget) {
         this.mesmerizedTarget = mesmerizedTarget;
     }
 

@@ -28,7 +28,7 @@ public class SStatusEffects {
     );
 
     public static void initialize() {
-        // loads the class
+        MesmerizedStatusEffect.ON_APPROACHED_MESMER_TARGET.register(FearStatusEffect::onMesmerizedProc);
     }
 
     private static RegistryEntry<StatusEffect> register(String name, StatusEffect statusEffect) {

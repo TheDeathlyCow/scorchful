@@ -12,7 +12,6 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.predicate.entity.EntityPredicates;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import java.util.function.Predicate;
@@ -22,7 +21,7 @@ public class MesmerizedStatusEffect extends StatusEffect {
     public static final Predicate<Entity> IS_VALID_TARGET = EntityPredicates.EXCEPT_SPECTATOR
             .and(Entity::isPlayer);
 
-    public static final Event<OnApproachedMesmerTarget> ON_APPROACHED_MESMER_TARGET_EVENT = EventFactory.createArrayBacked(
+    public static final Event<OnApproachedMesmerTarget> ON_APPROACHED_MESMER_TARGET = EventFactory.createArrayBacked(
             OnApproachedMesmerTarget.class,
             listeners -> (mesmerized, mesmerizing) -> {
                 for (OnApproachedMesmerTarget listener : listeners) {
@@ -50,7 +49,7 @@ public class MesmerizedStatusEffect extends StatusEffect {
             Vec3d targetPos = component.getMesmerizedTarget().getPos();
             Vec3d entityPos = entity.getPos();
             if (entityPos.isInRange(targetPos, 2)) {
-                ON_APPROACHED_MESMER_TARGET_EVENT.invoker().onApproach(entity, component.getMesmerizedTarget());
+                ON_APPROACHED_MESMER_TARGET.invoker().onApproach(entity, component.getMesmerizedTarget());
                 return false;
             }
         }
@@ -64,6 +63,6 @@ public class MesmerizedStatusEffect extends StatusEffect {
 
     @FunctionalInterface
     public interface OnApproachedMesmerTarget {
-        void onApproach(LivingEntity mesmerized, Entity mesmerizing);
+        void onApproach(LivingEntity mesmerized, LivingEntity mesmerizing);
     }
 }

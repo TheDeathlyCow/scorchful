@@ -5,6 +5,7 @@ import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.entity.effect.MesmerizedStatusEffect;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.pathing.Path;
 import net.minecraft.entity.mob.PathAwareEntity;
@@ -61,10 +62,11 @@ public class MesmerizedTargetGoal extends Goal {
 
     private void acquireTargetIfNeeded(MesmerizedComponent component) {
         if (!component.hasMesmerizedTarget()) {
-            List<Entity> nearby = this.mob.getWorld().getOtherEntities(
-                    this.mob,
+            List<LivingEntity> nearby = this.mob.getWorld().getEntitiesByClass(
+                    LivingEntity.class,
                     this.mob.getBoundingBox().expand(8),
                     MesmerizedStatusEffect.IS_VALID_TARGET
+                            .and(entity -> entity != this.mob)
             );
             if (!nearby.isEmpty()) {
                 component.setMesmerizedTarget(nearby.getFirst());
