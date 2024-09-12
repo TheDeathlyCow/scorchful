@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import org.ladysnake.cca.api.v3.component.ComponentKey;
@@ -40,12 +41,7 @@ public class ScorchfulComponents implements EntityComponentInitializer {
                 EntityDesertVisionComponent::new
         );
         registry.registerFor(
-                PathAwareEntity.class,
-                MESMERIZED,
-                MesmerizedComponent::new
-        );
-        registry.registerFor(
-                PlayerEntity.class,
+                LivingEntity.class,
                 MESMERIZED,
                 MesmerizedComponent::new
         );
