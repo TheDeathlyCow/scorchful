@@ -21,6 +21,10 @@
   "item.scorchful.tooltip.hydrating": "Cung Cấp Nước \uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
   "item.scorchful.tooltip.parching": "Khô Khát ☀",
 
+  "item.minecraft.potion.effect.scorchful.paranoia": "Thuốc Hoang Tưởng",
+  "item.minecraft.splash_potion.effect.scorchful.paranoia": "Thuốc Hoang Tưởng có thế ném được",
+  "item.minecraft.lingering_potion.effect.scorchful.paranoia": "Thuốc Hoang Tưởng kéo dài",
+  "item.minecraft.tipped_arrow.effect.scorchful.paranoia": "Mũi Tên Hoang Tưởng",
 
   "tag.item.scorchful.is_hydrating": "Thực Phẩm Và Đồ Uống Cấp Nước",
   "tag.item.scorchful.is_parching": "Thực Phẩm Và Đồ Uống Gây Khát",
@@ -37,8 +41,8 @@
   "block.scorchful.crimson_lily": "Hoa Huệ Đỏ Thẫm",
   "block.scorchful.warped_lily": "Hoa Huệ Kỳ Dị",
   "block.scorchful.rooted_netherrack": "Netherrack Có Rễ",
-  "block.scorchful.rooted_crimson_nylium": "Nylium Đỏ Thẫm Có Rễ",
-  "block.scorchful.rooted_warped_nylium": "Nylium Kỳ Dị Có Rễ",
+  "block.scorchful.rooted_crimson_nylium": "Khuẩn dị thể Đỏ Thẫm Có Rễ",
+  "block.scorchful.rooted_warped_nylium": "Khuẩn dị thể Kỳ Dị Có Rễ",
   "block.scorchful.sand_pile": "Đống Cát",
   "block.scorchful.red_sand_pile": "Đống Cát Đỏ",
   "block.scorchful.sand_cauldron": "Vạc Cát",
@@ -50,6 +54,7 @@
 
 
   "effect.scorchful.heat_stroke": "Sốc Nhiệt",
+  "effect.scorchful.fear": "Sợ Hãi",
 
 
   "death.attack.scorchful.heat": "%1$s không thể chịu nổi cái nóng",
@@ -60,6 +65,8 @@
   "advancement.scorchful.adventure.drink_cactus_juice.description": "Uống một bình nước ép xương rồng",
   "advancements.scorchful.husbandry.obtain_turtle_armor.title": "Che Chắn",
   "advancements.scorchful.husbandry.obtain_turtle_armor.description": "Nhận được một mảnh giáp rùa",
+  "advancements.scorchful.adventure.shoot_paranoia_arrow.title": "Kẻ Sát Nhân Tâm Trí",
+  "advancements.scorchful.adventure.shoot_paranoia_arrow.description": "Bị đánh trúng bởi Sợ Hãi",
 
   "subtitles.item.scorchful.water_skin.fill": "Đổ đầy bình nước da",
   "subtitles.temperature_effect.scorchful.heartbeat": "Tim đập",
@@ -75,10 +82,14 @@
 
   "text.autoconfig.scorchful.option.clientConfig": "Cấu hình máy khách",
   "text.autoconfig.scorchful.option.clientConfig.doBurningHeartOverlay": "Hiệu ứng trái tim cháy",
+  "text.autoconfig.scorchful.option.clientConfig.doSoakingOverlay": "Bật lớp phủ ngâm nước",
   "text.autoconfig.scorchful.option.clientConfig.doSunHatShading": "Hiệu ứng đổ bóng từ Mũ Chống Nắng",
   "text.autoconfig.scorchful.option.clientConfig.enableSoundTemperatureEffects": "Bật Hiệu Ứng Âm Thanh Nhiệt Độ",
+  "text.autoconfig.scorchful.option.clientConfig.enableWetDripParticles": "Bật hạt nước khi ướt",
   "text.autoconfig.scorchful.option.clientConfig.enableHeatStrokePostProcessing": "Bật xử lý hậu quả sốc nhiệt",
   "text.autoconfig.scorchful.option.clientConfig.enableHeatStrokePostProcessing.@Tooltip": "Bật các hiệu ứng như mờ và sóng từ trạng thái Sốc Nhiệt. Có thể gây lag nếu không có GPU chuyên dụng.",
+  "text.autoconfig.scorchful.option.clientConfig.enableFearPostProcessing": "Bật xử lý hậu cảnh trạng thái sợ hãi",
+  "text.autoconfig.scorchful.option.clientConfig.enableFearPostProcessing.@Tooltip": "Bật hiệu ứng tối và giảm màu trên màn hình từ hiệu ứng trạng thái Sợ Hãi. Có thể gây lag nếu không có GPU chuyên dụng.",
   "text.autoconfig.scorchful.option.clientConfig.sunHatShadeOpacity": "Độ mờ của bóng từ Mũ Chống Nắng",
   "text.autoconfig.scorchful.option.clientConfig.enableSandstormParticles": "Bật hiệu ứng hạt bão cát",
   "text.autoconfig.scorchful.option.clientConfig.enableSandstormFog": "Bật sương mù bão cát",
@@ -91,6 +102,7 @@
 
   "text.autoconfig.scorchful.option.heatingConfig": "Cấu hình nhiệt",
   "text.autoconfig.scorchful.option.heatingConfig.doPassiveHeating": "Bật nhiệt độ thụ động",
+  "text.autoconfig.scorchful.option.heatingConfig.passiveHeatingTickInterval": "Khoảng thời gian làm nóng thụ động",
   "text.autoconfig.scorchful.option.heatingConfig.maxPassiveHeatingScale": "Tỷ lệ nhiệt thụ động tối đa (0-1)",
   "text.autoconfig.scorchful.option.heatingConfig.enableTurtleArmorEffects": "Bật hiệu ứng của Giáp Rùa",
   "text.autoconfig.scorchful.option.heatingConfig.coolingFromIce": "Làm mát từ băng",
@@ -126,23 +138,30 @@
 
   "text.autoconfig.scorchful.option.combatConfig": "Cấu hình Chiến đấu",
   "text.autoconfig.scorchful.option.combatConfig.fireBallThrownType": "Loại Quả Cầu Lửa ném",
+  "text.autoconfig.scorchful.option.combatConfig.enableDesertVisions": "Bật Ảo Ảnh Sa Mạc",
   "text.autoconfig.scorchful.option.combatConfig.defaultArmorHeatResistance": "Khả năng chống nhiệt của giáp mặc định",
   "text.autoconfig.scorchful.option.combatConfig.veryHarmfulArmorHeatResistance": "Khả năng chống nhiệt của giáp rất nóng",
   "text.autoconfig.scorchful.option.combatConfig.protectiveArmorHeatResistance": "Khả năng chống nhiệt của giáp bảo vệ",
   "text.autoconfig.scorchful.option.combatConfig.veryProtectiveArmorHeatResistance": "Khả năng chống nhiệt của giáp bảo vệ rất cao",
+  "text.autoconfig.scorchful.option.combatConfig.fearDetectionRangeMultiplier": "Hệ số nhân phạm vi phát hiện sợ hãi",
 
   "text.autoconfig.scorchful.option.weatherConfig": "Cấu hình Thời tiết",
   "text.autoconfig.scorchful.option.weatherConfig.doSandPileAccumulation": "Bật tích lũy Đống Cát",
   "text.autoconfig.scorchful.option.weatherConfig.sandPileAccumulationHeight": "Chiều cao tích lũy Đống Cát",
   "text.autoconfig.scorchful.option.weatherConfig.sandstormSlownessAmountPercent": "Lượng Giảm tốc trong Bão cát (tỷ lệ phần trăm từ -1 đến +1)",
+  "text.autoconfig.scorchful.option.weatherConfig.sandstormFollowRangeReductionPercent": "Tỷ lệ giảm phạm vi theo dõi trong bão cát (phần trăm từ -1 đến +1)",
 
   "text.autoconfig.scorchful.option.integrationConfig": "Cấu hình Tích hợp Mod",
-
   "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig": "Cấu hình Mất nước",
   "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.@Tooltip": "Yêu cầu Mất nước để có hiệu lực",
   "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.minWaterLevelForSweat": "Mức nước tối thiểu cần thiết để đổ mồ hôi",
-  "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.maxRehydrationWaterAddedPerLevel": "Lượng nước tái cung cấp tối đa thêm vào mỗi cấp độ Tái cung cấp nước",
   
+  "text.autoconfig.scorchful.option.integrationConfig.seasonsConfig": "Cấu Hình Mùa",
+  "text.autoconfig.scorchful.option.integrationConfig.seasonsConfig.@Tooltip": "Yêu cầu Fabric Seasons hoặc Serene Seasons và Thermoo Patches",
+  "text.autoconfig.scorchful.option.integrationConfig.seasonsConfig.enableSeasonsIntegration": "Bật tích hợp mùa",
+  "text.autoconfig.scorchful.option.integrationConfig.seasonsConfig.wetSeasonHumidBiomeSweatEfficiency": "Hiệu suất đổ mồ hôi trong mùa ẩm",
+  "text.autoconfig.scorchful.option.integrationConfig.seasonsConfig.drySeasonHumidBiomeSweatEfficiency": "Hiệu suất đổ mồ hôi trong mùa khô",
+
   "text.autoconfig.scorchful.option.updateConfig": "Cấu hình Cập nhật",
   "text.autoconfig.scorchful.option.updateConfig.currentConfigVersion": "Phiên bản cấu hình hiện tại",
   "text.autoconfig.scorchful.option.updateConfig.enableConfigUpdates": "Bật cập nhật cấu hình tự động",
