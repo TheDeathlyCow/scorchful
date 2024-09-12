@@ -2,9 +2,9 @@ package com.github.thedeathlycow.scorchful.entity.ai;
 
 import com.github.thedeathlycow.scorchful.components.MesmerizedComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
+import com.github.thedeathlycow.scorchful.entity.effect.MesmerizedStatusEffect;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.ai.goal.FollowMobGoal;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.pathing.Path;
 import net.minecraft.entity.mob.PathAwareEntity;
@@ -60,29 +60,27 @@ public class MesmerizedTargetGoal extends Goal {
     }
 
     private void acquireTargetIfNeeded(MesmerizedComponent component) {
-        if (component.hasMesmerizedTarget()) {
-            return;
-        }
-        List<Entity> nearby = this.mob.getWorld().getOtherEntities(
-                this.mob,
-                this.mob.getBoundingBox().expand(8),
-                Entity::isPlayer
-        );
-        if (!nearby.isEmpty()) {
-            component.setMesmerizedTarget(nearby.getFirst());
+        if (!component.hasMesmerizedTarget()) {
+            List<Entity> nearby = this.mob.getWorld().getOtherEntities(
+                    this.mob,
+                    this.mob.getBoundingBox().expand(8),
+                    MesmerizedStatusEffect.IS_VALID_TARGET
+            );
+            if (!nearby.isEmpty()) {
+                component.setMesmerizedTarget(nearby.getFirst());
+            }
         }
     }
 
     private void updatePathIfNeeded(MesmerizedComponent component) {
-        if (!component.hasMesmerizedTarget()) {
-            return;
-        }
-        this.mob.getLookControl()
-                .lookAt(component.getMesmerizedTarget(), 10.0f, this.mob.getMaxLookPitchChange());
+        if (component.hasMesmerizedTarget()) {
+            this.mob.getLookControl()
+                    .lookAt(component.getMesmerizedTarget(), 10.0f, this.mob.getMaxLookPitchChange());
 
-        BlockPos mesmerTargetPos = component.getMesmerizedTarget().getBlockPos();
-        if (this.mesmerizedPath == null || !mesmerTargetPos.isWithinDistance(this.mesmerizedPath.getTarget(), 2)) {
-            this.updatePath();
+            BlockPos mesmerTargetPos = component.getMesmerizedTarget().getBlockPos();
+            if (this.mesmerizedPath == null || !mesmerTargetPos.isWithinDistance(this.mesmerizedPath.getTarget(), 2)) {
+                this.updatePath();
+            }
         }
     }
 }
