@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.mixin;
 
 import com.github.thedeathlycow.scorchful.entity.ai.FearTargetGoal;
+import com.github.thedeathlycow.scorchful.entity.ai.MesmerizedTargetGoal;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.GoalSelector;
@@ -34,6 +35,7 @@ public abstract class MobEntityMixin extends LivingEntity {
             MobEntity instance = (MobEntity) (Object) this;
             if (instance instanceof PathAwareEntity pathAware) {
                 this.goalSelector.add(1, new FearTargetGoal(pathAware));
+                this.goalSelector.add(1, new MesmerizedTargetGoal(pathAware));
             }
         }
     }
