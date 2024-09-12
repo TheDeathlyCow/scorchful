@@ -16,16 +16,12 @@ public class FearStatusEffect extends StatusEffect {
         super(category, color, SParticleTypes.BAT);
     }
 
-    public static boolean canHaveFear(LivingEntity entity, StatusEffectInstance effectInstance) {
-        if (effectInstance.equals(SStatusEffects.FEAR)) {
-            if (entity.getType().isIn(SEntityTypeTags.IMMUNE_TO_FEAR)) {
-                return false;
-            } else {
-                return entity.isPlayer() || entity instanceof PathAwareEntity;
-            }
+    public static boolean canHaveFear(LivingEntity entity) {
+        if (entity.getType().isIn(SEntityTypeTags.IMMUNE_TO_FEAR)) {
+            return false;
+        } else {
+            return entity.isPlayer() || entity instanceof PathAwareEntity;
         }
-
-        return true;
     }
 
     public static boolean isFeared(Entity target) {
