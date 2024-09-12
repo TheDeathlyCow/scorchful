@@ -17,7 +17,7 @@ public class FearStatusEffect extends StatusEffect {
     }
 
     public static boolean canHaveFear(LivingEntity entity) {
-        if (entity.getType().isIn(SEntityTypeTags.IMMUNE_TO_FEAR)) {
+        if (entity.getType().isIn(SEntityTypeTags.IMMUNE_TO_FEAR) || entity.hasStatusEffect(SStatusEffects.MESMERIZED)) {
             return false;
         } else {
             return entity.isPlayer() || entity instanceof PathAwareEntity;

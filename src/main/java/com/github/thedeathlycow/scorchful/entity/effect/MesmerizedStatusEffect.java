@@ -5,7 +5,6 @@ import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.PathAwareEntity;
 
 public class MesmerizedStatusEffect extends StatusEffect {
