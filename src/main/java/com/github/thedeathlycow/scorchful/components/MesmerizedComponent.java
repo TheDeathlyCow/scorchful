@@ -49,6 +49,10 @@ public class MesmerizedComponent implements Component, ServerTickingComponent, A
         this.key.sync(this.provider);
     }
 
+    public boolean isMesmerized() {
+        return hasMesmerizedTarget() && this.provider.hasStatusEffect(SStatusEffects.MESMERIZED);
+    }
+
     public boolean hasMesmerizedTarget() {
         return this.mesmerizedTarget != null;
     }

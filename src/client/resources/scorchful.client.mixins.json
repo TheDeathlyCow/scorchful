@@ -4,6 +4,7 @@
     "compatibilityLevel": "JAVA_17",
     "plugin": "com.github.thedeathlycow.scorchful.mixin.client.compat.Plugin",
     "client": [
+        "ClientPlayerEntityMixin",
         "ClientPlayNetworkHandlerMixin",
         "DrippingWetPlayerMixin",
         "HeadFeatureRendererMixin",
