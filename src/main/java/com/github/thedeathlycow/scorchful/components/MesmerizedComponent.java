@@ -5,6 +5,7 @@ import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.RegistryByteBuf;
@@ -15,12 +16,13 @@ import org.jetbrains.annotations.Nullable;
 import org.ladysnake.cca.api.v3.component.Component;
 import org.ladysnake.cca.api.v3.component.ComponentKey;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
+import org.ladysnake.cca.api.v3.component.tick.ClientTickingComponent;
 import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
 
 import java.util.List;
 import java.util.Optional;
 
-public class MesmerizedComponent implements Component, ServerTickingComponent, AutoSyncedComponent {
+public class MesmerizedComponent implements Component, ServerTickingComponent, ClientTickingComponent, AutoSyncedComponent {
 
     private static final double MOVEMENT_SPEED = 0.07;
 
@@ -95,7 +97,12 @@ public class MesmerizedComponent implements Component, ServerTickingComponent, A
             return;
         }
 
-        if (this.updateTarget()) {
+        this.updateTarget();
+    }
+
+    @Override
+    public void clientTick() {
+        if (this.isMesmerized()) {
             this.moveTowardsTarget();
         }
     }
@@ -112,18 +119,8 @@ public class MesmerizedComponent implements Component, ServerTickingComponent, A
     }
 
     private void moveTowardsTarget() {
-        if (this.canForceProviderMovement()) {
-            Vec3d targetPos = this.mesmerizedTarget.getPos();
-            Vec3d providerPos = this.provider.getPos();
-
-            Vec3d moveDirection = targetPos.subtract(providerPos)
-                    .normalize()
-                    .multiply(MOVEMENT_SPEED);
-
-            this.provider.addVelocity(moveDirection);
-            this.provider.velocityModified = true;
-
-            this.provider.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, targetPos);
+        if (!this.provider.isSpectator() && this.provider.isPlayer()) {
+            this.provider.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, this.mesmerizedTarget.getEyePos());
         }
     }
 
@@ -154,9 +151,5 @@ public class MesmerizedComponent implements Component, ServerTickingComponent, A
             return true;
         }
         return false;
-    }
-
-    private boolean canForceProviderMovement() {
-        return this.provider.isPlayer() && !this.provider.isSpectator();
     }
 }
