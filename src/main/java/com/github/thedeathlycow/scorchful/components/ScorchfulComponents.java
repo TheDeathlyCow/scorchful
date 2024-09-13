@@ -2,8 +2,6 @@ package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import org.ladysnake.cca.api.v3.component.ComponentKey;
 import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 import org.ladysnake.cca.api.v3.entity.EntityComponentFactoryRegistry;
@@ -43,7 +41,7 @@ public class ScorchfulComponents implements EntityComponentInitializer {
         registry.registerFor(
                 LivingEntity.class,
                 MESMERIZED,
-                MesmerizedComponent::new
+                provider -> new MesmerizedComponent(provider, MESMERIZED)
         );
     }
 }

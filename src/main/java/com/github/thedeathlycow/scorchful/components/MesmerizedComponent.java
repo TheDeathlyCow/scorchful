@@ -3,35 +3,50 @@ package com.github.thedeathlycow.scorchful.components;
 import com.github.thedeathlycow.scorchful.entity.effect.MesmerizedStatusEffect;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MovementType;
-import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.Nullable;
 import org.ladysnake.cca.api.v3.component.Component;
+import org.ladysnake.cca.api.v3.component.ComponentKey;
+import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
 
 import java.util.List;
+import java.util.Optional;
 
-public class MesmerizedComponent implements Component, ServerTickingComponent {
+public class MesmerizedComponent implements Component, ServerTickingComponent, AutoSyncedComponent {
 
     private static final double MOVEMENT_SPEED = 0.07;
 
     private final LivingEntity provider;
 
+    private final ComponentKey<MesmerizedComponent> key;
+
     private LivingEntity mesmerizedTarget;
 
-    public MesmerizedComponent(LivingEntity provider) {
+    public MesmerizedComponent(LivingEntity provider, ComponentKey<MesmerizedComponent> key) {
         this.provider = provider;
+        this.key = key;
     }
 
+    @Nullable
     public LivingEntity getMesmerizedTarget() {
         return mesmerizedTarget;
     }
 
+    public Optional<LivingEntity> maybeGetMesmerizedTarget() {
+        return Optional.ofNullable(this.getMesmerizedTarget());
+    }
+
     public void setMesmerizedTarget(LivingEntity mesmerizedTarget) {
         this.mesmerizedTarget = mesmerizedTarget;
+        this.key.sync(this.provider);
     }
 
     public boolean hasMesmerizedTarget() {
@@ -47,8 +62,32 @@ public class MesmerizedComponent implements Component, ServerTickingComponent {
     }
 
     @Override
+    public boolean shouldSyncWith(ServerPlayerEntity player) {
+        return this.provider == player;
+    }
+
+    @Override
+    public void writeSyncPacket(RegistryByteBuf buf, ServerPlayerEntity recipient) {
+        buf.writeOptional(this.maybeGetMesmerizedTarget(), (b, value) -> {
+            b.writeVarInt(value.getId());
+        });
+    }
+
+    @Override
+    public void applySyncPacket(RegistryByteBuf buf) {
+        this.mesmerizedTarget = buf.readOptional(PacketByteBuf::readVarInt)
+                .map(value -> {
+                    Entity entity = this.provider.getWorld().getEntityById(value);
+                    return entity instanceof LivingEntity livingEntity ? livingEntity : null;
+                }).orElse(null);
+    }
+
+    @Override
     public void serverTick() {
         if (!this.provider.hasStatusEffect(SStatusEffects.MESMERIZED)) {
+            if (this.hasMesmerizedTarget()) {
+                this.setMesmerizedTarget(null);
+            }
             return;
         }
 
@@ -91,7 +130,7 @@ public class MesmerizedComponent implements Component, ServerTickingComponent {
         if (MesmerizedStatusEffect.IS_VALID_TARGET.test(this.mesmerizedTarget)) {
             return true;
         } else {
-            this.mesmerizedTarget = null;
+            this.setMesmerizedTarget(null);
             return false;
         }
     }
@@ -114,6 +153,6 @@ public class MesmerizedComponent implements Component, ServerTickingComponent {
     }
 
     private boolean canForceProviderMovement() {
-        return !(this.provider.isSpectator() || this.provider instanceof PathAwareEntity);
+        return this.provider.isPlayer() && !this.provider.isSpectator();
     }
 }
