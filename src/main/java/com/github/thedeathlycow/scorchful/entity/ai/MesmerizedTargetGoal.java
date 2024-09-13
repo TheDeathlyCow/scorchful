@@ -64,7 +64,7 @@ public class MesmerizedTargetGoal extends Goal {
         if (!component.hasMesmerizedTarget()) {
             List<LivingEntity> nearby = this.mob.getWorld().getEntitiesByClass(
                     LivingEntity.class,
-                    this.mob.getBoundingBox().expand(8),
+                    this.mob.getBoundingBox().expand(16),
                     MesmerizedStatusEffect.IS_VALID_TARGET
                             .and(entity -> entity != this.mob)
             );

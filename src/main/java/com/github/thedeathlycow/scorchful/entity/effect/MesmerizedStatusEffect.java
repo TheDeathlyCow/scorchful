@@ -19,7 +19,10 @@ import java.util.function.Predicate;
 public class MesmerizedStatusEffect extends StatusEffect {
 
     public static final Predicate<Entity> IS_VALID_TARGET = EntityPredicates.EXCEPT_SPECTATOR
-            .and(Entity::isPlayer);
+            .and(entity -> {
+                return entity instanceof LivingEntity livingEntity
+                        && livingEntity.hasStatusEffect(SStatusEffects.MESMERIZING);
+            });
 
     public static final Event<OnApproachedMesmerTarget> ON_APPROACHED_MESMER_TARGET = EventFactory.createArrayBacked(
             OnApproachedMesmerTarget.class,
