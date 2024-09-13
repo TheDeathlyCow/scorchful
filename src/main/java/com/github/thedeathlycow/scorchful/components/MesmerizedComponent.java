@@ -9,6 +9,8 @@ import net.minecraft.registry.RegistryWrapper;
 import org.ladysnake.cca.api.v3.component.Component;
 import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
 
+import java.util.List;
+
 public class MesmerizedComponent implements Component, ServerTickingComponent {
 
     private final LivingEntity provider;
@@ -46,6 +48,16 @@ public class MesmerizedComponent implements Component, ServerTickingComponent {
                     || !MesmerizedStatusEffect.IS_VALID_TARGET.test(this.mesmerizedTarget);
             if (removeTarget) {
                 this.mesmerizedTarget = null;
+            }
+        } else {
+            List<LivingEntity> nearby = this.provider.getWorld().getEntitiesByClass(
+                    LivingEntity.class,
+                    this.provider.getBoundingBox().expand(16),
+                    MesmerizedStatusEffect.IS_VALID_TARGET
+                            .and(entity -> entity != this.provider)
+            );
+            if (!nearby.isEmpty()) {
+                this.setMesmerizedTarget(nearby.getFirst());
             }
         }
     }

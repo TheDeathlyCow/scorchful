@@ -38,7 +38,7 @@ public class MesmerizedStatusEffect extends StatusEffect {
     }
 
     public static boolean canBeMesmerized(LivingEntity entity) {
-        if (entity.getType().isIn(SEntityTypeTags.IMMUNE_TO_MESMERIZED) || entity.hasStatusEffect(SStatusEffects.FEAR)) {
+        if (entity.getType().isIn(SEntityTypeTags.IMMUNE_TO_MESMERIZED) || entity.hasStatusEffect(SStatusEffects.FEAR) || entity.hasStatusEffect(SStatusEffects.MESMERIZING)) {
             return false;
         } else {
             return entity.isPlayer() || entity instanceof PathAwareEntity;

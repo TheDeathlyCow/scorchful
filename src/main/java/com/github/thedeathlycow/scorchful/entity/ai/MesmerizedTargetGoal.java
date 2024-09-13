@@ -40,7 +40,6 @@ public class MesmerizedTargetGoal extends Goal {
     @Override
     public void tick() {
         MesmerizedComponent component = ScorchfulComponents.MESMERIZED.get(this.mob);
-        this.acquireTargetIfNeeded(component);
         this.updatePathIfNeeded(component);
     }
 
@@ -58,20 +57,6 @@ public class MesmerizedTargetGoal extends Goal {
     private void updatePath() {
         MesmerizedComponent component = ScorchfulComponents.MESMERIZED.get(this.mob);
         this.mob.getNavigation().startMovingTo(component.getMesmerizedTarget(), this.speed);
-    }
-
-    private void acquireTargetIfNeeded(MesmerizedComponent component) {
-        if (!component.hasMesmerizedTarget()) {
-            List<LivingEntity> nearby = this.mob.getWorld().getEntitiesByClass(
-                    LivingEntity.class,
-                    this.mob.getBoundingBox().expand(16),
-                    MesmerizedStatusEffect.IS_VALID_TARGET
-                            .and(entity -> entity != this.mob)
-            );
-            if (!nearby.isEmpty()) {
-                component.setMesmerizedTarget(nearby.getFirst());
-            }
-        }
     }
 
     private void updatePathIfNeeded(MesmerizedComponent component) {
