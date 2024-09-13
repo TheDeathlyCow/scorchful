@@ -9,6 +9,7 @@
         "DrippingWetPlayerMixin",
         "HeadFeatureRendererMixin",
         "InGameHudMixin",
+        "MouseMixin",
         "sandstorm.BackgroundRendererMixin",
         "sandstorm.WorldRendererMixin"
     ],

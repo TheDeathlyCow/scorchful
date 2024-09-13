@@ -2,16 +2,15 @@ package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.entity.effect.MesmerizedStatusEffect;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
+import com.github.thedeathlycow.scorchful.util.EntityLookUtil;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 import org.ladysnake.cca.api.v3.component.Component;
 import org.ladysnake.cca.api.v3.component.ComponentKey;
@@ -103,7 +102,7 @@ public class MesmerizedComponent implements Component, ServerTickingComponent, C
     @Override
     public void clientTick() {
         if (this.isMesmerized()) {
-            this.moveTowardsTarget();
+            this.lookAtTarget();
         }
     }
 
@@ -118,9 +117,15 @@ public class MesmerizedComponent implements Component, ServerTickingComponent, C
         }
     }
 
-    private void moveTowardsTarget() {
+    private void lookAtTarget() {
         if (!this.provider.isSpectator() && this.provider.isPlayer()) {
-            this.provider.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, this.mesmerizedTarget.getEyePos());
+            float fixedDeltaTime = this.provider.getWorld().getTickManager().getMillisPerTick() / 1000f;
+            EntityLookUtil.lookTowards(
+                    this.provider,
+                    EntityAnchorArgumentType.EntityAnchor.EYES,
+                    this.mesmerizedTarget.getEyePos(),
+                    5f * fixedDeltaTime
+            );
         }
     }
 
@@ -152,4 +157,6 @@ public class MesmerizedComponent implements Component, ServerTickingComponent, C
         }
         return false;
     }
+
+
 }
