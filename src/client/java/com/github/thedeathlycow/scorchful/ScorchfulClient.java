@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful;
 import com.github.thedeathlycow.scorchful.client.SandstormEffects;
 import com.github.thedeathlycow.scorchful.client.SandstormSounds;
 import com.github.thedeathlycow.scorchful.client.ShaderStatusEffectManagers;
+import com.github.thedeathlycow.scorchful.components.MesmerizedComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.hud.BurningHeartsOverlay;
 import com.github.thedeathlycow.scorchful.hud.MountHealthOverlay;
@@ -39,6 +40,15 @@ public class ScorchfulClient implements ClientModInitializer {
 
         ClientTickEvents.END_WORLD_TICK.register(SandstormEffects::tickSandstormParticles);
         ClientTickEvents.END_WORLD_TICK.register(SandstormSounds.INSTANCE::tick);
+        WorldRenderEvents.START.register(
+                context -> {
+                    PlayerEntity player = MinecraftClient.getInstance().player;
+                    if (player != null) {
+                        float timeDelta = context.tickCounter().getLastFrameDuration();
+                        ScorchfulComponents.MESMERIZED.get(player).updateLook(timeDelta);
+                    }
+                }
+        );
 
         SParticleFactories.registerFactories();
 

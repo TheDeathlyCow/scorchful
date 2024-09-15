@@ -15,13 +15,12 @@ import org.jetbrains.annotations.Nullable;
 import org.ladysnake.cca.api.v3.component.Component;
 import org.ladysnake.cca.api.v3.component.ComponentKey;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
-import org.ladysnake.cca.api.v3.component.tick.ClientTickingComponent;
 import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
 
 import java.util.List;
 import java.util.Optional;
 
-public class MesmerizedComponent implements Component, ServerTickingComponent, ClientTickingComponent, AutoSyncedComponent {
+public class MesmerizedComponent implements Component, ServerTickingComponent, AutoSyncedComponent {
 
     private static final double MOVEMENT_SPEED = 0.07;
 
@@ -99,10 +98,9 @@ public class MesmerizedComponent implements Component, ServerTickingComponent, C
         this.updateTarget();
     }
 
-    @Override
-    public void clientTick() {
+    public void updateLook(float timeDelta) {
         if (this.isMesmerized()) {
-            this.lookAtTarget();
+            this.lookAtTarget(timeDelta);
         }
     }
 
@@ -117,14 +115,13 @@ public class MesmerizedComponent implements Component, ServerTickingComponent, C
         }
     }
 
-    private void lookAtTarget() {
+    private void lookAtTarget(float timeDelta) {
         if (!this.provider.isSpectator() && this.provider.isPlayer()) {
-            float fixedDeltaTime = this.provider.getWorld().getTickManager().getMillisPerTick() / 1000f;
             EntityLookUtil.lookTowards(
                     this.provider,
                     EntityAnchorArgumentType.EntityAnchor.EYES,
                     this.mesmerizedTarget.getEyePos(),
-                    5f * fixedDeltaTime
+                    timeDelta
             );
         }
     }

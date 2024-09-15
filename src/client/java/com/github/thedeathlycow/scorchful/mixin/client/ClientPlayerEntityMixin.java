@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.authlib.GameProfile;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.input.Input;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -47,8 +48,6 @@ abstract class ClientPlayerEntityMixin extends PlayerEntity {
         if (ScorchfulComponents.MESMERIZED.get(this).isMesmerized()) {
             instance.movementForward = MathHelper.clamp(slowDownFactor * 1.5f, -1f, 1f);
             instance.movementSideways = 0.0f;
-
-
         }
     }
 
