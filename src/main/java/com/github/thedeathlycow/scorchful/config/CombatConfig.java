@@ -31,6 +31,8 @@ public class CombatConfig implements ConfigData {
 
     double mesmerizedActivationRadius = 4.0;
 
+    float mesmerizedActivationDamage = 10f;
+
     public FireChargeThrower.FireballFactory getFireBallThrownType() {
         return fireBallThrownType;
     }
@@ -61,6 +63,10 @@ public class CombatConfig implements ConfigData {
 
     public double getMesmerizedActivationRadius() {
         return mesmerizedActivationRadius;
+    }
+
+    public float getMesmerizedActivationDamage() {
+        return mesmerizedActivationDamage;
     }
 
     @Override

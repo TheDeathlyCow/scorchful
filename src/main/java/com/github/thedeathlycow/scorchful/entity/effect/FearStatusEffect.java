@@ -15,7 +15,6 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 
 public class FearStatusEffect extends StatusEffect {
@@ -46,14 +45,18 @@ public class FearStatusEffect extends StatusEffect {
         World world = mesmerized.getWorld();
         if (!world.isClient()) {
             mesmerized.addStatusEffect(new StatusEffectInstance(SStatusEffects.FEAR, 60), mesmerizing);
-            DamageSource source = scare(world, mesmerizing);
-            mesmerized.damage(source, 10);
+            DamageSource source = scareDamage(world, mesmerizing);
+            mesmerized.damage(source, getActivationDamage());
         }
     }
 
-    public static DamageSource scare(World world, LivingEntity attacker) {
+    public static DamageSource scareDamage(World world, LivingEntity attacker) {
         Registry<DamageType> registry = world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE);
         return new DamageSource(registry.entryOf(SDamageTypes.SCARE), attacker);
+    }
+
+    private static float getActivationDamage() {
+        return Scorchful.getConfig().combatConfig.getMesmerizedActivationDamage();
     }
 
 }
