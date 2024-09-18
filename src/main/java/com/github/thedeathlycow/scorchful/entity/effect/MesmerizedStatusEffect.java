@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.entity.effect;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.components.MesmerizedComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
@@ -51,7 +52,7 @@ public class MesmerizedStatusEffect extends StatusEffect {
         if (component.hasMesmerizedTarget()) {
             Vec3d targetPos = component.getMesmerizedTarget().getPos();
             Vec3d entityPos = entity.getPos();
-            if (entityPos.isInRange(targetPos, 2)) {
+            if (entityPos.isInRange(targetPos, this.getActivationRange())) {
                 ON_APPROACHED_MESMER_TARGET.invoker().onApproach(entity, component.getMesmerizedTarget());
                 return false;
             }
@@ -62,6 +63,10 @@ public class MesmerizedStatusEffect extends StatusEffect {
     @Override
     public boolean canApplyUpdateEffect(int duration, int amplifier) {
         return true;
+    }
+
+    private double getActivationRange() {
+        return Scorchful.getConfig().combatConfig.getMesmerizedActivationRadius();
     }
 
     @FunctionalInterface

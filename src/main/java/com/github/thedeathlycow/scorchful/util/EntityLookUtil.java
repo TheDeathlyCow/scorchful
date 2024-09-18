@@ -21,8 +21,8 @@ public class EntityLookUtil {
         float targetPitch = (float) -MathHelper.atan2(dy, horizontalDistance);
         float targetYaw = (float) MathHelper.atan2(dz, dx);
 
-        targetPitch = MathHelper.wrapDegrees(targetPitch * 180.0F / MathHelper.PI);
-        targetYaw = MathHelper.wrapDegrees(targetYaw * 180.0F / MathHelper.PI - 90.0F);
+        targetPitch = MathHelper.wrapDegrees(targetPitch * 180.0f / MathHelper.PI);
+        targetYaw = MathHelper.wrapDegrees(targetYaw * 180.0f / MathHelper.PI - 90.0f);
 
         targetPitch = MathHelper.lerp(delta, entity.getPitch(), targetPitch);
         targetYaw = MathHelper.lerp(delta, entity.getYaw(), targetYaw);

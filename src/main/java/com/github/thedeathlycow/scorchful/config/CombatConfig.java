@@ -29,6 +29,8 @@ public class CombatConfig implements ConfigData {
 
     double fearDetectionRangeMultiplier = 2.0;
 
+    double mesmerizedActivationRadius = 4.0;
+
     public FireChargeThrower.FireballFactory getFireBallThrownType() {
         return fireBallThrownType;
     }
@@ -55,6 +57,10 @@ public class CombatConfig implements ConfigData {
 
     public double getFearDetectionRangeMultiplier() {
         return fearDetectionRangeMultiplier;
+    }
+
+    public double getMesmerizedActivationRadius() {
+        return mesmerizedActivationRadius;
     }
 
     @Override
