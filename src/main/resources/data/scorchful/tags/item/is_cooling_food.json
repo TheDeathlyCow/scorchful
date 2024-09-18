@@ -1,0 +1,37 @@
+{
+    "replace": false,
+    "values": [
+        {
+            "required": false,
+            "id": "beachparty:sweetberry_icecream"
+        },
+        {
+            "required": false,
+            "id": "beachparty:coconut_icecream"
+        },
+        {
+            "required": false,
+            "id": "beachparty:chocolate_icecream"
+        },
+        {
+            "required": false,
+            "id": "beachparty:icecream_coconut"
+        },
+        {
+            "required": false,
+            "id": "beachparty:icecream_melon"
+        },
+        {
+            "required": false,
+            "id": "beachparty:icecream_cactus"
+        },
+        {
+            "required": false,
+            "id": "beachparty:icecream_sweetberries"
+        },
+        {
+            "required": false,
+            "id": "beachparty:icecream_chocolate"
+        }
+    ]
+}

@@ -26,6 +26,7 @@
     "item.minecraft.lingering_potion.effect.scorchful.paranoia": "Lingering Potion of Paranoia",
     "item.minecraft.tipped_arrow.effect.scorchful.paranoia": "Arrow of Paranoia",
     
+    "tag.item.scorchful.is_cooling_food": "Cooling food",
     "tag.item.scorchful.is_hydrating": "Hydrating Food and Drink",
     "tag.item.scorchful.is_parching": "Parching Food and Drink",
     "tag.item.scorchful.is_refreshing": "Refreshing Food and Drink",
