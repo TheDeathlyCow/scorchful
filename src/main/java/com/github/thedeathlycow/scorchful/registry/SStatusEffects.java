@@ -34,7 +34,7 @@ public class SStatusEffects {
     );
 
     public static void initialize() {
-        MesmerizedStatusEffect.ON_APPROACHED_MESMER_TARGET.register(FearStatusEffect::onMesmerizedProc);
+        MesmerizedStatusEffect.ON_APPROACHED_MESMER_TARGET.register(FearStatusEffect::onMesmerizedActivated);
     }
 
     private static RegistryEntry<StatusEffect> register(String name, StatusEffect statusEffect) {

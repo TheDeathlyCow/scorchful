@@ -1,17 +1,22 @@
 package com.github.thedeathlycow.scorchful.entity.effect;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.registry.SDamageTypes;
 import com.github.thedeathlycow.scorchful.registry.SParticleTypes;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageTypes;
+import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.world.World;
 
 public class FearStatusEffect extends StatusEffect {
     public FearStatusEffect(StatusEffectCategory category, int color) {
@@ -37,11 +42,18 @@ public class FearStatusEffect extends StatusEffect {
                 : original;
     }
 
-    public static void onMesmerizedProc(LivingEntity mesmerized, LivingEntity mesmerizing) {
-        mesmerized.addStatusEffect(new StatusEffectInstance(SStatusEffects.FEAR, 60), mesmerizing);
-        DamageSource source = mesmerized.getWorld().getDamageSources()
-                        .mobAttack(mesmerizing);
-        mesmerized.damage(source, 10);
+    public static void onMesmerizedActivated(LivingEntity mesmerized, LivingEntity mesmerizing) {
+        World world = mesmerized.getWorld();
+        if (!world.isClient()) {
+            mesmerized.addStatusEffect(new StatusEffectInstance(SStatusEffects.FEAR, 60), mesmerizing);
+            DamageSource source = scare(world, mesmerizing);
+            mesmerized.damage(source, 10);
+        }
+    }
+
+    public static DamageSource scare(World world, LivingEntity attacker) {
+        Registry<DamageType> registry = world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE);
+        return new DamageSource(registry.entryOf(SDamageTypes.SCARE), attacker);
     }
 
 }

@@ -61,7 +61,8 @@
 
     "death.attack.scorchful.heat": "%1$s couldn't handle the heat",
     "death.attack.scorchful.heat.player": "%1$s couldn't handle the heat of %2$s",
-    
+    "death.attack.scorchful.scare": "%1$s was scared to death",
+    "death.attack.scorchful.scare.player": "%1$s was spooked by %2$s",
     
     "advancement.scorchful.adventure.drink_cactus_juice.title": "It's the Quenchiest!",
     "advancement.scorchful.adventure.drink_cactus_juice.description": "Drink a Bottle of Cactus Juice",
