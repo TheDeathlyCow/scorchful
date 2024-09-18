@@ -122,6 +122,7 @@
     "text.autoconfig.scorchful.option.heatingConfig.minLightLevelForHeatInNether": "Minimum light level for heat (in The Nether)",
     "text.autoconfig.scorchful.option.heatingConfig.blocksAboveLavaOceanPerHeatInNether": "Blocks above Lava Ocean per heat increase (in The Nether)",
     "text.autoconfig.scorchful.option.heatingConfig.maxHeatFromLavaOceanInNether": "Maximum heat from Lava Ocean (in The Nether)",
+    "text.autoconfig.scorchful.option.heatingConfig.temperatureFromCoolingFood": "Temperature from cooling food",
     
     "text.autoconfig.scorchful.option.thirstConfig": "Thirst Config",
     "text.autoconfig.scorchful.option.thirstConfig.temperatureFromWetness": "Temperature from Wetness",

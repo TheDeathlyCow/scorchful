@@ -90,7 +90,10 @@ public class Scorchful implements ModInitializer {
         ScorchfulItemEvents.CONSUME_ITEM.register(DrinkItem::applyWater);
         ScorchfulItemEvents.CONSUME_ITEM.register((stack, player) -> {
             if (stack.isIn(SItemTags.IS_COOLING_FOOD)) {
-
+                player.thermoo$addTemperature(
+                        getConfig().heatingConfig.getTemperatureFromCoolingFood(),
+                        HeatingModes.ACTIVE
+                );
             }
         });
         ArmorMaterialEvents.GET_HEAT_RESISTANCE.register(HeatResistanceHelper::getHeatResistance);
@@ -100,7 +103,7 @@ public class Scorchful implements ModInitializer {
                 (entity, source, baseDamageTaken, damageTaken, blocked) -> {
                     if (!blocked && source.isIn(SDamageTypeTags.FIREBALL)) {
                         entity.thermoo$addTemperature(
-                                Scorchful.getConfig().heatingConfig.getFireballHeat(),
+                                getConfig().heatingConfig.getFireballHeat(),
                                 HeatingModes.ACTIVE
                         );
                     }
