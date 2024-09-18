@@ -5,12 +5,14 @@ import com.github.thedeathlycow.scorchful.block.SandCauldronBehaviours;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
 import com.github.thedeathlycow.scorchful.event.ScorchfulLivingEntityEvents;
+import com.github.thedeathlycow.scorchful.item.DrinkItem;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
 import com.github.thedeathlycow.scorchful.item.HeatResistanceHelper;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.item.loot.TurtleScuteLootTableModifier;
 import com.github.thedeathlycow.scorchful.registry.*;
 import com.github.thedeathlycow.scorchful.registry.tag.SDamageTypeTags;
+import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.github.thedeathlycow.scorchful.server.ThirstCommand;
 import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
 import com.github.thedeathlycow.scorchful.temperature.AmbientTemperatureController;
@@ -85,6 +87,12 @@ public class Scorchful implements ModInitializer {
         );
         UseItemCallback.EVENT.register(new FireChargeThrower());
         ScorchfulItemEvents.GET_DEFAULT_STACK.register(DrinkLevelComponent::applyToNewStack);
+        ScorchfulItemEvents.CONSUME_ITEM.register(DrinkItem::applyWater);
+        ScorchfulItemEvents.CONSUME_ITEM.register((stack, player) -> {
+            if (stack.isIn(SItemTags.IS_COOLING_FOOD)) {
+
+            }
+        });
         ArmorMaterialEvents.GET_HEAT_RESISTANCE.register(HeatResistanceHelper::getHeatResistance);
 
         // custom scorchful event

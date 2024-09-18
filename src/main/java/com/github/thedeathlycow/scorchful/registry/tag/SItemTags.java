@@ -7,6 +7,7 @@ import net.minecraft.registry.tag.TagKey;
 
 public class SItemTags {
 
+    public static final TagKey<Item> IS_COOLING_FOOD = of("is_cooling_food");
     public static final TagKey<Item> IS_REFRESHING = of("is_refreshing");
 
     public static final TagKey<Item> IS_SUSTAINING = of("is_sustaining");
