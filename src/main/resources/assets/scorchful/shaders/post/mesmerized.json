@@ -1,0 +1,17 @@
+{
+    "targets": [
+        "swap"
+    ],
+    "passes": [
+        {
+            "intarget": "minecraft:main",
+            "outtarget": "swap",
+            "name": "scorchful:focus"
+        },
+        {
+            "intarget": "swap",
+            "outtarget": "minecraft:main",
+            "name": "blit"
+        }
+    ]
+}
