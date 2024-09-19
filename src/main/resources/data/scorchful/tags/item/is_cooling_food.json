@@ -32,6 +32,18 @@
         {
             "required": false,
             "id": "beachparty:icecream_chocolate"
+        },
+        {
+            "required": false,
+            "id": "#c:icicles"
+        },
+        {
+            "required": false,
+            "id": "immersive_weathering:ice_sickle"
+        },
+        {
+            "required": false,
+            "id": "immersive_weathering:icicle"
         }
     ]
 }
