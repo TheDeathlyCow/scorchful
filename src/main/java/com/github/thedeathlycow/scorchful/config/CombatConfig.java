@@ -35,7 +35,7 @@ public class CombatConfig implements ConfigData {
 
     float mesmerizedActivationDamagePerLevel = 4f;
 
-    int mesmerizedActionFearLengthPerLevel = 10;
+    int mesmerizedActionFearLengthPerLevel = 5;
 
     public FireChargeThrower.FireballFactory getFireBallThrownType() {
         return fireBallThrownType;
@@ -75,6 +75,10 @@ public class CombatConfig implements ConfigData {
 
     public float getMesmerizedActivationDamagePerLevel() {
         return mesmerizedActivationDamagePerLevel;
+    }
+
+    public int getMesmerizedActionFearLengthPerLevel() {
+        return 20 * mesmerizedActionFearLengthPerLevel;
     }
 
     @Override

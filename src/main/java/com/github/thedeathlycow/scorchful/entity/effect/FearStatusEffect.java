@@ -45,7 +45,9 @@ public class FearStatusEffect extends StatusEffect {
     public static void onMesmerizedActivated(LivingEntity mesmerized, LivingEntity mesmerizing, int amplifier) {
         World world = mesmerized.getWorld();
         if (!world.isClient()) {
-            mesmerized.addStatusEffect(new StatusEffectInstance(SStatusEffects.FEAR, 60), mesmerizing);
+            int fearDuration = getFearDuration(amplifier);
+            mesmerized.addStatusEffect(new StatusEffectInstance(SStatusEffects.FEAR, fearDuration), mesmerizing);
+
             DamageSource source = scareDamage(world, mesmerizing);
             mesmerized.damage(source, getActivationDamage(amplifier));
         }
@@ -63,4 +65,8 @@ public class FearStatusEffect extends StatusEffect {
         return base + amplifier * scale;
     }
 
+    private static int getFearDuration(int amplifier) {
+        CombatConfig config = Scorchful.getConfig().combatConfig;
+        return config.getMesmerizedActionFearLengthPerLevel() * (1 + amplifier);
+    }
 }

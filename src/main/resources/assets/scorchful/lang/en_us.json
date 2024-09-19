@@ -150,7 +150,7 @@
     "text.autoconfig.scorchful.option.combatConfig.mesmerizedActivationRadius": "Mesmerized activation radius",
     "text.autoconfig.scorchful.option.combatConfig.mesmerizedActivationBaseDamage": "Mesmerized activation base damage",
     "text.autoconfig.scorchful.option.combatConfig.mesmerizedActivationDamagePerLevel": "Mesmerized activation damage scale",
-    "text.autoconfig.scorchful.option.combatConfig.mesmerizedActionFearLengthPerLevel": "Mesmerized activation fear duration per level",
+    "text.autoconfig.scorchful.option.combatConfig.mesmerizedActionFearLengthPerLevel": "Mesmerized activation fear duration per level (seconds)",
     
     "text.autoconfig.scorchful.option.weatherConfig": "Weather Config",
     "text.autoconfig.scorchful.option.weatherConfig.doSandPileAccumulation": "Do Sand Pile accumulation",
