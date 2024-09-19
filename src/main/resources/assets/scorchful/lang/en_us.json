@@ -148,7 +148,9 @@
     "text.autoconfig.scorchful.option.combatConfig.veryProtectiveArmorHeatResistance": "Very thermally protective armor piece heat resistance",
     "text.autoconfig.scorchful.option.combatConfig.fearDetectionRangeMultiplier": "Fear detection range multiplier",
     "text.autoconfig.scorchful.option.combatConfig.mesmerizedActivationRadius": "Mesmerized activation radius",
-    "text.autoconfig.scorchful.option.combatConfig.mesmerizedActivationDamage": "Mesmerized activation damage",
+    "text.autoconfig.scorchful.option.combatConfig.mesmerizedActivationBaseDamage": "Mesmerized activation base damage",
+    "text.autoconfig.scorchful.option.combatConfig.mesmerizedActivationDamagePerLevel": "Mesmerized activation damage scale",
+    "text.autoconfig.scorchful.option.combatConfig.mesmerizedActionFearLengthPerLevel": "Mesmerized activation fear duration per level",
     
     "text.autoconfig.scorchful.option.weatherConfig": "Weather Config",
     "text.autoconfig.scorchful.option.weatherConfig.doSandPileAccumulation": "Do Sand Pile accumulation",

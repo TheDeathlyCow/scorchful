@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.entity.effect;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.config.CombatConfig;
 import com.github.thedeathlycow.scorchful.registry.SDamageTypes;
 import com.github.thedeathlycow.scorchful.registry.SParticleTypes;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
@@ -41,12 +42,12 @@ public class FearStatusEffect extends StatusEffect {
                 : original;
     }
 
-    public static void onMesmerizedActivated(LivingEntity mesmerized, LivingEntity mesmerizing) {
+    public static void onMesmerizedActivated(LivingEntity mesmerized, LivingEntity mesmerizing, int amplifier) {
         World world = mesmerized.getWorld();
         if (!world.isClient()) {
             mesmerized.addStatusEffect(new StatusEffectInstance(SStatusEffects.FEAR, 60), mesmerizing);
             DamageSource source = scareDamage(world, mesmerizing);
-            mesmerized.damage(source, getActivationDamage());
+            mesmerized.damage(source, getActivationDamage(amplifier));
         }
     }
 
@@ -55,8 +56,11 @@ public class FearStatusEffect extends StatusEffect {
         return new DamageSource(registry.entryOf(SDamageTypes.SCARE), attacker);
     }
 
-    private static float getActivationDamage() {
-        return Scorchful.getConfig().combatConfig.getMesmerizedActivationDamage();
+    private static float getActivationDamage(int amplifier) {
+        CombatConfig config = Scorchful.getConfig().combatConfig;
+        float base = config.getMesmerizedActivationBaseDamage();
+        float scale = config.getMesmerizedActivationDamagePerLevel();
+        return base + amplifier * scale;
     }
 
 }

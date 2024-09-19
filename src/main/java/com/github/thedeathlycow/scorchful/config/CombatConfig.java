@@ -31,7 +31,11 @@ public class CombatConfig implements ConfigData {
 
     double mesmerizedActivationRadius = 4.0;
 
-    float mesmerizedActivationDamage = 10f;
+    float mesmerizedActivationBaseDamage = 4f;
+
+    float mesmerizedActivationDamagePerLevel = 4f;
+
+    int mesmerizedActionFearLengthPerLevel = 10;
 
     public FireChargeThrower.FireballFactory getFireBallThrownType() {
         return fireBallThrownType;
@@ -65,13 +69,21 @@ public class CombatConfig implements ConfigData {
         return mesmerizedActivationRadius;
     }
 
-    public float getMesmerizedActivationDamage() {
-        return mesmerizedActivationDamage;
+    public float getMesmerizedActivationBaseDamage() {
+        return mesmerizedActivationBaseDamage;
+    }
+
+    public float getMesmerizedActivationDamagePerLevel() {
+        return mesmerizedActivationDamagePerLevel;
     }
 
     @Override
     public void validatePostLoad() throws ValidationException {
         ConfigData.super.validatePostLoad();
         this.fearDetectionRangeMultiplier = MathHelper.clamp(fearDetectionRangeMultiplier, 0, 128);
+        this.mesmerizedActivationRadius = Math.max(0f, mesmerizedActivationRadius);
+        this.mesmerizedActivationBaseDamage = Math.max(0f, mesmerizedActivationBaseDamage);
+        this.mesmerizedActivationDamagePerLevel = Math.max(0f, mesmerizedActivationDamagePerLevel);
+        this.mesmerizedActionFearLengthPerLevel = Math.max(0, mesmerizedActionFearLengthPerLevel);
     }
 }

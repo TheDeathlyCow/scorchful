@@ -27,9 +27,9 @@ public class MesmerizedStatusEffect extends StatusEffect {
 
     public static final Event<OnApproachedMesmerTarget> ON_APPROACHED_MESMER_TARGET = EventFactory.createArrayBacked(
             OnApproachedMesmerTarget.class,
-            listeners -> (mesmerized, mesmerizing) -> {
+            listeners -> (mesmerized, mesmerizing, amplifier) -> {
                 for (OnApproachedMesmerTarget listener : listeners) {
-                    listener.onApproach(mesmerized, mesmerizing);
+                    listener.onApproach(mesmerized, mesmerizing, amplifier);
                 }
             }
     );
@@ -53,7 +53,7 @@ public class MesmerizedStatusEffect extends StatusEffect {
             Vec3d targetPos = component.getMesmerizedTarget().getPos();
             Vec3d entityPos = entity.getPos();
             if (entityPos.isInRange(targetPos, this.getActivationRange())) {
-                ON_APPROACHED_MESMER_TARGET.invoker().onApproach(entity, component.getMesmerizedTarget());
+                ON_APPROACHED_MESMER_TARGET.invoker().onApproach(entity, component.getMesmerizedTarget(), amplifier);
                 return false;
             }
         }
@@ -71,6 +71,6 @@ public class MesmerizedStatusEffect extends StatusEffect {
 
     @FunctionalInterface
     public interface OnApproachedMesmerTarget {
-        void onApproach(LivingEntity mesmerized, LivingEntity mesmerizing);
+        void onApproach(LivingEntity mesmerized, LivingEntity mesmerizing, int amplifier);
     }
 }
