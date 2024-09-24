@@ -9,6 +9,7 @@ import com.github.thedeathlycow.scorchful.item.DrinkItem;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
 import com.github.thedeathlycow.scorchful.item.HeatResistanceHelper;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
+import com.github.thedeathlycow.scorchful.item.enchantment.EnchantmentModifiers;
 import com.github.thedeathlycow.scorchful.item.loot.TurtleScuteLootTableModifier;
 import com.github.thedeathlycow.scorchful.registry.*;
 import com.github.thedeathlycow.scorchful.registry.tag.SDamageTypeTags;
@@ -112,7 +113,8 @@ public class Scorchful implements ModInitializer {
 
         this.registerThermooEventListeners();
         LootTableEvents.MODIFY.register(new TurtleScuteLootTableModifier());
-
+        EnchantmentModifiers.initialize();
+        
         PayloadTypeRegistry.playS2C().register(TemperatureSoundEventPacket.PACKET_ID, TemperatureSoundEventPacket.PACKET_CODEC);
 
         LOGGER.info("Scorchful initialized!");
