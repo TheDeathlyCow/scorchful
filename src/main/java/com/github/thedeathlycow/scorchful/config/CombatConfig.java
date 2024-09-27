@@ -29,6 +29,9 @@ public class CombatConfig implements ConfigData {
 
     double fearDetectionRangeMultiplier = 2.0;
 
+    @ConfigEntry.Gui.RequiresRestart
+    float impalingDamagePerLevel = 2.5f;
+
     public FireChargeThrower.FireballFactory getFireBallThrownType() {
         return fireBallThrownType;
     }
@@ -57,9 +60,14 @@ public class CombatConfig implements ConfigData {
         return fearDetectionRangeMultiplier;
     }
 
+    public float getImpalingDamagePerLevel() {
+        return impalingDamagePerLevel;
+    }
+
     @Override
     public void validatePostLoad() throws ValidationException {
         ConfigData.super.validatePostLoad();
         this.fearDetectionRangeMultiplier = MathHelper.clamp(fearDetectionRangeMultiplier, 0, 128);
+        this.impalingDamagePerLevel = Math.max(0f, impalingDamagePerLevel);
     }
 }
