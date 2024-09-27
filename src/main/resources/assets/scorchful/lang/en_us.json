@@ -147,6 +147,7 @@
     "text.autoconfig.scorchful.option.combatConfig.protectiveArmorHeatResistance": "Thermally protective armor piece heat resistance",
     "text.autoconfig.scorchful.option.combatConfig.veryProtectiveArmorHeatResistance": "Very thermally protective armor piece heat resistance",
     "text.autoconfig.scorchful.option.combatConfig.fearDetectionRangeMultiplier": "Fear detection range multiplier",
+    "text.autoconfig.scorchful.option.combatConfig.impalingDamagePerLevel": "Impaling damage per level",
     
     "text.autoconfig.scorchful.option.weatherConfig": "Weather Config",
     "text.autoconfig.scorchful.option.weatherConfig.doSandPileAccumulation": "Do Sand Pile accumulation",
