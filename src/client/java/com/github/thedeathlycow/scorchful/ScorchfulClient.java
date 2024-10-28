@@ -8,7 +8,7 @@ import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.hud.BurningHeartsOverlay;
 import com.github.thedeathlycow.scorchful.hud.MountHealthOverlay;
 import com.github.thedeathlycow.scorchful.hud.SoakingUnderlay;
-import com.github.thedeathlycow.scorchful.item.DrinkItemTooltip;
+import com.github.thedeathlycow.scorchful.item.ItemTooltips;
 import com.github.thedeathlycow.scorchful.item.SModelPredicates;
 import com.github.thedeathlycow.scorchful.network.SoundTemperatureEffectPacketListener;
 import com.github.thedeathlycow.scorchful.registry.SCutouts;
@@ -56,7 +56,8 @@ public class ScorchfulClient implements ClientModInitializer {
         StatusBarOverlayRenderEvents.AFTER_HEALTH_BAR.register(BurningHeartsOverlay.INSTANCE);
         StatusBarOverlayRenderEvents.AFTER_MOUNT_HEALTH_BAR.register(MountHealthOverlay.INSTANCE);
 
-        ItemTooltipCallback.EVENT.register(DrinkItemTooltip::appendTooltip);
+        ItemTooltipCallback.EVENT.register(ItemTooltips::appendDrinkTooltip);
+        ItemTooltipCallback.EVENT.register(ItemTooltips::appendCoolingTooltip);
 
         ClientPlayNetworking.registerGlobalReceiver(
                 TemperatureSoundEventPacket.PACKET_ID,

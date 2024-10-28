@@ -70,7 +70,7 @@ public abstract class DrinkItem extends Item {
     }
 
     /**
-     * Called from mixin. Applies water from drinking to the user.
+     * Called from {@link com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents#CONSUME_ITEM}. Applies water from drinking to the user.
      *
      * @param stack  Stack being consumed
      * @param player Player consuming the drink

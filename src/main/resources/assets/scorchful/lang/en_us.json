@@ -16,6 +16,7 @@
     "item.scorchful.turtle_leggings": "Turtle Knee Pads",
     "item.scorchful.turtle_boots": "Turtle Flippers",
     
+    "item.scorchful.tooltip.cooling": "Cooling ❄",
     "item.scorchful.tooltip.refreshing": "Refreshing \uD83C\uDF0A",
     "item.scorchful.tooltip.sustaining": "Sustaining \uD83C\uDF0A\uD83C\uDF0A",
     "item.scorchful.tooltip.hydrating": "Hydrating \uD83C\uDF0A\uD83C\uDF0A\uD83C\uDF0A",
@@ -26,6 +27,7 @@
     "item.minecraft.lingering_potion.effect.scorchful.paranoia": "Lingering Potion of Paranoia",
     "item.minecraft.tipped_arrow.effect.scorchful.paranoia": "Arrow of Paranoia",
     
+    "tag.item.scorchful.is_cooling_food": "Cooling food",
     "tag.item.scorchful.is_hydrating": "Hydrating Food and Drink",
     "tag.item.scorchful.is_parching": "Parching Food and Drink",
     "tag.item.scorchful.is_refreshing": "Refreshing Food and Drink",
@@ -126,6 +128,7 @@
     "text.autoconfig.scorchful.option.heatingConfig.minLightLevelForHeatInNether": "Minimum light level for heat (in The Nether)",
     "text.autoconfig.scorchful.option.heatingConfig.blocksAboveLavaOceanPerHeatInNether": "Blocks above Lava Ocean per heat increase (in The Nether)",
     "text.autoconfig.scorchful.option.heatingConfig.maxHeatFromLavaOceanInNether": "Maximum heat from Lava Ocean (in The Nether)",
+    "text.autoconfig.scorchful.option.heatingConfig.temperatureFromCoolingFood": "Temperature from cooling food",
     
     "text.autoconfig.scorchful.option.thirstConfig": "Thirst Config",
     "text.autoconfig.scorchful.option.thirstConfig.temperatureFromWetness": "Temperature from Wetness",
@@ -153,6 +156,7 @@
     "text.autoconfig.scorchful.option.combatConfig.mesmerizedActivationBaseDamage": "Mesmerized activation base damage",
     "text.autoconfig.scorchful.option.combatConfig.mesmerizedActivationDamagePerLevel": "Mesmerized activation damage scale",
     "text.autoconfig.scorchful.option.combatConfig.mesmerizedActionFearLengthPerLevel": "Mesmerized activation fear duration per level (seconds)",
+    "text.autoconfig.scorchful.option.combatConfig.impalingDamagePerLevel": "Impaling damage per level",
     
     "text.autoconfig.scorchful.option.weatherConfig": "Weather Config",
     "text.autoconfig.scorchful.option.weatherConfig.doSandPileAccumulation": "Do Sand Pile accumulation",

@@ -47,6 +47,8 @@ public class HeatingConfig implements ConfigData {
 
     int maxHeatFromLavaOceanInNether = 3;
 
+    int temperatureFromCoolingFood = -1260;
+
     public boolean doPassiveHeating() {
         return doPassiveHeating;
     }
@@ -125,5 +127,9 @@ public class HeatingConfig implements ConfigData {
 
     public int getMaxHeatFromLavaOceanInNether() {
         return maxHeatFromLavaOceanInNether;
+    }
+
+    public int getTemperatureFromCoolingFood() {
+        return temperatureFromCoolingFood;
     }
 }

@@ -36,6 +36,9 @@ public class CombatConfig implements ConfigData {
     float mesmerizedActivationDamagePerLevel = 4f;
 
     int mesmerizedActionFearLengthPerLevel = 5;
+    
+    @ConfigEntry.Gui.RequiresRestart
+    float impalingDamagePerLevel = 2.5f;
 
     public FireChargeThrower.FireballFactory getFireBallThrownType() {
         return fireBallThrownType;
@@ -80,6 +83,10 @@ public class CombatConfig implements ConfigData {
     public int getMesmerizedActionFearLengthPerLevel() {
         return 20 * mesmerizedActionFearLengthPerLevel;
     }
+    
+    public float getImpalingDamagePerLevel() {
+        return impalingDamagePerLevel;
+    }
 
     @Override
     public void validatePostLoad() throws ValidationException {
@@ -89,5 +96,6 @@ public class CombatConfig implements ConfigData {
         this.mesmerizedActivationBaseDamage = Math.max(0f, mesmerizedActivationBaseDamage);
         this.mesmerizedActivationDamagePerLevel = Math.max(0f, mesmerizedActivationDamagePerLevel);
         this.mesmerizedActionFearLengthPerLevel = Math.max(0, mesmerizedActionFearLengthPerLevel);
+        this.impalingDamagePerLevel = Math.max(0f, impalingDamagePerLevel);
     }
 }

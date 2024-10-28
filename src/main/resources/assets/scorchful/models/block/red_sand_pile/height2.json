@@ -1,5 +1,5 @@
 {
-    "parent": "minecraft:block/snow_height2",
+    "parent": "scorchful:block/layered/height2",
     "textures": {
         "particle": "minecraft:block/red_sand",
         "texture": "minecraft:block/red_sand"

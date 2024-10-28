@@ -3,7 +3,7 @@
     "values": [
         "minecraft:husk",
         {
-            "replace": false,
+            "required": false,
             "id": "#c:bosses"
         },
         "minecraft:camel",

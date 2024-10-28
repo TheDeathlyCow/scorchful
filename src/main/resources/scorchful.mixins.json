@@ -13,6 +13,7 @@
         "TargetPredicateMixin",
         "accessor.BlockDisplayAccess",
         "accessor.ComponentMapBuilderAccessor",
+        "accessor.EnchantmentBuilderAccessor",
         "compat.frostiful.absent.EntityMixin",
         "server.SandAccumulationServerWorldMixin",
         "thirst.ConsumeItemCriterionMixin",

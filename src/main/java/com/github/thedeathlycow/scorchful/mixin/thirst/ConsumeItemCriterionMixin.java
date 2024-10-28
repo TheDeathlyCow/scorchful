@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.mixin.thirst;
 
+import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
 import com.github.thedeathlycow.scorchful.item.DrinkItem;
 import net.minecraft.advancement.criterion.ConsumeItemCriterion;
 import net.minecraft.item.ItemStack;
@@ -17,7 +18,7 @@ public class ConsumeItemCriterionMixin {
             at = @At("HEAD")
     )
     private void onTriggered(ServerPlayerEntity player, ItemStack stack, CallbackInfo ci) {
-        DrinkItem.applyWater(stack, player);
+        ScorchfulItemEvents.CONSUME_ITEM.invoker().consume(stack, player);
     }
 
 
