@@ -36,6 +36,12 @@ public final class ShaderStatusEffectManagers {
             ClientConfig::enableFearPostProcessing
     );
 
+    private static final ShaderStatusEffectManager MESMERIZED = createAndTrack(
+            Scorchful.id("shaders/post/mesmerized.json"),
+            SStatusEffects.MESMERIZED,
+            ClientConfig::enableMesmerizedPostProcessing
+    );
+
     public static void initialize() {
         ShaderStatusEffectManagers.getTrackedManagers().forEach(manager -> {
             ShaderEffectRenderCallback.EVENT.register(manager);

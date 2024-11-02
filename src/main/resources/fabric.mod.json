@@ -51,7 +51,8 @@
 	"custom": {
 		"cardinal-components": [
 			"scorchful:player_water",
-			"scorchful:entity_desert_vision"
+			"scorchful:entity_desert_vision",
+			"scorchful:mesmerized"
 		],
 		"modmenu": {
 			"links": {

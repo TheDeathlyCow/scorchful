@@ -13,6 +13,7 @@ public class SEntityTypeTags {
 
     public static final TagKey<EntityType<?>> IMMUNE_TO_FEAR = of("immune_to_fear");
 
+    public static final TagKey<EntityType<?>> IMMUNE_TO_MESMERIZED = of("immune_to_mesmerized");
 
     private static TagKey<EntityType<?>> of(String path) {
         return TagKey.of(RegistryKeys.ENTITY_TYPE, Scorchful.id(path));

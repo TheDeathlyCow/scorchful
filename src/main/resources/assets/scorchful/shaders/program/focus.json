@@ -1,0 +1,20 @@
+{
+    "blend": {
+        "func": "add",
+        "srcrgb": "one",
+        "dstrgb": "one"
+    },
+    "vertex": "blit",
+    "fragment": "scorchful:focus",
+    "attributes": [  ],
+    "samplers": [
+        { "name": "DiffuseSampler" }
+    ],
+    "uniforms": [
+        { "name": "ProjMat",        "type": "matrix4x4", "count": 16,   "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
+        { "name": "OutSize",        "type": "float",     "count": 2,    "values": [ 1.0, 1.0 ] },
+        { "name": "Intensity",      "type": "float",     "count": 1,    "values": [ 1.1 ] },
+        { "name": "Radius",         "type": "float",     "count": 1,    "values": [ 0.1 ] },
+        { "name": "Kernel",         "type": "float",     "count": 1,    "values": [ 5.0 ] }
+    ]
+}

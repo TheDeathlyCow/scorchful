@@ -49,6 +49,12 @@ public class FearTargetGoal extends Goal {
     }
 
     @Override
+    public void stop() {
+        this.mob.getNavigation().stop();
+        this.fleePath = null;
+    }
+
+    @Override
     public boolean shouldContinue() {
         return !this.mob.getNavigation().isIdle();
     }
