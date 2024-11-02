@@ -1,49 +1,6 @@
 {
     "replace": false,
     "values": [
-        {
-            "required": false,
-            "id": "beachparty:sweetberry_icecream"
-        },
-        {
-            "required": false,
-            "id": "beachparty:coconut_icecream"
-        },
-        {
-            "required": false,
-            "id": "beachparty:chocolate_icecream"
-        },
-        {
-            "required": false,
-            "id": "beachparty:icecream_coconut"
-        },
-        {
-            "required": false,
-            "id": "beachparty:icecream_melon"
-        },
-        {
-            "required": false,
-            "id": "beachparty:icecream_cactus"
-        },
-        {
-            "required": false,
-            "id": "beachparty:icecream_sweetberries"
-        },
-        {
-            "required": false,
-            "id": "beachparty:icecream_chocolate"
-        },
-        {
-            "required": false,
-            "id": "#c:icicles"
-        },
-        {
-            "required": false,
-            "id": "immersive_weathering:ice_sickle"
-        },
-        {
-            "required": false,
-            "id": "immersive_weathering:icicle"
-        }
+        "#thermoo:consumable/cooling"
     ]
 }
