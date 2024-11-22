@@ -35,7 +35,7 @@ public class ScorchfulServerThirstPlugin implements ServerThirstPlugin {
     }
 
     @Override
-    public int getRehydrationEnchantmentDrinkSize() {
+    public int getMaxRehydrationWaterCapacity() {
         return 0;
     }
 

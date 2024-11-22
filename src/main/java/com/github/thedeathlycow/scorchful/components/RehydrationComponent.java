@@ -1,5 +1,7 @@
 package com.github.thedeathlycow.scorchful.components;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.config.DehydrationConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
@@ -38,6 +40,20 @@ public class RehydrationComponent implements Component {
     public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         if (this.waterCaptured > 0) {
             tag.putInt(REHYDRATION_DRINK_KEY, this.waterCaptured);
+        }
+    }
+
+    public void tickRehydration(double rehydrationEfficiency, int wetChange) {
+        if (rehydrationEfficiency > 0) {
+            ScorchfulConfig config = Scorchful.getConfig();
+
+            boolean dehydrationLoaded = ScorchfulIntegrations.isDehydrationLoaded();
+            if (wetChange < 0 && this.provider.getRandom().nextBoolean()) {
+                this.tickRehydrationWaterRecapture(config, dehydrationLoaded);
+            }
+            this.tickRehydrationRefill(config, rehydrationEfficiency, dehydrationLoaded);
+        } else {
+            this.resetRehydration();
         }
     }
 

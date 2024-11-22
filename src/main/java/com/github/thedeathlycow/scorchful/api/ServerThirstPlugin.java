@@ -13,7 +13,7 @@ public interface ServerThirstPlugin {
 
     int tickSweatTransfer(PlayerEntity player);
 
-    int getRehydrationEnchantmentDrinkSize();
+    int getMaxRehydrationWaterCapacity();
 
     boolean rehydrateFromEnchantment(double rehydrationEfficiency);
 
