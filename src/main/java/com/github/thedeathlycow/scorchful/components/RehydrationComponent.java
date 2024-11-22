@@ -16,7 +16,7 @@ import net.minecraft.util.math.Vec3d;
 import org.ladysnake.cca.api.v3.component.Component;
 import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
 
-public class RehydrationComponent implements Component, ServerTickingComponent {
+public class RehydrationComponent implements Component {
 
     private final PlayerEntity provider;
     private int waterCaptured = 0;
@@ -25,11 +25,6 @@ public class RehydrationComponent implements Component, ServerTickingComponent {
 
     public RehydrationComponent(PlayerEntity provider) {
         this.provider = provider;
-    }
-
-    @Override
-    public void serverTick() {
-
     }
 
     @Override
