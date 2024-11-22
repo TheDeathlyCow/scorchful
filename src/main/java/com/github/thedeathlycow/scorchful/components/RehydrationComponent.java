@@ -12,11 +12,9 @@ import net.minecraft.util.math.Vec3d;
 import org.ladysnake.cca.api.v3.component.Component;
 
 public class RehydrationComponent implements Component {
-
     private final PlayerEntity provider;
     private int waterCaptured = 0;
-
-    private static final String REHYDRATION_DRINK_KEY = "rehydration_drink";
+    private static final String WATER_CAPTURED_KEY = "water_captured";
 
     public RehydrationComponent(PlayerEntity provider) {
         this.provider = provider;
@@ -24,15 +22,15 @@ public class RehydrationComponent implements Component {
 
     @Override
     public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        if (tag.contains(REHYDRATION_DRINK_KEY, NbtElement.INT_TYPE)) {
-            this.waterCaptured = tag.getInt(REHYDRATION_DRINK_KEY);
+        if (tag.contains(WATER_CAPTURED_KEY, NbtElement.INT_TYPE)) {
+            this.waterCaptured = tag.getInt(WATER_CAPTURED_KEY);
         }
     }
 
     @Override
     public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         if (this.waterCaptured > 0) {
-            tag.putInt(REHYDRATION_DRINK_KEY, this.waterCaptured);
+            tag.putInt(WATER_CAPTURED_KEY, this.waterCaptured);
         }
     }
 
