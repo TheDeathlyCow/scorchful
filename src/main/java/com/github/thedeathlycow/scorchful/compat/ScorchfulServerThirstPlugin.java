@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.temperature;
+package com.github.thedeathlycow.scorchful.compat;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
@@ -31,11 +31,6 @@ public class ScorchfulServerThirstPlugin implements ServerThirstPlugin {
 
     @Override
     public int tickSweatTransfer(PlayerEntity player) {
-        return 0;
-    }
-
-    @Override
-    public int getMaxRehydrationWaterCapacity() {
         return 0;
     }
 

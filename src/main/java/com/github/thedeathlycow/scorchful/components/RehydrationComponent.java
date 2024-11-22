@@ -43,6 +43,12 @@ public class RehydrationComponent implements Component {
         }
     }
 
+    // REHYDRATION EXPLANATION
+    // The Rehydration enchantment builds up a drink whenever the player loses wetness/soaking to cooling
+    // That drink is the same size as a hydrating drink.
+    // When the drink is full, the player is given back all the water in the drink as *body* water.
+    // However, some of that water is lost, based on the total level of Rehydration.
+
     public void tickRehydration(double rehydrationEfficiency, int wetChange) {
         if (rehydrationEfficiency > 0) {
             ScorchfulConfig config = Scorchful.getConfig();
@@ -57,18 +63,12 @@ public class RehydrationComponent implements Component {
         }
     }
 
-    // REHYDRATION EXPLANATION
-    // The Rehydration enchantment builds up a drink whenever the player loses wetness (not body water) to cooling
-    // That drink is the same size as a hydrating drink.
-    // When the drink is full, the player is given back all the water in the drink as *body* water.
-    // However, some of that water is lost, based on the total level of Rehydration.
-
-    public void tickRehydrationWaterRecapture(ScorchfulConfig config, boolean dehydrationLoaded) {
+    private void tickRehydrationWaterRecapture(ScorchfulConfig config, boolean dehydrationLoaded) {
         int rehydrationCapacity = config.getRehydrationDrinkSize(dehydrationLoaded);
         this.waterCaptured = Math.min(this.waterCaptured + 1, rehydrationCapacity);
     }
 
-    public void tickRehydrationRefill(ScorchfulConfig config, double rehydrationEfficiency, boolean dehydrationLoaded) {
+    private void tickRehydrationRefill(ScorchfulConfig config, double rehydrationEfficiency, boolean dehydrationLoaded) {
         int rehydrationCapacity = config.getRehydrationDrinkSize(dehydrationLoaded);
         if (waterCaptured >= rehydrationCapacity && this.provider.getWorld() instanceof ServerWorld serverWorld) {
             if (dehydrationLoaded) {
@@ -82,7 +82,7 @@ public class RehydrationComponent implements Component {
         }
     }
 
-    public void resetRehydration() {
+    private void resetRehydration() {
         this.waterCaptured = 0;
     }
 
@@ -139,9 +139,5 @@ public class RehydrationComponent implements Component {
                     1f / 1000f
             );
         }
-    }
-
-    private static float getRehydrationEfficiency(int rehydrationLevel, float min, float max) {
-        return MathHelper.lerp(rehydrationLevel / 4f, min, max);
     }
 }

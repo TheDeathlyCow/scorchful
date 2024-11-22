@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.temperature;
+package com.github.thedeathlycow.scorchful.compat;
 
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
 import org.jetbrains.annotations.NotNull;

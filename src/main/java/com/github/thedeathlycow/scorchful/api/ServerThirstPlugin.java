@@ -1,6 +1,8 @@
 package com.github.thedeathlycow.scorchful.api;
 
-import com.github.thedeathlycow.scorchful.temperature.ServerThirstPluginManager;
+import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.config.ThirstConfig;
+import com.github.thedeathlycow.scorchful.compat.ServerThirstPluginManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -13,9 +15,12 @@ public interface ServerThirstPlugin {
 
     int tickSweatTransfer(PlayerEntity player);
 
-    int getMaxRehydrationWaterCapacity();
-
     boolean rehydrateFromEnchantment(double rehydrationEfficiency);
+
+    default int getMaxRehydrationWaterCapacity() {
+        ThirstConfig config = Scorchful.getConfig().thirstConfig;
+        return config.getRehydrationDrinkSize();
+    }
 
     static void registerPlugin(@NotNull ServerThirstPlugin plugin) {
         Objects.requireNonNull(plugin, "Thirst plugin may not be null!");
