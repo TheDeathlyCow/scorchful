@@ -70,12 +70,15 @@ public class RehydrationComponent implements Component {
 
     public void tickRehydrationRefill(ScorchfulConfig config, double rehydrationEfficiency, boolean dehydrationLoaded) {
         int rehydrationCapacity = config.getRehydrationDrinkSize(dehydrationLoaded);
-        if (waterCaptured >= rehydrationCapacity) {
+        if (waterCaptured >= rehydrationCapacity && this.provider.getWorld() instanceof ServerWorld serverWorld) {
             if (dehydrationLoaded) {
                 this.rehydrateWithDehydration(config, rehydrationEfficiency);
             } else {
                 this.rehydrate(config, rehydrationEfficiency);
             }
+
+            this.playRehydrationEffects(serverWorld);
+            this.resetRehydration();
         }
     }
 
@@ -93,10 +96,8 @@ public class RehydrationComponent implements Component {
         double efficiency = config.thirstConfig.getMaxRehydrationEfficiency() * rehydrationEfficiency;
         int drinkToAdd = MathHelper.floor(this.waterCaptured * efficiency);
 
-        if (drinkToAdd > 0 && this.provider.getWorld() instanceof ServerWorld serverWorld) {
+        if (drinkToAdd > 0) {
             waterComponent.drink(drinkToAdd);
-            this.playRehydrationEffects(serverWorld);
-            this.resetRehydration();
         }
     }
 
@@ -109,15 +110,9 @@ public class RehydrationComponent implements Component {
             return;
         }
 
-        if (this.provider.getWorld() instanceof ServerWorld serverWorld) {
-            int maxWater = MathHelper.floor(
-                    rehydrationEfficiency * dehydrationConfig.getMaxWaterLost()
-            );
-            int waterToAdd = this.provider.getRandom().nextBetween(1, maxWater);
-            thirstManager.add(waterToAdd);
-            this.playRehydrationEffects(serverWorld);
-            this.resetRehydration();
-        }
+        int maxWater = MathHelper.floor(rehydrationEfficiency * dehydrationConfig.getMaxWaterLost());
+        int waterToAdd = this.provider.getRandom().nextBetween(1, maxWater);
+        thirstManager.add(waterToAdd);
     }
 
     private void playRehydrationEffects(ServerWorld serverWorld) {
