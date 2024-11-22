@@ -1,23 +1,15 @@
 package com.github.thedeathlycow.scorchful.components;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
-import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
-import com.github.thedeathlycow.scorchful.config.DehydrationConfig;
-import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
-import net.dehydration.access.ThirstManagerAccess;
-import net.dehydration.thirst.ThirstManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import org.ladysnake.cca.api.v3.component.Component;
-import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
 
 public class RehydrationComponent implements Component {
 
@@ -52,26 +44,19 @@ public class RehydrationComponent implements Component {
 
     public void tickRehydration(double rehydrationEfficiency, int wetChange) {
         if (rehydrationEfficiency > 0) {
-            ScorchfulConfig config = Scorchful.getConfig();
-
-            boolean dehydrationLoaded = ScorchfulIntegrations.isDehydrationLoaded();
             if (wetChange < 0 && this.provider.getRandom().nextBoolean()) {
-                this.tickRehydrationWaterRecapture(config, dehydrationLoaded);
+                int rehydrationCapacity = ServerThirstPlugin.getActivePlugin().getMaxRehydrationWaterCapacity();
+                this.waterCaptured = Math.min(this.waterCaptured + 1, rehydrationCapacity);
             }
-            this.tickRehydrationRefill(config, rehydrationEfficiency, dehydrationLoaded);
+            this.tickRehydrate(rehydrationEfficiency);
         } else {
             this.resetRehydration();
         }
     }
 
-    private void tickRehydrationWaterRecapture(ScorchfulConfig config, boolean dehydrationLoaded) {
-        int rehydrationCapacity = config.getRehydrationDrinkSize(dehydrationLoaded);
-        this.waterCaptured = Math.min(this.waterCaptured + 1, rehydrationCapacity);
-    }
-
-    private void tickRehydrationRefill(ScorchfulConfig config, double rehydrationEfficiency, boolean dehydrationLoaded) {
-        int rehydrationCapacity = config.getRehydrationDrinkSize(dehydrationLoaded);
-        if (waterCaptured >= rehydrationCapacity && this.provider.getWorld() instanceof ServerWorld serverWorld) {
+    private void tickRehydrate(double rehydrationEfficiency) {
+        int rehydrationCapacity = ServerThirstPlugin.getActivePlugin().getMaxRehydrationWaterCapacity();
+        if (this.waterCaptured >= rehydrationCapacity && this.provider.getWorld() instanceof ServerWorld serverWorld) {
             ServerThirstPlugin plugin = ServerThirstPlugin.getActivePlugin();
             plugin.rehydrateFromEnchantment(this.provider, this.waterCaptured, rehydrationEfficiency);
             this.playRehydrationEffects(serverWorld);
