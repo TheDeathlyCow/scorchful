@@ -55,7 +55,7 @@ public class PlayerWaterComponent implements Component, ServerTickingComponent {
     public void serverTick() {
         if (!this.provider.thermoo$isCold() && ServerThirstPlugin.getActivePlugin().transferWaterToSweat(this.provider)) {
             // sweating: move thirst water to wetness
-            this.provider.thermoo$addWetTicks(-2);
+            this.provider.thermoo$addWetTicks(2);
         }
     }
 }

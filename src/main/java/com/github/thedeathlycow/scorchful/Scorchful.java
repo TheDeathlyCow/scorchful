@@ -91,9 +91,9 @@ public class Scorchful implements ModInitializer {
         );
 
         if (ScorchfulIntegrations.isDehydrationLoaded() && !ServerThirstPlugin.isCustomPluginLoaded()) {
+            LOGGER.debug("Applying Dehydration thirst plugin");
             ServerThirstPlugin.registerPlugin(new DehydrationServerThirstPlugin());
         }
-
 
         UseItemCallback.EVENT.register(new FireChargeThrower());
         ScorchfulItemEvents.GET_DEFAULT_STACK.register(DrinkLevelComponent::applyToNewStack);
@@ -123,7 +123,7 @@ public class Scorchful implements ModInitializer {
         this.registerThermooEventListeners();
         LootTableEvents.MODIFY.register(new TurtleScuteLootTableModifier());
         EnchantmentModifiers.initialize();
-        
+
         PayloadTypeRegistry.playS2C().register(TemperatureSoundEventPacket.PACKET_ID, TemperatureSoundEventPacket.PACKET_CODEC);
 
         LOGGER.info("Scorchful initialized!");
