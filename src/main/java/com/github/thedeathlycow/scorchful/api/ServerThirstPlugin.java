@@ -3,7 +3,7 @@ package com.github.thedeathlycow.scorchful.api;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
-public interface ThirstPlugin {
+public interface ServerThirstPlugin {
     void onConsumeDrink(PlayerEntity player, ItemStack stack);
 
     void tickSweat(PlayerEntity player);
