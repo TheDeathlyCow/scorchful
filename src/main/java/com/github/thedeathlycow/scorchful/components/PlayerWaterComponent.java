@@ -31,8 +31,6 @@ public class PlayerWaterComponent implements Component, ServerTickingComponent {
 
     private int waterDrunk = 0;
 
-    private int rehydrationDrink = 0;
-
     public PlayerWaterComponent(PlayerEntity provider) {
         this.provider = provider;
     }
@@ -50,20 +48,12 @@ public class PlayerWaterComponent implements Component, ServerTickingComponent {
         if (tag.contains(WATER_KEY, NbtElement.INT_TYPE)) {
             this.waterDrunk = tag.getInt(WATER_KEY);
         }
-
-        if (tag.contains(REHYDRATION_DRINK_KEY, NbtElement.INT_TYPE)) {
-            this.rehydrationDrink = tag.getInt(REHYDRATION_DRINK_KEY);
-        }
     }
 
     @Override
     public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         if (this.waterDrunk > 0) {
             tag.putInt(WATER_KEY, this.waterDrunk);
-        }
-
-        if (this.rehydrationDrink > 0) {
-            tag.putInt(REHYDRATION_DRINK_KEY, this.rehydrationDrink);
         }
     }
 
@@ -99,97 +89,5 @@ public class PlayerWaterComponent implements Component, ServerTickingComponent {
             thirstManager.addDehydration(config.getDehydrationConsumedBySweat());
             player.thermoo$addWetTicks(2);
         }
-    }
-
-    // REHYDRATION EXPLANATION
-    // The Rehydration enchantment builds up a drink whenever the player loses wetness (not body water) to cooling
-    // That drink is the same size as a hydrating drink.
-    // When the drink is full, the player is given back all the water in the drink as *body* water.
-    // However, some of that water is lost, based on the total level of Rehydration.
-
-    public void tickRehydrationWaterRecapture(ScorchfulConfig config, boolean dehydrationLoaded) {
-        int rehydrationCapacity = config.getRehydrationDrinkSize(dehydrationLoaded);
-        this.rehydrationDrink = Math.min(this.rehydrationDrink + 1, rehydrationCapacity);
-    }
-
-    public void tickRehydrationRefill(ScorchfulConfig config, double rehydrationEfficiency, boolean dehydrationLoaded) {
-        int rehydrationCapacity = config.getRehydrationDrinkSize(dehydrationLoaded);
-        if (rehydrationDrink >= rehydrationCapacity) {
-            if (dehydrationLoaded) {
-                this.rehydrateWithDehydration(config, rehydrationEfficiency);
-            } else {
-                this.rehydrate(config, rehydrationEfficiency);
-            }
-        }
-    }
-
-    public void resetRehydration() {
-        this.rehydrationDrink = 0;
-    }
-
-    private void rehydrate(ScorchfulConfig config, double rehydrationEfficiency) {
-        // dont drink if dont have to - prevents rehydration spam
-        if (this.waterDrunk > 1) {
-            return;
-        }
-
-        double efficiency = config.thirstConfig.getMaxRehydrationEfficiency() * rehydrationEfficiency;
-        int drinkToAdd = MathHelper.floor(this.rehydrationDrink * efficiency);
-
-        if (drinkToAdd > 0 && this.provider.getWorld() instanceof ServerWorld serverWorld) {
-            this.drink(drinkToAdd);
-            this.playRehydrationEffects(serverWorld);
-            this.resetRehydration();
-        }
-    }
-
-    private void rehydrateWithDehydration(ScorchfulConfig config, double rehydrationEfficiency) {
-        ThirstManager thirstManager = ((ThirstManagerAccess) this.provider).getThirstManager();
-
-        DehydrationConfig dehydrationConfig = config.integrationConfig.dehydrationConfig;
-        // dont drink if dont have to - prevents rehydration spam
-        if (thirstManager.getThirstLevel() > dehydrationConfig.getMinWaterLevelForSweat()) {
-            return;
-        }
-
-        if (this.provider.getWorld() instanceof ServerWorld serverWorld) {
-            int maxWater = MathHelper.floor(
-                    rehydrationEfficiency * dehydrationConfig.getMaxWaterLost()
-            );
-            int waterToAdd = this.provider.getRandom().nextBetween(1, maxWater);
-            thirstManager.add(waterToAdd);
-            this.playRehydrationEffects(serverWorld);
-            this.resetRehydration();
-        }
-    }
-
-    private void playRehydrationEffects(ServerWorld serverWorld) {
-        Vec3d pos = this.provider.getPos();
-
-        if (!this.provider.isSilent() && !this.provider.isSneaking()) {
-            serverWorld.playSound(
-                    null,
-                    this.provider.getBlockPos(),
-                    SSoundEvents.REHYDRATE,
-                    this.provider.getSoundCategory()
-            );
-        }
-
-        if (!this.provider.isInvisible()) {
-            float height = this.provider.getHeight();
-            float width = this.provider.getWidth();
-
-            serverWorld.spawnParticles(
-                    ParticleTypes.BUBBLE_POP,
-                    pos.x, pos.y, pos.z,
-                    50,
-                    width, height, width,
-                    1f / 1000f
-            );
-        }
-    }
-
-    private static float getRehydrationEfficiency(int rehydrationLevel, float min, float max) {
-        return MathHelper.lerp(rehydrationLevel / 4f, min, max);
     }
 }

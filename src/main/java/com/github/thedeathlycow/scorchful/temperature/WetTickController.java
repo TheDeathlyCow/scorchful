@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.temperature;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
+import com.github.thedeathlycow.scorchful.components.RehydrationComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.SEntityAttributes;
@@ -69,7 +70,7 @@ public class WetTickController extends EnvironmentControllerDecorator {
 
     private static void tickRehydration(PlayerEntity player, ScorchfulConfig config, int wetChange) {
         double rehydrationEfficiency = player.getAttributeValue(SEntityAttributes.REHYDRATION_EFFICIENCY);
-        PlayerWaterComponent component = ScorchfulComponents.PLAYER_WATER.get(player);
+        RehydrationComponent component = ScorchfulComponents.REHYDRATION.get(player);
 
         if (rehydrationEfficiency > 0) {
             boolean dehydrationLoaded = ScorchfulIntegrations.isDehydrationLoaded();

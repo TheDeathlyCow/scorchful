@@ -11,7 +11,7 @@ import java.util.Objects;
 public interface ServerThirstPlugin {
     void onConsumeDrink(ServerPlayerEntity player, ItemStack stack);
 
-    void tickSweat(PlayerEntity player);
+    int tickSweatTransfer(PlayerEntity player);
 
     int getRehydrationEnchantmentDrinkSize();
 

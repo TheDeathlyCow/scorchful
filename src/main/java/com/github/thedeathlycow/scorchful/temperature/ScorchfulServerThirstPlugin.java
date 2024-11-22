@@ -30,8 +30,8 @@ public class ScorchfulServerThirstPlugin implements ServerThirstPlugin {
     }
 
     @Override
-    public void tickSweat(PlayerEntity player) {
-
+    public int tickSweatTransfer(PlayerEntity player) {
+        return 0;
     }
 
     @Override
