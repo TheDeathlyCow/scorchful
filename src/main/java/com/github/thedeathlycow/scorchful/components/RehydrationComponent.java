@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.config.DehydrationConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
@@ -71,12 +72,8 @@ public class RehydrationComponent implements Component {
     private void tickRehydrationRefill(ScorchfulConfig config, double rehydrationEfficiency, boolean dehydrationLoaded) {
         int rehydrationCapacity = config.getRehydrationDrinkSize(dehydrationLoaded);
         if (waterCaptured >= rehydrationCapacity && this.provider.getWorld() instanceof ServerWorld serverWorld) {
-            if (dehydrationLoaded) {
-                this.rehydrateWithDehydration(config, rehydrationEfficiency);
-            } else {
-                this.rehydrate(config, rehydrationEfficiency);
-            }
-
+            ServerThirstPlugin plugin = ServerThirstPlugin.getActivePlugin();
+            plugin.rehydrateFromEnchantment(this.provider, this.waterCaptured, rehydrationEfficiency);
             this.playRehydrationEffects(serverWorld);
             this.resetRehydration();
         }
@@ -84,35 +81,6 @@ public class RehydrationComponent implements Component {
 
     private void resetRehydration() {
         this.waterCaptured = 0;
-    }
-
-    private void rehydrate(ScorchfulConfig config, double rehydrationEfficiency) {
-        // dont drink if dont have to - prevents rehydration spam
-        PlayerWaterComponent waterComponent = ScorchfulComponents.PLAYER_WATER.get(this.provider);
-        if (waterComponent.getWaterDrunk() > 1) {
-            return;
-        }
-
-        double efficiency = config.thirstConfig.getMaxRehydrationEfficiency() * rehydrationEfficiency;
-        int drinkToAdd = MathHelper.floor(this.waterCaptured * efficiency);
-
-        if (drinkToAdd > 0) {
-            waterComponent.drink(drinkToAdd);
-        }
-    }
-
-    private void rehydrateWithDehydration(ScorchfulConfig config, double rehydrationEfficiency) {
-        ThirstManager thirstManager = ((ThirstManagerAccess) this.provider).getThirstManager();
-
-        DehydrationConfig dehydrationConfig = config.integrationConfig.dehydrationConfig;
-        // dont drink if dont have to - prevents rehydration spam
-        if (thirstManager.getThirstLevel() > dehydrationConfig.getMinWaterLevelForSweat()) {
-            return;
-        }
-
-        int maxWater = MathHelper.floor(rehydrationEfficiency * dehydrationConfig.getMaxWaterLost());
-        int waterToAdd = this.provider.getRandom().nextBetween(1, maxWater);
-        thirstManager.add(waterToAdd);
     }
 
     private void playRehydrationEffects(ServerWorld serverWorld) {

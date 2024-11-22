@@ -4,12 +4,14 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
+import com.github.thedeathlycow.scorchful.config.ThirstConfig;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.math.MathHelper;
 
 public class ScorchfulServerThirstPlugin implements ServerThirstPlugin {
     @Override
@@ -35,7 +37,19 @@ public class ScorchfulServerThirstPlugin implements ServerThirstPlugin {
     }
 
     @Override
-    public void rehydrateFromEnchantment(double rehydrationEfficiency) {
-        return;
+    public void rehydrateFromEnchantment(PlayerEntity player, int waterCaptured, double rehydrationEfficiency) {
+        // don't drink if we already have water (and dont need to) - prevents rehydration spam
+        PlayerWaterComponent waterComponent = ScorchfulComponents.PLAYER_WATER.get(player);
+        if (waterComponent.getWaterDrunk() > 1) {
+            return;
+        }
+
+        ThirstConfig config = Scorchful.getConfig().thirstConfig;
+        double efficiency = config.getMaxRehydrationEfficiency() * rehydrationEfficiency;
+        int drinkToAdd = MathHelper.floor(waterCaptured * efficiency);
+
+        if (drinkToAdd > 0) {
+            waterComponent.drink(drinkToAdd);
+        }
     }
 }
