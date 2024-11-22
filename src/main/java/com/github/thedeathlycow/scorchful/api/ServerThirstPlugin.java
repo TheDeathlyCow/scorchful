@@ -15,11 +15,10 @@ public interface ServerThirstPlugin {
 
     int tickSweatTransfer(PlayerEntity player);
 
-    boolean rehydrateFromEnchantment(double rehydrationEfficiency);
+    void rehydrateFromEnchantment(double rehydrationEfficiency);
 
     default int getMaxRehydrationWaterCapacity() {
-        ThirstConfig config = Scorchful.getConfig().thirstConfig;
-        return config.getRehydrationDrinkSize();
+        return Scorchful.getConfig().getRehydrationDrinkSize(false);
     }
 
     static void registerPlugin(@NotNull ServerThirstPlugin plugin) {
@@ -30,5 +29,9 @@ public interface ServerThirstPlugin {
     @NotNull
     static ServerThirstPlugin getActivePlugin() {
         return ServerThirstPluginManager.getInstance().getPlugin();
+    }
+
+    static boolean isCustomPluginLoaded() {
+
     }
 }

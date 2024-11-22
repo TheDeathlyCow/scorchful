@@ -1,7 +1,10 @@
 package com.github.thedeathlycow.scorchful;
 
+import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.block.NetherLilyBehaviours;
 import com.github.thedeathlycow.scorchful.block.SandCauldronBehaviours;
+import com.github.thedeathlycow.scorchful.compat.DehydrationServerThirstPlugin;
+import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
 import com.github.thedeathlycow.scorchful.event.ScorchfulLivingEntityEvents;
@@ -86,6 +89,12 @@ public class Scorchful implements ModInitializer {
                     ThirstCommand.register(dispatcher);
                 }
         );
+
+        if (ScorchfulIntegrations.isDehydrationLoaded() && !ServerThirstPlugin.isCustomPluginLoaded()) {
+            ServerThirstPlugin.registerPlugin(new DehydrationServerThirstPlugin());
+        }
+
+
         UseItemCallback.EVENT.register(new FireChargeThrower());
         ScorchfulItemEvents.GET_DEFAULT_STACK.register(DrinkLevelComponent::applyToNewStack);
         ScorchfulItemEvents.CONSUME_ITEM.register(DrinkItem::applyWater);

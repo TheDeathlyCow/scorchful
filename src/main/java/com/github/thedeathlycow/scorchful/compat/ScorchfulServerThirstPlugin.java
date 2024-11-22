@@ -35,7 +35,7 @@ public class ScorchfulServerThirstPlugin implements ServerThirstPlugin {
     }
 
     @Override
-    public boolean rehydrateFromEnchantment(double rehydrationEfficiency) {
-        return false;
+    public void rehydrateFromEnchantment(double rehydrationEfficiency) {
+        return;
     }
 }

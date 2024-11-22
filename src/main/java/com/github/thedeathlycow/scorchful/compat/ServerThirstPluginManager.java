@@ -8,6 +8,8 @@ public final class ServerThirstPluginManager {
 
     private static final ServerThirstPluginManager INSTANCE = new ServerThirstPluginManager();
 
+    private static final ServerThirstPlugin DEFAULT = new ScorchfulServerThirstPlugin();
+
     @Nullable
     private ServerThirstPlugin customPlugin = null;
 
@@ -17,7 +19,11 @@ public final class ServerThirstPluginManager {
 
     @NotNull
     public ServerThirstPlugin getPlugin() {
-        return customPlugin;
+        return this.customPlugin != null ? this.customPlugin : DEFAULT;
+    }
+
+    public boolean isCustomPluginLoaded() {
+        return this.customPlugin != null;
     }
 
     public void registerPlugin(ServerThirstPlugin plugin) {
