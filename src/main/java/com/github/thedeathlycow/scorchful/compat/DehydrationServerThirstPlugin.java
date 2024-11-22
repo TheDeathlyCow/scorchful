@@ -3,7 +3,6 @@ package com.github.thedeathlycow.scorchful.compat;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.config.DehydrationConfig;
-import com.github.thedeathlycow.scorchful.config.ThirstConfig;
 import net.dehydration.access.ThirstManagerAccess;
 import net.dehydration.thirst.ThirstManager;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,8 +17,16 @@ public class DehydrationServerThirstPlugin implements ServerThirstPlugin {
     }
 
     @Override
-    public int tickSweatTransfer(PlayerEntity player) {
-        return 0;
+    public boolean transferWaterToSweat(PlayerEntity player) {
+        DehydrationConfig config = Scorchful.getConfig().integrationConfig.dehydrationConfig;
+        ThirstManager thirstManager = ((ThirstManagerAccess) player).getThirstManager();
+        if (thirstManager.getThirstLevel() > config.getMinWaterLevelForSweat()
+                && player.thermoo$getTemperature() > 0) {
+            thirstManager.addDehydration(config.getDehydrationConsumedBySweat());
+            return true;
+        }
+
+        return false;
     }
 
     @Override

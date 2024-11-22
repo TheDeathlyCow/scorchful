@@ -32,8 +32,14 @@ public class ScorchfulServerThirstPlugin implements ServerThirstPlugin {
     }
 
     @Override
-    public int tickSweatTransfer(PlayerEntity player) {
-        return 0;
+    public boolean transferWaterToSweat(PlayerEntity player) {
+        PlayerWaterComponent waterComponent = ScorchfulComponents.PLAYER_WATER.get(player);
+        if (waterComponent.getWaterDrunk() > 0 && player.thermoo$getTemperature() > 0) {
+            waterComponent.drink(-1);
+            return true;
+        }
+
+        return false;
     }
 
     @Override

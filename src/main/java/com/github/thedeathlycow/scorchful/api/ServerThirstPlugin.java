@@ -10,9 +10,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 
 public interface ServerThirstPlugin {
+
+    int SOAKING_SWEAT_PER_TICK = 2;
+
     void onConsumeDrink(ServerPlayerEntity player, ItemStack stack);
 
-    int tickSweatTransfer(PlayerEntity player);
+    boolean transferWaterToSweat(PlayerEntity player);
 
     void rehydrateFromEnchantment(PlayerEntity player, int waterCaptured, double rehydrationEfficiency);
 
