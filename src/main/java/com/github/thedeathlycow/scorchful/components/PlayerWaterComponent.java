@@ -1,12 +1,9 @@
 package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
-import com.github.thedeathlycow.scorchful.config.DehydrationConfig;
 import net.minecraft.registry.RegistryWrapper;
 import org.ladysnake.cca.api.v3.component.Component;
 import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
-import net.dehydration.access.ThirstManagerAccess;
-import net.dehydration.thirst.ThirstManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -53,7 +50,7 @@ public class PlayerWaterComponent implements Component, ServerTickingComponent {
 
     @Override
     public void serverTick() {
-        if (!this.provider.thermoo$isCold() && ServerThirstPlugin.getActivePlugin().transferWaterToSweat(this.provider)) {
+        if (!this.provider.thermoo$isCold() && ServerThirstPlugin.getActivePlugin().dehydrateFromSweating(this.provider)) {
             // sweating: move thirst water to wetness
             this.provider.thermoo$addWetTicks(2);
         }

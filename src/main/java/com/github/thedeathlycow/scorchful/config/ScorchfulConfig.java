@@ -42,10 +42,4 @@ public class ScorchfulConfig extends PartitioningSerializer.GlobalData {
                     "You may disable these updates if you don't want this to happen.");
         }
     }
-
-    public int getRehydrationDrinkSize(boolean dehydrationLoaded) {
-        return dehydrationLoaded
-                ? this.integrationConfig.dehydrationConfig.getRehydrationDrinkSize()
-                : this.thirstConfig.getRehydrationDrinkSize();
-    }
 }

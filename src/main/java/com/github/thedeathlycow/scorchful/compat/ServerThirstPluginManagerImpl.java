@@ -4,16 +4,16 @@ import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public final class ServerThirstPluginManager {
+public final class ServerThirstPluginManagerImpl {
 
-    private static final ServerThirstPluginManager INSTANCE = new ServerThirstPluginManager();
+    private static final ServerThirstPluginManagerImpl INSTANCE = new ServerThirstPluginManagerImpl();
 
     private static final ServerThirstPlugin DEFAULT = new ScorchfulServerThirstPlugin();
 
     @Nullable
     private ServerThirstPlugin customPlugin = null;
 
-    public static ServerThirstPluginManager getInstance() {
+    public static ServerThirstPluginManagerImpl getInstance() {
         return INSTANCE;
     }
 
@@ -34,7 +34,7 @@ public final class ServerThirstPluginManager {
         this.customPlugin = plugin;
     }
 
-    private ServerThirstPluginManager() {
+    private ServerThirstPluginManagerImpl() {
 
     }
 }

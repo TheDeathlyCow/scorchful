@@ -6,18 +6,11 @@ import com.github.thedeathlycow.scorchful.config.DehydrationConfig;
 import net.dehydration.access.ThirstManagerAccess;
 import net.dehydration.thirst.ThirstManager;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.MathHelper;
 
 public class DehydrationServerThirstPlugin implements ServerThirstPlugin {
     @Override
-    public void onConsumeDrink(ServerPlayerEntity player, ItemStack stack) {
-        // handled by dehydration mod
-    }
-
-    @Override
-    public boolean transferWaterToSweat(PlayerEntity player) {
+    public boolean dehydrateFromSweating(PlayerEntity player) {
         DehydrationConfig config = Scorchful.getConfig().integrationConfig.dehydrationConfig;
         ThirstManager thirstManager = ((ThirstManagerAccess) player).getThirstManager();
         if (thirstManager.getThirstLevel() > config.getMinWaterLevelForSweat()
@@ -46,6 +39,6 @@ public class DehydrationServerThirstPlugin implements ServerThirstPlugin {
 
     @Override
     public int getMaxRehydrationWaterCapacity() {
-        return Scorchful.getConfig().getRehydrationDrinkSize(true);
+        return Scorchful.getConfig().integrationConfig.dehydrationConfig.getRehydrationDrinkSize();
     }
 }

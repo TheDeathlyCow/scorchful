@@ -1,8 +1,12 @@
 package com.github.thedeathlycow.scorchful.item;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
+import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
+import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
+import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -72,7 +76,23 @@ public abstract class DrinkItem extends Item {
      * @param player Player consuming the drink
      */
     public static void applyWater(ItemStack stack, ServerPlayerEntity player) {
-        ServerThirstPlugin.getActivePlugin().onConsumeDrink(player, stack);
+        if (ServerThirstPlugin.isCustomPluginLoaded()) {
+            return;
+        }
+
+        DrinkLevelComponent drink = stack.get(SDataComponentTypes.DRINK_LEVEL);
+        if (drink == null) {
+            return;
+        }
+
+        PlayerWaterComponent component = ScorchfulComponents.PLAYER_WATER.get(player);
+
+        int water = drink.getDrinkingWater(Scorchful.getConfig().thirstConfig);
+        component.drink(water);
+
+        if (component.getWaterDrunk() >= PlayerWaterComponent.MAX_WATER * 0.9) {
+            player.playSound(SSoundEvents.ENTITY_GULP, 1f, 1f);
+        }
     }
 
     @Override
