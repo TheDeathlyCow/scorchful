@@ -16,6 +16,11 @@ public class ScorchfulComponents implements EntityComponentInitializer {
             PlayerWaterComponent.class
     );
 
+    public static final ComponentKey<RehydrationComponent> REHYDRATION = ComponentRegistry.getOrCreate(
+            Scorchful.id("rehydration"),
+            RehydrationComponent.class
+    );
+
     public static final ComponentKey<EntityDesertVisionComponent> ENTITY_DESERT_VISION = ComponentRegistry.getOrCreate(
             Scorchful.id("entity_desert_vision"),
             EntityDesertVisionComponent.class
@@ -31,6 +36,11 @@ public class ScorchfulComponents implements EntityComponentInitializer {
         registry.registerForPlayers(
                 PLAYER_WATER,
                 PlayerWaterComponent::new,
+                RespawnCopyStrategy.LOSSLESS_ONLY
+        );
+        registry.registerForPlayers(
+                REHYDRATION,
+                RehydrationComponent::new,
                 RespawnCopyStrategy.LOSSLESS_ONLY
         );
         registry.registerFor(

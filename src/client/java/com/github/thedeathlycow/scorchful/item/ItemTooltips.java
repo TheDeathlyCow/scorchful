@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.item;
 
+import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
@@ -21,8 +22,12 @@ public class ItemTooltips {
             .setStyle(Style.EMPTY.withColor(Formatting.AQUA));
 
     public static void appendDrinkTooltip(ItemStack stack, Item.TooltipContext context, TooltipType tooltipType, List<Text> tooltip) {
+        if (ServerThirstPlugin.isCustomPluginLoaded()) {
+            return;
+        }
+
         DrinkLevelComponent level = stack.get(SDataComponentTypes.DRINK_LEVEL);
-        if (level != null && !ScorchfulIntegrations.isDehydrationLoaded()) {
+        if (level != null) {
             if (tooltipType.isAdvanced()) {
                 addTooltipBeforeAdvanced(stack, tooltip, level.getTooltipText());
             } else {

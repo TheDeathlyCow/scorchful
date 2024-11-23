@@ -52,7 +52,8 @@
 		"cardinal-components": [
 			"scorchful:player_water",
 			"scorchful:entity_desert_vision",
-			"scorchful:mesmerized"
+			"scorchful:mesmerized",
+			"scorchful:rehydration"
 		],
 		"modmenu": {
 			"links": {
