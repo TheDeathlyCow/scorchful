@@ -27,7 +27,7 @@ public class ItemTooltips {
         }
 
         DrinkLevelComponent level = stack.get(SDataComponentTypes.DRINK_LEVEL);
-        if (level != null && !ScorchfulIntegrations.isDehydrationLoaded()) {
+        if (level != null) {
             if (tooltipType.isAdvanced()) {
                 addTooltipBeforeAdvanced(stack, tooltip, level.getTooltipText());
             } else {
