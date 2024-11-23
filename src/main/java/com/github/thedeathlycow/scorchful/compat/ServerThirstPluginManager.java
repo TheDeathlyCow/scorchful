@@ -1,22 +1,21 @@
 package com.github.thedeathlycow.scorchful.compat;
 
-import com.github.thedeathlycow.scorchful.api.ScorchfulServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @ApiStatus.Internal
-public final class ServerThirstPluginManagerImpl {
+public final class ServerThirstPluginManager {
 
-    private static final ServerThirstPluginManagerImpl INSTANCE = new ServerThirstPluginManagerImpl();
+    public static final ServerThirstPlugin DEFAULT = new ScorchfulServerThirstPlugin();
 
-    private static final ServerThirstPlugin DEFAULT = new ScorchfulServerThirstPlugin();
+    private static final ServerThirstPluginManager INSTANCE = new ServerThirstPluginManager();
 
     @Nullable
     private ServerThirstPlugin customPlugin = null;
 
-    public static ServerThirstPluginManagerImpl getInstance() {
+    public static ServerThirstPluginManager getInstance() {
         return INSTANCE;
     }
 
@@ -37,7 +36,7 @@ public final class ServerThirstPluginManagerImpl {
         this.customPlugin = plugin;
     }
 
-    private ServerThirstPluginManagerImpl() {
+    private ServerThirstPluginManager() {
 
     }
 }

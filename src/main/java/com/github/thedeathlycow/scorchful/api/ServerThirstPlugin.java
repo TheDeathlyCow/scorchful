@@ -1,7 +1,8 @@
 package com.github.thedeathlycow.scorchful.api;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.compat.ServerThirstPluginManagerImpl;
+import com.github.thedeathlycow.scorchful.compat.ScorchfulServerThirstPlugin;
+import com.github.thedeathlycow.scorchful.compat.ServerThirstPluginManager;
 import net.minecraft.entity.player.PlayerEntity;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,7 +21,6 @@ import java.util.Objects;
  * @see ScorchfulServerThirstPlugin
  */
 public interface ServerThirstPlugin {
-
     /**
      * Attempts to dehydrate the player from sweating.
      *
@@ -63,7 +63,7 @@ public interface ServerThirstPlugin {
      */
     static void registerPlugin(@NotNull ServerThirstPlugin plugin) {
         Objects.requireNonNull(plugin, "Thirst plugin may not be null!");
-        ServerThirstPluginManagerImpl.getInstance().registerPlugin(plugin);
+        ServerThirstPluginManager.getInstance().registerPlugin(plugin);
     }
 
     /**
@@ -73,13 +73,22 @@ public interface ServerThirstPlugin {
      */
     @NotNull
     static ServerThirstPlugin getActivePlugin() {
-        return ServerThirstPluginManagerImpl.getInstance().getPlugin();
+        return ServerThirstPluginManager.getInstance().getPlugin();
+    }
+
+    /**
+     * Gets the default plugin behaviour.
+     *
+     * @return Returns a global instance of the default thirst plugin.
+     */
+    static ServerThirstPlugin getDefaultPlugin() {
+        return ServerThirstPluginManager.DEFAULT;
     }
 
     /**
      * @return Returns {@code true} if a custom plugin is already loaded
      */
     static boolean isCustomPluginLoaded() {
-        return ServerThirstPluginManagerImpl.getInstance().isCustomPluginLoaded();
+        return ServerThirstPluginManager.getInstance().isCustomPluginLoaded();
     }
 }
