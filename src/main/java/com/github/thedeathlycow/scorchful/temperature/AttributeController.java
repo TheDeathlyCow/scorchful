@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.temperature;
 import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentController;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentControllerDecorator;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -26,7 +27,7 @@ public class AttributeController extends EnvironmentControllerDecorator {
         double value = super.getBaseValueForAttribute(attribute, entity);
 
         if (attribute == ThermooAttributes.MAX_TEMPERATURE) {
-            value = entity.isPlayer()
+            value = entity.getType() == EntityType.PLAYER
                     ? PLAYER_MAX_TEMPERATURE
                     : BASE_MAX_TEMPERATURE;
         }

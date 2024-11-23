@@ -1,8 +1,7 @@
 package com.github.thedeathlycow.scorchful.temperature;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
-import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
+import com.github.thedeathlycow.scorchful.components.RehydrationComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.SEntityAttributes;
@@ -60,26 +59,16 @@ public class WetTickController extends EnvironmentControllerDecorator {
             wetChange -= config.thirstConfig.getOnFireDryDate();
         }
 
-        if (entity.isPlayer()) {
-            tickRehydration((PlayerEntity) entity, config, wetChange);
+        if (entity instanceof PlayerEntity player) {
+            tickRehydration(player, wetChange);
         }
 
         return wetChange;
     }
 
-    private static void tickRehydration(PlayerEntity player, ScorchfulConfig config, int wetChange) {
+    private static void tickRehydration(PlayerEntity player, int wetChange) {
         double rehydrationEfficiency = player.getAttributeValue(SEntityAttributes.REHYDRATION_EFFICIENCY);
-        PlayerWaterComponent component = ScorchfulComponents.PLAYER_WATER.get(player);
-
-        if (rehydrationEfficiency > 0) {
-            boolean dehydrationLoaded = ScorchfulIntegrations.isDehydrationLoaded();
-            if (wetChange < 0 && player.getRandom().nextBoolean()) {
-                component.tickRehydrationWaterRecapture(config, dehydrationLoaded);
-            }
-            component.tickRehydrationRefill(config, rehydrationEfficiency, dehydrationLoaded);
-        } else {
-            component.resetRehydration();
-        }
+        RehydrationComponent component = ScorchfulComponents.REHYDRATION.get(player);
+        component.tickRehydration(rehydrationEfficiency, wetChange);
     }
-
 }

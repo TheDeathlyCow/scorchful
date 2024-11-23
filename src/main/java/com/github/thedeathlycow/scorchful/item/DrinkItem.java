@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
+import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
@@ -76,20 +76,22 @@ public abstract class DrinkItem extends Item {
      * @param player Player consuming the drink
      */
     public static void applyWater(ItemStack stack, ServerPlayerEntity player) {
-        if (!ScorchfulIntegrations.isDehydrationLoaded()) {
-            DrinkLevelComponent drink = stack.get(SDataComponentTypes.DRINK_LEVEL);
-            if (drink == null) {
-                return;
-            }
+        if (ServerThirstPlugin.isCustomPluginLoaded()) {
+            return;
+        }
 
-            PlayerWaterComponent component = ScorchfulComponents.PLAYER_WATER.get(player);
+        DrinkLevelComponent drink = stack.get(SDataComponentTypes.DRINK_LEVEL);
+        if (drink == null) {
+            return;
+        }
 
-            int water = drink.getDrinkingWater(Scorchful.getConfig().thirstConfig);
-            component.drink(water);
+        PlayerWaterComponent component = ScorchfulComponents.PLAYER_WATER.get(player);
 
-            if (component.getWaterDrunk() >= PlayerWaterComponent.MAX_WATER * 0.9) {
-                player.playSound(SSoundEvents.ENTITY_GULP, 1f, 1f);
-            }
+        int water = drink.getDrinkingWater(Scorchful.getConfig().thirstConfig);
+        component.drink(water);
+
+        if (component.getWaterDrunk() >= PlayerWaterComponent.MAX_WATER * 0.9) {
+            player.playSound(SSoundEvents.ENTITY_GULP, 1f, 1f);
         }
     }
 
