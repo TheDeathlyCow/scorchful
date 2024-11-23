@@ -43,7 +43,7 @@ public class RehydrationComponent implements Component {
     public void tickRehydration(double rehydrationEfficiency, int wetChange) {
         if (rehydrationEfficiency > 0) {
             if (wetChange < 0 && this.provider.getRandom().nextBoolean()) {
-                int rehydrationCapacity = ServerThirstPlugin.getActivePlugin().getMaxRehydrationWaterCapacity();
+                int rehydrationCapacity = ServerThirstPlugin.getActivePlugin().getRehydrationThreshold();
                 this.waterCaptured = Math.min(this.waterCaptured + 1, rehydrationCapacity);
             }
             this.tickRehydrate(rehydrationEfficiency);
@@ -53,7 +53,7 @@ public class RehydrationComponent implements Component {
     }
 
     private void tickRehydrate(double rehydrationEfficiency) {
-        int rehydrationCapacity = ServerThirstPlugin.getActivePlugin().getMaxRehydrationWaterCapacity();
+        int rehydrationCapacity = ServerThirstPlugin.getActivePlugin().getRehydrationThreshold();
         if (this.waterCaptured >= rehydrationCapacity && this.provider.getWorld() instanceof ServerWorld serverWorld) {
             ServerThirstPlugin plugin = ServerThirstPlugin.getActivePlugin();
             plugin.rehydrateFromEnchantment(this.provider, this.waterCaptured, rehydrationEfficiency);

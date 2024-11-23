@@ -1,9 +1,12 @@
 package com.github.thedeathlycow.scorchful.compat;
 
+import com.github.thedeathlycow.scorchful.api.ScorchfulServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+@ApiStatus.Internal
 public final class ServerThirstPluginManagerImpl {
 
     private static final ServerThirstPluginManagerImpl INSTANCE = new ServerThirstPluginManagerImpl();

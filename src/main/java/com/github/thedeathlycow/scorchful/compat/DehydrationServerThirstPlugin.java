@@ -38,7 +38,7 @@ public class DehydrationServerThirstPlugin implements ServerThirstPlugin {
     }
 
     @Override
-    public int getMaxRehydrationWaterCapacity() {
+    public int getRehydrationThreshold() {
         return Scorchful.getConfig().integrationConfig.dehydrationConfig.getRehydrationDrinkSize();
     }
 }
