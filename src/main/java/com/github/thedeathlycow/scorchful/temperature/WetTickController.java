@@ -61,8 +61,8 @@ public class WetTickController extends EnvironmentControllerDecorator {
             wetChange -= config.thirstConfig.getOnFireDryDate();
         }
 
-        if (entity.isPlayer()) {
-            tickRehydration((PlayerEntity) entity, config, wetChange);
+        if (entity instanceof PlayerEntity player) {
+            tickRehydration(player, config, wetChange);
         }
 
         return wetChange;
