@@ -16,6 +16,7 @@ public class SSoundEvents {
     public static final SoundEvent WEATHER_SANDSTORM = create("weather.sandstorm");
     public static final SoundEvent ENTITY_GULP = create("entity.gulp");
     public static final SoundEvent DISCOVER_VISION = create("discover_vision");
+    public static final SoundEvent TEMPERATURE_EFFECT_PANT = create("temperature_effect.scorchful.pant");
 
     public static void registerAll() {
         register(ITEM_WATER_SKIN_FILL);
@@ -25,6 +26,7 @@ public class SSoundEvents {
         register(WEATHER_SANDSTORM);
         register(ENTITY_GULP);
         register(DISCOVER_VISION);
+        register(TEMPERATURE_EFFECT_PANT);
     }
 
     private static SoundEvent register(SoundEvent event) {
