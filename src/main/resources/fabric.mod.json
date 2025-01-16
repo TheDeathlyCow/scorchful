@@ -12,7 +12,7 @@
 		"sources": "https://github.com/TheDeathlyCow/scorchful",
 		"issues": "https://github.com/TheDeathlyCow/scorchful/issues"
 	},
-	"license": "All rights reserved",
+	"license": "LGPL-3.0",
 	"icon": "assets/scorchful/icon.png",
 	"environment": "*",
 	"entrypoints": {
@@ -41,7 +41,7 @@
 		"minecraft": "1.21.1",
 		"java": ">=21",
 		"fabric-api": ">=0.105.0",
-		"thermoo": ">=4.2.3"
+		"thermoo": ">=4.3"
 	},
 	"suggests": {
 		"frostiful": "*",
