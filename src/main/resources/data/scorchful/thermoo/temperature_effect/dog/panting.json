@@ -1,0 +1,29 @@
+{
+    "type": "thermoo:sequence",
+    "entity_type": "#scorchful:dogs_that_pant",
+    "temperature_scale_range": {
+        "min": 0.25
+    },
+    "config": {
+        "children": [
+            {
+                "type": "scorchful:sound",
+                "config": {
+                    "interval": 40,
+                    "sound": "scorchful:temperature_effect.scorchful.pant",
+                    "volume": 1,
+                    "pitch": 1,
+                    "only_play_to_source": false
+                }
+            },
+            {
+                "type": "scorchful:cool_from_panting",
+                "config": {
+                    "interval": 20,
+                    "temperature_change": -20,
+                    "heating_mode": "passive"
+                }
+            }
+        ]
+    }
+}
