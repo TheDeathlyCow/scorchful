@@ -1,6 +1,6 @@
 {
     "type": "thermoo:sequence",
-    "entity_type": "#scorchful:dogs_that_pant",
+    "entity_type": "#scorchful:mobs_that_pant",
     "temperature_scale_range": {
         "min": 0.25
     },
@@ -8,11 +8,41 @@
         "children": [
             {
                 "type": "scorchful:sound",
+                "temperature_scale_range": {
+                    "min": 0.9
+                },
                 "config": {
-                    "interval": 40,
-                    "sound": "scorchful:temperature_effect.scorchful.pant",
+                    "interval": 20,
+                    "sound": "minecraft:entity.wolf.pant",
                     "volume": 1,
-                    "pitch": 1,
+                    "pitch": 1.1,
+                    "only_play_to_source": false
+                }
+            },
+            {
+                "type": "scorchful:sound",
+                "temperature_scale_range": {
+                    "min": 0.5,
+                    "max": 0.9
+                },
+                "config": {
+                    "interval": 60,
+                    "sound": "minecraft:entity.wolf.pant",
+                    "volume": 1,
+                    "pitch": 1.05,
+                    "only_play_to_source": false
+                }
+            },
+            {
+                "type": "scorchful:sound",
+                "temperature_scale_range": {
+                    "max": 0.5
+                },
+                "config": {
+                    "interval": 100,
+                    "sound": "minecraft:entity.wolf.pant",
+                    "volume": 1,
+                    "pitch": 1.0,
                     "only_play_to_source": false
                 }
             },

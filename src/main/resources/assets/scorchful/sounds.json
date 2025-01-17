@@ -16,7 +16,7 @@
     },
     "temperature_effect.scorchful.pant": {
         "sounds": [
-            "scorchful:entity/pant1"
+            "scorchful:entity/pant_maybe"
         ],
         "subtitle": "subtitles.temperature_effect.scorchful.pant"
     },
