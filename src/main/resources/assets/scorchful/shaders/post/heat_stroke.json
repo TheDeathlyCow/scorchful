@@ -6,17 +6,7 @@
         {
             "intarget": "minecraft:main",
             "outtarget": "swap",
-            "name": "scorchful:periodic_blur",
-            "uniforms": [
-                {
-                    "name": "BlurDirection",
-                    "values": [ 1.0, 0.0 ]
-                },
-                {
-                    "name": "BlurRadius",
-                    "values": [ 20.0 ]
-                }
-            ]
+            "name": "scorchful:periodic_blur"
         },
         {
             "intarget": "swap",

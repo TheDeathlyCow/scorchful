@@ -2,9 +2,9 @@
     "blend": {
         "func": "add",
         "srcrgb": "one",
-        "dstrgb": "one"
+        "dstrgb": "zero"
     },
-    "vertex": "blit",
+    "vertex": "blur",
     "fragment": "scorchful:periodic_blur",
     "attributes": [ "Position" ],
     "samplers": [
@@ -16,7 +16,7 @@
         { "name": "OutSize",        "type": "float",     "count": 2,    "values": [ 1.0, 1.0 ] },
         { "name": "Time",           "type": "float",     "count": 1,    "values": [ 0.0 ] },
         { "name": "Frequency",      "type": "float",     "count": 1,    "values": [ 1.0 ] },
-        { "name": "BlurRadius",     "type": "float",     "count": 1,    "values": [ 2.0 ] },
-        { "name": "BlurDirection",  "type": "float",     "count": 2,    "values": [ 1.0, 0.0 ] }
+        { "name": "BlurRadius",     "type": "float",     "count": 1,    "values": [ 20.0 ] },
+        { "name": "BlurDir",        "type": "float",     "count": 2,    "values": [ 1.0, 0.0 ] }
     ]
 }

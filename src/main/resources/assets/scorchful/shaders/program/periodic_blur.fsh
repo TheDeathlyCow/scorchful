@@ -5,12 +5,12 @@
 uniform sampler2D DiffuseSampler;
 
 in vec2 texCoord;
-in vec2 oneTexel;
+in vec2 sampleStep;
 
 uniform float Time;
 uniform float Frequency;
 uniform float BlurRadius;
-uniform vec2 BlurDirection;
+uniform vec2 BlurDir;
 
 // rgba color with elements in range 0-1
 out vec4 fragColor;
@@ -20,7 +20,7 @@ vec3 blur(vec2 centerPos, vec2 direction, float radius) {
     int count = 0;
 
     for (float r = -radius; r <= radius; r += 1.0) {
-        vec2 offset = vec2(oneTexel.x * r * direction.x, oneTexel.y * r * direction.y);
+        vec2 offset = vec2(sampleStep.x * r * direction.x, sampleStep.y * r * direction.y);
         vec2 samplePos = centerPos + offset;
 
         vec3 rgb = texture(DiffuseSampler, samplePos).rgb;
@@ -37,7 +37,7 @@ void main() {
         // just copy colour if no blur
         fragColor = texture(DiffuseSampler, texCoord);
     } else {
-        vec3 rgb = blur(texCoord, BlurDirection, BlurRadius * intensity);
+        vec3 rgb = blur(texCoord, BlurDir, BlurRadius * intensity);
         fragColor = vec4(rgb, 1.0);
     }
 }
