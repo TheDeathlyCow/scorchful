@@ -1,0 +1,13 @@
+{
+    "replace": false,
+    "values": [
+        {
+            "required": false,
+            "id": "artifacts:umbrella"
+        },
+        {
+            "required": false,
+            "id": "originsumbrellas:umbrella"
+        }
+    ]
+}
