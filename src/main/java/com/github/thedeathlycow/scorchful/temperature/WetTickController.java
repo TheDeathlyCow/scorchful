@@ -6,6 +6,7 @@ import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.mixin.accessor.EntityAccessor;
 import com.github.thedeathlycow.scorchful.registry.SEntityAttributes;
+import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentController;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentControllerDecorator;
 import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
@@ -74,7 +75,11 @@ public class WetTickController extends EnvironmentControllerDecorator {
     }
 
     private static boolean isTouchingWater(LivingEntity entity) {
-        return entity.isTouchingWater()
-                || ((EntityAccessor) entity).scorchful$invokeIsBeingRainedOn();
+        if (entity.isTouchingWater()) {
+            return true;
+        }
+
+        return ((EntityAccessor) entity).scorchful$invokeIsBeingRainedOn()
+                && !entity.isHolding(stack -> stack.isIn(SItemTags.BLOCKS_RAIN_WHEN_HOLDING));
     }
 }
