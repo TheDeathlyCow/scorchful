@@ -9,12 +9,12 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.dynamic.Codecs;
 
-public class CoolFromPantingTemperatureEffect extends TemperatureEffect<CoolFromPantingTemperatureEffect.Config> {
+public class ChangeTemperatureEffect extends TemperatureEffect<ChangeTemperatureEffect.Config> {
 
     /**
      * @param configCodec Codec for the config type
      */
-    public CoolFromPantingTemperatureEffect(Codec<Config> configCodec) {
+    public ChangeTemperatureEffect(Codec<Config> configCodec) {
         super(configCodec);
     }
 

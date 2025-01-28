@@ -47,7 +47,7 @@
                 }
             },
             {
-                "type": "scorchful:cool_from_panting",
+                "type": "scorchful:change_temperature",
                 "config": {
                     "interval": 20,
                     "temperature_change": -20,
