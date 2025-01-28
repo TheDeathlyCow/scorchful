@@ -7,6 +7,12 @@
 	"authors": [
 		"TheDeathlyCow"
 	],
+	"contributors": [
+		"NerjalNosk (Various compatibility patches)",
+		"godkyo98 (Vietnamese Translation)",
+		"noawx (Finnish Translation)",
+		"JellyBubb1e (Chinese Translation)"
+	],
 	"contact": {
 		"homepage": "https://modrinth.com/mod/scorchful",
 		"sources": "https://github.com/TheDeathlyCow/scorchful",

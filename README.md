@@ -22,6 +22,10 @@ Scorchful is a mod for [Minecraft: Java Edition](https://www.minecraft.net/en-us
 
 Scorchful is licensed under LGPLv3. 
 
+## Additional Credits
+
+Thanks to everyone who has contributed to Scorchful, no matter how big or small! See the [Credits](./CREDITS.md) for the full list of contributors.
+
 ## Building 
 
 Scorchful is built using [Gradle](https://gradle.org/). You can use the following command to build the latest version of the mod:
