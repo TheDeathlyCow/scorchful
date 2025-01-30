@@ -6,24 +6,29 @@ import net.minecraft.world.biome.Biome;
 
 public record SeasonalBiomeTags(
         TagKey<Biome> scorching,
-        TagKey<Biome> warm
+        TagKey<Biome> warm,
+        TagKey<Biome> normal
 ) {
 
     private static final SeasonalBiomeTags SPRING_TAGS = new SeasonalBiomeTags(
             SBiomeTags.register("temperature/spring/scorching"),
-            SBiomeTags.register("temperature/spring/warm")
+            SBiomeTags.register("temperature/spring/warm"),
+            SBiomeTags.register("temperature/spring/normal")
     );
     private static final SeasonalBiomeTags SUMMER_TAGS = new SeasonalBiomeTags(
             SBiomeTags.register("temperature/summer/scorching"),
-            SBiomeTags.register("temperature/summer/warm")
+            SBiomeTags.register("temperature/summer/warm"),
+            SBiomeTags.register("temperature/summer/normal")
     );
     private static final SeasonalBiomeTags AUTUMN_TAGS = new SeasonalBiomeTags(
             SBiomeTags.register("temperature/autumn/scorching"),
-            SBiomeTags.register("temperature/autumn/warm")
+            SBiomeTags.register("temperature/autumn/warm"),
+            SBiomeTags.register("temperature/autumn/normal")
     );
     private static final SeasonalBiomeTags WINTER_TAGS = new SeasonalBiomeTags(
             SBiomeTags.register("temperature/winter/scorching"),
-            SBiomeTags.register("temperature/winter/warm")
+            SBiomeTags.register("temperature/winter/warm"),
+            SBiomeTags.register("temperature/winter/normal")
     );
 
     /**

@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
+        "#c:is_plains",
         "#c:is_temperate",
         "minecraft:beach",
         "#scorchful:temperature/summer/scorching"

@@ -4,7 +4,6 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.HeatingConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.item.SunHatItem;
-import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SeasonalBiomeTags;
 import com.github.thedeathlycow.thermoo.api.season.ThermooSeason;
@@ -22,7 +21,6 @@ import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionType;
-import org.jetbrains.annotations.Nullable;
 
 public class AmbientTemperatureController extends EnvironmentControllerDecorator {
 
@@ -157,7 +155,7 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
 
         SeasonalBiomeTags tags = SeasonalBiomeTags.forSeason(season);
 
-        if (biome.isIn(tags.warm())) {
+        if (!biome.isIn(tags.normal()) || biome.isIn(tags.warm())) {
             int skylight = world.getLightLevel(LightType.SKY, pos);
             int skylightWithDarkness = skylight - world.getAmbientDarkness(); // adjusted with night and weather
 
