@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.registry.tag;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.thermoo.api.season.ThermooSeason;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.world.biome.Biome;
@@ -33,6 +34,10 @@ public record SeasonalBiomeTags(
      * @return The tags of that season, or spring if no season is given
      */
     public static SeasonalBiomeTags forSeason(ThermooSeason season) {
+        if (!Scorchful.getConfig().integrationConfig.seasonsConfig.enableSeasonsIntegration()) {
+            return SPRING_TAGS;
+        }
+
         return switch (season) {
             case SUMMER -> SUMMER_TAGS;
             case WINTER -> WINTER_TAGS;
