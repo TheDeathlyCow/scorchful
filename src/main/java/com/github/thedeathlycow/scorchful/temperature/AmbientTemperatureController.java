@@ -4,6 +4,7 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.HeatingConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.item.SunHatItem;
+import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SeasonalBiomeTags;
 import com.github.thedeathlycow.thermoo.api.season.ThermooSeason;
@@ -147,6 +148,10 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         int warmth = controller.getLocalTemperatureChange(world, pos);
 
         RegistryEntry<Biome> biome = world.getBiome(pos);
+        if (biome.isIn(SBiomeTags.IS_NEVER_WARM_TEMPERATURE)) {
+            return warmth;
+        }
+
         ScorchfulConfig config = Scorchful.getConfig();
 
         ThermooSeason season = config.integrationConfig.seasonsConfig.enableSeasonsIntegration()
