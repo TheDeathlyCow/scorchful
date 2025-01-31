@@ -20,6 +20,8 @@ public class SItemTags {
 
     public static final TagKey<Item> TURTLE_ARMOR = of("turtle_armor");
 
+    public static final TagKey<Item> BLOCKS_RAIN_WHEN_HOLDING = of("blocks_rain_when_holding");
+
     private static TagKey<Item> of(String path) {
         return TagKey.of(RegistryKeys.ITEM, Scorchful.id(path));
     }

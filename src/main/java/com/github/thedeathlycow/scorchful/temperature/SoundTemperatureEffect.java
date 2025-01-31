@@ -1,6 +1,5 @@
 package com.github.thedeathlycow.scorchful.temperature;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
 import com.github.thedeathlycow.thermoo.api.ThermooCodecs;
 import com.github.thedeathlycow.thermoo.api.temperature.effects.TemperatureEffect;
@@ -13,14 +12,9 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.floatprovider.FloatProvider;
 
 public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEffect.Config> {
-
-
-    public static final Identifier PACKET_ID = Scorchful.id("play_sound_temperature_effect");
-
 
     /**
      * @param configCodec Codec for the config type
@@ -72,7 +66,6 @@ public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEf
             FloatProvider pitch,
             int interval
     ) {
-
         public static final Codec<Config> CODEC = RecordCodecBuilder.create(
                 instance -> instance.group(
                         Registries.SOUND_EVENT.getCodec()

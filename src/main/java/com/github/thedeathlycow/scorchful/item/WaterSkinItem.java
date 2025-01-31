@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.item;
 
+import com.github.thedeathlycow.scorchful.api.CollectWaterCallback;
 import com.github.thedeathlycow.scorchful.block.NetherLilyBlock;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
@@ -177,9 +178,11 @@ public class WaterSkinItem extends DrinkItem {
                 SSoundEvents.ITEM_WATER_SKIN_FILL, SoundCategory.PLAYERS,
                 1.0f, 1.0f
         );
-        world.emitGameEvent(null, GameEvent.FLUID_PICKUP, sourcePos);
+        world.emitGameEvent(player, GameEvent.FLUID_PICKUP, sourcePos);
         player.incrementStat(Stats.USED.getOrCreateStat(this));
         addDrinks(stack, amount);
+
+        CollectWaterCallback.EVENT.invoker().onWaterCollected(player, stack, sourcePos);
     }
 
     @Nullable

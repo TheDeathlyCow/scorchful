@@ -35,6 +35,7 @@
     "tag.item.scorchful.is_sun_protecting_hat": "Sun Protecting Hats",
     "tag.item.scorchful.sand_piles": "Sand Piles",
     "tag.item.scorchful.turtle_armor": "Turtle Armor",
+    "tag.item.scorchful.blocks_rain_when_holding": "Rain Blocker",
     
     
     "attribute.name.player.rehydration_efficiency": "Rehydration Efficiency",
@@ -80,6 +81,7 @@
     "subtitles.weather.scorchful.sandstorm": "Wind blows",
     "subtitles.scorchful.entity.gulp": "Player gulps",
     "subtitles.scorchful.discover_vision": "Player discovers vision",
+    "subtitles.temperature_effect.scorchful.pant": "Dog pants",
     
     "stat.scorchful.fill_crimson_lily": "Filled Crimson Lily",
     "stat.scorchful.soaked_by_crimson_lily": "Soaked by Crimson Lily",
