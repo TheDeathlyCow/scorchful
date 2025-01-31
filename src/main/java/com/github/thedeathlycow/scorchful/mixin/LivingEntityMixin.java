@@ -1,18 +1,23 @@
 package com.github.thedeathlycow.scorchful.mixin;
 
 import com.github.thedeathlycow.scorchful.entity.effect.FearStatusEffect;
+import com.github.thedeathlycow.scorchful.entity.effect.MesmerizedStatusEffect;
 import com.github.thedeathlycow.scorchful.event.ScorchfulLivingEntityEvents;
+import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import com.github.thedeathlycow.scorchful.server.SandstormSlowing;
 import com.github.thedeathlycow.scorchful.temperature.Cooling;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.profiler.Profiler;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,6 +26,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
+
+    @Shadow
+    public abstract ItemStack eatFood(World world, ItemStack stack, FoodComponent foodComponent);
 
     @Unique
     private boolean scorchful_wasInSandstorm = false;
@@ -77,8 +85,11 @@ public abstract class LivingEntityMixin extends Entity {
             at = @At("HEAD"),
             cancellable = true
     )
-    private void blockFear(StatusEffectInstance effect, CallbackInfoReturnable<Boolean> cir) {
-        if (!FearStatusEffect.canHaveFear((LivingEntity) (Object) this, effect)) {
+    private void statusEffectImmunity(StatusEffectInstance effect, CallbackInfoReturnable<Boolean> cir) {
+        LivingEntity instance = (LivingEntity) (Object) this;
+        boolean immune = effect.equals(SStatusEffects.FEAR) && !FearStatusEffect.canHaveFear(instance)
+                || effect.equals(SStatusEffects.MESMERIZED) && !MesmerizedStatusEffect.canBeMesmerized(instance);
+        if (immune) {
             cir.setReturnValue(false);
         }
     }

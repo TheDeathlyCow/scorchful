@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import net.minecraft.entity.LivingEntity;
 import org.ladysnake.cca.api.v3.component.ComponentKey;
 import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 import org.ladysnake.cca.api.v3.entity.EntityComponentFactoryRegistry;
@@ -25,6 +26,10 @@ public class ScorchfulComponents implements EntityComponentInitializer {
             EntityDesertVisionComponent.class
     );
 
+    public static final ComponentKey<MesmerizedComponent> MESMERIZED = ComponentRegistry.getOrCreate(
+            Scorchful.id("mesmerized"),
+            MesmerizedComponent.class
+    );
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
@@ -42,6 +47,11 @@ public class ScorchfulComponents implements EntityComponentInitializer {
                 Entity.class,
                 ENTITY_DESERT_VISION,
                 EntityDesertVisionComponent::new
+        );
+        registry.registerFor(
+                LivingEntity.class,
+                MESMERIZED,
+                provider -> new MesmerizedComponent(provider, MESMERIZED)
         );
     }
 }

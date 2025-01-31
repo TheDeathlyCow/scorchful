@@ -3,6 +3,8 @@ package com.github.thedeathlycow.scorchful;
 import com.github.thedeathlycow.scorchful.client.SandstormEffects;
 import com.github.thedeathlycow.scorchful.client.SandstormSounds;
 import com.github.thedeathlycow.scorchful.client.ShaderStatusEffectManagers;
+import com.github.thedeathlycow.scorchful.components.MesmerizedComponent;
+import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.hud.BurningHeartsOverlay;
 import com.github.thedeathlycow.scorchful.hud.MountHealthOverlay;
 import com.github.thedeathlycow.scorchful.hud.SoakingUnderlay;
@@ -21,6 +23,10 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.tick.TickManager;
 
 @Environment(EnvType.CLIENT)
 public class ScorchfulClient implements ClientModInitializer {
@@ -34,6 +40,15 @@ public class ScorchfulClient implements ClientModInitializer {
 
         ClientTickEvents.END_WORLD_TICK.register(SandstormEffects::tickSandstormParticles);
         ClientTickEvents.END_WORLD_TICK.register(SandstormSounds.INSTANCE::tick);
+        WorldRenderEvents.START.register(
+                context -> {
+                    PlayerEntity player = MinecraftClient.getInstance().player;
+                    if (player != null) {
+                        float timeDelta = context.tickCounter().getLastFrameDuration();
+                        ScorchfulComponents.MESMERIZED.get(player).updateLook(timeDelta);
+                    }
+                }
+        );
 
         SParticleFactories.registerFactories();
 

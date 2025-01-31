@@ -58,11 +58,14 @@
 
     "effect.scorchful.heat_stroke": "Heat Stroke",
     "effect.scorchful.fear": "Fear",
+    "effect.scorchful.mesmerized": "Mesmerized",
+    "effect.scorchful.mesmerizing": "Mesmerizing",
     
 
     "death.attack.scorchful.heat": "%1$s couldn't handle the heat",
     "death.attack.scorchful.heat.player": "%1$s couldn't handle the heat of %2$s",
-    
+    "death.attack.scorchful.scare": "%1$s was scared to death",
+    "death.attack.scorchful.scare.player": "%1$s was spooked by %2$s",
     
     "advancement.scorchful.adventure.drink_cactus_juice.title": "It's the Quenchiest!",
     "advancement.scorchful.adventure.drink_cactus_juice.description": "Drink a Bottle of Cactus Juice",
@@ -94,6 +97,8 @@
     "text.autoconfig.scorchful.option.clientConfig.enableHeatStrokePostProcessing.@Tooltip": "Enables effects like blur and wavey-ness from the Heat Stroke status effect. May increase lag without a dedicated GPU.",
     "text.autoconfig.scorchful.option.clientConfig.enableFearPostProcessing": "Enable fear post processing",
     "text.autoconfig.scorchful.option.clientConfig.enableFearPostProcessing.@Tooltip": "Enables the screen darkening and desaturation from the Fear status effect. May increase lag without a dedicated GPU.",
+    "text.autoconfig.scorchful.option.clientConfig.enableMesmerizedPostProcessing": "Enable mesmerized post processing",
+    "text.autoconfig.scorchful.option.clientConfig.enableMesmerizedPostProcessing.@Tooltip": "Enables the screen darkening from the Mesmerized status effect. May increase lag without a dedicated GPU.",
     "text.autoconfig.scorchful.option.clientConfig.sunHatShadeOpacity": "Sun Hat shade opacity",
     "text.autoconfig.scorchful.option.clientConfig.enableSandstormParticles": "Enable sandstorm particles",
     "text.autoconfig.scorchful.option.clientConfig.enableSandstormFog": "Enable sandstorm fog",
@@ -149,6 +154,10 @@
     "text.autoconfig.scorchful.option.combatConfig.protectiveArmorHeatResistance": "Thermally protective armor piece heat resistance",
     "text.autoconfig.scorchful.option.combatConfig.veryProtectiveArmorHeatResistance": "Very thermally protective armor piece heat resistance",
     "text.autoconfig.scorchful.option.combatConfig.fearDetectionRangeMultiplier": "Fear detection range multiplier",
+    "text.autoconfig.scorchful.option.combatConfig.mesmerizedActivationRadius": "Mesmerized activation radius",
+    "text.autoconfig.scorchful.option.combatConfig.mesmerizedActivationBaseDamage": "Mesmerized activation base damage",
+    "text.autoconfig.scorchful.option.combatConfig.mesmerizedActivationDamagePerLevel": "Mesmerized activation damage scale",
+    "text.autoconfig.scorchful.option.combatConfig.mesmerizedActionFearLengthPerLevel": "Mesmerized activation fear duration per level (seconds)",
     "text.autoconfig.scorchful.option.combatConfig.impalingDamagePerLevel": "Impaling damage per level",
     
     "text.autoconfig.scorchful.option.weatherConfig": "Weather Config",

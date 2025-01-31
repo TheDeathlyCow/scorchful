@@ -29,6 +29,14 @@ public class CombatConfig implements ConfigData {
 
     double fearDetectionRangeMultiplier = 2.0;
 
+    double mesmerizedActivationRadius = 4.0;
+
+    float mesmerizedActivationBaseDamage = 4f;
+
+    float mesmerizedActivationDamagePerLevel = 4f;
+
+    int mesmerizedActionFearLengthPerLevel = 5;
+    
     @ConfigEntry.Gui.RequiresRestart
     float impalingDamagePerLevel = 2.5f;
 
@@ -60,6 +68,22 @@ public class CombatConfig implements ConfigData {
         return fearDetectionRangeMultiplier;
     }
 
+    public double getMesmerizedActivationRadius() {
+        return mesmerizedActivationRadius;
+    }
+
+    public float getMesmerizedActivationBaseDamage() {
+        return mesmerizedActivationBaseDamage;
+    }
+
+    public float getMesmerizedActivationDamagePerLevel() {
+        return mesmerizedActivationDamagePerLevel;
+    }
+
+    public int getMesmerizedActionFearLengthPerLevel() {
+        return 20 * mesmerizedActionFearLengthPerLevel;
+    }
+    
     public float getImpalingDamagePerLevel() {
         return impalingDamagePerLevel;
     }
@@ -68,6 +92,10 @@ public class CombatConfig implements ConfigData {
     public void validatePostLoad() throws ValidationException {
         ConfigData.super.validatePostLoad();
         this.fearDetectionRangeMultiplier = MathHelper.clamp(fearDetectionRangeMultiplier, 0, 128);
+        this.mesmerizedActivationRadius = Math.max(0f, mesmerizedActivationRadius);
+        this.mesmerizedActivationBaseDamage = Math.max(0f, mesmerizedActivationBaseDamage);
+        this.mesmerizedActivationDamagePerLevel = Math.max(0f, mesmerizedActivationDamagePerLevel);
+        this.mesmerizedActionFearLengthPerLevel = Math.max(0, mesmerizedActionFearLengthPerLevel);
         this.impalingDamagePerLevel = Math.max(0f, impalingDamagePerLevel);
     }
 }
