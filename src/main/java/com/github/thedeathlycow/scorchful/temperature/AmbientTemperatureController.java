@@ -22,7 +22,6 @@ import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionType;
-import org.jetbrains.annotations.Nullable;
 
 public class AmbientTemperatureController extends EnvironmentControllerDecorator {
 
@@ -149,11 +148,15 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         int warmth = controller.getLocalTemperatureChange(world, pos);
 
         RegistryEntry<Biome> biome = world.getBiome(pos);
+        if (biome.isIn(SBiomeTags.IS_NEVER_WARM_TEMPERATURE)) {
+            return warmth;
+        }
+
         ScorchfulConfig config = Scorchful.getConfig();
 
         SeasonalBiomeTags tags = SeasonalBiomeTags.forSeason(ThermooSeason.getCurrentSeason(world).orElse(ThermooSeason.SPRING));
 
-        if (biome.isIn(tags.warm())) {
+        if (!biome.isIn(tags.normal()) || biome.isIn(tags.warm())) {
             int skylight = world.getLightLevel(LightType.SKY, pos);
             int skylightWithDarkness = skylight - world.getAmbientDarkness(); // adjusted with night and weather
 
