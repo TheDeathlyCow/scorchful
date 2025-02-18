@@ -21,6 +21,7 @@ import com.github.thedeathlycow.scorchful.server.ThirstCommand;
 import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
 import com.github.thedeathlycow.scorchful.temperature.AmbientTemperatureController;
 import com.github.thedeathlycow.scorchful.temperature.AttributeController;
+import com.github.thedeathlycow.scorchful.temperature.ServerPlayerEnvironmentTickListeners;
 import com.github.thedeathlycow.scorchful.temperature.WetTickController;
 import com.github.thedeathlycow.scorchful.worldgen.NetherBiomeModifications;
 import com.github.thedeathlycow.thermoo.api.armor.material.ArmorMaterialEvents;
@@ -136,28 +137,7 @@ public class Scorchful implements ModInitializer {
 
 
     private void registerThermooEventListeners() {
-        PlayerEnvironmentEvents.CAN_APPLY_PASSIVE_TEMPERATURE_CHANGE.register(
-                (change, player) -> {
-                    if (change <= 0) {
-                        return TriState.DEFAULT;
-                    }
-
-                    ScorchfulConfig config = getConfig();
-
-                    int tickInterval = config.heatingConfig.getPassiveHeatingTickInterval();
-                    if (tickInterval > 1 && player.age % tickInterval != 0) {
-                        return TriState.FALSE;
-                    }
-
-                    if (!config.heatingConfig.doPassiveHeating()) {
-                        return TriState.FALSE;
-                    } else {
-                        return TriState.of(
-                                player.thermoo$getTemperatureScale() < config.heatingConfig.getMaxPassiveHeatingScale()
-                        );
-                    }
-                }
-        );
+        ServerPlayerEnvironmentTickListeners.initialize();
 
         EnvironmentControllerInitializeEvent.EVENT.register(AttributeController::new);
         EnvironmentControllerInitializeEvent.EVENT.register(AmbientTemperatureController::new);

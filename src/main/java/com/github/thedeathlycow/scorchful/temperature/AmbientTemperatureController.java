@@ -105,9 +105,7 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
     public int getLocalTemperatureChange(World world, BlockPos pos) {
         DimensionType dimensionType = world.getDimension();
 
-        if (dimensionType.natural()) {
-            return getNaturalWorldTemperatureChange(world, pos);
-        } else if (world.getDimension().ultrawarm()) {
+        if (world.getDimension().ultrawarm()) {
             return getNetherTemperatureChange(world, pos);
         } else {
             return controller.getLocalTemperatureChange(world, pos);
@@ -143,34 +141,34 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         );
     }
 
-    private int getNaturalWorldTemperatureChange(World world, BlockPos pos) {
-        // initialize to base
-        int warmth = controller.getLocalTemperatureChange(world, pos);
-
-        RegistryEntry<Biome> biome = world.getBiome(pos);
-        if (biome.isIn(SBiomeTags.IS_NEVER_WARM_TEMPERATURE)) {
-            return warmth;
-        }
-
-        ScorchfulConfig config = Scorchful.getConfig();
-
-        SeasonalBiomeTags tags = SeasonalBiomeTags.forSeason(ThermooSeason.getCurrentSeason(world).orElse(ThermooSeason.SPRING));
-
-        if (!biome.isIn(tags.normal()) && biome.isIn(tags.warm())) {
-            int skylight = world.getLightLevel(LightType.SKY, pos);
-            int skylightWithDarkness = skylight - world.getAmbientDarkness(); // adjusted with night and weather
-
-            int minLevel = config.heatingConfig.getMinSkyLightLevelForHeat();
-
-            if (skylightWithDarkness >= minLevel) {
-                warmth += config.heatingConfig.getHeatFromSun();
-
-                // make the sun scorching, but don't have ambient temperature
-                if (biome.isIn(tags.scorching())) {
-                    warmth += config.heatingConfig.getScorchingBiomeHeatIncrease();
-                }
-            }
-        }
-        return warmth;
-    }
+//    private int getNaturalWorldTemperatureChange(World world, BlockPos pos) {
+//        // initialize to base
+//        int warmth = controller.getLocalTemperatureChange(world, pos);
+//
+//        RegistryEntry<Biome> biome = world.getBiome(pos);
+//        if (biome.isIn(SBiomeTags.IS_NEVER_WARM_TEMPERATURE)) {
+//            return warmth;
+//        }
+//
+//        ScorchfulConfig config = Scorchful.getConfig();
+//
+//        SeasonalBiomeTags tags = SeasonalBiomeTags.forSeason(ThermooSeason.getCurrentSeason(world).orElse(ThermooSeason.SPRING));
+//
+//        if (!biome.isIn(tags.normal()) && biome.isIn(tags.warm())) {
+//            int skylight = world.getLightLevel(LightType.SKY, pos);
+//            int skylightWithDarkness = skylight - world.getAmbientDarkness(); // adjusted with night and weather
+//
+//            int minLevel = config.heatingConfig.getMinSkyLightLevelForHeat();
+//
+//            if (skylightWithDarkness >= minLevel) {
+//                warmth += config.heatingConfig.getHeatFromSun();
+//
+//                // make the sun scorching, but don't have ambient temperature
+//                if (biome.isIn(tags.scorching())) {
+//                    warmth += config.heatingConfig.getScorchingBiomeHeatIncrease();
+//                }
+//            }
+//        }
+//        return warmth;
+//    }
 }
