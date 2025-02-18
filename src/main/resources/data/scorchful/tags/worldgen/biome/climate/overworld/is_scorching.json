@@ -1,0 +1,17 @@
+{
+    "replace": false,
+    "values": [
+        {
+            "required": false,
+            "id": "#scorchful:scorching_biomes"
+        },
+        {
+            "required": false,
+            "id": "#scorchful:temperature/spring/scorching"
+        },
+        "#c:is_desert",
+        "#c:is_badlands",
+        "minecraft:desert",
+        "#minecraft:is_badlands"
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "replace": false,
+    "values": [
+        {
+            "required": false,
+            "id": "#scorchful:temperature/is_never_warm"
+        }
+    ]
+}

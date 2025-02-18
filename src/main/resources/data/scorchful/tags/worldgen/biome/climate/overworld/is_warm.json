@@ -1,0 +1,16 @@
+{
+    "replace": false,
+    "values": [
+        {
+            "required": false,
+            "id": "#scorchful:warm_biomes"
+        },
+        {
+            "required": false,
+            "id": "#scorchful:temperature/spring/warm"
+        },
+        "#c:is_hot/overworld",
+        "minecraft:warm_ocean",
+        "minecraft:mangrove_swamp"
+    ]
+}

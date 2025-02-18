@@ -1,0 +1,8 @@
+{
+    "replace": false,
+    "values": [
+        "#scorchful:climate/is_never_warm",
+        "minecraft:stony_peaks",
+        "#scorchful:climate/overworld/is_scorching"
+    ]
+}
