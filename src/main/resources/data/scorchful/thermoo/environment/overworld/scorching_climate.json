@@ -3,7 +3,7 @@
     "exclude_biomes": "#scorchful:climate/overworld/is_not_scorching",
     "provider": {
         "type": "thermoo:reduce_sequence",
-        "modifiers": "#scorchful:warm_modifiers",
+        "modifiers": "#scorchful:scorching_modifiers",
         "base": {
             "type": "thermoo:seasonal/temperate",
             "fallback_season": "spring",

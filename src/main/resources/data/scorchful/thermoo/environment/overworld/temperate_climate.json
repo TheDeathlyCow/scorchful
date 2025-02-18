@@ -1,0 +1,19 @@
+{
+    "biomes": "#scorchful:climate/overworld/is_temperate",
+    "exclude_biomes": "#scorchful:climate/overworld/is_not_temperate",
+    "provider": {
+        "type": "thermoo:seasonal/temperate",
+        "seasons": {
+            "summer": {
+                "type": "thermoo:reduce_sequence",
+                "modifiers": "#scorchful:temperate_modifiers",
+                "base": {
+                    "type": "thermoo:reduce_constant",
+                    "components": {
+                        "thermoo:temperature": 25.0
+                    }
+                }
+            }
+        }
+    }
+}

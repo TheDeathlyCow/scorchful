@@ -1,0 +1,12 @@
+{
+    "replace": false,
+    "values": [
+        "#c:is_plains",
+        "#c:is_temperate",
+        "#c:is_hill",
+        {
+            "required": false,
+            "id": "#frostiful:temperature/winter/cool"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "replace": false,
+    "values": [
+        "#scorchful:climate/is_never_warm",
+        "#scorchful:climate/overworld/is_warm",
+        "#scorchful:climate/overworld/is_scorching"
+    ]
+}
