@@ -1,0 +1,25 @@
+{
+    "biomes": "#scorchful:climate/overworld/is_rainy",
+    "exclude_biomes": "#scorchful:climate/overworld/is_not_rainy",
+    "provider": {
+        "type": "thermoo:reduce_sequence",
+        "modifiers": "#scorchful:rainy_modifiers",
+        "base": {
+            "type": "thermoo:seasonal/tropical",
+            "seasons": {
+                "wet": {
+                    "type": "thermoo:reduce_constant",
+                    "components": {
+                        "thermoo:relative_humidity": 0.95
+                    }
+                },
+                "dry": {
+                    "type": "thermoo:reduce_constant",
+                    "components": {
+                        "thermoo:temperature": 0.25
+                    }
+                }
+            }
+        }
+    }
+}

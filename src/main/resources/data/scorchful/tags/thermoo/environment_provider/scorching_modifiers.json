@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
-        "#scorchful:base_modifiers"
+        "#scorchful:base_temperature_modifiers",
+        "scorchful:extra_sun_light"
     ]
 }

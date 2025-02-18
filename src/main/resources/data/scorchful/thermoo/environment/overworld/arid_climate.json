@@ -1,0 +1,25 @@
+{
+    "biomes": "#scorchful:climate/overworld/is_arid",
+    "exclude_biomes": "#scorchful:climate/overworld/is_not_arid",
+    "provider": {
+        "type": "thermoo:reduce_sequence",
+        "modifiers": "#scorchful:arid_modifiers",
+        "base": {
+            "type": "thermoo:seasonal/tropical",
+            "seasons": {
+                "wet": {
+                    "type": "thermoo:reduce_constant",
+                    "components": {
+                        "thermoo:relative_humidity": 0.5
+                    }
+                },
+                "dry": {
+                    "type": "thermoo:reduce_constant",
+                    "components": {
+                        "thermoo:temperature": 0.1
+                    }
+                }
+            }
+        }
+    }
+}
