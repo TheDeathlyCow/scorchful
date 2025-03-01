@@ -1,0 +1,13 @@
+{
+    "schemaVersion": 1,
+    "id": "scorchful-datagen",
+    "name": "Scorchful Datagen Mod",
+    "version": "1.0.0",
+    "environment": "*",
+    "license": "LGPL-3.0",
+    "entrypoints": {
+        "fabric-datagen": [
+            "com.github.thedeathlycow.scorchful.datagen.ScorchfulDataGenerator"
+        ]
+    }
+}
