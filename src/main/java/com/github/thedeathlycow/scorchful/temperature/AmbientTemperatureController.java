@@ -4,16 +4,10 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.HeatingConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.item.SunHatItem;
-import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
-import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SeasonalBiomeTags;
 import com.github.thedeathlycow.thermoo.api.season.ThermooSeason;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentController;
 import com.github.thedeathlycow.thermoo.api.temperature.EnvironmentControllerDecorator;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerChunkManager;
@@ -35,47 +29,47 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
         super(controller);
     }
 
-    @Override
-    public int getTemperatureEffectsChange(LivingEntity entity) {
-        // dont mess with frostiful
-        if (!entity.thermoo$isWarm()) {
-            return controller.getTemperatureEffectsChange(entity);
-        }
+//    @Override
+//    public int getTemperatureEffectsChange(LivingEntity entity) {
+//        // dont mess with frostiful
+//        if (!entity.thermoo$isWarm()) {
+//            return controller.getTemperatureEffectsChange(entity);
+//        }
+//
+//        int change = 0;
+//        HeatingConfig config = Scorchful.getConfig().heatingConfig;
+//
+//        if (entity.thermoo$canOverheat() && entity.isOnFire() && !entity.isFireImmune()) {
+//            int onFireChange = entity.hasStatusEffect(StatusEffects.FIRE_RESISTANCE)
+//                    ? config.getOnFireWarmRateWithFireResistance()
+//                    : config.getOnFireWarmRate();
+//
+//            change += onFireChange;
+//        }
+//
+//        if (entity.isInLava()) {
+//            change += config.getInLavaWarmRate();
+//        } else if (entity.getType() == EntityType.STRIDER) {
+//            change -= config.getStriderOutOfLavaCoolRate();
+//        }
+//
+//        if (entity.wasInPowderSnow && entity.thermoo$canFreeze()) {
+//            change -= config.getPowderSnowCoolRate();
+//        }
+//
+//        return change;
+//    }
 
-        int change = 0;
-        HeatingConfig config = Scorchful.getConfig().heatingConfig;
-
-        if (entity.thermoo$canOverheat() && entity.isOnFire() && !entity.isFireImmune()) {
-            int onFireChange = entity.hasStatusEffect(StatusEffects.FIRE_RESISTANCE)
-                    ? config.getOnFireWarmRateWithFireResistance()
-                    : config.getOnFireWarmRate();
-
-            change += onFireChange;
-        }
-
-        if (entity.isInLava()) {
-            change += config.getInLavaWarmRate();
-        } else if (entity.getType() == EntityType.STRIDER) {
-            change -= config.getStriderOutOfLavaCoolRate();
-        }
-
-        if (entity.wasInPowderSnow && entity.thermoo$canFreeze()) {
-            change -= config.getPowderSnowCoolRate();
-        }
-
-        return change;
-    }
-
-    @Override
-    public int getFloorTemperature(LivingEntity entity, World world, BlockState state, BlockPos pos) {
-        int base = controller.getFloorTemperature(entity, world, state, pos);
-        if (state.isIn(SBlockTags.HEAVY_ICE) && entity.thermoo$isWarm()) {
-            ScorchfulConfig config = Scorchful.getConfig();
-            return base - config.heatingConfig.getCoolingFromIce();
-        } else {
-            return base;
-        }
-    }
+//    @Override
+//    public int getFloorTemperature(LivingEntity entity, World world, BlockState state, BlockPos pos) {
+//        int base = controller.getFloorTemperature(entity, world, state, pos);
+//        if (state.isIn(SBlockTags.HEAVY_ICE) && entity.thermoo$isWarm()) {
+//            ScorchfulConfig config = Scorchful.getConfig();
+//            return base - config.heatingConfig.getCoolingFromIce();
+//        } else {
+//            return base;
+//        }
+//    }
 
     @Override
     public int getEnvironmentTemperatureForPlayer(PlayerEntity player, int localTemperature) {

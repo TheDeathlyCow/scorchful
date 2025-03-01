@@ -19,10 +19,7 @@ import com.github.thedeathlycow.scorchful.registry.tag.SDamageTypeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.github.thedeathlycow.scorchful.server.ThirstCommand;
 import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
-import com.github.thedeathlycow.scorchful.temperature.AmbientTemperatureController;
-import com.github.thedeathlycow.scorchful.temperature.AttributeController;
-import com.github.thedeathlycow.scorchful.temperature.ServerPlayerEnvironmentTickListeners;
-import com.github.thedeathlycow.scorchful.temperature.WetTickController;
+import com.github.thedeathlycow.scorchful.temperature.*;
 import com.github.thedeathlycow.scorchful.worldgen.NetherBiomeModifications;
 import com.github.thedeathlycow.thermoo.api.armor.material.ArmorMaterialEvents;
 import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
@@ -138,6 +135,8 @@ public class Scorchful implements ModInitializer {
 
     private void registerThermooEventListeners() {
         ServerPlayerEnvironmentTickListeners.initialize();
+        ActiveTemperatureEffects.initialize();
+        PassiveTemperatureEffects.initialize();
 
         EnvironmentControllerInitializeEvent.EVENT.register(AttributeController::new);
         EnvironmentControllerInitializeEvent.EVENT.register(AmbientTemperatureController::new);
