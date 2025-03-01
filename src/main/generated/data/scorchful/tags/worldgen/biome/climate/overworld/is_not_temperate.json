@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "#scorchful:is_never_warm",
+      "required": false
+    },
+    {
+      "id": "#scorchful:climate/overworld/is_warm",
+      "required": false
+    },
+    {
+      "id": "#scorchful:climate/overworld/is_scorching",
+      "required": false
+    }
+  ]
+}

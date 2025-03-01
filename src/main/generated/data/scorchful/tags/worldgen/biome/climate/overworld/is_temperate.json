@@ -1,0 +1,25 @@
+{
+  "values": [
+    {
+      "id": "#c:is_temperate/overworld",
+      "required": false
+    },
+    {
+      "id": "#c:is_plains",
+      "required": false
+    },
+    {
+      "id": "#c:is_hill",
+      "required": false
+    },
+    {
+      "id": "#c:is_beach",
+      "required": false
+    },
+    "minecraft:stony_peaks",
+    {
+      "id": "#scorchful:temperature/summer/warm",
+      "required": false
+    }
+  ]
+}

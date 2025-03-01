@@ -24,6 +24,19 @@ public class ClimateBiomeTagGenerator extends FabricTagProvider<Biome> {
         getOrCreateTagBuilder(SClimateBiomeTags.IS_NEVER_WARM)
                 .addOptionalTag(Scorchful.id("temperature/is_never_warm"));
 
+        getOrCreateTagBuilder(SClimateBiomeTags.IS_TEMPERATE)
+                .addOptionalTag(ConventionalBiomeTags.IS_TEMPERATE_OVERWORLD)
+                .addOptionalTag(ConventionalBiomeTags.IS_PLAINS)
+                .addOptionalTag(ConventionalBiomeTags.IS_HILL)
+                .addOptionalTag(ConventionalBiomeTags.IS_BEACH)
+                .add(BiomeKeys.STONY_PEAKS)
+                .addOptionalTag(Scorchful.id("temperature/summer/warm"));
+
+        getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_TEMPERATE)
+                .addOptionalTag(SClimateBiomeTags.IS_NEVER_WARM)
+                .addOptionalTag(SClimateBiomeTags.IS_WARM)
+                .addOptionalTag(SClimateBiomeTags.IS_SCORCHING);
+
         getOrCreateTagBuilder(SClimateBiomeTags.IS_WARM)
                 .addOptionalTag(Scorchful.id("warm_biomes"))
                 .addOptionalTag(Scorchful.id("temperature/spring/warm"))
