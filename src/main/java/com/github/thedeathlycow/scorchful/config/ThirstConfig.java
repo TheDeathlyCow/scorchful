@@ -29,6 +29,10 @@ public class ThirstConfig implements ConfigData {
 
     float humidBiomeSweatEfficiency = 1f / 3f;
 
+    float extraHumidBiomeSweatEfficiency = 1f / 6f;
+
+    float aridBiomeSweatEfficiency = 2.0f;
+
     float maxRehydrationEfficiency = 0.75f;
 
     public int getTemperatureFromWetness() {
@@ -73,6 +77,14 @@ public class ThirstConfig implements ConfigData {
 
     public float getHumidBiomeSweatEfficiency() {
         return humidBiomeSweatEfficiency;
+    }
+
+    public float getExtraHumidBiomeSweatEfficiency() {
+        return extraHumidBiomeSweatEfficiency;
+    }
+
+    public float getAridBiomeSweatEfficiency() {
+        return aridBiomeSweatEfficiency;
     }
 
     public float getMaxRehydrationEfficiency() {

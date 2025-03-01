@@ -61,9 +61,9 @@ public final class PassiveTemperatureEffects {
     private static float getSweatEfficiency(EnvironmentTickContext<LivingEntity> context, ScorchfulConfig config) {
         double relativeHumidity = context.components().getOrDefault(EnvironmentComponentTypes.RELATIVE_HUMIDITY, RelativeHumidityComponent.DEFAULT);
         if (relativeHumidity <= 0.2f) {
-            return config.integrationConfig.seasonsConfig.getDrySeasonHumidBiomeSweatEfficiency();
+            return config.thirstConfig.getAridBiomeSweatEfficiency();
         } else if (relativeHumidity >= 0.8f) {
-            return config.integrationConfig.seasonsConfig.getWetSeasonHumidBiomeSweatEfficiency();
+            return config.thirstConfig.getExtraHumidBiomeSweatEfficiency();
         } else if (relativeHumidity >= 0.6f) {
             return config.thirstConfig.getHumidBiomeSweatEfficiency();
         } else {
