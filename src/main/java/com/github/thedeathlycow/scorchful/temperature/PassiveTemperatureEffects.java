@@ -2,33 +2,21 @@ package com.github.thedeathlycow.scorchful.temperature;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.scorchful.config.SeasonsConfig;
-import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.github.thedeathlycow.thermoo.api.environment.component.EnvironmentComponentTypes;
 import com.github.thedeathlycow.thermoo.api.environment.component.RelativeHumidityComponent;
-import com.github.thedeathlycow.thermoo.api.environment.event.EnvironmentTickContext;
-import com.github.thedeathlycow.thermoo.api.season.ThermooSeason;
-import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
+import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentTickContext;
 import com.github.thedeathlycow.thermoo.api.temperature.event.LivingEntityTemperatureTickEvents;
-import com.github.thedeathlycow.thermoo.api.temperature.event.TickContext;
 import net.minecraft.block.BlockState;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 
 public final class PassiveTemperatureEffects {
     public static void initialize() {
         LivingEntityTemperatureTickEvents.GET_PASSIVE_TEMPERATURE_CHANGE.register(PassiveTemperatureEffects::getPassiveChange);
     }
 
-    private static int getPassiveChange(TickContext<LivingEntity> context) {
+    private static int getPassiveChange(EnvironmentTickContext<LivingEntity> context) {
         LivingEntity entity = context.affected();
 
         // don't touch frostiful's effects
@@ -45,7 +33,7 @@ public final class PassiveTemperatureEffects {
         return total;
     }
 
-    private static int getIcyFloorTemperatureChange(TickContext<LivingEntity> context, ScorchfulConfig config) {
+    private static int getIcyFloorTemperatureChange(EnvironmentTickContext<LivingEntity> context, ScorchfulConfig config) {
         LivingEntity entity = context.affected();
         BlockState steppingState = entity.getSteppingBlockState();
 
@@ -56,7 +44,7 @@ public final class PassiveTemperatureEffects {
         return 0;
     }
 
-    private static int getCoolingFromSweat(TickContext<LivingEntity> context, ScorchfulConfig config) {
+    private static int getCoolingFromSweat(EnvironmentTickContext<LivingEntity> context, ScorchfulConfig config) {
         LivingEntity entity = context.affected();
         if (entity.thermoo$isWet()) {
             int temperatureChange = config.thirstConfig.getTemperatureFromWetness();

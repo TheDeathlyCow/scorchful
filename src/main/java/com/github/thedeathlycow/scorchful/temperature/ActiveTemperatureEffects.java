@@ -3,7 +3,7 @@ package com.github.thedeathlycow.scorchful.temperature;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.thermoo.api.temperature.event.LivingEntityTemperatureTickEvents;
-import com.github.thedeathlycow.thermoo.api.temperature.event.TickContext;
+import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentTickContext;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
@@ -13,7 +13,7 @@ public final class ActiveTemperatureEffects {
         LivingEntityTemperatureTickEvents.GET_ACTIVE_TEMPERATURE_CHANGE.register(ActiveTemperatureEffects::getActiveChange);
     }
 
-    private static int getActiveChange(TickContext<LivingEntity> context) {
+    private static int getActiveChange(EnvironmentTickContext<LivingEntity> context) {
         LivingEntity entity = context.affected();
 
         // don't touch frostiful's effects

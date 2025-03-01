@@ -7,8 +7,8 @@ import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.mixin.accessor.EntityAccessor;
 import com.github.thedeathlycow.scorchful.registry.SEntityAttributes;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
+import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentTickContext;
 import com.github.thedeathlycow.thermoo.api.temperature.event.LivingEntitySoakingTickEvents;
-import com.github.thedeathlycow.thermoo.api.temperature.event.TickContext;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.util.TriState;
 import net.minecraft.block.Blocks;
@@ -34,7 +34,7 @@ public final class SoakingEffects {
         );
     }
 
-    private static int getSoakingChange(TickContext<LivingEntity> context) {
+    private static int getSoakingChange(EnvironmentTickContext<LivingEntity> context) {
         if (context.affected().isSpectator()) {
             return 0;
         }
@@ -70,7 +70,7 @@ public final class SoakingEffects {
                 : 0;
     }
 
-    private static void tickRehydration(TickContext<LivingEntity> context, int wetChange) {
+    private static void tickRehydration(EnvironmentTickContext<LivingEntity> context, int wetChange) {
         if (context.affected() instanceof PlayerEntity player) {
             double rehydrationEfficiency = player.getAttributeValue(SEntityAttributes.REHYDRATION_EFFICIENCY);
             RehydrationComponent component = ScorchfulComponents.REHYDRATION.get(player);
