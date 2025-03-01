@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "#scorchful:warm_biomes",
+      "required": false
+    },
+    {
+      "id": "#scorchful:temperature/spring/warm",
+      "required": false
+    },
+    {
+      "id": "#c:is_hot/overworld",
+      "required": false
+    },
+    {
+      "id": "#minecraft:is_jungle",
+      "required": false
+    }
+  ]
+}

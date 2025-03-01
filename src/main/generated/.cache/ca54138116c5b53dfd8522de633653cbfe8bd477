@@ -1,0 +1,6 @@
+// 1.21.1	2025-03-01T10:57:29.2964063	Scorchful Datagen Mod/Tags for minecraft:worldgen/biome
+8af3d7d919727c54944bf35cb076190c15471e14 data\scorchful\tags\worldgen\biome\climate\overworld\is_not_warm.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data\scorchful\tags\worldgen\biome\climate\overworld\is_not_rainy.json
+dd6ed90d0b24eaa81c3666c40aeab038702fb72c data\scorchful\tags\worldgen\biome\climate\overworld\is_warm.json
+7bc466f4f4fe8ca111dc8e048b927a5c68d341e2 data\scorchful\tags\worldgen\biome\climate\overworld\is_rainy.json
+82b991f19775f25b89e6b4a364583a5db9f27026 data\scorchful\tags\worldgen\biome\is_never_warm.json
