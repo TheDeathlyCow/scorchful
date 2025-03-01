@@ -8,10 +8,6 @@
     {
       "id": "#c:is_beach",
       "required": false
-    },
-    {
-      "id": "#scorchful:climate/overworld/is_scorching",
-      "required": false
     }
   ]
 }

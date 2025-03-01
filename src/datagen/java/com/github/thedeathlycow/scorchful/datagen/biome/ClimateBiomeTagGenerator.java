@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BiomeTags;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 
@@ -23,26 +24,44 @@ public class ClimateBiomeTagGenerator extends FabricTagProvider<Biome> {
         getOrCreateTagBuilder(SClimateBiomeTags.IS_NEVER_WARM)
                 .addOptionalTag(Scorchful.id("temperature/is_never_warm"));
 
-
-        getOrCreateTagBuilder(SClimateBiomeTags.IS_WARM_OVERWORLD_CLIMATE)
+        getOrCreateTagBuilder(SClimateBiomeTags.IS_WARM)
                 .addOptionalTag(Scorchful.id("warm_biomes"))
                 .addOptionalTag(Scorchful.id("temperature/spring/warm"))
                 .addOptionalTag(ConventionalBiomeTags.IS_HOT_OVERWORLD)
                 .addOptionalTag(BiomeTags.IS_JUNGLE);
 
-        getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_WARM_OVERWORLD_CLIMATE)
+        getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_WARM)
+                .addOptionalTag(SClimateBiomeTags.IS_NEVER_WARM)
+                .add(BiomeKeys.STONY_PEAKS)
+                .addOptionalTag(ConventionalBiomeTags.IS_BEACH)
+                .addOptionalTag(SClimateBiomeTags.IS_SCORCHING);
+
+        getOrCreateTagBuilder(SClimateBiomeTags.IS_SCORCHING)
+                .addOptionalTag(Scorchful.id("scorching_biomes"))
+                .addOptionalTag(Scorchful.id("temperature/spring/scorching"))
+                .addOptionalTag(ConventionalBiomeTags.IS_DESERT)
+                .addOptionalTag(ConventionalBiomeTags.IS_BADLANDS)
+                .addOptionalTag(BiomeTags.IS_BADLANDS);
+
+        getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_SCORCHING)
                 .addOptionalTag(SClimateBiomeTags.IS_NEVER_WARM)
                 .add(BiomeKeys.STONY_PEAKS)
                 .addOptionalTag(ConventionalBiomeTags.IS_BEACH);
-        // TODO: is_scorching
 
-        getOrCreateTagBuilder(SClimateBiomeTags.IS_RAINY_OVERWORLD_CLIMATE)
+        getOrCreateTagBuilder(SClimateBiomeTags.IS_RAINY)
                 .addOptionalTag(Scorchful.id("humid_biomes"))
                 .addOptionalTag(ConventionalBiomeTags.IS_WET_OVERWORLD)
                 .addOptionalTag(ConventionalBiomeTags.IS_SWAMP)
                 .addOptionalTag(BiomeTags.IS_JUNGLE);
 
-        getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_RAINY_OVERWORLD_CLIMATE);
-        // TODO: is_arid
+        getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_RAINY)
+                .addOptionalTag(SClimateBiomeTags.IS_ARID);
+
+        getOrCreateTagBuilder(SClimateBiomeTags.IS_ARID)
+                .addOptionalTag(Identifier.of("frostiful", "dry_biomes"))
+                .addOptionalTag(ConventionalBiomeTags.IS_DRY_OVERWORLD);
+
+        getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_ARID)
+                .addOptionalTag(SClimateBiomeTags.IS_RAINY);
     }
 }

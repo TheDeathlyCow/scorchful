@@ -1,8 +1,0 @@
-{
-    "replace": false,
-    "values": [
-        "#scorchful:climate/is_never_warm",
-        "minecraft:stony_peaks",
-        "minecraft:beach"
-    ]
-}
