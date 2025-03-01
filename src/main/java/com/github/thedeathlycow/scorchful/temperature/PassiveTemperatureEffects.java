@@ -28,7 +28,7 @@ public final class PassiveTemperatureEffects {
 
         ScorchfulConfig config = Scorchful.getConfig();
         total += getIcyFloorTemperatureChange(context, config);
-        total -= getCoolingFromSweat(context, config);
+        total += getTemperatureFromSweat(context, config);
 
         return total;
     }
@@ -44,7 +44,7 @@ public final class PassiveTemperatureEffects {
         return 0;
     }
 
-    private static int getCoolingFromSweat(EnvironmentTickContext<LivingEntity> context, ScorchfulConfig config) {
+    private static int getTemperatureFromSweat(EnvironmentTickContext<LivingEntity> context, ScorchfulConfig config) {
         LivingEntity entity = context.affected();
         if (entity.thermoo$isWet()) {
             int temperatureChange = config.thirstConfig.getTemperatureFromWetness();

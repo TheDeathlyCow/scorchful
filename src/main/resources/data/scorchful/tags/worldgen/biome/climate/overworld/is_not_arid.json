@@ -1,6 +1,6 @@
 {
     "replace": false,
     "values": [
-        "#scorchful/climate/overworld/is_rainy"
+        "#scorchful:climate/overworld/is_rainy"
     ]
 }

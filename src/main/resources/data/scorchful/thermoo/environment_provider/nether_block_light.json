@@ -1,0 +1,18 @@
+{
+    "type": "thermoo:light_threshold",
+    "light_type": "block",
+    "threshold": 13,
+    "above": {
+        "type": "thermoo:reduce_constant",
+        "components": {
+            "thermoo:temperature": {
+                "value": 5,
+                "unit": "kelvin"
+            }
+        }
+    },
+    "below": {
+        "type": "thermoo:replace_constant",
+        "components": {}
+    }
+}

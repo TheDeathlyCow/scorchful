@@ -139,7 +139,5 @@ public class Scorchful implements ModInitializer {
         ActiveTemperatureEffects.initialize();
         PassiveTemperatureEffects.initialize();
         SoakingEffects.initialize();
-
-        EnvironmentControllerInitializeEvent.EVENT.register(AmbientTemperatureController::new);
     }
 }
