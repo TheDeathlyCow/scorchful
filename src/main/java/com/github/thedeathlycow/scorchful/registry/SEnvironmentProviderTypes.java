@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.temperature.CheckBiomeEnvironmentProvider;
+import com.github.thedeathlycow.scorchful.temperature.HeatIndexTemperatureModifier;
 import com.github.thedeathlycow.scorchful.temperature.SeaLevelAltitudeTemperatureEnvironmentProvider;
 import com.github.thedeathlycow.thermoo.api.ThermooRegistries;
 import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProvider;
@@ -17,6 +18,11 @@ public final class SEnvironmentProviderTypes {
     public static final EnvironmentProviderType<CheckBiomeEnvironmentProvider> CHECK_BIOME = register(
             "check_biome",
             new EnvironmentProviderType<>(CheckBiomeEnvironmentProvider.CODEC)
+    );
+
+    public static final EnvironmentProviderType<HeatIndexTemperatureModifier> HEAT_INDEX_TEMPERATURE_MODIFIER = register(
+            "heat_index_temperature_modifier",
+            new EnvironmentProviderType<>(HeatIndexTemperatureModifier.CODEC)
     );
 
     public static void initialize() {

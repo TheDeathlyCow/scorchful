@@ -1,6 +1,14 @@
 {
   "values": [
     {
+      "id": "scorchful:arid_humidity",
+      "required": false
+    },
+    {
+      "id": "scorchful:rainy_humidity",
+      "required": false
+    },
+    {
       "id": "scorchful:sun_light",
       "required": false
     }
