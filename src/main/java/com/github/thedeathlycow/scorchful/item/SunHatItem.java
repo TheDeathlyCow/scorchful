@@ -1,10 +1,15 @@
 package com.github.thedeathlycow.scorchful.item;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
+import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import dev.emi.trinkets.api.TrinketsApi;
+import net.minecraft.component.type.AttributeModifierSlot;
+import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Equipment;
 import net.minecraft.item.Item;
@@ -48,6 +53,20 @@ public class SunHatItem extends Item implements Equipment {
     @Override
     public EquipmentSlot getSlotType() {
         return EquipmentSlot.HEAD;
+    }
+
+    public static AttributeModifiersComponent attributeModifiers() {
+        return AttributeModifiersComponent.builder()
+                .add(
+                        ThermooAttributes.ENVIRONMENT_HEAT_RESISTANCE,
+                        new EntityAttributeModifier(
+                                Scorchful.id("sun_hat_resistance"),
+                                0.25,
+                                EntityAttributeModifier.Operation.ADD_VALUE
+                        ),
+                        AttributeModifierSlot.HEAD
+                )
+                .build();
     }
 
     @Override

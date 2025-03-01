@@ -71,29 +71,29 @@ public class AmbientTemperatureController extends EnvironmentControllerDecorator
 //        }
 //    }
 
-    @Override
-    public int getEnvironmentTemperatureForPlayer(PlayerEntity player, int localTemperature) {
-        if (localTemperature < 0 || !player.thermoo$canOverheat()) {
-            return controller.getEnvironmentTemperatureForPlayer(player, localTemperature);
-        }
-
-        ScorchfulConfig config = Scorchful.getConfig();
-
-        World world = player.getWorld();
-        int sunLight = world.getLightLevel(LightType.SKY, player.getBlockPos());
-        RegistryEntry<Biome> biome = world.getBiome(player.getBlockPos());
-        ThermooSeason season = ThermooSeason.getCurrentSeason(world).orElse(ThermooSeason.SPRING);
-
-        boolean hasHatShade = sunLight >= config.heatingConfig.getMinSkyLightLevelForHeat()
-                && SunHatItem.isWearingSunHat(player)
-                && biome.isIn(SeasonalBiomeTags.forSeason(season).scorching());
-
-        if (hasHatShade) {
-            int shading = config.heatingConfig.getSunHatShadeTemperatureChange();
-            return localTemperature + shading;
-        }
-        return localTemperature;
-    }
+//    @Override
+//    public int getEnvironmentTemperatureForPlayer(PlayerEntity player, int localTemperature) {
+//        if (localTemperature < 0 || !player.thermoo$canOverheat()) {
+//            return controller.getEnvironmentTemperatureForPlayer(player, localTemperature);
+//        }
+//
+//        ScorchfulConfig config = Scorchful.getConfig();
+//
+//        World world = player.getWorld();
+//        int sunLight = world.getLightLevel(LightType.SKY, player.getBlockPos());
+//        RegistryEntry<Biome> biome = world.getBiome(player.getBlockPos());
+//        ThermooSeason season = ThermooSeason.getCurrentSeason(world).orElse(ThermooSeason.SPRING);
+//
+//        boolean hasHatShade = sunLight >= config.heatingConfig.getMinSkyLightLevelForHeat()
+//                && SunHatItem.isWearingSunHat(player)
+//                && biome.isIn(SeasonalBiomeTags.forSeason(season).scorching());
+//
+//        if (hasHatShade) {
+//            int shading = config.heatingConfig.getSunHatShadeTemperatureChange();
+//            return localTemperature + shading;
+//        }
+//        return localTemperature;
+//    }
 
     @Override
     public int getLocalTemperatureChange(World world, BlockPos pos) {

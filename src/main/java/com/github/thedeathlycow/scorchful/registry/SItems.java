@@ -25,6 +25,7 @@ public class SItems {
     public static final Item SUN_HAT = new SunHatItem(
             new Item.Settings()
                     .equipmentSlot((entity, stack) -> EquipmentSlot.HEAD)
+                    .attributeModifiers(SunHatItem.attributeModifiers())
                     .maxCount(1)
     );
 
