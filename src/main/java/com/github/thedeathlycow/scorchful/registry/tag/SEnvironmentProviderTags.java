@@ -12,6 +12,7 @@ public final class SEnvironmentProviderTags {
     public static final TagKey<EnvironmentProvider> SCORCHING_MODIFIERS = of("scorching_modifiers");
     public static final TagKey<EnvironmentProvider> RAINY_MODIFIERS = of("rainy_modifiers");
     public static final TagKey<EnvironmentProvider> ARID_MODIFIERS = of("arid_modifiers");
+    public static final TagKey<EnvironmentProvider> NETHER_MODIFIERS = of("nether_modifiers");
 
     private static TagKey<EnvironmentProvider> of(String path) {
         return TagKey.of(ThermooRegistryKeys.ENVIRONMENT_PROVIDER, Scorchful.id(path));

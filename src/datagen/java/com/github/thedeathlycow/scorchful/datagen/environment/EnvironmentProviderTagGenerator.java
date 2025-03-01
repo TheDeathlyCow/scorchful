@@ -29,5 +29,9 @@ public class EnvironmentProviderTagGenerator extends FabricTagProvider<Environme
         getOrCreateTagBuilder(SEnvironmentProviderTags.RAINY_MODIFIERS);
 
         getOrCreateTagBuilder(SEnvironmentProviderTags.ARID_MODIFIERS);
+
+        getOrCreateTagBuilder(SEnvironmentProviderTags.NETHER_MODIFIERS)
+                .addOptional(SEnvironmentProviders.NETHER_HUMIDITY)
+                .addOptional(SEnvironmentProviders.NETHER_BLOCK_LIGHT);
     }
 }
