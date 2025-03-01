@@ -54,7 +54,7 @@ public record SeaLevelAltitudeTemperatureEnvironmentProvider(
             temperature += distanceToSeaLevel * temperatureDecreasePerBlock.value();
         }
 
-        builder.add(
+        builder.replace(
                 EnvironmentComponentTypes.TEMPERATURE,
                 new TemperatureRecordComponent(temperature, temperatureDecreasePerBlock.unit())
         );

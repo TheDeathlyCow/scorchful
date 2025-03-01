@@ -6,7 +6,10 @@
         "modifiers": "#scorchful:nether_modifiers",
         "base": {
             "type": "scorchful:sea_level_altitude_temperature",
-            "temperature_at_sea_level": 50,
+            "temperature_at_sea_level": {
+                "value": 50.0,
+                "unit": "celsius"
+            },
             "temperature_decrease_per_block": {
                 "value": -2,
                 "unit": "kelvin"
