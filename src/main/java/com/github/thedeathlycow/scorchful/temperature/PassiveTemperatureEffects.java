@@ -62,9 +62,9 @@ public final class PassiveTemperatureEffects {
         double relativeHumidity = context.components().getOrDefault(EnvironmentComponentTypes.RELATIVE_HUMIDITY, RelativeHumidityComponent.DEFAULT);
         if (relativeHumidity <= 0.2f) {
             return config.integrationConfig.seasonsConfig.getDrySeasonHumidBiomeSweatEfficiency();
-        } else if (relativeHumidity >= 0.9f) {
+        } else if (relativeHumidity >= 0.8f) {
             return config.integrationConfig.seasonsConfig.getWetSeasonHumidBiomeSweatEfficiency();
-        } else if (relativeHumidity > 0.5f) {
+        } else if (relativeHumidity >= 0.6f) {
             return config.thirstConfig.getHumidBiomeSweatEfficiency();
         } else {
             return 1f;
