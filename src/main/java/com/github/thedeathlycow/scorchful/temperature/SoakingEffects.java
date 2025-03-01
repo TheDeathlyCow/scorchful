@@ -66,7 +66,7 @@ public final class SoakingEffects {
 
     private static int getOnFireChange(LivingEntity entity, ScorchfulConfig config) {
         return entity.isOnFire()
-                ? -config.thirstConfig.getOnFireDryDate()
+                ? config.thirstConfig.getOnFireDryDate()
                 : 0;
     }
 
