@@ -2,7 +2,14 @@ package com.github.thedeathlycow.scorchful.temperature;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.scorchful.config.SeasonsConfig;
+import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
+import com.github.thedeathlycow.thermoo.api.environment.component.EnvironmentComponentTypes;
+import com.github.thedeathlycow.thermoo.api.environment.component.RelativeHumidityComponent;
+import com.github.thedeathlycow.thermoo.api.environment.event.EnvironmentTickContext;
+import com.github.thedeathlycow.thermoo.api.season.ThermooSeason;
+import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import com.github.thedeathlycow.thermoo.api.temperature.event.LivingEntityTemperatureTickEvents;
 import com.github.thedeathlycow.thermoo.api.temperature.event.TickContext;
 import net.minecraft.block.BlockState;
@@ -10,6 +17,11 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 
 public final class PassiveTemperatureEffects {
     public static void initialize() {
@@ -28,6 +40,7 @@ public final class PassiveTemperatureEffects {
 
         ScorchfulConfig config = Scorchful.getConfig();
         total += getIcyFloorTemperatureChange(context, config);
+        total -= getCoolingFromSweat(context, config);
 
         return total;
     }
@@ -41,6 +54,33 @@ public final class PassiveTemperatureEffects {
         }
 
         return 0;
+    }
+
+    private static int getCoolingFromSweat(TickContext<LivingEntity> context, ScorchfulConfig config) {
+        LivingEntity entity = context.affected();
+        if (entity.thermoo$isWet()) {
+            int temperatureChange = config.thirstConfig.getTemperatureFromWetness();
+            if (!context.affected().isSubmergedInWater()) {
+                float efficiency = getSweatEfficiency(context, config);
+                temperatureChange = MathHelper.floor(temperatureChange * efficiency);
+            }
+            return temperatureChange;
+        }
+
+        return 0;
+    }
+
+    private static float getSweatEfficiency(EnvironmentTickContext<LivingEntity> context, ScorchfulConfig config) {
+        double relativeHumidity = context.components().getOrDefault(EnvironmentComponentTypes.RELATIVE_HUMIDITY, RelativeHumidityComponent.DEFAULT);
+        if (relativeHumidity <= 0.2f) {
+            return config.integrationConfig.seasonsConfig.getDrySeasonHumidBiomeSweatEfficiency();
+        } else if (relativeHumidity >= 0.9f) {
+            return config.integrationConfig.seasonsConfig.getWetSeasonHumidBiomeSweatEfficiency();
+        } else if (relativeHumidity > 0.5f) {
+            return config.thirstConfig.getHumidBiomeSweatEfficiency();
+        } else {
+            return 1f;
+        }
     }
 
     private PassiveTemperatureEffects() {
