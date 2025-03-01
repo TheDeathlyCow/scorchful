@@ -1,7 +1,0 @@
-{
-    "replace": false,
-    "values": [
-        "#scorchful:base_humidity_modifiers",
-        "scorchful:arid_temperature_reduction"
-    ]
-}

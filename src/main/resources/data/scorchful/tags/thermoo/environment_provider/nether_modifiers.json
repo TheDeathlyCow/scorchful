@@ -1,7 +1,0 @@
-{
-    "replace": false,
-    "values": [
-        "scorchful:nether_humidity",
-        "scorchful:nether_block_light"
-    ]
-}
