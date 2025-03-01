@@ -11,10 +11,10 @@
                 "unit": "celsius"
             },
             "temperature_decrease_per_block": {
-                "value": -2,
+                "value": -1.5,
                 "unit": "kelvin"
             },
-            "max_elevation": 15
+            "max_elevation": 20
         }
     }
 }
