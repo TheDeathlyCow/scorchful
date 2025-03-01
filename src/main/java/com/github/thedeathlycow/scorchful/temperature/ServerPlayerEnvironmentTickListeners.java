@@ -30,7 +30,7 @@ public final class ServerPlayerEnvironmentTickListeners {
         if (temperatureC < 25.0) {
             return 0;
         }
-        int total = MathHelper.floor((temperatureC / 5.0) - 4);
+        int total = MathHelper.floor(((temperatureC + 5) / 10.0) - 2);
 
         if (context.affected().age % 20 == 0 && Scorchful.LOGGER.isDebugEnabled()) {
             Scorchful.LOGGER.debug("Adding {} temperature to {}", total, context.affected().getNameForScoreboard());
