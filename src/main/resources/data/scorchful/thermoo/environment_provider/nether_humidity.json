@@ -1,0 +1,6 @@
+{
+    "type": "thermoo:replace_constant",
+    "components": {
+        "thermoo:relative_humidity": 0.01
+    }
+}
