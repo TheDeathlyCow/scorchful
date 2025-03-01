@@ -1,0 +1,17 @@
+{
+    "biomes": "#scorchful:climate/nether/is_hell",
+    "exclude_biomes": "#scorchful:climate/nether/is_not_hell",
+    "provider": {
+        "type": "thermoo:reduce_sequence",
+        "modifiers": "#scorchful:nether_modifiers",
+        "base": {
+            "type": "scorchful:sea_level_altitude_temperature",
+            "temperature_at_sea_level": 50,
+            "temperature_decrease_per_block": {
+                "value": -2,
+                "unit": "kelvin"
+            },
+            "max_elevation": 15
+        }
+    }
+}
