@@ -11,19 +11,19 @@
                 "spring": {
                     "type": "thermoo:reduce_constant",
                     "components": {
-                        "thermoo:temperature": 30.0
+                        "thermoo:temperature": 35.0
                     }
                 },
                 "summer": {
                     "type": "thermoo:reduce_constant",
                     "components": {
-                        "thermoo:temperature": 35.0
+                        "thermoo:temperature": 45.0
                     }
                 },
                 "autumn": {
                     "type": "thermoo:reduce_constant",
                     "components": {
-                        "thermoo:temperature": 30.0
+                        "thermoo:temperature": 35.0
                     }
                 },
                 "winter": {

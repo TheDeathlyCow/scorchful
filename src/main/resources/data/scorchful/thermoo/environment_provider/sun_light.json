@@ -2,16 +2,16 @@
     "type": "thermoo:light_threshold",
     "light_type": "sky",
     "threshold": 13,
-    "above": {
+    "below": {
         "type": "thermoo:reduce_constant",
         "components": {
             "thermoo:temperature": {
-                "value": 5,
+                "value": -10,
                 "unit": "kelvin"
             }
         }
     },
-    "below": {
+    "above": {
         "type": "thermoo:replace_constant",
         "components": {}
     }
