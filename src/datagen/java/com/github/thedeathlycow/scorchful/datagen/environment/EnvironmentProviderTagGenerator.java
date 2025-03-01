@@ -18,6 +18,8 @@ public class EnvironmentProviderTagGenerator extends FabricTagProvider<Environme
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         getOrCreateTagBuilder(SEnvironmentProviderTags.BASE_TEMPERATURE_MODIFIERS)
+                .addOptional(SEnvironmentProviders.ARID_HUMIDITY)
+                .addOptional(SEnvironmentProviders.RAINY_HUMIDITY)
                 .addOptional(SEnvironmentProviders.SUN_LIGHT);
 
         getOrCreateTagBuilder(SEnvironmentProviderTags.WARM_MODIFIERS)

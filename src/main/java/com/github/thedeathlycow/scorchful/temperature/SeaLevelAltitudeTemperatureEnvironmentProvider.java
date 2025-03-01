@@ -1,5 +1,7 @@
 package com.github.thedeathlycow.scorchful.temperature;
 
+import com.github.thedeathlycow.scorchful.registry.SEnvironmentProviderTypes;
+import com.github.thedeathlycow.scorchful.registry.tag.SEnvironmentProviderTags;
 import com.github.thedeathlycow.thermoo.api.environment.component.EnvironmentComponentTypes;
 import com.github.thedeathlycow.thermoo.api.environment.component.TemperatureRecordComponent;
 import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProvider;
@@ -62,6 +64,6 @@ public record SeaLevelAltitudeTemperatureEnvironmentProvider(
 
     @Override
     public EnvironmentProviderType<? extends EnvironmentProvider> getType() {
-        return null;
+        return SEnvironmentProviderTypes.SEA_LEVEL_ALTITUDE_TEMPERATURE;
     }
 }

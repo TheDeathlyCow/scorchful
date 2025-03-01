@@ -1,7 +1,8 @@
 {
-    "type": "thermoo:reduce_sequence",
-    "modifiers": "#scorchful:rainy_modifiers",
-    "base": {
+    "type": "scorchful:check_biome",
+    "biomes": "#scorchful:climate/overworld/is_rainy",
+    "exclude_biomes": "#scorchful:climate/overworld/is_not_rainy",
+    "provider": {
         "type": "thermoo:seasonal/tropical",
         "fallback_season": "dry",
         "seasons": {
