@@ -3,10 +3,6 @@
     {
       "id": "#scorchful:base_temperature_modifiers",
       "required": false
-    },
-    {
-      "id": "scorchful:rainy_humidity",
-      "required": false
     }
   ]
 }

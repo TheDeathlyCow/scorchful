@@ -20,8 +20,14 @@ public class EnvironmentProviderTagGenerator extends FabricTagProvider<Environme
         getOrCreateTagBuilder(SEnvironmentProviderTags.BASE_TEMPERATURE_MODIFIERS)
                 .addOptional(SEnvironmentProviders.SUN_LIGHT);
 
-        getOrCreateTagBuilder(SEnvironmentProviderTags.WARM_AND_RAINY_MODIFIERS)
-                .addOptionalTag(SEnvironmentProviderTags.BASE_TEMPERATURE_MODIFIERS)
-                .addOptional(SEnvironmentProviders.RAINY_HUMIDITY);
+        getOrCreateTagBuilder(SEnvironmentProviderTags.WARM_MODIFIERS)
+                .addOptionalTag(SEnvironmentProviderTags.BASE_TEMPERATURE_MODIFIERS);
+
+        getOrCreateTagBuilder(SEnvironmentProviderTags.SCORCHING_MODIFIERS)
+                .addOptionalTag(SEnvironmentProviderTags.BASE_TEMPERATURE_MODIFIERS);
+
+        getOrCreateTagBuilder(SEnvironmentProviderTags.RAINY_MODIFIERS);
+
+        getOrCreateTagBuilder(SEnvironmentProviderTags.ARID_MODIFIERS);
     }
 }

@@ -1,3 +1,6 @@
-// 1.21.1	2025-03-01T11:06:37.5994576	Scorchful Datagen Mod/Tags for thermoo:environment_provider
-d61f24f0764b0b75422e70ecd10c4d031db2880f data\scorchful\tags\thermoo\environment_provider\warm_and_rainy_modifiers.json
+// 1.21.1	2025-03-01T11:41:16.9774586	Scorchful Datagen Mod/Tags for thermoo:environment_provider
+530903f4c8502d3a7d51da64a23c827db8ca80ac data\scorchful\tags\thermoo\environment_provider\scorching_modifiers.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data\scorchful\tags\thermoo\environment_provider\arid_modifiers.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data\scorchful\tags\thermoo\environment_provider\rainy_modifiers.json
+530903f4c8502d3a7d51da64a23c827db8ca80ac data\scorchful\tags\thermoo\environment_provider\warm_modifiers.json
 04c914989697a0b4a10f0a4e82a2cc0e4d77d0f9 data\scorchful\tags\thermoo\environment_provider\base_temperature_modifiers.json

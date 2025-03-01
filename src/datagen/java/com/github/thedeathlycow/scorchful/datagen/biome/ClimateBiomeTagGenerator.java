@@ -76,5 +76,11 @@ public class ClimateBiomeTagGenerator extends FabricTagProvider<Biome> {
 
         getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_ARID)
                 .addOptionalTag(SClimateBiomeTags.IS_RAINY);
+
+        getOrCreateTagBuilder(SClimateBiomeTags.IS_HELL)
+                .addOptionalTag(ConventionalBiomeTags.IS_NETHER);
+
+        getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_HELL)
+                .addOptionalTag(SClimateBiomeTags.IS_NEVER_WARM);
     }
 }

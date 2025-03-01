@@ -1,0 +1,8 @@
+{
+  "values": [
+    {
+      "id": "#scorchful:base_temperature_modifiers",
+      "required": false
+    }
+  ]
+}

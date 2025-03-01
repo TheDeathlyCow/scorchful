@@ -1,7 +1,6 @@
 package com.github.thedeathlycow.scorchful.datagen;
 
 import com.github.thedeathlycow.scorchful.datagen.biome.ClimateBiomeTagGenerator;
-import com.github.thedeathlycow.scorchful.datagen.environment.EnvironmentProviderGenerator;
 import com.github.thedeathlycow.scorchful.datagen.environment.EnvironmentProviderTagGenerator;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -18,7 +17,6 @@ public class ScorchfulDataGenerator implements DataGeneratorEntrypoint {
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
         LOGGER.info("Running Scorchful datagen");
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
-        pack.addProvider(EnvironmentProviderGenerator::new);
         pack.addProvider(EnvironmentProviderTagGenerator::new);
         pack.addProvider(ClimateBiomeTagGenerator::new);
     }
