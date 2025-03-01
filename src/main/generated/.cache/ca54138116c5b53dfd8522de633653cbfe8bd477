@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-01T11:54:46.5564477	Scorchful Datagen Mod/Tags for minecraft:worldgen/biome
+// 1.21.1	2025-03-01T12:07:04.8706051	Scorchful Datagen Mod/Tags for minecraft:worldgen/biome
 ed935d9012ed8355aee451c468cb21f69758e568 data\scorchful\tags\worldgen\biome\climate\overworld\is_not_warm.json
 a825750abeb91c2ba87745a1555931b879bd1394 data\scorchful\tags\worldgen\biome\climate\nether\is_hell.json
 b04b5373dafb326b0ccd4405762c3ef33d9007b0 data\scorchful\tags\worldgen\biome\climate\nether\is_not_hell.json
