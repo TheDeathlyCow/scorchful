@@ -9,11 +9,7 @@
       "required": false
     },
     {
-      "id": "scorchful:modifier/shade",
-      "required": false
-    },
-    {
-      "id": "scorchful:modifier/time_of_day",
+      "id": "scorchful:modifier/apply_shade_for_time",
       "required": false
     }
   ]

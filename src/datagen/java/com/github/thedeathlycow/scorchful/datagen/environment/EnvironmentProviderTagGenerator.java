@@ -20,8 +20,7 @@ public class EnvironmentProviderTagGenerator extends FabricTagProvider<Environme
         getOrCreateTagBuilder(SEnvironmentProviderTags.TEMPERATURE_MODIFIERS)
                 .addOptional(SEnvironmentProviders.ARID_HUMIDITY)
                 .addOptional(SEnvironmentProviders.RAINY_HUMIDITY)
-                .addOptional(SEnvironmentProviders.SHADE)
-                .addOptional(SEnvironmentProviders.TIME_OF_DAY);
+                .addOptional(SEnvironmentProviders.APPLY_SHADE_FOR_TIME);
 
         getOrCreateTagBuilder(SEnvironmentProviderTags.NETHER_MODIFIERS)
                 .addOptional(SEnvironmentProviders.NETHER_HUMIDITY)
