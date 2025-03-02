@@ -1,5 +1,0 @@
-{
-    "biomes": "#scorchful:climate/is_rainy",
-    "exclude_biomes": "#scorchful:climate/is_not_rainy",
-    "provider": "scorchful:set_humidity/rainy_climate"
-}

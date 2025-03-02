@@ -86,5 +86,7 @@ public class ClimateBiomeTagGenerator extends FabricTagProvider<Biome> {
         getOrCreateTagBuilder(SClimateBiomeTags.EXTREME_HUMIDITY)
                 .addOptionalTag(SClimateBiomeTags.IS_RAINY)
                 .addOptionalTag(SClimateBiomeTags.IS_ARID);
+
+        getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_HUMID_CAVE);
     }
 }

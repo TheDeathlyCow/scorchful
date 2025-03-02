@@ -1,0 +1,10 @@
+{
+    "biomes": "#c:is_cave",
+    "exclude_biomes": "#scorchful:climate/is_not_humid_cave",
+    "provider": {
+        "type": "thermoo:constant",
+        "components": {
+            "thermoo:relative_humidity": 0.95
+        }
+    }
+}

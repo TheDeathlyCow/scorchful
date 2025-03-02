@@ -4,7 +4,7 @@
         "rain": {
             "type": "thermoo:constant",
             "components": {
-                "thermoo:relative_humidity": 1.0
+                "thermoo:relative_humidity": 0.95
             }
         }
     }
