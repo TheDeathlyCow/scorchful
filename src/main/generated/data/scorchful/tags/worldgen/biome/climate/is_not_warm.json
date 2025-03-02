@@ -4,12 +4,13 @@
       "id": "#scorchful:is_never_warm",
       "required": false
     },
+    "minecraft:stony_peaks",
     {
-      "id": "#scorchful:climate/overworld/is_warm",
+      "id": "#c:is_beach",
       "required": false
     },
     {
-      "id": "#scorchful:climate/overworld/is_scorching",
+      "id": "#scorchful:climate/is_scorching",
       "required": false
     }
   ]

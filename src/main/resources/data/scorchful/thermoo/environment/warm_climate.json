@@ -1,6 +1,6 @@
 {
-    "biomes": "#scorchful:climate/overworld/is_warm",
-    "exclude_biomes": "#scorchful:climate/overworld/is_not_warm",
+    "biomes": "#scorchful:climate/is_warm",
+    "exclude_biomes": "#scorchful:climate/is_not_warm",
     "provider": {
         "type": "thermoo:reduce_sequence",
         "modifiers": "#scorchful:warm_modifiers",

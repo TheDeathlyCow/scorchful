@@ -1,7 +1,7 @@
 {
   "values": [
     {
-      "id": "#scorchful:climate/overworld/is_arid",
+      "id": "#scorchful:climate/is_rainy",
       "required": false
     }
   ]

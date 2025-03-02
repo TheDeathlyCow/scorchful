@@ -1,0 +1,5 @@
+{
+    "biomes": "#scorchful:climate/is_arid",
+    "exclude_biomes": "#scorchful:climate/is_not_arid",
+    "provider": "scorchful:set_humidity/arid"
+}
