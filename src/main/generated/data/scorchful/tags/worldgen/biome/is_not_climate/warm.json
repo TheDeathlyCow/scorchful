@@ -10,7 +10,7 @@
       "required": false
     },
     {
-      "id": "#scorchful:climate/is_scorching",
+      "id": "#scorchful:is_climate/scorching",
       "required": false
     }
   ]

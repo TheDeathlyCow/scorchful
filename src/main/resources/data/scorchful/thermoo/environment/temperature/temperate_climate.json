@@ -1,6 +1,6 @@
 {
-    "biomes": "#scorchful:climate/is_temperate",
-    "exclude_biomes": "#scorchful:climate/is_not_temperate",
+    "biomes": "#scorchful:is_climate/temperate",
+    "exclude_biomes": "#scorchful:is_not_climate/temperate",
     "provider": {
         "type": "thermoo:seasonal/temperate",
         "seasons": {

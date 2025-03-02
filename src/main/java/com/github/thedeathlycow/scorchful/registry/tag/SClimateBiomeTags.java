@@ -6,26 +6,26 @@ import net.minecraft.world.biome.Biome;
 public final class SClimateBiomeTags {
     public static final TagKey<Biome> IS_NEVER_WARM = SBiomeTags.register("is_never_warm");
 
-    public static final TagKey<Biome> IS_TEMPERATE = SBiomeTags.register("climate/is_temperate");
-    public static final TagKey<Biome> IS_NOT_TEMPERATE = SBiomeTags.register("climate/is_not_temperate");
+    public static final TagKey<Biome> IS_TEMPERATE = SBiomeTags.register("is_climate/temperate");
+    public static final TagKey<Biome> IS_NOT_TEMPERATE = SBiomeTags.register("is_not_climate/temperate");
 
-    public static final TagKey<Biome> IS_WARM = SBiomeTags.register("climate/is_warm");
-    public static final TagKey<Biome> IS_NOT_WARM = SBiomeTags.register("climate/is_not_warm");
+    public static final TagKey<Biome> IS_WARM = SBiomeTags.register("is_climate/warm");
+    public static final TagKey<Biome> IS_NOT_WARM = SBiomeTags.register("is_not_climate/warm");
 
-    public static final TagKey<Biome> IS_SCORCHING = SBiomeTags.register("climate/is_scorching");
-    public static final TagKey<Biome> IS_NOT_SCORCHING = SBiomeTags.register("climate/is_not_scorching");
+    public static final TagKey<Biome> IS_SCORCHING = SBiomeTags.register("is_climate/scorching");
+    public static final TagKey<Biome> IS_NOT_SCORCHING = SBiomeTags.register("is_not_climate/scorching");
 
-    public static final TagKey<Biome> IS_RAINY = SBiomeTags.register("climate/is_rainy");
-    public static final TagKey<Biome> IS_NOT_RAINY = SBiomeTags.register("climate/is_not_rainy");
+    public static final TagKey<Biome> IS_RAINY = SBiomeTags.register("is_climate/rainy");
+    public static final TagKey<Biome> IS_NOT_RAINY = SBiomeTags.register("is_not_climate/rainy");
 
-    public static final TagKey<Biome> IS_ARID = SBiomeTags.register("climate/is_arid");
-    public static final TagKey<Biome> IS_NOT_ARID = SBiomeTags.register("climate/is_not_arid");
+    public static final TagKey<Biome> IS_ARID = SBiomeTags.register("is_climate/arid");
+    public static final TagKey<Biome> IS_NOT_ARID = SBiomeTags.register("is_not_climate/arid");
 
-    public static final TagKey<Biome> IS_HELL = SBiomeTags.register("climate/is_hell");
-    public static final TagKey<Biome> IS_NOT_HELL = SBiomeTags.register("climate/is_not_hell");
+    public static final TagKey<Biome> IS_HELL = SBiomeTags.register("is_climate/hell");
+    public static final TagKey<Biome> IS_NOT_HELL = SBiomeTags.register("is_not_climate/hell");
 
-    public static final TagKey<Biome> EXTREME_HUMIDITY = SBiomeTags.register("climate/extreme_humidity");
-    public static final TagKey<Biome> IS_NOT_HUMID_CAVE = SBiomeTags.register("climate/is_not_humid_cave");
+    public static final TagKey<Biome> IS_EXTREME_HUMIDITY = SBiomeTags.register("is_extreme_humidity");
+    public static final TagKey<Biome> IS_NOT_HUMID_CAVE = SBiomeTags.register("is_not_climate/humid_cave");
 
     private SClimateBiomeTags() {
 

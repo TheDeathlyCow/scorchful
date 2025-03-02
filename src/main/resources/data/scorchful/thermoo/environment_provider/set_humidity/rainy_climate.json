@@ -1,7 +1,7 @@
 {
     "type": "scorchful:check_biome",
-    "biomes": "#scorchful:climate/is_rainy",
-    "exclude_biomes": "#scorchful:climate/is_not_rainy",
+    "biomes": "#scorchful:is_climate/rainy",
+    "exclude_biomes": "#scorchful:is_not_climate/rainy",
     "provider": {
         "type": "thermoo:modify",
         "modifiers": "#scorchful:humidity_modifiers",

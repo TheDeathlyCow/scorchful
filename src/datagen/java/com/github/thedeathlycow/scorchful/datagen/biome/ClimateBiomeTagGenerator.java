@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.datagen.biome;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SClimateBiomeTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
@@ -22,7 +23,7 @@ public class ClimateBiomeTagGenerator extends FabricTagProvider<Biome> {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         getOrCreateTagBuilder(SClimateBiomeTags.IS_NEVER_WARM)
-                .addOptionalTag(Scorchful.id("temperature/is_never_warm"));
+                .addOptionalTag(SBiomeTags.IS_NEVER_WARM_TEMPERATURE);
 
         getOrCreateTagBuilder(SClimateBiomeTags.IS_TEMPERATE)
                 .addOptionalTag(ConventionalBiomeTags.IS_TEMPERATE_OVERWORLD)
@@ -62,7 +63,7 @@ public class ClimateBiomeTagGenerator extends FabricTagProvider<Biome> {
                 .addOptionalTag(ConventionalBiomeTags.IS_BEACH);
 
         getOrCreateTagBuilder(SClimateBiomeTags.IS_RAINY)
-                .addOptionalTag(Scorchful.id("humid_biomes"))
+                .addOptionalTag(SBiomeTags.HUMID_BIOMES)
                 .addOptionalTag(ConventionalBiomeTags.IS_WET_OVERWORLD)
                 .addOptionalTag(ConventionalBiomeTags.IS_SWAMP)
                 .addOptionalTag(BiomeTags.IS_JUNGLE);
@@ -83,7 +84,7 @@ public class ClimateBiomeTagGenerator extends FabricTagProvider<Biome> {
         getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_HELL)
                 .addOptionalTag(SClimateBiomeTags.IS_NEVER_WARM);
 
-        getOrCreateTagBuilder(SClimateBiomeTags.EXTREME_HUMIDITY)
+        getOrCreateTagBuilder(SClimateBiomeTags.IS_EXTREME_HUMIDITY)
                 .addOptionalTag(SClimateBiomeTags.IS_RAINY)
                 .addOptionalTag(SClimateBiomeTags.IS_ARID);
 

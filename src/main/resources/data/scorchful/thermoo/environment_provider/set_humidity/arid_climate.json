@@ -1,7 +1,7 @@
 {
     "type": "scorchful:check_biome",
-    "biomes": "#scorchful:climate/is_arid",
-    "exclude_biomes": "#scorchful:climate/is_not_arid",
+    "biomes": "#scorchful:is_climate/arid",
+    "exclude_biomes": "#scorchful:is_not_climate/arid",
     "provider": {
         "type": "thermoo:modify",
         "modifiers": "#scorchful:humidity_modifiers",

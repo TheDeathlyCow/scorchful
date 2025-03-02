@@ -1,7 +1,7 @@
 {
   "values": [
     {
-      "id": "#scorchful:climate/is_rainy",
+      "id": "#scorchful:is_climate/arid",
       "required": false
     }
   ]

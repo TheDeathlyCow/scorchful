@@ -1,6 +1,6 @@
 {
-    "biomes": "#scorchful:climate/is_hell",
-    "exclude_biomes": "#scorchful:climate/is_not_hell",
+    "biomes": "#scorchful:is_climate/hell",
+    "exclude_biomes": "#scorchful:is_not_climate/hell",
     "provider": {
         "type": "thermoo:modify",
         "modifiers": "#scorchful:nether_modifiers",
