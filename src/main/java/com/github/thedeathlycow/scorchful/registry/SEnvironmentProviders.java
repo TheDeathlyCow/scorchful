@@ -6,12 +6,12 @@ import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProv
 import net.minecraft.registry.RegistryKey;
 
 public final class SEnvironmentProviders {
-    public static final RegistryKey<EnvironmentProvider> SUN_LIGHT = of("sun_light");
-    public static final RegistryKey<EnvironmentProvider> NETHER_HUMIDITY = of("nether_humidity");
-    public static final RegistryKey<EnvironmentProvider> NETHER_BLOCK_LIGHT = of("nether_block_light");
-    public static final RegistryKey<EnvironmentProvider> ARID_HUMIDITY = of("arid_humidity");
-    public static final RegistryKey<EnvironmentProvider> RAINY_HUMIDITY = of("rainy_humidity");
+    public static final RegistryKey<EnvironmentProvider> SUN_LIGHT = of("modifier/sun_light");
+    public static final RegistryKey<EnvironmentProvider> NETHER_BLOCK_LIGHT = of("modifier/nether_block_light");
 
+    public static final RegistryKey<EnvironmentProvider> NETHER_HUMIDITY = of("set_humidity/nether");
+    public static final RegistryKey<EnvironmentProvider> ARID_HUMIDITY = of("set_humidity/arid");
+    public static final RegistryKey<EnvironmentProvider> RAINY_HUMIDITY = of("set_humidity/rainy");
 
     private static RegistryKey<EnvironmentProvider> of(String name) {
         return RegistryKey.of(ThermooRegistryKeys.ENVIRONMENT_PROVIDER, Scorchful.id(name));

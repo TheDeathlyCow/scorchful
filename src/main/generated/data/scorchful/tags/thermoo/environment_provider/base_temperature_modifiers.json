@@ -1,15 +1,15 @@
 {
   "values": [
     {
-      "id": "scorchful:arid_humidity",
+      "id": "scorchful:set_humidity/arid",
       "required": false
     },
     {
-      "id": "scorchful:rainy_humidity",
+      "id": "scorchful:set_humidity/rainy",
       "required": false
     },
     {
-      "id": "scorchful:sun_light",
+      "id": "scorchful:modifier/sun_light",
       "required": false
     }
   ]

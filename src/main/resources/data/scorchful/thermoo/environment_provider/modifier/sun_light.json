@@ -3,8 +3,22 @@
     "light_type": "sky",
     "threshold": 13,
     "above": {
-        "type": "thermoo:replace_constant",
-        "components": {}
+        "type": "thermoo:light_threshold",
+        "light_type": "sky",
+        "threshold": 15,
+        "above": {
+            "type": "thermoo:replace_constant",
+            "components": {}
+        },
+        "below": {
+            "type": "thermoo:replace_constant",
+            "components": {
+                "thermoo:temperature": {
+                    "value": -5,
+                    "unit": "kelvin"
+                }
+            }
+        }
     },
     "below": {
         "type": "scorchful:relative_humidity_threshold",
