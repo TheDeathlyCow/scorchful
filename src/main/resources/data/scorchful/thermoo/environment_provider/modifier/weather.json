@@ -1,0 +1,5 @@
+{
+    "type": "thermoo:weather_state",
+    "rain": "scorchful:modifier/precipitation_type",
+    "thunder": "scorchful:modifier/precipitation_type"
+}
