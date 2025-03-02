@@ -1,7 +1,7 @@
 {
   "values": [
     {
-      "id": "#scorchful:base_temperature_modifiers",
+      "id": "scorchful:modifier/humid_weather",
       "required": false
     }
   ]

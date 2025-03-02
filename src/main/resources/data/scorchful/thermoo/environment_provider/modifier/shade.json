@@ -2,10 +2,7 @@
     "type": "thermoo:light_threshold",
     "light_type": "sky",
     "threshold": 13,
-    "above": {
-        "type": "thermoo:constant",
-        "components": {}
-    },
+    "above": "scorchful:empty",
     "below": {
         "type": "thermoo:constant",
         "components": {

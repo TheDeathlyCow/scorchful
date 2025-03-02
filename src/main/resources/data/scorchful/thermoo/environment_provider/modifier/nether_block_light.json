@@ -9,8 +9,5 @@
             "unit": "kelvin"
         }
     },
-    "below": {
-        "type": "thermoo:constant",
-        "components": {}
-    }
+    "below": "scorchful:empty"
 }

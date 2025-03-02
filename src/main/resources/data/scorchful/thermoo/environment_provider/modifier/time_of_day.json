@@ -5,8 +5,5 @@
         "max": 24000
     },
     "in": "scorchful:modifier/night_temperature",
-    "out": {
-        "type": "thermoo:constant",
-        "components": {}
-    }
+    "out": "scorchful:empty"
 }

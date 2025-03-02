@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "#scorchful:climate/is_rainy",
+      "required": false
+    },
+    {
+      "id": "#scorchful:climate/is_arid",
+      "required": false
+    }
+  ]
+}

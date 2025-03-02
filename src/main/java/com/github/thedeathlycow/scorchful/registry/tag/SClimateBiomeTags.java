@@ -24,6 +24,8 @@ public final class SClimateBiomeTags {
     public static final TagKey<Biome> IS_HELL = SBiomeTags.register("climate/is_hell");
     public static final TagKey<Biome> IS_NOT_HELL = SBiomeTags.register("climate/is_not_hell");
 
+    public static final TagKey<Biome> EXTREME_HUMIDITY = SBiomeTags.register("climate/extreme_humidity");
+
     private SClimateBiomeTags() {
 
     }

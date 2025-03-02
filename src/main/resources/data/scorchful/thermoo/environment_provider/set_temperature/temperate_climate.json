@@ -1,6 +1,6 @@
 {
     "type": "thermoo:modify",
-    "modifiers": "#scorchful:temperate_modifiers",
+    "modifiers": "#scorchful:temperature_modifiers",
     "base": {
         "type": "thermoo:constant",
         "components": {

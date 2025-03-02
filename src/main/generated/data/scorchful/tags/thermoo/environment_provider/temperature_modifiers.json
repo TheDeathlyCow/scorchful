@@ -9,10 +9,6 @@
       "required": false
     },
     {
-      "id": "scorchful:modifier/weather",
-      "required": false
-    },
-    {
       "id": "scorchful:modifier/shade",
       "required": false
     },

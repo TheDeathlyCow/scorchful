@@ -17,24 +17,17 @@ public class EnvironmentProviderTagGenerator extends FabricTagProvider<Environme
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        getOrCreateTagBuilder(SEnvironmentProviderTags.BASE_TEMPERATURE_MODIFIERS)
+        getOrCreateTagBuilder(SEnvironmentProviderTags.TEMPERATURE_MODIFIERS)
                 .addOptional(SEnvironmentProviders.ARID_HUMIDITY)
                 .addOptional(SEnvironmentProviders.RAINY_HUMIDITY)
-                .addOptional(SEnvironmentProviders.WEATHER)
                 .addOptional(SEnvironmentProviders.SHADE)
                 .addOptional(SEnvironmentProviders.TIME_OF_DAY);
-
-        getOrCreateTagBuilder(SEnvironmentProviderTags.WARM_MODIFIERS)
-                .addOptionalTag(SEnvironmentProviderTags.BASE_TEMPERATURE_MODIFIERS);
-
-        getOrCreateTagBuilder(SEnvironmentProviderTags.SCORCHING_MODIFIERS)
-                .addOptionalTag(SEnvironmentProviderTags.BASE_TEMPERATURE_MODIFIERS);
-
-        getOrCreateTagBuilder(SEnvironmentProviderTags.TEMPERATE_MODIFIERS)
-                .addOptionalTag(SEnvironmentProviderTags.BASE_TEMPERATURE_MODIFIERS);
 
         getOrCreateTagBuilder(SEnvironmentProviderTags.NETHER_MODIFIERS)
                 .addOptional(SEnvironmentProviders.NETHER_HUMIDITY)
                 .addOptional(SEnvironmentProviders.NETHER_BLOCK_LIGHT);
+
+        getOrCreateTagBuilder(SEnvironmentProviderTags.HUMIDITY_MODIFIERS)
+                .addOptional(SEnvironmentProviders.HUMID_WEATHER);
     }
 }

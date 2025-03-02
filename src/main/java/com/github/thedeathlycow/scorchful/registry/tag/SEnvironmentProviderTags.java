@@ -6,12 +6,9 @@ import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProv
 import net.minecraft.registry.tag.TagKey;
 
 public final class SEnvironmentProviderTags {
-    public static final TagKey<EnvironmentProvider> BASE_TEMPERATURE_MODIFIERS = of("base_temperature_modifiers");
-
-    public static final TagKey<EnvironmentProvider> WARM_MODIFIERS = of("warm_modifiers");
-    public static final TagKey<EnvironmentProvider> SCORCHING_MODIFIERS = of("scorching_modifiers");
-    public static final TagKey<EnvironmentProvider> TEMPERATE_MODIFIERS = of("temperate_modifiers");
+    public static final TagKey<EnvironmentProvider> TEMPERATURE_MODIFIERS = of("temperature_modifiers");
     public static final TagKey<EnvironmentProvider> NETHER_MODIFIERS = of("nether_modifiers");
+    public static final TagKey<EnvironmentProvider> HUMIDITY_MODIFIERS = of("humidity_modifiers");
 
     private static TagKey<EnvironmentProvider> of(String path) {
         return TagKey.of(ThermooRegistryKeys.ENVIRONMENT_PROVIDER, Scorchful.id(path));
