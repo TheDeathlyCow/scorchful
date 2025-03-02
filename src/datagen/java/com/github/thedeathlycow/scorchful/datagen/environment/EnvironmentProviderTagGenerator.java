@@ -28,6 +28,9 @@ public class EnvironmentProviderTagGenerator extends FabricTagProvider<Environme
         getOrCreateTagBuilder(SEnvironmentProviderTags.SCORCHING_MODIFIERS)
                 .addOptionalTag(SEnvironmentProviderTags.BASE_TEMPERATURE_MODIFIERS);
 
+        getOrCreateTagBuilder(SEnvironmentProviderTags.TEMPERATE_MODIFIERS)
+                .addOptionalTag(SEnvironmentProviderTags.BASE_TEMPERATURE_MODIFIERS);
+
         getOrCreateTagBuilder(SEnvironmentProviderTags.NETHER_MODIFIERS)
                 .addOptional(SEnvironmentProviders.NETHER_HUMIDITY)
                 .addOptional(SEnvironmentProviders.NETHER_BLOCK_LIGHT);

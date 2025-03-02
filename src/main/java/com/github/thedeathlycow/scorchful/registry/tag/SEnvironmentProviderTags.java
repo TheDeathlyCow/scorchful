@@ -10,6 +10,7 @@ public final class SEnvironmentProviderTags {
 
     public static final TagKey<EnvironmentProvider> WARM_MODIFIERS = of("warm_modifiers");
     public static final TagKey<EnvironmentProvider> SCORCHING_MODIFIERS = of("scorching_modifiers");
+    public static final TagKey<EnvironmentProvider> TEMPERATE_MODIFIERS = of("temperate_modifiers");
     public static final TagKey<EnvironmentProvider> NETHER_MODIFIERS = of("nether_modifiers");
 
     private static TagKey<EnvironmentProvider> of(String path) {

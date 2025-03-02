@@ -1,0 +1,30 @@
+{
+    "type": "thermoo:seasonal/temperate",
+    "fallback_season": "spring",
+    "seasons": {
+        "spring": {
+            "type": "thermoo:reduce_constant",
+            "components": {
+                "thermoo:temperature": 35.0
+            }
+        },
+        "summer": {
+            "type": "thermoo:reduce_constant",
+            "components": {
+                "thermoo:temperature": 45.0
+            }
+        },
+        "autumn": {
+            "type": "thermoo:reduce_constant",
+            "components": {
+                "thermoo:temperature": 35.0
+            }
+        },
+        "winter": {
+            "type": "thermoo:reduce_constant",
+            "components": {
+                "thermoo:temperature": 25.0
+            }
+        }
+    }
+}
