@@ -4,7 +4,16 @@
     "provider": {
         "type": "thermoo:seasonal/temperate",
         "seasons": {
-            "summer": "scorchful:set_temperature/temperate_climate"
+            "summer": {
+                "type": "thermoo:modify",
+                "modifiers": "#scorchful:temperature_modifiers",
+                "base": {
+                    "type": "thermoo:constant",
+                    "components": {
+                        "thermoo:temperature": 25.0
+                    }
+                }
+            }
         }
     }
 }
