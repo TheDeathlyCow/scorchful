@@ -1,7 +1,7 @@
 {
     "type": "scorchful:check_biome",
-    "biomes": "#scorchful:climate/overworld/is_arid",
-    "exclude_biomes": "#scorchful:climate/overworld/is_not_arid",
+    "biomes": "#scorchful:climate/is_arid",
+    "exclude_biomes": "#scorchful:climate/is_not_arid",
     "provider": {
         "type": "thermoo:seasonal/tropical",
         "fallback_season": "dry",
