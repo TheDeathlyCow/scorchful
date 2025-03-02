@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.temperature.CheckBiomeEnvironmentProvider;
+import com.github.thedeathlycow.scorchful.temperature.CheckTimeEnvironmentProvider;
 import com.github.thedeathlycow.scorchful.temperature.RelativeHumidityThresholdEnvironmentProvider;
 import com.github.thedeathlycow.scorchful.temperature.SeaLevelAltitudeTemperatureEnvironmentProvider;
 import com.github.thedeathlycow.thermoo.api.ThermooRegistries;
@@ -23,6 +24,11 @@ public final class SEnvironmentProviderTypes {
     public static final EnvironmentProviderType<RelativeHumidityThresholdEnvironmentProvider> RELATIVE_HUMIDITY_THRESHOLD = register(
             "relative_humidity_threshold",
             new EnvironmentProviderType<>(RelativeHumidityThresholdEnvironmentProvider.CODEC)
+    );
+
+    public static final EnvironmentProviderType<CheckTimeEnvironmentProvider> CHECK_TIME = register(
+            "check_time",
+            new EnvironmentProviderType<>(CheckTimeEnvironmentProvider.CODEC)
     );
 
     public static void initialize() {

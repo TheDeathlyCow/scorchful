@@ -6,7 +6,8 @@ import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProv
 import net.minecraft.registry.RegistryKey;
 
 public final class SEnvironmentProviders {
-    public static final RegistryKey<EnvironmentProvider> SUN_LIGHT = of("modifier/sun_light");
+    public static final RegistryKey<EnvironmentProvider> TIME_OF_DAY = of("modifier/time_of_day");
+    public static final RegistryKey<EnvironmentProvider> SHADE = of("modifier/shade");
     public static final RegistryKey<EnvironmentProvider> NETHER_BLOCK_LIGHT = of("modifier/nether_block_light");
 
     public static final RegistryKey<EnvironmentProvider> NETHER_HUMIDITY = of("set_humidity/hell");

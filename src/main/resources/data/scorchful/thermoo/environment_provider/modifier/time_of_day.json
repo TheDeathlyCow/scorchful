@@ -1,0 +1,12 @@
+{
+    "type": "scorchful:check_time",
+    "time_range": {
+        "min": 13000,
+        "max": 23000
+    },
+    "in": "scorchful:modifier/night_temperature",
+    "out": {
+        "type": "thermoo:replace_constant",
+        "components": {}
+    }
+}

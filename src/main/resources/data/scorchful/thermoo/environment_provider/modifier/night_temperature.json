@@ -1,0 +1,32 @@
+{
+    "type": "scorchful:relative_humidity_threshold",
+    "relative_humidity_threshold": 0.35,
+    "above": {
+        "type": "scorchful:relative_humidity_threshold",
+        "relative_humidity_threshold": 0.65,
+        "above": {
+            "type": "thermoo:reduce_constant",
+            "components": {
+                "thermoo:temperature": {
+                    "value": -5.0,
+                    "unit": "kelvin"
+                }
+            }
+        },
+        "below": {
+            "type": "thermoo:reduce_constant",
+            "components": {
+                "thermoo:temperature": {
+                    "value": -10.0,
+                    "unit": "kelvin"
+                }
+            }
+        }
+    },
+    "below": {
+        "type": "thermoo:replace_constant",
+        "components": {
+            "thermoo:temperature": 10
+        }
+    }
+}
