@@ -64,7 +64,7 @@ public final class PassiveTemperatureEffects {
             return config.thirstConfig.getAridBiomeSweatEfficiency();
         } else if (relativeHumidity >= 0.8f) {
             return config.thirstConfig.getExtraHumidBiomeSweatEfficiency();
-        } else if (relativeHumidity >= 0.6f) {
+        } else if (relativeHumidity >= 0.65f) {
             return config.thirstConfig.getHumidBiomeSweatEfficiency();
         } else {
             return 1f;

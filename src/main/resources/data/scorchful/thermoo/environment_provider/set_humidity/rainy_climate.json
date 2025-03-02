@@ -15,7 +15,7 @@
             "dry": {
                 "type": "thermoo:replace_constant",
                 "components": {
-                    "thermoo:relative_humidity": 0.6
+                    "thermoo:relative_humidity": 0.65
                 }
             }
         }
