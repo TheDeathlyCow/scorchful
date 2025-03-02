@@ -41,7 +41,7 @@ public record CheckBiomeEnvironmentProvider(
     }
 
     @Override
-    public EnvironmentProviderType<? extends EnvironmentProvider> getType() {
+    public EnvironmentProviderType<CheckBiomeEnvironmentProvider> getType() {
         return SEnvironmentProviderTypes.CHECK_BIOME;
     }
 }

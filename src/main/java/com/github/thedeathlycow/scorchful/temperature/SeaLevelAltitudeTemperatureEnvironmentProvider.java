@@ -63,7 +63,7 @@ public record SeaLevelAltitudeTemperatureEnvironmentProvider(
     }
 
     @Override
-    public EnvironmentProviderType<? extends EnvironmentProvider> getType() {
+    public EnvironmentProviderType<SeaLevelAltitudeTemperatureEnvironmentProvider> getType() {
         return SEnvironmentProviderTypes.SEA_LEVEL_ALTITUDE_TEMPERATURE;
     }
 }

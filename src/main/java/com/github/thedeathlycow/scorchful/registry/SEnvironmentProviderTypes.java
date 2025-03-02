@@ -2,7 +2,7 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.temperature.CheckBiomeEnvironmentProvider;
-import com.github.thedeathlycow.scorchful.temperature.HeatIndexTemperatureModifier;
+import com.github.thedeathlycow.scorchful.temperature.RelativeHumidityThresholdEnvironmentProvider;
 import com.github.thedeathlycow.scorchful.temperature.SeaLevelAltitudeTemperatureEnvironmentProvider;
 import com.github.thedeathlycow.thermoo.api.ThermooRegistries;
 import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProvider;
@@ -20,9 +20,9 @@ public final class SEnvironmentProviderTypes {
             new EnvironmentProviderType<>(CheckBiomeEnvironmentProvider.CODEC)
     );
 
-    public static final EnvironmentProviderType<HeatIndexTemperatureModifier> HEAT_INDEX_TEMPERATURE_MODIFIER = register(
-            "heat_index_temperature_modifier",
-            new EnvironmentProviderType<>(HeatIndexTemperatureModifier.CODEC)
+    public static final EnvironmentProviderType<RelativeHumidityThresholdEnvironmentProvider> RELATIVE_HUMIDITY_THRESHOLD = register(
+            "relative_humidity_threshold",
+            new EnvironmentProviderType<>(RelativeHumidityThresholdEnvironmentProvider.CODEC)
     );
 
     public static void initialize() {
@@ -32,7 +32,6 @@ public final class SEnvironmentProviderTypes {
     private static <T extends EnvironmentProvider> EnvironmentProviderType<T> register(String id, EnvironmentProviderType<T> environmentProviderType) {
         return Registry.register(ThermooRegistries.ENVIRONMENT_PROVIDER_TYPE, Scorchful.id(id), environmentProviderType);
     }
-
 
     private SEnvironmentProviderTypes() {
 
