@@ -2,7 +2,7 @@
     "type": "scorchful:check_time",
     "time_range": {
         "min": 13000,
-        "max": 23000
+        "max": 24000
     },
     "in": "scorchful:modifier/night_temperature",
     "out": {
