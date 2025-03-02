@@ -1,5 +1,5 @@
 {
-    "biomes": "#c:is_cave",
+    "biomes": "#scorchful:is_climate/humid_cave",
     "exclude_biomes": "#scorchful:is_not_climate/humid_cave",
     "provider": {
         "type": "thermoo:constant",
