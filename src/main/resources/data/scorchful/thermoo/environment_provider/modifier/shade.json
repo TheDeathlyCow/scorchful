@@ -2,7 +2,6 @@
     "type": "thermoo:light_threshold",
     "light_type": "sky",
     "threshold": 13,
-    "apply_ambient_darkness": false,
     "above": {
         "type": "thermoo:replace_constant",
         "components": {}
