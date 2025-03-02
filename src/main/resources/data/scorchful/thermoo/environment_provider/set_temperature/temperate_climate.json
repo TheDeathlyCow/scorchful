@@ -1,8 +1,8 @@
 {
-    "type": "thermoo:reduce_sequence",
+    "type": "thermoo:modify",
     "modifiers": "#scorchful:temperate_modifiers",
     "base": {
-        "type": "thermoo:reduce_constant",
+        "type": "thermoo:constant",
         "components": {
             "thermoo:temperature": 25.0
         }

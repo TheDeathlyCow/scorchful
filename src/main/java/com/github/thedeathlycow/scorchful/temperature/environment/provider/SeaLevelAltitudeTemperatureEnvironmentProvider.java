@@ -1,15 +1,14 @@
-package com.github.thedeathlycow.scorchful.temperature;
+package com.github.thedeathlycow.scorchful.temperature.environment.provider;
 
 import com.github.thedeathlycow.scorchful.registry.SEnvironmentProviderTypes;
-import com.github.thedeathlycow.scorchful.registry.tag.SEnvironmentProviderTags;
 import com.github.thedeathlycow.thermoo.api.environment.component.EnvironmentComponentTypes;
 import com.github.thedeathlycow.thermoo.api.environment.component.TemperatureRecordComponent;
 import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProvider;
 import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProviderType;
 import com.github.thedeathlycow.thermoo.api.util.TemperatureRecord;
-import com.github.thedeathlycow.thermoo.api.util.component.ReducibleComponentMapBuilder;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.component.ComponentMap;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerChunkManager;
 import net.minecraft.util.dynamic.Codecs;
@@ -38,7 +37,7 @@ public record SeaLevelAltitudeTemperatureEnvironmentProvider(
     );
 
     @Override
-    public void buildCurrentComponents(World world, BlockPos pos, RegistryEntry<Biome> biome, ReducibleComponentMapBuilder builder) {
+    public void buildCurrentComponents(World world, BlockPos pos, RegistryEntry<Biome> biome, ComponentMap.Builder builder) {
         // assume no sea level
         int distanceToSeaLevel = Integer.MAX_VALUE;
 
@@ -56,9 +55,9 @@ public record SeaLevelAltitudeTemperatureEnvironmentProvider(
             temperature += distanceToSeaLevel * temperatureDecreasePerBlock.value();
         }
 
-        builder.replace(
+        builder.add(
                 EnvironmentComponentTypes.TEMPERATURE,
-                new TemperatureRecordComponent(temperature, temperatureDecreasePerBlock.unit())
+                new TemperatureRecord(temperature, temperatureDecreasePerBlock.unit())
         );
     }
 

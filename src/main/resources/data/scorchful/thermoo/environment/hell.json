@@ -2,7 +2,7 @@
     "biomes": "#scorchful:climate/is_hell",
     "exclude_biomes": "#scorchful:climate/is_not_hell",
     "provider": {
-        "type": "thermoo:reduce_sequence",
+        "type": "thermoo:modify",
         "modifiers": "#scorchful:nether_modifiers",
         "base": {
             "type": "scorchful:sea_level_altitude_temperature",

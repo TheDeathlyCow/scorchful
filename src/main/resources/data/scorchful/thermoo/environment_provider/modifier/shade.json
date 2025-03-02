@@ -3,11 +3,11 @@
     "light_type": "sky",
     "threshold": 13,
     "above": {
-        "type": "thermoo:replace_constant",
+        "type": "thermoo:constant",
         "components": {}
     },
     "below": {
-        "type": "thermoo:replace_constant",
+        "type": "thermoo:constant",
         "components": {
             "thermoo:temperature": 20
         }

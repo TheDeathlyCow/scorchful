@@ -7,13 +7,13 @@
         "fallback_season": "dry",
         "seasons": {
             "wet": {
-                "type": "thermoo:replace_constant",
+                "type": "thermoo:constant",
                 "components": {
                     "thermoo:relative_humidity": 0.5
                 }
             },
             "dry": {
-                "type": "thermoo:replace_constant",
+                "type": "thermoo:constant",
                 "components": {
                     "thermoo:relative_humidity": 0.1
                 }

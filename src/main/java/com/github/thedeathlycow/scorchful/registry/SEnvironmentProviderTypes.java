@@ -1,10 +1,10 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.temperature.CheckBiomeEnvironmentProvider;
-import com.github.thedeathlycow.scorchful.temperature.CheckTimeEnvironmentProvider;
-import com.github.thedeathlycow.scorchful.temperature.RelativeHumidityThresholdEnvironmentProvider;
-import com.github.thedeathlycow.scorchful.temperature.SeaLevelAltitudeTemperatureEnvironmentProvider;
+import com.github.thedeathlycow.scorchful.temperature.environment.provider.CheckBiomeEnvironmentProvider;
+import com.github.thedeathlycow.scorchful.temperature.environment.provider.CheckTimeEnvironmentProvider;
+import com.github.thedeathlycow.scorchful.temperature.environment.provider.RelativeHumidityThresholdEnvironmentProvider;
+import com.github.thedeathlycow.scorchful.temperature.environment.provider.SeaLevelAltitudeTemperatureEnvironmentProvider;
 import com.github.thedeathlycow.thermoo.api.ThermooRegistries;
 import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProvider;
 import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProviderType;

@@ -6,7 +6,7 @@
     },
     "in": "scorchful:modifier/night_temperature",
     "out": {
-        "type": "thermoo:replace_constant",
+        "type": "thermoo:constant",
         "components": {}
     }
 }

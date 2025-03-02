@@ -24,7 +24,6 @@ public final class ServerPlayerEnvironmentTickListeners {
 
         double temperatureC = context.components()
                 .getOrDefault(EnvironmentComponentTypes.TEMPERATURE, TemperatureRecordComponent.DEFAULT)
-                .temperature()
                 .valueInUnit(TemperatureUnit.CELSIUS);
 
         if (temperatureC < 25.0) {

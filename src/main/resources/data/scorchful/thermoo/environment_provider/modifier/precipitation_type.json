@@ -2,7 +2,7 @@
     "type": "thermoo:precipitation_type",
     "precipitation_type": {
         "rain": {
-            "type": "thermoo:replace_constant",
+            "type": "thermoo:constant",
             "components": {
                 "thermoo:relative_humidity": 1.0
             }
