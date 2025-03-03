@@ -6,6 +6,7 @@ import com.github.thedeathlycow.thermoo.api.environment.component.EnvironmentCom
 import com.github.thedeathlycow.thermoo.api.environment.component.TemperatureRecordComponent;
 import com.github.thedeathlycow.thermoo.api.environment.event.ServerPlayerEnvironmentTickEvents;
 import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentTickContext;
+import com.github.thedeathlycow.thermoo.api.util.TemperatureRecord;
 import com.github.thedeathlycow.thermoo.api.util.TemperatureUnit;
 import net.fabricmc.fabric.api.util.TriState;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -22,14 +23,10 @@ public final class ServerPlayerEnvironmentTickListeners {
             return 0;
         }
 
-        double temperatureC = context.components()
-                .getOrDefault(EnvironmentComponentTypes.TEMPERATURE, TemperatureRecordComponent.DEFAULT)
-                .valueInUnit(TemperatureUnit.CELSIUS);
+        TemperatureRecord temperature = context.components()
+                .getOrDefault(EnvironmentComponentTypes.TEMPERATURE, TemperatureRecordComponent.DEFAULT);
 
-        if (temperatureC < 25.0) {
-            return 0;
-        }
-        int total = MathHelper.floor(((temperatureC + 5) / 10.0) - 2);
+        int total = environmentTemperatureToTemperatureChange(temperature);
 
         if (context.affected().age % 20 == 0 && Scorchful.LOGGER.isDebugEnabled()) {
             Scorchful.LOGGER.debug("Adding {} temperature to {}", total, context.affected().getNameForScoreboard());
@@ -56,5 +53,14 @@ public final class ServerPlayerEnvironmentTickListeners {
         } else {
             return TriState.of(player.thermoo$getTemperatureScale() < config.heatingConfig.getMaxPassiveHeatingScale());
         }
+    }
+
+    static int environmentTemperatureToTemperatureChange(TemperatureRecord temperature) {
+        double temperatureC = temperature.valueInUnit(TemperatureUnit.CELSIUS);
+
+        if (temperatureC < 30.0) {
+            return 0;
+        }
+        return MathHelper.floor(((temperatureC) / 10.0) - 2);
     }
 }

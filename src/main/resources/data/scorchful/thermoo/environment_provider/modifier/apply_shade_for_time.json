@@ -10,7 +10,7 @@
         "above": "scorchful:room_temperature",
         "below": {
             "type": "thermoo:temperature_shift",
-            "shift": -25
+            "shift": -30
         }
     },
     "out": {
