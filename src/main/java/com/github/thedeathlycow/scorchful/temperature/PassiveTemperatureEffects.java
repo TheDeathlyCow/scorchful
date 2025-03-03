@@ -12,6 +12,10 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 
 public final class PassiveTemperatureEffects {
+    private static final double LOW_HUMIDITY = 0.2;
+    private static final double HIGH_HUMIDITY = 0.65;
+    private static final double VERY_HIGH_HUMIDITY = 0.8;
+
     public static void initialize() {
         LivingEntityTemperatureTickEvents.GET_PASSIVE_TEMPERATURE_CHANGE.register(PassiveTemperatureEffects::getPassiveChange);
     }
@@ -60,11 +64,11 @@ public final class PassiveTemperatureEffects {
 
     private static float getSweatEfficiency(EnvironmentTickContext<LivingEntity> context, ScorchfulConfig config) {
         double relativeHumidity = context.components().getOrDefault(EnvironmentComponentTypes.RELATIVE_HUMIDITY, RelativeHumidityComponent.DEFAULT);
-        if (relativeHumidity <= 0.2f) {
+        if (relativeHumidity <= LOW_HUMIDITY) {
             return config.thirstConfig.getAridBiomeSweatEfficiency();
-        } else if (relativeHumidity >= 0.8f) {
+        } else if (relativeHumidity >= VERY_HIGH_HUMIDITY) {
             return config.thirstConfig.getExtraHumidBiomeSweatEfficiency();
-        } else if (relativeHumidity >= 0.65f) {
+        } else if (relativeHumidity >= HIGH_HUMIDITY) {
             return config.thirstConfig.getHumidBiomeSweatEfficiency();
         } else {
             return 1f;
