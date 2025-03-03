@@ -20,7 +20,7 @@ public final class PassiveTemperatureEffects {
         LivingEntityTemperatureTickEvents.GET_PASSIVE_TEMPERATURE_CHANGE.register(PassiveTemperatureEffects::getPassiveChange);
     }
 
-    private static int getPassiveChange(EnvironmentTickContext<LivingEntity> context) {
+    private static int getPassiveChange(EnvironmentTickContext<? extends LivingEntity> context) {
         LivingEntity entity = context.affected();
 
         // don't touch frostiful's effects
@@ -37,7 +37,7 @@ public final class PassiveTemperatureEffects {
         return total;
     }
 
-    private static int getIcyFloorTemperatureChange(EnvironmentTickContext<LivingEntity> context, ScorchfulConfig config) {
+    private static int getIcyFloorTemperatureChange(EnvironmentTickContext<? extends LivingEntity> context, ScorchfulConfig config) {
         LivingEntity entity = context.affected();
         BlockState steppingState = entity.getSteppingBlockState();
 
@@ -48,7 +48,7 @@ public final class PassiveTemperatureEffects {
         return 0;
     }
 
-    private static int getTemperatureFromSweat(EnvironmentTickContext<LivingEntity> context, ScorchfulConfig config) {
+    private static int getTemperatureFromSweat(EnvironmentTickContext<? extends LivingEntity> context, ScorchfulConfig config) {
         LivingEntity entity = context.affected();
         if (entity.thermoo$isWet()) {
             int temperatureChange = config.thirstConfig.getTemperatureFromWetness();
@@ -62,7 +62,7 @@ public final class PassiveTemperatureEffects {
         return 0;
     }
 
-    private static float getSweatEfficiency(EnvironmentTickContext<LivingEntity> context, ScorchfulConfig config) {
+    private static float getSweatEfficiency(EnvironmentTickContext<? extends LivingEntity> context, ScorchfulConfig config) {
         double relativeHumidity = context.components().getOrDefault(EnvironmentComponentTypes.RELATIVE_HUMIDITY, RelativeHumidityComponent.DEFAULT);
         if (relativeHumidity <= LOW_HUMIDITY) {
             return config.thirstConfig.getAridBiomeSweatEfficiency();

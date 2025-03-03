@@ -54,9 +54,7 @@ public final class ServerPlayerEnvironmentTickListeners {
         if (!config.heatingConfig.doPassiveHeating()) {
             return TriState.FALSE;
         } else {
-            return TriState.of(
-                    player.thermoo$getTemperatureScale() < config.heatingConfig.getMaxPassiveHeatingScale()
-            );
+            return TriState.of(player.thermoo$getTemperatureScale() < config.heatingConfig.getMaxPassiveHeatingScale());
         }
     }
 }

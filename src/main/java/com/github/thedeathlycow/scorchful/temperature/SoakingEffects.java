@@ -34,7 +34,7 @@ public final class SoakingEffects {
         );
     }
 
-    private static int getSoakingChange(EnvironmentTickContext<LivingEntity> context) {
+    private static int getSoakingChange(EnvironmentTickContext<? extends LivingEntity> context) {
         if (context.affected().isSpectator()) {
             return 0;
         }
@@ -70,7 +70,7 @@ public final class SoakingEffects {
                 : 0;
     }
 
-    private static void tickRehydration(EnvironmentTickContext<LivingEntity> context, int wetChange) {
+    private static void tickRehydration(EnvironmentTickContext<? extends LivingEntity> context, int wetChange) {
         if (context.affected() instanceof PlayerEntity player) {
             double rehydrationEfficiency = player.getAttributeValue(SEntityAttributes.REHYDRATION_EFFICIENCY);
             RehydrationComponent component = ScorchfulComponents.REHYDRATION.get(player);

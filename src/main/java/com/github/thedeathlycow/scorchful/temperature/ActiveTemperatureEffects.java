@@ -13,7 +13,7 @@ public final class ActiveTemperatureEffects {
         LivingEntityTemperatureTickEvents.GET_ACTIVE_TEMPERATURE_CHANGE.register(ActiveTemperatureEffects::getActiveChange);
     }
 
-    private static int getActiveChange(EnvironmentTickContext<LivingEntity> context) {
+    private static int getActiveChange(EnvironmentTickContext<? extends LivingEntity> context) {
         LivingEntity entity = context.affected();
 
         // don't touch frostiful's effects
