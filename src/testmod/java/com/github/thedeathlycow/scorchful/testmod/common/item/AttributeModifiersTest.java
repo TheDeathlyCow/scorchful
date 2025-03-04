@@ -24,9 +24,9 @@ import net.minecraft.util.math.BlockPos;
 @SuppressWarnings("unused")
 public class AttributeModifiersTest {
     public static void initialize() {
-        ModifyItemAttributeModifiersCallback.EVENT.register((stack, slot, component) -> {
+        ModifyItemAttributeModifiersCallback.EVENT.register((stack, slot, builder) -> {
             if (slot == AttributeModifierSlot.CHEST && stack.isOf(SItems.TURTLE_CHESTPLATE)) {
-                return component.with(
+                builder.add(
                         EntityAttributes.GENERIC_SCALE,
                         new EntityAttributeModifier(
                                 ScorchfulTestMod.id("turtle_chestplate_scale_test"),
@@ -38,7 +38,7 @@ public class AttributeModifiersTest {
             }
 
             if (slot == AttributeModifierSlot.MAINHAND && stack.isIn(ItemTags.AXES)) {
-                return component.with(
+                builder.add(
                         EntityAttributes.GENERIC_ARMOR,
                         new EntityAttributeModifier(
                                 ScorchfulTestMod.id("diamond_axe_armor_test"),
@@ -50,7 +50,7 @@ public class AttributeModifiersTest {
             }
 
             if (slot == AttributeModifierSlot.MAINHAND && stack.isOf(Items.NETHERITE_AXE)) {
-                return component.with(
+                builder.add(
                         EntityAttributes.GENERIC_ARMOR,
                         // duplicate
                         new EntityAttributeModifier(
@@ -61,8 +61,6 @@ public class AttributeModifiersTest {
                         slot
                 );
             }
-
-            return component;
         });
     }
 
