@@ -15,6 +15,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.test.GameTest;
 import net.minecraft.test.TestContext;
 import net.minecraft.util.Hand;
@@ -36,12 +37,25 @@ public class AttributeModifiersTest {
                 );
             }
 
-            if (slot == AttributeModifierSlot.MAINHAND && stack.isOf(Items.DIAMOND_AXE)) {
+            if (slot == AttributeModifierSlot.MAINHAND && stack.isIn(ItemTags.AXES)) {
                 return component.with(
                         EntityAttributes.GENERIC_ARMOR,
                         new EntityAttributeModifier(
                                 ScorchfulTestMod.id("diamond_axe_armor_test"),
                                 1.0,
+                                EntityAttributeModifier.Operation.ADD_VALUE
+                        ),
+                        slot
+                );
+            }
+
+            if (slot == AttributeModifierSlot.MAINHAND && stack.isOf(Items.NETHERITE_AXE)) {
+                return component.with(
+                        EntityAttributes.GENERIC_ARMOR,
+                        // duplicate
+                        new EntityAttributeModifier(
+                                ScorchfulTestMod.id("diamond_axe_armor_test"),
+                                5.0,
                                 EntityAttributeModifier.Operation.ADD_VALUE
                         ),
                         slot
@@ -89,6 +103,15 @@ public class AttributeModifiersTest {
 
         villager.setStackInHand(Hand.MAIN_HAND, Items.DIAMOND_AXE.getDefaultStack());
         context.expectEntityWithDataEnd(BlockPos.ORIGIN, EntityType.VILLAGER, LivingEntity::getArmor, 1);
+    }
+
+    @GameTest(templateName = FabricGameTest.EMPTY_STRUCTURE)
+    public void default_netherite_axe_overwrites_armor(TestContext context) {
+        VillagerEntity villager = context.spawnEntity(EntityType.VILLAGER, BlockPos.ORIGIN);
+        context.expectEntityWithData(BlockPos.ORIGIN, EntityType.VILLAGER, LivingEntity::getArmor, 0);
+
+        villager.setStackInHand(Hand.MAIN_HAND, Items.NETHERITE_AXE.getDefaultStack());
+        context.expectEntityWithDataEnd(BlockPos.ORIGIN, EntityType.VILLAGER, LivingEntity::getArmor, 5);
     }
 
     @GameTest(templateName = FabricGameTest.EMPTY_STRUCTURE)
