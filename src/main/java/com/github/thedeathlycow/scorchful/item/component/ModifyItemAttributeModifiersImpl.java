@@ -2,8 +2,9 @@ package com.github.thedeathlycow.scorchful.item.component;
 
 import com.github.thedeathlycow.scorchful.event.ModifyItemAttributeModifiersCallback;
 import com.github.thedeathlycow.scorchful.mixin.accessor.AttributeModifiersComponentBuilderAccessor;
+import com.google.common.collect.MapMaker;
 import it.unimi.dsi.fastutil.Pair;
-import net.minecraft.component.type.AttributeModifierSlot;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.item.ItemStack;
@@ -16,17 +17,28 @@ import java.util.List;
 import java.util.Map;
 
 public final class ModifyItemAttributeModifiersImpl {
+    private static final Map<ItemStack, AttributeModifiersComponent> CACHE = new MapMaker()
+            .weakKeys()
+            .makeMap();
+
     public static void initialize() {
+        ServerLifecycleEvents.SERVER_STARTING.register(server -> CACHE.clear());
+        ServerLifecycleEvents.START_DATA_PACK_RELOAD.register((server, resourceManager) -> CACHE.clear());
     }
 
-    public static AttributeModifiersComponent invoke(ItemStack stack, AttributeModifierSlot slot, AttributeModifiersComponent base) {
-        AttributeModifiersComponent.Builder builder = AttributeModifiersComponent.builder();
-        AttributeModifiersComponentBuilderAccessor accessor = (AttributeModifiersComponentBuilderAccessor) builder;
-        accessor.scorchful$getEntries().addAll(base.modifiers());
+    public static AttributeModifiersComponent invoke(ItemStack stack, AttributeModifiersComponent base) {
+        return CACHE.computeIfAbsent(
+                stack,
+                s -> {
+                    AttributeModifiersComponent.Builder builder = AttributeModifiersComponent.builder();
+                    AttributeModifiersComponentBuilderAccessor accessor = (AttributeModifiersComponentBuilderAccessor) builder;
+                    accessor.scorchful$getEntries().addAll(base.modifiers());
 
-        ModifyItemAttributeModifiersCallback.EVENT.invoker().modifyAttributeModifiers(stack, slot, builder);
+                    ModifyItemAttributeModifiersCallback.EVENT.invoker().modifyAttributeModifiers(s, builder);
 
-        return new AttributeModifiersComponent(removeDuplicates(builder.build().modifiers()), base.showInTooltip());
+                    return new AttributeModifiersComponent(removeDuplicates(builder.build().modifiers()), base.showInTooltip());
+                }
+        );
     }
 
     private static List<AttributeModifiersComponent.Entry> removeDuplicates(Collection<AttributeModifiersComponent.Entry> modifiers) {

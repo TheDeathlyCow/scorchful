@@ -24,8 +24,8 @@ import net.minecraft.util.math.BlockPos;
 @SuppressWarnings("unused")
 public class AttributeModifiersTest {
     public static void initialize() {
-        ModifyItemAttributeModifiersCallback.EVENT.register((stack, slot, builder) -> {
-            if (slot == AttributeModifierSlot.CHEST && stack.isOf(SItems.TURTLE_CHESTPLATE)) {
+        ModifyItemAttributeModifiersCallback.EVENT.register((stack, builder) -> {
+            if (stack.isOf(SItems.TURTLE_CHESTPLATE)) {
                 builder.add(
                         EntityAttributes.GENERIC_SCALE,
                         new EntityAttributeModifier(
@@ -33,11 +33,11 @@ public class AttributeModifiersTest {
                                 1.0,
                                 EntityAttributeModifier.Operation.ADD_VALUE
                         ),
-                        slot
+                        AttributeModifierSlot.CHEST
                 );
             }
 
-            if (slot == AttributeModifierSlot.MAINHAND && stack.isIn(ItemTags.AXES)) {
+            if (stack.isIn(ItemTags.AXES)) {
                 builder.add(
                         EntityAttributes.GENERIC_ARMOR,
                         new EntityAttributeModifier(
@@ -45,11 +45,11 @@ public class AttributeModifiersTest {
                                 1.0,
                                 EntityAttributeModifier.Operation.ADD_VALUE
                         ),
-                        slot
+                        AttributeModifierSlot.MAINHAND
                 );
             }
 
-            if (slot == AttributeModifierSlot.MAINHAND && stack.isOf(Items.NETHERITE_AXE)) {
+            if (stack.isOf(Items.NETHERITE_AXE)) {
                 builder.add(
                         EntityAttributes.GENERIC_ARMOR,
                         // duplicate
@@ -58,7 +58,7 @@ public class AttributeModifiersTest {
                                 5.0,
                                 EntityAttributeModifier.Operation.ADD_VALUE
                         ),
-                        slot
+                        AttributeModifierSlot.MAINHAND
                 );
             }
         });

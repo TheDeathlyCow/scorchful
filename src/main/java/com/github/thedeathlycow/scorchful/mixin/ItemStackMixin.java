@@ -1,6 +1,5 @@
 package com.github.thedeathlycow.scorchful.mixin;
 
-import com.github.thedeathlycow.scorchful.event.ModifyItemAttributeModifiersCallback;
 import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
 import com.github.thedeathlycow.scorchful.item.component.ModifyItemAttributeModifiersImpl;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -56,7 +55,7 @@ public abstract class ItemStackMixin {
     ) {
         // prevent overriding modified components from commands
         if (this.getComponentChanges().get(DataComponentTypes.ATTRIBUTE_MODIFIERS) == null) {
-            instance = ModifyItemAttributeModifiersImpl.invoke((ItemStack) (Object) this, slot, instance);
+            instance = ModifyItemAttributeModifiersImpl.invoke((ItemStack) (Object) this, instance);
         }
         original.call(instance, slot, attributeConsumer);
     }
@@ -76,7 +75,7 @@ public abstract class ItemStackMixin {
     ) {
         // prevent overriding modified components from commands
         if (this.getComponentChanges().get(DataComponentTypes.ATTRIBUTE_MODIFIERS) == null) {
-            instance = ModifyItemAttributeModifiersImpl.invoke((ItemStack) (Object) this, AttributeModifierSlot.forEquipmentSlot(slot), instance);
+            instance = ModifyItemAttributeModifiersImpl.invoke((ItemStack) (Object) this, instance);
         }
         original.call(instance, slot, attributeConsumer);
     }
