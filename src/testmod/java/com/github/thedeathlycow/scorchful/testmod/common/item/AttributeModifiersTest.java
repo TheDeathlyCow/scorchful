@@ -91,7 +91,7 @@ public class AttributeModifiersTest {
         stack.set(DataComponentTypes.ATTRIBUTE_MODIFIERS, AttributeModifiersComponent.DEFAULT);
 
         villager.equipStack(EquipmentSlot.CHEST, stack);
-        context.expectEntityWithDataEnd(BlockPos.ORIGIN, EntityType.VILLAGER, LivingEntity::getScale, 2f);
+        context.expectEntityWithDataEnd(BlockPos.ORIGIN, EntityType.VILLAGER, LivingEntity::getScale, 1f);
     }
 
     @GameTest(templateName = FabricGameTest.EMPTY_STRUCTURE)
