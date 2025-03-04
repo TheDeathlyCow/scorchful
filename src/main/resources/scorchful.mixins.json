@@ -11,6 +11,7 @@
         "PlayerEntityMixin",
         "PointOfInterestTypesMixin",
         "TargetPredicateMixin",
+        "accessor.AttributeModifiersComponentBuilderAccessor",
         "accessor.BlockDisplayAccess",
         "accessor.ComponentMapBuilderAccessor",
         "accessor.EnchantmentBuilderAccessor",

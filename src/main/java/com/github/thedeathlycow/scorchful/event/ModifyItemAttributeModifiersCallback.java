@@ -11,24 +11,19 @@ import org.jetbrains.annotations.ApiStatus;
 public interface ModifyItemAttributeModifiersCallback {
     Event<ModifyItemAttributeModifiersCallback> EVENT = EventFactory.createArrayBacked(
             ModifyItemAttributeModifiersCallback.class,
-            listeners -> (stack, slot, builder) -> {
+            listeners -> (stack, slot, component) -> {
                 for (ModifyItemAttributeModifiersCallback listener : listeners) {
-                    listener.modifyAttributeModifiers(stack, slot, builder);
+                    component = listener.modifyAttributeModifiers(stack, slot, component);
                 }
+                return component;
             }
     );
 
-    void modifyAttributeModifiers(ItemStack stack, AttributeModifierSlot slot, AttributeModifiersComponent.Builder builder);
+    AttributeModifiersComponent modifyAttributeModifiers(ItemStack stack, AttributeModifierSlot slot, AttributeModifiersComponent component);
 
     @ApiStatus.Internal
     static AttributeModifiersComponent invoke(ItemStack stack, AttributeModifierSlot slot, AttributeModifiersComponent base) {
-        AttributeModifiersComponent.Builder builder = AttributeModifiersComponent.builder();
-
-        for (AttributeModifiersComponent.Entry entry : base.modifiers()) {
-            builder.add(entry.attribute(), entry.modifier(), entry.slot());
-        }
-
-        ModifyItemAttributeModifiersCallback.EVENT.invoker().modifyAttributeModifiers(stack, slot, builder);
-        return new AttributeModifiersComponent(builder.build().modifiers(), base.showInTooltip());
+        return ModifyItemAttributeModifiersCallback.EVENT.invoker()
+                .modifyAttributeModifiers(stack, slot, base);
     }
 }
