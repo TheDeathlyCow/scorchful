@@ -7,11 +7,10 @@ import com.github.thedeathlycow.scorchful.compat.DehydrationServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
-import com.github.thedeathlycow.scorchful.event.ScorchfulLivingEntityEvents;
 import com.github.thedeathlycow.scorchful.item.DrinkItem;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
-import com.github.thedeathlycow.scorchful.item.HeatResistanceHelper;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
+import com.github.thedeathlycow.scorchful.item.component.HeatResistanceModifier;
 import com.github.thedeathlycow.scorchful.item.enchantment.EnchantmentModifiers;
 import com.github.thedeathlycow.scorchful.item.loot.TurtleScuteLootTableModifier;
 import com.github.thedeathlycow.scorchful.registry.*;
@@ -19,13 +18,12 @@ import com.github.thedeathlycow.scorchful.registry.tag.SDamageTypeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.github.thedeathlycow.scorchful.server.ThirstCommand;
 import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
-import com.github.thedeathlycow.scorchful.temperature.*;
+import com.github.thedeathlycow.scorchful.temperature.ActiveTemperatureEffects;
+import com.github.thedeathlycow.scorchful.temperature.PassiveTemperatureEffects;
+import com.github.thedeathlycow.scorchful.temperature.ServerPlayerEnvironmentTickListeners;
+import com.github.thedeathlycow.scorchful.temperature.SoakingEffects;
 import com.github.thedeathlycow.scorchful.worldgen.NetherBiomeModifications;
-import com.github.thedeathlycow.thermoo.api.armor.material.ArmorMaterialEvents;
-import com.github.thedeathlycow.thermoo.api.item.ModifyItemAttributeModifiersCallback;
 import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
-import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentControllerInitializeEvent;
-import com.github.thedeathlycow.thermoo.api.temperature.event.PlayerEnvironmentEvents;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
@@ -35,8 +33,6 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.fabricmc.fabric.api.util.TriState;
-import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -106,7 +102,7 @@ public class Scorchful implements ModInitializer {
                 );
             }
         });
-        HeatResistanceHelper.initialize();
+        HeatResistanceModifier.initialize();
 
         // custom scorchful event
         ServerLivingEntityEvents.AFTER_DAMAGE.register(

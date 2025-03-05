@@ -15,17 +15,13 @@ public class CombatConfig implements ConfigData {
 
     boolean enableDesertVisions = true;
 
-    @ConfigEntry.Gui.RequiresRestart
-    double defaultArmorHeatResistance = -0.5;
+    double defaultArmorHeatResistanceMultiplier = -1;
 
-    @ConfigEntry.Gui.RequiresRestart
-    double veryHarmfulArmorHeatResistance = -1.0;
+    double veryHarmfulArmorHeatResistanceMultiplier = -2.0;
 
-    @ConfigEntry.Gui.RequiresRestart
-    double protectiveArmorHeatResistance = 0.5;
+    double protectiveArmorHeatResistanceMultiplier = 1.0;
 
-    @ConfigEntry.Gui.RequiresRestart
-    double veryProtectiveArmorHeatResistance = 1.0;
+    double veryProtectiveArmorHeatResistanceMultiplier = 2.0;
 
     double fearDetectionRangeMultiplier = 2.0;
 
@@ -40,20 +36,20 @@ public class CombatConfig implements ConfigData {
         return enableDesertVisions;
     }
 
-    public double getDefaultArmorHeatResistance() {
-        return defaultArmorHeatResistance;
+    public double getDefaultArmorHeatResistanceMultiplier() {
+        return defaultArmorHeatResistanceMultiplier;
     }
 
-    public double getVeryHarmfulArmorHeatResistance() {
-        return veryHarmfulArmorHeatResistance;
+    public double getVeryHarmfulArmorHeatResistanceMultiplier() {
+        return veryHarmfulArmorHeatResistanceMultiplier;
     }
 
-    public double getProtectiveArmorHeatResistance() {
-        return protectiveArmorHeatResistance;
+    public double getProtectiveArmorHeatResistanceMultiplier() {
+        return protectiveArmorHeatResistanceMultiplier;
     }
 
-    public double getVeryProtectiveArmorHeatResistance() {
-        return veryProtectiveArmorHeatResistance;
+    public double getVeryProtectiveArmorHeatResistanceMultiplier() {
+        return veryProtectiveArmorHeatResistanceMultiplier;
     }
 
     public double getFearDetectionRangeMultiplier() {

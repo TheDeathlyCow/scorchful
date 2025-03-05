@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.item.enchantment;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.item.component.HeatResistanceModifier;
 import com.github.thedeathlycow.scorchful.mixin.accessor.EnchantmentBuilderAccessor;
 import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import com.github.thedeathlycow.scorchful.config.CombatConfig;
@@ -65,15 +66,15 @@ public class EnchantmentModifiers {
             return;
         }
 
-        float max = (float) Scorchful.getConfig().combatConfig.getVeryProtectiveArmorHeatResistance();
-        float maxLevel = ((EnchantmentBuilderAccessor) builder).getDefinition().maxLevel();
-        float valuePerLevel = max / maxLevel;
+        double max = HeatResistanceModifier.BASE_HEAT_RESISTANCE * Scorchful.getConfig().combatConfig.getVeryProtectiveArmorHeatResistanceMultiplier();
+        double maxLevel = ((EnchantmentBuilderAccessor) builder).getDefinition().maxLevel();
+        double valuePerLevel = max / maxLevel;
         builder.addEffect(
                 EnchantmentEffectComponentTypes.ATTRIBUTES,
                 new AttributeEnchantmentEffect(
                         Scorchful.id("enchantment.fire_protection.heat_resistance"),
                         ThermooAttributes.HEAT_RESISTANCE,
-                        EnchantmentLevelBasedValue.linear(valuePerLevel),
+                        EnchantmentLevelBasedValue.linear((float) valuePerLevel),
                         EntityAttributeModifier.Operation.ADD_VALUE
                 )
         );
