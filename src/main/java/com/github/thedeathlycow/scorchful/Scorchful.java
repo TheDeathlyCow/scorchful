@@ -23,6 +23,7 @@ import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPa
 import com.github.thedeathlycow.scorchful.temperature.*;
 import com.github.thedeathlycow.scorchful.worldgen.NetherBiomeModifications;
 import com.github.thedeathlycow.thermoo.api.armor.material.ArmorMaterialEvents;
+import com.github.thedeathlycow.thermoo.api.item.ModifyItemAttributeModifiersCallback;
 import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentControllerInitializeEvent;
 import com.github.thedeathlycow.thermoo.api.temperature.event.PlayerEnvironmentEvents;
@@ -106,8 +107,7 @@ public class Scorchful implements ModInitializer {
                 );
             }
         });
-        ArmorMaterialEvents.GET_HEAT_RESISTANCE.register(HeatResistanceHelper::getHeatResistance);
-        ModifyItemAttributeModifiersImpl.initialize();
+        HeatResistanceHelper.initialize();
 
         // custom scorchful event
         ServerLivingEntityEvents.AFTER_DAMAGE.register(

@@ -22,6 +22,11 @@ public class SItemTags {
 
     public static final TagKey<Item> BLOCKS_RAIN_WHEN_HOLDING = of("blocks_rain_when_holding");
 
+    public static final TagKey<Item> IS_VERY_PROTECTIVE_HEAT_RESISTANCE = of("is_heat_resistant/very_protective");
+    public static final TagKey<Item> IS_PROTECTIVE_HEAT_RESISTANCE = of("is_heat_resistant/protective");
+    public static final TagKey<Item> IS_VERY_WEAK_HEAT_RESISTANCE = of("is_heat_resistant/very_harmful");
+    public static final TagKey<Item> IS_NEUTRAL_HEAT_RESISTANCE = of("is_heat_resistant/neutral");
+
     private static TagKey<Item> of(String path) {
         return TagKey.of(RegistryKeys.ITEM, Scorchful.id(path));
     }
