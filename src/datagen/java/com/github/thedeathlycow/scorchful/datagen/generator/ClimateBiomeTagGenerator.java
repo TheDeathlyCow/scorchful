@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.datagen.biome;
+package com.github.thedeathlycow.scorchful.datagen.generator;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;

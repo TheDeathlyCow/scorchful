@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.datagen.environment;
+package com.github.thedeathlycow.scorchful.datagen.generator;
 
 import com.github.thedeathlycow.scorchful.registry.SEnvironmentProviders;
 import com.github.thedeathlycow.scorchful.registry.tag.SEnvironmentProviderTags;

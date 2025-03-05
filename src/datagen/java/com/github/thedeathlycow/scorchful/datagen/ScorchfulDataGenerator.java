@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.datagen;
 
-import com.github.thedeathlycow.scorchful.datagen.biome.ClimateBiomeTagGenerator;
-import com.github.thedeathlycow.scorchful.datagen.environment.EnvironmentProviderTagGenerator;
+import com.github.thedeathlycow.scorchful.datagen.generator.ClimateBiomeTagGenerator;
+import com.github.thedeathlycow.scorchful.datagen.generator.EnvironmentProviderTagGenerator;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import org.slf4j.Logger;
