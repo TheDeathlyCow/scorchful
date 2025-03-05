@@ -36,6 +36,10 @@ public final class HeatResistanceModifier {
                         HeatResistanceLevel level = stack.getOrDefault(SDataComponentTypes.HEAT_RESISTANCE_LEVEL, HeatResistanceLevel.HARMFUL);
 
                         double multiplier = level.getMultiplier(config);
+                        if (multiplier == 0) {
+                            return;
+                        }
+
                         EquipmentSlot slot = armorItem.getSlotType();
                         AttributeModifierSlot modifierSlot = AttributeModifierSlot.forEquipmentSlot(slot);
 
