@@ -2,17 +2,17 @@ package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.CombatConfig;
-import com.github.thedeathlycow.scorchful.event.ModifyItemAttributeModifiersCallback;
 import com.github.thedeathlycow.scorchful.registry.tag.SArmorMaterialTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import com.github.thedeathlycow.thermoo.api.armor.material.ArmorMaterialTags;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+import com.github.thedeathlycow.thermoo.api.item.ModifyItemAttributeModifiersCallback;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.item.*;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.TagKey;
 
 import java.util.function.Predicate;

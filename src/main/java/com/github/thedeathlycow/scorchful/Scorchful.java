@@ -12,7 +12,6 @@ import com.github.thedeathlycow.scorchful.item.DrinkItem;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
 import com.github.thedeathlycow.scorchful.item.HeatResistanceHelper;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
-import com.github.thedeathlycow.scorchful.item.component.ModifyItemAttributeModifiersImpl;
 import com.github.thedeathlycow.scorchful.item.enchantment.EnchantmentModifiers;
 import com.github.thedeathlycow.scorchful.item.loot.TurtleScuteLootTableModifier;
 import com.github.thedeathlycow.scorchful.registry.*;

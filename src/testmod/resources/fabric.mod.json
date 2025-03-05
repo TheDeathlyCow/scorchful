@@ -13,7 +13,6 @@
             "com.github.thedeathlycow.scorchful.testmod.common.cauldron.CauldronInteractionTests",
             "com.github.thedeathlycow.scorchful.testmod.common.cauldron.SandCauldronTests",
             "com.github.thedeathlycow.scorchful.testmod.common.item.CoolingFoodTest",
-            "com.github.thedeathlycow.scorchful.testmod.common.item.AttributeModifiersTest",
             "com.github.thedeathlycow.scorchful.testmod.common.netherlily.CrimsonLilyTests",
             "com.github.thedeathlycow.scorchful.testmod.common.netherlily.WarpedLilyTests",
             "com.github.thedeathlycow.scorchful.testmod.common.temperature.DogPantingTests",
