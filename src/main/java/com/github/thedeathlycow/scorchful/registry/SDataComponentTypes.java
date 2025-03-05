@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.registry;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
+import com.github.thedeathlycow.scorchful.item.component.HeatResistanceLevel;
 import net.minecraft.component.ComponentType;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.Registries;
@@ -26,9 +27,17 @@ public class SDataComponentTypes {
                     .packetCodec(PacketCodecs.VAR_INT)
     );
 
+    public static final ComponentType<HeatResistanceLevel> HEAT_RESISTANCE_LEVEL = create(
+            builder -> builder
+                    .codec(HeatResistanceLevel.CODEC)
+                    .packetCodec(HeatResistanceLevel.PACKET_CODEC)
+                    .cache()
+    );
+
     public static void initialize() {
         register("drink_level", DRINK_LEVEL);
         register("num_drinks", NUM_DRINKS);
+        register("heat_resistance_level", HEAT_RESISTANCE_LEVEL);
     }
 
     private static <T> ComponentType<T> create(UnaryOperator<ComponentType.Builder<T>> builderOperator) {

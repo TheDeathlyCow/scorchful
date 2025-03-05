@@ -2,8 +2,11 @@ package com.github.thedeathlycow.scorchful.item.component;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.CombatConfig;
+import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
+import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import com.github.thedeathlycow.thermoo.api.item.ModifyItemAttributeModifiersCallback;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -21,11 +24,18 @@ public final class HeatResistanceModifier {
     public static final double BASE_ENVIRONMENT_HEAT_RESISTANCE = 0.125;
 
     public static void initialize() {
+        ScorchfulItemEvents.GET_DEFAULT_STACK.register(stack -> {
+            if (stack.isIn(ConventionalItemTags.ARMORS) && !stack.contains(SDataComponentTypes.HEAT_RESISTANCE_LEVEL)) {
+                stack.set(SDataComponentTypes.HEAT_RESISTANCE_LEVEL, HeatResistanceLevel.forStack(stack));
+            }
+        });
         ModifyItemAttributeModifiersCallback.EVENT.register(
                 (stack, builder) -> {
                     if (stack.getItem() instanceof ArmorItem armorItem) {
                         CombatConfig config = Scorchful.getConfig().combatConfig;
-                        double multiplier = HeatResistanceLevel.getMultiplierForStack(stack, config);
+                        HeatResistanceLevel level = stack.getOrDefault(SDataComponentTypes.HEAT_RESISTANCE_LEVEL, HeatResistanceLevel.HARMFUL);
+
+                        double multiplier = level.getMultiplier(config);
                         EquipmentSlot slot = armorItem.getSlotType();
                         AttributeModifierSlot modifierSlot = AttributeModifierSlot.forEquipmentSlot(slot);
 
