@@ -15,13 +15,7 @@ public class CombatConfig implements ConfigData {
 
     boolean enableDesertVisions = true;
 
-    double defaultArmorHeatResistanceMultiplier = -1;
-
-    double veryHarmfulArmorHeatResistanceMultiplier = -2.0;
-
-    double protectiveArmorHeatResistanceMultiplier = 1.0;
-
-    double veryProtectiveArmorHeatResistanceMultiplier = 2.0;
+    double fireProtectionHeatResistancePerLevel = 0.125;
 
     double fearDetectionRangeMultiplier = 2.0;
 
@@ -36,20 +30,8 @@ public class CombatConfig implements ConfigData {
         return enableDesertVisions;
     }
 
-    public double getDefaultArmorHeatResistanceMultiplier() {
-        return defaultArmorHeatResistanceMultiplier;
-    }
-
-    public double getVeryHarmfulArmorHeatResistanceMultiplier() {
-        return veryHarmfulArmorHeatResistanceMultiplier;
-    }
-
-    public double getProtectiveArmorHeatResistanceMultiplier() {
-        return protectiveArmorHeatResistanceMultiplier;
-    }
-
-    public double getVeryProtectiveArmorHeatResistanceMultiplier() {
-        return veryProtectiveArmorHeatResistanceMultiplier;
+    public double getFireProtectionHeatResistancePerLevel() {
+        return fireProtectionHeatResistancePerLevel;
     }
 
     public double getFearDetectionRangeMultiplier() {

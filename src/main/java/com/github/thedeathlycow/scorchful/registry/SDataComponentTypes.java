@@ -3,7 +3,7 @@ package com.github.thedeathlycow.scorchful.registry;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
-import com.github.thedeathlycow.scorchful.item.component.HeatResistanceLevelComponent;
+import com.github.thedeathlycow.scorchful.item.component.ExtraAttributeModifierComponent;
 import net.minecraft.component.ComponentType;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.Registries;
@@ -27,17 +27,25 @@ public class SDataComponentTypes {
                     .packetCodec(PacketCodecs.VAR_INT)
     );
 
-    public static final ComponentType<HeatResistanceLevelComponent> HEAT_RESISTANCE_LEVEL = create(
+    public static final ComponentType<ExtraAttributeModifierComponent> HEAT_RESISTANCE = create(
             builder -> builder
-                    .codec(HeatResistanceLevelComponent.CODEC)
-                    .packetCodec(HeatResistanceLevelComponent.PACKET_CODEC)
+                    .codec(ExtraAttributeModifierComponent.CODEC)
+                    .packetCodec(ExtraAttributeModifierComponent.PACKET_CODEC)
+                    .cache()
+    );
+
+    public static final ComponentType<ExtraAttributeModifierComponent> ENVIRONMENT_HEAT_RESISTANCE = create(
+            builder -> builder
+                    .codec(ExtraAttributeModifierComponent.CODEC)
+                    .packetCodec(ExtraAttributeModifierComponent.PACKET_CODEC)
                     .cache()
     );
 
     public static void initialize() {
         register("drink_level", DRINK_LEVEL);
         register("num_drinks", NUM_DRINKS);
-        register("heat_resistance_level", HEAT_RESISTANCE_LEVEL);
+        register("heat_resistance", HEAT_RESISTANCE);
+        register("environment_heat_resistance", ENVIRONMENT_HEAT_RESISTANCE);
     }
 
     private static <T> ComponentType<T> create(UnaryOperator<ComponentType.Builder<T>> builderOperator) {

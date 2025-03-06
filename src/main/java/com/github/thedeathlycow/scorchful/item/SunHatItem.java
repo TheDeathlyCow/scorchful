@@ -55,20 +55,6 @@ public class SunHatItem extends Item implements Equipment {
         return EquipmentSlot.HEAD;
     }
 
-    public static AttributeModifiersComponent attributeModifiers() {
-        return AttributeModifiersComponent.builder()
-                .add(
-                        ThermooAttributes.ENVIRONMENT_HEAT_RESISTANCE,
-                        new EntityAttributeModifier(
-                                Scorchful.id("sun_hat_resistance"),
-                                0.25,
-                                EntityAttributeModifier.Operation.ADD_VALUE
-                        ),
-                        AttributeModifierSlot.HEAD
-                )
-                .build();
-    }
-
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         tooltip.add(TOOLTIP);
