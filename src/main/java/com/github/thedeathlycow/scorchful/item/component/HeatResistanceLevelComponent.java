@@ -1,7 +1,6 @@
 package com.github.thedeathlycow.scorchful.item.component;
 
 import com.github.thedeathlycow.scorchful.config.CombatConfig;
-import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.tag.SArmorMaterialTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.github.thedeathlycow.thermoo.api.armor.material.ArmorMaterialTags;
@@ -19,7 +18,7 @@ import net.minecraft.util.StringIdentifiable;
 import java.util.function.Predicate;
 import java.util.function.ToDoubleFunction;
 
-public enum HeatResistanceLevel implements StringIdentifiable {
+public enum HeatResistanceLevelComponent implements StringIdentifiable {
     VERY_PROTECTIVE(
             "very_protective",
             ArmorMaterialTags.VERY_RESISTANT_TO_HEAT,
@@ -50,8 +49,13 @@ public enum HeatResistanceLevel implements StringIdentifiable {
             CombatConfig::getVeryHarmfulArmorHeatResistanceMultiplier
     );
 
-    public static final Codec<HeatResistanceLevel> CODEC = StringIdentifiable.createCodec(HeatResistanceLevel::values);
-    public static final PacketCodec<ByteBuf, HeatResistanceLevel> PACKET_CODEC = PacketCodecs.indexed(i -> values()[i], Enum::ordinal);
+    public static final Codec<HeatResistanceLevelComponent> CODEC = StringIdentifiable.createCodec(
+            HeatResistanceLevelComponent::values
+    );
+    public static final PacketCodec<ByteBuf, HeatResistanceLevelComponent> PACKET_CODEC = PacketCodecs.indexed(
+            i -> values()[i],
+            Enum::ordinal
+    );
 
     private final String name;
 
@@ -59,18 +63,18 @@ public enum HeatResistanceLevel implements StringIdentifiable {
 
     private final ToDoubleFunction<CombatConfig> multiplier;
 
-    HeatResistanceLevel(String name, TagKey<ArmorMaterial> armorMaterialTag, TagKey<Item> itemTag, ToDoubleFunction<CombatConfig> heatResistanceProvider) {
+    HeatResistanceLevelComponent(String name, TagKey<ArmorMaterial> armorMaterialTag, TagKey<Item> itemTag, ToDoubleFunction<CombatConfig> heatResistanceProvider) {
         this(name, createTagPredicate(armorMaterialTag, itemTag), heatResistanceProvider);
     }
 
-    HeatResistanceLevel(String name, Predicate<ItemStack> appliesTo, ToDoubleFunction<CombatConfig> multiplier) {
+    HeatResistanceLevelComponent(String name, Predicate<ItemStack> appliesTo, ToDoubleFunction<CombatConfig> multiplier) {
         this.name = name;
         this.appliesTo = appliesTo;
         this.multiplier = multiplier;
     }
 
-    public static HeatResistanceLevel forStack(ItemStack stack) {
-        for (HeatResistanceLevel level : values()) {
+    public static HeatResistanceLevelComponent forStack(ItemStack stack) {
+        for (HeatResistanceLevelComponent level : values()) {
             if (level != HARMFUL && level.appliesTo.test(stack)) {
                 return level;
             }

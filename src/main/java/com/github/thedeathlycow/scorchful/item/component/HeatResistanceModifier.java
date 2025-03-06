@@ -26,14 +26,14 @@ public final class HeatResistanceModifier {
     public static void initialize() {
         ScorchfulItemEvents.GET_DEFAULT_STACK.register(stack -> {
             if (stack.isIn(ConventionalItemTags.ARMORS) && !stack.contains(SDataComponentTypes.HEAT_RESISTANCE_LEVEL)) {
-                stack.set(SDataComponentTypes.HEAT_RESISTANCE_LEVEL, HeatResistanceLevel.forStack(stack));
+                stack.set(SDataComponentTypes.HEAT_RESISTANCE_LEVEL, HeatResistanceLevelComponent.forStack(stack));
             }
         });
         ModifyItemAttributeModifiersCallback.EVENT.register(
                 (stack, builder) -> {
                     if (stack.getItem() instanceof ArmorItem armorItem) {
                         CombatConfig config = Scorchful.getConfig().combatConfig;
-                        HeatResistanceLevel level = stack.getOrDefault(SDataComponentTypes.HEAT_RESISTANCE_LEVEL, HeatResistanceLevel.HARMFUL);
+                        HeatResistanceLevelComponent level = stack.getOrDefault(SDataComponentTypes.HEAT_RESISTANCE_LEVEL, HeatResistanceLevelComponent.HARMFUL);
 
                         double multiplier = level.getMultiplier(config);
                         if (multiplier == 0) {
