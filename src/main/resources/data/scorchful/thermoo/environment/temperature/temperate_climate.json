@@ -10,7 +10,7 @@
                 "base": {
                     "type": "thermoo:constant",
                     "components": {
-                        "thermoo:temperature": 25.0
+                        "thermoo:temperature": 30.0
                     }
                 }
             }
