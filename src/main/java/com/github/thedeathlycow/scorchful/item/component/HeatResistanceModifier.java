@@ -8,7 +8,9 @@ import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import com.github.thedeathlycow.thermoo.api.item.ModifyItemAttributeModifiersCallback;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
+import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -16,6 +18,7 @@ import net.minecraft.item.Equipment;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 
+import javax.xml.crypto.Data;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +48,34 @@ public final class HeatResistanceModifier {
     }
 
     private static void modifyVanillaItemComponents() {
+        DefaultItemComponentEvents.MODIFY.register(context -> {
+            context.modify(
+                    Items.WOLF_ARMOR,
+                    builder -> {
+                        AttributeModifiersComponent attributes = builder.getOrDefault(
+                                DataComponentTypes.ATTRIBUTE_MODIFIERS,
+                                AttributeModifiersComponent.DEFAULT
+                        );
+
+                        if (attributes.modifiers().isEmpty()) {
+                            attributes = Items.WOLF_ARMOR.getAttributeModifiers();
+                        }
+
+                        attributes = attributes.with(
+                                ThermooAttributes.HEAT_RESISTANCE,
+                                new EntityAttributeModifier(
+                                        Scorchful.id("base_heat_resistance"),
+                                        8.0,
+                                        EntityAttributeModifier.Operation.ADD_VALUE
+                                ),
+                                AttributeModifierSlot.BODY
+                        );
+
+                        builder.add(DataComponentTypes.ATTRIBUTE_MODIFIERS, attributes);
+                    }
+            );
+        });
+
         DefaultItemComponentEvents.MODIFY.register(context -> {
             context.modify(
                     List.of(
