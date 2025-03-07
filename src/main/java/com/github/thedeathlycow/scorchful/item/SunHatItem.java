@@ -34,6 +34,20 @@ public class SunHatItem extends Item implements Equipment {
         super(settings);
     }
 
+    public static AttributeModifiersComponent attributeModifiers() {
+        return AttributeModifiersComponent.builder()
+                .add(
+                        ThermooAttributes.ENVIRONMENT_HEAT_RESISTANCE,
+                        new EntityAttributeModifier(
+                                Scorchful.id("sun_hat_resistance"),
+                                0.25,
+                                EntityAttributeModifier.Operation.ADD_VALUE
+                        ),
+                        AttributeModifierSlot.HEAD
+                )
+                .build();
+    }
+
     public static boolean isWearingSunHat(LivingEntity entity) {
         boolean isWearingInTrinketSlot = false;
         if (ScorchfulIntegrations.isModLoaded(ScorchfulIntegrations.TRINKETS_ID)) {

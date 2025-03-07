@@ -26,7 +26,7 @@ public class SItems {
     public static final Item SUN_HAT = new SunHatItem(
             new Item.Settings()
                     .equipmentSlot((entity, stack) -> EquipmentSlot.HEAD)
-                    .component(SDataComponentTypes.ENVIRONMENT_HEAT_RESISTANCE, TurtleArmorEffects.ENVIRONMENT_HEAT_RESISTANCE)
+                    .attributeModifiers(SunHatItem.attributeModifiers())
                     .maxCount(1)
     );
 
@@ -78,8 +78,7 @@ public class SItems {
             ArmorItem.Type.CHESTPLATE,
             new Item.Settings()
                     .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(25))
-                    .component(SDataComponentTypes.HEAT_RESISTANCE, TurtleArmorEffects.HEAT_RESISTANCE)
-                    .component(SDataComponentTypes.ENVIRONMENT_HEAT_RESISTANCE, TurtleArmorEffects.ENVIRONMENT_HEAT_RESISTANCE)
+                    .component(SDataComponentTypes.EXTRA_ATTRIBUTE_MODIFIERS, TurtleArmorEffects.EXTRA_ATTRIBUTES)
     );
 
     public static final Item TURTLE_LEGGINGS = new ArmorItem(
@@ -87,8 +86,7 @@ public class SItems {
             ArmorItem.Type.LEGGINGS,
             new Item.Settings()
                     .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(25))
-                    .component(SDataComponentTypes.HEAT_RESISTANCE, TurtleArmorEffects.HEAT_RESISTANCE)
-                    .component(SDataComponentTypes.ENVIRONMENT_HEAT_RESISTANCE, TurtleArmorEffects.ENVIRONMENT_HEAT_RESISTANCE)
+                    .component(SDataComponentTypes.EXTRA_ATTRIBUTE_MODIFIERS, TurtleArmorEffects.EXTRA_ATTRIBUTES)
     );
 
     public static final Item TURTLE_BOOTS = new ArmorItem(
@@ -96,8 +94,7 @@ public class SItems {
             ArmorItem.Type.BOOTS,
             new Item.Settings()
                     .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(25))
-                    .component(SDataComponentTypes.HEAT_RESISTANCE, TurtleArmorEffects.HEAT_RESISTANCE)
-                    .component(SDataComponentTypes.ENVIRONMENT_HEAT_RESISTANCE, TurtleArmorEffects.ENVIRONMENT_HEAT_RESISTANCE)
+                    .component(SDataComponentTypes.EXTRA_ATTRIBUTE_MODIFIERS, TurtleArmorEffects.EXTRA_ATTRIBUTES)
     );
 
     public static void registerItems() {

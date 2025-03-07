@@ -1,6 +1,9 @@
 package com.github.thedeathlycow.scorchful.item.component;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.item.TurtleArmorEffects;
 import com.github.thedeathlycow.scorchful.registry.tag.SArmorMaterialTags;
+import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import com.github.thedeathlycow.thermoo.api.armor.material.ArmorMaterialTags;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
@@ -18,26 +21,48 @@ public enum LegacyHeatResistanceLevel implements StringIdentifiable {
     VERY_PROTECTIVE(
             "very_protective",
             ArmorMaterialTags.VERY_RESISTANT_TO_HEAT,
-            new ExtraAttributeModifierComponent(1, EntityAttributeModifier.Operation.ADD_VALUE),
-            new ExtraAttributeModifierComponent(0.25, EntityAttributeModifier.Operation.ADD_VALUE)
+            TurtleArmorEffects.EXTRA_ATTRIBUTES
     ),
     PROTECTIVE(
             "protective",
             ArmorMaterialTags.RESISTANT_TO_HEAT,
-            new ExtraAttributeModifierComponent(0.5, EntityAttributeModifier.Operation.ADD_VALUE),
-            new ExtraAttributeModifierComponent(0.125, EntityAttributeModifier.Operation.ADD_VALUE)
+            new ExtraAttributeModifierComponent(
+                    new ExtraAttributeModifierComponent.Entry(
+                            ThermooAttributes.HEAT_RESISTANCE,
+                            0.5,
+                            EntityAttributeModifier.Operation.ADD_VALUE,
+                            Scorchful.id("base_heat_resistance")
+                    ),
+                    new ExtraAttributeModifierComponent.Entry(
+                            ThermooAttributes.ENVIRONMENT_HEAT_RESISTANCE,
+                            0.125,
+                            EntityAttributeModifier.Operation.ADD_VALUE,
+                            Scorchful.id("base_environment_heat_resistance")
+                    )
+            )
     ),
     NEUTRAL(
             "neutral",
             SArmorMaterialTags.HEAT_NEUTRAL,
-            new ExtraAttributeModifierComponent(0, EntityAttributeModifier.Operation.ADD_VALUE),
-            new ExtraAttributeModifierComponent(0, EntityAttributeModifier.Operation.ADD_VALUE)
+            ExtraAttributeModifierComponent.EMPTY
     ),
     VERY_HARMFUL(
             "very_harmful",
             ArmorMaterialTags.VERY_WEAK_TO_HEAT,
-            new ExtraAttributeModifierComponent(-1, EntityAttributeModifier.Operation.ADD_VALUE),
-            new ExtraAttributeModifierComponent(-0.25, EntityAttributeModifier.Operation.ADD_VALUE)
+            new ExtraAttributeModifierComponent(
+                    new ExtraAttributeModifierComponent.Entry(
+                            ThermooAttributes.HEAT_RESISTANCE,
+                            -1.0,
+                            EntityAttributeModifier.Operation.ADD_VALUE,
+                            Scorchful.id("base_heat_resistance")
+                    ),
+                    new ExtraAttributeModifierComponent.Entry(
+                            ThermooAttributes.ENVIRONMENT_HEAT_RESISTANCE,
+                            -0.25,
+                            EntityAttributeModifier.Operation.ADD_VALUE,
+                            Scorchful.id("base_environment_heat_resistance")
+                    )
+            )
     );
 
     public static final Codec<LegacyHeatResistanceLevel> CODEC = StringIdentifiable.createCodec(
@@ -50,14 +75,16 @@ public enum LegacyHeatResistanceLevel implements StringIdentifiable {
 
     private final String name;
     private final TagKey<ArmorMaterial> armorMaterialTag;
-    private final ExtraAttributeModifierComponent heatResistance;
-    private final ExtraAttributeModifierComponent environmentHeatResistance;
+    private final ExtraAttributeModifierComponent extraAttributeModifiers;
 
-    LegacyHeatResistanceLevel(String name, TagKey<ArmorMaterial> armorMaterialTag, ExtraAttributeModifierComponent heatResistance, ExtraAttributeModifierComponent environmentHeatResistance) {
+    LegacyHeatResistanceLevel(
+            String name,
+            TagKey<ArmorMaterial> armorMaterialTag,
+            ExtraAttributeModifierComponent extraAttributeModifiers
+    ) {
         this.name = name;
         this.armorMaterialTag = armorMaterialTag;
-        this.heatResistance = heatResistance;
-        this.environmentHeatResistance = environmentHeatResistance;
+        this.extraAttributeModifiers = extraAttributeModifiers;
     }
 
     @Nullable
@@ -73,12 +100,8 @@ public enum LegacyHeatResistanceLevel implements StringIdentifiable {
         return null;
     }
 
-    public ExtraAttributeModifierComponent getHeatResistance() {
-        return heatResistance;
-    }
-
-    public ExtraAttributeModifierComponent getEnvironmentHeatResistance() {
-        return environmentHeatResistance;
+    public ExtraAttributeModifierComponent getExtraAttributeModifiers() {
+        return extraAttributeModifiers;
     }
 
     @Override
