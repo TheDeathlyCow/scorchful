@@ -24,9 +24,6 @@ import java.util.List;
 import java.util.Map;
 
 public final class HeatResistanceModifier {
-    private static final Map<EquipmentSlot, Identifier> HEAT_RESISTANCE_ID = new EnumMap<>(EquipmentSlot.class);
-    private static final Map<EquipmentSlot, Identifier> ENVIRONMENT_HEAT_RESISTANCE_ID = new EnumMap<>(EquipmentSlot.class);
-
     public static void initialize() {
         initializeLegacyMaterialTags();
         modifyVanillaItemComponents();
