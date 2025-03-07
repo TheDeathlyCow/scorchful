@@ -42,7 +42,8 @@ public class ClimateBiomeTagGenerator extends FabricTagProvider<Biome> {
                 .addOptionalTag(Scorchful.id("warm_biomes"))
                 .addOptionalTag(Scorchful.id("temperature/spring/warm"))
                 .addOptionalTag(ConventionalBiomeTags.IS_HOT_OVERWORLD)
-                .addOptionalTag(BiomeTags.IS_JUNGLE);
+                .addOptionalTag(BiomeTags.IS_JUNGLE)
+                .add(BiomeKeys.MANGROVE_SWAMP);
 
         getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_WARM)
                 .addOptionalTag(SClimateBiomeTags.IS_NEVER_WARM)
