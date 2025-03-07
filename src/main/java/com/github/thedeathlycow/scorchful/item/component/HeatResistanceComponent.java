@@ -33,5 +33,5 @@ public record HeatResistanceComponent(
     public static final HeatResistanceComponent VERY_PROTECTIVE = new HeatResistanceComponent(1.0, 0.25);
     public static final HeatResistanceComponent PROTECTIVE = new HeatResistanceComponent(0.5, 0.125);
     public static final HeatResistanceComponent NEUTRAL = new HeatResistanceComponent(0, 0);
-    public static final HeatResistanceComponent VERY_HARMFUL = new HeatResistanceComponent(-0.5, -0.125);
+    public static final HeatResistanceComponent VERY_HARMFUL = new HeatResistanceComponent(-1, -0.25);
 }
