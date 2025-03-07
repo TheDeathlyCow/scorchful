@@ -1,6 +1,14 @@
 {
   "values": [
     {
+      "id": "#scorchful:is_climate/humid_cave",
+      "required": false
+    },
+    {
+      "id": "#scorchful:is_climate/temperate_swamp",
+      "required": false
+    },
+    {
       "id": "#scorchful:is_climate/rainy",
       "required": false
     },

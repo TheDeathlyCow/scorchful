@@ -86,6 +86,8 @@ public class ClimateBiomeTagGenerator extends FabricTagProvider<Biome> {
                 .addOptionalTag(SClimateBiomeTags.IS_NEVER_WARM);
 
         getOrCreateTagBuilder(SClimateBiomeTags.IS_EXTREME_HUMIDITY)
+                .addOptionalTag(SClimateBiomeTags.IS_HUMID_CAVE)
+                .addOptionalTag(SClimateBiomeTags.IS_TEMPERATE_SWAMP)
                 .addOptionalTag(SClimateBiomeTags.IS_RAINY)
                 .addOptionalTag(SClimateBiomeTags.IS_ARID);
 
@@ -93,5 +95,11 @@ public class ClimateBiomeTagGenerator extends FabricTagProvider<Biome> {
                 .addOptionalTag(ConventionalBiomeTags.IS_CAVE);
 
         getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_HUMID_CAVE);
+
+        getOrCreateTagBuilder(SClimateBiomeTags.IS_TEMPERATE_SWAMP)
+                .addOptionalTag(ConventionalBiomeTags.IS_SWAMP);
+
+        getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_TEMPERATE_SWAMP)
+                .add(BiomeKeys.MANGROVE_SWAMP);
     }
 }
