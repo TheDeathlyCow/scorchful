@@ -13,9 +13,8 @@
       "required": false
     },
     {
-      "id": "#minecraft:is_jungle",
+      "id": "#c:is_swamp",
       "required": false
-    },
-    "minecraft:mangrove_swamp"
+    }
   ]
 }
