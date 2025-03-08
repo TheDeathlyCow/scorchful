@@ -13,6 +13,14 @@
       "required": false
     },
     {
+      "id": "#c:is_savanna",
+      "required": false
+    },
+    {
+      "id": "#c:is_jungle",
+      "required": false
+    },
+    {
       "id": "#c:is_swamp",
       "required": false
     }
