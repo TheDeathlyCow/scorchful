@@ -18,8 +18,7 @@ public class EnvironmentProviderTagGenerator extends FabricTagProvider<Environme
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         getOrCreateTagBuilder(SEnvironmentProviderTags.TEMPERATURE_MODIFIERS)
-                .addOptional(SEnvironmentProviders.ARID_HUMIDITY)
-                .addOptional(SEnvironmentProviders.RAINY_HUMIDITY)
+                .addOptionalTag(SEnvironmentProviderTags.HUMIDITY_MODIFIERS)
                 .addOptional(SEnvironmentProviders.APPLY_SHADE_FOR_TIME);
 
         getOrCreateTagBuilder(SEnvironmentProviderTags.NETHER_MODIFIERS)
@@ -27,6 +26,8 @@ public class EnvironmentProviderTagGenerator extends FabricTagProvider<Environme
                 .addOptional(SEnvironmentProviders.NETHER_BLOCK_LIGHT);
 
         getOrCreateTagBuilder(SEnvironmentProviderTags.HUMIDITY_MODIFIERS)
+                .addOptional(SEnvironmentProviders.ARID_HUMIDITY)
+                .addOptional(SEnvironmentProviders.RAINY_HUMIDITY)
                 .addOptional(SEnvironmentProviders.HUMID_WEATHER);
     }
 }

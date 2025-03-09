@@ -3,23 +3,19 @@
     "biomes": "#scorchful:is_climate/rainy",
     "exclude_biomes": "#scorchful:is_not_climate/rainy",
     "provider": {
-        "type": "thermoo:modify",
-        "modifiers": "#scorchful:humidity_modifiers",
-        "base": {
-            "type": "thermoo:seasonal/tropical",
-            "fallback_season": "dry",
-            "seasons": {
-                "wet": {
-                    "type": "thermoo:constant",
-                    "components": {
-                        "thermoo:relative_humidity": 0.95
-                    }
-                },
-                "dry": {
-                    "type": "thermoo:constant",
-                    "components": {
-                        "thermoo:relative_humidity": 0.65
-                    }
+        "type": "thermoo:seasonal/tropical",
+        "fallback_season": "dry",
+        "seasons": {
+            "wet": {
+                "type": "thermoo:constant",
+                "components": {
+                    "thermoo:relative_humidity": 0.95
+                }
+            },
+            "dry": {
+                "type": "thermoo:constant",
+                "components": {
+                    "thermoo:relative_humidity": 0.65
                 }
             }
         }

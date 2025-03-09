@@ -1,6 +1,14 @@
 {
   "values": [
     {
+      "id": "scorchful:set_humidity/arid_climate",
+      "required": false
+    },
+    {
+      "id": "scorchful:set_humidity/rainy_climate",
+      "required": false
+    },
+    {
       "id": "scorchful:modifier/humid_weather",
       "required": false
     }
