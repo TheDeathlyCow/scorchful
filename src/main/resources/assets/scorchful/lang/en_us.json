@@ -134,6 +134,8 @@
     "text.autoconfig.scorchful.option.thirstConfig.touchingWaterWetnessIncrease": "Touching water or rain wetness increase per tick",
     "text.autoconfig.scorchful.option.thirstConfig.onFireDryDate": "On fire dry rate",
     "text.autoconfig.scorchful.option.thirstConfig.humidBiomeSweatEfficiency": "Humid biome sweating efficiency",
+    "text.autoconfig.scorchful.option.thirstConfig.extraHumidBiomeSweatEfficiency": "Extra Humid biome sweating efficiency",
+    "text.autoconfig.scorchful.option.thirstConfig.aridBiomeSweatEfficiency": "Arid biome sweating efficiency",
     "text.autoconfig.scorchful.option.thirstConfig.maxRehydrationEfficiency": "Maximum Rehydration Enchantment efficiency",
     
     "text.autoconfig.scorchful.option.combatConfig": "Combat Config",
