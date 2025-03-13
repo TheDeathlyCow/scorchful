@@ -5,7 +5,7 @@
     "above": {
         "type": "thermoo:temperature_shift",
         "shift": {
-            "value": 5,
+            "value": 10,
             "unit": "kelvin"
         }
     },
