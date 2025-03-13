@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.temperature;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.config.HeatingConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.thermoo.api.environment.component.EnvironmentComponentTypes;
 import com.github.thedeathlycow.thermoo.api.environment.component.TemperatureRecordComponent;
@@ -26,7 +27,7 @@ public final class ServerPlayerEnvironmentTickListeners {
         TemperatureRecord temperature = context.components()
                 .getOrDefault(EnvironmentComponentTypes.TEMPERATURE, TemperatureRecordComponent.DEFAULT);
 
-        int total = environmentTemperatureToTemperatureChange(temperature);
+        int total = environmentTemperatureToTemperatureChange(temperature, Scorchful.getConfig().heatingConfig);
 
         if (context.affected().age % 20 == 0 && Scorchful.LOGGER.isDebugEnabled()) {
             Scorchful.LOGGER.debug("Adding {} temperature to {}", total, context.affected().getNameForScoreboard());
@@ -55,12 +56,16 @@ public final class ServerPlayerEnvironmentTickListeners {
         }
     }
 
-    static int environmentTemperatureToTemperatureChange(TemperatureRecord temperature) {
+    static int environmentTemperatureToTemperatureChange(TemperatureRecord temperature, HeatingConfig config) {
         double temperatureC = temperature.valueInUnit(TemperatureUnit.CELSIUS);
 
-        if (temperatureC < 30.0) {
+        double thresholdC = config.getMinTemperatureForHeatC();
+        double degreesPerTemperatureIncrease = config.getDegreesCPerTemperatureIncrease();
+
+        if (temperatureC < thresholdC) {
             return 0;
         }
-        return MathHelper.floor(((temperatureC) / 10.0) - 2);
+        // Graphical proof: https://www.desmos.com/calculator/ugi7wflbze
+        return MathHelper.floor((temperatureC - thresholdC + degreesPerTemperatureIncrease) / degreesPerTemperatureIncrease);
     }
 }

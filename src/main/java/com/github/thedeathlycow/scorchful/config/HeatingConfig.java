@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.config;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 @Config(name = Scorchful.MODID + ".heating_config")
 public class HeatingConfig implements ConfigData {
@@ -14,6 +15,12 @@ public class HeatingConfig implements ConfigData {
     float maxPassiveHeatingScale = 1.0f;
 
     boolean enableTurtleArmorEffects = true;
+
+    @ConfigEntry.Gui.Tooltip
+    double minTemperatureForHeatC = 30.0;
+
+    @ConfigEntry.Gui.Tooltip
+    double degreesCPerTemperatureIncrease = 10.0;
 
     int coolingFromIce = 12;
 
@@ -47,6 +54,14 @@ public class HeatingConfig implements ConfigData {
 
     public boolean isTurtleArmorEffectsEnabled() {
         return enableTurtleArmorEffects;
+    }
+
+    public double getMinTemperatureForHeatC() {
+        return minTemperatureForHeatC;
+    }
+
+    public double getDegreesCPerTemperatureIncrease() {
+        return degreesCPerTemperatureIncrease;
     }
 
     public int getCoolingFromIce() {
@@ -83,5 +98,18 @@ public class HeatingConfig implements ConfigData {
 
     public int getTemperatureFromCoolingFood() {
         return temperatureFromCoolingFood;
+    }
+
+    @Override
+    public void validatePostLoad() throws ValidationException {
+        ConfigData.super.validatePostLoad();
+
+        if (this.minTemperatureForHeatC < 25) {
+            this.minTemperatureForHeatC = 25;
+        }
+
+        if (this.degreesCPerTemperatureIncrease <= 0) {
+            throw new ValidationException("Degrees C Per Temperature Increase must be positive!");
+        }
     }
 }
