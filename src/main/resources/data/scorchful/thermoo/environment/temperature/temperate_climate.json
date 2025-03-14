@@ -1,0 +1,19 @@
+{
+    "biomes": "#scorchful:is_climate/temperate",
+    "exclude_biomes": "#scorchful:is_not_climate/temperate",
+    "provider": {
+        "type": "thermoo:seasonal/temperate",
+        "seasons": {
+            "summer": {
+                "type": "thermoo:modify",
+                "modifiers": "#scorchful:temperature_modifiers",
+                "base": {
+                    "type": "thermoo:constant",
+                    "components": {
+                        "thermoo:temperature": 30.0
+                    }
+                }
+            }
+        }
+    }
+}

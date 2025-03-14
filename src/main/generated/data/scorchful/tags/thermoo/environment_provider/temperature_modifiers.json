@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "#scorchful:humidity_modifiers",
+      "required": false
+    },
+    {
+      "id": "scorchful:modifier/apply_shade_for_time",
+      "required": false
+    }
+  ]
+}

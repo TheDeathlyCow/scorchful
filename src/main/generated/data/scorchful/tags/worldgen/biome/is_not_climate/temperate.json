@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "#scorchful:is_never_warm",
+      "required": false
+    },
+    {
+      "id": "#scorchful:is_climate/warm",
+      "required": false
+    },
+    {
+      "id": "#scorchful:is_climate/scorching",
+      "required": false
+    }
+  ]
+}

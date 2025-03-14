@@ -3,8 +3,10 @@ package com.github.thedeathlycow.scorchful.registry;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.SingleDrinkItem;
 import com.github.thedeathlycow.scorchful.item.SunHatItem;
+import com.github.thedeathlycow.scorchful.item.TurtleArmorEffects;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
+import com.github.thedeathlycow.scorchful.item.component.HeatResistanceComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
@@ -25,6 +27,7 @@ public class SItems {
     public static final Item SUN_HAT = new SunHatItem(
             new Item.Settings()
                     .equipmentSlot((entity, stack) -> EquipmentSlot.HEAD)
+                    .attributeModifiers(SunHatItem.attributeModifiers())
                     .maxCount(1)
     );
 
@@ -76,6 +79,7 @@ public class SItems {
             ArmorItem.Type.CHESTPLATE,
             new Item.Settings()
                     .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(25))
+                    .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE)
     );
 
     public static final Item TURTLE_LEGGINGS = new ArmorItem(
@@ -83,6 +87,7 @@ public class SItems {
             ArmorItem.Type.LEGGINGS,
             new Item.Settings()
                     .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(25))
+                    .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE)
     );
 
     public static final Item TURTLE_BOOTS = new ArmorItem(
@@ -90,6 +95,7 @@ public class SItems {
             ArmorItem.Type.BOOTS,
             new Item.Settings()
                     .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(25))
+                    .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE)
     );
 
     public static void registerItems() {

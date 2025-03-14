@@ -1,0 +1,9 @@
+{
+    "biomes": "#c:is_overworld",
+    "exclude_biomes": "#scorchful:is_extreme_humidity",
+    "provider": {
+        "type": "thermoo:modify",
+        "modifiers": "#scorchful:humidity_modifiers",
+        "base": "scorchful:empty"
+    }
+}

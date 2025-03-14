@@ -1,9 +1,0 @@
-{
-    "replace": false,
-    "values": [
-        "#c:is_wet/overworld",
-        "#minecraft:is_jungle",
-        "minecraft:mangrove_swamp",
-        "minecraft:swamp"
-    ]
-}

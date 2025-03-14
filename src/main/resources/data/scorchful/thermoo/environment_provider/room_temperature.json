@@ -1,0 +1,6 @@
+{
+    "type": "thermoo:constant",
+    "components": {
+        "thermoo:temperature": 20
+    }
+}

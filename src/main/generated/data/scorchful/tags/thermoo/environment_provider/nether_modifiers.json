@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "scorchful:set_humidity/hell",
+      "required": false
+    },
+    {
+      "id": "scorchful:modifier/nether_block_light",
+      "required": false
+    }
+  ]
+}

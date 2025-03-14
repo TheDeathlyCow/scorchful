@@ -1,0 +1,8 @@
+{
+  "values": [
+    {
+      "id": "#scorchful:is_climate/arid",
+      "required": false
+    }
+  ]
+}
