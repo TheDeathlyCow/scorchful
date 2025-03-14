@@ -43,3 +43,19 @@ respectively.
 
 !!! tip
     These base values are not currently configurable. If you wish to have more fine-grained control over the item attribute modifier values, you will need to use another mod like [Default Components](https://modrinth.com/mod/default-components) to set the default value to `0` in this component, and then add a regular attribute modifier to the underlying `minecraft:attribute_modifiers` component using a mod like [CIA](https://modrinth.com/mod/cia) or Default Components.
+
+??? info "Default Item Heat Resistance List"
+    | Item/Armor tier                            | Heat resistance modifier            |
+    |--------------------------------------------|-------------------------------------|
+    | All Chainmail Armor                        | Neutral                             |
+    | All Golden Armor                           | Neutral                             |
+    | All Iron Armor                             | Harmful (-0.5 HR, -0.125 EHR)       |
+    | All Leather Armor                          | Harmful (-0.5 HR, -0.125 EHR)       |
+    | All Diamond Armor                          | Harmful (-0.5 HR, -0.125 EHR)       |
+    | All Fur Armor (Frostiful)                  | Very Harmful (-1 HR, -0.25 EHR)     |
+    | All Fur Padded Chainmail Armor (Frostiful) | Very Harmful (-1 HR, -0.25 EHR)     |
+    | Ice Skates (Frostiful)                     | Very Harmful (-1 HR, -0.25 EHR)     |
+    | Armored Ice Skates (Frostiful)             | Very Harmful (-1 HR, -0.25 EHR)     |
+    | All Netherite Armor                        | Protective (+0.5 HR, +0.125 EHR)    |
+    | Turtle Shell                               | Very Protective (+1 HR, +0.25 EHR)  |
+    | All other [Turtle Armor](./Turtle-Armor)   | Very Protective (+1 HR, +0.25 EHR)  |

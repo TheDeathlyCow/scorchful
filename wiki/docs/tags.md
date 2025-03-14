@@ -28,7 +28,6 @@ These tags will apply a [`scorchful:frost_resistance`](./components.md#heat-resi
 !!! warning
     These tags are deprecated, it is preferred that you use a the [`scorchful:frost_resistance`](./components.md#heat-resistance) component to modify attributes of custom armours instead.
 
-
 ## Block Tags
 
 Location: `data/scorchful/tags/block`.
@@ -60,14 +59,61 @@ Location: `data/(scorchful|thermoo)/tags/entity_type`.
 
 Location: `data/scorchful/tags/item`.
 
-| Tag ID                               | Description                                                                                        | Default values (summarized)                                                                            |
-|--------------------------------------|----------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| Water based tags                     | Determines how much water to give (or take) from the player when they consume certain food/drink   | See the [temperature system page](./Temperature-System#Sweating) for a better explanation and summary. |
-| `scorchful:is_sun_protecting_hat`    | Items that, when worn in the Head slot, provide a shade effect similar to the [Sun Hat](./Sun-Hat) | Sun Hat                                                                                                |
-| `scorchful:sand_piles`               | The sand pile items                                                                                | Sand Pile, Red Sand Pile                                                                               |
-| `scorchful:turtle_armor`             | The turtle armor set                                                                               | All Turtle Armour items, including the vanilla Turtle Helmet                                           |
-| `scorchful:is_cooling_food`          | Directly applies cooling to players when consumed                                                  | Ice creams from Let's Do Beachparty, and Icicles from Immersive Weathering                             |
-| `scorchful:blocks_rain_when_holding` | Blocks soaking effects from rain when held in main or off hand                                     | Umbrella items from Origins: Umbrellas and Artifacts                                                   |
+| Tag ID                               | Description                                                                                        | Default values (summarized)                                                |
+|--------------------------------------|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| Water based tags                     | Determines how much water to give (or take) from the player when they consume certain food/drink   | See below                                                                  |
+| `scorchful:is_sun_protecting_hat`    | Items that, when worn in the Head slot, provide a shade effect similar to the [Sun Hat](./Sun-Hat) | Sun Hat                                                                    |
+| `scorchful:sand_piles`               | The sand pile items                                                                                | Sand Pile, Red Sand Pile                                                   |
+| `scorchful:turtle_armor`             | The turtle armor set                                                                               | All Turtle Armour items, including the vanilla Turtle Helmet               |
+| `scorchful:is_cooling_food`          | Directly applies cooling to players when consumed                                                  | Ice creams from Let's Do Beachparty, and Icicles from Immersive Weathering |
+| `scorchful:blocks_rain_when_holding` | Blocks soaking effects from rain when held in main or off hand                                     | Umbrella items from Origins: Umbrellas and Artifacts                       |
+
+### Food and Drink Thirst Replenishing Items
+
+??? note "List of food and drink items that provide water by default in Scorchful"
+    | Food or Drink item                     | Water provided   |
+    |----------------------------------------|------------------|
+    | Water Bottles and Potions              | Hydrating (300)  |
+    | Water Skin                             | Hydrating (300)  |
+    | Bottle of Cactus Juice                 | Hydrating (300)  |
+    | Ominous Bottle                         | Hydrating (300)  |
+    | Bucket of Milk                         | Hydrating (300)  |
+    | Bottle of Milk (Farmer's Delight)      | Hydrating (300)  |
+    | Hot Cocoa (Farmer's Delight)           | Hydrating (300)  |
+    | Melon Juice (Farmer's Delight)         | Hydrating (300)  |
+    | Apple Cider (Farmer's Delight)         | Hydrating (300)  |
+    | Melon Slice                            | Sustaining (120) |
+    | Mushroom Stew                          | Sustaining (120) |
+    | Rabbit Stew                            | Sustaining (120) |
+    | Beetroot Soup                          | Sustaining (120) |
+    | Suspicious Stew                        | Sustaining (120) |
+    | Beef Stew (Farmer's Delight)           | Sustaining (120) |
+    | Chicken Soup (Farmer's Delight)        | Sustaining (120) |
+    | Vegetable Soup (Farmer's Delight)      | Sustaining (120) |
+    | Fish Stew (Farmer's Delight)           | Sustaining (120) |
+    | Pumpkin Soup (Farmer's Delight)        | Sustaining (120) |
+    | Baked Cod Stew (Farmer's Delight)      | Sustaining (120) |
+    | Noodle Soup (Farmer's Delight)         | Sustaining (120) |
+    | Soups and Stews from *most* other mods | Sustaining (120) |
+    | Apple                                  | Refreshing (60)  |
+    | Golden Apple                           | Refreshing (60)  |
+    | Enchanted Golden Apple                 | Refreshing (60)  |
+    | Raw Cod                                | Refreshing (60)  |
+    | Raw Salmon                             | Refreshing (60)  |
+    | Raw Tropical Fish                      | Refreshing (60)  |
+    | Pufferfish                             | Refreshing (60)  |
+    | Sweet Berries                          | Refreshing (60)  |
+    | Glow Berries                           | Refreshing (60)  |
+    | Carrot                                 | Refreshing (60)  |
+    | Golden Carrot                          | Refreshing (60)  |
+    | Potato (raw)                           | Refreshing (60)  |
+    | Beetroot                               | Refreshing (60)  |
+    | Melon Popsicle (Farmer's Delight)      | Refreshing (60)  |
+    | Vegetables from *most* other mods      | Refreshing (60)  |
+    | Fruits from *most* other mods          | Refreshing (60)  |
+    | Raw Fish from *most* other mods        | Refreshing (60)  |
+    | Berries from *most* other mods         | Refreshing (60)  |
+
 
 ## Biome Tags
 

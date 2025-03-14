@@ -23,6 +23,9 @@ If the `type` is `scorchful:sound`, the `config` has the following format:
     * `I` **interval**: Integer, how many ticks between playing the sound.
     * `T/F` **only_play_to_source**: Boolean, if true, the sound is only played to the player it this effect is active for. OPTIONAL: Defaults to `false`, playing for all nearby entities.
 
+!!! tip
+    You can disable the sound effect with the config option `enableSoundTemperatureEffects` in the [Client Config](./config.md#client-config).
+
 ---
 
 ## Change Temperature
