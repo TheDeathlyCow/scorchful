@@ -70,18 +70,25 @@ Location: `data/scorchful/tags/item`.
 
 Location: `data/scorchful/tags/worldgen/biome`.
 
-| Tag ID                                            | Description                                                                              | Default values (summarized)                                                         |
-|---------------------------------------------------|------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| `scorchful:has_feature/crimson_lily_patch`        | Which biomes Crimson Lily patches generate in                                            | Crimson Forest                                                                      |
-| `scorchful:has_feature/sparse_crimson_lily_patch` | Which biomes Sparse Crimson Lily patches generate in                                     | Nether Wastes                                                                       |
-| `scorchful:has_structure/warped_lily_farm`        | Which biomes Warped Lily Farms generate in                                               | Warped Forest                                                                       |
-| 'Heat vision' tags                                | Controls the biomes of the various [Heat Visions](./Heat-Visions)                        | See [Heat Visions](./Heat-Visions) for a more detailed breakdown                    |
-| `scorchful:has_red_sand_storms`                   | Which biomes should have Red Sandstorms                                                  | All badlands-like biomes                                                            |
-| `scorchful:has_regular_sand_storms`               | Which biomes should have regular Sandstorms                                              | All Desert-like biomes                                                              |
-| `scorchful:has_regular_sand_storms`               | Which biomes should have regular Sandstorms                                              | All Desert-like biomes                                                              |
-| `scorchful:humid_biomes`                          | Which biomes are 'humid' in the temperature system                                       | See [the Temperature System page](./Temperature-System#Cooling) for details         |
-| Seasonal Temperature tags                         | Which tags are used to define warm and scorching biomes, depending on the current season | See [Overworld Temperature System page](./Temperature-System#Overworld) for details |
-| `scorchful:temperature/is_never_warm`             | Which biomes are never warm, regardless of season                                        | Stony Peaks and End biomes                                                          |
+| Tag ID                                            | Description                                                       | Default values (summarized)                                      |
+|---------------------------------------------------|-------------------------------------------------------------------|------------------------------------------------------------------|
+| `scorchful:has_feature/crimson_lily_patch`        | Which biomes Crimson Lily patches generate in                     | Crimson Forest                                                   |
+| `scorchful:has_feature/sparse_crimson_lily_patch` | Which biomes Sparse Crimson Lily patches generate in              | Nether Wastes                                                    |
+| `scorchful:has_structure/warped_lily_farm`        | Which biomes Warped Lily Farms generate in                        | Warped Forest                                                    |
+| 'Heat vision' tags                                | Controls the biomes of the various [Heat Visions](./Heat-Visions) | See [Heat Visions](./Heat-Visions) for a more detailed breakdown |
+| `scorchful:has_red_sand_storms`                   | Which biomes should have Red Sandstorms                           | All badlands-like biomes                                         |
+| `scorchful:has_regular_sand_storms`               | Which biomes should have regular Sandstorms                       | All Desert-like biomes                                           |
+| `scorchful:is_climate/*`                          | Set the biomes for each climate                                   | See [temperature system page](./Temperature-System)              |
+| `scorchful:is_not_climate/*`                      | Excludes biomes from a particular climate                         | See [temperature system page](./Temperature-System)              |
+| `scorchful:is_extreme_humidity`                   | Biomes that have extremely high or extremely low humidity         | Rainy Climates, Arid Climates, and Caves                         |
+| `scorchful:is_never_warm`                         | Biomes that are never warm                                        | Empty                                                            |
 
 ## Removed Tags
 
+### Biome Tags
+
+| Tag ID                                | Description                                                                              | Default values (summarized)                                                         | Replacement                                                      |
+|---------------------------------------|------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------|
+| Seasonal Temperature tags             | Which tags are used to define warm and scorching biomes, depending on the current season | See [Overworld Temperature System page](./Temperature-System#Overworld) for details | `#scorchful:is_climate/*` and `#scorchful:is_not_climate/*` tags |
+| `scorchful:humid_biomes`              | Which biomes are 'humid' in the temperature system                                       | See [the Temperature System page](./Temperature-System#Cooling) for details         | `#scorchful:is_climate/rainy`                                    |
+| `scorchful:temperature/is_never_warm` | Which biomes are never warm, regardless of season                                        | Stony Peaks and End biomes                                                          | `scorchful:temperature/is_never_warm`                            |
