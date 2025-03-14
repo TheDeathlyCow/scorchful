@@ -146,10 +146,12 @@ Location: `data/scorchful/tags/thermoo/environment_provider`.
 
 ## Removed Tags
 
+Starting from Scorchful 0.15, removed tags will now be documented here.
+
 ### Biome Tags
 
-| Tag ID                                | Description                                                                              | Default values (summarized)                                                         | Replacement                                                      |
-|---------------------------------------|------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------|
-| Seasonal Temperature tags             | Which tags are used to define warm and scorching biomes, depending on the current season | See [Overworld Temperature System page](./Temperature-System#Overworld) for details | `#scorchful:is_climate/*` and `#scorchful:is_not_climate/*` tags |
-| `scorchful:humid_biomes`              | Which biomes are 'humid' in the temperature system                                       | See [the Temperature System page](./Temperature-System#Cooling) for details         | `#scorchful:is_climate/rainy`                                    |
-| `scorchful:temperature/is_never_warm` | Which biomes are never warm, regardless of season                                        | Stony Peaks and End biomes                                                          | `scorchful:temperature/is_never_warm`                            |
+| Tag ID                                | Description                                                                              | Removed versions | Replacement                                                      |
+|---------------------------------------|------------------------------------------------------------------------------------------|------------------|------------------------------------------------------------------|
+| Seasonal Temperature tags             | Which tags are used to define warm and scorching biomes, depending on the current season | 0.15             | `#scorchful:is_climate/*` and `#scorchful:is_not_climate/*` tags |
+| `scorchful:humid_biomes`              | Which biomes are 'humid' in the temperature system                                       | 0.15             | `#scorchful:is_climate/rainy`                                    |
+| `scorchful:temperature/is_never_warm` | Which biomes are never warm, regardless of season                                        | 0.15             | `scorchful:temperature/is_never_warm`                            |

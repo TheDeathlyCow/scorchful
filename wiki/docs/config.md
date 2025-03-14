@@ -113,42 +113,57 @@ These reflect the removed config options from Scorchful, and their replacements 
 ### Combat Config
 
 * Default armor piece heat resistance `defaultArmorHeatResistance`: The default Heat Resistance to apply to all armor pieces that are not explicitly overridden
+    * Removed in 0.15
     * Replaced with the item component [`scorchful:heat_resistance`](./components.md#heat-resistance) 
 * Very warm armor piece heat resistance `veryHarmfulArmorHeatResistance`: The amount of Heat Resistance to apply to very warm armor pieces (such as Fur Armor in Frostiful)
+     * Removed in 0.15
      * Replaced with the item component [`scorchful:heat_resistance`](./components.md#heat-resistance)
 * Thermally protective armor piece heat resistance `protectiveArmorHeatResistance`: The amount of Heat Resistance to apply to protective armors, such as Netherite
+    * Removed in 0.15
     * Replaced with the item component [`scorchful:heat_resistance`](./components.md#heat-resistance)
 * Very thermally protective armor piece heat resistance `veryProtectiveArmorHeatResistance`: The amount of Heat Resistance to apply to very protective armors, such as Turtle
+    * Removed in 0.15
     * Replaced with the item component [`scorchful:heat_resistance`](./components.md#heat-resistance) 
  
 ### Heating Config
 
 * Minimum sky light level for heat `minSkyLightLevelForHeat`: The minimum *sky light* level that will start to apply environmental heating
+    * Removed in 0.15
     * Replaced with the [environment provider](https://thermoo.thedeathlycow.com/datapacks/environment_provider_definition/) `scorchful:modifier/apply_shade_for_time`.
 * Heat from the Sun `heatFromSun`: How much environmental heating to apply from the Sun every tick
+    * Removed in 0.15
     * Replaced with the [environments](https://thermoo.thedeathlycow.com/datapacks/environment_definition/) `scorchful:temperature/scorching_climate`, `scorchful:temperature/warm_climate`, and `scorchful:temperature/temperate_climate`.
 * Sun Hat shade temperature change `sunHatShadeTemperatureChange`: The temperature change to apply to players wearing a Sun Hat in Scorching Biomes each tick
+    * Removed in 0.15
     * Replaced with an [Environment Heat Resistance](https://thermoo.thedeathlycow.com/entity_attributes/) attribute modifier.
 * Light level per heat increase (in The Nether) `lightLevelPerHeatInNether`: How many light levels correspond to a +1 increase in passive temperature, in The Nether
+    * Removed in 0.15
     * Replaced with the [environment](https://thermoo.thedeathlycow.com/datapacks/environment_definition/) `scorchful:hell`.
 * Minimum light level for heat (in The Nether) `minLightLevelForHeatInNether`: The minimum light level to begin facing heat, in The Nether
+    * Removed in 0.15
     * Replaced with the [environment](https://thermoo.thedeathlycow.com/datapacks/environment_definition/) `scorchful:hell`.
 * Blocks above Lava Ocean per heat increase (in The Nether) `blocksAboveLavaOceanPerHeatInNether`: How many blocks above the lava ocean correspond to a +1 increase in passive temperature, in The Nether
+    * Removed in 0.15
     * Replaced with the [environment](https://thermoo.thedeathlycow.com/datapacks/environment_definition/) `scorchful:hell`.
 * Maximum heat from Lava Ocean (in The Nether) `maxHeatFromLavaOceanInNether`: The maximum passive heat that the Lava Ocean can create, in The Nether
+    * Removed in 0.15
     * Replaced with the [environment](https://thermoo.thedeathlycow.com/datapacks/environment_definition/) `scorchful:hell`.
 
 ### Thirst Config
 
 * Dry rate `dryRate`: How many wetness points to remove each tick when not in contact with water
+    * Removed in 0.15
     * No replacement, hardcoded to be handled by Thermoo directly.
 
 ### Mod Integration Config
 #### Seasons Config
 
 * Enable seasons integration `enableSeasonsIntegration`: Toggles seasons integration. If set to false, Scorchful will treat all biomes as if it were Spring.
+    * Removed in 0.15
     * Replaced with the `thermoo:seasonal/temperate` and `thermoo:seasonal/tropical` [environment provider](https://thermoo.thedeathlycow.com/datapacks/environment_provider_definition/).
 * Wet Season humid biome sweat efficiency `wetSeasonHumidBiomeSweatEfficiency`: How efficient [sweating](./Temperature-System#Sweating) is during the Wet Season in humid tropical biomes. This feature is exclusive to Serene Seasons.
+    * Removed in 0.15
     * Replaced with `thirstConfig/extraHumidBiomeSweatEfficiency` 
 * Dry Season humid biome sweat efficiency `drySeasonHumidBiomeSweatEfficiency`: How efficient [sweating](./Temperature-System#Sweating) is during the Dry Season in humid tropical biomes. This feature is exclusive to Serene Seasons.
+    * Removed in 0.15
     * Replaced with `thirstConfig/aridBiomeSweatEfficiency` 
