@@ -1,0 +1,51 @@
+site_name: Scorchful Config Wiki
+
+repo_url: https://github.com/TheDeathlyCow/scorchful
+repo_name: TheDeathlyCow/scorchful
+
+nav:
+  - index.md
+  - config.md
+  - tags.md
+  - components.md
+  - temperature_effect_types.md
+  - "🌡️ Thermoo API ↗": https://thermoo.thedeathlycow.com/
+
+theme:
+  name: material
+  logo: assets/logo.png
+  favicon: assets/favicon.svg
+
+  palette:
+    - scheme: slate
+      primary: custom
+      features:
+        - navigation.expand
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - scheme: default
+      primary: custom
+      features:
+        - navigation.expand
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+
+extra_css:
+  - assets/styles.css
+
+markdown_extensions:
+  - attr_list
+  - meta
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      options:
+        custom_icons:
+          - assets/.icons

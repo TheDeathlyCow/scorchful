@@ -10,7 +10,7 @@ import net.minecraft.util.math.MathHelper;
 @Config(name = Scorchful.MODID + ".combat_config")
 public class CombatConfig implements ConfigData {
 
-    @ConfigEntry.Gui.EnumHandler
+    @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
     FireChargeThrower.FireballFactory fireBallThrownType = FireChargeThrower.FireballFactory.SMALL;
 
     boolean enableDesertVisions = true;
