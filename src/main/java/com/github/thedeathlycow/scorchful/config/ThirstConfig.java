@@ -29,7 +29,7 @@ public class ThirstConfig implements ConfigData {
 
     float extraHumidBiomeSweatEfficiency = 1f / 6f;
 
-    float aridBiomeSweatEfficiency = 2.0f;
+    float aridBiomeSweatEfficiency = 1.5f;
 
     float maxRehydrationEfficiency = 0.75f;
 
