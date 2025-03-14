@@ -7,6 +7,9 @@ This page describes the various datapack tags used by Scorchful. It includes bot
 !!! warning
     This page reflects the latest set of tags available for Minecraft 1.21.1. Items documented here may not necessarily reflect what appears in an older version of Scorchful. Starting from Scorchful 0.15, removed options will be documented in [Removed Tags](#removed-tags).
 
+!!! info
+    Items marked with [DG] are data generated, and so their definitions are found in `src/main/generated/data/`. All other tags are defined in `src/main/resources/data/`.
+
 ## Armor Material Tags
 
 Location: `data/(scorchful|thermoo)/tags/armor_material`.
@@ -68,7 +71,7 @@ Location: `data/scorchful/tags/item`.
 
 ## Biome Tags
 
-Location: `data/scorchful/tags/worldgen/biome`.
+Location: `data/scorchful/tags/worldgen/biome`
 
 | Tag ID                                            | Description                                                       | Default values (summarized)                                      |
 |---------------------------------------------------|-------------------------------------------------------------------|------------------------------------------------------------------|
@@ -78,10 +81,22 @@ Location: `data/scorchful/tags/worldgen/biome`.
 | 'Heat vision' tags                                | Controls the biomes of the various [Heat Visions](./Heat-Visions) | See [Heat Visions](./Heat-Visions) for a more detailed breakdown |
 | `scorchful:has_red_sand_storms`                   | Which biomes should have Red Sandstorms                           | All badlands-like biomes                                         |
 | `scorchful:has_regular_sand_storms`               | Which biomes should have regular Sandstorms                       | All Desert-like biomes                                           |
-| `scorchful:is_climate/*`                          | Set the biomes for each climate                                   | See [temperature system page](./Temperature-System)              |
-| `scorchful:is_not_climate/*`                      | Excludes biomes from a particular climate                         | See [temperature system page](./Temperature-System)              |
-| `scorchful:is_extreme_humidity`                   | Biomes that have extremely high or extremely low humidity         | Rainy Climates, Arid Climates, and Caves                         |
-| `scorchful:is_never_warm`                         | Biomes that are never warm                                        | Empty                                                            |
+| `scorchful:is_climate/*` [DG]                     | Set the biomes for each climate                                   | See [temperature system page](./Temperature-System)              |
+| `scorchful:is_not_climate/*` [DG]                 | Excludes biomes from a particular climate                         | See [temperature system page](./Temperature-System)              |
+| `scorchful:is_extreme_humidity` [DG]              | Biomes that have extremely high or extremely low humidity         | Rainy Climates, Arid Climates, and Caves                         |
+| `scorchful:is_never_warm` [DG]                    | Biomes that are never warm                                        | Empty                                                            |
+
+## Environment Providers
+
+Location: `data/scorchful/tags/thermoo/environment_provider`.
+
+[Environment Provider](https://thermoo.thedeathlycow.com/datapacks/environment_provider_definition/) is a custom registry, defined in Thermoo.
+
+| Tag ID                                 | Description                                               | Default values (summarized)                                |
+|----------------------------------------|-----------------------------------------------------------|------------------------------------------------------------|
+| `scorchful:humidity_modifiers` [DG]    | Set humidity for overworld biomes                         | Set climate humidity, set humidity for weather             |
+| `scorchful:nether_modifiers` [DG]      | Sets humidity and adjust temperature for nether biomes    | Set nether humidity, add temperature for block light       |
+| `scorchful:temperature_modifiers` [DG] | Sets humidity and adjust temperature for overworld biomes | `#scorchful:humidity_modifiers`, set temperature for shade |
 
 ## Removed Tags
 
