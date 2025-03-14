@@ -85,6 +85,7 @@ Server-side options for combat features in Scorchful.
 * :star: Enable Desert Visions `enableDesertVisions`: Enable/disable [Heat Visions](./Heat-Visions)
 * Fear detection range multiplier `fearDetectionRangeMultiplier`: How much to multiply an entity's (including players) hostile mob detection range by.
 * Impaling damage per level `impalingDamagePerLevel`: How much damage the Impaling enchantment should do to wet entities, per level of Impaling
+* Fire Protection heat resistance per level `fireProtectionHeatResistancePerLevel`: How much Heat Resistance the Fire Protection enchantment should give, per level of Fire Protection.
 
 ## Weather Config
 
