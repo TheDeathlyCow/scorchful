@@ -11,8 +11,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 
-public class SPotions {
-
+public final class SPotions {
     private static final String PARANOIA_NAME = "paranoia";
     private static final int ONE_MINUTE = 60 * 20;
 
@@ -35,6 +34,7 @@ public class SPotions {
     );
 
     public static void initialize() {
+        Scorchful.LOGGER.debug("Initialized Scorchful potions");
         FabricBrewingRecipeRegistryBuilder.BUILD.register(
                 builder -> {
                     builder.registerPotionRecipe(Potions.AWKWARD, Items.WITHER_ROSE, PARANOIA);

@@ -7,23 +7,22 @@ import net.minecraft.stat.StatFormatter;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
 
-public class SStats {
+public final class SStats {
+    public static final Identifier SOAKED_BY_CRIMSON_LILY = register("soaked_by_crimson_lily", StatFormatter.DEFAULT);
 
-    public static final Identifier SOAKED_BY_CRIMSON_LILY = Scorchful.id("soaked_by_crimson_lily");
+    public static final Identifier USE_WARPED_LILY = register("use_warped_lily", StatFormatter.DEFAULT);
 
-    public static final Identifier USE_WARPED_LILY = Scorchful.id("use_warped_lily");
+    public static final Identifier FILL_CRIMSON_LILY = register("fill_crimson_lily", StatFormatter.DEFAULT);
 
-    public static final Identifier FILL_CRIMSON_LILY = Scorchful.id("fill_crimson_lily");
-
-    public static void registerAll() {
-        register(SOAKED_BY_CRIMSON_LILY, StatFormatter.DEFAULT);
-        register(USE_WARPED_LILY, StatFormatter.DEFAULT);
-        register(FILL_CRIMSON_LILY, StatFormatter.DEFAULT);
+    public static void initialize() {
+        Scorchful.LOGGER.debug("Initialized Scorchful stats");
     }
 
-    private static void register(Identifier identifier, StatFormatter formatter) {
-        Registry.register(Registries.CUSTOM_STAT, identifier, identifier);
-        Stats.CUSTOM.getOrCreateStat(identifier, formatter);
+    private static Identifier register(String name, StatFormatter formatter) {
+        Identifier id = Scorchful.id(name);
+        Registry.register(Registries.CUSTOM_STAT, id, id);
+        Stats.CUSTOM.getOrCreateStat(id, formatter);
+        return id;
     }
 
     private SStats() {

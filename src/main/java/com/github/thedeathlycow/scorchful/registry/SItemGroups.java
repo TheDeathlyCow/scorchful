@@ -12,32 +12,36 @@ import net.minecraft.text.Text;
 import org.jetbrains.annotations.Contract;
 
 public class SItemGroups {
-    public static final ItemGroup SCORCHFUL = FabricItemGroup.builder()
-            .icon(SItems.SUN_HAT::getDefaultStack)
-            .displayName(Text.translatable("item_group.scorchful"))
-            .entries((context, entries) -> {
-                entries.add(SItems.SUN_HAT.getDefaultStack());
-                entries.add(Items.TURTLE_HELMET.getDefaultStack());
-                entries.add(SItems.TURTLE_CHESTPLATE.getDefaultStack());
-                entries.add(SItems.TURTLE_LEGGINGS.getDefaultStack());
-                entries.add(SItems.TURTLE_BOOTS.getDefaultStack());
+    public static final ItemGroup SCORCHFUL = Registry.register(
+            Registries.ITEM_GROUP,
+            Scorchful.id("main"),
+            FabricItemGroup.builder()
+                    .icon(SItems.SUN_HAT::getDefaultStack)
+                    .displayName(Text.translatable("item_group.scorchful"))
+                    .entries((context, entries) -> {
+                        entries.add(SItems.SUN_HAT.getDefaultStack());
+                        entries.add(Items.TURTLE_HELMET.getDefaultStack());
+                        entries.add(SItems.TURTLE_CHESTPLATE.getDefaultStack());
+                        entries.add(SItems.TURTLE_LEGGINGS.getDefaultStack());
+                        entries.add(SItems.TURTLE_BOOTS.getDefaultStack());
 
-                entries.add(SItems.WATER_SKIN.getDefaultStack());
-                entries.add(makeFilledWaterSkin());
-                entries.add(SItems.CACTUS_JUICE.getDefaultStack());
+                        entries.add(SItems.WATER_SKIN.getDefaultStack());
+                        entries.add(makeFilledWaterSkin());
+                        entries.add(SItems.CACTUS_JUICE.getDefaultStack());
 
-                entries.add(SItems.CRIMSON_LILY.getDefaultStack());
-                entries.add(SItems.WARPED_LILY.getDefaultStack());
-                entries.add(SItems.ROOTED_NETHERRACK.getDefaultStack());
-                entries.add(SItems.ROOTED_CRIMSON_NYLIUM.getDefaultStack());
-                entries.add(SItems.ROOTED_WARPED_NYLIUM.getDefaultStack());
+                        entries.add(SItems.CRIMSON_LILY.getDefaultStack());
+                        entries.add(SItems.WARPED_LILY.getDefaultStack());
+                        entries.add(SItems.ROOTED_NETHERRACK.getDefaultStack());
+                        entries.add(SItems.ROOTED_CRIMSON_NYLIUM.getDefaultStack());
+                        entries.add(SItems.ROOTED_WARPED_NYLIUM.getDefaultStack());
 
-                entries.add(SItems.SAND_PILE.getDefaultStack());
-                entries.add(SItems.RED_SAND_PILE.getDefaultStack());
-            }).build();
+                        entries.add(SItems.SAND_PILE.getDefaultStack());
+                        entries.add(SItems.RED_SAND_PILE.getDefaultStack());
+                    }).build()
+    );
 
-    public static void registerAll() {
-        Registry.register(Registries.ITEM_GROUP, Scorchful.id("main"), SCORCHFUL);
+    public static void initialize() {
+        Scorchful.LOGGER.debug("Initialized Scorchful item groups");
     }
 
     @Contract("->new")

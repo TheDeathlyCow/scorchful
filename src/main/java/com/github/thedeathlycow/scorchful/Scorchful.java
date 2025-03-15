@@ -60,20 +60,20 @@ public class Scorchful implements ModInitializer {
         configHolder = AutoConfig.getConfigHolder(ScorchfulConfig.class); //NOSONAR: this is correct usage for mods
         ScorchfulConfig.updateConfig(configHolder);
 
-        SBlocks.registerBlocks();
-        SBlockEntityTypes.registerAll();
+        SBlocks.initialize();
+        SBlockEntityTypes.initialize();
         SArmorMaterials.initialize();
         SDataComponentTypes.initialize();
-        SItems.registerItems();
-        SItemGroups.registerAll();
-        SEntityTypes.registerAll();
+        SItems.initialize();
+        SItemGroups.initialize();
+        SEntityTypes.initialize();
         SSoundEvents.registerAll();
-        STemperatureEffects.registerAll();
+        STemperatureEffects.initialize();
         SStatusEffects.initialize();
         SEntityAttributes.initialize();
-        SParticleTypes.registerAll();
+        SParticleTypes.initialize();
         NetherBiomeModifications.placeFeaturesInBiomes();
-        SStats.registerAll();
+        SStats.initialize();
         SandCauldronBehaviours.registerAll();
         NetherLilyBehaviours.registerBehaviours();
         SHeatVisions.initialize();

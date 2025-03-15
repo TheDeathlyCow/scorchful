@@ -7,22 +7,18 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
-public class SBlockEntityTypes {
-
-
-
-    public static void registerAll() {
+public final class SBlockEntityTypes {
+    public static void initialize() {
+        Scorchful.LOGGER.debug("Initialized Scorchful block entity types");
     }
 
-    public static void register(String name, BlockEntityType<?> type) {
-        Registry.register(Registries.BLOCK_ENTITY_TYPE, Scorchful.id(name), type);
-    }
-
-    private static <T extends BlockEntity> BlockEntityType<T> create(
+    public static <T extends BlockEntity> BlockEntityType<T> register(
+            String name,
             BlockEntityType.BlockEntityFactory<T> factory,
             Block... blocks
     ) {
-        return BlockEntityType.Builder.create(factory, blocks).build();
+        BlockEntityType<T> type = BlockEntityType.Builder.create(factory, blocks).build();
+        return Registry.register(Registries.BLOCK_ENTITY_TYPE, Scorchful.id(name), type);
     }
 
     private SBlockEntityTypes() {
