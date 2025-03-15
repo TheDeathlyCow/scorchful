@@ -6,6 +6,9 @@
     "environment": "*",
     "license": "LGPL-3.0",
     "entrypoints": {
+        "main": [
+            "com.github.thedeathlycow.scorchful.testmod.common.ScorchfulTestMod"
+        ],
         "fabric-gametest": [
             "com.github.thedeathlycow.scorchful.testmod.common.cauldron.CauldronInteractionTests",
             "com.github.thedeathlycow.scorchful.testmod.common.cauldron.SandCauldronTests",

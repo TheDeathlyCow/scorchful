@@ -209,3 +209,10 @@ publishing {
         // retrieving dependencies.
     }
 }
+
+fabricApi {
+    configureDataGeneration() {
+        createSourceSet = true
+        modId = "scorchful-datagen"
+    }
+}

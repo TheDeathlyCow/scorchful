@@ -10,22 +10,12 @@ import net.minecraft.util.math.MathHelper;
 @Config(name = Scorchful.MODID + ".combat_config")
 public class CombatConfig implements ConfigData {
 
-    @ConfigEntry.Gui.EnumHandler
+    @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
     FireChargeThrower.FireballFactory fireBallThrownType = FireChargeThrower.FireballFactory.SMALL;
 
     boolean enableDesertVisions = true;
 
-    @ConfigEntry.Gui.RequiresRestart
-    double defaultArmorHeatResistance = -0.5;
-
-    @ConfigEntry.Gui.RequiresRestart
-    double veryHarmfulArmorHeatResistance = -1.0;
-
-    @ConfigEntry.Gui.RequiresRestart
-    double protectiveArmorHeatResistance = 0.5;
-
-    @ConfigEntry.Gui.RequiresRestart
-    double veryProtectiveArmorHeatResistance = 1.0;
+    double fireProtectionHeatResistancePerLevel = 0.125;
 
     double fearDetectionRangeMultiplier = 2.0;
 
@@ -48,20 +38,8 @@ public class CombatConfig implements ConfigData {
         return enableDesertVisions;
     }
 
-    public double getDefaultArmorHeatResistance() {
-        return defaultArmorHeatResistance;
-    }
-
-    public double getVeryHarmfulArmorHeatResistance() {
-        return veryHarmfulArmorHeatResistance;
-    }
-
-    public double getProtectiveArmorHeatResistance() {
-        return protectiveArmorHeatResistance;
-    }
-
-    public double getVeryProtectiveArmorHeatResistance() {
-        return veryProtectiveArmorHeatResistance;
+    public double getFireProtectionHeatResistancePerLevel() {
+        return fireProtectionHeatResistancePerLevel;
     }
 
     public double getFearDetectionRangeMultiplier() {

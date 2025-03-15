@@ -10,15 +10,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.FluidTags;
 
 public class TurtleArmorEffects {
-
     public static void update(PlayerEntity player) {
-
         if (player.isSubmergedIn(FluidTags.WATER)) {
             return;
         }
 
         HeatingConfig config = Scorchful.getConfig().heatingConfig;
-
         if (!config.isTurtleArmorEffectsEnabled()) {
             return;
         }

@@ -1,0 +1,11 @@
+{
+    "type": "thermoo:precipitation_type",
+    "precipitation_type": {
+        "rain": {
+            "type": "thermoo:constant",
+            "components": {
+                "thermoo:relative_humidity": 0.95
+            }
+        }
+    }
+}

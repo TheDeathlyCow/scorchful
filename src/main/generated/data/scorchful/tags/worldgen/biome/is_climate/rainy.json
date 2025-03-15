@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "#scorchful:humid_biomes",
+      "required": false
+    },
+    {
+      "id": "#c:is_wet/overworld",
+      "required": false
+    },
+    {
+      "id": "#c:is_swamp",
+      "required": false
+    },
+    {
+      "id": "#minecraft:is_jungle",
+      "required": false
+    }
+  ]
+}

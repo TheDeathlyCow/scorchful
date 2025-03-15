@@ -23,11 +23,13 @@ public class ThirstConfig implements ConfigData {
 
     int touchingWaterWetnessIncrease = 1;
 
-    int dryRate = 1;
-
     int onFireDryDate = 3;
 
     float humidBiomeSweatEfficiency = 1f / 3f;
+
+    float extraHumidBiomeSweatEfficiency = 1f / 6f;
+
+    float aridBiomeSweatEfficiency = 1.5f;
 
     float maxRehydrationEfficiency = 0.75f;
 
@@ -63,16 +65,20 @@ public class ThirstConfig implements ConfigData {
         return touchingWaterWetnessIncrease;
     }
 
-    public int getDryRate() {
-        return dryRate;
-    }
-
     public int getOnFireDryDate() {
         return onFireDryDate;
     }
 
     public float getHumidBiomeSweatEfficiency() {
         return humidBiomeSweatEfficiency;
+    }
+
+    public float getExtraHumidBiomeSweatEfficiency() {
+        return extraHumidBiomeSweatEfficiency;
+    }
+
+    public float getAridBiomeSweatEfficiency() {
+        return aridBiomeSweatEfficiency;
     }
 
     public float getMaxRehydrationEfficiency() {

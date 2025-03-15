@@ -5,7 +5,6 @@ import com.github.thedeathlycow.scorchful.entity.effect.MesmerizedStatusEffect;
 import com.github.thedeathlycow.scorchful.event.ScorchfulLivingEntityEvents;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import com.github.thedeathlycow.scorchful.server.SandstormSlowing;
-import com.github.thedeathlycow.scorchful.temperature.Cooling;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.Entity;
@@ -58,17 +57,6 @@ public abstract class LivingEntityMixin extends Entity {
                 (LivingEntity) (Object) this,
                 scorchful_wasInSandstorm
         );
-        profiler.pop();
-    }
-
-    @Inject(
-            method = "tick",
-            at = @At("TAIL")
-    )
-    private void afterTick(CallbackInfo ci) {
-        Profiler profiler = this.getWorld().getProfiler();
-        profiler.push("scorchful_cooling");
-        Cooling.tick((LivingEntity) (Object) this);
         profiler.pop();
     }
 

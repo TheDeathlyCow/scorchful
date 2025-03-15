@@ -1,0 +1,23 @@
+{
+    "type": "scorchful:check_time",
+    "time_range": {
+        "min": 13000,
+        "max": 24000
+    },
+    "in": {
+        "type": "scorchful:relative_humidity_threshold",
+        "relative_humidity_threshold": 0.35,
+        "above": "scorchful:room_temperature",
+        "below": {
+            "type": "thermoo:temperature_shift",
+            "shift": -30
+        }
+    },
+    "out": {
+        "type": "thermoo:light_threshold",
+        "light_type": "sky",
+        "threshold": 13,
+        "above": "scorchful:empty",
+        "below": "scorchful:room_temperature"
+    }
+}

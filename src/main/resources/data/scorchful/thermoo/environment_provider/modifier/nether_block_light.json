@@ -1,0 +1,13 @@
+{
+    "type": "thermoo:light_threshold",
+    "light_type": "block",
+    "threshold": 13,
+    "above": {
+        "type": "thermoo:temperature_shift",
+        "shift": {
+            "value": 10,
+            "unit": "kelvin"
+        }
+    },
+    "below": "scorchful:empty"
+}
