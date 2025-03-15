@@ -12,6 +12,7 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
@@ -76,25 +77,25 @@ public class SItems {
 
     public static final Item TURTLE_CHESTPLATE = new ArmorItem(
             SArmorMaterials.TURTLE,
-            ArmorItem.Type.CHESTPLATE,
+            EquipmentType.CHESTPLATE,
             new Item.Settings()
-                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(25))
+                    .maxDamage(EquipmentType.CHESTPLATE.getMaxDamage(25))
                     .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE)
     );
 
     public static final Item TURTLE_LEGGINGS = new ArmorItem(
             SArmorMaterials.TURTLE,
-            ArmorItem.Type.LEGGINGS,
+            EquipmentType.LEGGINGS,
             new Item.Settings()
-                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(25))
+                    .maxDamage(EquipmentType.LEGGINGS.getMaxDamage(25))
                     .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE)
     );
 
     public static final Item TURTLE_BOOTS = new ArmorItem(
             SArmorMaterials.TURTLE,
-            ArmorItem.Type.BOOTS,
+            EquipmentType.BOOTS,
             new Item.Settings()
-                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(25))
+                    .maxDamage(EquipmentType.BOOTS.getMaxDamage(25))
                     .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE)
     );
 

@@ -7,8 +7,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -17,7 +17,7 @@ import java.util.Map;
 @FunctionalInterface
 public interface NetherLilyBehaviour {
 
-    ItemActionResult interact(
+    ActionResult interact(
             BlockState state,
             World world,
             BlockPos pos,
@@ -32,7 +32,7 @@ public interface NetherLilyBehaviour {
 
     static NetherLilyBehaviourMap createMap(String name) {
         var map = new Object2ObjectOpenHashMap<Item, NetherLilyBehaviour>();
-        map.defaultReturnValue((state, world, pos, player, hand, stack) -> ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION);
+        map.defaultReturnValue((state, world, pos, player, hand, stack) -> ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION);
 
         var behaviourMap = new NetherLilyBehaviourMap(name, map);
         BEHAVIOUR_MAPS.put(name, behaviourMap);

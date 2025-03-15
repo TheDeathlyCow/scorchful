@@ -208,7 +208,7 @@ public class WaterSkinItem extends DrinkItem {
         return null;
     }
 
-    private ItemActionResult onCauldronInteract(
+    private ActionResult onCauldronInteract(
             BlockState state,
             World world,
             BlockPos pos,
@@ -222,10 +222,10 @@ public class WaterSkinItem extends DrinkItem {
             player.incrementStat(Stats.USE_CAULDRON);
             LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
         }
-        return ItemActionResult.success(world.isClient);
+        return ActionResult.success(world.isClient);
     }
 
-    public ItemActionResult onWarpedLilyInteract(
+    public ActionResult onWarpedLilyInteract(
             BlockState state,
             World world,
             BlockPos pos,
@@ -234,11 +234,11 @@ public class WaterSkinItem extends DrinkItem {
             ItemStack stack
     ) {
         if (getNumDrinks(stack) >= MAX_DRINKS) {
-            return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
         if (state.get(NetherLilyBlock.WATER_SATURATION_LEVEL) < 3) {
-            return ItemActionResult.FAIL;
+            return ActionResult.FAIL;
         }
 
         if (!world.isClient) {
@@ -246,7 +246,7 @@ public class WaterSkinItem extends DrinkItem {
             player.incrementStat(SStats.USE_WARPED_LILY);
             NetherLilyBlock.setWater(state, world, pos, 0);
         }
-        return ItemActionResult.success(world.isClient);
+        return ActionResult.success(world.isClient);
     }
 
 }

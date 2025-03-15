@@ -19,7 +19,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -102,7 +102,7 @@ public class SandCauldronBehaviours {
      * @param stack      the block item stack in the player's hand
      * @return a {@linkplain ActionResult#isAccepted successful} action result
      */
-    public static ItemActionResult fillCauldronWithBlock(
+    public static ActionResult fillCauldronWithBlock(
             World world, BlockPos pos,
             PlayerEntity player,
             Hand hand,
@@ -121,7 +121,7 @@ public class SandCauldronBehaviours {
             world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.0f);
             world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
         }
-        return ItemActionResult.success(world.isClient);
+        return ActionResult.success(world.isClient);
     }
 
     /**
@@ -136,7 +136,7 @@ public class SandCauldronBehaviours {
      * @param state      the cauldron block state
      * @return a {@linkplain ActionResult#isAccepted successful} action result if emptied, {@link ActionResult#PASS} otherwise
      */
-    public static ItemActionResult emptyBlockFromCauldron(
+    public static ActionResult emptyBlockFromCauldron(
             BlockState state,
             World world, BlockPos pos,
             PlayerEntity player,
@@ -145,7 +145,7 @@ public class SandCauldronBehaviours {
     ) {
         if (!world.isClient) {
             if (state.contains(SandCauldronBlock.LEVEL) && state.get(SandCauldronBlock.LEVEL) < SandCauldronBlock.MAX_LEVEL) {
-                return ItemActionResult.FAIL;
+                return ActionResult.FAIL;
             }
 
             Item item = stack.getItem();
@@ -161,7 +161,7 @@ public class SandCauldronBehaviours {
             world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.0f);
             world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
         }
-        return ItemActionResult.success(world.isClient);
+        return ActionResult.success(world.isClient);
     }
 
     private static CauldronBehavior fillWithSand(BlockState filledState) {

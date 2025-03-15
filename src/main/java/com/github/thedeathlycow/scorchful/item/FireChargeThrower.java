@@ -9,8 +9,8 @@ import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.entity.projectile.SmallFireballEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
@@ -22,9 +22,9 @@ public class FireChargeThrower implements UseItemCallback {
     private static final int FIRE_CHARGE_COOL_DOWN = 20;
 
     @Override
-    public TypedActionResult<ItemStack> interact(PlayerEntity player, World world, Hand hand) {
+    public ActionResult interact(PlayerEntity player, World world, Hand hand) {
         if (player.isSpectator()) {
-            return TypedActionResult.pass(ItemStack.EMPTY);
+            return ActionResult.PASS;
         }
 
         ScorchfulConfig config = Scorchful.getConfig();
@@ -32,10 +32,10 @@ public class FireChargeThrower implements UseItemCallback {
 
         ItemStack stack = player.getStackInHand(hand);
         if (!stack.isOf(Items.FIRE_CHARGE) || throwingTypes == FireballFactory.DISABLED) {
-            return TypedActionResult.pass(ItemStack.EMPTY);
+            return ActionResult.PASS;
         }
-        if (player.getItemCooldownManager().isCoolingDown(stack.getItem())) {
-            return TypedActionResult.fail(stack);
+        if (player.getItemCooldownManager().isCoolingDown(stack)) {
+            return ActionResult.FAIL;
         }
 
         // spawn fire charge entity
@@ -44,7 +44,7 @@ public class FireChargeThrower implements UseItemCallback {
             AbstractFireballEntity fireball = throwingTypes.create(world, player, rotation);
 
             if (fireball == null) {
-                return TypedActionResult.pass(ItemStack.EMPTY);
+                return ActionResult.PASS;
             }
 
             fireball.setPosition(fireball.getX(), player.getBodyY(0.5) + 0.5, fireball.getZ());
@@ -57,13 +57,12 @@ public class FireChargeThrower implements UseItemCallback {
         if (!player.isCreative()) {
             stack.decrement(1);
         }
-        player.getItemCooldownManager().set(stack.getItem(), FIRE_CHARGE_COOL_DOWN);
+        player.getItemCooldownManager().set(stack, FIRE_CHARGE_COOL_DOWN);
 
-        return TypedActionResult.success(stack);
+        return ActionResult.SUCCESS;
     }
 
     public enum FireballFactory {
-
         DISABLED {
             @Override
             @Nullable
@@ -94,7 +93,5 @@ public class FireChargeThrower implements UseItemCallback {
 
         @Nullable
         public abstract AbstractFireballEntity create(World world, PlayerEntity player, Vec3d velocity);
-
     }
-
 }

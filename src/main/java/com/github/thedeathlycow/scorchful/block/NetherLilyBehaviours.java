@@ -12,7 +12,7 @@ import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
-import net.minecraft.util.ItemActionResult;
+import net.minecraft.util.ActionResult;
 import net.minecraft.world.event.GameEvent;
 
 public class NetherLilyBehaviours {
@@ -24,7 +24,7 @@ public class NetherLilyBehaviours {
     private static final NetherLilyBehaviour ADD_WATER = (state, world, pos, player, hand, stack) -> {
         if (!world.isClient) {
             if (state.get(NetherLilyBlock.WATER_SATURATION_LEVEL) >= NetherLilyBlock.MAX_LEVEL) {
-                return ItemActionResult.FAIL;
+                return ActionResult.FAIL;
             }
             Item item = stack.getItem();
             player.incrementStat(SStats.FILL_CRIMSON_LILY);
@@ -38,7 +38,7 @@ public class NetherLilyBehaviours {
             );
             world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
         }
-        return ItemActionResult.success(world.isClient);
+        return ActionResult.success(world.isClient);
     };
 
     public static void registerBehaviours() {
@@ -47,7 +47,7 @@ public class NetherLilyBehaviours {
                 (state, world, pos, player, hand, stack) -> {
 
                     if (state.get(NetherLilyBlock.WATER_SATURATION_LEVEL) < 3) {
-                        return ItemActionResult.FAIL;
+                        return ActionResult.FAIL;
                     }
 
                     if (!world.isClient) {
@@ -71,7 +71,7 @@ public class NetherLilyBehaviours {
                         );
                         world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
                     }
-                    return ItemActionResult.success(world.isClient);
+                    return ActionResult.success(world.isClient);
                 }
         );
         WARPED_LILY_BEHAVIOUR.map().put(SItems.WATER_SKIN, ((WaterSkinItem) SItems.WATER_SKIN)::onWarpedLilyInteract);
@@ -80,7 +80,7 @@ public class NetherLilyBehaviours {
                 Items.POTION,
                 (state, world, pos, player, hand, stack) -> {
 
-                    ItemActionResult result = ADD_WATER.interact(state, world, pos, player, hand, stack);
+                    ActionResult result = ADD_WATER.interact(state, world, pos, player, hand, stack);
 
                     if (!world.isClient && result.isAccepted()) {
                         player.setStackInHand(
@@ -95,11 +95,11 @@ public class NetherLilyBehaviours {
         CRIMSON_LILY_BEHAVIOUR.map().put(
                 SItems.WATER_SKIN,
                 (state, world, pos, player, hand, stack) -> {
-                    ItemActionResult result;
+                    ActionResult result;
                     if (WaterSkinItem.hasDrink(stack)) {
                         result = ADD_WATER.interact(state, world, pos, player, hand, stack);
                     } else {
-                        result = ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+                        result = ActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
                     }
 
                     if (!world.isClient && result.isAccepted()) {
