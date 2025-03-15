@@ -22,7 +22,7 @@ public class SStatusEffects {
     );
 
     public static void initialize() {
-        // loads the class
+        Scorchful.LOGGER.debug("Initialized Scorchful status effects");
     }
 
     private static RegistryEntry<StatusEffect> register(String name, StatusEffect statusEffect) {

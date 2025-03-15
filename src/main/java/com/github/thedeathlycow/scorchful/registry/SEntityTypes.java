@@ -5,9 +5,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
-public class SEntityTypes {
-
-    public static void registerAll() {
+public final class SEntityTypes {
+    public static void initialize() {
         // nothing here yet owo
     }
 

@@ -14,20 +14,23 @@ import java.util.function.UnaryOperator;
 
 public class SDataComponentTypes {
 
-    public static final ComponentType<DrinkLevelComponent> DRINK_LEVEL = create(
+    public static final ComponentType<DrinkLevelComponent> DRINK_LEVEL = register(
+            "drink_level",
             builder -> builder
                     .codec(DrinkLevelComponent.CODEC)
                     .packetCodec(DrinkLevelComponent.PACKET_CODEC)
                     .cache()
     );
 
-    public static final ComponentType<Integer> NUM_DRINKS = create(
+    public static final ComponentType<Integer> NUM_DRINKS = register(
+            "num_drinks",
             builder -> builder
                     .codec(Codecs.rangedInt(0, WaterSkinItem.MAX_DRINKS))
                     .packetCodec(PacketCodecs.VAR_INT)
     );
 
-    public static final ComponentType<HeatResistanceComponent> HEAT_RESISTANCE = create(
+    public static final ComponentType<HeatResistanceComponent> HEAT_RESISTANCE = register(
+            "heat_resistance",
             builder -> builder
                     .codec(HeatResistanceComponent.CODEC)
                     .packetCodec(HeatResistanceComponent.PACKET_CODEC)
@@ -35,20 +38,14 @@ public class SDataComponentTypes {
     );
 
     public static void initialize() {
-        register("drink_level", DRINK_LEVEL);
-        register("num_drinks", NUM_DRINKS);
-        register("heat_resistance", HEAT_RESISTANCE);
+        Scorchful.LOGGER.debug("Initialized Scorchful item components");
     }
 
-    private static <T> ComponentType<T> create(UnaryOperator<ComponentType.Builder<T>> builderOperator) {
-        return builderOperator.apply(ComponentType.builder()).build();
-    }
-
-    private static <T> void register(String id, ComponentType<T> componentType) {
-        Registry.register(
+    private static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
+        return Registry.register(
                 Registries.DATA_COMPONENT_TYPE,
                 Scorchful.id(id),
-                componentType
+                builderOperator.apply(ComponentType.builder()).build()
         );
     }
 
