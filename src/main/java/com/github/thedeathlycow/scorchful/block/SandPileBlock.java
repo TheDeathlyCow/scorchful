@@ -54,7 +54,7 @@ public class SandPileBlock extends FallingBlock {
     public SandPileBlock(int color, Settings settings) {
         super(settings);
         this.color = color;
-        this.setDefaultState(this.stateManager.getDefaultState().with(LAYERS, 1));
+        this.setDefaultState(this.getDefaultState().with(LAYERS, 1));
     }
 
     @Override

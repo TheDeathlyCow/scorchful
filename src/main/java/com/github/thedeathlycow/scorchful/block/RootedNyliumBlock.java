@@ -17,7 +17,6 @@ import net.minecraft.world.chunk.light.ChunkLightProvider;
 
 @SuppressWarnings("deprecation")
 public class RootedNyliumBlock extends Block implements Fertilizable {
-
     public static final MapCodec<RootedNyliumBlock> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
                             Registries.BLOCK.getCodec()

@@ -62,6 +62,10 @@ public class NetherLilyBlock extends Block {
     public NetherLilyBlock(NetherLilyBehaviour.NetherLilyBehaviourMap behaviorMap, Settings settings) {
         super(settings);
         this.behaviorMap = behaviorMap;
+        this.setDefaultState(
+                this.getDefaultState()
+                        .with(WATER_SATURATION_LEVEL, 0)
+        );
     }
 
     public static void setWater(BlockState state, World world, BlockPos pos, int level) {
