@@ -20,9 +20,15 @@ import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.Block;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.packet.s2c.play.BlockUpdateS2CPacket;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -49,31 +55,31 @@ public class Scorchful implements ModInitializer {
         configHolder = AutoConfig.getConfigHolder(ScorchfulConfig.class); //NOSONAR: this is correct usage for mods
         ScorchfulConfig.updateConfig(configHolder);
 
+        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+            CommandRegistrationCallback.EVENT.register(
+                    (dispatcher, registryAccess, environment) -> {
+                        ThirstCommand.register(dispatcher);
+                    }
+            );
+        }
+
         SArmorMaterials.initialize();
         SBlocks.initialize();
         SBlockEntityTypes.initialize();
-        SItems.initialize();
         SDataComponentTypes.initialize();
-        SItemGroups.initialize();
+        SItems.initialize();
         SEntityTypes.initialize();
+        SPotions.initialize();
+        SItemGroups.initialize();
         SSoundEvents.initialize();
         STemperatureEffects.initialize();
         SStatusEffects.initialize();
-        SEntityAttributes.initialize();
         SParticleTypes.initialize();
         NetherBiomeModifications.initialize();
         SStats.initialize();
         SHeatVisions.initialize();
-        SPotions.initialize();
         SEnvironmentProviderTypes.initialize();
-        SandCauldronBehaviours.initialize();
-        NetherLilyBehaviours.initialize();
-
-        CommandRegistrationCallback.EVENT.register(
-                (dispatcher, registryAccess, environment) -> {
-                    ThirstCommand.register(dispatcher);
-                }
-        );
+        SEntityAttributes.initialize();
 
         if (ScorchfulIntegrations.isDehydrationLoaded() && !ServerThirstPlugin.isCustomPluginLoaded()) {
             LOGGER.debug("Applying Dehydration thirst plugin");
@@ -87,11 +93,16 @@ public class Scorchful implements ModInitializer {
         LOGGER.info("Scorchful initialized!");
 
         ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-            var sb = new StringBuilder();
-            Registries.BLOCK.streamEntries().forEach(block -> {
-                sb.append("\n - ").append(block);
-            });
-            LOGGER.info("Blocks:{}", sb);
+            var blockupdate = new BlockUpdateS2CPacket(BlockPos.ORIGIN, SBlocks.SAND_CAULDRON.getDefaultState());
+            try {
+                var ids = Block.STATE_IDS;
+                LOGGER.info("raw id: {}", ids.getRawId(SBlocks.SAND_CAULDRON.getDefaultState()));
+                var factory = RegistryByteBuf.makeFactory(server.getRegistryManager());
+                BlockUpdateS2CPacket.CODEC.encode(factory.apply(PacketByteBufs.create()), blockupdate);
+            } catch (Exception e) {
+                e.printStackTrace();
+                LOGGER.info("exception: {}", e);
+            }
         });
     }
 

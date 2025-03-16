@@ -27,7 +27,6 @@ import net.minecraft.world.event.GameEvent;
 
 import java.util.function.Predicate;
 
-
 public class SandCauldronBlock extends AbstractCauldronBlock {
 
     public static final MapCodec<SandCauldronBlock> CODEC = RecordCodecBuilder.mapCodec(
@@ -58,7 +57,6 @@ public class SandCauldronBlock extends AbstractCauldronBlock {
      *
      * @param settings
      * @param sandstormType     The type of sandstorm this will fill in
-     * @param filledInteraction the behaviour for emptying the cauldron
      * @param behaviorMap       other behaviours for this cauldron
      */
     public SandCauldronBlock(
@@ -94,6 +92,7 @@ public class SandCauldronBlock extends AbstractCauldronBlock {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder);
         builder.add(LEVEL);
     }
 

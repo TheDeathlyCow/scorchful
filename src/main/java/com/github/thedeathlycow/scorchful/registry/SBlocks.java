@@ -5,6 +5,7 @@ import com.github.thedeathlycow.scorchful.block.*;
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.network.packet.s2c.play.BlockUpdateS2CPacket;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -112,6 +113,8 @@ public final class SBlocks {
 
     public static void initialize() {
         Scorchful.LOGGER.debug("Initialized Scorchful blocks");
+        SandCauldronBehaviours.initialize();
+        NetherLilyBehaviours.initialize();
     }
 
     private static Block register(String id, Function<AbstractBlock.Settings, Block> blockFactory) {
@@ -120,7 +123,6 @@ public final class SBlocks {
 
     private static Block register(String id, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings) {
         Block block = blockFactory.apply(settings);
-
         return Registry.register(Registries.BLOCK, Scorchful.id(id), block);
     }
 

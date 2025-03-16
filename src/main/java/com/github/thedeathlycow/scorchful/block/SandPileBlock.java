@@ -151,6 +151,7 @@ public class SandPileBlock extends FallingBlock {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder);
         builder.add(LAYERS);
     }
 }

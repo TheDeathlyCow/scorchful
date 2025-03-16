@@ -32,7 +32,7 @@ public class SItemGroups {
                         entries.add(SItems.CRIMSON_LILY.getDefaultStack());
                         entries.add(SItems.WARPED_LILY.getDefaultStack());
                         entries.add(SItems.ROOTED_NETHERRACK.getDefaultStack());
-                        entries.add(SItems.ROOTED_CRIMSON_NYLIUM.getDefaultStack());
+                        entries.add(SItems. ROOTED_CRIMSON_NYLIUM.getDefaultStack());
                         entries.add(SItems.ROOTED_WARPED_NYLIUM.getDefaultStack());
 
                         entries.add(SItems.SAND_PILE.getDefaultStack());
