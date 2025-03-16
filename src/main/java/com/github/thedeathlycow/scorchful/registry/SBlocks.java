@@ -2,20 +2,23 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.block.*;
+import com.github.thedeathlycow.scorchful.mixin.accessor.PointOfInterestTypeAccessor;
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
+import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.network.packet.s2c.play.BlockUpdateS2CPacket;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.world.poi.PointOfInterestType;
+import net.minecraft.world.poi.PointOfInterestTypes;
 
 import java.util.function.Function;
 
 public final class SBlocks {
     public static final Block CRIMSON_LILY = register(
             "crimson_lily",
-            settings ->  new CrimsonLilyBlock(
+            settings -> new CrimsonLilyBlock(
                     NetherLilyBehaviours.CRIMSON_LILY_BEHAVIOUR,
                     settings
                             .mapColor(MapColor.DARK_RED)
@@ -115,6 +118,15 @@ public final class SBlocks {
         Scorchful.LOGGER.debug("Initialized Scorchful blocks");
         SandCauldronBehaviours.initialize();
         NetherLilyBehaviours.initialize();
+
+        PointOfInterestType poi = Registries.POINT_OF_INTEREST_TYPE.getOrThrow(PointOfInterestTypes.LEATHERWORKER);
+
+        ((PointOfInterestTypeAccessor) (Object) poi).scorchful$setBlockStates(
+                ImmutableSet.<BlockState>builder()
+                        .addAll(poi.blockStates())
+                        .addAll(SPointsOfInterest.SAND_CAULDRONS)
+                        .build()
+        );
     }
 
     private static Block register(String id, Function<AbstractBlock.Settings, Block> blockFactory) {
