@@ -118,15 +118,6 @@ public final class SBlocks {
         Scorchful.LOGGER.debug("Initialized Scorchful blocks");
         SandCauldronBehaviours.initialize();
         NetherLilyBehaviours.initialize();
-
-        PointOfInterestType poi = Registries.POINT_OF_INTEREST_TYPE.getOrThrow(PointOfInterestTypes.LEATHERWORKER);
-
-        ((PointOfInterestTypeAccessor) (Object) poi).scorchful$setBlockStates(
-                ImmutableSet.<BlockState>builder()
-                        .addAll(poi.blockStates())
-                        .addAll(SPointsOfInterest.SAND_CAULDRONS)
-                        .build()
-        );
     }
 
     private static Block register(String id, Function<AbstractBlock.Settings, Block> blockFactory) {

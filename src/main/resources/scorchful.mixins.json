@@ -16,6 +16,7 @@
         "accessor.EnchantmentBuilderAccessor",
         "accessor.EntityAccessor",
         "accessor.PointOfInterestTypeAccessor",
+        "accessor.PointOfInterestTypesAccessor",
         "compat.frostiful.absent.EntityMixin",
         "server.SandAccumulationServerWorldMixin",
         "thirst.ConsumeItemCriterionMixin",
