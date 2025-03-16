@@ -1,6 +1,8 @@
 package com.github.thedeathlycow.scorchful;
 
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
+import com.github.thedeathlycow.scorchful.block.NetherLilyBehaviours;
+import com.github.thedeathlycow.scorchful.block.SandCauldronBehaviours;
 import com.github.thedeathlycow.scorchful.compat.DehydrationServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
@@ -64,6 +66,8 @@ public class Scorchful implements ModInitializer {
         SHeatVisions.initialize();
         SPotions.initialize();
         SEnvironmentProviderTypes.initialize();
+        SandCauldronBehaviours.initialize();
+        NetherLilyBehaviours.initialize();
 
         CommandRegistrationCallback.EVENT.register(
                 (dispatcher, registryAccess, environment) -> {

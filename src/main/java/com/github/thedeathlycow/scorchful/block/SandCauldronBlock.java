@@ -68,6 +68,10 @@ public class SandCauldronBlock extends AbstractCauldronBlock {
     ) {
         super(settings, behaviorMap);
         this.sandstormType = sandstormType;
+        this.setDefaultState(
+                this.getDefaultState()
+                        .with(LEVEL, 3)
+        );
     }
 
     public static boolean canFillWithSand(World world, Sandstorms.SandstormType sandstormType) {

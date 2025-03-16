@@ -112,8 +112,6 @@ public final class SBlocks {
 
     public static void initialize() {
         Scorchful.LOGGER.debug("Initialized Scorchful blocks");
-        SandCauldronBehaviours.initialize();
-        NetherLilyBehaviours.initialize();
     }
 
     private static Block register(String id, Function<AbstractBlock.Settings, Block> blockFactory) {
