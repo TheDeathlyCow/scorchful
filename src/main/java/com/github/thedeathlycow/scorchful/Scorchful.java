@@ -80,6 +80,7 @@ public class Scorchful implements ModInitializer {
         SHeatVisions.initialize();
         SEnvironmentProviderTypes.initialize();
         SEntityAttributes.initialize();
+        SPointsOfInterest.initialize();
 
         if (ScorchfulIntegrations.isDehydrationLoaded() && !ServerThirstPlugin.isCustomPluginLoaded()) {
             LOGGER.debug("Applying Dehydration thirst plugin");
