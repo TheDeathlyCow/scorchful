@@ -1,21 +1,10 @@
 package com.github.thedeathlycow.scorchful;
 
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
-import com.github.thedeathlycow.scorchful.block.NetherLilyBehaviours;
-import com.github.thedeathlycow.scorchful.block.SandCauldronBehaviours;
 import com.github.thedeathlycow.scorchful.compat.DehydrationServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
-import com.github.thedeathlycow.scorchful.item.DrinkItem;
-import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
-import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
-import com.github.thedeathlycow.scorchful.item.component.HeatResistanceModifier;
-import com.github.thedeathlycow.scorchful.item.enchantment.EnchantmentModifiers;
-import com.github.thedeathlycow.scorchful.item.loot.TurtleScuteLootTableModifier;
 import com.github.thedeathlycow.scorchful.registry.*;
-import com.github.thedeathlycow.scorchful.registry.tag.SDamageTypeTags;
-import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.github.thedeathlycow.scorchful.server.ThirstCommand;
 import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
 import com.github.thedeathlycow.scorchful.temperature.ActiveTemperatureEffects;
@@ -23,16 +12,14 @@ import com.github.thedeathlycow.scorchful.temperature.PassiveTemperatureEffects;
 import com.github.thedeathlycow.scorchful.temperature.ServerPlayerEnvironmentTickListeners;
 import com.github.thedeathlycow.scorchful.temperature.SoakingEffects;
 import com.github.thedeathlycow.scorchful.worldgen.NetherBiomeModifications;
-import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.fabricmc.fabric.api.event.player.UseItemCallback;
-import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -60,22 +47,20 @@ public class Scorchful implements ModInitializer {
         configHolder = AutoConfig.getConfigHolder(ScorchfulConfig.class); //NOSONAR: this is correct usage for mods
         ScorchfulConfig.updateConfig(configHolder);
 
+        SArmorMaterials.initialize();
         SBlocks.initialize();
         SBlockEntityTypes.initialize();
-        SArmorMaterials.initialize();
-        SDataComponentTypes.initialize();
         SItems.initialize();
+        SDataComponentTypes.initialize();
         SItemGroups.initialize();
         SEntityTypes.initialize();
-        SSoundEvents.registerAll();
+        SSoundEvents.initialize();
         STemperatureEffects.initialize();
         SStatusEffects.initialize();
         SEntityAttributes.initialize();
         SParticleTypes.initialize();
-        NetherBiomeModifications.placeFeaturesInBiomes();
+        NetherBiomeModifications.initialize();
         SStats.initialize();
-        SandCauldronBehaviours.registerAll();
-        NetherLilyBehaviours.registerBehaviours();
         SHeatVisions.initialize();
         SPotions.initialize();
         SEnvironmentProviderTypes.initialize();
@@ -91,38 +76,19 @@ public class Scorchful implements ModInitializer {
             ServerThirstPlugin.registerPlugin(new DehydrationServerThirstPlugin());
         }
 
-        UseItemCallback.EVENT.register(new FireChargeThrower());
-        ScorchfulItemEvents.GET_DEFAULT_STACK.register(DrinkLevelComponent::applyToNewStack);
-        ScorchfulItemEvents.CONSUME_ITEM.register(DrinkItem::applyWater);
-        ScorchfulItemEvents.CONSUME_ITEM.register((stack, player) -> {
-            if (stack.isIn(SItemTags.IS_COOLING_FOOD)) {
-                player.thermoo$addTemperature(
-                        getConfig().heatingConfig.getTemperatureFromCoolingFood(),
-                        HeatingModes.ACTIVE
-                );
-            }
-        });
-        HeatResistanceModifier.initialize();
-
-        // custom scorchful event
-        ServerLivingEntityEvents.AFTER_DAMAGE.register(
-                (entity, source, baseDamageTaken, damageTaken, blocked) -> {
-                    if (!blocked && source.isIn(SDamageTypeTags.FIREBALL)) {
-                        entity.thermoo$addTemperature(
-                                getConfig().heatingConfig.getFireballHeat(),
-                                HeatingModes.ACTIVE
-                        );
-                    }
-                }
-        );
-
         this.registerThermooEventListeners();
-        LootTableEvents.MODIFY.register(new TurtleScuteLootTableModifier());
-        EnchantmentModifiers.initialize();
 
         PayloadTypeRegistry.playS2C().register(TemperatureSoundEventPacket.PACKET_ID, TemperatureSoundEventPacket.PACKET_CODEC);
 
         LOGGER.info("Scorchful initialized!");
+
+        ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+            var sb = new StringBuilder();
+            Registries.BLOCK.streamEntries().forEach(block -> {
+                sb.append("\n - ").append(block);
+            });
+            LOGGER.info("Blocks:{}", sb);
+        });
     }
 
     @NotNull

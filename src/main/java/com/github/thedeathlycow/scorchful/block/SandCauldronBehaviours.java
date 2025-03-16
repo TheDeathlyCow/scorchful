@@ -2,8 +2,6 @@ package com.github.thedeathlycow.scorchful.block;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
-import com.mojang.serialization.Codec;
-import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,12 +18,9 @@ import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemActionResult;
-import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
-
-import java.util.Map;
 
 public class SandCauldronBehaviours {
 
@@ -57,7 +52,7 @@ public class SandCauldronBehaviours {
         );
     };
 
-    public static void registerAll() {
+    public static void initialize() {
         CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.map().put(
                 Items.SAND,
                 fillWithSand(

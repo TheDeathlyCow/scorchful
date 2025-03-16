@@ -11,10 +11,8 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.PlacedFeature;
 
-public class NetherBiomeModifications {
-
-    public static void placeFeaturesInBiomes() {
-
+public final class NetherBiomeModifications {
+    public static void initialize() {
         BiomeModification modification = BiomeModifications.create(Scorchful.id("nether_features"));
 
         modification.add(

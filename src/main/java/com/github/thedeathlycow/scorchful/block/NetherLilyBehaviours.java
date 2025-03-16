@@ -41,7 +41,7 @@ public class NetherLilyBehaviours {
         return ItemActionResult.success(world.isClient);
     };
 
-    public static void registerBehaviours() {
+    public static void initialize() {
         WARPED_LILY_BEHAVIOUR.map().put(
                 Items.GLASS_BOTTLE,
                 (state, world, pos, player, hand, stack) -> {
