@@ -17,8 +17,6 @@ import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
 public class CrimsonLilyBlock extends NetherLilyBlock {
-
-
     public CrimsonLilyBlock(NetherLilyBehaviour.NetherLilyBehaviourMap behaviorMap, Settings settings) {
         super(behaviorMap, settings);
     }
