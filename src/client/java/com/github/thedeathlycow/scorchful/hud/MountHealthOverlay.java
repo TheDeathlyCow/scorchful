@@ -4,6 +4,7 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import org.joml.Vector2i;
@@ -36,6 +37,7 @@ public final class MountHealthOverlay implements StatusBarOverlayRenderEvents.Re
             if (isHalfHeart) {
                 // flips the half heart around, since animal hearts are backwards
                 context.drawTexture(
+                        RenderLayer::getGuiTextured,
                         BurningHeartsOverlay.HEART_OVERLAY_TEXTURE,
                         pos.x + 4, pos.y - 1,
                         4, 0,
@@ -44,6 +46,7 @@ public final class MountHealthOverlay implements StatusBarOverlayRenderEvents.Re
                 );
             } else {
                 context.drawTexture(
+                        RenderLayer::getGuiTextured,
                         BurningHeartsOverlay.HEART_OVERLAY_TEXTURE,
                         pos.x, pos.y - 1,
                         0, 0,

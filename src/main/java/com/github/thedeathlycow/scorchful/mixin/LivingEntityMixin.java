@@ -10,6 +10,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.util.profiler.Profiler;
+import net.minecraft.util.profiler.Profilers;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -43,7 +44,7 @@ public abstract class LivingEntityMixin extends Entity {
             at = @At("TAIL")
     )
     private void afterTickMovement(CallbackInfo ci) {
-        Profiler profiler = this.getWorld().getProfiler();
+        Profiler profiler = Profilers.get();
         profiler.push("scorchful_sandstorm_slow");
         scorchful_wasInSandstorm = SandstormSlowing.tickSandstormSlow(
                 (LivingEntity) (Object) this,

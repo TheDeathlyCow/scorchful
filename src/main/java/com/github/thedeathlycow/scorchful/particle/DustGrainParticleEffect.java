@@ -28,7 +28,7 @@ public class DustGrainParticleEffect extends AbstractDustParticleEffect {
                     .apply(instance, DustGrainParticleEffect::new)
     );
     public static final PacketCodec<RegistryByteBuf, DustGrainParticleEffect> PACKET_CODEC = PacketCodec.tuple(
-            PacketCodecs.VECTOR3F,
+            PacketCodecs.VECTOR_3F,
             DustGrainParticleEffect::getColor,
             PacketCodecs.FLOAT,
             DustGrainParticleEffect::getScale,

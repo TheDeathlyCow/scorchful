@@ -21,7 +21,7 @@ public class SpurtingWaterParticleEffect implements ParticleEffect {
 
     public static final MapCodec<SpurtingWaterParticleEffect> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
-                            Codecs.NONNEGATIVE_INT
+                            Codecs.NON_NEGATIVE_INT
                                     .fieldOf("delay")
                                     .forGetter(SpurtingWaterParticleEffect::getDelay)
                     )

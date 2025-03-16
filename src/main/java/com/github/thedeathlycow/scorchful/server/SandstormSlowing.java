@@ -46,22 +46,22 @@ public class SandstormSlowing {
     }
 
     private static void removeModifiers(LivingEntity entity) {
-        removeModifier(entity, EntityAttributes.GENERIC_MOVEMENT_SPEED, SPEED_MODIFIER_ID);
-        removeModifier(entity, EntityAttributes.GENERIC_FOLLOW_RANGE, FOLLOW_RANGE_MODIFIER_ID);
+        removeModifier(entity, EntityAttributes.MOVEMENT_SPEED, SPEED_MODIFIER_ID);
+        removeModifier(entity, EntityAttributes.FOLLOW_RANGE, FOLLOW_RANGE_MODIFIER_ID);
     }
 
     private static void addSlow(LivingEntity entity) {
         WeatherConfig config = Scorchful.getConfig().weatherConfig;
         addModifier(
                 entity,
-                EntityAttributes.GENERIC_MOVEMENT_SPEED,
+                EntityAttributes.MOVEMENT_SPEED,
                 SPEED_MODIFIER_ID,
                 config.getSandstormSlownessAmountPercent(),
                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
         addModifier(
                 entity,
-                EntityAttributes.GENERIC_FOLLOW_RANGE,
+                EntityAttributes.FOLLOW_RANGE,
                 FOLLOW_RANGE_MODIFIER_ID,
                 config.getSandstormFollowRangeReductionPercent(),
                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL

@@ -17,9 +17,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.dynamic.Codecs;
-import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
@@ -116,7 +113,7 @@ public class SandCauldronBehaviours {
             world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.0f);
             world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
         }
-        return ActionResult.success(world.isClient);
+        return ActionResult.SUCCESS;
     }
 
     /**
@@ -156,7 +153,7 @@ public class SandCauldronBehaviours {
             world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.0f);
             world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
         }
-        return ActionResult.success(world.isClient);
+        return ActionResult.SUCCESS;
     }
 
     private static CauldronBehavior fillWithSand(BlockState filledState) {

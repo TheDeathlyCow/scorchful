@@ -25,7 +25,7 @@ public final class SHeatVisions {
             new EntityHeatVision<>(
                     SBiomeTags.HEAT_VISION_BOAT,
                     6,
-                    EntityType.BOAT
+                    EntityType.OAK_BOAT
             )
     );
     public static final HeatVision POPPY = register(

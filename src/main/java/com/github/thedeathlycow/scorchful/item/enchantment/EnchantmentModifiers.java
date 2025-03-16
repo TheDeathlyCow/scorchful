@@ -12,6 +12,7 @@ import net.minecraft.enchantment.EnchantmentLevelBasedValue;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.effect.AttributeEnchantmentEffect;
 import net.minecraft.enchantment.effect.value.AddEnchantmentEffect;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.loot.condition.AllOfLootCondition;
 import net.minecraft.loot.condition.EntityPropertiesLootCondition;
@@ -20,7 +21,7 @@ import net.minecraft.loot.context.LootContext;
 import net.minecraft.predicate.NumberRange;
 import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.predicate.entity.EntityTypePredicate;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.*;
 import net.minecraft.registry.tag.EntityTypeTags;
 
 public class EnchantmentModifiers {
@@ -36,6 +37,9 @@ public class EnchantmentModifiers {
         }
 
         CombatConfig config = Scorchful.getConfig().combatConfig;
+        RegistryEntryLookup<EntityType<?>> entityLookup = DynamicRegistryManager.of(Registries.REGISTRIES)
+                .getOrThrow(RegistryKeys.ENTITY_TYPE);
+
         builder.addEffect(
                 EnchantmentEffectComponentTypes.DAMAGE,
                 new AddEnchantmentEffect(EnchantmentLevelBasedValue.linear(config.getImpalingDamagePerLevel())),
@@ -48,7 +52,10 @@ public class EnchantmentModifiers {
                                 EntityPropertiesLootCondition.builder(
                                         LootContext.EntityTarget.THIS,
                                         EntityPredicate.Builder.create()
-                                                .type(EntityTypePredicate.create(EntityTypeTags.SENSITIVE_TO_IMPALING))
+                                                .type(EntityTypePredicate.create(
+                                                        entityLookup,
+                                                        EntityTypeTags.SENSITIVE_TO_IMPALING
+                                                ))
                                 )
                         )
                 )

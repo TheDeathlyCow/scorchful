@@ -7,6 +7,7 @@ import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
@@ -34,6 +35,7 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
         BurningHeartType type = BurningHeartType.forPlayer(player, hardcore);
         if (type != null) {
             context.drawTexture(
+                    RenderLayer::getGuiTextured,
                     HEART_OVERLAY_TEXTURE,
                     x, y - 1,
                     halfHeart ? 9 : 0, type.textureV,
@@ -71,6 +73,7 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
 
             int u = isHalfHeart ? 9 : 0;
             context.drawTexture(
+                    RenderLayer::getGuiTextured,
                     HEART_OVERLAY_TEXTURE,
                     pos.x, pos.y - 1,
                     u, 0,

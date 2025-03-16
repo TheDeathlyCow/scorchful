@@ -8,6 +8,7 @@ import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -26,14 +27,14 @@ public class CrimsonLilyBlock extends NetherLilyBlock {
         if (state.get(WATER_SATURATION_LEVEL) != 3) {
             return;
         }
-        if (!world.isClient) {
-            soakEntity(state, world, pos, entity);
+        if (world instanceof ServerWorld serverWorld) {
+            soakEntity(state, serverWorld, pos, entity);
         } else {
             createSplash(world, pos);
         }
     }
 
-    private static void soakEntity(BlockState state, World world, BlockPos pos, Entity entity) {
+    private static void soakEntity(BlockState state, ServerWorld world, BlockPos pos, Entity entity) {
         world.playSound(
                 null,
                 pos,
@@ -51,6 +52,7 @@ public class CrimsonLilyBlock extends NetherLilyBlock {
 
         if (entity.getType().isIn(SEntityTypeTags.CRIMSON_LILY_HURTS)) {
             entity.damage(
+                    world,
                     world.getDamageSources().generic(),
                     10f
             );

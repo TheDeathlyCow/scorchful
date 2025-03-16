@@ -103,7 +103,7 @@ public class SandAccumulation {
     private static boolean canSetSand(ServerWorld world, BlockPos pos, Block sandPileBlock) {
         BlockState current = world.getBlockState(pos);
         return pos.getY() >= world.getBottomY()
-                && pos.getY() < world.getTopY()
+                && pos.getY() < world.getTopYInclusive()
                 && (current.isAir() || current.isOf(sandPileBlock))
                 && sandPileBlock.getDefaultState().canPlaceAt(world, pos);
     }

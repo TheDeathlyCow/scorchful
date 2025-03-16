@@ -26,8 +26,7 @@ public final class SPointsOfInterest {
     public static void initialize() {
         Scorchful.LOGGER.debug("Initialized Scorchful POIs");
         RegistryEntry<PointOfInterestType> leatherWorkerPOI = Registries.POINT_OF_INTEREST_TYPE
-                .getEntry(PointOfInterestTypes.LEATHERWORKER)
-                .orElseThrow();
+                .getOrThrow(PointOfInterestTypes.LEATHERWORKER);
 
         ((PointOfInterestTypeAccessor) (Object) leatherWorkerPOI.value()).scorchful$setBlockStates(
                 ImmutableSet.<BlockState>builder()
@@ -43,7 +42,7 @@ public final class SPointsOfInterest {
             RegistryEntry<PointOfInterestType> existing = PointOfInterestTypesAccessor.scorchful$getStatesToType()
                     .put(state, poiTypeEntry);
             if (existing != null) {
-                throw Util.throwOrPause(new IllegalStateException(String.format(Locale.ROOT, "%s is defined in more than one PoI type", state)));
+                throw Util.getFatalOrPause(new IllegalStateException(String.format(Locale.ROOT, "%s is defined in more than one PoI type", state)));
             }
         });
     }

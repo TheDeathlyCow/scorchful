@@ -65,7 +65,6 @@ public class Scorchful implements ModInitializer {
 
         SArmorMaterials.initialize();
         SBlocks.initialize();
-        SBlockEntityTypes.initialize();
         SDataComponentTypes.initialize();
         SItems.initialize();
         SEntityTypes.initialize();

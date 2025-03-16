@@ -16,7 +16,7 @@ public class SFeatureRenderers {
     public static void registerAll() {
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register(
                 (entityType, entityRenderer, registrationHelper, context) -> {
-                    if (entityRenderer instanceof BipedEntityRenderer<?, ?> bipedEntityRenderer) {
+                    if (entityRenderer instanceof BipedEntityRenderer<?, ?, ?> bipedEntityRenderer) {
                         registrationHelper.register(
                                 new SunHatFeatureRenderer<>(
                                         bipedEntityRenderer,

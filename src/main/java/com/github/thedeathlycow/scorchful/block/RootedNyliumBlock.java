@@ -61,9 +61,8 @@ public class RootedNyliumBlock extends Block implements Fertilizable {
     }
 
     private static boolean stayAlive(BlockState state, WorldView world, BlockPos pos) {
-        BlockPos blockPos = pos.up();
-        BlockState blockState = world.getBlockState(blockPos);
-        int i = ChunkLightProvider.getRealisticOpacity(world, state, pos, blockState, blockPos, Direction.UP, blockState.getOpacity(world, blockPos));
-        return i < world.getMaxLightLevel();
+        BlockState aboveState = world.getBlockState(pos.up());
+        int i = ChunkLightProvider.getRealisticOpacity(state, aboveState, Direction.UP, aboveState.getOpacity());
+        return i < 15;
     }
 }

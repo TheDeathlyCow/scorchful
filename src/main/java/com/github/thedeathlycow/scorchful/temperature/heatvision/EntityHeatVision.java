@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.temperature.heatvision;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.tag.TagKey;
@@ -23,7 +24,7 @@ public class EntityHeatVision<E extends Entity> extends HeatVision {
 
     @Override
     public boolean spawn(PlayerEntity player, ServerWorld world, BlockPos pos) {
-        E entity = entityType.create(world);
+        E entity = entityType.create(world, SpawnReason.NATURAL);
 
         if (entity != null) {
             entity.refreshPositionAndAngles(pos, 0f, 0f);

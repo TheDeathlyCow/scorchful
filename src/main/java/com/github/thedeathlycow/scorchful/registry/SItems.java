@@ -94,9 +94,9 @@ public final class SItems {
             "turtle_chestplate",
             settings -> new ArmorItem(
                     SArmorMaterials.TURTLE,
-                    ArmorItem.Type.CHESTPLATE,
+                    EquipmentType.CHESTPLATE,
                     settings
-                            .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(25))
+                            .maxDamage(EquipmentType.CHESTPLATE.getMaxDamage(25))
                             .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE)
             )
     );
@@ -105,9 +105,9 @@ public final class SItems {
             "turtle_leggings",
             settings -> new ArmorItem(
                     SArmorMaterials.TURTLE,
-                    ArmorItem.Type.LEGGINGS,
+                    EquipmentType.LEGGINGS,
                     settings
-                            .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(25))
+                            .maxDamage(EquipmentType.LEGGINGS.getMaxDamage(25))
                             .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE)
             )
     );
@@ -116,9 +116,9 @@ public final class SItems {
             "turtle_boots",
             settings -> new ArmorItem(
                     SArmorMaterials.TURTLE,
-                    ArmorItem.Type.BOOTS,
+                    EquipmentType.BOOTS,
                     settings
-                            .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(25))
+                            .maxDamage(EquipmentType.BOOTS.getMaxDamage(25))
                             .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE)
             )
     );

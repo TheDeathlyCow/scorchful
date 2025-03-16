@@ -8,10 +8,12 @@ import com.github.thedeathlycow.scorchful.registry.SStats;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.consume.UseAction;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -41,6 +43,10 @@ public class WaterSkinItem extends DrinkItem {
             .withColor(Formatting.RED);
 
     public static final int MAX_DRINKS = 16;
+
+    public static final Text FULL_ITEM_NAME = Text.translatable("item.scorchful.water_skin.filled");
+    public static final Text PARTIALLY_FULL_ITEM_NAME = Text.translatable("item.scorchful.water_skin.partially_filled");
+    public static final Text EMPTY_ITEM_NAME = Text.translatable("item.scorchful.water_skin.empty");
 
     public WaterSkinItem(Settings settings) {
         super(settings);
@@ -84,18 +90,6 @@ public class WaterSkinItem extends DrinkItem {
     }
 
     @Override
-    public String getTranslationKey(ItemStack stack) {
-        int numDrinks = getNumDrinks(stack);
-
-        return switch (numDrinks) {
-            case 0 -> "item.scorchful.water_skin.empty";
-            case MAX_DRINKS -> "item.scorchful.water_skin.filled";
-            default -> "item.scorchful.water_skin.partially_filled";
-        };
-    }
-
-
-    @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType tooltipType) {
         int numDrinks = getNumDrinks(stack);
 
@@ -112,10 +106,10 @@ public class WaterSkinItem extends DrinkItem {
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+    public ActionResult use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
 
-        TypedActionResult<ItemStack> refillResult = this.tryRefill(world, user, stack);
+        ActionResult refillResult = this.tryRefill(world, user, stack);
         if (refillResult != null) {
             return refillResult;
         }
@@ -124,7 +118,18 @@ public class WaterSkinItem extends DrinkItem {
             return super.use(world, user, hand);
         }
 
-        return TypedActionResult.pass(stack);
+        return ActionResult.PASS;
+    }
+
+    @Override
+    public Text getName(ItemStack stack) {
+        int numDrinks = getNumDrinks(stack);
+
+        return switch (numDrinks) {
+            case 0 -> EMPTY_ITEM_NAME;
+            case MAX_DRINKS -> FULL_ITEM_NAME;
+            default -> PARTIALLY_FULL_ITEM_NAME;
+        };
     }
 
     @Override
@@ -186,7 +191,7 @@ public class WaterSkinItem extends DrinkItem {
     }
 
     @Nullable
-    private TypedActionResult<ItemStack> tryRefill(World world, PlayerEntity user, ItemStack stack) {
+    private ActionResult tryRefill(World world, PlayerEntity user, ItemStack stack) {
         BlockHitResult blockHitResult = Item.raycast(world, user, RaycastContext.FluidHandling.SOURCE_ONLY);
         if (blockHitResult.getType() == HitResult.Type.BLOCK) {
             BlockPos hitPos = blockHitResult.getBlockPos();
@@ -199,10 +204,7 @@ public class WaterSkinItem extends DrinkItem {
                 if (!world.isClient) {
                     this.fill(stack, user, world, hitPos, 4);
                 }
-                return TypedActionResult.success(
-                        stack,
-                        world.isClient()
-                );
+                return ActionResult.SUCCESS;
             }
         }
         return null;
@@ -222,7 +224,7 @@ public class WaterSkinItem extends DrinkItem {
             player.incrementStat(Stats.USE_CAULDRON);
             LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
         }
-        return ActionResult.success(world.isClient);
+        return ActionResult.SUCCESS;
     }
 
     public ActionResult onWarpedLilyInteract(
@@ -234,7 +236,7 @@ public class WaterSkinItem extends DrinkItem {
             ItemStack stack
     ) {
         if (getNumDrinks(stack) >= MAX_DRINKS) {
-            return ActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
 
         if (state.get(NetherLilyBlock.WATER_SATURATION_LEVEL) < 3) {
@@ -246,7 +248,7 @@ public class WaterSkinItem extends DrinkItem {
             player.incrementStat(SStats.USE_WARPED_LILY);
             NetherLilyBlock.setWater(state, world, pos, 0);
         }
-        return ActionResult.success(world.isClient);
+        return ActionResult.SUCCESS;
     }
 
 }

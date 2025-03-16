@@ -23,7 +23,7 @@ public class SSoundEvents {
     private static SoundEvent register(String name) {
         SoundEvent event = SoundEvent.of(Scorchful.id(name));
 
-        return Registry.register(Registries.SOUND_EVENT, event.getId(), event);
+        return Registry.register(Registries.SOUND_EVENT, event.id(), event);
     }
 
     private SSoundEvents() {

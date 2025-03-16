@@ -6,11 +6,12 @@ import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelPartNames;
+import net.minecraft.client.render.entity.state.BipedEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 
 @Environment(EnvType.CLIENT)
-public class SunHatModel<T extends LivingEntity> extends BipedEntityModel<T> {
+public class SunHatModel<S extends BipedEntityRenderState> extends BipedEntityModel<S> {
 
     public SunHatModel(ModelPart root) {
         super(root);
@@ -39,10 +40,5 @@ public class SunHatModel<T extends LivingEntity> extends BipedEntityModel<T> {
         );
 
         return TexturedModelData.of(modelData, 64, 64);
-    }
-
-    @Override
-    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
-        this.head.render(matrices, vertices, light, overlay, color);
     }
 }

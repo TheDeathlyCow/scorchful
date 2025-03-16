@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.hud;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
@@ -43,6 +44,7 @@ public final class SoakingUnderlay implements StatusBarOverlayRenderEvents.Rende
 
             int width = isHalfHeart ? 5 : 9;
             context.drawTexture(
+                    RenderLayer::getGuiTextured,
                     TEXTURE,
                     pos.x, pos.y - 1,
                     0, 0,

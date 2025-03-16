@@ -37,7 +37,7 @@ public class NetherLilyBehaviours {
             );
             world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
         }
-        return ActionResult.success(world.isClient);
+        return ActionResult.SUCCESS;
     };
 
     public static void initialize() {
@@ -70,7 +70,7 @@ public class NetherLilyBehaviours {
                         );
                         world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
                     }
-                    return ActionResult.success(world.isClient);
+                    return ActionResult.SUCCESS;
                 }
         );
         WARPED_LILY_BEHAVIOUR.map().put(SItems.WATER_SKIN, ((WaterSkinItem) SItems.WATER_SKIN)::onWarpedLilyInteract);
@@ -98,7 +98,7 @@ public class NetherLilyBehaviours {
                     if (WaterSkinItem.hasDrink(stack)) {
                         result = ADD_WATER.interact(state, world, pos, player, hand, stack);
                     } else {
-                        result = ActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+                        result = ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
                     }
 
                     if (!world.isClient && result.isAccepted()) {

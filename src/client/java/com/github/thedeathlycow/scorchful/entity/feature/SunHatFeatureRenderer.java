@@ -13,34 +13,36 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.render.entity.state.BipedEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public class SunHatFeatureRenderer<T extends LivingEntity, M extends BipedEntityModel<T>> extends FeatureRenderer<T, M> {
+public class SunHatFeatureRenderer<S extends BipedEntityRenderState, M extends BipedEntityModel<S>> extends FeatureRenderer<S, M> {
 
     private static final Identifier TEXTURE = Scorchful.id("textures/entity/sun_hat.png");
 
-    private final SunHatModel<T> model;
+    private final SunHatModel<S> model;
 
-    public SunHatFeatureRenderer(FeatureRendererContext<T, M> context, SunHatModel<T> model) {
+    public SunHatFeatureRenderer(FeatureRendererContext<S, M> context, SunHatModel<S> model) {
         super(context);
         this.model = model;
     }
 
     @Override
     public void render(
-            MatrixStack matrices, VertexConsumerProvider vertexConsumers,
+            MatrixStack matrices,
+            VertexConsumerProvider vertexConsumers,
             int light,
-            T entity,
-            float limbAngle, float limbDistance,
-            float tickDelta, float animationProgress,
-            float headYaw, float headPitch
+            S state,
+            float limbAngle,
+            float limbDistance
     ) {
-        if (SunHatItem.isWearingSunHat(entity)) {
-            this.getContextModel().copyBipedStateTo(this.model);
+        if (state.equippedHeadStack.isOf(SItems.SUN_HAT)) {
+            this.getContextModel().copyTransforms(this.model);
             VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(TEXTURE));
             this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 0xffffffff);
         }
