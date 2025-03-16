@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.block;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.registry.SBlockProperties;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -29,7 +30,6 @@ import net.minecraft.world.WorldView;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.event.GameEvent;
 
-@SuppressWarnings("deprecation")
 public class NetherLilyBlock extends Block {
 
     public static final MapCodec<NetherLilyBlock> CODEC = RecordCodecBuilder.mapCodec(
@@ -42,20 +42,16 @@ public class NetherLilyBlock extends Block {
                     .apply(instance, NetherLilyBlock::new)
     );
 
-
     public static final int MIN_LEVEL = 0;
 
     public static final int MAX_LEVEL = 3;
 
-    public static final IntProperty WATER_SATURATION_LEVEL = IntProperty.of(
-            "water_level", MIN_LEVEL, MAX_LEVEL
-    );
+    public static final IntProperty WATER_SATURATION_LEVEL = SBlockProperties.WATER_LEVEL_0_3;
 
     private static final VoxelShape SHAPE = Block.createCuboidShape(
             2.0, 0.0, 2.0,
             14.0, 3.0, 14.0
     );
-
 
     private final NetherLilyBehaviour.NetherLilyBehaviourMap behaviorMap;
 
@@ -81,6 +77,7 @@ public class NetherLilyBlock extends Block {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder);
         builder.add(WATER_SATURATION_LEVEL);
     }
 

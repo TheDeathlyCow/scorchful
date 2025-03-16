@@ -16,7 +16,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.world.event.GameEvent;
 
 public class NetherLilyBehaviours {
-
     public static final NetherLilyBehaviour.NetherLilyBehaviourMap WARPED_LILY_BEHAVIOUR = NetherLilyBehaviour.createMap("scorchful_warped_lily");
 
     public static final NetherLilyBehaviour.NetherLilyBehaviourMap CRIMSON_LILY_BEHAVIOUR = NetherLilyBehaviour.createMap("scorchful_crimson_lily");

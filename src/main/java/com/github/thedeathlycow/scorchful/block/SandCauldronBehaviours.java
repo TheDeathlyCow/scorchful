@@ -25,8 +25,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
 public class SandCauldronBehaviours {
-
-
     public static final CauldronBehavior.CauldronBehaviorMap SAND_CAULDRON_BEHAVIOUR = CauldronBehavior.createMap("scorchful_sand_cauldron");
     public static final CauldronBehavior.CauldronBehaviorMap RED_SAND_CAULDRON_BEHAVIOUR = CauldronBehavior.createMap("scorchful_red_sand_cauldron");
 
