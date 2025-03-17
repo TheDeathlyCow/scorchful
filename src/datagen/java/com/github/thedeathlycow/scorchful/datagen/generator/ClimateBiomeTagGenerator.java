@@ -95,6 +95,6 @@ public class ClimateBiomeTagGenerator extends FabricTagProvider<Biome> {
                 .addOptionalTag(ConventionalBiomeTags.IS_CAVE);
 
         getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_HUMID_CAVE)
-                .addOptionalTag(ConventionalBiomeTags.IS_SPOOKY);
+                .add(BiomeKeys.DEEP_DARK);
     }
 }

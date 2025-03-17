@@ -9,6 +9,8 @@ import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.world.poi.PointOfInterestType;
 import net.minecraft.world.poi.PointOfInterestTypes;
@@ -125,8 +127,9 @@ public final class SBlocks {
     }
 
     private static Block register(String id, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings) {
-        Block block = blockFactory.apply(settings);
-        return Registry.register(Registries.BLOCK, Scorchful.id(id), block);
+        RegistryKey<Block> key = RegistryKey.of(RegistryKeys.BLOCK, Scorchful.id(id));
+        Block block = blockFactory.apply(settings.registryKey(key));
+        return Registry.register(Registries.BLOCK, key, block);
     }
 
     private SBlocks() {

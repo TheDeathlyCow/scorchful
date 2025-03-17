@@ -20,6 +20,8 @@ import net.minecraft.item.Items;
 import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 
 import java.util.function.Function;
 
@@ -146,9 +148,9 @@ public final class SItems {
     }
 
     private static Item register(String id, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
-        Item item = itemFactory.apply(settings);
-
-        return Registry.register(Registries.ITEM, Scorchful.id(id), item);
+        RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, Scorchful.id(id));
+        Item item = itemFactory.apply(settings.registryKey(key));
+        return Registry.register(Registries.ITEM, key, item);
     }
 
     private SItems() {
