@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:glass_bottle",
+    "minecraft:cactus",
+    "minecraft:cactus"
+  ],
+  "result": {
+    "count": 1,
+    "id": "scorchful:cactus_juice"
+  }
+}

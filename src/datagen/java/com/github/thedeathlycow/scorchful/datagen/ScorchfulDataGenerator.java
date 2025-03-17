@@ -1,11 +1,14 @@
 package com.github.thedeathlycow.scorchful.datagen;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.datagen.generator.BlockTagGenerator;
 import com.github.thedeathlycow.scorchful.datagen.generator.ClimateBiomeTagGenerator;
 import com.github.thedeathlycow.scorchful.datagen.generator.EnvironmentProviderTagGenerator;
 import com.github.thedeathlycow.scorchful.datagen.generator.ItemTagGenerator;
+import com.github.thedeathlycow.scorchful.datagen.generator.ScorchfulRecipeGenerator;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,5 +27,13 @@ public class ScorchfulDataGenerator implements DataGeneratorEntrypoint {
 
         BlockTagGenerator blockTags = pack.addProvider(BlockTagGenerator::new);
         pack.addProvider((output, registriesFuture) -> new ItemTagGenerator(output, registriesFuture, blockTags));
+
+        pack.addProvider(ScorchfulRecipeGenerator::new);
+    }
+
+    @Override
+    @Nullable
+    public String getEffectiveModId() {
+        return Scorchful.MODID;
     }
 }

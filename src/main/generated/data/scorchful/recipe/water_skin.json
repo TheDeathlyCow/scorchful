@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:leather",
+    "I": "minecraft:iron_ingot"
+  },
+  "pattern": [
+    " #I",
+    "# #",
+    " # "
+  ],
+  "result": {
+    "count": 1,
+    "id": "scorchful:water_skin"
+  }
+}

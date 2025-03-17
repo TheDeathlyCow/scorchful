@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "scorchful:sun_hat"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "is_player_warm": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "thermoo:temperature",
+            "scale": {
+              "min": 0.25
+            },
+            "value": {}
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "is_player_warm"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "scorchful:sun_hat"
+    ]
+  }
+}
