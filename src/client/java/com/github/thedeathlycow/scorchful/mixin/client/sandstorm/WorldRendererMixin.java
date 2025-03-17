@@ -2,10 +2,13 @@ package com.github.thedeathlycow.scorchful.mixin.client.sandstorm;
 
 import com.github.thedeathlycow.scorchful.client.SandstormEffects;
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
+import net.minecraft.client.option.CloudRenderMode;
+import net.minecraft.client.render.FrameGraphBuilder;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,8 +27,8 @@ public class WorldRendererMixin {
             at = @At("HEAD"),
             cancellable = true
     )
-    private void cancelCloudsInSandstorms(MatrixStack matrices, Matrix4f matrix4f, Matrix4f matrix4f2, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {
-        if (this.world != null && SandstormEffects.shouldCancelClouds(this.world, BlockPos.ofFloored(cameraX, cameraY, cameraZ))) {
+    private void cancelCloudsInSandstorms(FrameGraphBuilder frameGraphBuilder, Matrix4f positionMatrix, Matrix4f projectionMatrix, CloudRenderMode renderMode, Vec3d cameraPos, float ticks, int color, float cloudHeight, CallbackInfo ci) {
+        if (this.world != null && SandstormEffects.shouldCancelClouds(this.world, BlockPos.ofFloored(cameraPos))) {
             ci.cancel();
         }
     }

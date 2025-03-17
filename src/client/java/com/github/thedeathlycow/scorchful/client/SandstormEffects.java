@@ -21,7 +21,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 import java.util.Optional;
 
@@ -74,7 +76,8 @@ public class SandstormEffects {
         }
     }
 
-    public static Optional<Vec3d> getFogColor(
+    @Nullable
+    public static Vector4f getFogColor(
             ClientWorld world, Camera camera,
             float baseRed, float baseGreen, float baseBlue,
             float tickDelta
@@ -82,7 +85,7 @@ public class SandstormEffects {
         ClientConfig config = Scorchful.getConfig().clientConfig;
 
         if (!config.isSandstormFogEnabled()) {
-            return Optional.empty();
+            return null;
         }
 
         float gradient = world.getRainGradient(1f);
@@ -112,9 +115,9 @@ public class SandstormEffects {
                     }
             );
 
-            return Optional.of(adjustedColor);
+            return adjustedColor;
         }
-        return Optional.empty();
+        return null;
     }
 
     public static void updateFogDistance(
