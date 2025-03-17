@@ -22,7 +22,7 @@ public class UmbrellaTests {
         long time = context.getWorld().getTimeOfDay();
         context.setTime(18_000);
 
-        var pos = new BlockPos(1, 1, 1);
+        var pos = new BlockPos(1, 0, 1);
         ZombieEntity zombie = context.spawnMob(EntityType.ZOMBIE, pos);
 
         zombie.setStackInHand(Hand.MAIN_HAND, Items.LEATHER.getDefaultStack());
@@ -47,7 +47,7 @@ public class UmbrellaTests {
         long time = context.getWorld().getTimeOfDay();
         context.setTime(18_000);
 
-        var pos = new BlockPos(1, 1, 1);
+        var pos = new BlockPos(1, 0, 1);
         ZombieEntity zombie = context.spawnMob(EntityType.ZOMBIE, pos);
 
         zombie.setStackInHand(Hand.OFF_HAND, Items.LEATHER.getDefaultStack());

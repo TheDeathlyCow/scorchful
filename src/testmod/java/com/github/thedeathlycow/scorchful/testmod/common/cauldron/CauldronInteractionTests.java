@@ -18,7 +18,7 @@ public class CauldronInteractionTests {
             templateName = "scorchful-test:cauldron/empty_cauldron"
     )
     public void add_sand_to_empty_cauldron(TestContext context) {
-        final BlockPos cauldronPos = new BlockPos(2, 2, 2);
+        final BlockPos cauldronPos = new BlockPos(2, 1, 2);
         context.checkBlock(
                 cauldronPos,
                 block -> block == Blocks.CAULDRON,
@@ -41,7 +41,7 @@ public class CauldronInteractionTests {
             templateName = "scorchful-test:cauldron/empty_cauldron"
     )
     public void add_red_sand_to_empty_cauldron(TestContext context) {
-        final BlockPos cauldronPos = new BlockPos(2, 2, 2);
+        final BlockPos cauldronPos = new BlockPos(2, 1, 2);
         context.checkBlock(
                 cauldronPos,
                 block -> block == Blocks.CAULDRON,

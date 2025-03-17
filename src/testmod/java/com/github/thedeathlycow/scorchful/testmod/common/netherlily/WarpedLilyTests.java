@@ -21,7 +21,7 @@ public class WarpedLilyTests {
             templateName = "scorchful-test:nether_lily/warped_wet"
     )
     public void using_glass_bottle_on_wet_warped_lily_fills_it(TestContext context) {
-        final BlockPos lilyPos = new BlockPos(2, 2, 2);
+        final BlockPos lilyPos = new BlockPos(2, 1, 2);
         context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
 
@@ -57,7 +57,7 @@ public class WarpedLilyTests {
             templateName = "scorchful-test:nether_lily/warped_dry"
     )
     public void using_glass_bottle_on_dry_warped_lily_does_not_fill_it(TestContext context) {
-        final BlockPos lilyPos = new BlockPos(2, 2, 2);
+        final BlockPos lilyPos = new BlockPos(2, 1, 2);
         context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
 
@@ -92,7 +92,7 @@ public class WarpedLilyTests {
             templateName = "scorchful-test:nether_lily/warped_partially_wet"
     )
     public void using_glass_bottle_on_partially_wet_warped_lily_does_not_fill_it(TestContext context) {
-        final BlockPos lilyPos = new BlockPos(2, 2, 2);
+        final BlockPos lilyPos = new BlockPos(2, 1, 2);
         context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, 2);
 
@@ -127,7 +127,7 @@ public class WarpedLilyTests {
             templateName = "scorchful-test:nether_lily/warped_wet"
     )
     public void using_water_skin_on_wet_warped_lily_fills_it(TestContext context) {
-        final BlockPos lilyPos = new BlockPos(2, 2, 2);
+        final BlockPos lilyPos = new BlockPos(2, 1, 2);
         context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
 
@@ -155,7 +155,7 @@ public class WarpedLilyTests {
             templateName = "scorchful-test:nether_lily/warped_dry"
     )
     public void using_water_skin_on_dry_warped_lily_does_not_fill_it(TestContext context) {
-        final BlockPos lilyPos = new BlockPos(2, 2, 2);
+        final BlockPos lilyPos = new BlockPos(2, 1, 2);
         context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
 

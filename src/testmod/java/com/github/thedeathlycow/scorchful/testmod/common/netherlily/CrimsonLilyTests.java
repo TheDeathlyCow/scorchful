@@ -26,7 +26,7 @@ public class CrimsonLilyTests {
             templateName = "scorchful-test:nether_lily/crimson_wet"
     )
     public void stepping_on_wet_crimson_lily_soaks_player(TestContext context) {
-        final BlockPos lilyPos = new BlockPos(2, 2, 2);
+        final BlockPos lilyPos = new BlockPos(2, 1, 2);
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, CrimsonLilyBlock.WATER_SATURATION_LEVEL, CrimsonLilyBlock.MAX_LEVEL);
 
@@ -49,7 +49,7 @@ public class CrimsonLilyTests {
             templateName = "scorchful-test:nether_lily/crimson_dry"
     )
     public void stepping_on_dry_crimson_lily_does_not_soak_player(TestContext context) {
-        final BlockPos lilyPos = new BlockPos(2, 2, 2);
+        final BlockPos lilyPos = new BlockPos(2, 1, 2);
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, CrimsonLilyBlock.WATER_SATURATION_LEVEL, CrimsonLilyBlock.MIN_LEVEL);
 
@@ -72,7 +72,7 @@ public class CrimsonLilyTests {
             templateName = "scorchful-test:nether_lily/crimson_partially_wet"
     )
     public void stepping_on_partially_wet_crimson_lily_does_not_soak_player(TestContext context) {
-        final BlockPos lilyPos = new BlockPos(2, 2, 2);
+        final BlockPos lilyPos = new BlockPos(2, 1, 2);
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, CrimsonLilyBlock.WATER_SATURATION_LEVEL, 2);
 
@@ -95,11 +95,11 @@ public class CrimsonLilyTests {
             templateName = "scorchful-test:nether_lily/crimson_wet"
     )
     public void stepping_on_wet_crimson_lily_soaks_and_hurts_strider(TestContext context) {
-        final BlockPos lilyPos = new BlockPos(2, 2, 2);
+        final BlockPos lilyPos = new BlockPos(2, 1, 2);
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, CrimsonLilyBlock.WATER_SATURATION_LEVEL, CrimsonLilyBlock.MAX_LEVEL);
 
-        StriderEntity strider = context.spawnEntity(EntityType.STRIDER, 0, 2, 0);
+        StriderEntity strider = context.spawnEntity(EntityType.STRIDER, 0, 1, 0);
 
         BooleanSupplier isStriderWet = strider::thermoo$isWet;
 
@@ -133,7 +133,7 @@ public class CrimsonLilyTests {
             templateName = "scorchful-test:nether_lily/crimson_dry"
     )
     public void using_water_bottle_on_dry_crimson_lily_saturates_it(TestContext context) {
-        final BlockPos lilyPos = new BlockPos(2, 2, 2);
+        final BlockPos lilyPos = new BlockPos(2, 1, 2);
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
 
@@ -161,7 +161,7 @@ public class CrimsonLilyTests {
             templateName = "scorchful-test:nether_lily/crimson_dry"
     )
     public void using_water_skin_on_dry_crimson_lily_saturates_it(TestContext context) {
-        final BlockPos lilyPos = new BlockPos(2, 2, 2);
+        final BlockPos lilyPos = new BlockPos(2, 1, 2);
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
 
@@ -191,7 +191,7 @@ public class CrimsonLilyTests {
             templateName = "scorchful-test:nether_lily/crimson_wet"
     )
     public void using_water_bottle_on_wet_crimson_lily_does_not_consume_bottle(TestContext context) {
-        final BlockPos lilyPos = new BlockPos(2, 2, 2);
+        final BlockPos lilyPos = new BlockPos(2, 1, 2);
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
 
@@ -219,7 +219,7 @@ public class CrimsonLilyTests {
             templateName = "scorchful-test:nether_lily/crimson_wet"
     )
     public void using_water_skin_on_wet_crimson_lily_does_not_consume_skin(TestContext context) {
-        final BlockPos lilyPos = new BlockPos(2, 2, 2);
+        final BlockPos lilyPos = new BlockPos(2, 1, 2);
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
 

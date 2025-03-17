@@ -17,7 +17,7 @@ public class SandCauldronTests {
             templateName = "scorchful-test:cauldron/sand_cauldron"
     )
     public void remove_sand_from_sand_cauldron(TestContext context) {
-        final BlockPos cauldronPos = new BlockPos(2, 2, 2);
+        final BlockPos cauldronPos = new BlockPos(2, 1, 2);
         context.checkBlock(
                 cauldronPos,
                 block -> block == SBlocks.SAND_CAULDRON,
@@ -37,7 +37,7 @@ public class SandCauldronTests {
             templateName = "scorchful-test:cauldron/red_sand_cauldron"
     )
     public void remove_red_sand_from_red_sand_cauldron(TestContext context) {
-        final BlockPos cauldronPos = new BlockPos(2, 2, 2);
+        final BlockPos cauldronPos = new BlockPos(2, 1, 2);
         context.checkBlock(
                 cauldronPos,
                 block -> block == SBlocks.RED_SAND_CAULDRON,
@@ -57,7 +57,7 @@ public class SandCauldronTests {
             templateName = "scorchful-test:cauldron/partially_filled_sand_cauldron"
     )
     public void try_remove_sand_from_partially_filled_sand_cauldron(TestContext context) {
-        final BlockPos cauldronPos = new BlockPos(2, 2, 2);
+        final BlockPos cauldronPos = new BlockPos(2, 1, 2);
         context.checkBlock(
                 cauldronPos,
                 block -> block == SBlocks.SAND_CAULDRON,
