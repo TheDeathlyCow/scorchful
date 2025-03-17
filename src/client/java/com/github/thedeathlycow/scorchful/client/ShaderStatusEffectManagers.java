@@ -22,20 +22,20 @@ public final class ShaderStatusEffectManagers {
     private static final List<ShaderStatusEffectManager> TRACKED_MANAGERS = new ArrayList<>(2);
 
     private static final ShaderStatusEffectManager HEAT_STROKE = createAndTrack(
-            Scorchful.id("shaders/post/heat_stroke.json"),
+            Scorchful.id("heat_stroke"),
             SStatusEffects.HEAT_STROKE,
             ClientConfig::enableHeatStrokePostProcessing
     );
 
     private static final ShaderStatusEffectManager FEAR = createAndTrack(
-            Scorchful.id("shaders/post/fear.json"),
+            Scorchful.id("fear"),
             SStatusEffects.FEAR,
             ClientConfig::enableFearPostProcessing
     );
 
     public static void initialize() {
         ShaderStatusEffectManagers.getTrackedManagers().forEach(manager -> {
-//            ShaderEffectRenderCallback.EVENT.register(manager);
+            ShaderEffectRenderCallback.EVENT.register(manager);
             ClientPlayConnectionEvents.DISCONNECT.register(manager);
         });
     }
@@ -72,6 +72,7 @@ public final class ShaderStatusEffectManagers {
 //        ManagedShaderEffect managedShaderEffect = ShaderEffectManager.getInstance().manage(shaderID);
         var statusEffectShader = new ShaderStatusEffectManager(
 //                managedShaderEffect,
+                shaderID,
                 potionEffect,
                 enabledPredicate
         );

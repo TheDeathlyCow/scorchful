@@ -4,15 +4,22 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ClientConfig;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.PostEffectProcessor;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.client.render.DefaultFramebufferSet;
+import net.minecraft.client.render.RenderTickCounter;
+import net.minecraft.client.util.Pool;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.util.Identifier;
 
 import java.util.function.Predicate;
 
-public final class ShaderStatusEffectManager implements ClientPlayConnectionEvents.Disconnect {
+public final class ShaderStatusEffectManager implements ShaderEffectRenderCallback, ClientPlayConnectionEvents.Disconnect {
 
 //    private final ManagedShaderEffect managedShaderEffect;
+
+    private final Identifier shaderID;
 
     private final RegistryEntry<StatusEffect> potionEffect;
 
@@ -22,10 +29,12 @@ public final class ShaderStatusEffectManager implements ClientPlayConnectionEven
 
     public ShaderStatusEffectManager(
 //            ManagedShaderEffect managedShaderEffect,
+            Identifier shaderID,
             RegistryEntry<StatusEffect> potionEffect,
             Predicate<ClientConfig> enabledPredicate
     ) {
 //        this.managedShaderEffect = managedShaderEffect;
+        this.shaderID = shaderID;
         this.potionEffect = potionEffect;
         this.enabledPredicate = enabledPredicate;
     }
@@ -51,10 +60,15 @@ public final class ShaderStatusEffectManager implements ClientPlayConnectionEven
         this.enabled = false;
     }
 
-//    @Override
-//    public void renderShaderEffects(float tickDelta) {
-//        if (enabled) {
+    @Override
+    public void renderShaderEffects(MinecraftClient client, Pool pool, RenderTickCounter tickDelta) {
+        if (enabled) {
 //            this.managedShaderEffect.render(tickDelta);
-//        }
-//    }
+            PostEffectProcessor postEffectProcessor = client.getShaderLoader()
+                    .loadPostEffect(this.shaderID, DefaultFramebufferSet.MAIN_ONLY);
+            if (postEffectProcessor != null) {
+                postEffectProcessor.render(client.getFramebuffer(), pool);
+            }
+        }
+    }
 }

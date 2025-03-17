@@ -7,8 +7,8 @@ uniform sampler2D InSampler;
 in vec2 texCoord;
 in vec2 sampleStep;
 
-uniform float Time;
-uniform float Frequency;
+uniform float GameTime;
+uniform float Period;
 uniform float BlurRadius;
 uniform vec2 BlurDir;
 
@@ -32,7 +32,9 @@ vec3 blur(vec2 centerPos, vec2 direction, float radius) {
 }
 
 void main() {
-    float intensity = sin(Frequency * Time * PI * 2.0);
+    float time = fract(GameTime * 1200.0f / Period);
+
+    float intensity = sin(time * PI * 2.0);
     if (intensity < 0.0) {
         // just copy colour if no blur
         fragColor = texture(InSampler, texCoord);
