@@ -2,7 +2,7 @@
 
 // Algorithm from: http://lolengine.net/blog/2013/07/27/rgb-to-hsv-in-glsl
 
-uniform sampler2D DiffuseSampler;
+uniform sampler2D InSampler;
 
 in vec2 texCoord;
 in vec2 oneTexel;
@@ -30,7 +30,7 @@ vec3 hsv2rgb(vec3 c)
 }
 
 void main() {
-    vec4 rgbIn = texture(DiffuseSampler, texCoord);
+    vec4 rgbIn = texture(InSampler, texCoord);
     vec3 hsv = rgb2hsv(rgbIn.rgb);
     hsv *= ColorScaleHSV;
 

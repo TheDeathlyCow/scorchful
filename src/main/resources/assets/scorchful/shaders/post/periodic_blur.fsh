@@ -2,7 +2,7 @@
 
 #define PI 3.1415926535
 
-uniform sampler2D DiffuseSampler;
+uniform sampler2D InSampler;
 
 in vec2 texCoord;
 in vec2 sampleStep;
@@ -23,7 +23,7 @@ vec3 blur(vec2 centerPos, vec2 direction, float radius) {
         vec2 offset = vec2(sampleStep.x * r * direction.x, sampleStep.y * r * direction.y);
         vec2 samplePos = centerPos + offset;
 
-        vec3 rgb = texture(DiffuseSampler, samplePos).rgb;
+        vec3 rgb = texture(InSampler, samplePos).rgb;
 
         result += rgb;
         count++;
@@ -35,7 +35,7 @@ void main() {
     float intensity = sin(Frequency * Time * PI * 2.0);
     if (intensity < 0.0) {
         // just copy colour if no blur
-        fragColor = texture(DiffuseSampler, texCoord);
+        fragColor = texture(InSampler, texCoord);
     } else {
         vec3 rgb = blur(texCoord, BlurDir, BlurRadius * intensity);
         fragColor = vec4(rgb, 1.0);

@@ -4,11 +4,11 @@
         "srcrgb": "one",
         "dstrgb": "one"
     },
-    "vertex": "blit",
-    "fragment": "scorchful:color_convolve_hsv",
+    "vertex": "minecraft:post/blit",
+    "fragment": "scorchful:post/color_convolve_hsv",
     "attributes": [  ],
     "samplers": [
-        { "name": "DiffuseSampler" }
+        { "name": "InSampler" }
     ],
     "uniforms": [
         { "name": "ProjMat",        "type": "matrix4x4", "count": 16,   "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
