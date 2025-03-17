@@ -12,6 +12,7 @@ import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
@@ -57,40 +58,19 @@ public final class SItems {
             )
     );
 
-    public static final Item CRIMSON_LILY = register(
-            "crimson_lily",
-            settings -> new BlockItem(SBlocks.CRIMSON_LILY, settings)
-    );
+    public static final Item CRIMSON_LILY = register("crimson_lily", SBlocks.CRIMSON_LILY);
 
-    public static final Item WARPED_LILY = register(
-            "warped_lily",
-            settings -> new BlockItem(SBlocks.WARPED_LILY, settings)
-    );
+    public static final Item WARPED_LILY = register("warped_lily", SBlocks.WARPED_LILY);
 
-    public static final Item ROOTED_NETHERRACK = register(
-            "rooted_netherrack",
-            settings -> new BlockItem(SBlocks.ROOTED_NETHERRACK, settings)
-    );
+    public static final Item ROOTED_NETHERRACK = register("rooted_netherrack", SBlocks.ROOTED_NETHERRACK);
 
-    public static final Item ROOTED_CRIMSON_NYLIUM = register(
-            "rooted_crimson_nylium",
-            settings -> new BlockItem(SBlocks.ROOTED_CRIMSON_NYLIUM, settings)
-    );
+    public static final Item ROOTED_CRIMSON_NYLIUM = register("rooted_crimson_nylium",SBlocks.ROOTED_CRIMSON_NYLIUM );
 
-    public static final Item ROOTED_WARPED_NYLIUM = register(
-            "rooted_warped_nylium",
-            settings -> new BlockItem(SBlocks.ROOTED_WARPED_NYLIUM, settings)
-    );
+    public static final Item ROOTED_WARPED_NYLIUM = register("rooted_warped_nylium", SBlocks.ROOTED_WARPED_NYLIUM);
 
-    public static final Item SAND_PILE = register(
-            "sand_pile",
-            settings -> new BlockItem(SBlocks.SAND_PILE, settings)
-    );
+    public static final Item SAND_PILE = register("sand_pile", SBlocks.SAND_PILE);
 
-    public static final Item RED_SAND_PILE = register(
-            "red_sand_pile",
-            settings -> new BlockItem(SBlocks.RED_SAND_PILE, settings)
-    );
+    public static final Item RED_SAND_PILE = register("red_sand_pile", SBlocks.RED_SAND_PILE);
 
     public static final Item TURTLE_CHESTPLATE = register(
             "turtle_chestplate",
@@ -141,6 +121,10 @@ public final class SItems {
         HeatResistanceModifier.initialize();
         LootTableEvents.MODIFY.register(new TurtleScuteLootTableModifier());
         EnchantmentModifiers.initialize();
+    }
+
+    private static Item register(String id, Block block) {
+        return register(id, settings -> new BlockItem(block, settings.useBlockPrefixedTranslationKey()));
     }
 
     private static Item register(String id, Function<Item.Settings, Item> itemFactory) {
