@@ -9,10 +9,7 @@ import com.github.thedeathlycow.scorchful.hud.SoakingUnderlay;
 import com.github.thedeathlycow.scorchful.item.ItemTooltips;
 import com.github.thedeathlycow.scorchful.item.SModelPredicates;
 import com.github.thedeathlycow.scorchful.network.SoundTemperatureEffectPacketListener;
-import com.github.thedeathlycow.scorchful.registry.SCutouts;
-import com.github.thedeathlycow.scorchful.registry.SEntityModelLayers;
-import com.github.thedeathlycow.scorchful.registry.SFeatureRenderers;
-import com.github.thedeathlycow.scorchful.registry.SParticleFactories;
+import com.github.thedeathlycow.scorchful.registry.*;
 import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
 import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
 import net.fabricmc.api.ClientModInitializer;
@@ -31,6 +28,7 @@ public class ScorchfulClient implements ClientModInitializer {
         SEntityModelLayers.registerAll();
         SFeatureRenderers.registerAll();
         SCutouts.registerCutouts();
+        SEntityRenderers.initialize();
 
         ClientTickEvents.END_WORLD_TICK.register(SandstormEffects::tickSandstormParticles);
         ClientTickEvents.END_WORLD_TICK.register(SandstormSounds.INSTANCE::tick);

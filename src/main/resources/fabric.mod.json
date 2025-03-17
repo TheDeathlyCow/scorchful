@@ -58,7 +58,8 @@
 		"cardinal-components": [
 			"scorchful:player_water",
 			"scorchful:entity_desert_vision",
-			"scorchful:rehydration"
+			"scorchful:rehydration",
+			"scorchful:heat_vision_synced_data"
 		],
 		"modmenu": {
 			"links": {

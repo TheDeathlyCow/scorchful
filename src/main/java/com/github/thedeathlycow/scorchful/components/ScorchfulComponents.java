@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.entity.HeatVisionEntity;
 import org.ladysnake.cca.api.v3.component.ComponentKey;
 import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 import org.ladysnake.cca.api.v3.entity.EntityComponentFactoryRegistry;
@@ -25,6 +26,11 @@ public class ScorchfulComponents implements EntityComponentInitializer {
             EntityDesertVisionComponent.class
     );
 
+    public static final ComponentKey<HeatVisionEntity.SyncedData> HEAT_VISION_SYNCED_DATA = ComponentRegistry.getOrCreate(
+            Scorchful.id("heat_vision_synced_data"),
+            HeatVisionEntity.SyncedData.class
+    );
+
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
@@ -42,6 +48,11 @@ public class ScorchfulComponents implements EntityComponentInitializer {
                 Entity.class,
                 ENTITY_DESERT_VISION,
                 EntityDesertVisionComponent::new
+        );
+        registry.registerFor(
+                HeatVisionEntity.class,
+                HEAT_VISION_SYNCED_DATA,
+                HeatVisionEntity.SyncedData::new
         );
     }
 }

@@ -12,7 +12,7 @@ public final class SRegistryKeys {
     public static void initialize() {
         DynamicRegistries.registerSynced(
                 HEAT_VISION_TYPE,
-                HeatVisionType.CODEC,
+                HeatVisionType.ELEMENT_CODEC,
                 HeatVisionType.NETWORK_CODEC
         );
     }
