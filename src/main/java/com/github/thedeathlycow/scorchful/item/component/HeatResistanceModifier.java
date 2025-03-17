@@ -5,12 +5,14 @@ import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import com.github.thedeathlycow.thermoo.api.item.ModifyItemAttributeModifiersCallback;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.Items;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 
 import java.util.EnumMap;
@@ -97,7 +99,7 @@ public final class HeatResistanceModifier {
     private static void initializeItemModifiers() {
         ModifyItemAttributeModifiersCallback.EVENT.register(
                 (stack, builder) -> {
-                    if (stack.contains(DataComponentTypes.EQUIPPABLE)) {
+                    if (stack.isIn(ConventionalItemTags.ARMORS) && stack.contains(DataComponentTypes.EQUIPPABLE)) {
                         HeatResistanceComponent resistance = stack.getOrDefault(
                                 SDataComponentTypes.HEAT_RESISTANCE,
                                 HeatResistanceComponent.DEFAULT
