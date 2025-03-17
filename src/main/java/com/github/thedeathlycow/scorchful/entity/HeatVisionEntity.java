@@ -15,6 +15,7 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.ladysnake.cca.api.v3.component.Component;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
@@ -49,6 +50,10 @@ public class HeatVisionEntity extends Entity {
 
     public RegistryEntry<HeatVisionType> getHeatVisionType() {
         return ScorchfulComponents.HEAT_VISION_SYNCED_DATA.get(this).heatVisionType;
+    }
+
+    public Identifier getRendererID() {
+        return this.getHeatVisionType().value().rendererID();
     }
 
     public static class SyncedData implements Component, AutoSyncedComponent {

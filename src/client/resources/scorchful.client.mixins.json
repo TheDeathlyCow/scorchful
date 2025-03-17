@@ -8,6 +8,7 @@
         "DrippingWetPlayerMixin",
         "HeadFeatureRendererMixin",
         "InGameHudMixin",
+        "accessor.EntityRenderDispatcherAccessor",
         "sandstorm.BackgroundRendererMixin",
         "sandstorm.WorldRendererMixin"
     ],
