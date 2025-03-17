@@ -12,9 +12,6 @@ import net.minecraft.network.packet.s2c.play.EntityStatusEffectS2CPacket;
 import net.minecraft.network.packet.s2c.play.RemoveEntityStatusEffectS2CPacket;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
-import org.ladysnake.satin.api.event.ShaderEffectRenderCallback;
-import org.ladysnake.satin.api.managed.ManagedShaderEffect;
-import org.ladysnake.satin.api.managed.ShaderEffectManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +35,7 @@ public final class ShaderStatusEffectManagers {
 
     public static void initialize() {
         ShaderStatusEffectManagers.getTrackedManagers().forEach(manager -> {
-            ShaderEffectRenderCallback.EVENT.register(manager);
+//            ShaderEffectRenderCallback.EVENT.register(manager);
             ClientPlayConnectionEvents.DISCONNECT.register(manager);
         });
     }
@@ -72,9 +69,9 @@ public final class ShaderStatusEffectManagers {
             RegistryEntry<StatusEffect> potionEffect,
             Predicate<ClientConfig> enabledPredicate
     ) {
-        ManagedShaderEffect managedShaderEffect = ShaderEffectManager.getInstance().manage(shaderID);
+//        ManagedShaderEffect managedShaderEffect = ShaderEffectManager.getInstance().manage(shaderID);
         var statusEffectShader = new ShaderStatusEffectManager(
-                managedShaderEffect,
+//                managedShaderEffect,
                 potionEffect,
                 enabledPredicate
         );

@@ -37,28 +37,28 @@ public class EnchantmentModifiers {
         }
 
         CombatConfig config = Scorchful.getConfig().combatConfig;
-        RegistryEntryLookup<EntityType<?>> entityLookup = DynamicRegistryManager.of(Registries.REGISTRIES)
-                .getOrThrow(RegistryKeys.ENTITY_TYPE);
 
         builder.addEffect(
                 EnchantmentEffectComponentTypes.DAMAGE,
                 new AddEnchantmentEffect(EnchantmentLevelBasedValue.linear(config.getImpalingDamagePerLevel())),
-                AllOfLootCondition.builder(
-                        () -> new SoakedLootCondition(
-                                NumberRange.IntRange.atLeast(1),
-                                NumberRange.DoubleRange.ANY
-                        ),
-                        InvertedLootCondition.builder(
-                                EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        EntityPredicate.Builder.create()
-                                                .type(EntityTypePredicate.create(
-                                                        entityLookup,
-                                                        EntityTypeTags.SENSITIVE_TO_IMPALING
-                                                ))
-                                )
-                        )
-                )
+                SoakedLootCondition.builder(NumberRange.IntRange.atLeast(1))
+                // TODO: registry lookup doesnt work, throws: java.lang.IllegalStateException: Missing tag TagKey[minecraft:entity_type / minecraft:sensitive_to_impaling]
+//                AllOfLootCondition.builder(
+//                        () -> new SoakedLootCondition(
+//                                ,
+//                                NumberRange.DoubleRange.ANY
+//                        ),
+//                        InvertedLootCondition.builder(
+//                                EntityPropertiesLootCondition.builder(
+//                                        LootContext.EntityTarget.THIS,
+//                                        EntityPredicate.Builder.create()
+//                                                .type(EntityTypePredicate.create(
+//                                                        Registries.ENTITY_TYPE,
+//                                                        EntityTypeTags.SENSITIVE_TO_IMPALING
+//                                                ))
+//                                )
+//                        )
+//                )
         );
     }
 

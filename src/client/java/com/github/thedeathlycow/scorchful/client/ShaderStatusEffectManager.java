@@ -7,14 +7,12 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.registry.entry.RegistryEntry;
-import org.ladysnake.satin.api.event.ShaderEffectRenderCallback;
-import org.ladysnake.satin.api.managed.ManagedShaderEffect;
 
 import java.util.function.Predicate;
 
-public final class ShaderStatusEffectManager implements ShaderEffectRenderCallback, ClientPlayConnectionEvents.Disconnect {
+public final class ShaderStatusEffectManager implements ClientPlayConnectionEvents.Disconnect {
 
-    private final ManagedShaderEffect managedShaderEffect;
+//    private final ManagedShaderEffect managedShaderEffect;
 
     private final RegistryEntry<StatusEffect> potionEffect;
 
@@ -23,11 +21,11 @@ public final class ShaderStatusEffectManager implements ShaderEffectRenderCallba
     private boolean enabled = false;
 
     public ShaderStatusEffectManager(
-            ManagedShaderEffect managedShaderEffect,
+//            ManagedShaderEffect managedShaderEffect,
             RegistryEntry<StatusEffect> potionEffect,
             Predicate<ClientConfig> enabledPredicate
     ) {
-        this.managedShaderEffect = managedShaderEffect;
+//        this.managedShaderEffect = managedShaderEffect;
         this.potionEffect = potionEffect;
         this.enabledPredicate = enabledPredicate;
     }
@@ -53,10 +51,10 @@ public final class ShaderStatusEffectManager implements ShaderEffectRenderCallba
         this.enabled = false;
     }
 
-    @Override
-    public void renderShaderEffects(float tickDelta) {
-        if (enabled) {
-            this.managedShaderEffect.render(tickDelta);
-        }
-    }
+//    @Override
+//    public void renderShaderEffects(float tickDelta) {
+//        if (enabled) {
+//            this.managedShaderEffect.render(tickDelta);
+//        }
+//    }
 }

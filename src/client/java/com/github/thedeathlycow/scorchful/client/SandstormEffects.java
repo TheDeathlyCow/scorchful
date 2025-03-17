@@ -23,7 +23,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
-import org.joml.Vector4f;
 
 import java.util.Optional;
 
@@ -77,7 +76,7 @@ public class SandstormEffects {
     }
 
     @Nullable
-    public static Vector4f getFogColor(
+    public static Vec3d getFogColor(
             ClientWorld world, Camera camera,
             float baseRed, float baseGreen, float baseBlue,
             float tickDelta

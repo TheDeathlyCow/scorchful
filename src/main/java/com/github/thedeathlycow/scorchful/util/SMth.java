@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.util;
 
+import net.fabricmc.loader.impl.lib.sat4j.core.Vec;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
