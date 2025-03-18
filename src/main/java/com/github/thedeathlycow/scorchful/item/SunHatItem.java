@@ -23,7 +23,7 @@ import net.minecraft.util.Identifier;
 import java.util.List;
 
 public class SunHatItem extends Item {
-    public static final Identifier SHADE_OVERLAY_TEXTURE = Scorchful.id("textures/misc/shade_overlay.png");
+    public static final Identifier SHADE_OVERLAY_TEXTURE = Scorchful.id("misc/shade_overlay");
     private static final Text TOOLTIP = Text.translatable(
             "item.scorchful.sun_hat.tooltip"
     ).setStyle(Style.EMPTY.withColor(Formatting.BLUE));
