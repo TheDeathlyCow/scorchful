@@ -45,7 +45,7 @@ public class HeatVisionEntityRenderer extends EntityRenderer<HeatVisionEntity, H
                     var renderer = (EntityRenderer<Entity, EntityRenderState>) accessor.renderers().get(state.entityState.type());
 
                     EntityRenderState s = renderer.createRenderState();
-                    s.onFire = state.entityState.onFire();
+                    s.onFire = true;
 
                     renderer.render(s, matrices, vertexConsumers, light);
                 }

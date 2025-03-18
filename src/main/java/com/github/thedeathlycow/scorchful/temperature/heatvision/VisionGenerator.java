@@ -34,7 +34,7 @@ public class VisionGenerator {
         if (key.isEmpty()) {
             return List.of();
         }
-        return this.cache.computeIfAbsent(key.get(), k -> this.computeVisionsForBiome(biome));
+        return this.cache.computeIfAbsent(key.get(), k -> this.computeVisionsForBiome(serverWorld, biome));
     }
 
 

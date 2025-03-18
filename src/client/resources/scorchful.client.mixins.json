@@ -16,6 +16,5 @@
         "defaultRequire": 1
     },
     "mixins": [
-        "EntityRendererMixin"
     ]
 }
