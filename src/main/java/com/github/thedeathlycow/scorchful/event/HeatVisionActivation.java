@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.event;
 
-import com.github.thedeathlycow.scorchful.temperature.heatvision.v2.HeatVisionDefinition;
+import com.github.thedeathlycow.scorchful.temperature.heatvision.data.HeatVisionDefinition;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.entity.player.PlayerEntity;

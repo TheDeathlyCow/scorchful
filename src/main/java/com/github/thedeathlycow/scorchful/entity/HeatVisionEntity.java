@@ -1,9 +1,9 @@
 package com.github.thedeathlycow.scorchful.entity;
 
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
-import com.github.thedeathlycow.scorchful.temperature.heatvision.v2.EntityState;
-import com.github.thedeathlycow.scorchful.temperature.heatvision.v2.HeatVisionDefinition;
-import com.github.thedeathlycow.scorchful.temperature.heatvision.v2.HeatVisionType;
+import com.github.thedeathlycow.scorchful.temperature.heatvision.data.EntityState;
+import com.github.thedeathlycow.scorchful.temperature.heatvision.data.HeatVisionDefinition;
+import com.github.thedeathlycow.scorchful.temperature.heatvision.data.HeatVisionType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;

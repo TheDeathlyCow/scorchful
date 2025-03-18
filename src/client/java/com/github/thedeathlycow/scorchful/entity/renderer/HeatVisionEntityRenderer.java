@@ -3,21 +3,16 @@ package com.github.thedeathlycow.scorchful.entity.renderer;
 import com.github.thedeathlycow.scorchful.entity.HeatVisionEntity;
 import com.github.thedeathlycow.scorchful.entity.renderer.state.HeatVisionEntityRenderState;
 import com.github.thedeathlycow.scorchful.mixin.client.accessor.EntityRenderDispatcherAccessor;
-import com.github.thedeathlycow.scorchful.temperature.heatvision.v2.HeatVisionType;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.BlockRenderManager;
-import net.minecraft.client.render.entity.DisplayEntityRenderer;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.state.EntityRenderState;
-import net.minecraft.client.render.entity.state.ZombieEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.mob.HuskEntity;
 
 public class HeatVisionEntityRenderer extends EntityRenderer<HeatVisionEntity, HeatVisionEntityRenderState> {
     private final BlockRenderManager blockRenderManager;

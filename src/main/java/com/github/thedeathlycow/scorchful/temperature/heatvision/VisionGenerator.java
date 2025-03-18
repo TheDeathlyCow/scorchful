@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
 import com.github.thedeathlycow.scorchful.registry.SRegistryKeys;
-import com.github.thedeathlycow.scorchful.temperature.heatvision.v2.HeatVisionDefinition;
+import com.github.thedeathlycow.scorchful.temperature.heatvision.data.HeatVisionDefinition;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;

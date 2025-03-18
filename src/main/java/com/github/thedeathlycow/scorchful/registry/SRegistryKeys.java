@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.temperature.heatvision.v2.HeatVisionDefinition;
+import com.github.thedeathlycow.scorchful.temperature.heatvision.data.HeatVisionDefinition;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;

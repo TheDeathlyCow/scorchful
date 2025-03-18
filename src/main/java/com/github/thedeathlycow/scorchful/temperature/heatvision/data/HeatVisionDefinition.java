@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.temperature.heatvision.v2;
+package com.github.thedeathlycow.scorchful.temperature.heatvision.data;
 
 import com.github.thedeathlycow.scorchful.registry.SRegistryKeys;
 import com.mojang.serialization.Codec;

@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.temperature.heatvision.v2;
+package com.github.thedeathlycow.scorchful.temperature.heatvision.data;
 
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
