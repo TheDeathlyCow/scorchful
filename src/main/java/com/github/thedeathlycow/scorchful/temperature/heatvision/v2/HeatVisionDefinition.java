@@ -11,20 +11,26 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryElementCodec;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.entry.RegistryEntryList;
+import net.minecraft.util.collection.Weight;
+import net.minecraft.util.collection.Weighted;
 import net.minecraft.world.biome.Biome;
 
 import java.util.Optional;
 
 public record HeatVisionDefinition(
         RegistryEntryList<Biome> biomes,
+        Weight weight,
         HeatVisionType renderType,
         Optional<EntityState> entityState
-) {
+) implements Weighted {
     public static final Codec<HeatVisionDefinition> ELEMENT_CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
                     RegistryCodecs.entryList(RegistryKeys.BIOME)
                             .fieldOf("biomes")
                             .forGetter(HeatVisionDefinition::biomes),
+                    Weight.CODEC
+                            .fieldOf("weight")
+                            .forGetter(HeatVisionDefinition::weight),
                     HeatVisionType.CODEC
                             .fieldOf("render_type")
                             .forGetter(HeatVisionDefinition::renderType),
@@ -68,6 +74,16 @@ public record HeatVisionDefinition(
     );
 
     private HeatVisionDefinition(HeatVisionType type, Optional<EntityState> entityState) {
-        this(RegistryEntryList.empty(), type, entityState);
+        this(
+                RegistryEntryList.empty(),
+                Weight.of(1),
+                type,
+                entityState
+        );
+    }
+
+    @Override
+    public Weight getWeight() {
+        return this.weight;
     }
 }

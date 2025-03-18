@@ -2,6 +2,7 @@
     "biomes": [
         "minecraft:desert"
     ],
+    "weight": 10,
     "render_type": "entity",
     "entity_state": {
         "type": "minecraft:husk",

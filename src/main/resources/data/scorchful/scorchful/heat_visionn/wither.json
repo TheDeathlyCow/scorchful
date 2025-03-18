@@ -2,6 +2,7 @@
     "biomes": [
         "minecraft:desert"
     ],
+    "weight": 1,
     "render_type": "block",
     "entity_state": {
         "type": "minecraft:wither"
