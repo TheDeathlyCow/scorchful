@@ -1,12 +1,15 @@
 package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.entity.HeatVisionEntity;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import com.github.thedeathlycow.scorchful.util.SMth;
+import net.fabricmc.loader.impl.lib.sat4j.core.Vec;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.LightType;
@@ -20,7 +23,6 @@ public class VisionSpawner {
     private static final VisionGenerator generator = new VisionGenerator();
 
     public static void tick(PlayerEntity player) {
-
         if (!Scorchful.getConfig().combatConfig.enableDesertVisions()) {
             return;
         }
@@ -46,10 +48,16 @@ public class VisionSpawner {
         if (pos == null) {
             return;
         }
-        var controller = generator.chooseVision(serverWorld, pos);
-        if (controller != null) {
-//            controller.spawn(cause, serverWorld, pos);
-            Scorchful.LOGGER.debug("Spawned a desert vision at " + pos);
+        var vision = generator.chooseVision(serverWorld, pos);
+        if (vision != null) {
+            HeatVisionEntity entity = new HeatVisionEntity(serverWorld, vision);
+            entity.setPos(pos.getX(), pos.getY(), pos.getZ());
+
+            if (serverWorld.spawnEntity(entity)) {
+                Scorchful.LOGGER.debug("Spawned a desert vision at {}", pos);
+            } else {
+                Scorchful.LOGGER.warn("Unable to spawn desert vision at {}", pos);
+            }
         }
     }
 
@@ -89,6 +97,4 @@ public class VisionSpawner {
 
     private VisionSpawner() {
     }
-
-
 }

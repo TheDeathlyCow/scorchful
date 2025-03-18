@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.entity;
 
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
+import com.github.thedeathlycow.scorchful.registry.SEntityTypes;
 import com.github.thedeathlycow.scorchful.temperature.heatvision.data.EntityState;
 import com.github.thedeathlycow.scorchful.temperature.heatvision.data.HeatVisionDefinition;
 import com.github.thedeathlycow.scorchful.temperature.heatvision.data.HeatVisionType;
@@ -21,11 +22,11 @@ import net.minecraft.world.World;
 import org.ladysnake.cca.api.v3.component.Component;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
-public class HeatVisionEntity extends Entity {
+public final class HeatVisionEntity extends Entity {
     private static final String HEAT_VISION_KEY = "heat_vision";
 
-    public HeatVisionEntity(EntityType<?> type, World world, RegistryEntry<HeatVisionDefinition> heatVision) {
-        super(type, world);
+    public HeatVisionEntity(World world, RegistryEntry<HeatVisionDefinition> heatVision) {
+        super(SEntityTypes.HEAT_VISION, world);
         ScorchfulComponents.HEAT_VISION_SYNCED_DATA.get(this).heatVision = heatVision;
     }
 

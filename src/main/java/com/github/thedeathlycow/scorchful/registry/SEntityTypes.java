@@ -18,7 +18,7 @@ public final class SEntityTypes {
     public static final EntityType<HeatVisionEntity> HEAT_VISION = register(
             "heat_vision",
             EntityType.Builder.create(
-                    (type, world) -> new HeatVisionEntity(type, world, HeatVisionDefinition.EMPTY),
+                    (type, world) -> new HeatVisionEntity(world, HeatVisionDefinition.EMPTY),
                     SpawnGroup.MISC
             )
     );
