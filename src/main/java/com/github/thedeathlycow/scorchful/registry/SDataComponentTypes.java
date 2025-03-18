@@ -4,10 +4,13 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.item.component.HeatResistanceComponent;
+import com.mojang.serialization.Codec;
 import net.minecraft.component.ComponentType;
+import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.util.Unit;
 import net.minecraft.util.dynamic.Codecs;
 
 import java.util.function.UnaryOperator;
@@ -35,6 +38,13 @@ public class SDataComponentTypes {
                     .codec(HeatResistanceComponent.CODEC)
                     .packetCodec(HeatResistanceComponent.PACKET_CODEC)
                     .cache()
+    );
+
+    public static final ComponentType<Unit> MODIFY_CAMERA_OVERLAY_OPACITY = register(
+            "modify_camera_overlay_opacity",
+            builder -> builder
+                    .codec(Codec.unit(Unit.INSTANCE))
+                    .packetCodec(PacketCodec.unit(Unit.INSTANCE))
     );
 
     public static void initialize() {
