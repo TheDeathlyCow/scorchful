@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.entity;
 
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
+import com.github.thedeathlycow.scorchful.temperature.heatvision.v2.EntityState;
 import com.github.thedeathlycow.scorchful.temperature.heatvision.v2.HeatVisionDefinition;
 import com.github.thedeathlycow.scorchful.temperature.heatvision.v2.HeatVisionType;
 import net.minecraft.entity.Entity;
@@ -21,11 +22,11 @@ import org.ladysnake.cca.api.v3.component.Component;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 public class HeatVisionEntity extends Entity {
-    private static final String HEAT_VISION_TYPE_KEY = "heat_vision_type";
+    private static final String HEAT_VISION_KEY = "heat_vision";
 
-    public HeatVisionEntity(EntityType<?> type, World world, RegistryEntry<HeatVisionDefinition> heatVisionType) {
+    public HeatVisionEntity(EntityType<?> type, World world, RegistryEntry<HeatVisionDefinition> heatVision) {
         super(type, world);
-        ScorchfulComponents.HEAT_VISION_SYNCED_DATA.get(this).heatVisionType = heatVisionType;
+        ScorchfulComponents.HEAT_VISION_SYNCED_DATA.get(this).heatVision = heatVision;
     }
 
     @Override
@@ -40,7 +41,12 @@ public class HeatVisionEntity extends Entity {
 
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {
-        // handled by cca
+        if (nbt.contains(HEAT_VISION_KEY)) {
+            RegistryOps<NbtElement> ops = this.getWorld().getRegistryManager().getOps(NbtOps.INSTANCE);
+            ScorchfulComponents.HEAT_VISION_SYNCED_DATA.get(this).heatVision = HeatVisionDefinition.CODEC.decode(ops, nbt.get(HEAT_VISION_KEY))
+                    .getOrThrow()
+                    .getFirst();
+        }
     }
 
     @Override
@@ -48,18 +54,22 @@ public class HeatVisionEntity extends Entity {
         // handled by cca
     }
 
-    public RegistryEntry<HeatVisionDefinition> getHeatVisionType() {
-        return ScorchfulComponents.HEAT_VISION_SYNCED_DATA.get(this).heatVisionType;
+    public RegistryEntry<HeatVisionDefinition> getVisionData() {
+        return ScorchfulComponents.HEAT_VISION_SYNCED_DATA.get(this).heatVision;
     }
 
     public HeatVisionType getRenderType() {
-        return this.getHeatVisionType().value().type();
+        return this.getVisionData().value().renderType();
+    }
+
+    public EntityState getEntityRenderState() {
+        return this.getVisionData().value().entityState().orElse(null);
     }
 
     public static class SyncedData implements Component, AutoSyncedComponent {
         private final HeatVisionEntity provider;
 
-        private RegistryEntry<HeatVisionDefinition> heatVisionType;
+        private RegistryEntry<HeatVisionDefinition> heatVision;
 
         public SyncedData(HeatVisionEntity provider) {
             this.provider = provider;
@@ -68,7 +78,7 @@ public class HeatVisionEntity extends Entity {
         @Override
         public void readFromNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
             RegistryOps<NbtElement> ops = provider.getWorld().getRegistryManager().getOps(NbtOps.INSTANCE);
-            this.heatVisionType = HeatVisionDefinition.CODEC.decode(ops, nbt.get(HEAT_VISION_TYPE_KEY))
+            this.heatVision = HeatVisionDefinition.CODEC.decode(ops, nbt.get(HEAT_VISION_KEY))
                     .getOrThrow()
                     .getFirst();
         }
@@ -77,20 +87,20 @@ public class HeatVisionEntity extends Entity {
         public void writeToNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
             RegistryOps<NbtElement> ops = provider.getWorld().getRegistryManager().getOps(NbtOps.INSTANCE);
             nbt.put(
-                    HEAT_VISION_TYPE_KEY,
-                    HeatVisionDefinition.CODEC.encodeStart(ops, this.heatVisionType)
+                    HEAT_VISION_KEY,
+                    HeatVisionDefinition.CODEC.encodeStart(ops, this.heatVision)
                             .getOrThrow()
             );
         }
 
         @Override
         public void writeSyncPacket(RegistryByteBuf buf, ServerPlayerEntity recipient) {
-            HeatVisionDefinition.PACKET_CODEC.encode(buf, this.heatVisionType);
+            HeatVisionDefinition.PACKET_CODEC.encode(buf, this.heatVision);
         }
 
         @Override
         public void applySyncPacket(RegistryByteBuf buf) {
-            this.heatVisionType = HeatVisionDefinition.PACKET_CODEC.decode(buf);
+            this.heatVision = HeatVisionDefinition.PACKET_CODEC.decode(buf);
         }
     }
 }

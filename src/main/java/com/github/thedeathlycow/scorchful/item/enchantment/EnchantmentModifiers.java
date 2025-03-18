@@ -52,7 +52,7 @@ public class EnchantmentModifiers {
 //                                EntityPropertiesLootCondition.builder(
 //                                        LootContext.EntityTarget.THIS,
 //                                        EntityPredicate.Builder.create()
-//                                                .type(EntityTypePredicate.create(
+//                                                .renderType(EntityTypePredicate.create(
 //                                                        Registries.ENTITY_TYPE,
 //                                                        EntityTypeTags.SENSITIVE_TO_IMPALING
 //                                                ))

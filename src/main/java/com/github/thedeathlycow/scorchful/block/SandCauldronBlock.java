@@ -56,7 +56,7 @@ public class SandCauldronBlock extends AbstractCauldronBlock {
      * Constructs a leveled cauldron block.
      *
      * @param settings
-     * @param sandstormType     The type of sandstorm this will fill in
+     * @param sandstormType     The renderType of sandstorm this will fill in
      * @param behaviorMap       other behaviours for this cauldron
      */
     public SandCauldronBlock(

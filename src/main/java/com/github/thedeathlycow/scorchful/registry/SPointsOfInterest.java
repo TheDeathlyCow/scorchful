@@ -42,7 +42,7 @@ public final class SPointsOfInterest {
             RegistryEntry<PointOfInterestType> existing = PointOfInterestTypesAccessor.scorchful$getStatesToType()
                     .put(state, poiTypeEntry);
             if (existing != null) {
-                throw Util.getFatalOrPause(new IllegalStateException(String.format(Locale.ROOT, "%s is defined in more than one PoI type", state)));
+                throw Util.getFatalOrPause(new IllegalStateException(String.format(Locale.ROOT, "%s is defined in more than one PoI renderType", state)));
             }
         });
     }

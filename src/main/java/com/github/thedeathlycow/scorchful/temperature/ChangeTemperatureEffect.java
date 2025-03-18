@@ -12,7 +12,7 @@ import net.minecraft.util.dynamic.Codecs;
 public class ChangeTemperatureEffect extends TemperatureEffect<ChangeTemperatureEffect.Config> {
 
     /**
-     * @param configCodec Codec for the config type
+     * @param configCodec Codec for the config renderType
      */
     public ChangeTemperatureEffect(Codec<Config> configCodec) {
         super(configCodec);

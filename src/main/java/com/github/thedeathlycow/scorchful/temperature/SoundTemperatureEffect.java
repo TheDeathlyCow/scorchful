@@ -17,7 +17,7 @@ import net.minecraft.util.math.floatprovider.FloatProvider;
 public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEffect.Config> {
 
     /**
-     * @param configCodec Codec for the config type
+     * @param configCodec Codec for the config renderType
      */
     public SoundTemperatureEffect(Codec<Config> configCodec) {
         super(configCodec);

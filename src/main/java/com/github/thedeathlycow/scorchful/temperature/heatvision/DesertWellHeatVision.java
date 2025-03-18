@@ -79,8 +79,8 @@ public class DesertWellHeatVision extends HeatVision {
 //    }
 //
 //    @Nullable
-//    private <T extends Entity> T spawnAndRide(EntityType<T> type, ServerWorld world, BlockPos pos) {
-//        T entity = type.create(world);
+//    private <T extends Entity> T spawnAndRide(EntityType<T> renderType, ServerWorld world, BlockPos pos) {
+//        T entity = renderType.create(world);
 //        if (entity != null) {
 //            ScorchfulComponents.DESERT_VISION_CHILD.get(entity).makeDesertVisionChild(this.getCause());
 //            ScorchfulComponents.DESERT_VISION_CHILD.sync(entity);

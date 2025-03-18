@@ -1,0 +1,9 @@
+{
+    "biomes": [
+        "minecraft:desert"
+    ],
+    "render_type": "entity",
+    "entity_state": {
+        "type": "minecraft:wither"
+    }
+}
