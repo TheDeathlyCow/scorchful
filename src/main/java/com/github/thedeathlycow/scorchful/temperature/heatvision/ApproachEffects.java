@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.event.HeatVisionActivation;
 import com.github.thedeathlycow.scorchful.particle.DustGrainParticleEffect;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
@@ -10,11 +11,10 @@ import net.minecraft.util.math.Vec3d;
 import org.joml.Vector3f;
 
 public class ApproachEffects {
-
-
     private static final Vector3f COLOR = Vec3d.unpackRgb(0xD9AA84).toVector3f();
 
     public static void initialize() {
+        Scorchful.LOGGER.debug("Initialized heat vision approach effects");
         HeatVisionActivation.EVENT.register((vision, world, pos, player) -> {
             var particle = new DustGrainParticleEffect(COLOR, 1f);
             world.spawnParticles(

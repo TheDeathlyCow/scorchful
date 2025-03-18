@@ -48,7 +48,7 @@ public class VisionSpawner {
         }
         var controller = generator.chooseVision(serverWorld, pos);
         if (controller != null) {
-            controller.spawn(cause, serverWorld, pos);
+//            controller.spawn(cause, serverWorld, pos);
             Scorchful.LOGGER.debug("Spawned a desert vision at " + pos);
         }
     }

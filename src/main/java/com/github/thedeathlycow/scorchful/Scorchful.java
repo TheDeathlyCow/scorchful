@@ -13,6 +13,7 @@ import com.github.thedeathlycow.scorchful.temperature.ActiveTemperatureEffects;
 import com.github.thedeathlycow.scorchful.temperature.PassiveTemperatureEffects;
 import com.github.thedeathlycow.scorchful.temperature.ServerPlayerEnvironmentTickListeners;
 import com.github.thedeathlycow.scorchful.temperature.SoakingEffects;
+import com.github.thedeathlycow.scorchful.temperature.heatvision.ApproachEffects;
 import com.github.thedeathlycow.scorchful.worldgen.NetherBiomeModifications;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
@@ -76,11 +77,11 @@ public class Scorchful implements ModInitializer {
         SParticleTypes.initialize();
         NetherBiomeModifications.initialize();
         SStats.initialize();
-        SHeatVisions.initialize();
         SEnvironmentProviderTypes.initialize();
         SEntityAttributes.initialize();
         SPointsOfInterest.initialize();
         SRegistryKeys.initialize();
+        ApproachEffects.initialize();
 
         if (ScorchfulIntegrations.isDehydrationLoaded() && !ServerThirstPlugin.isCustomPluginLoaded()) {
             LOGGER.debug("Applying Dehydration thirst plugin");

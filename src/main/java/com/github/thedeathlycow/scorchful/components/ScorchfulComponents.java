@@ -21,11 +21,6 @@ public class ScorchfulComponents implements EntityComponentInitializer {
             RehydrationComponent.class
     );
 
-    public static final ComponentKey<EntityDesertVisionComponent> ENTITY_DESERT_VISION = ComponentRegistry.getOrCreate(
-            Scorchful.id("entity_desert_vision"),
-            EntityDesertVisionComponent.class
-    );
-
     public static final ComponentKey<HeatVisionEntity.SyncedData> HEAT_VISION_SYNCED_DATA = ComponentRegistry.getOrCreate(
             Scorchful.id("heat_vision_synced_data"),
             HeatVisionEntity.SyncedData.class
@@ -43,11 +38,6 @@ public class ScorchfulComponents implements EntityComponentInitializer {
                 REHYDRATION,
                 RehydrationComponent::new,
                 RespawnCopyStrategy.LOSSLESS_ONLY
-        );
-        registry.registerFor(
-                Entity.class,
-                ENTITY_DESERT_VISION,
-                EntityDesertVisionComponent::new
         );
         registry.registerFor(
                 HeatVisionEntity.class,

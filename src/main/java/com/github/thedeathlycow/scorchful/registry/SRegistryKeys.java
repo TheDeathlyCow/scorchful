@@ -7,7 +7,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 
 public final class SRegistryKeys {
-    public static final RegistryKey<Registry<HeatVisionDefinition>> HEAT_VISION = createRegistryKey("heat_visionn");
+    public static final RegistryKey<Registry<HeatVisionDefinition>> HEAT_VISION = createRegistryKey("heat_vision");
 
     public static void initialize() {
         DynamicRegistries.registerSynced(

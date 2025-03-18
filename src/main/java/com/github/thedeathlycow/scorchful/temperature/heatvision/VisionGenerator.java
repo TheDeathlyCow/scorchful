@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
-import com.github.thedeathlycow.scorchful.registry.SRegistries;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import com.github.thedeathlycow.scorchful.registry.SRegistryKeys;
+import com.github.thedeathlycow.scorchful.temperature.heatvision.v2.HeatVisionDefinition;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
@@ -10,17 +10,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 public class VisionGenerator {
 
-    private final Map<RegistryKey<Biome>, List<HeatVision>> cache = new Object2ObjectOpenHashMap<>();
+    private final Map<RegistryKey<Biome>, List<HeatVisionDefinition>> cache = new IdentityHashMap<>();
 
     @Nullable
-    public HeatVision chooseVision(ServerWorld serverWorld, BlockPos pos) {
-        List<HeatVision> controllers = this.getPossibleVisions(serverWorld.getBiome(pos));
+    public HeatVisionDefinition chooseVision(ServerWorld serverWorld, BlockPos pos) {
+        List<HeatVisionDefinition> controllers = this.getPossibleVisions(serverWorld, serverWorld.getBiome(pos));
         if (controllers.isEmpty()) {
             return null;
         }
@@ -28,7 +29,7 @@ public class VisionGenerator {
         return Weighting.getRandom(serverWorld.getRandom(), controllers).orElseThrow(IllegalStateException::new);
     }
 
-    private List<HeatVision> getPossibleVisions(RegistryEntry<Biome> biome) {
+    private List<HeatVisionDefinition> getPossibleVisions(ServerWorld serverWorld, RegistryEntry<Biome> biome) {
         Optional<RegistryKey<Biome>> key = biome.getKey();
         if (key.isEmpty()) {
             return List.of();
@@ -37,9 +38,9 @@ public class VisionGenerator {
     }
 
 
-    private List<HeatVision> computeVisionsForBiome(RegistryEntry<Biome> biome) {
-        return SRegistries.HEAT_VISION.stream()
-                .filter(vision -> vision.canApplyToBiome(biome))
+    private List<HeatVisionDefinition> computeVisionsForBiome(ServerWorld serverWorld, RegistryEntry<Biome> biome) {
+        return serverWorld.getRegistryManager().getOrThrow(SRegistryKeys.HEAT_VISION).stream()
+                .filter(vision -> vision.biomes().contains(biome))
                 .toList();
     }
 

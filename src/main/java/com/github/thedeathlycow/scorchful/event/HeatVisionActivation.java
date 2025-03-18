@@ -1,12 +1,12 @@
 package com.github.thedeathlycow.scorchful.event;
 
-import com.github.thedeathlycow.scorchful.temperature.heatvision.HeatVision;
+import com.github.thedeathlycow.scorchful.temperature.heatvision.v2.HeatVisionDefinition;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 @FunctionalInterface
 public interface HeatVisionActivation {
@@ -23,5 +23,5 @@ public interface HeatVisionActivation {
             }
     );
 
-    void onActivated(HeatVision vision, ServerWorld world, BlockPos pos, PlayerEntity cause);
+    void onActivated(RegistryEntry<HeatVisionDefinition> vision, ServerWorld world, BlockPos pos, PlayerEntity cause);
 }
