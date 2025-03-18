@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.entity.model;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
+import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelPartNames;
@@ -40,5 +41,9 @@ public class SunHatModel<S extends BipedEntityRenderState> extends BipedEntityMo
         );
 
         return TexturedModelData.of(modelData, 64, 64);
+    }
+
+    public final void renderHead(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
+        this.getHead().render(matrices, vertices, light, overlay, color);
     }
 }

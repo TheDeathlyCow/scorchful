@@ -44,7 +44,7 @@ public class SunHatFeatureRenderer<S extends BipedEntityRenderState, M extends B
         if (state.equippedHeadStack.isOf(SItems.SUN_HAT)) {
             this.getContextModel().copyTransforms(this.model);
             VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(TEXTURE));
-            this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 0xffffffff);
+            this.model.renderHead(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 0xffffffff);
         }
     }
 }
