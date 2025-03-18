@@ -25,7 +25,7 @@ public class HeatVisionEntityRenderer extends EntityRenderer<HeatVisionEntity, H
     @Override
     public void updateRenderState(HeatVisionEntity entity, HeatVisionEntityRenderState state, float tickDelta) {
         super.updateRenderState(entity, state, tickDelta);
-        state.rendererID = entity.getRendererID();
+        state.renderType = entity.getRenderType();
     }
 
     @Override

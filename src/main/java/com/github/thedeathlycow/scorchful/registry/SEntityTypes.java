@@ -3,7 +3,7 @@ package com.github.thedeathlycow.scorchful.registry;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.entity.HeatVisionEntity;
 import com.github.thedeathlycow.scorchful.registry.tag.SDamageTypeTags;
-import com.github.thedeathlycow.scorchful.temperature.heatvision.v2.HeatVisionType;
+import com.github.thedeathlycow.scorchful.temperature.heatvision.v2.HeatVisionDefinition;
 import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.Entity;
@@ -18,7 +18,7 @@ public final class SEntityTypes {
     public static final EntityType<HeatVisionEntity> HEAT_VISION = register(
             "heat_vision",
             EntityType.Builder.create(
-                    (type, world) -> new HeatVisionEntity(type, world, HeatVisionType.EMPTY),
+                    (type, world) -> new HeatVisionEntity(type, world, HeatVisionDefinition.EMPTY),
                     SpawnGroup.MISC
             )
     );

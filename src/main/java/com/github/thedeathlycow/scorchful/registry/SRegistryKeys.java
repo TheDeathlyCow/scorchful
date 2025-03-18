@@ -1,19 +1,19 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.temperature.heatvision.v2.HeatVisionType;
+import com.github.thedeathlycow.scorchful.temperature.heatvision.v2.HeatVisionDefinition;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 
 public final class SRegistryKeys {
-    public static final RegistryKey<Registry<HeatVisionType>> HEAT_VISION_TYPE = createRegistryKey("heat_vision_type");
+    public static final RegistryKey<Registry<HeatVisionDefinition>> HEAT_VISION = createRegistryKey("heat_vision");
 
     public static void initialize() {
         DynamicRegistries.registerSynced(
-                HEAT_VISION_TYPE,
-                HeatVisionType.ELEMENT_CODEC,
-                HeatVisionType.NETWORK_CODEC
+                HEAT_VISION,
+                HeatVisionDefinition.ELEMENT_CODEC,
+                HeatVisionDefinition.NETWORK_CODEC
         );
     }
 
