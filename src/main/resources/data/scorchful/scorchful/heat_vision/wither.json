@@ -3,8 +3,9 @@
         "minecraft:desert"
     ],
     "weight": 1,
-    "render_type": "block",
+    "render_type": "entity",
     "entity_state": {
-        "type": "minecraft:wither"
+        "type": "minecraft:wither",
+        "on_fire": true
     }
 }

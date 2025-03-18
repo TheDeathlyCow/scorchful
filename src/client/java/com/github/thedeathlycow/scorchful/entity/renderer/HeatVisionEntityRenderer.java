@@ -32,6 +32,10 @@ public class HeatVisionEntityRenderer extends EntityRenderer<HeatVisionEntity, H
         super.updateRenderState(entity, state, tickDelta);
         state.renderType = entity.getRenderType();
         state.entityState = entity.getEntityRenderState();
+        if (state.entityState != null) {
+            // TODO: fire rendering only renders for the actual entity hitbox, not the hitbox of the thing it delegates to
+            state.onFire = state.entityState.onFire();
+        }
     }
 
     @Override
@@ -45,7 +49,6 @@ public class HeatVisionEntityRenderer extends EntityRenderer<HeatVisionEntity, H
                     var renderer = (EntityRenderer<Entity, EntityRenderState>) accessor.renderers().get(state.entityState.type());
 
                     EntityRenderState s = renderer.createRenderState();
-                    s.onFire = true;
 
                     renderer.render(s, matrices, vertexConsumers, light);
                 }
