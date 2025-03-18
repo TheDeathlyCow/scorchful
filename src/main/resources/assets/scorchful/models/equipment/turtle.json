@@ -1,0 +1,14 @@
+{
+    "layers": {
+        "humanoid": [
+            {
+                "texture": "scorchful:turtle"
+            }
+        ],
+        "humanoid_leggings": [
+            {
+                "texture": "scorchful:turtle"
+            }
+        ]
+    }
+}
