@@ -7,7 +7,7 @@
     "config": {
         "scale": 0.1,
         "id": "scorchful:temperature_effect.strider_speed",
-        "attribute_type": "minecraft:generic.movement_speed",
+        "attribute_type": "minecraft:movement_speed",
         "operation": "add_value"
     }
 }

@@ -44,13 +44,8 @@ public class ClientConfig implements ConfigData {
 
     float sandStormFogEnd = 64f;
 
-
-    public boolean isSunHatShading() {
-        return doSunHatShading;
-    }
-
     public float getSunHatShadeOpacity() {
-        return sunHatShadeOpacity;
+        return doSunHatShading ? sunHatShadeOpacity : 0f;
     }
 
     public boolean enableSoundTemperatureEffects() {

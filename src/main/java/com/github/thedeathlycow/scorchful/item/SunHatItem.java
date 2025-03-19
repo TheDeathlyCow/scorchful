@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
+import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import dev.emi.trinkets.api.TrinketsApi;
@@ -19,23 +20,27 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Unit;
 
 import java.util.List;
 
 public class SunHatItem extends Item {
-    public static final Identifier SHADE_OVERLAY_TEXTURE = Scorchful.id("textures/misc/shade_overlay.png");
+    public static final Identifier SHADE_OVERLAY_TEXTURE = Scorchful.id("misc/shade_overlay");
     private static final Text TOOLTIP = Text.translatable(
             "item.scorchful.sun_hat.tooltip"
     ).setStyle(Style.EMPTY.withColor(Formatting.BLUE));
 
     public SunHatItem(Settings settings) {
-        super(settings.component(
+        super(settings
+                .component(
                         DataComponentTypes.EQUIPPABLE,
                         EquippableComponent.builder(EquipmentSlot.HEAD)
                                 .damageOnHurt(false)
                                 .cameraOverlay(SHADE_OVERLAY_TEXTURE)
                                 .build()
-                ));
+                )
+                .component(SDataComponentTypes.MODIFY_CAMERA_OVERLAY_OPACITY, Unit.INSTANCE)
+        );
     }
 
     public static AttributeModifiersComponent attributeModifiers() {

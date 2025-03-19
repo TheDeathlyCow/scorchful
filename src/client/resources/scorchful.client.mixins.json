@@ -6,6 +6,7 @@
     "client": [
         "ClientPlayNetworkHandlerMixin",
         "DrippingWetPlayerMixin",
+        "GameRendererMixin",
         "HeadFeatureRendererMixin",
         "InGameHudMixin",
         "accessor.EntityRenderDispatcherAccessor",

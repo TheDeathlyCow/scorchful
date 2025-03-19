@@ -36,8 +36,8 @@ The attributes are documented on the [Thermoo Wiki](https://thermoo.thedeathlyco
         - `D` **heat_resistance**: The heat resistance value to add to the entity when this item is worn.
         - `D` **environment_heat_resistance**: The environment heat resistance value to add to the entity when this item is worn.
 
-The final attribute modifiers are applied as an `add_value` modifier for the `thermoo:generic.heat_resistance`
-and `thermoo:generic.environment_heat_resistance` attributes with modifier IDs
+The final attribute modifiers are applied as an `add_value` modifier for the `thermoo:heat_resistance`<sup>1</sup>
+and `thermoo:environment_heat_resistance`<sup>1</sup> attributes with modifier IDs
 of `scorchful:base_heat_resistance/${slot_id}` and `scorchful:base_environment_heat_resistance/${slot_id}`,
 respectively.
 
@@ -59,3 +59,6 @@ respectively.
     | All Netherite Armor                        | Protective (+0.5 HR, +0.125 EHR)    |
     | Turtle Shell                               | Very Protective (+1 HR, +0.25 EHR)  |
     | All other [Turtle Armor](./Turtle-Armor)   | Very Protective (+1 HR, +0.25 EHR)  |
+
+---
+<sup>1</sup>In 1.21.1 and below, these attribute IDs are `thermoo:generic.heat_resistance` and `thermoo:generic.environment_heat_resistance`.
