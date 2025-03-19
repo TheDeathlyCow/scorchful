@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.entity.renderer;
 import com.github.thedeathlycow.scorchful.entity.HeatVisionEntity;
 import com.github.thedeathlycow.scorchful.entity.renderer.state.HeatVisionEntityRenderState;
 import com.github.thedeathlycow.scorchful.mixin.client.accessor.EntityRenderDispatcherAccessor;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
@@ -36,6 +37,7 @@ public class HeatVisionEntityRenderer extends EntityRenderer<HeatVisionEntity, H
             // TODO: fire rendering only renders for the actual entity hitbox, not the hitbox of the thing it delegates to
             state.onFire = state.entityState.onFire();
         }
+        state.blockState = entity.getBlockRenderState();
     }
 
     @Override
@@ -54,13 +56,15 @@ public class HeatVisionEntityRenderer extends EntityRenderer<HeatVisionEntity, H
                 }
             }
             case BLOCK -> {
-                this.blockRenderManager.renderBlockAsEntity(
-                        Blocks.STONE.getDefaultState(),
-                        matrices,
-                        vertexConsumers,
-                        light,
-                        OverlayTexture.DEFAULT_UV
-                );
+                if (state.blockState != null) {
+                    this.blockRenderManager.renderBlockAsEntity(
+                            state.blockState,
+                            matrices,
+                            vertexConsumers,
+                            light,
+                            OverlayTexture.DEFAULT_UV
+                    );
+                }
             }
             default -> {
                 // render nothing when empty

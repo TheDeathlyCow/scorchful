@@ -1,8 +1,10 @@
 package com.github.thedeathlycow.scorchful.temperature.heatvision.data;
 
+import com.github.thedeathlycow.scorchful.mixin.accessor.TrackedDataHandlerRegistryAccessor;
 import com.github.thedeathlycow.scorchful.registry.SRegistryKeys;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.block.BlockState;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
@@ -21,7 +23,8 @@ public record HeatVisionDefinition(
         RegistryEntryList<Biome> biomes,
         Weight weight,
         HeatVisionType renderType,
-        Optional<EntityState> entityState
+        Optional<EntityState> entityState,
+        Optional<BlockState> blockState
 ) implements Weighted {
     public static final Codec<HeatVisionDefinition> ELEMENT_CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
@@ -36,7 +39,10 @@ public record HeatVisionDefinition(
                             .forGetter(HeatVisionDefinition::renderType),
                     EntityState.CODEC
                             .optionalFieldOf("entity_state")
-                            .forGetter(HeatVisionDefinition::entityState)
+                            .forGetter(HeatVisionDefinition::entityState),
+                    BlockState.CODEC
+                            .optionalFieldOf("block_state")
+                            .forGetter(HeatVisionDefinition::blockState)
             ).apply(instance, HeatVisionDefinition::new)
     );
 
@@ -52,7 +58,10 @@ public record HeatVisionDefinition(
                             .forGetter(HeatVisionDefinition::renderType),
                     EntityState.CODEC
                             .optionalFieldOf("entity_state")
-                            .forGetter(HeatVisionDefinition::entityState)
+                            .forGetter(HeatVisionDefinition::entityState),
+                    BlockState.CODEC
+                            .optionalFieldOf("block_state")
+                            .forGetter(HeatVisionDefinition::blockState)
             ).apply(instance, HeatVisionDefinition::new)
     );
 
@@ -61,6 +70,8 @@ public record HeatVisionDefinition(
             HeatVisionDefinition::renderType,
             PacketCodecs.optional(EntityState.PACKET_CODEC),
             HeatVisionDefinition::entityState,
+            TrackedDataHandlerRegistryAccessor.scorchful$blockStatePackCodec(),
+            HeatVisionDefinition::blockState,
             HeatVisionDefinition::new
     );
 
@@ -70,15 +81,16 @@ public record HeatVisionDefinition(
     );
 
     public static final RegistryEntry<HeatVisionDefinition> EMPTY = RegistryEntry.of(
-            new HeatVisionDefinition(HeatVisionType.EMPTY, Optional.empty())
+            new HeatVisionDefinition(HeatVisionType.EMPTY, Optional.empty(), Optional.empty())
     );
 
-    private HeatVisionDefinition(HeatVisionType type, Optional<EntityState> entityState) {
+    private HeatVisionDefinition(HeatVisionType type, Optional<EntityState> entityState, Optional<BlockState> blockState) {
         this(
                 RegistryEntryList.empty(),
                 Weight.of(1),
                 type,
-                entityState
+                entityState,
+                blockState
         );
     }
 

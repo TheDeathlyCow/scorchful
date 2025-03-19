@@ -5,6 +5,7 @@ import com.github.thedeathlycow.scorchful.registry.SEntityTypes;
 import com.github.thedeathlycow.scorchful.temperature.heatvision.data.EntityState;
 import com.github.thedeathlycow.scorchful.temperature.heatvision.data.HeatVisionDefinition;
 import com.github.thedeathlycow.scorchful.temperature.heatvision.data.HeatVisionType;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
@@ -19,6 +20,7 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import org.ladysnake.cca.api.v3.component.Component;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
@@ -63,8 +65,14 @@ public final class HeatVisionEntity extends Entity {
         return this.getVisionData().value().renderType();
     }
 
+    @Nullable
     public EntityState getEntityRenderState() {
         return this.getVisionData().value().entityState().orElse(null);
+    }
+
+    @Nullable
+    public BlockState getBlockRenderState() {
+        return this.getVisionData().value().blockState().orElse(null);
     }
 
     public static class SyncedData implements Component, AutoSyncedComponent {

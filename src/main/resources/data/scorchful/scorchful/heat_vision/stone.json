@@ -1,0 +1,13 @@
+{
+    "biomes": [
+        "minecraft:desert"
+    ],
+    "weight": 1,
+    "render_type": "block",
+    "entity_state": {
+        "on_fire": true
+    },
+    "block_state": {
+        "Name": "minecraft:stone"
+    }
+}
