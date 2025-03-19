@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.temperature.heatvision.data;
 import com.github.thedeathlycow.scorchful.mixin.accessor.TrackedDataHandlerRegistryAccessor;
 import com.github.thedeathlycow.scorchful.registry.SRegistryKeys;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.network.RegistryByteBuf;
@@ -26,7 +27,7 @@ public record HeatVisionDefinition(
         Optional<EntityState> entityState,
         Optional<BlockState> blockState
 ) implements Weighted {
-    public static final Codec<HeatVisionDefinition> ELEMENT_CODEC = RecordCodecBuilder.create(
+    public static final Codec<HeatVisionDefinition> ELEMENT_CODEC =  RecordCodecBuilder.<HeatVisionDefinition>create(
             instance -> instance.group(
                     RegistryCodecs.entryList(RegistryKeys.BIOME)
                             .fieldOf("biomes")
@@ -44,7 +45,7 @@ public record HeatVisionDefinition(
                             .optionalFieldOf("block_state")
                             .forGetter(HeatVisionDefinition::blockState)
             ).apply(instance, HeatVisionDefinition::new)
-    );
+    ).validate(HeatVisionDefinition::validate);
 
     public static final Codec<RegistryEntry<HeatVisionDefinition>> CODEC = RegistryElementCodec.of(
             SRegistryKeys.HEAT_VISION,
@@ -97,5 +98,28 @@ public record HeatVisionDefinition(
     @Override
     public Weight getWeight() {
         return this.weight;
+    }
+
+    private static DataResult<HeatVisionDefinition> validate(HeatVisionDefinition heatVision) {
+        switch (heatVision.renderType) {
+            case ENTITY -> {
+                if (heatVision.entityState.isEmpty()) {
+                    return DataResult.error(() -> "Entity type heat vision requires an entity state");
+                }
+                if (heatVision.blockState.isPresent()) {
+                    return DataResult.error(() -> "Entity type heat vision may not have a block state");
+                }
+            }
+            case BLOCK -> {
+                if (heatVision.blockState.isEmpty()) {
+                    return DataResult.error(() -> "Block type heat vision requires a block state");
+                }
+                if (heatVision.entityState.isPresent()) {
+                    return DataResult.error(() -> "Block type heat vision may not have an entity state");
+                }
+            }
+        }
+
+        return DataResult.success(heatVision);
     }
 }
