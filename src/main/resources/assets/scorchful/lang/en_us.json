@@ -113,6 +113,7 @@
     "text.autoconfig.scorchful.option.heatingConfig.minTemperatureForHeatC.@Tooltip": "May not be less than 25°C",
     "text.autoconfig.scorchful.option.heatingConfig.degreesCPerTemperatureIncrease": "Degrees per temperature level increase (in °C/°K)",
     "text.autoconfig.scorchful.option.heatingConfig.degreesCPerTemperatureIncrease.@Tooltip": "Must be positive",
+    "text.autoconfig.scorchful.option.heatingConfig.environmentTemperatureMultiplier": "Environment temperature multiplier",
     "text.autoconfig.scorchful.option.heatingConfig.coolingFromIce": "Cooling from ice",
     "text.autoconfig.scorchful.option.heatingConfig.onFireWarmRate": "On fire warm rate",
     "text.autoconfig.scorchful.option.heatingConfig.onFireWarmRateWithFireResistance": "On fire warm rate with Fire Resistance",

@@ -22,6 +22,8 @@ public class HeatingConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip
     double degreesCPerTemperatureIncrease = 10.0;
 
+    double environmentTemperatureMultiplier = 1.0;
+
     int coolingFromIce = 12;
 
     int onFireWarmRate = 24;
@@ -62,6 +64,10 @@ public class HeatingConfig implements ConfigData {
 
     public double getDegreesCPerTemperatureIncrease() {
         return degreesCPerTemperatureIncrease;
+    }
+
+    public double getEnvironmentTemperatureMultiplier() {
+        return environmentTemperatureMultiplier;
     }
 
     public int getCoolingFromIce() {
