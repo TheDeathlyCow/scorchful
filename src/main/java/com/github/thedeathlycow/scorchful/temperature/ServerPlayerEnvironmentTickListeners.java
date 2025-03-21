@@ -65,7 +65,8 @@ public final class ServerPlayerEnvironmentTickListeners {
         if (temperatureC < thresholdC) {
             return 0;
         }
-        // Graphical proof: https://www.desmos.com/calculator/ugi7wflbze
-        return MathHelper.floor((temperatureC - thresholdC + degreesPerTemperatureIncrease) / degreesPerTemperatureIncrease);
+        // Graphical proof: https://www.desmos.com/calculator/42rvcpnxwx
+        double base = (temperatureC - thresholdC + degreesPerTemperatureIncrease) / degreesPerTemperatureIncrease;
+        return MathHelper.floor(config.getEnvironmentTemperatureMultiplier() * base);
     }
 }

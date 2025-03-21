@@ -46,8 +46,9 @@ Server-side options for temperature and heating.
 * :star: Passive heating tick interval `passiveHeatingTickInterval`: How many ticks should occur between applying heat to a player from the environment. Setting this to large values can be used to slow heat down.
 * :star: Max passive heating percent (0-1) `maxPassiveHeatingScale`: The maximum scale that the environment can heat heat players to. Given as a percentage from 0 to 1 (0 = 0%, 1 = 100%)
 * Enable Turtle Armor status effects `enableTurtleArmorEffects`: Enable/disable water breathing from Turtle Armor
-* :star: Min temperature for heat (in °C) `minTemperatureForHeatC`: Cutoff temperature for overheating in Celsius. Biomes at or above this temperature will apply environment heating to players. May not be less than 25°C.
-* :star: Degrees per temperature level increase (in °C/°K) `degreesCPerTemperatureIncrease`: Specifies the number of Celsius/Kelvin degrees the temperature must be above the minimum heat threshold for each one-point increase in player temperature per tick. Must be positive and non-zero.
+* :star: Min temperature for heat (in °C) `minTemperatureForHeatC`[^1]: Cutoff temperature for overheating in Celsius. Biomes at or above this temperature will apply environment heating to players. May not be less than 25°C.
+* :star: Degrees per temperature level increase (in °C/°K) `degreesCPerTemperatureIncrease`[^1]: Specifies the number of Celsius/Kelvin degrees the temperature must be above the minimum heat threshold for each one-point increase in player temperature per tick. Must be positive and non-zero.
+* :star: Environment temperature multiplier `environmentTemperatureMultiplier`[^1]: Multiplies the final temperature point change of an environment temperature change. 
 * Cooling from ice `coolingFromIce`: How much temperature to remove each tick that the player is standing on packed or blue ice
 * :star: Scorching biome heat increase `scorchingBiomeHeatIncrease`: How much to increase the environmental heating by when out in the Sun in a Scorching biome (Deserts and Badlands)
 * On fire warm rate `onFireWarmRate`: How much to increase the temperature of entities on fire each tick
@@ -58,6 +59,7 @@ Server-side options for temperature and heating.
 * Fireball strike heat `fireballHeat`: The amount of heat to apply to entities when struck by a fire ball / fire charge
 * Water breathing duration per worn piece of Turtle Armor (seconds) `waterBreathingDurationPerTurtleArmorPieceSeconds`: The amount of time to add to the dive water breathing per piece of turtle armor worn, in seconds
 * Temperature from cooling food `temperatureFromCoolingFood`: Temperature change to apply to players after eating items with the tag `scorchful:is_cooling_food`
+
 
 ## Thirst Config
 
@@ -166,4 +168,13 @@ These reflect the removed config options from Scorchful, and their replacements 
     * Replaced with `thirstConfig/extraHumidBiomeSweatEfficiency` 
 * Dry Season humid biome sweat efficiency `drySeasonHumidBiomeSweatEfficiency`: How efficient [sweating](./Temperature-System#Sweating) is during the Dry Season in humid tropical biomes. This feature is exclusive to Serene Seasons.
     * Removed in 0.15
-    * Replaced with `thirstConfig/aridBiomeSweatEfficiency` 
+    * Replaced with `thirstConfig/aridBiomeSweatEfficiency`
+
+[^1]: The final value of the environment temperature change is calculated using the formula below. You can find a graphical representation on [Desmos](https://www.desmos.com/calculator/42rvcpnxwx).
+    ??? Formula
+        $$
+        B(T) = (T - minTemp + degreesPerTempInc) / degreesPerTempInc \\
+        TemperatureChange(T) = max(0, floor(multiplier * B(T))
+        $$
+
+        Note that $T$ is in Degrees Celsius.
