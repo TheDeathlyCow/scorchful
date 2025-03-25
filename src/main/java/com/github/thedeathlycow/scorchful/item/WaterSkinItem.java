@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.api.CollectWaterCallback;
 import com.github.thedeathlycow.scorchful.block.NetherLilyBlock;
+import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.SStats;
@@ -68,7 +69,7 @@ public class WaterSkinItem extends DrinkItem {
     @Override
     protected ItemStack getPostConsumeStack(ItemStack stack, World world, ServerPlayerEntity serverPlayer) {
         if (!serverPlayer.isCreative()) {
-            addDrinks(stack, -1);
+            DrinkContainerComponent.addDrinks(stack, -1);
         }
 
         return stack;
@@ -77,28 +78,16 @@ public class WaterSkinItem extends DrinkItem {
     @Override
     public ItemStack getDefaultStack() {
         var itemStack = super.getDefaultStack();
-        itemStack.set(SDataComponentTypes.NUM_DRINKS, 0);
+        itemStack.set(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT);
         return itemStack;
     }
 
     public static int getNumDrinks(ItemStack stack) {
-        return stack.getOrDefault(SDataComponentTypes.NUM_DRINKS, 0);
-    }
-
-    public static float getFill(ItemStack stack) {
-        return (float) getNumDrinks(stack) / MAX_DRINKS;
+        return stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT).numDrinks();
     }
 
     public static boolean hasDrink(ItemStack stack) {
         return getNumDrinks(stack) > 0;
-    }
-
-    public static void addDrinks(ItemStack stack, int value) {
-        stack.apply(
-                SDataComponentTypes.NUM_DRINKS,
-                0,
-                currentDrinks -> MathHelper.clamp(currentDrinks + value, 0, MAX_DRINKS)
-        );
     }
 
     @Override
@@ -167,7 +156,8 @@ public class WaterSkinItem extends DrinkItem {
 
     @Override
     public int getItemBarColor(ItemStack stack) {
-        float fill = Math.max(0.0f, getFill(stack));
+        DrinkContainerComponent container = stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT);
+        float fill = Math.max(0.0f, container.getCurrentFill());
 
         float saturationValue = MathHelper.clampedMap(fill, 0f, 1f, 0.5f, 1.0f);
 
@@ -183,7 +173,7 @@ public class WaterSkinItem extends DrinkItem {
         );
         world.emitGameEvent(player, GameEvent.FLUID_PICKUP, sourcePos);
         player.incrementStat(Stats.USED.getOrCreateStat(this));
-        addDrinks(stack, amount);
+        DrinkContainerComponent.addDrinks(stack, amount);
 
         CollectWaterCallback.EVENT.invoker().onWaterCollected(player, stack, sourcePos);
     }

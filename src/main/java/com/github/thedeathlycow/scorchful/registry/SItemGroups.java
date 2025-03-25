@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
+import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -47,7 +48,7 @@ public class SItemGroups {
     @Contract("->new")
     public static ItemStack makeFilledWaterSkin() {
         var filledWaterSkin = SItems.WATER_SKIN.getDefaultStack();
-        WaterSkinItem.addDrinks(filledWaterSkin, WaterSkinItem.MAX_DRINKS);
+        DrinkContainerComponent.fillCompletely(filledWaterSkin);
         return filledWaterSkin;
     }
 

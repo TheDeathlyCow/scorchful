@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.testmod.common.netherlily;
 import com.github.thedeathlycow.scorchful.block.CrimsonLilyBlock;
 import com.github.thedeathlycow.scorchful.block.NetherLilyBlock;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
+import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import net.minecraft.block.BlockState;
@@ -167,7 +168,7 @@ public class CrimsonLilyTests {
 
         PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
         ItemStack filledWaterSkin = SItems.WATER_SKIN.getDefaultStack();
-        WaterSkinItem.addDrinks(filledWaterSkin, 1);
+        DrinkContainerComponent.addDrinks(filledWaterSkin, 1);
         player.setStackInHand(Hand.MAIN_HAND, filledWaterSkin);
 
         BooleanSupplier isWaterSkinEmpty = () -> {
@@ -225,7 +226,8 @@ public class CrimsonLilyTests {
 
         PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
         var waterSkin = SItems.WATER_SKIN.getDefaultStack();
-        ((WaterSkinItem) SItems.WATER_SKIN).addDrinks(waterSkin, 1);
+
+        DrinkContainerComponent.addDrinks(waterSkin, 1);
         player.setStackInHand(Hand.MAIN_HAND, waterSkin);
 
         BooleanSupplier isWaterSkinEmpty = () -> !WaterSkinItem.hasDrink(player.getStackInHand(Hand.MAIN_HAND));

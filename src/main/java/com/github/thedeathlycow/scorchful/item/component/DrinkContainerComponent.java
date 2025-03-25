@@ -26,8 +26,8 @@ public record DrinkContainerComponent(int numDrinks, int maxDrinks) {
                             .forGetter(DrinkContainerComponent::maxDrinks)
             ).apply(instance, DrinkContainerComponent::new)
     ).validate(component -> {
-        if (component.numDrinks < 0 || component.numDrinks >= component.maxDrinks) {
-            return DataResult.error(() -> "Num drinks not in range [0, " + component.maxDrinks + "]");
+        if (component.numDrinks < 0 || component.numDrinks > component.maxDrinks) {
+            return DataResult.error(() -> "Num drinks not in range [0, " + component.maxDrinks + "]: " + component.numDrinks);
         } else {
             return DataResult.success(component);
         }
@@ -52,6 +52,14 @@ public record DrinkContainerComponent(int numDrinks, int maxDrinks) {
                 SDataComponentTypes.DRINK_CONTAINER,
                 DEFAULT,
                 current -> current.addDrinks(value)
+        );
+    }
+
+    public static DrinkContainerComponent fillCompletely(ItemStack stack) {
+        return stack.apply(
+                SDataComponentTypes.DRINK_CONTAINER,
+                DEFAULT,
+                current -> current.addDrinks(current.maxDrinks)
         );
     }
 
