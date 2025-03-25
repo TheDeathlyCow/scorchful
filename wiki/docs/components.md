@@ -17,18 +17,18 @@ Sets how much water this item should restore to players when consumed. This does
 - `{}` **components**: Parent tag.
     - `E` **scorchful:heat_resistance**: One of `parching`, `refreshing`, `sustaining`, or `hydrating`. The final water replenishing values are set by [config](./config.md).
 
-
+---
 ### Num Drinks (1.21.1-1.21.3)
-
-!!! warning
-    This component was removed in Minecraft 1.21.4 and replaced with `scorchful:drink_container`. This change was aliased so old worlds will still work with this new component.
 
 Sets the number of drinks in a [Water Skin](https://modded.wiki/w/Scorchful:Water_Skin).
 
 - `{}` **components**: Parent tag.
     - `I` **scorchful:num_drinks**: Integer in the range `[0, 16]`. Used by the [Water Skin](https://modded.wiki/w/Scorchful:Water_Skin) item to determine how many drinks it has left.
 
+!!! warning
+    This component was removed in Minecraft 1.21.4 and replaced with `scorchful:drink_container`. This change was aliased so old worlds will still work with this new component.
 
+---
 ### Drink Container (1.21.4+)
 
 Sets the current and max number of drinks in a drinkable item, such as a [Water Skin](https://modded.wiki/w/Scorchful:Water_Skin). This component sannot exist on a stackable item stack.
@@ -42,6 +42,7 @@ Or,
 - `{}` **components**: Parent tag. 
     - `I` **scorchful:drink_container**: Integer in the range `[0, 16]`. Determines the number of drinks left in this item container.
 
+---
 ### Heat Resistance
 
 This component adds Heat Resistance and Environment Heat Resistance attribute modifiers to items. This does not modify
@@ -55,8 +56,8 @@ The attributes are documented on the [Thermoo Wiki](https://thermoo.thedeathlyco
         - `D` **heat_resistance**: The heat resistance value to add to the entity when this item is worn.
         - `D` **environment_heat_resistance**: The environment heat resistance value to add to the entity when this item is worn.
 
-The final attribute modifiers are applied as an `add_value` modifier for the `thermoo:heat_resistance`<sup>1</sup>
-and `thermoo:environment_heat_resistance`<sup>1</sup> attributes with modifier IDs
+The final attribute modifiers are applied as an `add_value` modifier for the `thermoo:heat_resistance`[^1]
+and `thermoo:environment_heat_resistance`[^1] attributes with modifier IDs
 of `scorchful:base_heat_resistance/${slot_id}` and `scorchful:base_environment_heat_resistance/${slot_id}`,
 respectively.
 
@@ -79,5 +80,4 @@ respectively.
     | Turtle Shell                               | Very Protective (+1 HR, +0.25 EHR)  |
     | All other [Turtle Armor](./Turtle-Armor)   | Very Protective (+1 HR, +0.25 EHR)  |
 
----
-<sup>1</sup>In 1.21.1 and below, these attribute IDs are `thermoo:generic.heat_resistance` and `thermoo:generic.environment_heat_resistance`.
+[^1]: In 1.21.1 and below, these attribute IDs are `thermoo:generic.heat_resistance` and `thermoo:generic.environment_heat_resistance`.
