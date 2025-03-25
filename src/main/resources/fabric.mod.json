@@ -44,10 +44,10 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.16.10",
-		"minecraft": ">=1.21.2 <=1.21.3",
+		"minecraft": "1.21.4",
 		"java": ">=21",
-		"fabric-api": ">=0.114.0",
-		"thermoo": ">=5.2"
+		"fabric-api": ">=0.119.2",
+		"thermoo": ">=5.2.1"
 	},
 	"suggests": {
 		"frostiful": "*",

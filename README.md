@@ -56,11 +56,12 @@ These are the current versions being supported by Scorchful.
 
 | Minecraft Version | Support Status         |
 |-------------------|------------------------|
-| 1.21.3            | ✅ Supported            | 
+| 1.21.4            | ✅ Supported            | 
+| 1.21.3            | ⚠️ Critical fixes only | 
 | 1.21.1            | ✅ Supported            | 
 | 1.20.4            | ❌ Unsupported          | 
 | 1.20.2            | ❌ Unsupported          | 
-| 1.20.1            | ⚠️ Critical fixes only |
+| 1.20.1            | ❌ Unsupported          |
 | 1.19.4            | ❌ Unsupported          |
 | 1.19.2            | ❌ Unsupported          | 
 
