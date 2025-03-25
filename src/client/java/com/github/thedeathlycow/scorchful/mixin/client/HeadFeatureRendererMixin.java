@@ -1,11 +1,13 @@
 package com.github.thedeathlycow.scorchful.mixin.client;
 
 import com.github.thedeathlycow.scorchful.registry.SItems;
+import net.minecraft.client.data.EquipmentAssetProvider;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.HeadFeatureRenderer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.ModelWithHead;
 import net.minecraft.client.render.entity.state.LivingEntityRenderState;
+import net.minecraft.client.render.item.ItemRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,9 +31,10 @@ public class HeadFeatureRendererMixin<S extends LivingEntityRenderState, M exten
             float limbDistance,
             CallbackInfo ci
     ) {
-        ItemStack stack = state.equippedHeadStack;
-        if (stack.isOf(SItems.SUN_HAT)) {
-            ci.cancel();
-        }
+//        EquipmentAssetProvider
+//        ItemRenderState stack = state.headItemRenderState;
+//        if (stack.isOf(SItems.SUN_HAT)) {
+//            ci.cancel();
+//        }
     }
 }
