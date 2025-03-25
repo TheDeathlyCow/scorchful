@@ -6,6 +6,7 @@ import com.github.thedeathlycow.scorchful.datagen.generator.ClimateBiomeTagGener
 import com.github.thedeathlycow.scorchful.datagen.generator.EnvironmentProviderTagGenerator;
 import com.github.thedeathlycow.scorchful.datagen.generator.ItemTagGenerator;
 import com.github.thedeathlycow.scorchful.datagen.generator.ScorchfulRecipeGenerator;
+import com.github.thedeathlycow.scorchful.datagen.generator.client.SModelGenerator;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import org.jetbrains.annotations.Nullable;
@@ -29,6 +30,8 @@ public class ScorchfulDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider((output, registriesFuture) -> new ItemTagGenerator(output, registriesFuture, blockTags));
 
         pack.addProvider(ScorchfulRecipeGenerator::new);
+
+        pack.addProvider(SModelGenerator::new);
     }
 
     @Override

@@ -1,0 +1,14 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "scorchful:item/water_skin/full"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "scorchful:item/water_skin/empty"
+    },
+    "property": "scorchful:water_skin/is_empty"
+  }
+}

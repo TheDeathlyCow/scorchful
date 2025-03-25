@@ -7,6 +7,7 @@ import com.github.thedeathlycow.scorchful.hud.BurningHeartsOverlay;
 import com.github.thedeathlycow.scorchful.hud.MountHealthOverlay;
 import com.github.thedeathlycow.scorchful.hud.SoakingUnderlay;
 import com.github.thedeathlycow.scorchful.item.ItemTooltips;
+import com.github.thedeathlycow.scorchful.item.WaterSkinIsEmptyProperty;
 import com.github.thedeathlycow.scorchful.network.SoundTemperatureEffectPacketListener;
 import com.github.thedeathlycow.scorchful.registry.SCutouts;
 import com.github.thedeathlycow.scorchful.registry.SEntityModelLayers;
@@ -20,6 +21,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.render.item.property.bool.BooleanProperties;
 
 @Environment(EnvType.CLIENT)
 public class ScorchfulClient implements ClientModInitializer {
@@ -48,6 +50,8 @@ public class ScorchfulClient implements ClientModInitializer {
         );
 
         ShaderStatusEffectManagers.initialize();
+
+        BooleanProperties.ID_MAPPER.put(Scorchful.id("water_skin/is_empty"), WaterSkinIsEmptyProperty.CODEC);
     }
 
 }
