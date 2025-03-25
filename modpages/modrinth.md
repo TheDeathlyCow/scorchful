@@ -1,6 +1,6 @@
 <center>
 
-<img src="https://raw.githubusercontent.com/TheDeathlyCow/scorchful/main/docs/banner.png" alt="Scorchful banner showing a Sandstorm and a Crimson Lily side by side"/>
+<img src="https://raw.githubusercontent.com/TheDeathlyCow/scorchful/HEAD/docs/banner.png" alt="Scorchful banner showing a Sandstorm and a Crimson Lily side by side"/>
 
 <i>"Survival is the ability to swim in strange water."</i><br/>
 <i>- Frank Herbert, Dune</i>
@@ -8,7 +8,7 @@
 <br/>
 
 <a href="https://modrinth.com/mod/frostiful">
-<img src="https://raw.githubusercontent.com/TheDeathlyCow/scorchful/main/docs/try_frostiful.svg" alt="Want something a little cooler? Try Frostiful!"/>
+<img src="https://raw.githubusercontent.com/TheDeathlyCow/scorchful/HEAD/docs/try_frostiful.svg" alt="Want something a little cooler? Try Frostiful!"/>
 </a>
 
 </center>
@@ -19,7 +19,7 @@
 
 ## Keeping Wet and Staying Cool
 
-<img src="https://raw.githubusercontent.com/TheDeathlyCow/scorchful/main/docs/oasis.png" alt="A player wearing a Sun Hat and turtle armor drinking from a water skin."/>
+<img src="https://raw.githubusercontent.com/TheDeathlyCow/scorchful/HEAD/docs/oasis.png" alt="A player wearing a Sun Hat and turtle armor drinking from a water skin."/>
 <center>
   A player wearing a Sun Hat and Turtle Armor drinking from a water skin.
 </center>
@@ -31,7 +31,7 @@ Overcome the heat by **Staying Wet**. You can go for a dip in the pond or river,
 
 ## Enhanced Nether Survival
 
-<img src="https://raw.githubusercontent.com/TheDeathlyCow/scorchful/main/docs/warped_farm.png" alt="A Piglin protecting its patch of Warped Lillies."/>
+<img src="https://raw.githubusercontent.com/TheDeathlyCow/scorchful/HEAD/docs/warped_farm.png" alt="A Piglin protecting its patch of Warped Lillies."/>
 <center>
   A Piglin protecting its patch of Warped Lillies.
 </center>
@@ -43,7 +43,7 @@ The Nether is an extreme environment that brings many new perils. It is hotter t
 
 ## Sandstorms
 
-<img src="https://raw.githubusercontent.com/TheDeathlyCow/scorchful/main/docs/sandstorm.png" alt="A Sandstorm envelopes a dead tree in the Desert."/>
+<img src="https://raw.githubusercontent.com/TheDeathlyCow/scorchful/HEAD/docs/sandstorm.png" alt="A Sandstorm envelopes a dead tree in the Desert."/>
 <center>
   A Sandstorm envelopes a dead tree in the Desert.
 </center>
@@ -53,7 +53,7 @@ The Nether is an extreme environment that brings many new perils. It is hotter t
 
 ## Combat and Future Plans
 
-<img src="https://raw.githubusercontent.com/TheDeathlyCow/scorchful/main/docs/wastes.png" alt="A Crimson Lily growing in the hostile Nether Wastes."/>
+<img src="https://raw.githubusercontent.com/TheDeathlyCow/scorchful/HEAD/docs/wastes.png" alt="A Crimson Lily growing in the hostile Nether Wastes."/>
 <center>
   A Crimson Lily growing in the hostile Nether Wastes.
 </center>
@@ -73,12 +73,12 @@ Scorchful is extremely highly configurable. It has an extensive config that lets
 
 # Mod Integrations
 
-Scorchful is designed to work alongside [Frostiful](https://modrinth.com/mod/frostiful), as its heat-focused sister mod. It also also out-of-the-box integration for [Dehydration](https://modrinth.com/mod/dehydration). Additionally, [Thermoo Patches](https://modrinth.com/mod/thermoo-patches) offers a suite of integration patches for many other mods, such as Origins, Fabric Seasons, Colorful Hearts, Overflowing Bars, Armor Points++, Ad Astra, and more!
+Scorchful is designed to work alongside [Frostiful](https://modrinth.com/mod/frostiful), as its heat-focused sister mod. It also has out-of-the-box integration for [Dehydration](https://modrinth.com/mod/dehydration). Additionally, [Thermoo Patches](https://modrinth.com/mod/thermoo-patches) offers a suite of integration patches for many other mods, such as Origins, Fabric Seasons, Serene Seasons, Colorful Hearts, Overflowing Bars, Friends & Foes, and more!
 
 
 * [Frostiful](https://modrinth.com/mod/frostiful): Scorchful has native support for Frostiful, and both mods are designed to work alongside each other. I highly recommend using both!
 * [Dehydration](https://modrinth.com/mod/dehydration): If Dehydration is enabled, Scorchful will automatically disable the built-in thirst system and use Dehydration's instead.
-* [Colorful Hearts](https://modrinth.com/mod/colorful-hearts) & [Overflowing Bars](https://modrinth.com/mod/overflowing-bars): Burning Hearts render on top of the new hearts from these mods. However, engulfed hearts currently do not work.
+* [Colorful Hearts](https://modrinth.com/mod/colorful-hearts) & [Overflowing Bars](https://modrinth.com/mod/overflowing-bars): When using [Thermoo Patches](https://modrinth.com/mod/thermoo-patches), burning Hearts will render on top of the new hearts from these mods. However, engulfed hearts currently do not work.
 * [Enchantment Descriptions](https://modrinth.com/mod/enchantment-descriptions): A description is provided for the Rehydration enchantment for Armor.
 * [Trinkets](https://modrinth.com/mod/trinkets): The Sun Hat can be worn in the Hat slot, and provides the same benefits as when equipped in the regular head slot.
 * [Farmer's Delight](https://modrinth.com/mod/farmers-delight-fabric): Foods and Drinks from Farmer's Delight have been integrated to provide water, where it makes sense to do so.
