@@ -33,7 +33,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
-public class WaterSkinItem extends DrinkItem {
+public class WaterSkinItem extends Item {
     public static final Style TOOLTIP_STYLE = DrinkContainerComponent.TOOLTIP_STYLE;
 
     public static final Style PARCHING_STYLE = Style.EMPTY

@@ -45,6 +45,7 @@ public final class SDataComponentTypes {
             builder -> builder
                     .codec(Codec.unit(Unit.INSTANCE))
                     .packetCodec(PacketCodec.unit(Unit.INSTANCE))
+                    .cache()
     );
 
     public static void initialize() {

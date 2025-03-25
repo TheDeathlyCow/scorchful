@@ -2,7 +2,6 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
-import com.github.thedeathlycow.scorchful.item.DrinkItem;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
 import com.github.thedeathlycow.scorchful.item.SunHatItem;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
@@ -56,7 +55,7 @@ public final class SItems {
 
     public static final Item CACTUS_JUICE = register(
             "cactus_juice",
-            settings -> new DrinkItem(
+            settings -> new Item(
                     settings.maxCount(16)
                             .recipeRemainder(Items.GLASS_BOTTLE)
                             .useRemainder(Items.GLASS_BOTTLE)
