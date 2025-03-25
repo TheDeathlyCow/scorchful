@@ -8,8 +8,7 @@ This page documents the various component types added by Scorchful.
 
 ## Item Components
 
-This is a new component type added for items. For the full format in Vanilla,
-see: [https://minecraft.wiki/w/Data_component_format](https://minecraft.wiki/w/Data_component_format)
+These are the new component types added for items. For the full format in Vanilla, see: [https://minecraft.wiki/w/Data_component_format](https://minecraft.wiki/w/Data_component_format)
 
 ### Drink Level
 
@@ -18,10 +17,30 @@ Sets how much water this item should restore to players when consumed. This does
 - `{}` **components**: Parent tag.
     - `E` **scorchful:heat_resistance**: One of `parching`, `refreshing`, `sustaining`, or `hydrating`. The final water replenishing values are set by [config](./config.md).
 
-### Num Drinks
+
+### Num Drinks (1.21.1-1.21.3)
+
+!!! warning
+    This component was removed in Minecraft 1.21.4 and replaced with `scorchful:drink_container`. This change was aliased so old worlds will still work with this new component.
+
+Sets the number of drinks in a [Water Skin](https://modded.wiki/w/Scorchful:Water_Skin).
 
 - `{}` **components**: Parent tag.
-    - `I` **scorchful:num_drinks**: Integer in the range `[0, 16]`. Used by the [Water Skin](./Water-Skin) item to determine how many drinks it has left.
+    - `I` **scorchful:num_drinks**: Integer in the range `[0, 16]`. Used by the [Water Skin](https://modded.wiki/w/Scorchful:Water_Skin) item to determine how many drinks it has left.
+
+
+### Drink Container (1.21.4+)
+
+Sets the current and max number of drinks in a drinkable item, such as a [Water Skin](https://modded.wiki/w/Scorchful:Water_Skin). This component sannot exist on a stackable item stack.
+
+- `{}` **components**: Parent tag.
+    - `{}` **scorchful:drink_container**: A compound component.
+        - `I` **num_drinks**: Integer in the range `[0, max_drinks]`. Determines the number of drinks left in this item container.
+        - `I` **max_drinks**: Optional positive integer. The maximum number of drinks this container may have. Defaults to `16`.
+
+Or,
+- `{}` **components**: Parent tag. 
+    - `I` **scorchful:drink_container**: Integer in the range `[0, 16]`. Determines the number of drinks left in this item container.
 
 ### Heat Resistance
 
