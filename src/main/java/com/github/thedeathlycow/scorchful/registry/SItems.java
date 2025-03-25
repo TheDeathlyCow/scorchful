@@ -2,7 +2,11 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
-import com.github.thedeathlycow.scorchful.item.*;
+import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
+import com.github.thedeathlycow.scorchful.item.SingleDrinkItem;
+import com.github.thedeathlycow.scorchful.item.SunHatItem;
+import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
+import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.item.component.HeatResistanceComponent;
 import com.github.thedeathlycow.scorchful.item.component.HeatResistanceModifier;
@@ -14,7 +18,6 @@ import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.block.Block;
 import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
@@ -35,7 +38,7 @@ public final class SItems {
                     settings
                             .maxCount(1)
                             .component(DataComponentTypes.CONSUMABLE, WaterSkinItem.consumable())
-                            .component(SDataComponentTypes.NUM_DRINKS, 0)
+                            .component(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT)
                             .component(SDataComponentTypes.DRINK_LEVEL, DrinkLevelComponent.HYDRATING)
             )
     );
@@ -67,7 +70,7 @@ public final class SItems {
 
     public static final Item ROOTED_NETHERRACK = register("rooted_netherrack", SBlocks.ROOTED_NETHERRACK);
 
-    public static final Item ROOTED_CRIMSON_NYLIUM = register("rooted_crimson_nylium",SBlocks.ROOTED_CRIMSON_NYLIUM );
+    public static final Item ROOTED_CRIMSON_NYLIUM = register("rooted_crimson_nylium", SBlocks.ROOTED_CRIMSON_NYLIUM);
 
     public static final Item ROOTED_WARPED_NYLIUM = register("rooted_warped_nylium", SBlocks.ROOTED_WARPED_NYLIUM);
 

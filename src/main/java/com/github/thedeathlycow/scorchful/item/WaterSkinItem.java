@@ -145,15 +145,6 @@ public class WaterSkinItem extends DrinkItem {
     }
 
     @Override
-    public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        if (!hasDrink(stack)) {
-            return stack;
-        }
-
-        return super.finishUsing(stack, world, user);
-    }
-
-    @Override
     public int getMaxUseTime(ItemStack stack, LivingEntity user) {
         return hasDrink(stack) ? DrinkItem.DRINK_TIME_TICKS : 0;
     }

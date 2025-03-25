@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
+import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.item.component.HeatResistanceComponent;
 import com.mojang.serialization.Codec;
@@ -15,8 +16,7 @@ import net.minecraft.util.dynamic.Codecs;
 
 import java.util.function.UnaryOperator;
 
-public class SDataComponentTypes {
-
+public final class SDataComponentTypes {
     public static final ComponentType<DrinkLevelComponent> DRINK_LEVEL = register(
             "drink_level",
             builder -> builder
@@ -25,11 +25,11 @@ public class SDataComponentTypes {
                     .cache()
     );
 
-    public static final ComponentType<Integer> NUM_DRINKS = register(
-            "num_drinks",
+    public static final ComponentType<DrinkContainerComponent> DRINK_CONTAINER = register(
+            "drink_container",
             builder -> builder
-                    .codec(Codecs.rangedInt(0, WaterSkinItem.MAX_DRINKS))
-                    .packetCodec(PacketCodecs.VAR_INT)
+                    .codec(DrinkContainerComponent.CODEC)
+                    .packetCodec(DrinkContainerComponent.PACKET_CODEC)
     );
 
     public static final ComponentType<HeatResistanceComponent> HEAT_RESISTANCE = register(
@@ -49,6 +49,8 @@ public class SDataComponentTypes {
 
     public static void initialize() {
         Scorchful.LOGGER.debug("Initialized Scorchful item components");
+
+        Registries.DATA_COMPONENT_TYPE.addAlias(Scorchful.id("num_drinks"), Scorchful.id("drink_container"));
     }
 
     private static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
