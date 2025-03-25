@@ -2,17 +2,21 @@ package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
+import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.consume.UseAction;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
-public abstract class DrinkItem extends Item {
+import java.io.Console;
+
+public class DrinkItem extends Item {
 
     public static final int DRINK_TIME_TICKS = 32;
     private static final int START_DRINK_PARTICLES = DRINK_TIME_TICKS - 10;
@@ -20,8 +24,6 @@ public abstract class DrinkItem extends Item {
     public DrinkItem(Settings settings) {
         super(settings);
     }
-
-    protected abstract ItemStack getPostConsumeStack(ItemStack stack, World world, ServerPlayerEntity serverPlayer);
 
     @Override
     public ItemStack getDefaultStack() {

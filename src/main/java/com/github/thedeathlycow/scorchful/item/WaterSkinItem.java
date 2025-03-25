@@ -48,24 +48,6 @@ public class WaterSkinItem extends DrinkItem {
         CauldronBehavior.WATER_CAULDRON_BEHAVIOR.map().put(this, this::onCauldronInteract);
     }
 
-    public static ConsumableComponent consumable() {
-        return ConsumableComponent.builder()
-                .sound(SoundEvents.ENTITY_GENERIC_DRINK)
-                .useAction(UseAction.DRINK)
-                .consumeSeconds(DRINK_TIME_TICKS / 20f)
-                .consumeParticles(false)
-                .build();
-    }
-
-    @Override
-    protected ItemStack getPostConsumeStack(ItemStack stack, World world, ServerPlayerEntity serverPlayer) {
-        if (!serverPlayer.isCreative()) {
-            DrinkContainerComponent.addDrinks(stack, -1);
-        }
-
-        return stack;
-    }
-
     @Override
     public ItemStack getDefaultStack() {
         var itemStack = super.getDefaultStack();

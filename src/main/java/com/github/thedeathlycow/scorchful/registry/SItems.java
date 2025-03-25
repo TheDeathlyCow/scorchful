@@ -2,8 +2,8 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
+import com.github.thedeathlycow.scorchful.item.DrinkItem;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
-import com.github.thedeathlycow.scorchful.item.SingleDrinkItem;
 import com.github.thedeathlycow.scorchful.item.SunHatItem;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
@@ -18,6 +18,7 @@ import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.block.Block;
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ConsumableComponents;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
@@ -37,7 +38,7 @@ public final class SItems {
             settings -> new WaterSkinItem(
                     settings
                             .maxCount(1)
-                            .component(DataComponentTypes.CONSUMABLE, WaterSkinItem.consumable())
+                            .component(DataComponentTypes.CONSUMABLE, ConsumableComponents.DRINK)
                             .component(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT)
                             .component(SDataComponentTypes.DRINK_LEVEL, DrinkLevelComponent.HYDRATING)
             )
@@ -55,12 +56,12 @@ public final class SItems {
 
     public static final Item CACTUS_JUICE = register(
             "cactus_juice",
-            settings -> new SingleDrinkItem(
-                    settings
-                            .maxCount(16)
+            settings -> new DrinkItem(
+                    settings.maxCount(16)
                             .recipeRemainder(Items.GLASS_BOTTLE)
-                            .component(SDataComponentTypes.DRINK_LEVEL, DrinkLevelComponent.HYDRATING),
-                    Items.GLASS_BOTTLE::getDefaultStack
+                            .useRemainder(Items.GLASS_BOTTLE)
+                            .component(DataComponentTypes.CONSUMABLE, ConsumableComponents.DRINK)
+                            .component(SDataComponentTypes.DRINK_LEVEL, DrinkLevelComponent.HYDRATING)
             )
     );
 
