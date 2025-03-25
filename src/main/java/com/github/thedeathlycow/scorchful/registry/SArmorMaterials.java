@@ -2,11 +2,11 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import net.minecraft.item.equipment.ArmorMaterial;
-import net.minecraft.item.equipment.EquipmentModels;
+import net.minecraft.item.equipment.EquipmentAssetKeys;
 import net.minecraft.item.equipment.EquipmentType;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 
 import java.util.EnumMap;
@@ -26,7 +26,7 @@ public final class SArmorMaterials {
             0.0f,
             0.0f,
             ItemTags.REPAIRS_TURTLE_HELMET,
-            Scorchful.id("turtle")
+            RegistryKey.of(EquipmentAssetKeys.REGISTRY_KEY, Scorchful.id("turtle"))
     );
 
     private SArmorMaterials() {
