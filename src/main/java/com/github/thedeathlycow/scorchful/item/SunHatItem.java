@@ -1,17 +1,13 @@
 package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
-import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
-import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.component.type.EquippableComponent;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -56,17 +52,6 @@ public class SunHatItem extends Item {
                 )
                 .build();
     }
-
-//    public static boolean isWearingSunHat(LivingEntity entity) {
-//        boolean isWearingInTrinketSlot = false;
-//        if (ScorchfulIntegrations.isModLoaded(ScorchfulIntegrations.TRINKETS_ID)) {
-//            isWearingInTrinketSlot = TrinketsApi.getTrinketComponent(entity)
-//                    .map(trinketComponent -> trinketComponent.isEquipped(stack -> stack.isIn(SItemTags.IS_SUN_PROTECTING_HAT)))
-//                    .orElse(false);
-//        }
-//        return isWearingInTrinketSlot
-//                || entity.getEquippedStack(EquipmentSlot.HEAD).isIn(SItemTags.IS_SUN_PROTECTING_HAT);
-//    }
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {

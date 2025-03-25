@@ -16,8 +16,6 @@ public class SItemTags {
 
     public static final TagKey<Item> IS_PARCHING = of("is_parching");
 
-    public static final TagKey<Item> IS_SUN_PROTECTING_HAT = of("is_sun_protecting_hat");
-
     public static final TagKey<Item> TURTLE_ARMOR = of("turtle_armor");
 
     public static final TagKey<Item> BLOCKS_RAIN_WHEN_HOLDING = of("blocks_rain_when_holding");

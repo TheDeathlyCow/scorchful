@@ -145,7 +145,6 @@ dependencies {
     // still not updated :(
     // include "org.ladysnake:satin:${satin_version}"
 
-    modCompileOnly "dev.emi:trinkets:${project.trinkets_version}"
     modCompileOnly("maven.modrinth:dehydration:${project.dehydration_version}") { transitive = false }
 
     afterEvaluate {
