@@ -5,14 +5,26 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipAppender;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.util.math.MathHelper;
 
-public record DrinkContainerComponent(int numDrinks, int maxDrinks) {
+import java.util.function.Consumer;
+
+public record DrinkContainerComponent(int numDrinks, int maxDrinks) implements TooltipAppender {
+    public static final Style TOOLTIP_STYLE = Style.EMPTY
+            .withColor(Formatting.AQUA);
+
     public static final DrinkContainerComponent DEFAULT = new DrinkContainerComponent(0, 16);
 
     private static final Codec<DrinkContainerComponent> VALUE_CODEC = RecordCodecBuilder.<DrinkContainerComponent>create(
@@ -83,5 +95,14 @@ public record DrinkContainerComponent(int numDrinks, int maxDrinks) {
 
     public boolean isFull() {
         return this.numDrinks >= this.maxDrinks;
+    }
+
+    @Override
+    public void appendTooltip(Item.TooltipContext context, Consumer<Text> tooltip, TooltipType type) {
+        MutableText text = this.hasDrink()
+                ? Text.translatable("item.scorchful.water_skin.tooltip.count", this.numDrinks(), this.maxDrinks())
+                : Text.translatable("item.scorchful.water_skin.tooltip.empty");
+        text.setStyle(TOOLTIP_STYLE);
+        tooltip.accept(text);
     }
 }

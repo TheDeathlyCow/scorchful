@@ -16,6 +16,8 @@ import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipAppender;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.tag.TagKey;
@@ -25,10 +27,11 @@ import net.minecraft.util.function.ValueLists;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.Consumer;
 import java.util.function.IntFunction;
 import java.util.function.ToIntFunction;
 
-public enum DrinkLevelComponent implements StringIdentifiable, Consumable {
+public enum DrinkLevelComponent implements StringIdentifiable, Consumable, TooltipAppender {
     PARCHING(
             "parching",
             SItemTags.IS_PARCHING,
@@ -123,5 +126,10 @@ public enum DrinkLevelComponent implements StringIdentifiable, Consumable {
                 user.playSound(SSoundEvents.ENTITY_GULP, 1f, 1f);
             }
         }
+    }
+
+    @Override
+    public void appendTooltip(Item.TooltipContext context, Consumer<Text> tooltip, TooltipType type) {
+        tooltip.accept(this.tooltipText);
     }
 }

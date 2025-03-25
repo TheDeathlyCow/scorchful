@@ -14,13 +14,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.consume.UseAction;
-import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -35,12 +33,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-
 public class WaterSkinItem extends DrinkItem {
-
-    public static final Style TOOLTIP_STYLE = Style.EMPTY
-            .withColor(Formatting.AQUA);
+    public static final Style TOOLTIP_STYLE = DrinkContainerComponent.TOOLTIP_STYLE;
 
     public static final Style PARCHING_STYLE = Style.EMPTY
             .withColor(Formatting.RED);
@@ -85,22 +79,6 @@ public class WaterSkinItem extends DrinkItem {
 
     public static boolean hasDrink(ItemStack stack) {
         return stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT).hasDrink();
-    }
-
-    @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType tooltipType) {
-        DrinkContainerComponent container = getContainer(stack);
-
-        if (container.numDrinks() > 0) {
-            super.appendTooltip(stack, context, tooltip, tooltipType);
-        }
-
-        MutableText text = container.hasDrink()
-                ? Text.translatable("item.scorchful.water_skin.tooltip.count", container.numDrinks(), container.maxDrinks())
-                : Text.translatable("item.scorchful.water_skin.tooltip.empty");
-        text.setStyle(TOOLTIP_STYLE);
-
-        tooltip.add(text);
     }
 
     @Override
