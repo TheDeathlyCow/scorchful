@@ -31,35 +31,4 @@ public class DrinkItem extends Item {
         itemStack.set(SDataComponentTypes.DRINK_LEVEL, DrinkLevelComponent.HYDRATING);
         return itemStack;
     }
-
-    @Override
-    public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
-        super.usageTick(world, user, stack, remainingUseTicks);
-        if (world.isClient && remainingUseTicks < START_DRINK_PARTICLES) {
-            spawnWaterParticles(world, user, 2);
-        }
-    }
-
-    private static void spawnWaterParticles(World world, LivingEntity entity, int count) {
-        Random random = entity.getRandom();
-
-        for (int i = 0; i < count; i++) {
-
-            var velocity = new Vec3d((random.nextFloat() - 0.5) * 0.1, Math.random() * 0.1 + 1, 0);
-            velocity = velocity.rotateX(-entity.getPitch() * (MathHelper.PI / 180f));
-            velocity = velocity.rotateY(-entity.getYaw() * (MathHelper.PI / 180f));
-
-            double y = -random.nextFloat() * 0.6 - 0.3;
-            var postion = new Vec3d((random.nextFloat() - 0.5) * 0.3, y, 0.6);
-            postion = postion.rotateX(-entity.getPitch() * (MathHelper.PI / 180f));
-            postion = postion.rotateY(-entity.getYaw() * (MathHelper.PI / 180f));
-            postion = postion.add(entity.getX(), entity.getEyeY(), entity.getZ());
-
-            world.addParticle(
-                    ParticleTypes.SPLASH,
-                    postion.x, postion.y, postion.z,
-                    velocity.x, velocity.y + 1, velocity.z
-            );
-        }
-    }
 }

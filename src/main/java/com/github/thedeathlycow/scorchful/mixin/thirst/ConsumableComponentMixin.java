@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.mixin.thirst;
 
 import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
+import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -8,10 +9,12 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ConsumableComponent.class)
@@ -50,6 +53,17 @@ public class ConsumableComponentMixin {
         DrinkContainerComponent component = stack.get(SDataComponentTypes.DRINK_CONTAINER);
         if (component != null && component.hasDrink()) {
             stack.set(SDataComponentTypes.DRINK_CONTAINER, component.addDrinks(-1));
+        }
+    }
+
+    @Inject(
+            method = "spawnParticlesAndPlaySound",
+            at = @At("TAIL")
+    )
+    private void spawnWaterParticles(Random random, LivingEntity user, ItemStack stack, int particleCount, CallbackInfo ci) {
+        DrinkLevelComponent level = stack.get(SDataComponentTypes.DRINK_LEVEL);
+        if (level == DrinkLevelComponent.HYDRATING) {
+            DrinkLevelComponent.spawnWaterParticles(user.getWorld(), user, particleCount);
         }
     }
 }
