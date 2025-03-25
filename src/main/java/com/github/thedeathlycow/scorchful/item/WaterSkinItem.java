@@ -8,7 +8,7 @@ import com.github.thedeathlycow.scorchful.registry.SStats;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -18,11 +18,14 @@ import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -51,6 +54,15 @@ public class WaterSkinItem extends DrinkItem {
     public WaterSkinItem(Settings settings) {
         super(settings);
         CauldronBehavior.WATER_CAULDRON_BEHAVIOR.map().put(this, this::onCauldronInteract);
+    }
+
+    public static ConsumableComponent consumable() {
+        return ConsumableComponent.builder()
+                .sound(SoundEvents.ENTITY_GENERIC_DRINK)
+                .useAction(UseAction.DRINK)
+                .consumeSeconds(DRINK_TIME_TICKS / 20f)
+                .consumeParticles(false)
+                .build();
     }
 
     @Override
@@ -144,11 +156,6 @@ public class WaterSkinItem extends DrinkItem {
     @Override
     public int getMaxUseTime(ItemStack stack, LivingEntity user) {
         return hasDrink(stack) ? DrinkItem.DRINK_TIME_TICKS : 0;
-    }
-
-    @Override
-    public UseAction getUseAction(ItemStack stack) {
-        return hasDrink(stack) ? UseAction.DRINK : UseAction.NONE;
     }
 
     @Override

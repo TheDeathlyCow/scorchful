@@ -13,6 +13,8 @@ import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.block.Block;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
@@ -32,6 +34,7 @@ public final class SItems {
             settings -> new WaterSkinItem(
                     settings
                             .maxCount(1)
+                            .component(DataComponentTypes.CONSUMABLE, WaterSkinItem.consumable())
                             .component(SDataComponentTypes.NUM_DRINKS, 0)
                             .component(SDataComponentTypes.DRINK_LEVEL, DrinkLevelComponent.HYDRATING)
             )
@@ -109,7 +112,6 @@ public final class SItems {
         Scorchful.LOGGER.debug("Initialized Scorchful items");
         UseItemCallback.EVENT.register(new FireChargeThrower());
         ScorchfulItemEvents.GET_DEFAULT_STACK.register(DrinkLevelComponent::applyToNewStack);
-        ScorchfulItemEvents.CONSUME_ITEM.register(DrinkItem::applyWater);
         ScorchfulItemEvents.CONSUME_ITEM.register((stack, player) -> {
             if (stack.isIn(SItemTags.IS_COOLING_FOOD)) {
                 player.thermoo$addTemperature(

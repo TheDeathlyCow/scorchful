@@ -1,11 +1,19 @@
 package com.github.thedeathlycow.scorchful.item.component;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
+import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
+import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.ThirstConfig;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
+import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.component.type.Consumable;
+import net.minecraft.component.type.ConsumableComponent;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.codec.PacketCodec;
@@ -14,12 +22,13 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.function.ValueLists;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.IntFunction;
 import java.util.function.ToIntFunction;
 
-public enum DrinkLevelComponent implements StringIdentifiable {
+public enum DrinkLevelComponent implements StringIdentifiable, Consumable {
     PARCHING(
             "parching",
             SItemTags.IS_PARCHING,
@@ -99,4 +108,20 @@ public enum DrinkLevelComponent implements StringIdentifiable {
         return this.name;
     }
 
+    @Override
+    public void onConsume(World world, LivingEntity user, ItemStack stack, ConsumableComponent consumable) {
+        if (ServerThirstPlugin.isCustomPluginLoaded()) {
+            return;
+        }
+
+        PlayerWaterComponent waterComponent = ScorchfulComponents.PLAYER_WATER.getNullable(user);
+        if (waterComponent != null) {
+            int water = this.getDrinkingWater(Scorchful.getConfig().thirstConfig);
+            waterComponent.drink(water);
+
+            if (waterComponent.getWaterDrunk() >= PlayerWaterComponent.MAX_WATER * 0.9) {
+                user.playSound(SSoundEvents.ENTITY_GULP, 1f, 1f);
+            }
+        }
+    }
 }

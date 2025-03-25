@@ -44,65 +44,11 @@ public abstract class DrinkItem extends Item {
     }
 
     @Override
-    public ActionResult use(World world, PlayerEntity user, Hand hand) {
-        return ItemUsage.consumeHeldItem(world, user, hand);
-    }
-
-    @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         super.usageTick(world, user, stack, remainingUseTicks);
         if (world.isClient && remainingUseTicks < START_DRINK_PARTICLES) {
             spawnWaterParticles(world, user, 2);
         }
-    }
-
-    @Override
-    public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        user.emitGameEvent(GameEvent.DRINK);
-
-        if (user instanceof ServerPlayerEntity serverPlayer) {
-            Criteria.CONSUME_ITEM.trigger(serverPlayer, stack);
-            serverPlayer.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
-            return this.getPostConsumeStack(super.finishUsing(stack, world, user), world, serverPlayer);
-        } else {
-            return super.finishUsing(stack, world, user);
-        }
-    }
-
-    /**
-     * Called from {@link com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents#CONSUME_ITEM}. Applies water from drinking to the user.
-     *
-     * @param stack  Stack being consumed
-     * @param player Player consuming the drink
-     */
-    public static void applyWater(ItemStack stack, ServerPlayerEntity player) {
-        if (ServerThirstPlugin.isCustomPluginLoaded()) {
-            return;
-        }
-
-        DrinkLevelComponent drink = stack.get(SDataComponentTypes.DRINK_LEVEL);
-        if (drink == null) {
-            return;
-        }
-
-        PlayerWaterComponent component = ScorchfulComponents.PLAYER_WATER.get(player);
-
-        int water = drink.getDrinkingWater(Scorchful.getConfig().thirstConfig);
-        component.drink(water);
-
-        if (component.getWaterDrunk() >= PlayerWaterComponent.MAX_WATER * 0.9) {
-            player.playSound(SSoundEvents.ENTITY_GULP, 1f, 1f);
-        }
-    }
-
-    @Override
-    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
-        return DRINK_TIME_TICKS;
-    }
-
-    @Override
-    public UseAction getUseAction(ItemStack stack) {
-        return UseAction.DRINK;
     }
 
     private static void spawnWaterParticles(World world, LivingEntity entity, int count) {
