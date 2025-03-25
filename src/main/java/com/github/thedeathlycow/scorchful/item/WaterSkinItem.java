@@ -112,11 +112,7 @@ public class WaterSkinItem extends DrinkItem {
             return refillResult;
         }
 
-        if (hasDrink(stack)) {
-            return super.use(world, user, hand);
-        }
-
-        return ActionResult.PASS;
+        return super.use(world, user, hand);
     }
 
     @Override

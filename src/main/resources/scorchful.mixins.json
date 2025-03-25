@@ -19,6 +19,7 @@
         "accessor.PointOfInterestTypesAccessor",
         "compat.frostiful.absent.EntityMixin",
         "server.SandAccumulationServerWorldMixin",
+        "thirst.ConsumableComponentMixin",
         "thirst.ConsumeItemCriterionMixin",
         "thirst.PotionEntityMixin"
     ],
