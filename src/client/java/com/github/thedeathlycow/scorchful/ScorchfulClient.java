@@ -7,7 +7,6 @@ import com.github.thedeathlycow.scorchful.hud.BurningHeartsOverlay;
 import com.github.thedeathlycow.scorchful.hud.MountHealthOverlay;
 import com.github.thedeathlycow.scorchful.hud.SoakingUnderlay;
 import com.github.thedeathlycow.scorchful.item.ItemTooltips;
-import com.github.thedeathlycow.scorchful.item.SModelPredicates;
 import com.github.thedeathlycow.scorchful.network.SoundTemperatureEffectPacketListener;
 import com.github.thedeathlycow.scorchful.registry.SCutouts;
 import com.github.thedeathlycow.scorchful.registry.SEntityModelLayers;
@@ -27,7 +26,6 @@ public class ScorchfulClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        SModelPredicates.onInitialize();
         SEntityModelLayers.registerAll();
         SFeatureRenderers.registerAll();
         SCutouts.registerCutouts();
