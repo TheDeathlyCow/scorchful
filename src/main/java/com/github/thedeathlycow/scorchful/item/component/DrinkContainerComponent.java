@@ -1,6 +1,5 @@
 package com.github.thedeathlycow.scorchful.item.component;
 
-import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
@@ -33,7 +32,7 @@ public record DrinkContainerComponent(int numDrinks, int maxDrinks) {
         }
     });
 
-    public static final Codec<DrinkContainerComponent> CODEC = Codec.either(Codecs.rangedInt(0, WaterSkinItem.MAX_DRINKS), VALUE_CODEC)
+    public static final Codec<DrinkContainerComponent> CODEC = Codec.either(Codecs.rangedInt(0, DEFAULT.maxDrinks), VALUE_CODEC)
             .xmap(
                     either -> either.map(i -> new DrinkContainerComponent(i, DEFAULT.maxDrinks), container -> container),
                     Either::right
@@ -80,5 +79,9 @@ public record DrinkContainerComponent(int numDrinks, int maxDrinks) {
 
     public boolean isEmpty() {
         return !this.hasDrink();
+    }
+
+    public boolean isFull() {
+        return this.numDrinks >= this.maxDrinks;
     }
 }

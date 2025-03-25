@@ -10,7 +10,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.component.type.ConsumableComponent;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -46,8 +45,6 @@ public class WaterSkinItem extends DrinkItem {
     public static final Style PARCHING_STYLE = Style.EMPTY
             .withColor(Formatting.RED);
 
-    public static final int MAX_DRINKS = 16;
-
     public static final Text FULL_ITEM_NAME = Text.translatable("item.scorchful.water_skin.filled");
     public static final Text PARTIALLY_FULL_ITEM_NAME = Text.translatable("item.scorchful.water_skin.partially_filled");
     public static final Text EMPTY_ITEM_NAME = Text.translatable("item.scorchful.water_skin.empty");
@@ -82,24 +79,24 @@ public class WaterSkinItem extends DrinkItem {
         return itemStack;
     }
 
-    public static int getNumDrinks(ItemStack stack) {
-        return stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT).numDrinks();
+    public static DrinkContainerComponent getContainer(ItemStack stack) {
+        return stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT);
     }
 
     public static boolean hasDrink(ItemStack stack) {
-        return getNumDrinks(stack) > 0;
+        return stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT).hasDrink();
     }
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType tooltipType) {
-        int numDrinks = getNumDrinks(stack);
+        DrinkContainerComponent container = getContainer(stack);
 
-        if (numDrinks > 0) {
+        if (container.numDrinks() > 0) {
             super.appendTooltip(stack, context, tooltip, tooltipType);
         }
 
-        MutableText text = numDrinks > 0
-                ? Text.translatable("item.scorchful.water_skin.tooltip.count", numDrinks, MAX_DRINKS)
+        MutableText text = container.hasDrink()
+                ? Text.translatable("item.scorchful.water_skin.tooltip.count", container.numDrinks(), container.maxDrinks())
                 : Text.translatable("item.scorchful.water_skin.tooltip.empty");
         text.setStyle(TOOLTIP_STYLE);
 
@@ -124,40 +121,36 @@ public class WaterSkinItem extends DrinkItem {
 
     @Override
     public Text getName(ItemStack stack) {
-        int numDrinks = getNumDrinks(stack);
+        DrinkContainerComponent container = getContainer(stack);
 
-        return switch (numDrinks) {
-            case 0 -> EMPTY_ITEM_NAME;
-            case MAX_DRINKS -> FULL_ITEM_NAME;
-            default -> PARTIALLY_FULL_ITEM_NAME;
-        };
-    }
-
-    @Override
-    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
-        return hasDrink(stack) ? DrinkItem.DRINK_TIME_TICKS : 0;
+        if (container.isEmpty()) {
+            return EMPTY_ITEM_NAME;
+        } else if (container.isFull()) {
+            return FULL_ITEM_NAME;
+        } else {
+            return PARTIALLY_FULL_ITEM_NAME;
+        }
     }
 
     @Override
     public boolean isItemBarVisible(ItemStack stack) {
-        int numDrinks = getNumDrinks(stack);
-        return numDrinks < MAX_DRINKS;
+        return !getContainer(stack).isFull();
     }
 
     @Override
     public int getItemBarStep(ItemStack stack) {
-        int numDrinks = getNumDrinks(stack);
-        if (numDrinks == 0) {
+        DrinkContainerComponent container = getContainer(stack);
+
+        if (container.isEmpty()) {
             return 0;
         }
 
-        return Math.round(((float) numDrinks / MAX_DRINKS) * 13.0f);
+        return Math.round(container.getCurrentFill() * 13.0f);
     }
 
     @Override
     public int getItemBarColor(ItemStack stack) {
-        DrinkContainerComponent container = stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT);
-        float fill = Math.max(0.0f, container.getCurrentFill());
+        float fill = Math.max(0.0f, getContainer(stack).getCurrentFill());
 
         float saturationValue = MathHelper.clampedMap(fill, 0f, 1f, 0.5f, 1.0f);
 
@@ -184,7 +177,9 @@ public class WaterSkinItem extends DrinkItem {
         if (blockHitResult.getType() == HitResult.Type.BLOCK) {
             BlockPos hitPos = blockHitResult.getBlockPos();
 
-            if (!world.canPlayerModifyAt(user, hitPos) || getNumDrinks(stack) >= MAX_DRINKS) {
+            DrinkContainerComponent container = stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT);
+
+            if (!world.canPlayerModifyAt(user, hitPos) || container.isFull()) {
                 return null;
             }
 
@@ -223,7 +218,7 @@ public class WaterSkinItem extends DrinkItem {
             Hand hand,
             ItemStack stack
     ) {
-        if (getNumDrinks(stack) >= MAX_DRINKS) {
+        if (getContainer(stack).isFull()) {
             return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
 
@@ -238,5 +233,4 @@ public class WaterSkinItem extends DrinkItem {
         }
         return ActionResult.SUCCESS;
     }
-
 }
