@@ -2,7 +2,10 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
-import com.github.thedeathlycow.scorchful.item.*;
+import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
+import com.github.thedeathlycow.scorchful.item.SunHatItem;
+import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
+import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.item.component.HeatResistanceComponent;
 import com.github.thedeathlycow.scorchful.item.component.HeatResistanceModifier;
@@ -13,6 +16,8 @@ import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.block.Block;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ConsumableComponents;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
@@ -32,7 +37,8 @@ public final class SItems {
             settings -> new WaterSkinItem(
                     settings
                             .maxCount(1)
-                            .component(SDataComponentTypes.NUM_DRINKS, 0)
+                            .component(DataComponentTypes.CONSUMABLE, ConsumableComponents.DRINK)
+                            .component(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT)
                             .component(SDataComponentTypes.DRINK_LEVEL, DrinkLevelComponent.HYDRATING)
             )
     );
@@ -49,12 +55,12 @@ public final class SItems {
 
     public static final Item CACTUS_JUICE = register(
             "cactus_juice",
-            settings -> new SingleDrinkItem(
-                    settings
-                            .maxCount(16)
+            settings -> new Item(
+                    settings.maxCount(16)
                             .recipeRemainder(Items.GLASS_BOTTLE)
-                            .component(SDataComponentTypes.DRINK_LEVEL, DrinkLevelComponent.HYDRATING),
-                    Items.GLASS_BOTTLE::getDefaultStack
+                            .useRemainder(Items.GLASS_BOTTLE)
+                            .component(DataComponentTypes.CONSUMABLE, ConsumableComponents.DRINK)
+                            .component(SDataComponentTypes.DRINK_LEVEL, DrinkLevelComponent.HYDRATING)
             )
     );
 
@@ -64,7 +70,7 @@ public final class SItems {
 
     public static final Item ROOTED_NETHERRACK = register("rooted_netherrack", SBlocks.ROOTED_NETHERRACK);
 
-    public static final Item ROOTED_CRIMSON_NYLIUM = register("rooted_crimson_nylium",SBlocks.ROOTED_CRIMSON_NYLIUM );
+    public static final Item ROOTED_CRIMSON_NYLIUM = register("rooted_crimson_nylium", SBlocks.ROOTED_CRIMSON_NYLIUM);
 
     public static final Item ROOTED_WARPED_NYLIUM = register("rooted_warped_nylium", SBlocks.ROOTED_WARPED_NYLIUM);
 
@@ -109,7 +115,6 @@ public final class SItems {
         Scorchful.LOGGER.debug("Initialized Scorchful items");
         UseItemCallback.EVENT.register(new FireChargeThrower());
         ScorchfulItemEvents.GET_DEFAULT_STACK.register(DrinkLevelComponent::applyToNewStack);
-        ScorchfulItemEvents.CONSUME_ITEM.register(DrinkItem::applyWater);
         ScorchfulItemEvents.CONSUME_ITEM.register((stack, player) -> {
             if (stack.isIn(SItemTags.IS_COOLING_FOOD)) {
                 player.thermoo$addTemperature(

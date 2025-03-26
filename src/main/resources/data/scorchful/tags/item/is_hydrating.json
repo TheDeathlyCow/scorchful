@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
+        "#c:drinks",
         "minecraft:potion",
         "scorchful:water_skin",
         "scorchful:cactus_juice",

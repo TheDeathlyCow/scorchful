@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.block;
 
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
+import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import com.github.thedeathlycow.scorchful.registry.SStats;
 import net.minecraft.component.type.PotionContentsComponent;
@@ -102,7 +103,7 @@ public class NetherLilyBehaviours {
                     }
 
                     if (!world.isClient && result.isAccepted()) {
-                        WaterSkinItem.addDrinks(stack, -1);
+                        DrinkContainerComponent.addDrinks(stack, -1);
                     }
                     return result;
                 }

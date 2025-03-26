@@ -1,7 +1,6 @@
 package com.github.thedeathlycow.scorchful.mixin.thirst;
 
 import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
-import com.github.thedeathlycow.scorchful.item.DrinkItem;
 import net.minecraft.advancement.criterion.ConsumeItemCriterion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
