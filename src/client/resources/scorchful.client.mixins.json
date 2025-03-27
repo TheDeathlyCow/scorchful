@@ -4,21 +4,19 @@
     "compatibilityLevel": "JAVA_17",
     "plugin": "com.github.thedeathlycow.scorchful.mixin.client.compat.Plugin",
     "client": [
-        "entity.feature.ArmorFeatureRendererMixin",
-        "entity.render.BipedEntityRendererMixin",
-        "entity.render.BipedEntityRenderStateMixin",
         "ClientPlayNetworkHandlerMixin",
         "DrippingWetPlayerMixin",
         "GameRendererMixin",
-        "entity.feature.HeadFeatureRendererMixin",
         "InGameHudMixin",
+        "entity.feature.ArmorFeatureRendererMixin",
+        "entity.feature.HeadFeatureRendererMixin",
+        "entity.render.BipedEntityRendererMixin",
+        "entity.render.EntityRendererMixin",
+        "entity.render.LivingEntityRenderStateMixin",
         "sandstorm.BackgroundRendererMixin",
         "sandstorm.WorldRendererMixin"
     ],
     "injectors": {
         "defaultRequire": 1
-    },
-    "mixins": [
-        "entity.render.EntityRendererMixin"
-    ]
+    }
 }

@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.entity.state;
 
-public interface SBipedEntityRenderState {
+public interface SLivingEntityRenderState {
     default boolean scorchful$hasSunHat() {
         throw new AssertionError("Implemented in mixin");
     }

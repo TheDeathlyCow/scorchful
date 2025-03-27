@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.mixin.client.entity.render;
 
-import com.github.thedeathlycow.scorchful.entity.state.SBipedEntityRenderState;
+import com.github.thedeathlycow.scorchful.entity.state.SLivingEntityRenderState;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import net.minecraft.client.item.ItemModelManager;
 import net.minecraft.client.render.entity.BipedEntityRenderer;
@@ -19,7 +19,7 @@ public class BipedEntityRendererMixin {
             at = @At("TAIL")
     )
     private static void updateExtendedState(LivingEntity entity, BipedEntityRenderState state, float tickDelta, ItemModelManager itemModelResolver, CallbackInfo ci){
-        SBipedEntityRenderState sState = (SBipedEntityRenderState) state;
+        SLivingEntityRenderState sState = (SLivingEntityRenderState) state;
 
         sState.scorchful$hasSunHat(entity.getEquippedStack(EquipmentSlot.HEAD).contains(SDataComponentTypes.SUN_HAT_RENDERER));
     }

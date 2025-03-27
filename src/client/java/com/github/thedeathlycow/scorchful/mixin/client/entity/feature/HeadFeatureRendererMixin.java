@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.mixin.client.entity.feature;
 
-import com.github.thedeathlycow.scorchful.entity.state.SBipedEntityRenderState;
+import com.github.thedeathlycow.scorchful.entity.state.SLivingEntityRenderState;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.HeadFeatureRenderer;
 import net.minecraft.client.render.entity.model.EntityModel;
@@ -28,7 +28,7 @@ public class HeadFeatureRendererMixin<S extends LivingEntityRenderState, M exten
             float limbDistance,
             CallbackInfo ci
     ) {
-        if (((SBipedEntityRenderState) state).scorchful$hasSunHat()) {
+        if (((SLivingEntityRenderState) state).scorchful$hasSunHat()) {
             ci.cancel();
         }
     }
