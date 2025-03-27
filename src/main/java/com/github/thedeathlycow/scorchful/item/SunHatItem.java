@@ -36,6 +36,7 @@ public class SunHatItem extends Item {
                                 .build()
                 )
                 .component(SDataComponentTypes.MODIFY_CAMERA_OVERLAY_OPACITY, Unit.INSTANCE)
+                .component(SDataComponentTypes.HAS_SUN_HAT_MODEL, Unit.INSTANCE)
         );
     }
 

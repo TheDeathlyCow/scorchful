@@ -48,6 +48,14 @@ public final class SDataComponentTypes {
                     .cache()
     );
 
+    public static final ComponentType<Unit> HAS_SUN_HAT_MODEL = register(
+            "has_sun_hat_model",
+            builder -> builder
+                    .codec(Codec.unit(Unit.INSTANCE))
+                    .packetCodec(PacketCodec.unit(Unit.INSTANCE))
+                    .cache()
+    );
+
     public static void initialize() {
         Scorchful.LOGGER.debug("Initialized Scorchful item components");
 
