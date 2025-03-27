@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.item.component.SunHatRendererComponent;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import net.minecraft.component.DataComponentTypes;
@@ -21,11 +22,6 @@ import net.minecraft.util.Unit;
 import java.util.List;
 
 public class SunHatItem extends Item {
-    public static final Identifier SHADE_OVERLAY_TEXTURE = Scorchful.id("misc/shade_overlay");
-    private static final Text TOOLTIP = Text.translatable(
-            "item.scorchful.sun_hat.tooltip"
-    ).setStyle(Style.EMPTY.withColor(Formatting.BLUE));
-
     private SunHatItem(Settings settings) {
         super(settings);
     }
@@ -40,11 +36,10 @@ public class SunHatItem extends Item {
                                 DataComponentTypes.EQUIPPABLE,
                                 EquippableComponent.builder(EquipmentSlot.HEAD)
                                         .damageOnHurt(false)
-                                        .cameraOverlay(SHADE_OVERLAY_TEXTURE)
+                                        .cameraOverlay(SunHatRendererComponent.SHADE_OVERLAY_TEXTURE)
                                         .build()
                         )
-                        .component(SDataComponentTypes.MODIFY_CAMERA_OVERLAY_OPACITY, Unit.INSTANCE)
-                        .component(SDataComponentTypes.HAS_SUN_HAT_MODEL, Unit.INSTANCE)
+                        .component(SDataComponentTypes.SUN_HAT_RENDERER, SunHatRendererComponent.DEFAULT)
         );
     }
 
@@ -60,11 +55,5 @@ public class SunHatItem extends Item {
                         AttributeModifierSlot.HEAD
                 )
                 .build();
-    }
-
-    @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        tooltip.add(TOOLTIP);
-        super.appendTooltip(stack, context, tooltip, type);
     }
 }

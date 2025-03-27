@@ -5,6 +5,8 @@
     "plugin": "com.github.thedeathlycow.scorchful.mixin.client.compat.Plugin",
     "client": [
         "ArmorFeatureRendererMixin",
+        "BipedEntityRendererMixin",
+        "BipedEntityRenderStateMixin",
         "ClientPlayNetworkHandlerMixin",
         "DrippingWetPlayerMixin",
         "GameRendererMixin",

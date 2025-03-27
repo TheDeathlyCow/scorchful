@@ -5,6 +5,7 @@ import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.item.component.HeatResistanceComponent;
+import com.github.thedeathlycow.scorchful.item.component.SunHatRendererComponent;
 import com.mojang.serialization.Codec;
 import net.minecraft.component.ComponentType;
 import net.minecraft.network.codec.PacketCodec;
@@ -40,19 +41,11 @@ public final class SDataComponentTypes {
                     .cache()
     );
 
-    public static final ComponentType<Unit> MODIFY_CAMERA_OVERLAY_OPACITY = register(
-            "modify_camera_overlay_opacity",
+    public static final ComponentType<SunHatRendererComponent> SUN_HAT_RENDERER = register(
+            "sun_hat_renderer",
             builder -> builder
-                    .codec(Codec.unit(Unit.INSTANCE))
-                    .packetCodec(PacketCodec.unit(Unit.INSTANCE))
-                    .cache()
-    );
-
-    public static final ComponentType<Unit> HAS_SUN_HAT_MODEL = register(
-            "has_sun_hat_model",
-            builder -> builder
-                    .codec(Codec.unit(Unit.INSTANCE))
-                    .packetCodec(PacketCodec.unit(Unit.INSTANCE))
+                    .codec(SunHatRendererComponent.CODEC)
+                    .packetCodec(SunHatRendererComponent.PACKET_CODEC)
                     .cache()
     );
 

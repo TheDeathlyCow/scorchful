@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.entity.feature;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.entity.model.SunHatModel;
+import com.github.thedeathlycow.scorchful.entity.state.SBipedEntityRenderState;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import net.fabricmc.api.EnvType;
@@ -38,7 +39,7 @@ public class SunHatFeatureRenderer<S extends BipedEntityRenderState, M extends B
             float limbAngle,
             float limbDistance
     ) {
-        if (state.equippedHeadStack.contains(SDataComponentTypes.HAS_SUN_HAT_MODEL)) {
+        if (((SBipedEntityRenderState) state).scorchful$hasSunHat()) {
             this.getContextModel().copyTransforms(this.model);
             VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(TEXTURE));
             this.model.renderHead(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, -1);
