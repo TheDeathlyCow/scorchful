@@ -18,7 +18,6 @@ import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.block.Block;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ConsumableComponents;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -43,15 +42,7 @@ public final class SItems {
             )
     );
 
-    public static final Item SUN_HAT = register(
-            "sun_hat",
-            settings -> new SunHatItem(
-                    settings
-                            .equipmentSlot((entity, stack) -> EquipmentSlot.HEAD)
-                            .attributeModifiers(SunHatItem.attributeModifiers())
-                            .maxCount(1)
-            )
-    );
+    public static final Item SUN_HAT = register("sun_hat", SunHatItem::createItem);
 
     public static final Item CACTUS_JUICE = register(
             "cactus_juice",

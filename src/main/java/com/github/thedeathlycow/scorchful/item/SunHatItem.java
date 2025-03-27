@@ -26,21 +26,29 @@ public class SunHatItem extends Item {
             "item.scorchful.sun_hat.tooltip"
     ).setStyle(Style.EMPTY.withColor(Formatting.BLUE));
 
-    public SunHatItem(Settings settings) {
-        super(settings
-                .component(
-                        DataComponentTypes.EQUIPPABLE,
-                        EquippableComponent.builder(EquipmentSlot.HEAD)
-                                .damageOnHurt(false)
-                                .cameraOverlay(SHADE_OVERLAY_TEXTURE)
-                                .build()
-                )
-                .component(SDataComponentTypes.MODIFY_CAMERA_OVERLAY_OPACITY, Unit.INSTANCE)
-                .component(SDataComponentTypes.HAS_SUN_HAT_MODEL, Unit.INSTANCE)
+    private SunHatItem(Settings settings) {
+        super(settings);
+    }
+
+    public static Item createItem(Settings settings) {
+        return new SunHatItem(
+                settings
+                        .equipmentSlot((entity, stack) -> EquipmentSlot.HEAD)
+                        .attributeModifiers(SunHatItem.attributeModifiers())
+                        .maxCount(1)
+                        .component(
+                                DataComponentTypes.EQUIPPABLE,
+                                EquippableComponent.builder(EquipmentSlot.HEAD)
+                                        .damageOnHurt(false)
+                                        .cameraOverlay(SHADE_OVERLAY_TEXTURE)
+                                        .build()
+                        )
+                        .component(SDataComponentTypes.MODIFY_CAMERA_OVERLAY_OPACITY, Unit.INSTANCE)
+                        .component(SDataComponentTypes.HAS_SUN_HAT_MODEL, Unit.INSTANCE)
         );
     }
 
-    public static AttributeModifiersComponent attributeModifiers() {
+    private static AttributeModifiersComponent attributeModifiers() {
         return AttributeModifiersComponent.builder()
                 .add(
                         ThermooAttributes.ENVIRONMENT_HEAT_RESISTANCE,
