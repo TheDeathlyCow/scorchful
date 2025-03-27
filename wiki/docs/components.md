@@ -83,29 +83,14 @@ respectively.
     | All other [Turtle Armor](./Turtle-Armor)   | Very Protective (+1 HR, +0.25 EHR)  |
 
 ---
-### Modify Camera Overlay Capacity
+### Sun Hat Renderer
 > Available: 1.21.4+
 
-When present, sets the opacity of the `camera_overlay` field of an [equippable component](https://minecraft.wiki/w/Data_component_format#equippable) to be the [`sunHatShadeOpacity`](./config.md#client-config) config option.
+When present, replaces normal item rendering with that of the [sun hat](https://modded.wiki/w/Scorchful:Sun_Hat) when the item is worn on an entity's head. This includes a 3D sun hat model, a tooltip, and adjusting the opacity of the `camera_overlay` texture (if an [equippable](https://minecraft.wiki/w/Data_component_format#equippable) component is present). 
 
 - `{}` **components**: Parent tag.
-    - `{}` **scorchful:modify_camera_overlay_opacity**: Optional empty compound.
-
-_Example:_ `/give @s scorchful:sun_hat[scorchful:modify_camera_overlay_opacity={}]`
-
-- Gives a [Sun Hat](https://modded.wiki/w/Scorchful:Sun_Hat) that, when equipped, will set the opacity of its shade overlay texture to be set from the config.
-
----
-### Has Sun Hat Model
-> Available: 1.21.4+
-
-When present, renders a sun hat model instead of an item sprite on a wearer's head.
-
-- `{}` **components**: Parent tag.
-    - `{}` **scorchful:has_sun_hat_model**: Optional empty compound.
-
-_Example:_ `/give @s minecraft:bread[equippable={slot:"head"},scorchful:has_sun_hat_model={}]`
-
-- Gives a piece of bread that can be worn in the head slot and will render a sun hat instead of a bread item sprite.
+    - `{}` **scorchful:has_sun_hat_model**: Compound component.
+        - `T/F` **replace_armor_model**: Optional boolean, whether the regular armor model should be replaced with the Sun Hat. If false, a Sun Hat will be rendered in addition to the regular armor model when worn. Defaults to `true`.
+        - `T/F` **show_tooltip**: Optional boolean, whether to show the tooltip _Reduces heat from the Sun when worn_. Defaults to `true`.
 
 [^1]: In 1.21.1 and below, these attribute IDs are `thermoo:generic.heat_resistance` and `thermoo:generic.environment_heat_resistance`.
