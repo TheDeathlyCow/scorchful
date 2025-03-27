@@ -62,7 +62,7 @@ public abstract class InGameHudMixin {
             float opacity,
             @Local ItemStack stack
     ) {
-        if (stack.contains(SDataComponentTypes.MODIFY_CAMERA_OVERLAY_OPACITY)) {
+        if (stack.contains(SDataComponentTypes.SUN_HAT_RENDERER)) {
             return Scorchful.getConfig().clientConfig.getSunHatShadeOpacity();
         }
 

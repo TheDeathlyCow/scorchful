@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.mixin.client;
+package com.github.thedeathlycow.scorchful.mixin.client.entity.render;
 
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import net.minecraft.client.MinecraftClient;
