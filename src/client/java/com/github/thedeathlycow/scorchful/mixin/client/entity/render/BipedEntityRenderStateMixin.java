@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.mixin.client;
+package com.github.thedeathlycow.scorchful.mixin.client.entity.render;
 
 import com.github.thedeathlycow.scorchful.entity.state.SBipedEntityRenderState;
 import net.minecraft.client.render.entity.state.BipedEntityRenderState;

@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.mixin.client;
+package com.github.thedeathlycow.scorchful.mixin.client.entity.feature;
 
 import com.github.thedeathlycow.scorchful.item.component.SunHatRendererComponent;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
