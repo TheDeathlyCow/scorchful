@@ -11,23 +11,10 @@ import net.minecraft.component.type.EquippableComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.Unit;
 
-import java.util.List;
-
-public class SunHatItem extends Item {
-    private SunHatItem(Settings settings) {
-        super(settings);
-    }
-
-    public static Item createItem(Settings settings) {
-        return new SunHatItem(
+public final class SunHatItem {
+    public static Item createItem(Item.Settings settings) {
+        return new Item(
                 settings
                         .equipmentSlot((entity, stack) -> EquipmentSlot.HEAD)
                         .attributeModifiers(SunHatItem.attributeModifiers())
@@ -55,5 +42,9 @@ public class SunHatItem extends Item {
                         AttributeModifierSlot.HEAD
                 )
                 .build();
+    }
+
+    private SunHatItem() {
+
     }
 }

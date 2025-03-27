@@ -27,6 +27,7 @@ public final class ScorchfulItemTooltips implements ItemTooltipCallback {
 
         this.appendTooltip(stack, SDataComponentTypes.DRINK_CONTAINER, context, tooltipType, builder);
         this.appendTooltip(stack, SDataComponentTypes.DRINK_LEVEL, context, tooltipType, builder);
+        this.appendTooltip(stack, SDataComponentTypes.SUN_HAT_RENDERER, context, tooltipType, builder);
 
         if (stack.isIn(SItemTags.IS_COOLING_FOOD)) {
             builder.accept(COOLING_TOOLTIP);
