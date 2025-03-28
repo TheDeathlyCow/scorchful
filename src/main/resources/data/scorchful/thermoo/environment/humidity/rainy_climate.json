@@ -1,7 +1,7 @@
 {
-    "type": "scorchful:check_biome",
     "biomes": "#scorchful:is_climate/rainy",
     "exclude_biomes": "#scorchful:is_not_climate/rainy",
+    "priority": 1100,
     "provider": {
         "type": "thermoo:seasonal/tropical",
         "fallback_season": "dry",

@@ -1,0 +1,9 @@
+{
+    "biomes": "#c:is_overworld",
+    "priority": 1050,
+    "provider": {
+        "type": "thermoo:weather_state",
+        "rain": "scorchful:rain_humidity",
+        "thunder": "scorchful:rain_humidity"
+    }
+}

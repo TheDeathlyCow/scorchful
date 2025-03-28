@@ -1,14 +1,6 @@
 {
   "values": [
     {
-      "id": "#scorchful:warm_biomes",
-      "required": false
-    },
-    {
-      "id": "#scorchful:temperature/spring/warm",
-      "required": false
-    },
-    {
       "id": "#c:is_hot/overworld",
       "required": false
     },
@@ -20,8 +12,13 @@
       "id": "#c:is_jungle",
       "required": false
     },
+    "minecraft:mangrove_swamp",
     {
-      "id": "#c:is_swamp",
+      "id": "#scorchful:warm_biomes",
+      "required": false
+    },
+    {
+      "id": "#scorchful:temperature/spring/warm",
       "required": false
     }
   ]

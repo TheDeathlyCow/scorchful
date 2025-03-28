@@ -8,7 +8,6 @@ import net.minecraft.registry.tag.TagKey;
 public final class SEnvironmentProviderTags {
     public static final TagKey<EnvironmentProvider> TEMPERATURE_MODIFIERS = of("temperature_modifiers");
     public static final TagKey<EnvironmentProvider> NETHER_MODIFIERS = of("nether_modifiers");
-    public static final TagKey<EnvironmentProvider> HUMIDITY_MODIFIERS = of("humidity_modifiers");
 
     private static TagKey<EnvironmentProvider> of(String path) {
         return TagKey.of(ThermooRegistryKeys.ENVIRONMENT_PROVIDER, Scorchful.id(path));

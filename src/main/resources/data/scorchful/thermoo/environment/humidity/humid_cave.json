@@ -1,6 +1,7 @@
 {
     "biomes": "#scorchful:is_climate/humid_cave",
     "exclude_biomes": "#scorchful:is_not_climate/humid_cave",
+    "priority": 1100,
     "provider": {
         "type": "thermoo:constant",
         "components": {

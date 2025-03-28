@@ -28,7 +28,6 @@ public class ClimateBiomeTagGenerator extends FabricTagProvider<Biome> {
         getOrCreateTagBuilder(SClimateBiomeTags.IS_TEMPERATE)
                 .addOptionalTag(ConventionalBiomeTags.IS_TEMPERATE_OVERWORLD)
                 .addOptionalTag(ConventionalBiomeTags.IS_PLAINS)
-                .addOptionalTag(ConventionalBiomeTags.IS_HILL)
                 .addOptionalTag(ConventionalBiomeTags.IS_BEACH)
                 .add(BiomeKeys.STONY_PEAKS)
                 .addOptionalTag(Scorchful.id("temperature/summer/warm"));
@@ -39,30 +38,30 @@ public class ClimateBiomeTagGenerator extends FabricTagProvider<Biome> {
                 .addOptionalTag(SClimateBiomeTags.IS_SCORCHING);
 
         getOrCreateTagBuilder(SClimateBiomeTags.IS_WARM)
-                .addOptionalTag(Scorchful.id("warm_biomes"))
-                .addOptionalTag(Scorchful.id("temperature/spring/warm"))
                 .addOptionalTag(ConventionalBiomeTags.IS_HOT_OVERWORLD)
                 .addOptionalTag(ConventionalBiomeTags.IS_SAVANNA)
                 .addOptionalTag(ConventionalBiomeTags.IS_JUNGLE)
-                .addOptionalTag(ConventionalBiomeTags.IS_SWAMP);
+                .add(BiomeKeys.MANGROVE_SWAMP)
+                .addOptionalTag(Scorchful.id("warm_biomes"))
+                .addOptionalTag(Scorchful.id("temperature/spring/warm"));
 
         getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_WARM)
                 .addOptionalTag(SClimateBiomeTags.IS_NEVER_WARM)
-                .add(BiomeKeys.STONY_PEAKS)
+                .addOptionalTag(SClimateBiomeTags.IS_SCORCHING)
                 .addOptionalTag(ConventionalBiomeTags.IS_BEACH)
-                .addOptionalTag(SClimateBiomeTags.IS_SCORCHING);
+                .add(BiomeKeys.STONY_PEAKS);
 
         getOrCreateTagBuilder(SClimateBiomeTags.IS_SCORCHING)
-                .addOptionalTag(Scorchful.id("scorching_biomes"))
-                .addOptionalTag(Scorchful.id("temperature/spring/scorching"))
                 .addOptionalTag(ConventionalBiomeTags.IS_DESERT)
                 .addOptionalTag(ConventionalBiomeTags.IS_BADLANDS)
-                .addOptionalTag(BiomeTags.IS_BADLANDS);
+                .addOptionalTag(BiomeTags.IS_BADLANDS)
+                .addOptionalTag(Scorchful.id("scorching_biomes"))
+                .addOptionalTag(Scorchful.id("temperature/spring/scorching"));
 
         getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_SCORCHING)
                 .addOptionalTag(SClimateBiomeTags.IS_NEVER_WARM)
-                .add(BiomeKeys.STONY_PEAKS)
-                .addOptionalTag(ConventionalBiomeTags.IS_BEACH);
+                .addOptionalTag(ConventionalBiomeTags.IS_BEACH)
+                .add(BiomeKeys.STONY_PEAKS);
 
         getOrCreateTagBuilder(SClimateBiomeTags.IS_RAINY)
                 .addOptionalTag(SBiomeTags.HUMID_BIOMES)
@@ -70,15 +69,13 @@ public class ClimateBiomeTagGenerator extends FabricTagProvider<Biome> {
                 .addOptionalTag(ConventionalBiomeTags.IS_SWAMP)
                 .addOptionalTag(BiomeTags.IS_JUNGLE);
 
-        getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_RAINY)
-                .addOptionalTag(SClimateBiomeTags.IS_ARID);
+        getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_RAINY);
 
         getOrCreateTagBuilder(SClimateBiomeTags.IS_ARID)
                 .addOptionalTag(Identifier.of("frostiful", "dry_biomes"))
                 .addOptionalTag(ConventionalBiomeTags.IS_DRY_OVERWORLD);
 
-        getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_ARID)
-                .addOptionalTag(SClimateBiomeTags.IS_RAINY);
+        getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_ARID);
 
         getOrCreateTagBuilder(SClimateBiomeTags.IS_HELL)
                 .addOptionalTag(ConventionalBiomeTags.IS_NETHER);
@@ -86,15 +83,10 @@ public class ClimateBiomeTagGenerator extends FabricTagProvider<Biome> {
         getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_HELL)
                 .addOptionalTag(SClimateBiomeTags.IS_NEVER_WARM);
 
-        getOrCreateTagBuilder(SClimateBiomeTags.IS_EXTREME_HUMIDITY)
-                .addOptionalTag(SClimateBiomeTags.IS_HUMID_CAVE)
-                .addOptionalTag(SClimateBiomeTags.IS_RAINY)
-                .addOptionalTag(SClimateBiomeTags.IS_ARID);
-
         getOrCreateTagBuilder(SClimateBiomeTags.IS_HUMID_CAVE)
                 .addOptionalTag(ConventionalBiomeTags.IS_CAVE);
 
         getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_HUMID_CAVE)
-                .addOptionalTag(ConventionalBiomeTags.IS_SPOOKY);
+                .add(BiomeKeys.DEEP_DARK);
     }
 }
