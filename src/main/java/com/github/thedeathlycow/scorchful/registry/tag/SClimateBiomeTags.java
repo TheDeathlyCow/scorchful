@@ -27,8 +27,6 @@ public final class SClimateBiomeTags {
     public static final TagKey<Biome> IS_HUMID_CAVE = SBiomeTags.register("is_climate/humid_cave");
     public static final TagKey<Biome> IS_NOT_HUMID_CAVE = SBiomeTags.register("is_not_climate/humid_cave");
 
-    public static final TagKey<Biome> IS_EXTREME_HUMIDITY = SBiomeTags.register("is_extreme_humidity");
-
     private SClimateBiomeTags() {
 
     }

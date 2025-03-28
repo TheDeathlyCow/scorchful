@@ -1,0 +1,11 @@
+{
+    "type": "thermoo:seasonal/temperate",
+    "seasons": {
+        "summer": {
+            "type": "thermoo:constant",
+            "components": {
+                "thermoo:temperature": 30.0
+            }
+        }
+    }
+}
