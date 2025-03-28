@@ -1,0 +1,11 @@
+{
+    "biomes": "#scorchful:is_climate/hell",
+    "exclude_biomes": "#scorchful:is_not_climate/hell",
+    "priority": 1100,
+    "provider": {
+        "type": "thermoo:constant",
+        "components": {
+            "thermoo:relative_humidity": 0.01
+        }
+    }
+}

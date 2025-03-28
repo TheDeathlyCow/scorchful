@@ -1,9 +1,5 @@
 {
     "biomes": "#scorchful:is_climate/scorching",
     "exclude_biomes": "#scorchful:is_not_climate/scorching",
-    "provider": {
-        "type": "thermoo:modify",
-        "modifiers": "#scorchful:temperature_modifiers",
-        "base": "scorchful:set_temperature/scorching_climate"
-    }
+    "provider": "scorchful:set_temperature/scorching_climate"
 }

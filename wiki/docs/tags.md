@@ -129,7 +129,6 @@ Location: `data/scorchful/tags/worldgen/biome`
 | `scorchful:has_regular_sand_storms`               | Which biomes should have regular Sandstorms                       | All Desert-like biomes                                           |
 | `scorchful:is_climate/*` [DG]                     | Set the biomes for each climate                                   | See [temperature system page](./Temperature-System)              |
 | `scorchful:is_not_climate/*` [DG]                 | Excludes biomes from a particular climate                         | See [temperature system page](./Temperature-System)              |
-| `scorchful:is_extreme_humidity` [DG]              | Biomes that have extremely high or extremely low humidity         | Rainy Climates, Arid Climates, and Caves                         |
 | `scorchful:is_never_warm` [DG]                    | Biomes that are never warm                                        | Empty                                                            |
 
 ## Environment Providers
@@ -140,7 +139,6 @@ Location: `data/scorchful/tags/thermoo/environment_provider`.
 
 | Tag ID                                 | Description                                               | Default values (summarized)                                |
 |----------------------------------------|-----------------------------------------------------------|------------------------------------------------------------|
-| `scorchful:humidity_modifiers` [DG]    | Set humidity for overworld biomes                         | Set climate humidity, set humidity for weather             |
 | `scorchful:nether_modifiers` [DG]      | Sets humidity and adjust temperature for nether biomes    | Set nether humidity, add temperature for block light       |
 | `scorchful:temperature_modifiers` [DG] | Sets humidity and adjust temperature for overworld biomes | `#scorchful:humidity_modifiers`, set temperature for shade |
 

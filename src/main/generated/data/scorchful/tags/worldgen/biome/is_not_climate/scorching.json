@@ -4,10 +4,10 @@
       "id": "#scorchful:is_never_warm",
       "required": false
     },
-    "minecraft:stony_peaks",
     {
       "id": "#c:is_beach",
       "required": false
-    }
+    },
+    "minecraft:stony_peaks"
   ]
 }
