@@ -92,19 +92,6 @@ public class Scorchful implements ModInitializer {
         PayloadTypeRegistry.playS2C().register(TemperatureSoundEventPacket.PACKET_ID, TemperatureSoundEventPacket.PACKET_CODEC);
 
         LOGGER.info("Scorchful initialized!");
-
-        ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-            var blockupdate = new BlockUpdateS2CPacket(BlockPos.ORIGIN, SBlocks.SAND_CAULDRON.getDefaultState());
-            try {
-                var ids = Block.STATE_IDS;
-                LOGGER.info("raw id: {}", ids.getRawId(SBlocks.SAND_CAULDRON.getDefaultState()));
-                var factory = RegistryByteBuf.makeFactory(server.getRegistryManager());
-                BlockUpdateS2CPacket.CODEC.encode(factory.apply(PacketByteBufs.create()), blockupdate);
-            } catch (Exception e) {
-                e.printStackTrace();
-                LOGGER.info("exception: {}", e);
-            }
-        });
     }
 
     @NotNull
