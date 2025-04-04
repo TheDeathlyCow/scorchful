@@ -17,6 +17,7 @@
         "accessor.EntityAccessor",
         "accessor.PointOfInterestTypeAccessor",
         "accessor.PointOfInterestTypesAccessor",
+        "accessor.RegistryEntryReferenceAccessor",
         "compat.frostiful.absent.EntityMixin",
         "server.SandAccumulationServerWorldMixin",
         "thirst.ConsumableComponentMixin",

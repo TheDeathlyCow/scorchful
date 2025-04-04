@@ -6,6 +6,7 @@ import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.ThirstConfig;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
+import com.github.thedeathlycow.scorchful.mixin.accessor.RegistryEntryReferenceAccessor;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
@@ -86,6 +87,10 @@ public enum DrinkLevelComponent implements StringIdentifiable, Consumable, Toolt
 
     public static void applyToNewStack(ItemStack stack) {
         if (stack.contains(SDataComponentTypes.DRINK_LEVEL)) {
+            return;
+        }
+
+        if (((RegistryEntryReferenceAccessor) stack.getItem().getRegistryEntry()).scorchful$tags() == null) {
             return;
         }
 
