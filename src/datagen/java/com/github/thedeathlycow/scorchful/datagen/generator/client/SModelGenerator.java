@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.datagen.generator.client;
 
 import com.github.thedeathlycow.scorchful.item.WaterSkinIsEmptyProperty;
+import com.github.thedeathlycow.scorchful.registry.SArmorMaterials;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -12,6 +13,11 @@ import net.minecraft.client.render.item.model.ItemModel;
 import net.minecraft.item.Item;
 
 public class SModelGenerator extends FabricModelProvider {
+    private static final String HELMET = "helmet";
+    private static final String CHESTPLATE = "chestplate";
+    private static final String LEGGINGS = "leggings";
+    private static final String BOOTS = "boots";
+
     public SModelGenerator(FabricDataOutput output) {
         super(output);
     }
@@ -29,9 +35,9 @@ public class SModelGenerator extends FabricModelProvider {
         itemModelGenerator.register(SItems.RED_SAND_PILE);
 
         itemModelGenerator.register(SItems.SUN_HAT);
-        itemModelGenerator.register(SItems.TURTLE_CHESTPLATE);
-        itemModelGenerator.register(SItems.TURTLE_LEGGINGS);
-        itemModelGenerator.register(SItems.TURTLE_BOOTS);
+        itemModelGenerator.registerArmor(SItems.TURTLE_CHESTPLATE, SArmorMaterials.TURTLE.assetId(), CHESTPLATE, false);
+        itemModelGenerator.registerArmor(SItems.TURTLE_LEGGINGS, SArmorMaterials.TURTLE.assetId(), LEGGINGS, false);
+        itemModelGenerator.registerArmor(SItems.TURTLE_BOOTS, SArmorMaterials.TURTLE.assetId(), BOOTS, false);
         itemModelGenerator.register(SItems.CACTUS_JUICE);
 
         registerWaterSkin(itemModelGenerator, SItems.WATER_SKIN);
