@@ -25,5 +25,8 @@ public class ItemTagGenerator extends FabricTagProvider.ItemTagProvider {
 
         getOrCreateTagBuilder(ConventionalItemTags.WATER_DRINKS)
                 .add(SItems.WATER_SKIN);
+
+        getOrCreateTagBuilder(ConventionalItemTags.DRINK_CONTAINING_BOTTLE)
+                .add(SItems.CACTUS_JUICE);
     }
 }
