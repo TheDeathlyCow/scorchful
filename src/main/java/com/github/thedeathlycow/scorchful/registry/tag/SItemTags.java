@@ -4,6 +4,7 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
 
 public class SItemTags {
 
@@ -28,9 +29,12 @@ public class SItemTags {
 
     public static final TagKey<Item> COMMON_CACTUS_JUICE = ofCommon("drinks/cactus_juice");
 
-
     private static TagKey<Item> of(String path) {
         return TagKey.of(RegistryKeys.ITEM, Scorchful.id(path));
+    }
+
+    private static TagKey<Item> ofCommon(String path) {
+        return TagKey.of(RegistryKeys.ITEM, Identifier.of("c", path));
     }
 
     private SItemTags() {
