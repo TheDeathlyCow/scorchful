@@ -1,19 +1,13 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.item.component.HeatResistanceComponent;
 import com.github.thedeathlycow.scorchful.item.component.SunHatRendererComponent;
-import com.mojang.serialization.Codec;
 import net.minecraft.component.ComponentType;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.util.Unit;
-import net.minecraft.util.dynamic.Codecs;
 
 import java.util.function.UnaryOperator;
 

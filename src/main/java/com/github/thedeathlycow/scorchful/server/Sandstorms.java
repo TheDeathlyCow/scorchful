@@ -2,7 +2,6 @@ package com.github.thedeathlycow.scorchful.server;
 
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.mojang.serialization.Codec;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;

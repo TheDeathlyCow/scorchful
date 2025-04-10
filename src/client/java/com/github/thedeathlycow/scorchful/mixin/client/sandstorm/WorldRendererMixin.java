@@ -1,11 +1,9 @@
 package com.github.thedeathlycow.scorchful.mixin.client.sandstorm;
 
 import com.github.thedeathlycow.scorchful.client.SandstormEffects;
-import com.github.thedeathlycow.scorchful.server.Sandstorms;
 import net.minecraft.client.option.CloudRenderMode;
 import net.minecraft.client.render.FrameGraphBuilder;
 import net.minecraft.client.render.WorldRenderer;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;

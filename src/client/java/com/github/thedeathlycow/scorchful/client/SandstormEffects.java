@@ -24,8 +24,6 @@ import net.minecraft.world.biome.Biome;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
-import java.util.Optional;
-
 public class SandstormEffects {
 
     public static final Vec3d REGULAR_SANDSTORM_FOG_COLOR = Vec3d.unpackRgb(0xD9AA84);

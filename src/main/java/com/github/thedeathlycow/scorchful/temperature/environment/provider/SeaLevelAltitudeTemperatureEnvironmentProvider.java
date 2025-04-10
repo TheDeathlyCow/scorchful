@@ -2,7 +2,6 @@ package com.github.thedeathlycow.scorchful.temperature.environment.provider;
 
 import com.github.thedeathlycow.scorchful.registry.SEnvironmentProviderTypes;
 import com.github.thedeathlycow.thermoo.api.environment.component.EnvironmentComponentTypes;
-import com.github.thedeathlycow.thermoo.api.environment.component.TemperatureRecordComponent;
 import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProvider;
 import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProviderType;
 import com.github.thedeathlycow.thermoo.api.util.TemperatureRecord;

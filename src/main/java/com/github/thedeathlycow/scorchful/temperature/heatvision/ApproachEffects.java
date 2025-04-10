@@ -3,8 +3,6 @@ package com.github.thedeathlycow.scorchful.temperature.heatvision;
 import com.github.thedeathlycow.scorchful.event.HeatVisionActivation;
 import com.github.thedeathlycow.scorchful.particle.DustGrainParticleEffect;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
-import net.minecraft.block.Blocks;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Vector3f;

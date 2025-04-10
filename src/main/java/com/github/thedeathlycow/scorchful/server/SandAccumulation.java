@@ -6,7 +6,6 @@ import com.github.thedeathlycow.scorchful.config.WeatherConfig;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.SnowBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
