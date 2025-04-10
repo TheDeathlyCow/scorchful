@@ -21,9 +21,16 @@ public class SItemTags {
 
     public static final TagKey<Item> TURTLE_ARMOR = of("turtle_armor");
 
+    public static final TagKey<Item> VERY_HARMFUL_HEAT_RESISTANCE = of("heat_resistance/very_harmful");
+    public static final TagKey<Item> NEUTRAL_HEAT_RESISTANCE = of("heat_resistance/neutral");
+    public static final TagKey<Item> PROTECTIVE_HEAT_RESISTANCE = of("heat_resistance/protective");
+    public static final TagKey<Item> VERY_PROTECTIVE_HEAT_RESISTANCE = of("heat_resistance/very_protective");
+    public static final TagKey<Item> HEAT_RESISTANCE_MODIFIED = of("heat_resistance_modified");
+
     public static final TagKey<Item> BLOCKS_RAIN_WHEN_HOLDING = of("blocks_rain_when_holding");
 
     public static final TagKey<Item> COMMON_CACTUS_JUICE = ofCommon("drinks/cactus_juice");
+
 
     private static TagKey<Item> of(String path) {
         return TagKey.of(RegistryKeys.ITEM, Scorchful.id(path));

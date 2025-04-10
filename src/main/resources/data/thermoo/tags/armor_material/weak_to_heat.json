@@ -1,8 +1,4 @@
 {
     "replace": false,
-    "values": [
-        "minecraft:iron",
-        "minecraft:diamond",
-        "minecraft:leather"
-    ]
+    "values": []
 }

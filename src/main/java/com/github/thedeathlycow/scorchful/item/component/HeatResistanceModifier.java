@@ -133,10 +133,7 @@ public final class HeatResistanceModifier {
         ModifyItemAttributeModifiersCallback.EVENT.register(
                 (stack, builder) -> {
                     if (stack.getItem() instanceof ArmorItem armor) {
-                        HeatResistanceComponent resistance = stack.getOrDefault(
-                                SDataComponentTypes.HEAT_RESISTANCE,
-                                HeatResistanceComponent.DEFAULT
-                        );
+                        HeatResistanceComponent resistance = HeatResistanceComponent.get(stack);
 
                         EquipmentSlot slot = armor.getSlotType();
                         AttributeModifierSlot modifierSlot = AttributeModifierSlot.forEquipmentSlot(slot);

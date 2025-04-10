@@ -1,13 +1,4 @@
 {
     "replace": false,
-    "values": [
-        {
-            "required": false,
-            "id": "frostiful:fur"
-        },
-        {
-            "required": false,
-            "id": "frostiful:fur_lined_chainmail"
-        }
-    ]
+    "values": []
 }

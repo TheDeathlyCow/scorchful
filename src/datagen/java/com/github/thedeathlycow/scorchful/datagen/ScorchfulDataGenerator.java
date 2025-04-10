@@ -6,6 +6,7 @@ import com.github.thedeathlycow.scorchful.datagen.generator.EnvironmentProviderT
 import com.github.thedeathlycow.scorchful.datagen.generator.ItemTagGenerator;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,5 +25,9 @@ public class ScorchfulDataGenerator implements DataGeneratorEntrypoint {
 
         BlockTagGenerator blockTags = pack.addProvider(BlockTagGenerator::new);
         pack.addProvider((output, registriesFuture) -> new ItemTagGenerator(output, registriesFuture, blockTags));
+    }
+
+    public static Identifier commonID(String path) {
+        return Identifier.of("c", path);
     }
 }

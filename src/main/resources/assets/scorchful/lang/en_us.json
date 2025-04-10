@@ -36,6 +36,11 @@
     "tag.item.scorchful.sand_piles": "Sand Piles",
     "tag.item.scorchful.turtle_armor": "Turtle Armor",
     "tag.item.scorchful.blocks_rain_when_holding": "Rain Blocker",
+    "tag.item.scorchful.heat_resistance.very_harmful": "Very Harmful Heat Resistance",
+    "tag.item.scorchful.heat_resistance.neutral": "Neutral Heat Resistance",
+    "tag.item.scorchful.heat_resistance.protective": "Protective Heat Resistance",
+    "tag.item.scorchful.heat_resistance.very_protective": "Very Protective Heat Resistance",
+    "tag.item.c.drinks.cactus_juice": "Cactus Juice",
     
     
     "attribute.name.player.rehydration_efficiency": "Rehydration Efficiency",

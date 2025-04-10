@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "#thermoo-patches-stellaris-patch:space_suits",
+      "required": false
+    },
+    {
+      "id": "#c:armor/golden",
+      "required": false
+    },
+    {
+      "id": "#c:armor/chainmail",
+      "required": false
+    }
+  ]
+}
