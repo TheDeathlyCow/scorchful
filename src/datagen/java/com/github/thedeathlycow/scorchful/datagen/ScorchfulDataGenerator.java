@@ -10,6 +10,7 @@ import com.github.thedeathlycow.scorchful.datagen.generator.client.SModelGenerat
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import org.jetbrains.annotations.Nullable;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,5 +39,9 @@ public class ScorchfulDataGenerator implements DataGeneratorEntrypoint {
     @Nullable
     public String getEffectiveModId() {
         return Scorchful.MODID;
+    }
+
+    public static Identifier commonID(String path) {
+        return Identifier.of("c", path);
     }
 }

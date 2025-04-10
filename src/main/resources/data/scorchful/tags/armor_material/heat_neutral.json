@@ -1,7 +1,4 @@
 {
     "replace": false,
-    "values": [
-        "minecraft:gold",
-        "minecraft:chainmail"
-    ]
+    "values": []
 }

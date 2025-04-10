@@ -100,10 +100,7 @@ public final class HeatResistanceModifier {
         ModifyItemAttributeModifiersCallback.EVENT.register(
                 (stack, builder) -> {
                     if (stack.isIn(ConventionalItemTags.ARMORS) && stack.contains(DataComponentTypes.EQUIPPABLE)) {
-                        HeatResistanceComponent resistance = stack.getOrDefault(
-                                SDataComponentTypes.HEAT_RESISTANCE,
-                                HeatResistanceComponent.DEFAULT
-                        );
+                        HeatResistanceComponent resistance = HeatResistanceComponent.get(stack);
 
                         EquipmentSlot slot = stack.get(DataComponentTypes.EQUIPPABLE).slot();
                         AttributeModifierSlot modifierSlot = AttributeModifierSlot.forEquipmentSlot(slot);

@@ -1,7 +1,4 @@
 {
     "replace": false,
-    "values": [
-        "minecraft:turtle",
-        "scorchful:turtle"
-    ]
+    "values": []
 }
