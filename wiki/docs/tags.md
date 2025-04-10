@@ -23,10 +23,10 @@ Location: `data/(scorchful|thermoo)/tags/armor_material`.
 
 See [the Config file page](./config#combat-config) for how to customize the heat resistance values.
 
-These tags will apply a [`scorchful:frost_resistance`](./components.md#heat-resistance) component to any new stacks created with these tags that does not already have this component. Editing these tags and reloading will not update existing stacks.
+These tags will apply a [`scorchful:heat_resistance`](./components.md#heat-resistance) component to any new stacks created with these tags that does not already have this component. Editing these tags and reloading will not update existing stacks.
 
 !!! warning
-    These tags are deprecated, it is preferred that you use a the [`scorchful:frost_resistance`](./components.md#heat-resistance) component to modify attributes of custom armours instead.
+    These tags are deprecated, it is preferred that you use a the [`scorchful:heat_resistance`](./components.md#heat-resistance) component to modify attributes of custom armours instead. The `#scorchful:heat_resistance/*` [item tags](#item-tags) can also be used as a shorthand to apply these components.
 
 ## Block Tags
 
@@ -59,14 +59,17 @@ Location: `data/(scorchful|thermoo)/tags/entity_type`.
 
 Location: `data/scorchful/tags/item`.
 
-| Tag ID                               | Description                                                                                        | Default values (summarized)                                                |
-|--------------------------------------|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
-| Water based tags                     | Determines how much water to give (or take) from the player when they consume certain food/drink   | See below                                                                  |
-| `scorchful:is_sun_protecting_hat`    | Items that, when worn in the Head slot, provide a shade effect similar to the [Sun Hat](./Sun-Hat) | Sun Hat                                                                    |
-| `scorchful:sand_piles`               | The sand pile items                                                                                | Sand Pile, Red Sand Pile                                                   |
-| `scorchful:turtle_armor`             | The turtle armor set                                                                               | All Turtle Armour items, including the vanilla Turtle Helmet               |
-| `scorchful:is_cooling_food`          | Directly applies cooling to players when consumed                                                  | Ice creams from Let's Do Beachparty, and Icicles from Immersive Weathering |
-| `scorchful:blocks_rain_when_holding` | Blocks soaking effects from rain when held in main or off hand                                     | Umbrella items from Origins: Umbrellas and Artifacts                       |
+| Tag ID                               | Description                                                                                        | Default values (summarized)                                                                                                                          |
+|--------------------------------------|----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Water based tags                     | Determines how much water to give (or take) from the player when they consume certain food/drink   | See below                                                                                                                                            |
+| `scorchful:is_sun_protecting_hat`    | Items that, when worn in the Head slot, provide a shade effect similar to the [Sun Hat](./Sun-Hat) | Sun Hat                                                                                                                                              |
+| `scorchful:sand_piles`               | The sand pile items                                                                                | Sand Pile, Red Sand Pile                                                                                                                             |
+| `scorchful:turtle_armor`             | The turtle armor set                                                                               | All Turtle Armour items, including the vanilla Turtle Helmet                                                                                         |
+| `scorchful:is_cooling_food`          | Directly applies cooling to players when consumed                                                  | Ice creams from Let's Do Beachparty, and Icicles from Immersive Weathering                                                                           |
+| `scorchful:blocks_rain_when_holding` | Blocks soaking effects from rain when held in main or off hand                                     | Umbrella items from Origins: Umbrellas and Artifacts                                                                                                 |
+| `scorchful:heat_resistance_modified` | Items that have a [heat resistance component](./components.md#heat-resistance)                     | All armors                                                                                                                                           |
+| `scorchful:heat_resistance/*`        | Sets a default value for the [heat resistance component](./components.md#heat-resistance)          | Fur armor items (Very Harmful), Chainmail and Golden armor items (Neutral), Netherite armor items (Protective), Turtle armor items (Very Protective) |
+
 
 ### Food and Drink Thirst Replenishing Items
 
