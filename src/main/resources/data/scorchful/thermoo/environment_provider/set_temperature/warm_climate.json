@@ -1,29 +1,33 @@
 {
-    "type": "thermoo:seasonal/temperate",
-    "fallback_season": "spring",
-    "seasons": {
-        "spring": {
-            "type": "thermoo:constant",
-            "components": {
-                "thermoo:temperature": 30.0
-            }
-        },
-        "summer": {
-            "type": "thermoo:constant",
-            "components": {
-                "thermoo:temperature": 40.0
-            }
-        },
-        "autumn": {
-            "type": "thermoo:constant",
-            "components": {
-                "thermoo:temperature": 30.0
-            }
-        },
-        "winter": {
-            "type": "thermoo:constant",
-            "components": {
-                "thermoo:temperature": 20.0
+    "type": "thermoo:modify",
+    "modifiers": "#scorchful:temperature_modifiers",
+    "base": {
+        "type": "thermoo:seasonal/temperate",
+        "fallback_season": "spring",
+        "seasons": {
+            "spring": {
+                "type": "thermoo:constant",
+                "components": {
+                    "thermoo:temperature": 30.0
+                }
+            },
+            "summer": {
+                "type": "thermoo:constant",
+                "components": {
+                    "thermoo:temperature": 40.0
+                }
+            },
+            "autumn": {
+                "type": "thermoo:constant",
+                "components": {
+                    "thermoo:temperature": 30.0
+                }
+            },
+            "winter": {
+                "type": "thermoo:constant",
+                "components": {
+                    "thermoo:temperature": 20.0
+                }
             }
         }
     }
