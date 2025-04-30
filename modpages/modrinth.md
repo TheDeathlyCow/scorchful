@@ -69,7 +69,11 @@ Scorchful is licensed under LGPLv3. You can use this mod in mod packs, YouTube v
 
 # Configuration
 
-Scorchful is extremely highly configurable. It has an extensive config that lets you play around with different settings, disable features, or tweak the values of various things to adjust the difficulty of the mod. For example, if you're not all that into survival, but still wanna try out Sandstorms or have heat effects from Fire, you can completely disable passive heating! It also has a fair amount of datapack integrations with data-driven temperature effects and tags for things like Heat Resistance on armor and water from food and drink. The wiki has all of the detail, so be sure to read that when delving into config for Scorchful: https://github.com/TheDeathlyCow/scorchful/wiki/Config
+Scorchful is extremely highly configurable. It has an extensive config that lets you play around with different settings, disable features, or tweak the values of various things to adjust the difficulty of the mod. For example, if you're not all that into survival, but still wanna try out Sandstorms or have heat effects from Fire, you can completely disable passive heating! It also has a fair amount of datapack integrations with data-driven temperature effects and tags for things like Heat Resistance on armor and water from food and drink.
+
+# Wiki
+
+Scorchful has a comprehensive player and developer wiki available at https://modded.wiki/w/Mod:Scorchful. Thanks to Patbox for hosting this!
 
 # Mod Integrations
 
