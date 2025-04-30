@@ -9,9 +9,11 @@ A Dune-inspired Minecraft mod focused on Heat-based survival and combat. Sister 
 
 The above mod pages and this Git repository are the only official sources for this mod. Other sources may contain out of date or even maliciously modified versions of this mod. 
 
-## Wiki
+## Wiki and Documentation
 
-The wiki is available at https://github.com/TheDeathlyCow/scorchful/wiki. However, this wiki is still being constructed. In the meantime, any questions about the content or mechanics of Scorchful should be directed to the `#help-scorchful` channel of my Discord: https://discord.gg/aqASuWebRU
+Scorchful has a soon-to-be comprehensive player and developer wiki available at https://modded.wiki/w/Mod:Scorchful. Thanks to Patbox for hosting this!
+
+If you have questions or problems, tech support is also provided on my [community Discord](https://discord.gg/aqASuWebRU). However, it is preferred that bug reports are submitted to the [issue tracker](https://github.com/TheDeathlyCow/scorchful/issues).
 
 # Mod Integrations
 
@@ -36,7 +38,7 @@ Scorchful is a mod for [Minecraft: Java Edition](https://www.minecraft.net/en-us
 
 ## License 
 
-Scorchful is licensed under LGPLv3. 
+Scorchful is licensed under LGPL-3.0. 
 
 ## Additional Credits
 
