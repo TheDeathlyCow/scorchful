@@ -1,10 +1,10 @@
-package com.github.thedeathlycow.scorchful.testmod.common;
+package com.github.thedeathlycow.scorchful.gametest.common;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 
-public class ScorchfulTestMod implements ModInitializer {
+public class ScorchfulGameTest implements ModInitializer {
     public static final String MODID = Scorchful.MODID + "-test";
 
     @Override

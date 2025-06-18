@@ -41,78 +41,38 @@ loom {
     splitEnvironmentSourceSets()
 }
 
-sourceSets {
-    testmod {
-        compileClasspath += main.compileClasspath
-        runtimeClasspath += main.runtimeClasspath
-        compileClasspath += main.output
-        runtimeClasspath += main.output
+fabricApi {
+    configureDataGeneration() {
+        createSourceSet = true
+        client = true
+        modId = "scorchful-datagen"
     }
-
-    testmodClient {
-        compileClasspath += main.compileClasspath
-        runtimeClasspath += main.runtimeClasspath
-        compileClasspath += client.compileClasspath
-        runtimeClasspath += client.runtimeClasspath
-        compileClasspath += main.output
-        runtimeClasspath += main.output
-        compileClasspath += client.output
-        runtimeClasspath += client.output
-
-        compileClasspath += testmod.compileClasspath
-        runtimeClasspath += testmod.runtimeClasspath
-        compileClasspath += testmod.output
-        runtimeClasspath += testmod.output
-    }
-}
-
-subprojects {
-    dependencies {
-        testmodImplementation sourceSets.main.output
-        testmodImplementation project(path: ':', configuration: 'namedElements')
+    configureTests() {
+        createSourceSet = true
+        modId = "scorchful-test"
+        enableGameTests = true
+        enableClientGameTests = false
+        eula = true
     }
 }
 
 loom {
-    mods {
-        "scorchful" {
-            sourceSet sourceSets.main
-            sourceSet sourceSets.client
-        }
-
-        "scorchful-test" {
-            sourceSet sourceSets.testmod
-            sourceSet sourceSets.testmodClient
-        }
-    }
-
     accessWidenerPath = file("src/main/resources/scorchful.accesswidener")
 
     runs {
-        testmodClient {
+        gametestClient {
             client()
             ideConfigGenerated project.rootProject == project
-            name = "Testmod Client"
-            source sourceSets.testmodClient
+            name = "GameTest Client"
+            source sourceSets.gametest
         }
-        testmodServer {
+        gametestServer {
             server()
             ideConfigGenerated project.rootProject == project
-            name = "Testmod Server"
-            source sourceSets.testmod
-        }
-        gametest {
-            inherit testmodServer
-
-            name "Game Test"
-
-            // Enable the gametest runner
-            vmArg "-Dfabric-api.gametest"
-            vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/junit.xml"
-            runDir "build/gametest"
+            name = "GameTest Server"
+            source sourceSets.gametest
         }
     }
-
 }
 
 dependencies {
@@ -141,24 +101,11 @@ dependencies {
     modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
     // modImplementation "org.ladysnake:satin:${satin_version}"
 
-    testmodImplementation "org.mockito:mockito-core:3.+"
+    gametestImplementation "org.mockito:mockito-core:3.+"
     // still not updated :(
     // include "org.ladysnake:satin:${satin_version}"
 
     modCompileOnly("maven.modrinth:dehydration:${project.dehydration_version}") { transitive = false }
-
-    afterEvaluate {
-        subprojects.each {
-            api project(path: ":${it.name}", configuration: "namedElements")
-
-            if (!(it.name in devOnlyModules)) {
-                include project("${it.name}:")
-            }
-
-            testmodImplementation project("${it.name}:").sourceSets.testmod.output
-            testmodImplementation project("${it.name}:").sourceSets.testmodClient.output
-        }
-    }
 }
 
 processResources {
@@ -203,13 +150,5 @@ publishing {
         // Notice: This block does NOT have the same function as the block in the top level.
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
-    }
-}
-
-fabricApi {
-    configureDataGeneration() {
-        createSourceSet = true
-        client = true
-        modId = "scorchful-datagen"
     }
 }

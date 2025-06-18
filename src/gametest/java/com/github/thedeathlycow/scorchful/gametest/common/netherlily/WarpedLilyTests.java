@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.testmod.common.netherlily;
+package com.github.thedeathlycow.scorchful.gametest.common.netherlily;
 
 import com.github.thedeathlycow.scorchful.block.NetherLilyBlock;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;

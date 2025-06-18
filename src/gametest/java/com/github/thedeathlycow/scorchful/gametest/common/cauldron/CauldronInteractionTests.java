@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.testmod.common.cauldron;
+package com.github.thedeathlycow.scorchful.gametest.common.cauldron;
 
 import com.github.thedeathlycow.scorchful.block.SandCauldronBlock;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;

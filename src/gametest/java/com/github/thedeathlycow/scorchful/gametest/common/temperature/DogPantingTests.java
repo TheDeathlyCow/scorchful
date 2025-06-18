@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.testmod.common.temperature;
+package com.github.thedeathlycow.scorchful.gametest.common.temperature;
 
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.entity.EntityType;

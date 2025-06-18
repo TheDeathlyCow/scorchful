@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.testmod.common.item;
+package com.github.thedeathlycow.scorchful.gametest.common.item;
 
 import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;

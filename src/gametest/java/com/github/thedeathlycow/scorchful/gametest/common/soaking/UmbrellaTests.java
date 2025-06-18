@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.testmod.common.soaking;
+package com.github.thedeathlycow.scorchful.gametest.common.soaking;
 
 import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;

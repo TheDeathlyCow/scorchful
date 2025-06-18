@@ -1,0 +1,22 @@
+{
+    "schemaVersion": 1,
+    "id": "scorchful-test",
+    "name": "Scorchful Test Mod",
+    "version": "1.0.0",
+    "environment": "*",
+    "license": "LGPL-3.0",
+    "entrypoints": {
+        "main": [
+            "com.github.thedeathlycow.scorchful.gametest.common.ScorchfulGameTest"
+        ],
+        "fabric-gametest": [
+            "com.github.thedeathlycow.scorchful.gametest.common.cauldron.CauldronInteractionTests",
+            "com.github.thedeathlycow.scorchful.gametest.common.cauldron.SandCauldronTests",
+            "com.github.thedeathlycow.scorchful.gametest.common.item.CoolingFoodTest",
+            "com.github.thedeathlycow.scorchful.gametest.common.netherlily.CrimsonLilyTests",
+            "com.github.thedeathlycow.scorchful.gametest.common.netherlily.WarpedLilyTests",
+            "com.github.thedeathlycow.scorchful.gametest.common.temperature.DogPantingTests",
+            "com.github.thedeathlycow.scorchful.gametest.common.soaking.UmbrellaTests"
+        ]
+    }
+}
