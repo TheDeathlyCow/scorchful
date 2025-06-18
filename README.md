@@ -4,7 +4,7 @@ A Dune-inspired Minecraft mod focused on Heat-based survival and combat. Sister 
 
 ## Mod Pages
 
-* Modrinth (preferred): https://modrinth.com/mod/scorchful
+* Modrinth: https://modrinth.com/mod/scorchful
 * CurseForge: https://www.curseforge.com/minecraft/mc-mods/scorchful
 
 The above mod pages and this Git repository are the only official sources for this mod. Other sources may contain out of date or even maliciously modified versions of this mod. 
@@ -13,15 +13,14 @@ The above mod pages and this Git repository are the only official sources for th
 
 Scorchful has a soon-to-be comprehensive player and developer wiki available at https://modded.wiki/w/Mod:Scorchful. Thanks to Patbox for hosting this!
 
-If you have questions or problems, tech support is also provided on my [community Discord](https://discord.gg/aqASuWebRU). However, it is preferred that bug reports are submitted to the [issue tracker](https://github.com/TheDeathlyCow/scorchful/issues).
+If you have questions or problems, tech support is also provided on my [community Discord](https://discord.thedeathlycow.com). However, it is preferred that bug reports are submitted to the [issue tracker](https://github.com/TheDeathlyCow/scorchful/issues).
 
-# Mod Integrations
+## Mod Integrations
 
 This documents mod integrations that have been created specifically for Scorchful and are included with Scorchful out of the box.
 
-Many other patches that are also relevant for Frostiful are provided by the standalone [Thermoo Patches](https://modrinth.com/mod/thermoo-patches) mod, including season integration, heart bar fixes, and more.
+Many other patches that are also relevant for Scorchful are provided by the standalone [Thermoo Patches](https://modrinth.com/mod/thermoo-patches) mod, including season integration, heart bar fixes, and more.
 
-* [Tips](https://modrinth.com/mod/tips): Added some Frostiful-specific tips
 * [Enchantment Descriptions](https://modrinth.com/mod/enchantment-descriptions): Descriptions are provided for Scorchful's enchantments
 * [Farmer's Delight](https://modrinth.com/mod/farmers-delight-refabricated): Foods and drinks provide water for sweating
 * [Immersive Weathering](https://modrinth.com/mod/immersive-weathering): Icicles are cooling
@@ -34,7 +33,7 @@ Many other patches that are also relevant for Frostiful are provided by the stan
 
 ## Technical info
 
-Scorchful is a mod for [Minecraft: Java Edition](https://www.minecraft.net/en-us/store/minecraft-deluxe-collection-pc), written using the [Fabric Mod Loader](https://fabricmc.net/), with support also provided for the [Quilt Mod Loader](https://quiltmc.org/en/). Scorchful currently only supports Minecraft 1.20.4. Scorchful depends on [Fabric API](https://github.com/FabricMC/fabric), [Thermoo](https://github.com/TheDeathlyCow/thermoo/), and [Cloth Config](https://github.com/shedaniel/cloth-config), and has integrations for its sister mod, [Frostiful](https://github.com/TheDeathlyCow/frostiful/). If using Quilt, then Fabric API should be replaced with [Quilt Standard Libraries](https://github.com/QuiltMC/quilt-standard-libraries).
+Scorchful is a mod for [Minecraft: Java Edition](https://www.minecraft.net/en-us/store/minecraft-deluxe-collection-pc), written using the [Fabric Mod Loader](https://fabricmc.net/), with support also provided for the [Quilt Mod Loader](https://quiltmc.org/en/). Scorchful depends on [Fabric API](https://github.com/FabricMC/fabric), [Thermoo](https://github.com/TheDeathlyCow/thermoo/), and [Cloth Config](https://github.com/shedaniel/cloth-config), and has integrations for its sister mod, [Frostiful](https://github.com/TheDeathlyCow/frostiful/). If using Quilt, then Fabric API should be replaced with [Quilt Standard Libraries](https://github.com/QuiltMC/quilt-standard-libraries).
 
 ## License 
 
@@ -46,29 +45,35 @@ Thanks to everyone who has contributed to Scorchful, no matter how big or small!
 
 ## Building 
 
-Scorchful is built using [Gradle](https://gradle.org/). You can use the following command to build the latest version of the mod:
+Scorchful is built using [Gradle](https://gradle.org/) using the [Fabric Loom Gradle plugin](https://github.com/FabricMC/fabric-loom).
 
-```
-./gradlew build
+```bash
+# builds a production jar of Frostiful
+./gradlew build 
+
+# runs Frostiful's unit tests
+./gradlew check
+
+# runs Frostiful's game tests
+./gradlew runGametest
 ```
 
 # LTS Policy
 
-These are the current versions being supported by Scorchful.
+This is the current support status for each version of Minecraft that Scorchful is available for. The current Long-Term Support (LTS) policy for Scorchful versions is to support 1.21.1 and the latest game drop. Version 1.21.1 will be supported until at least the release of the Vibrant Visuals update for Java Edition.
 
-| Minecraft Version | Support Status         |
-|-------------------|------------------------|
-| 1.21.4            | ✅ Supported            | 
-| 1.21.3            | ⚠️ Critical fixes only | 
-| 1.21.1            | ✅ Supported            | 
-| 1.20.4            | ❌ Unsupported          | 
-| 1.20.2            | ❌ Unsupported          | 
-| 1.20.1            | ❌ Unsupported          |
-| 1.19.4            | ❌ Unsupported          |
-| 1.19.2            | ❌ Unsupported          | 
+Supported versions will receive all new features, fixes, and updates (where possible).
 
-Status Definitions:
+Unsupported versions version will receive no future updates, except for critical security fixes.
 
-* ✅ Supported: This version is fully supported and will receive all new features, fixes, and updates (where possible)
-* ⚠️ Critical fixes only: This version will receive only critical crash and security fixes, as well as minor features where they can be easily cherry-picked
-* ❌ Unsupported: This version will receive no future updates, except for critical security fixes
+| Minecraft Version | Support Status |
+|-------------------|----------------|
+| 1.21.5            | ✅ Supported    | 
+| 1.21.4            | ❌ Unsupported  | 
+| 1.21.3            | ❌ Unsupported  | 
+| 1.21.1            | ✅ Supported    | 
+| 1.20.4            | ❌ Unsupported  | 
+| 1.20.2            | ❌ Unsupported  | 
+| 1.20.1            | ❌ Unsupported  |
+| 1.19.4            | ❌ Unsupported  |
+| 1.19.2            | ❌ Unsupported  | 
