@@ -25,7 +25,7 @@ public class WorldRendererMixin {
             at = @At("HEAD"),
             cancellable = true
     )
-    private void cancelCloudsInSandstorms(FrameGraphBuilder frameGraphBuilder, Matrix4f positionMatrix, Matrix4f projectionMatrix, CloudRenderMode renderMode, Vec3d cameraPos, float ticks, int color, float cloudHeight, CallbackInfo ci) {
+    private void cancelCloudsInSandstorms(FrameGraphBuilder frameGraphBuilder, CloudRenderMode mode, Vec3d cameraPos, float f, int color, float cloudHeight, CallbackInfo ci) {
         if (this.world != null && SandstormEffects.shouldCancelClouds(this.world, BlockPos.ofFloored(cameraPos))) {
             ci.cancel();
         }
