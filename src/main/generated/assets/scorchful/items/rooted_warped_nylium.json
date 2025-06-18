@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "scorchful:block/rooted_warped_nylium"
+    "model": "scorchful:item/rooted_warped_nylium"
   }
 }
