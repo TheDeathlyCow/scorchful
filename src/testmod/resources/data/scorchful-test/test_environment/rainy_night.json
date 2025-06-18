@@ -1,0 +1,13 @@
+{
+    "type": "minecraft:all_of",
+    "definitions": [
+        {
+            "type": "minecraft:time_of_day",
+            "time": 18000
+        },
+        {
+            "type": "minecraft:weather",
+            "weather": "rain"
+        }
+    ]
+}

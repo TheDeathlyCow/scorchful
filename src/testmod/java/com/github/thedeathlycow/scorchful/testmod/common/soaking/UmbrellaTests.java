@@ -1,11 +1,10 @@
 package com.github.thedeathlycow.scorchful.testmod.common.soaking;
 
 import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
-import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
+import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.item.Items;
-import net.minecraft.test.GameTest;
 import net.minecraft.test.TestContext;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -13,9 +12,8 @@ import net.minecraft.util.math.BlockPos;
 @SuppressWarnings("unused")
 public class UmbrellaTests {
     @GameTest(
-            templateName = FabricGameTest.EMPTY_STRUCTURE,
             skyAccess = true,
-            batchId = "scorchful.rainy_night"
+            environment = "scorchful-test:rainy_night"
     )
     public void holding_leather_in_mainhand_blocks_rain(TestContext context) {
         context.getWorld().setWeather(0, 1000, true, false);
@@ -38,9 +36,8 @@ public class UmbrellaTests {
     }
 
     @GameTest(
-            templateName = FabricGameTest.EMPTY_STRUCTURE,
             skyAccess = true,
-            batchId = "scorchful.rainy_night"
+            environment = "scorchful-test:rainy_night"
     )
     public void holding_leather_in_offhand_blocks_rain(TestContext context) {
         context.getWorld().setWeather(0, 1000, true, false);

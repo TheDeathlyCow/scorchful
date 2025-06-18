@@ -7,13 +7,15 @@ import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.EntityCollisionHandler;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.StriderEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.test.GameTest;
+import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.test.TestContext;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameMode;
@@ -24,7 +26,7 @@ import java.util.function.BooleanSupplier;
 public class CrimsonLilyTests {
 
     @GameTest(
-            templateName = "scorchful-test:nether_lily/crimson_wet"
+            structure = "scorchful-test:nether_lily/crimson_wet"
     )
     public void stepping_on_wet_crimson_lily_soaks_player(TestContext context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -35,19 +37,19 @@ public class CrimsonLilyTests {
 
         BooleanSupplier isPlayerWet = player::thermoo$isWet;
 
-        context.assertFalse(isPlayerWet.getAsBoolean(), "Newly created player should be dry");
+        context.assertFalse(isPlayerWet.getAsBoolean(), Text.literal("Newly created player should be dry"));
 
         BlockState lilyState = context.getBlockState(lilyPos);
-        lilyState.onEntityCollision(context.getWorld(), context.getAbsolutePos(lilyPos), player);
+        lilyState.onEntityCollision(context.getWorld(), context.getAbsolutePos(lilyPos), player, EntityCollisionHandler.DUMMY);
 
-        context.assertTrue(isPlayerWet.getAsBoolean(), "Player should be wet");
+        context.assertTrue(isPlayerWet.getAsBoolean(), Text.literal("Player should be wet"));
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, CrimsonLilyBlock.WATER_SATURATION_LEVEL, CrimsonLilyBlock.MIN_LEVEL);
         context.complete();
     }
 
     @GameTest(
-            templateName = "scorchful-test:nether_lily/crimson_dry"
+            structure = "scorchful-test:nether_lily/crimson_dry"
     )
     public void stepping_on_dry_crimson_lily_does_not_soak_player(TestContext context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -58,19 +60,19 @@ public class CrimsonLilyTests {
 
         BooleanSupplier isPlayerWet = player::thermoo$isWet;
 
-        context.assertFalse(isPlayerWet.getAsBoolean(), "Newly created player should be dry");
+        context.assertFalse(isPlayerWet.getAsBoolean(), Text.literal("Newly created player should be dry"));
 
         BlockState lilyState = context.getBlockState(lilyPos);
-        lilyState.onEntityCollision(context.getWorld(), context.getAbsolutePos(lilyPos), player);
+        lilyState.onEntityCollision(context.getWorld(), context.getAbsolutePos(lilyPos), player, EntityCollisionHandler.DUMMY);
 
-        context.assertFalse(isPlayerWet.getAsBoolean(), "Player should NOT be wet");
+        context.assertFalse(isPlayerWet.getAsBoolean(), Text.literal("Player should NOT be wet"));
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, CrimsonLilyBlock.WATER_SATURATION_LEVEL, CrimsonLilyBlock.MIN_LEVEL);
         context.complete();
     }
 
     @GameTest(
-            templateName = "scorchful-test:nether_lily/crimson_partially_wet"
+            structure = "scorchful-test:nether_lily/crimson_partially_wet"
     )
     public void stepping_on_partially_wet_crimson_lily_does_not_soak_player(TestContext context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -81,19 +83,19 @@ public class CrimsonLilyTests {
 
         BooleanSupplier isPlayerWet = player::thermoo$isWet;
 
-        context.assertFalse(isPlayerWet.getAsBoolean(), "Newly created player should be dry");
+        context.assertFalse(isPlayerWet.getAsBoolean(), Text.literal("Newly created player should be dry"));
 
         BlockState lilyState = context.getBlockState(lilyPos);
-        lilyState.onEntityCollision(context.getWorld(), context.getAbsolutePos(lilyPos), player);
+        lilyState.onEntityCollision(context.getWorld(), context.getAbsolutePos(lilyPos), player, EntityCollisionHandler.DUMMY);
 
-        context.assertFalse(isPlayerWet.getAsBoolean(), "Player should NOT be wet");
+        context.assertFalse(isPlayerWet.getAsBoolean(), Text.literal("Player should NOT be wet"));
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, CrimsonLilyBlock.WATER_SATURATION_LEVEL, 2);
         context.complete();
     }
 
     @GameTest(
-            templateName = "scorchful-test:nether_lily/crimson_wet"
+            structure = "scorchful-test:nether_lily/crimson_wet"
     )
     public void stepping_on_wet_crimson_lily_soaks_and_hurts_strider(TestContext context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -104,7 +106,7 @@ public class CrimsonLilyTests {
 
         BooleanSupplier isStriderWet = strider::thermoo$isWet;
 
-        context.assertFalse(isStriderWet.getAsBoolean(), "Newly created Strider should be dry");
+        context.assertFalse(isStriderWet.getAsBoolean(), Text.literal("Newly created Strider should be dry"));
         context.expectEntityWithData(
                 new BlockPos(0, 2, 0),
                 EntityType.STRIDER,
@@ -116,14 +118,14 @@ public class CrimsonLilyTests {
 
         context.addInstantFinalTask(
                 () -> {
-                    context.assertTrue(isStriderWet.getAsBoolean(), "Strider should be wet");
+                    context.assertTrue(isStriderWet.getAsBoolean(), Text.literal("Strider should be wet"));
 
                     context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
                     context.expectBlockProperty(lilyPos, CrimsonLilyBlock.WATER_SATURATION_LEVEL, CrimsonLilyBlock.MIN_LEVEL);
 
                     context.assertTrue(
                             strider.getHealth() < strider.getMaxHealth(),
-                            "Strider should have been damaged"
+                            Text.literal("Strider should have been damaged")
                     );
                     strider.setAiDisabled(true);
                 }
@@ -131,7 +133,7 @@ public class CrimsonLilyTests {
     }
 
     @GameTest(
-            templateName = "scorchful-test:nether_lily/crimson_dry"
+            structure = "scorchful-test:nether_lily/crimson_dry"
     )
     public void using_water_bottle_on_dry_crimson_lily_saturates_it(TestContext context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -146,20 +148,20 @@ public class CrimsonLilyTests {
 
         context.assertTrue(
                 playerHasWaterBottle.getAsBoolean(),
-                "Newly created player should have a water bottle"
+               Text.literal( "Newly created player should have a water bottle")
         );
 
         context.useBlock(lilyPos, player);
 
-        context.assertFalse(playerHasWaterBottle.getAsBoolean(), "Player should NOT have a water bottle");
-        context.assertTrue(playerHasGlassBottle.getAsBoolean(), "Player should have a glass bottle");
+        context.assertFalse(playerHasWaterBottle.getAsBoolean(), Text.literal("Player should NOT have a water bottle"));
+        context.assertTrue(playerHasGlassBottle.getAsBoolean(), Text.literal("Player should have a glass bottle"));
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
         context.complete();
     }
 
     @GameTest(
-            templateName = "scorchful-test:nether_lily/crimson_dry"
+            structure = "scorchful-test:nether_lily/crimson_dry"
     )
     public void using_water_skin_on_dry_crimson_lily_saturates_it(TestContext context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -177,19 +179,19 @@ public class CrimsonLilyTests {
 
         context.assertFalse(
                 isWaterSkinEmpty.getAsBoolean(),
-                "Water skin should NOT be empty"
+                Text.literal("Water skin should NOT be empty")
         );
 
         context.useBlock(lilyPos, player);
 
-        context.assertTrue(isWaterSkinEmpty.getAsBoolean(), "Water skin should NOT be empty");
+        context.assertTrue(isWaterSkinEmpty.getAsBoolean(), Text.literal("Water skin should NOT be empty"));
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
         context.complete();
     }
 
     @GameTest(
-            templateName = "scorchful-test:nether_lily/crimson_wet"
+            structure = "scorchful-test:nether_lily/crimson_wet"
     )
     public void using_water_bottle_on_wet_crimson_lily_does_not_consume_bottle(TestContext context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -204,20 +206,20 @@ public class CrimsonLilyTests {
 
         context.assertTrue(
                 playerHasWaterBottle.getAsBoolean(),
-                "Newly created player should have a water bottle"
+                Text.literal("Newly created player should have a water bottle")
         );
 
         context.useBlock(lilyPos, player);
 
-        context.assertTrue(playerHasWaterBottle.getAsBoolean(), "Player should have a water bottle");
-        context.assertFalse(playerHasGlassBottle.getAsBoolean(), "Player should NOT have a glass bottle");
+        context.assertTrue(playerHasWaterBottle.getAsBoolean(), Text.literal("Player should have a water bottle"));
+        context.assertFalse(playerHasGlassBottle.getAsBoolean(), Text.literal("Player should NOT have a glass bottle"));
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
         context.complete();
     }
 
     @GameTest(
-            templateName = "scorchful-test:nether_lily/crimson_wet"
+            structure = "scorchful-test:nether_lily/crimson_wet"
     )
     public void using_water_skin_on_wet_crimson_lily_does_not_consume_skin(TestContext context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -234,14 +236,14 @@ public class CrimsonLilyTests {
 
         context.assertFalse(
                 isWaterSkinEmpty.getAsBoolean(),
-                "Water skin should not start as empty"
+                Text.literal("Water skin should not start as empty")
         );
 
         context.useBlock(lilyPos, player);
 
         context.assertFalse(
                 isWaterSkinEmpty.getAsBoolean(),
-                "Water skin should not be empty"
+                Text.literal("Water skin should not be empty")
         );
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
         context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
