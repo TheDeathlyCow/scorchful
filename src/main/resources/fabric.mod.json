@@ -43,12 +43,12 @@
 		}
 	],
 	"depends": {
-		"fabricloader": ">=0.16.10",
-		"minecraft": "1.21.4",
+		"fabricloader": ">=0.16.14",
+		"minecraft": "1.21.5",
 		"java": ">=21",
-		"fabric-api": ">=0.119.2",
-		"cloth-config": ">=17.0.144",
-		"cardinal-components-base": ">=6.2.2"
+		"fabric-api": ">=0.127.0",
+		"cloth-config": ">=18.0.145",
+		"cardinal-components-base": ">=6.3.1"
 	},
 	"suggests": {
 		"frostiful": "*",
@@ -63,7 +63,7 @@
 		],
 		"modmenu": {
 			"links": {
-				"modmenu.discord": "https://discord.gg/aqASuWebRU",
+				"modmenu.discord": "https://discord.thedeathlycow.com",
 				"modmenu.wiki": "https://modded.wiki/w/Mod:Scorchful",
 				"modmenu.kofi": "https://ko-fi.com/thedeathlycow",
 				"modmenu.modrinth": "https://modrinth.com/mod/scorchful"
