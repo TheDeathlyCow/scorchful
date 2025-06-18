@@ -4,24 +4,69 @@
     },
     "passes": [
         {
-            "program": "scorchful:post/periodic_blur",
+            "vertex_shader": "minecraft:post/blur",
+            "fragment_shader": "scorchful:post/periodic_blur",
             "inputs": [
                 {
                     "sampler_name": "In",
-                    "target": "minecraft:main"
+                    "target": "minecraft:main",
+                    "bilinear": true
                 }
             ],
-            "output": "swap"
+            "output": "swap",
+            "uniforms": [
+                {
+                    "name": "Period",
+                    "type": "float",
+                    "values": [
+                        1.5
+                    ]
+                },
+                {
+                    "name": "BlurRadius",
+                    "type": "float",
+                    "values": [
+                        40.0
+                    ]
+                },
+                {
+                    "name": "BlurDir",
+                    "type": "vec2",
+                    "values": [
+                        1.0,
+                        0.0
+                    ]
+                }
+            ]
         },
         {
-            "program": "scorchful:post/wobble",
+            "vertex_shader": "minecraft:post/blit",
+            "fragment_shader": "scorchful:post/wobble",
             "inputs": [
                 {
                     "sampler_name": "In",
                     "target": "swap"
                 }
             ],
-            "output": "minecraft:main"
+            "output": "minecraft:main",
+            "uniforms": [
+                {
+                    "name": "Frequency",
+                    "type": "vec2",
+                    "values": [
+                        512.0,
+                        288.0
+                    ]
+                },
+                {
+                    "name": "WobbleAmount",
+                    "type": "vec2",
+                    "values": [
+                        0.001,
+                        0.001
+                    ]
+                }
+            ]
         }
     ]
 }
