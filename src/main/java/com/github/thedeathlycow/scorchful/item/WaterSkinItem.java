@@ -131,7 +131,7 @@ public class WaterSkinItem extends Item {
 
             DrinkContainerComponent container = stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT);
 
-            if (!world.canPlayerModifyAt(user, hitPos) || container.isFull()) {
+            if (!world.canEntityModifyAt(user, hitPos) || container.isFull()) {
                 return null;
             }
 

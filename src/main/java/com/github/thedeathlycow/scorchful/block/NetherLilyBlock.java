@@ -135,7 +135,7 @@ public class NetherLilyBlock extends Block {
                 ? ParticleTypes.DRIPPING_DRIPSTONE_WATER
                 : ParticleTypes.DRIPPING_WATER;
 
-        world.addParticle(
+        world.addParticleClient(
                 particle,
                 x, y, z,
                 0, 0, 0

@@ -22,9 +22,7 @@ public class RehydrationComponent implements Component {
 
     @Override
     public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        if (tag.contains(WATER_CAPTURED_KEY, NbtElement.INT_TYPE)) {
-            this.waterCaptured = tag.getInt(WATER_CAPTURED_KEY);
-        }
+        this.waterCaptured = tag.getInt(WATER_CAPTURED_KEY, 0);
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.component.ComponentsAccess;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipAppender;
@@ -98,7 +99,7 @@ public record DrinkContainerComponent(int numDrinks, int maxDrinks) implements T
     }
 
     @Override
-    public void appendTooltip(Item.TooltipContext context, Consumer<Text> tooltip, TooltipType type) {
+    public void appendTooltip(Item.TooltipContext context, Consumer<Text> tooltip, TooltipType type, ComponentsAccess components) {
         MutableText text = this.hasDrink()
                 ? Text.translatable("item.scorchful.water_skin.tooltip.count", this.numDrinks(), this.maxDrinks())
                 : Text.translatable("item.scorchful.water_skin.tooltip.empty");

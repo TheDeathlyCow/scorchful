@@ -25,7 +25,8 @@ public class VisionGenerator {
             return null;
         }
 
-        return Weighting.getRandom(serverWorld.getRandom(), controllers).orElseThrow(IllegalStateException::new);
+        return Weighting.getRandom(serverWorld.getRandom(), controllers, HeatVision::getWeight)
+                .orElseThrow(IllegalStateException::new);
     }
 
     private List<HeatVision> getPossibleVisions(RegistryEntry<Biome> biome) {

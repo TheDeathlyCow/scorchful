@@ -12,6 +12,7 @@ import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.component.ComponentsAccess;
 import net.minecraft.component.type.Consumable;
 import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.entity.LivingEntity;
@@ -63,7 +64,7 @@ public enum DrinkLevelComponent implements StringIdentifiable, Consumable, Toolt
     );
 
     public static final Codec<DrinkLevelComponent> CODEC = StringIdentifiable.createCodec(DrinkLevelComponent::values);
-    public static final IntFunction<DrinkLevelComponent> ID_TO_VALUE = ValueLists.createIdToValueFunction(
+    public static final IntFunction<DrinkLevelComponent> ID_TO_VALUE = ValueLists.createIndexToValueFunction(
             DrinkLevelComponent::ordinal, values(), ValueLists.OutOfBoundsHandling.ZERO
     );
     public static final PacketCodec<ByteBuf, DrinkLevelComponent> PACKET_CODEC = PacketCodecs.indexed(
@@ -115,7 +116,7 @@ public enum DrinkLevelComponent implements StringIdentifiable, Consumable, Toolt
             postion = postion.rotateY(-entity.getYaw() * (MathHelper.PI / 180f));
             postion = postion.add(entity.getX(), entity.getEyeY(), entity.getZ());
 
-            world.addParticle(
+            world.addParticleClient(
                     ParticleTypes.SPLASH,
                     postion.x, postion.y, postion.z,
                     velocity.x, velocity.y + 1, velocity.z
@@ -165,7 +166,7 @@ public enum DrinkLevelComponent implements StringIdentifiable, Consumable, Toolt
     }
 
     @Override
-    public void appendTooltip(Item.TooltipContext context, Consumer<Text> tooltip, TooltipType type) {
+    public void appendTooltip(Item.TooltipContext context, Consumer<Text> tooltip, TooltipType type, ComponentsAccess components) {
         tooltip.accept(this.tooltipText);
     }
 }

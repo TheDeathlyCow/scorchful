@@ -7,6 +7,7 @@ import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
 import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCollisionHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -23,7 +24,7 @@ public class CrimsonLilyBlock extends NetherLilyBlock {
     }
 
     @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
         if (state.get(WATER_SATURATION_LEVEL) != 3) {
             return;
         }
@@ -75,7 +76,7 @@ public class CrimsonLilyBlock extends NetherLilyBlock {
             double y = center.y;
             double z = center.z + (random.nextDouble() / 3) - (1.0 / 6.0);
 
-            world.addParticle(
+            world.addParticleClient(
                     new SpurtingWaterParticleEffect(i),
                     x, y, z,
                     0, 0, 0

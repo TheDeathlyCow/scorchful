@@ -19,7 +19,7 @@ public final class SoakedEffects {
      * This is done on the client side to avoid sending unnecessary packets and save bandwidth.
      */
     public static void tickDripParticles(PlayerEntity player, World world, boolean submergedInWater) {
-        if (world.isClient) { // only show particles on client to save bandwidth
+        if (world.isClient()) { // only show particles on client to save bandwidth
 
             // config to disable
             if (!Scorchful.getConfig().clientConfig.enableWetDripParticles()) {
@@ -32,7 +32,7 @@ public final class SoakedEffects {
             }
 
             // only spawn particles when out of water
-            if (submergedInWater || player.isWet()) {
+            if (submergedInWater) {
                 return;
             }
 
@@ -54,7 +54,7 @@ public final class SoakedEffects {
                 double y = boundingBox.getMin(Direction.Axis.Y) + random.nextDouble(boundingBox.getLengthY());
                 double z = boundingBox.getMin(Direction.Axis.Z) + random.nextDouble(boundingBox.getLengthZ());
 
-                world.addParticle(
+                world.addParticleClient(
                         ParticleTypes.FALLING_DRIPSTONE_WATER,
                         x, y, z,
                         0, 0, 0

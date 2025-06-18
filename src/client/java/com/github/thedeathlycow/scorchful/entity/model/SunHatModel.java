@@ -35,7 +35,7 @@ public class SunHatModel<S extends BipedEntityRenderState> extends BipedEntityMo
                                 8.0F, 4.0F, 8.0F,
                                 dilation.add(0.6f)
                         ),
-                ModelTransform.pivot(0.0F, 24.0F, 0.0F)
+                ModelTransform.origin(0.0F, 24.0F, 0.0F)
         );
 
         return TexturedModelData.of(modelData, 64, 64);

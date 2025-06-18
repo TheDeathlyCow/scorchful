@@ -1,12 +1,9 @@
 package com.github.thedeathlycow.scorchful.item;
 
-import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
-import net.minecraft.component.ComponentType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipAppender;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
 import net.minecraft.text.Style;
@@ -17,7 +14,7 @@ import net.minecraft.util.Identifier;
 import java.util.List;
 import java.util.function.Consumer;
 
-public final class ScorchfulItemTooltips implements ItemTooltipCallback {
+public final class CoolingItemTooltip implements ItemTooltipCallback {
     private static final Text COOLING_TOOLTIP = Text.translatable("item.scorchful.tooltip.cooling")
             .setStyle(Style.EMPTY.withColor(Formatting.AQUA));
 
@@ -25,25 +22,8 @@ public final class ScorchfulItemTooltips implements ItemTooltipCallback {
     public void getTooltip(ItemStack stack, Item.TooltipContext context, TooltipType tooltipType, List<Text> tooltip) {
         Consumer<Text> builder = text -> addTooltipBeforeAdvanced(stack, tooltipType, tooltip, text);
 
-        this.appendTooltip(stack, SDataComponentTypes.DRINK_CONTAINER, context, tooltipType, builder);
-        this.appendTooltip(stack, SDataComponentTypes.DRINK_LEVEL, context, tooltipType, builder);
-        this.appendTooltip(stack, SDataComponentTypes.SUN_HAT_RENDERER, context, tooltipType, builder);
-
         if (stack.isIn(SItemTags.IS_COOLING_FOOD)) {
             builder.accept(COOLING_TOOLTIP);
-        }
-    }
-
-    private <T extends TooltipAppender> void appendTooltip(
-            ItemStack stack,
-            ComponentType<T> componentType,
-            Item.TooltipContext context,
-            TooltipType type,
-            Consumer<Text> textConsumer
-    ) {
-        T tooltipAppender = stack.get(componentType);
-        if (tooltipAppender != null) {
-            tooltipAppender.appendTooltip(context, textConsumer, type);
         }
     }
 

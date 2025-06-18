@@ -36,9 +36,7 @@ public class PlayerWaterComponent implements Component, ServerTickingComponent {
 
     @Override
     public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        if (tag.contains(WATER_KEY, NbtElement.INT_TYPE)) {
-            this.waterDrunk = tag.getInt(WATER_KEY);
-        }
+        this.waterDrunk = tag.getInt(WATER_KEY, 0);
     }
 
     @Override

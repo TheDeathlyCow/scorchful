@@ -77,7 +77,7 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
     @Override
     public void serverTick() {
         if (!this.tickCanLive()) {
-            Scorchful.LOGGER.debug("Discarding entity desert vision " + this.provider);
+            Scorchful.LOGGER.debug("Discarding entity desert vision {}", this.provider);
             this.provider.discard();
         }
     }

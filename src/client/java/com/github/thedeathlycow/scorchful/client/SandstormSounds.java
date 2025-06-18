@@ -45,7 +45,7 @@ public class SandstormSounds {
 
         this.chooseSpotForWindSound(world, camera).ifPresent(
                 pos -> {
-                    world.playSoundAtBlockCenter(
+                    world.playSoundAtBlockCenterClient(
                             pos,
                             SSoundEvents.WEATHER_SANDSTORM,
                             SoundCategory.WEATHER,

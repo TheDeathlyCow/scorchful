@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.item;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.HeatingConfig;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,7 +24,9 @@ public class TurtleArmorEffects {
         int durationPerPiece = config.getWaterBreathingDurationPerTurtleArmorPieceSeconds() * 20;
 
         int totalDuration = 0;
-        for (ItemStack stack : player.getArmorItems()) {
+        // TODO: replace with an attribute
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            ItemStack stack = player.getEquippedStack(slot);
             if (stack.isIn(SItemTags.TURTLE_ARMOR)) {
                 totalDuration += durationPerPiece;
             }

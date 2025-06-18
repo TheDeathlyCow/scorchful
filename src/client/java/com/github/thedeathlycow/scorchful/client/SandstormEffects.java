@@ -170,7 +170,7 @@ public class SandstormEffects {
 
     private static void addParticle(ClientWorld world, ParticleEffect particle, BlockPos pos, int rarity, float velocity) {
         if (Sandstorms.getCurrentSandStorm(world, pos) != Sandstorms.SandstormType.NONE && world.random.nextInt(rarity) == 0) {
-            world.addParticle(
+            world.addParticleClient(
                     particle,
                     pos.getX() + world.random.nextDouble(),
                     pos.getY() + world.random.nextDouble(),
