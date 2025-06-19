@@ -4,6 +4,7 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
 import com.github.thedeathlycow.scorchful.item.SunHatItem;
+import com.github.thedeathlycow.scorchful.item.TurtleArmorEffects;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
@@ -114,6 +115,7 @@ public final class SItems {
         HeatResistanceModifier.initialize();
         LootTableEvents.MODIFY.register(new TurtleScuteLootTableModifier());
         EnchantmentModifiers.initialize();
+        TurtleArmorEffects.initialize();
     }
 
     private static Item register(String id, Block block) {

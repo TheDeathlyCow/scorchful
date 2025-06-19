@@ -38,7 +38,7 @@ public class HeatingConfig implements ConfigData {
 
     int fireballHeat = 1000;
 
-    int waterBreathingDurationPerTurtleArmorPieceSeconds = 10;
+    float turtleArmorLungCapacityMultiplier = 1.0f;
 
     int temperatureFromCoolingFood = -1260;
 
@@ -98,8 +98,8 @@ public class HeatingConfig implements ConfigData {
         return fireballHeat;
     }
 
-    public int getWaterBreathingDurationPerTurtleArmorPieceSeconds() {
-        return waterBreathingDurationPerTurtleArmorPieceSeconds;
+    public float getTurtleArmorLungCapacityMultiplier() {
+        return turtleArmorLungCapacityMultiplier;
     }
 
     public int getTemperatureFromCoolingFood() {

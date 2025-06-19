@@ -4,6 +4,7 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import net.minecraft.entity.attribute.ClampedEntityAttribute;
 import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -14,9 +15,18 @@ public class SEntityAttributes {
     public static final RegistryEntry<EntityAttribute> REHYDRATION_EFFICIENCY = register(
             "player.rehydration_efficiency",
             new ClampedEntityAttribute(
-                    "attribute.name.player.rehydration_efficiency",
+                    "attribute.name.scorchful.rehydration_efficiency",
                     0.0,
                     0.0, 1.0
+            ).setTracked(true)
+    );
+
+    public static final RegistryEntry<EntityAttribute> LUNG_CAPACITY = register(
+            "lung_capacity",
+            new ClampedEntityAttribute(
+                    "attribute.name.scorchful.lung_capacity",
+                    0.0,
+                    0.0, 1024.0
             ).setTracked(true)
     );
 

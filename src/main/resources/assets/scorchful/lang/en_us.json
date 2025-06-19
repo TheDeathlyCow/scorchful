@@ -43,7 +43,8 @@
     "tag.item.c.drinks.cactus_juice": "Cactus Juice",
     
     
-    "attribute.name.player.rehydration_efficiency": "Rehydration Efficiency",
+    "attribute.name.scorchful.rehydration_efficiency": "Rehydration Efficiency",
+    "attribute.name.scorchful.lung_capacity": "Lung Capacity",
     
 
     "block.scorchful.crimson_lily": "Crimson Lily",
@@ -126,7 +127,7 @@
     "text.autoconfig.scorchful.option.heatingConfig.striderOutOfLavaCoolRate": "Strider out of lava cool rate",
     "text.autoconfig.scorchful.option.heatingConfig.powderSnowCoolRate": "Powder Snow cool rate when warm",
     "text.autoconfig.scorchful.option.heatingConfig.fireballHeat": "Fireball strike heat",
-    "text.autoconfig.scorchful.option.heatingConfig.waterBreathingDurationPerTurtleArmorPieceSeconds": "Water breathing duration per worn piece of Turtle Armor (seconds)",
+    "text.autoconfig.scorchful.option.heatingConfig.turtleArmorLungCapacityMultiplier": "Turtle Armor lung capacity duration multiplier",
     "text.autoconfig.scorchful.option.heatingConfig.temperatureFromCoolingFood": "Temperature from cooling food",
     
     "text.autoconfig.scorchful.option.thirstConfig": "Thirst Config",

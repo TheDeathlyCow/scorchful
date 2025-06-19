@@ -20,7 +20,6 @@ public class PlayerEntityMixin {
             cancellable = true
     )
     private void scorchfulTurtleArmorUpdate(CallbackInfo ci) {
-        TurtleArmorEffects.update((PlayerEntity) (Object) this);
         ci.cancel();
     }
 
@@ -29,7 +28,9 @@ public class PlayerEntityMixin {
             at = @At("TAIL")
     )
     private void afterTick(CallbackInfo ci) {
-        VisionSpawner.tick((PlayerEntity) (Object) this);
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        VisionSpawner.tick(player);
+        TurtleArmorEffects.update(player);
     }
 
     @Inject(
@@ -39,6 +40,7 @@ public class PlayerEntityMixin {
     private static void appendAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
         DefaultAttributeContainer.Builder builder = cir.getReturnValue();
         builder.add(SEntityAttributes.REHYDRATION_EFFICIENCY);
+        builder.add(SEntityAttributes.LUNG_CAPACITY);
     }
 
 }
