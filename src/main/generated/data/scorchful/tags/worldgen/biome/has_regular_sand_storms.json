@@ -1,0 +1,13 @@
+{
+  "values": [
+    "minecraft:desert",
+    {
+      "id": "#c:is_desert",
+      "required": false
+    },
+    {
+      "id": "#immersive-storms:has_sandstorms",
+      "required": false
+    }
+  ]
+}

@@ -12,9 +12,7 @@
         "entity.feature.HeadFeatureRendererMixin",
         "entity.render.BipedEntityRendererMixin",
         "entity.render.EntityRendererMixin",
-        "entity.render.LivingEntityRenderStateMixin",
-        "sandstorm.BackgroundRendererMixin",
-        "sandstorm.WorldRendererMixin"
+        "entity.render.LivingEntityRenderStateMixin"
     ],
     "injectors": {
         "defaultRequire": 1

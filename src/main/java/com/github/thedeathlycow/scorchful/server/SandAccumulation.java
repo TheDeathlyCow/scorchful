@@ -20,8 +20,6 @@ import net.minecraft.world.event.GameEvent;
 import java.util.Objects;
 
 public class SandAccumulation {
-
-
     public static void tickChunk(ServerWorld world, WorldChunk chunk, int randomTickSpeed) {
         // choose position
         final ChunkPos chunkPos = chunk.getPos();
