@@ -183,6 +183,8 @@ publishMods {
         requires("fabric-api", "cardinal-components-api", "thermoo", "cloth-config")
 
         optional("thermoo-patches", "frostiful", "modmenu", "dehydration")
+
+        embeds("immersive-storms")
     }
 
     modrinth {
@@ -193,5 +195,7 @@ publishMods {
         requires("fabric-api", "cardinal-components-api", "thermoo", "cloth-config")
 
         optional("thermoo-patches", "frostiful", "modmenu", "dehydration")
+
+        embeds("immersive-storms")
     }
 }
