@@ -96,7 +96,6 @@ public class ClimateBiomeTagGenerator extends FabricTagProvider<Biome> {
 
         getOrCreateTagBuilder(SBiomeTags.HAS_REGULAR_SAND_STORMS)
                 .add(BiomeKeys.DESERT)
-                .addOptionalTag(ConventionalBiomeTags.IS_DESERT)
-                .addOptionalTag(ISBiomeTags.HAS_SANDSTORMS);
+                .addOptionalTag(ConventionalBiomeTags.IS_DESERT);
     }
 }
