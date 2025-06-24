@@ -25,7 +25,6 @@ repositories {
         name = "Ladysnake Mods"
         url = 'https://maven.ladysnake.org/releases'
     }
-    maven { url "https://cursemaven.com" }
     exclusiveContent {
         forRepository {
             maven {
@@ -104,8 +103,8 @@ dependencies {
     // modImplementation "org.ladysnake:satin:${satin_version}"
 
     // temporarily using cursemaven since modrinth is delayed
-    modImplementation "curse.maven:immersive-storms-1288370:6659821"
-    include "curse.maven:immersive-storms-1288370:6659821"
+    modImplementation "maven.modrinth:immersive-storms:${project.immersive_storms_version}"
+    include "maven.modrinth:immersive-storms:${project.immersive_storms_version}"
 
     gametestImplementation "org.mockito:mockito-core:3.+"
     // still not updated :(
