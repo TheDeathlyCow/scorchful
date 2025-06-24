@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.datagen.generator;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SClimateBiomeTags;
+import com.thedeathlycow.immersive.storms.registry.ISBiomeTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
@@ -88,5 +89,13 @@ public class ClimateBiomeTagGenerator extends FabricTagProvider<Biome> {
 
         getOrCreateTagBuilder(SClimateBiomeTags.IS_NOT_HUMID_CAVE)
                 .add(BiomeKeys.DEEP_DARK);
+
+        getOrCreateTagBuilder(SBiomeTags.HAS_RED_SAND_STORMS)
+                .addOptionalTag(BiomeTags.IS_BADLANDS)
+                .addOptionalTag(ConventionalBiomeTags.IS_BADLANDS);
+
+        getOrCreateTagBuilder(SBiomeTags.HAS_REGULAR_SAND_STORMS)
+                .add(BiomeKeys.DESERT)
+                .addOptionalTag(ConventionalBiomeTags.IS_DESERT);
     }
 }

@@ -102,6 +102,10 @@ dependencies {
     modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
     // modImplementation "org.ladysnake:satin:${satin_version}"
 
+    // temporarily using cursemaven since modrinth is delayed
+    modImplementation "maven.modrinth:immersive-storms:${project.immersive_storms_version}"
+    include "maven.modrinth:immersive-storms:${project.immersive_storms_version}"
+
     gametestImplementation "org.mockito:mockito-core:3.+"
     // still not updated :(
     // include "org.ladysnake:satin:${satin_version}"
@@ -178,6 +182,8 @@ publishMods {
         requires("fabric-api", "cardinal-components-api", "thermoo", "cloth-config")
 
         optional("thermoo-patches", "frostiful", "modmenu", "dehydration")
+
+        embeds("immersive-storms")
     }
 
     modrinth {
@@ -188,5 +194,7 @@ publishMods {
         requires("fabric-api", "cardinal-components-api", "thermoo", "cloth-config")
 
         optional("thermoo-patches", "frostiful", "modmenu", "dehydration")
+
+        embeds("immersive-storms")
     }
 }
