@@ -1,7 +1,9 @@
 package com.github.thedeathlycow.scorchful.hud;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.thermoo.api.client.HeartBarContext;
 import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,45 +26,46 @@ public final class SoakingUnderlay implements StatusBarOverlayRenderEvents.Rende
     public void render(
             DrawContext context,
             PlayerEntity player,
-            Vector2i[] heartPositions,
-            int displayHealth, int maxDisplayHealth
+            HeartBarContext heartBarContext
     ) {
         if (!Scorchful.getConfig().clientConfig.doSoakingOverlay() || !player.thermoo$isWet()) {
             return;
         }
 
-        int burningHealthPoints = getNumBurningPoints(player, maxDisplayHealth);
-        int burningHealthHearts = getNumBurningHeartsFromPoints(burningHealthPoints);
-        for (int i = 0; i < burningHealthHearts; i++) {
-            Vector2i pos = heartPositions[i];
-            if (pos == null) {
-                continue;
-            }
-            // is half heart if this is the last heart being rendered and we have an odd
-            // number of frozen health points
-            boolean isHalfHeart = i + 1 >= burningHealthHearts && (burningHealthPoints & 1) == 1; // is odd check
+        final int soakedPoints = getNumSoakingPoints(player, heartBarContext.positions().size());
+        final int soakedHearts = getFullSoakedHeartsFromPoints(soakedPoints);
+        final boolean drawHalfHeartAtEnd = soakedHearts % 2 != 0;
 
+        int heartsRendered = 0;
+
+        for (Vector2i position : heartBarContext.positions()) {
+            if (heartsRendered >= soakedHearts) {
+                break;
+            }
+            boolean isHalfHeart = drawHalfHeartAtEnd && heartsRendered == soakedHearts - 1;
             int width = isHalfHeart ? 5 : 9;
+
             context.drawTexture(
-                    RenderLayer::getGuiTextured,
+                    RenderPipelines.GUI_TEXTURED,
                     TEXTURE,
-                    pos.x, pos.y - 1,
+                    position.x(), position.y() - 1,
                     0, 0,
                     width, 10,
                     TEXTURE_WIDTH, TEXTURE_HEIGHT
             );
+
+            heartsRendered++;
         }
-
     }
 
-    private static int getNumBurningPoints(@NotNull PlayerEntity player, int maxDisplayHealth) {
-        float overheatProgress = player.thermoo$getSoakedScale();
-        return MathHelper.ceil(overheatProgress * maxDisplayHealth);
+    private static int getNumSoakingPoints(@NotNull PlayerEntity player, int maxDisplayHealth) {
+        float soakedScale = player.thermoo$getSoakedScale();
+        return Math.round(soakedScale * maxDisplayHealth);
     }
 
-    private static int getNumBurningHeartsFromPoints(int burningPoints) {
+    private static int getFullSoakedHeartsFromPoints(int soakedPoints) {
         // number of whole hearts
-        return MathHelper.ceil(burningPoints / 2.0f);
+        return MathHelper.ceil(soakedPoints / 2.0f);
     }
 
     private SoakingUnderlay() {

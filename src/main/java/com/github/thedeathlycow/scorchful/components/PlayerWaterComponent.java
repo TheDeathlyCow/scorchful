@@ -2,9 +2,8 @@ package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.math.MathHelper;
 import org.ladysnake.cca.api.v3.component.Component;
 import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
@@ -35,14 +34,14 @@ public class PlayerWaterComponent implements Component, ServerTickingComponent {
     }
 
     @Override
-    public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        this.waterDrunk = tag.getInt(WATER_KEY, 0);
+    public void readData(ReadView readView) {
+        this.waterDrunk = readView.getInt(WATER_KEY, 0);
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
+    public void writeData(WriteView writeView) {
         if (this.waterDrunk > 0) {
-            tag.putInt(WATER_KEY, this.waterDrunk);
+            writeView.putInt(WATER_KEY, this.waterDrunk);
         }
     }
 

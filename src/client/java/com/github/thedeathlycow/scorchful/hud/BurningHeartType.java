@@ -7,8 +7,6 @@ import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
 public enum BurningHeartType {
-
-
     ENGULFED(10),
     ENGULFED_HARDCORE(20);
 

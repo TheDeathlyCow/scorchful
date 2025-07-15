@@ -2,9 +2,11 @@ package com.github.thedeathlycow.scorchful.hud;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.thermoo.api.client.HeartBarContext;
 import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.LivingEntity;
@@ -34,7 +36,7 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
         BurningHeartType type = BurningHeartType.forPlayer(player, hardcore);
         if (type != null) {
             context.drawTexture(
-                    RenderLayer::getGuiTextured,
+                    RenderPipelines.GUI_TEXTURED,
                     HEART_OVERLAY_TEXTURE,
                     x, y - 1,
                     halfHeart ? 9 : 0, type.textureV,
@@ -51,36 +53,39 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
     public void render(
             DrawContext context,
             PlayerEntity player,
-            Vector2i[] heartPositions,
-            int displayHealth, int maxDisplayHealth
+            HeartBarContext heartBarContext
     ) {
         ScorchfulConfig config = Scorchful.getConfig();
         if (!config.clientConfig.doBurningHeartOverlay() || player.thermoo$isCold()) {
             return;
         }
 
-        int burningHealthPoints = getNumBurningPoints(player, maxDisplayHealth);
-        int burningHealthHearts = getNumBurningHeartsFromPoints(burningHealthPoints);
-        for (int i = 0; i < burningHealthHearts; i++) {
-            Vector2i pos = heartPositions[i];
-            if (pos == null) {
-                continue;
-            }
-            // is half heart if this is the last heart being rendered and we have an odd
-            // number of frozen health points
-            boolean isHalfHeart = i + 1 >= burningHealthHearts && (burningHealthPoints & 1) == 1; // is odd check
+        final int fireHalfHearts = getNumBurningPoints(player, heartBarContext.positions().size());
+        final int fireHearts = getNumBurningHeartsFromPoints(fireHalfHearts);
+        final boolean drawHalfHeartAtEnd = fireHalfHearts % 2 != 0;
 
-            int u = isHalfHeart ? 9 : 0;
+        int heartsRendered = 0;
+
+        for (Vector2i position : heartBarContext.positions()) {
+            if (heartsRendered >= fireHearts) {
+                break;
+            }
+
+            int x = position.x();
+            int y = position.y() - 1;
+            int u = drawHalfHeartAtEnd && heartsRendered == fireHearts - 1 ? 9 : 0;
+
             context.drawTexture(
-                    RenderLayer::getGuiTextured,
+                    RenderPipelines.GUI_TEXTURED,
                     HEART_OVERLAY_TEXTURE,
-                    pos.x, pos.y - 1,
+                    x, y - 1,
                     u, 0,
                     9, 10,
                     TEXTURE_WIDTH, TEXTURE_HEIGHT
             );
-        }
 
+            heartsRendered++;
+        }
     }
 
     static int getNumBurningPoints(@NotNull LivingEntity entity, int maxDisplayHealth) {

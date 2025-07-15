@@ -8,6 +8,8 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.math.Vec3d;
 import org.ladysnake.cca.api.v3.component.Component;
 
@@ -21,14 +23,14 @@ public class RehydrationComponent implements Component {
     }
 
     @Override
-    public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        this.waterCaptured = tag.getInt(WATER_CAPTURED_KEY, 0);
+    public void readData(ReadView readView) {
+        this.waterCaptured = readView.getInt(WATER_CAPTURED_KEY, 0);
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
+    public void writeData(WriteView writeView) {
         if (this.waterCaptured > 0) {
-            tag.putInt(WATER_CAPTURED_KEY, this.waterCaptured);
+            writeView.putInt(WATER_CAPTURED_KEY, this.waterCaptured);
         }
     }
 
