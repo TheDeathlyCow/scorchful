@@ -14,7 +14,7 @@
 		"JellyBubb1e (Chinese Translation)"
 	],
 	"contact": {
-		"homepage": "https://modded.wiki/w/Mod:Scorchful",
+		"homepage": "https://modded.wiki/w/Scorchful",
 		"sources": "https://github.com/TheDeathlyCow/scorchful",
 		"issues": "https://github.com/TheDeathlyCow/scorchful/issues"
 	},
@@ -65,7 +65,7 @@
 		"modmenu": {
 			"links": {
 				"modmenu.discord": "https://discord.thedeathlycow.com",
-				"modmenu.wiki": "https://modded.wiki/w/Mod:Scorchful",
+				"modmenu.wiki": "https://modded.wiki/w/Scorchful",
 				"modmenu.kofi": "https://ko-fi.com/thedeathlycow",
 				"modmenu.modrinth": "https://modrinth.com/mod/scorchful"
 			}
