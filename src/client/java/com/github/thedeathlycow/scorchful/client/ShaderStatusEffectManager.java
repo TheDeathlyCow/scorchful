@@ -64,8 +64,7 @@ public final class ShaderStatusEffectManager implements ShaderEffectRenderCallba
     public void renderShaderEffects(MinecraftClient client, Pool pool, RenderTickCounter tickDelta) {
         if (enabled) {
 //            this.managedShaderEffect.render(tickDelta);
-            PostEffectProcessor postEffectProcessor = client.getShaderLoader()
-                    .loadPostEffect(this.shaderID, DefaultFramebufferSet.MAIN_ONLY);
+            PostEffectProcessor postEffectProcessor = client.getShaderLoader().loadPostEffect(this.shaderID, DefaultFramebufferSet.MAIN_ONLY);
             if (postEffectProcessor != null) {
                 postEffectProcessor.render(client.getFramebuffer(), pool);
             }

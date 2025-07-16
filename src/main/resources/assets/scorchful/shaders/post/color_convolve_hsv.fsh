@@ -1,5 +1,7 @@
 #version 150
 
+#moj_import <minecraft:globals.glsl>
+
 // Algorithm from: http://lolengine.net/blog/2013/07/27/rgb-to-hsv-in-glsl
 
 uniform sampler2D InSampler;

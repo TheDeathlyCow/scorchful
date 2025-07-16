@@ -1,9 +1,10 @@
 #version 150
 
+#moj_import <minecraft:globals.glsl>
+
 #define PI 3.1415926535
 
 uniform sampler2D InSampler;
-uniform float GameTime;
 
 layout (std140) uniform BlurConfig {
     float Period;

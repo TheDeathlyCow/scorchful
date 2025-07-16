@@ -4,7 +4,7 @@
     },
     "passes": [
         {
-            "vertex_shader": "minecraft:post/blur",
+            "vertex_shader": "scorchful:post/periodic_blur",
             "fragment_shader": "scorchful:post/periodic_blur",
             "inputs": [
                 {
@@ -15,21 +15,21 @@
             ],
             "output": "swap",
             "uniforms": {
-                "BlueConfig": [
+                "BlurConfig": [
                     {
                         "name": "Period",
                         "type": "float",
-                        "values": 1.5
+                        "value": 1.5
                     },
                     {
                         "name": "BlurRadius",
                         "type": "float",
-                        "values": 40.0
+                        "value": 40.0
                     },
                     {
                         "name": "BlurDir",
                         "type": "vec2",
-                        "values": [ 1.0, 0.0 ]
+                        "value": [ 1.0, 0.0 ]
                     }
                 ]
             }
@@ -49,12 +49,12 @@
                     {
                         "name": "Frequency",
                         "type": "vec2",
-                        "values": [ 512.0, 288.0 ]
+                        "value": [ 512.0, 288.0 ]
                     },
                     {
                         "name": "WobbleAmount",
                         "type": "vec2",
-                        "values": [ 0.001, 0.001 ]
+                        "value": [ 0.001, 0.001 ]
                     }
                 ]
             }
