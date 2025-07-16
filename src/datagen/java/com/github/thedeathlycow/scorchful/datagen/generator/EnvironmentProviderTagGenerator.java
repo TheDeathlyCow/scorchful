@@ -17,10 +17,10 @@ public class EnvironmentProviderTagGenerator extends FabricTagProvider<Environme
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        getOrCreateTagBuilder(SEnvironmentProviderTags.TEMPERATURE_MODIFIERS)
+        builder(SEnvironmentProviderTags.TEMPERATURE_MODIFIERS)
                 .addOptional(SEnvironmentProviders.APPLY_SHADE_FOR_TIME);
 
-        getOrCreateTagBuilder(SEnvironmentProviderTags.NETHER_MODIFIERS)
+        builder(SEnvironmentProviderTags.NETHER_MODIFIERS)
                 .addOptional(SEnvironmentProviders.NETHER_BLOCK_LIGHT);
     }
 }
