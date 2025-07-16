@@ -6,7 +6,6 @@ import com.github.thedeathlycow.thermoo.api.client.HeartBarContext;
 import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import org.joml.Vector2i;
@@ -26,8 +25,8 @@ public final class MountHealthOverlay implements StatusBarOverlayRenderEvents.Re
             return;
         }
 
-        final int fireHalfHearts = BurningHeartsOverlay.getNumBurningPoints(mount, heartBarContext.positions().size());
-        final int fireHearts = BurningHeartsOverlay.getNumBurningHeartsFromPoints(fireHalfHearts);
+        final int fireHalfHearts = BurningHeartsOverlay.getNumFireHalfHearts(mount, heartBarContext.positions().size());
+        final int fireHearts = BurningHeartsOverlay.getNumFireHearts(fireHalfHearts);
         final boolean drawHalfHeartAtEnd = fireHalfHearts % 2 != 0;
 
         int heartsRendered = 0;

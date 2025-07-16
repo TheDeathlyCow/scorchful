@@ -60,7 +60,7 @@ public final class SoakingUnderlay implements StatusBarOverlayRenderEvents.Rende
 
     private static int getNumSoakingPoints(@NotNull PlayerEntity player, int maxDisplayHealth) {
         float soakedScale = player.thermoo$getSoakedScale();
-        return Math.round(soakedScale * maxDisplayHealth);
+        return Math.round(soakedScale * maxDisplayHealth * 2);
     }
 
     private static int getFullSoakedHeartsFromPoints(int soakedPoints) {

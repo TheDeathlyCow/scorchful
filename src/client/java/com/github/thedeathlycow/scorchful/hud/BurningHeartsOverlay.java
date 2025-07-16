@@ -8,7 +8,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
@@ -60,8 +59,8 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
             return;
         }
 
-        final int fireHalfHearts = getNumBurningPoints(player, heartBarContext.positions().size());
-        final int fireHearts = getNumBurningHeartsFromPoints(fireHalfHearts);
+        final int fireHalfHearts = getNumFireHalfHearts(player, heartBarContext.positions().size());
+        final int fireHearts = getNumFireHearts(fireHalfHearts);
         final boolean drawHalfHeartAtEnd = fireHalfHearts % 2 != 0;
 
         int heartsRendered = 0;
@@ -78,7 +77,7 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
             context.drawTexture(
                     RenderPipelines.GUI_TEXTURED,
                     HEART_OVERLAY_TEXTURE,
-                    x, y - 1,
+                    x, y,
                     u, 0,
                     9, 10,
                     TEXTURE_WIDTH, TEXTURE_HEIGHT
@@ -88,12 +87,12 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
         }
     }
 
-    static int getNumBurningPoints(@NotNull LivingEntity entity, int maxDisplayHealth) {
+    static int getNumFireHalfHearts(@NotNull LivingEntity entity, int maxDisplayHealth) {
         float overheatProgress = entity.thermoo$getTemperatureScale();
-        return Math.round(overheatProgress * maxDisplayHealth);
+        return Math.round(overheatProgress * maxDisplayHealth * 2);
     }
 
-    static int getNumBurningHeartsFromPoints(int burningPoints) {
+    static int getNumFireHearts(int burningPoints) {
         // number of whole hearts
         return MathHelper.ceil(burningPoints / 2.0f);
     }
