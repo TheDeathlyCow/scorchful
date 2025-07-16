@@ -4,10 +4,12 @@
 
 uniform sampler2D InSampler;
 
+layout (std140) uniform ColorConvolveConfig {
+    vec3 ColorScaleHSV;
+};
+
 in vec2 texCoord;
 in vec2 oneTexel;
-
-uniform vec3 ColorScaleHSV;
 
 out vec4 fragColor;
 

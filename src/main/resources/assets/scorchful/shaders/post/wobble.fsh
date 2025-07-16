@@ -3,13 +3,15 @@
 #define PI 3.1415926535
 
 uniform sampler2D InSampler;
+uniform float GameTime;
+
+layout (std140) uniform WobbleConfig {
+    vec2 Frequency;
+    vec2 WobbleAmount;
+};
 
 in vec2 texCoord;
 in vec2 oneTexel;
-
-uniform float GameTime;
-uniform vec2 Frequency;
-uniform vec2 WobbleAmount;
 
 // rgba color with elements in range 0-1
 out vec4 fragColor;

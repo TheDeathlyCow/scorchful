@@ -3,14 +3,16 @@
 #define PI 3.1415926535
 
 uniform sampler2D InSampler;
+uniform float GameTime;
+
+layout (std140) uniform BlurConfig {
+    float Period;
+    float BlurRadius;
+    vec2 BlurDir;
+};
 
 in vec2 texCoord;
 in vec2 sampleStep;
-
-uniform float GameTime;
-uniform float Period;
-uniform float BlurRadius;
-uniform vec2 BlurDir;
 
 // rgba color with elements in range 0-1
 out vec4 fragColor;
