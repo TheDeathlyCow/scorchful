@@ -67,7 +67,7 @@ public final class ShaderStatusEffectManager implements ShaderEffectRenderCallba
             PostEffectProcessor postEffectProcessor = client.getShaderLoader()
                     .loadPostEffect(this.shaderID, DefaultFramebufferSet.MAIN_ONLY);
             if (postEffectProcessor != null) {
-                postEffectProcessor.render(client.getFramebuffer(), pool, null);
+                postEffectProcessor.render(client.getFramebuffer(), pool);
             }
         }
     }
