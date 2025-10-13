@@ -7,8 +7,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(DisplayEntity.BlockDisplayEntity.class)
 public interface BlockDisplayAccess {
-
     @Invoker("setBlockState")
     void scorchful$setBlockState(BlockState state);
-
 }
