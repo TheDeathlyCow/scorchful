@@ -18,14 +18,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientPlayNetworkHandler.class)
 public abstract class ClientPlayNetworkHandlerMixin extends ClientCommonNetworkHandler {
-
     @Shadow
     private ClientWorld world;
 
     protected ClientPlayNetworkHandlerMixin(MinecraftClient client, ClientConnection connection, ClientConnectionState connectionState) {
         super(client, connection, connectionState);
     }
-
 
     @Inject(
             method = "onEntityStatusEffect",
@@ -50,5 +48,4 @@ public abstract class ClientPlayNetworkHandlerMixin extends ClientCommonNetworkH
     private void onPlayerRespawn(PlayerRespawnS2CPacket packet, CallbackInfo ci) {
         ShaderStatusEffectManagers.onPlayerRespawn();
     }
-
 }

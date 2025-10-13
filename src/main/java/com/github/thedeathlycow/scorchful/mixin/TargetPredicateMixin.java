@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(TargetPredicate.class)
 public class TargetPredicateMixin {
-
     @WrapOperation(
             method = "test",
             at = @At(
@@ -25,5 +24,4 @@ public class TargetPredicateMixin {
         }
         return original.call(instance, targetEntity);
     }
-
 }

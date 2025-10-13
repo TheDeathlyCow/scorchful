@@ -58,5 +58,4 @@ public abstract class LivingEntityMixin extends Entity {
             cir.setReturnValue(false);
         }
     }
-
 }

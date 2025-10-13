@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
 public class EntityMixin {
-
     @Inject(
             method = "shouldSave",
             at = @At("HEAD"),
@@ -21,5 +20,4 @@ public class EntityMixin {
             cir.setReturnValue(false);
         }
     }
-
 }

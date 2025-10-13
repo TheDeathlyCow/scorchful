@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ConsumeItemCriterion.class)
 public class ConsumeItemCriterionMixin {
-
     @Inject(
             method = "trigger",
             at = @At("HEAD")
@@ -19,6 +18,4 @@ public class ConsumeItemCriterionMixin {
     private void onTriggered(ServerPlayerEntity player, ItemStack stack, CallbackInfo ci) {
         ScorchfulItemEvents.CONSUME_ITEM.invoker().consume(stack, player);
     }
-
-
 }

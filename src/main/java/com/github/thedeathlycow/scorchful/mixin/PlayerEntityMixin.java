@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
 public class PlayerEntityMixin {
-
     @Inject(
             method = "updateTurtleHelmet",
             at = @At("HEAD"),
@@ -42,5 +41,4 @@ public class PlayerEntityMixin {
         builder.add(SEntityAttributes.REHYDRATION_EFFICIENCY);
         builder.add(SEntityAttributes.LUNG_CAPACITY);
     }
-
 }
