@@ -9,6 +9,8 @@ import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.command.OrderedRenderCommandQueue;
+import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
@@ -31,16 +33,28 @@ public class SunHatFeatureRenderer<S extends BipedEntityRenderState, M extends B
     @Override
     public void render(
             MatrixStack matrices,
-            VertexConsumerProvider vertexConsumers,
+            OrderedRenderCommandQueue queue,
             int light,
             S state,
             float limbAngle,
             float limbDistance
     ) {
         if (((SLivingEntityRenderState) state).scorchful$hasSunHat()) {
-            this.getContextModel().copyTransforms(this.model);
-            VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(TEXTURE));
-            this.model.renderHead(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, -1);
+            this.getContextModel().applyTransform(matrices);
+
+            queue.getBatchingQueue(1)
+                    .submitModel(
+                            this.model,
+                            state,
+                            matrices,
+                            RenderLayer.getArmorCutoutNoCull(TEXTURE),
+                            light,
+                            OverlayTexture.DEFAULT_UV,
+                            -1,
+                            null,
+                            state.outlineColor,
+                            null
+                    );
         }
     }
 }

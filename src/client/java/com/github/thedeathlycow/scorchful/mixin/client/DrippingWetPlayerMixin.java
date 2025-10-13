@@ -16,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(PlayerEntity.class)
 @Environment(EnvType.CLIENT)
 public abstract class DrippingWetPlayerMixin extends LivingEntity {
-
     @Shadow
     protected boolean isSubmergedInWater;
 
@@ -29,7 +28,6 @@ public abstract class DrippingWetPlayerMixin extends LivingEntity {
             at = @At("TAIL")
     )
     private void dripParticles(CallbackInfo ci) {
-        SoakedEffects.tickDripParticles((PlayerEntity) (Object) this, this.getWorld(), this.isSubmergedInWater);
+        SoakedEffects.tickDripParticles((PlayerEntity) (Object) this, this.getEntityWorld(), this.isSubmergedInWater);
     }
-
 }
