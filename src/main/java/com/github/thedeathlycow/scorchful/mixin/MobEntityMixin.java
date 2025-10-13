@@ -30,7 +30,7 @@ public abstract class MobEntityMixin extends LivingEntity {
             at = @At("TAIL")
     )
     private void initFearTargetGoal(CallbackInfo ci) {
-        if (this.getWorld() != null && !this.getWorld().isClient) {
+        if (this.getEntityWorld() != null && !this.getEntityWorld().isClient()) {
             MobEntity instance = (MobEntity) (Object) this;
             if (instance instanceof PathAwareEntity pathAware) {
                 this.goalSelector.add(1, new FearTargetGoal(pathAware));

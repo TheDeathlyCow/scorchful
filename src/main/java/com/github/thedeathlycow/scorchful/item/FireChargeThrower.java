@@ -39,7 +39,7 @@ public class FireChargeThrower implements UseItemCallback {
         }
 
         // spawn fire charge entity
-        if (!world.isClient) {
+        if (!world.isClient()) {
             Vec3d rotation = player.getRotationVector();
             AbstractFireballEntity fireball = throwingTypes.create(world, player, rotation);
 

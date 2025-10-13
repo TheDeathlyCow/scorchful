@@ -102,7 +102,7 @@ public class SandCauldronBehaviours {
             BlockState state,
             SoundEvent soundEvent
     ) {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             Item item = stack.getItem();
             if (!player.isCreative()) {
                 stack.decrement(1);
@@ -135,7 +135,7 @@ public class SandCauldronBehaviours {
             ItemStack stack, ItemStack output,
             SoundEvent soundEvent
     ) {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             if (state.contains(SandCauldronBlock.LEVEL) && state.get(SandCauldronBlock.LEVEL) < SandCauldronBlock.MAX_LEVEL) {
                 return ActionResult.FAIL;
             }

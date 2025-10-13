@@ -24,7 +24,7 @@ public class SandstormSlowing {
             return false;
         }
 
-        World world = entity.getWorld();
+        World world = entity.getEntityWorld();
         BlockPos pos = entity.getBlockPos();
 
         if (world.isClient()) {

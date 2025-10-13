@@ -136,7 +136,7 @@ public class WaterSkinItem extends Item {
             }
 
             if (world.getFluidState(hitPos).isIn(FluidTags.WATER)) {
-                if (!world.isClient) {
+                if (!world.isClient()) {
                     this.fill(stack, user, world, hitPos, 4);
                 }
                 return ActionResult.SUCCESS;
@@ -154,7 +154,7 @@ public class WaterSkinItem extends Item {
             ItemStack stack
     ) {
 
-        if (!world.isClient) {
+        if (!world.isClient()) {
             this.fill(stack, player, world, pos, 1);
             player.incrementStat(Stats.USE_CAULDRON);
             LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
@@ -178,7 +178,7 @@ public class WaterSkinItem extends Item {
             return ActionResult.FAIL;
         }
 
-        if (!world.isClient) {
+        if (!world.isClient()) {
             this.fill(stack, player, world, pos, 4);
             player.incrementStat(SStats.USE_WARPED_LILY);
             NetherLilyBlock.setWater(state, world, pos, 0);

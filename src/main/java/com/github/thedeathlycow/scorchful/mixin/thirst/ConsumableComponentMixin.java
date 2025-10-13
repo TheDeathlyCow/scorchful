@@ -63,7 +63,7 @@ public class ConsumableComponentMixin {
     private void spawnWaterParticles(Random random, LivingEntity user, ItemStack stack, int particleCount, CallbackInfo ci) {
         DrinkLevelComponent level = stack.get(SDataComponentTypes.DRINK_LEVEL);
         if (level == DrinkLevelComponent.HYDRATING) {
-            DrinkLevelComponent.spawnWaterParticles(user.getWorld(), user, particleCount);
+            DrinkLevelComponent.spawnWaterParticles(user.getEntityWorld(), user, particleCount);
         }
     }
 }

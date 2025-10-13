@@ -54,7 +54,7 @@ public class RehydrationComponent implements Component {
 
     private void tickRehydrate(double rehydrationEfficiency) {
         int rehydrationCapacity = ServerThirstPlugin.getActivePlugin().getRehydrationThreshold();
-        if (this.waterCaptured >= rehydrationCapacity && this.provider.getWorld() instanceof ServerWorld serverWorld) {
+        if (this.waterCaptured >= rehydrationCapacity && this.provider.getEntityWorld() instanceof ServerWorld serverWorld) {
             ServerThirstPlugin plugin = ServerThirstPlugin.getActivePlugin();
             plugin.rehydrateFromEnchantment(this.provider, this.waterCaptured, rehydrationEfficiency);
             this.playRehydrationEffects(serverWorld);
@@ -67,7 +67,7 @@ public class RehydrationComponent implements Component {
     }
 
     private void playRehydrationEffects(ServerWorld serverWorld) {
-        Vec3d pos = this.provider.getPos();
+        Vec3d pos = this.provider.getEntityPos();
 
         if (!this.provider.isSilent() && !this.provider.isSneaking()) {
             serverWorld.playSound(

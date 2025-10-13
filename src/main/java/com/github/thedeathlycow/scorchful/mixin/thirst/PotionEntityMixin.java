@@ -26,8 +26,8 @@ public abstract class PotionEntityMixin extends ThrownItemEntity {
             at = @At("HEAD")
     )
     private void onSplashPotionCollision(HitResult hitResult, CallbackInfo ci) {
-        World world = this.getWorld();
-        if (world.isClient) {
+        World world = this.getEntityWorld();
+        if (world.isClient()) {
             return;
         }
         Box box = this.getBoundingBox().expand(4.0, 2.0, 4.0);

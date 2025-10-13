@@ -25,7 +25,7 @@ public class VisionSpawner {
             return;
         }
 
-        World world = player.getWorld();
+        World world = player.getEntityWorld();
 
         if (world.isClient() || !player.hasStatusEffect(SStatusEffects.HEAT_STROKE)) {
             return;
@@ -89,6 +89,4 @@ public class VisionSpawner {
 
     private VisionSpawner() {
     }
-
-
 }

@@ -53,7 +53,7 @@ public class FearTargetGoal extends Goal {
     }
 
     private Path findFleePath(LivingEntity target) {
-        Vec3d targetPos = NoPenaltyTargeting.findFrom(this.mob, 16, 7, target.getPos());
+        Vec3d targetPos = NoPenaltyTargeting.findFrom(this.mob, 16, 7, target.getEntityPos());
         return targetPos != null
                 ? this.mob.getNavigation().findPathTo(targetPos.x, targetPos.y, targetPos.z, 0)
                 : null;

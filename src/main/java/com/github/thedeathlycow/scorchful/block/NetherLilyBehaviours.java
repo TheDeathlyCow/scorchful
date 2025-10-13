@@ -22,7 +22,7 @@ public class NetherLilyBehaviours {
     public static final NetherLilyBehaviour.NetherLilyBehaviourMap CRIMSON_LILY_BEHAVIOUR = NetherLilyBehaviour.createMap("scorchful_crimson_lily");
 
     private static final NetherLilyBehaviour ADD_WATER = (state, world, pos, player, hand, stack) -> {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             if (state.get(NetherLilyBlock.WATER_SATURATION_LEVEL) >= NetherLilyBlock.MAX_LEVEL) {
                 return ActionResult.FAIL;
             }
@@ -50,7 +50,7 @@ public class NetherLilyBehaviours {
                         return ActionResult.FAIL;
                     }
 
-                    if (!world.isClient) {
+                    if (!world.isClient()) {
                         Item item = stack.getItem();
                         player.setStackInHand(
                                 hand,
@@ -82,7 +82,7 @@ public class NetherLilyBehaviours {
 
                     ActionResult result = ADD_WATER.interact(state, world, pos, player, hand, stack);
 
-                    if (!world.isClient && result.isAccepted()) {
+                    if (!world.isClient() && result.isAccepted()) {
                         player.setStackInHand(
                                 hand,
                                 ItemUsage.exchangeStack(stack, player, new ItemStack(Items.GLASS_BOTTLE))
@@ -102,7 +102,7 @@ public class NetherLilyBehaviours {
                         result = ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
                     }
 
-                    if (!world.isClient && result.isAccepted()) {
+                    if (!world.isClient() && result.isAccepted()) {
                         DrinkContainerComponent.addDrinks(stack, -1);
                     }
                     return result;

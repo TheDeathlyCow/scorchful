@@ -70,7 +70,7 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
         UUID uuid = buf.readOptional(RegistryByteBuf::readUuid).orElse(null);
 
         this.cause = uuid != null
-                ? this.provider.getWorld().getPlayerByUuid(uuid)
+                ? this.provider.getEntityWorld().getPlayerByUuid(uuid)
                 : null;
 
         Scorchful.LOGGER.debug("Applying sync packet to entity desert vision");
@@ -98,7 +98,7 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
             if (this.provider.squaredDistanceTo(cause) < activationDistance) {
                 HeatVisionActivation.EVENT.invoker().onActivated(
                         this.vision,
-                        (ServerWorld) this.provider.getWorld(),
+                        (ServerWorld) this.provider.getEntityWorld(),
                         this.provider.getBlockPos(),
                         cause
                 );
