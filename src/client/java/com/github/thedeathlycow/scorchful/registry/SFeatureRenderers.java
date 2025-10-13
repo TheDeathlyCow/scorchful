@@ -20,28 +20,28 @@ public class SFeatureRenderers {
                         registrationHelper.register(
                                 new SunHatFeatureRenderer<>(
                                         bipedEntityRenderer,
-                                        new SunHatModel<>(context.getPart(SEntityModelLayers.SUN_HAT))
+                                        context.getEntityModels()
                                 )
                         );
-                    } else if (entityRenderer instanceof PlayerEntityRenderer playerEntityRenderer) {
+                    } else if (entityRenderer instanceof PlayerEntityRenderer<?> playerEntityRenderer) {
                         registrationHelper.register(
                                 new SunHatFeatureRenderer<>(
                                         playerEntityRenderer,
-                                        new SunHatModel<>(context.getPart(SEntityModelLayers.SUN_HAT))
+                                        context.getEntityModels()
                                 )
                         );
                     } else if (entityRenderer instanceof ArmorStandEntityRenderer armorStandEntityRenderer) {
                         registrationHelper.register(
                                 new SunHatFeatureRenderer<>(
                                         armorStandEntityRenderer,
-                                        new SunHatModel<>(context.getPart(SEntityModelLayers.SUN_HAT))
+                                        context.getEntityModels()
                                 )
                         );
                     } else if (entityRenderer instanceof GiantEntityRenderer giantEntityRenderer) {
                         registrationHelper.register(
                                 new SunHatFeatureRenderer<>(
                                         giantEntityRenderer,
-                                        new SunHatModel<>(context.getPart(SEntityModelLayers.SUN_HAT))
+                                        context.getEntityModels()
                                 )
                         );
                     }

@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.entity.feature;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.entity.model.SunHatModel;
 import com.github.thedeathlycow.scorchful.entity.state.SLivingEntityRenderState;
+import com.github.thedeathlycow.scorchful.registry.SEntityModelLayers;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.OverlayTexture;
@@ -10,10 +11,14 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
+import net.minecraft.client.render.entity.BipedEntityRenderer;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
+import net.minecraft.client.render.entity.feature.CapeFeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
+import net.minecraft.client.render.entity.feature.HeadFeatureRenderer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.client.render.entity.model.LoadedEntityModels;
 import net.minecraft.client.render.entity.state.BipedEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
@@ -24,10 +29,15 @@ public class SunHatFeatureRenderer<S extends BipedEntityRenderState, M extends B
     private static final Identifier TEXTURE = Scorchful.id("textures/entity/sun_hat.png");
 
     private final SunHatModel<S> model;
+    private final SunHatModel<S> babyModel;
 
-    public SunHatFeatureRenderer(FeatureRendererContext<S, M> context, SunHatModel<S> model) {
+    public SunHatFeatureRenderer(
+            FeatureRendererContext<S, M> context,
+            LoadedEntityModels modelLoader
+    ) {
         super(context);
-        this.model = model;
+        this.model = new SunHatModel<>(modelLoader.getModelPart(SEntityModelLayers.SUN_HAT));
+        this.babyModel = new SunHatModel<>(modelLoader.getModelPart(SEntityModelLayers.SUN_HAT_BABY));
     }
 
     @Override
@@ -40,7 +50,9 @@ public class SunHatFeatureRenderer<S extends BipedEntityRenderState, M extends B
             float limbDistance
     ) {
         if (((SLivingEntityRenderState) state).scorchful$hasSunHat()) {
-            this.getContextModel().applyTransform(matrices);
+            M contextModel = this.getContextModel();
+            contextModel.getRootPart().applyTransform(matrices);
+            matrices.translate(0f, -1.3f, 0f);
 
             queue.getBatchingQueue(1)
                     .submitModel(

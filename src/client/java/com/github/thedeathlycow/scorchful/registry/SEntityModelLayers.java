@@ -9,11 +9,12 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 
 @Environment(EnvType.CLIENT)
 public class SEntityModelLayers {
-
     public static final EntityModelLayer SUN_HAT = new EntityModelLayer(Scorchful.id("sun_hat"), "main");
+    public static final EntityModelLayer SUN_HAT_BABY = new EntityModelLayer(Scorchful.id("sun_hat_baby"), "main");
 
     public static void registerAll() {
         EntityModelLayerRegistry.registerModelLayer(SUN_HAT, SunHatModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(SUN_HAT_BABY, SunHatModel::getBabyTexturedModelData);
     }
 
     private SEntityModelLayers() {
