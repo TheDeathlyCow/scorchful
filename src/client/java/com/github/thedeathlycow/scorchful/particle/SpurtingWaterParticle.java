@@ -3,11 +3,12 @@ package com.github.thedeathlycow.scorchful.particle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
+import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.util.math.random.Random;
 import org.jetbrains.annotations.Nullable;
 
-public class SpurtingWaterParticle extends SpriteBillboardParticle {
-
+public class SpurtingWaterParticle extends AbstractSlowingParticle {
     private static final float STARTING_Y_SPEED = 30f;
 
     private final int delay;
@@ -16,12 +17,14 @@ public class SpurtingWaterParticle extends SpriteBillboardParticle {
             ClientWorld clientWorld,
             double x, double y, double z,
             double velocityX, double velocityY, double velocityZ,
+            Sprite sprite,
             int delay
     ) {
-        super(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
+        super(clientWorld, x, y, z, velocityX, velocityY, velocityZ, sprite);
         this.gravityStrength = 0.75f;
         this.maxAge += delay;
         this.delay = delay;
+        this.setColor(0.2f, 0.3f, 1.0f);
     }
 
     @Override
@@ -34,10 +37,9 @@ public class SpurtingWaterParticle extends SpriteBillboardParticle {
     }
 
     @Override
-    public ParticleTextureSheet getType() {
-        return ParticleTextureSheet.PARTICLE_SHEET_OPAQUE;
+    protected RenderType getRenderType() {
+        return BillboardParticle.RenderType.PARTICLE_ATLAS_OPAQUE;
     }
-
     @Environment(EnvType.CLIENT)
     public static class Factory implements ParticleFactory<SpurtingWaterParticleEffect> {
 
@@ -47,23 +49,22 @@ public class SpurtingWaterParticle extends SpriteBillboardParticle {
             this.spriteProvider = spriteProvider;
         }
 
-        @Nullable
         @Override
+        @Nullable
         public Particle createParticle(
                 SpurtingWaterParticleEffect parameters,
                 ClientWorld world,
                 double x, double y, double z,
-                double velocityX, double velocityY, double velocityZ
+                double velocityX, double velocityY, double velocityZ,
+                Random random
         ) {
-            var particle = new SpurtingWaterParticle(
+            return new SpurtingWaterParticle(
                     world,
                     x, y, z,
                     velocityX, velocityY, velocityZ,
+                    this.spriteProvider.getFirst(),
                     parameters.getDelay()
             );
-            particle.setSprite(this.spriteProvider);
-            particle.setColor(0.2f, 0.3f, 1.0f);
-            return particle;
         }
     }
 }

@@ -3,25 +3,27 @@ package com.github.thedeathlycow.scorchful.particle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
+import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;
+import net.minecraft.util.math.random.Random;
+import org.jetbrains.annotations.Nullable;
 
-public class BatParticle extends SpriteBillboardParticle {
+public class BatParticle extends AbstractSlowingParticle  {
 
     private final SpriteProvider spriteProvider;
 
-    public BatParticle(ClientWorld world, double x, double y, double z, SpriteProvider spriteProvider) {
-        super(world, x, y, z);
+    public BatParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
+        super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider.getFirst());
         this.spriteProvider = spriteProvider;
-        this.setSpriteForAge(spriteProvider);
         this.maxAge = 12 + this.random.nextInt(4);
         this.scale = 0.15f;
         this.setBoundingBoxSpacing(1.0f, 1.0f);
     }
 
     @Override
-    public ParticleTextureSheet getType() {
-        return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
+    protected RenderType getRenderType() {
+        return BillboardParticle.RenderType.PARTICLE_ATLAS_OPAQUE;
     }
 
     @Override
@@ -34,7 +36,7 @@ public class BatParticle extends SpriteBillboardParticle {
         if (this.age++ >= this.maxAge) {
             this.markDead();
         } else {
-            this.setSpriteForAge(this.spriteProvider);
+            this.updateSprite(this.spriteProvider);
         }
     }
 
@@ -46,13 +48,16 @@ public class BatParticle extends SpriteBillboardParticle {
             this.spriteProvider = spriteProvider;
         }
 
+        @Override
+        @Nullable
         public Particle createParticle(
-                SimpleParticleType simpleParticleType,
+                SimpleParticleType parameters,
                 ClientWorld clientWorld,
                 double x, double y, double z,
-                double velocityX, double velocityY, double velocityZ
+                double velocityX, double velocityY, double velocityZ,
+                Random random
         ) {
-            return new BatParticle(clientWorld, x, y, z, this.spriteProvider);
+            return new BatParticle(clientWorld, x, y, z, velocityX, velocityY, velocityZ, this.spriteProvider);
         }
     }
 }
