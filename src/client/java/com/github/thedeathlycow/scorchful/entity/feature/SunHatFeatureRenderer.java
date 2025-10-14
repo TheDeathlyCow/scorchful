@@ -50,9 +50,10 @@ public class SunHatFeatureRenderer<S extends BipedEntityRenderState, M extends B
             float limbDistance
     ) {
         if (((SLivingEntityRenderState) state).scorchful$hasSunHat()) {
+            matrices.push();
+
             M contextModel = this.getContextModel();
             contextModel.getRootPart().applyTransform(matrices);
-            matrices.translate(0f, -1.3f, 0f);
 
             queue.getBatchingQueue(1)
                     .submitModel(
@@ -67,6 +68,8 @@ public class SunHatFeatureRenderer<S extends BipedEntityRenderState, M extends B
                             state.outlineColor,
                             null
                     );
+
+            matrices.pop();
         }
     }
 }
