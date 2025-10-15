@@ -30,6 +30,8 @@ public class ScorchfulDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(ScorchfulRecipeGenerator::new);
 
         pack.addProvider(SModelGenerator::new);
+
+        pack.addProvider(EnglishUSGenerator::new);
     }
 
     @Override

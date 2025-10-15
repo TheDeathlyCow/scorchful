@@ -17,7 +17,7 @@ public class SItemGroups {
             Scorchful.id("main"),
             FabricItemGroup.builder()
                     .icon(SItems.SUN_HAT::getDefaultStack)
-                    .displayName(Text.translatable("item_group.scorchful"))
+                    .displayName(Text.translatable("scorchful.title"))
                     .entries((context, entries) -> {
                         entries.add(SItems.SUN_HAT.getDefaultStack());
                         entries.add(Items.TURTLE_HELMET.getDefaultStack());
