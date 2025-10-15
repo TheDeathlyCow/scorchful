@@ -2,18 +2,44 @@ package com.github.thedeathlycow.scorchful.config;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
+import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
+import dev.isxander.yacl3.config.v2.api.SerialEntry;
+import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
+import dev.isxander.yacl3.config.v2.api.autogen.EnumCycler;
+import dev.isxander.yacl3.config.v2.api.autogen.IntSlider;
+import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
+
+import java.nio.file.Path;
 
 /**
  * Config for changes to thirst system when using Dehydration
  */
 @Config(name = Scorchful.MODID + ".dehydrationConfig")
 public class DehydrationConfig implements ConfigData {
+    static final Path PATH = Scorchful.getConfigDir().resolve("compat").resolve("dehydration.json5");
+
+    public static final ConfigClassHandler<DehydrationConfig> HANDLER = ConfigClassHandler.createBuilder(DehydrationConfig.class)
+            .id(Scorchful.id("compat/dehydration"))
+            .serializer(
+                    config -> GsonConfigSerializerBuilder.create(config)
+                            .setPath(PATH)
+                            .setJson5(true)
+                            .build()
+            )
+            .build();
+
+    private static final String CATEGORY = "dehydration";
+
 
     /**
      * Don't lose water to sweat when below this level.
      */
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Minimum water level required for sweating")
+    @SerialEntry(comment = "The minimum number of water points needed to be able to sweat (similar to how much hunger you need to heal)")
+    @IntSlider(min = 0, max = 20, step = 1)
     int minWaterLevelForSweat = 16;
 
     /**

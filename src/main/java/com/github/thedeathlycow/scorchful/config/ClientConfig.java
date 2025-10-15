@@ -28,8 +28,10 @@ public class ClientConfig implements ConfigData {
 
     private static final String CATEGORY = "client";
 
+    @AutoGen(category = CATEGORY)
     @Translate.Name("Do burning heart overlay")
     @SerialEntry(comment = "Toggle the burning heart temperature display on the health bar")
+    @TickBox
     boolean doBurningHeartOverlay = true;
 
     @AutoGen(category = CATEGORY)
