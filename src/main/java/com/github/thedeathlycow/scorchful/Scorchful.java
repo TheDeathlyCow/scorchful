@@ -27,6 +27,8 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.file.Path;
+
 public class Scorchful implements ModInitializer {
 
     public static final String MODID = "scorchful";
@@ -91,6 +93,9 @@ public class Scorchful implements ModInitializer {
         return configHolder.getConfig();
     }
 
+    public static Path getConfigDir() {
+        return FabricLoader.getInstance().getConfigDir().resolve(MODID);
+    }
 
     private void registerThermooEventListeners() {
         ServerPlayerEnvironmentTickListeners.initialize();

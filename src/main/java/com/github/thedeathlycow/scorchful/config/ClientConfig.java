@@ -2,47 +2,77 @@ package com.github.thedeathlycow.scorchful.config;
 
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
+import dev.isxander.yacl3.config.v2.api.SerialEntry;
+import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
+import dev.isxander.yacl3.config.v2.api.autogen.TickBox;
+import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
-import me.shedaniel.autoconfig.annotation.ConfigEntry;
-import net.minecraft.util.math.MathHelper;
+
+import java.nio.file.Path;
 
 @Config(name = Scorchful.MODID + ".client_config")
 public class ClientConfig implements ConfigData {
+    static final Path PATH = Scorchful.getConfigDir().resolve("client.json5");
 
+    public static final ConfigClassHandler<ClientConfig> HANDLER = ConfigClassHandler.createBuilder(ClientConfig.class)
+            .id(Scorchful.id("client"))
+            .serializer(
+                    config -> GsonConfigSerializerBuilder.create(config)
+                            .setPath(PATH)
+                            .setJson5(true)
+                            .build()
+            )
+            .build();
+
+    private static final String CATEGORY = "client";
+
+    @Translate.Name("Do burning heart overlay")
+    @SerialEntry(comment = "Toggle the burning heart temperature display on the health bar")
     boolean doBurningHeartOverlay = true;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Do soaking overlay")
+    @TickBox
+    @SerialEntry(comment = "Toggle the soaking display on the health bar")
     boolean doSoakingOverlay = true;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Do Sun Hat shading")
+    @TickBox
+    @SerialEntry(comment = "Toggle the darkening effect of the Sun Hat")
     boolean doSunHatShading = true;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Enable sound temperature effects")
+    @TickBox
+    @SerialEntry(comment = "Toggle the sound effects of temperature, particularly the heart beat")
     boolean enableSoundTemperatureEffects = true;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Enable wet drip particles")
+    @TickBox
+    @SerialEntry(comment = "Toggle the dripping particles when wet. This setting overrides Frostiful if installed.")
     boolean enableWetDripParticles = true;
 
-    @ConfigEntry.Gui.Tooltip
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Enable Heat Stroke post processing")
+    @TickBox
+    @SerialEntry(comment = "Toggle the blur and wavey-ness screen effects from the Heat Stroke status effect.")
     boolean enableHeatStrokePostProcessing = true;
 
-    @ConfigEntry.Gui.Tooltip
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Enable Fear post processing")
+    @TickBox
+    @SerialEntry(comment = "Toggle the darkening and desaturation screen effects from the Heat Stroke status effect.")
     boolean enableFearPostProcessing = true;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Enable Fear post processing")
+    @TickBox
+    @SerialEntry(comment = "Toggle the darkening and desaturation screen effects from the Heat Stroke status effect.")
     float sunHatShadeOpacity = 0.2f;
-
-    boolean enableSandstormParticles = true;
-
-    boolean enableSandstormFog = true;
-
-    boolean enableSandstormSounds = true;
-
-    int sandStormParticleRenderDistance = 20;
-
-    int sandStormParticleRarity = 60;
-
-    float sandStormParticleVelocity = -1f;
-
-    float sandStormFogStart = 16f;
-
-    float sandStormFogEnd = 64f;
 
     public float getSunHatShadeOpacity() {
         return doSunHatShading ? sunHatShadeOpacity : 0f;
@@ -70,43 +100,5 @@ public class ClientConfig implements ConfigData {
 
     public boolean doSoakingOverlay() {
         return doSoakingOverlay;
-    }
-
-    public boolean isSandstormParticlesEnabled() {
-        return enableSandstormParticles;
-    }
-
-    public boolean isSandstormFogEnabled() {
-        return enableSandstormFog;
-    }
-
-    public boolean isSandstormSoundsEnabled() {
-        return enableSandstormSounds;
-    }
-
-    public int getSandStormParticleRenderDistance() {
-        return sandStormParticleRenderDistance;
-    }
-
-    public int getSandStormParticleRarity() {
-        return sandStormParticleRarity;
-    }
-
-    public float getSandStormParticleVelocity() {
-        return sandStormParticleVelocity;
-    }
-
-    public float getSandStormFogStart() {
-        return sandStormFogStart;
-    }
-
-    public float getSandStormFogEnd() {
-        return sandStormFogEnd;
-    }
-
-    @Override
-    public void validatePostLoad() throws ValidationException {
-        this.sandStormParticleRarity = Math.max(1, this.sandStormParticleRarity);
-        this.sunHatShadeOpacity = MathHelper.clamp(this.sunHatShadeOpacity, 0f, 1f);
     }
 }
