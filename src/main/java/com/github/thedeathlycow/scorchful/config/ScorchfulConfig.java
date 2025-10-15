@@ -1,45 +1,51 @@
 package com.github.thedeathlycow.scorchful.config;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
-import me.shedaniel.autoconfig.ConfigHolder;
-import me.shedaniel.autoconfig.annotation.Config;
-import me.shedaniel.autoconfig.annotation.ConfigEntry;
-import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
+public final class ScorchfulConfig {
+    public static ClientConfig getClientConfig() {
+        return ClientConfig.HANDLER.instance();
+    }
 
-@Config(name = Scorchful.MODID)
-public class ScorchfulConfig extends PartitioningSerializer.GlobalData {
+    public static HeatingConfig getHeatingConfig() {
+        return HeatingConfig.HANDLER.instance();
+    }
 
-    @ConfigEntry.Gui.CollapsibleObject
-    public UpdateConfig updateConfig = new UpdateConfig();
+    public static CombatConfig getCombatConfig() {
+        return CombatConfig.HANDLER.instance();
+    }
 
-    @ConfigEntry.Gui.CollapsibleObject
-    public ClientConfig clientConfig = new ClientConfig();
+    public static WeatherConfig getWeatherConfig() {
+        return WeatherConfig.HANDLER.instance();
+    }
 
-    @ConfigEntry.Gui.CollapsibleObject
-    public HeatingConfig heatingConfig = new HeatingConfig();
+    public static ThirstConfig getThirstConfig() {
+        return ThirstConfig.HANDLER.instance();
+    }
 
-    @ConfigEntry.Gui.CollapsibleObject
-    public CombatConfig combatConfig = new CombatConfig();
+    public static DehydrationConfig getDehydrationConfig() {
+        return DehydrationConfig.HANDLER.instance();
+    }
 
-    @ConfigEntry.Gui.CollapsibleObject
-    public WeatherConfig weatherConfig = new WeatherConfig();
+    public static void initialize() {
+        ClientConfig.HANDLER.load();
+        ClientConfig.HANDLER.save();
 
-    @ConfigEntry.Gui.CollapsibleObject
-    public ThirstConfig thirstConfig = new ThirstConfig();
+        CombatConfig.HANDLER.load();
+        CombatConfig.HANDLER.save();
 
-    @ConfigEntry.Gui.CollapsibleObject
-    public ModIntegrationConfig integrationConfig = new ModIntegrationConfig();
+        DehydrationConfig.HANDLER.load();
+        DehydrationConfig.HANDLER.save();
 
-    public static void updateConfig(ConfigHolder<ScorchfulConfig> configHolder) {
-        UpdateConfig config = configHolder.getConfig().updateConfig;
+        HeatingConfig.HANDLER.load();
+        HeatingConfig.HANDLER.save();
 
-        if (config.isConfigUpdatesEnabled() && config.currentConfigVersion != Scorchful.CONFIG_VERSION) {
-            config.currentConfigVersion = Scorchful.CONFIG_VERSION;
-            configHolder.resetToDefault();
-            configHolder.save();
+        ThirstConfig.HANDLER.load();
+        ThirstConfig.HANDLER.save();
 
-            Scorchful.LOGGER.info("The Scorchful Config has been reset due to an update to the default values. " +
-                    "You may disable these updates if you don't want this to happen.");
-        }
+        WeatherConfig.HANDLER.load();
+        WeatherConfig.HANDLER.save();
+    }
+
+    private ScorchfulConfig() {
+
     }
 }

@@ -5,19 +5,15 @@ import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
-import dev.isxander.yacl3.config.v2.api.autogen.EnumCycler;
 import dev.isxander.yacl3.config.v2.api.autogen.IntSlider;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
-import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.annotation.Config;
 
 import java.nio.file.Path;
 
 /**
  * Config for changes to thirst system when using Dehydration
  */
-@Config(name = Scorchful.MODID + ".dehydrationConfig")
-public class DehydrationConfig implements ConfigData {
+public class DehydrationConfig {
     static final Path PATH = Scorchful.getConfigDir().resolve("compat").resolve("dehydration.json5");
 
     public static final ConfigClassHandler<DehydrationConfig> HANDLER = ConfigClassHandler.createBuilder(DehydrationConfig.class)

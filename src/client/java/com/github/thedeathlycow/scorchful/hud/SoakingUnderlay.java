@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.hud;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.thermoo.api.client.HeartBarContext;
 import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
 import net.minecraft.client.gl.RenderPipelines;
@@ -28,7 +29,7 @@ public final class SoakingUnderlay implements StatusBarOverlayRenderEvents.Rende
             PlayerEntity player,
             HeartBarContext heartBarContext
     ) {
-        if (!Scorchful.getConfig().clientConfig.doSoakingOverlay() || !player.thermoo$isWet()) {
+        if (!ScorchfulConfig.getClientConfig().doSoakingOverlay() || !player.thermoo$isWet()) {
             return;
         }
 

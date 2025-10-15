@@ -27,7 +27,7 @@ public final class ServerPlayerEnvironmentTickListeners {
         TemperatureRecord temperature = context.components()
                 .getOrDefault(EnvironmentComponentTypes.TEMPERATURE, TemperatureRecordComponent.DEFAULT);
 
-        int total = environmentTemperatureToTemperatureChange(temperature, Scorchful.getConfig().heatingConfig);
+        int total = environmentTemperatureToTemperatureChange(temperature, ScorchfulConfig.getHeatingConfig());
 
         if (context.affected().age % 20 == 0 && Scorchful.LOGGER.isDebugEnabled()) {
             Scorchful.LOGGER.debug("Adding {} temperature to {}", total, context.affected().getNameForScoreboard());
@@ -42,17 +42,17 @@ public final class ServerPlayerEnvironmentTickListeners {
         }
 
         ServerPlayerEntity player = context.affected();
-        ScorchfulConfig config = Scorchful.getConfig();
+        HeatingConfig config = ScorchfulConfig.getHeatingConfig();
 
-        int tickInterval = config.heatingConfig.getPassiveHeatingTickInterval();
+        int tickInterval = config.getPassiveHeatingTickInterval();
         if (tickInterval > 1 && player.age % tickInterval != 0) {
             return TriState.FALSE;
         }
 
-        if (!config.heatingConfig.doPassiveHeating()) {
+        if (!config.doPassiveHeating()) {
             return TriState.FALSE;
         } else {
-            return TriState.of(player.thermoo$getTemperatureScale() < config.heatingConfig.getMaxPassiveHeatingScale());
+            return TriState.of(player.thermoo$getTemperatureScale() < config.getMaxPassiveHeatingScale());
         }
     }
 

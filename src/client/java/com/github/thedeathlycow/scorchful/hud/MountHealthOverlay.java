@@ -20,8 +20,7 @@ public final class MountHealthOverlay implements StatusBarOverlayRenderEvents.Re
             PlayerEntity player, LivingEntity mount,
             HeartBarContext heartBarContext
     ) {
-        ScorchfulConfig config = Scorchful.getConfig();
-        if (!config.clientConfig.doBurningHeartOverlay() || mount.thermoo$isCold()) {
+        if (!ScorchfulConfig.getClientConfig().doBurningHeartOverlay() || mount.thermoo$isCold()) {
             return;
         }
 

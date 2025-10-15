@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.server;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.WeatherConfig;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
 import net.minecraft.entity.LivingEntity;
@@ -51,7 +52,7 @@ public class SandstormSlowing {
     }
 
     private static void addSlow(LivingEntity entity) {
-        WeatherConfig config = Scorchful.getConfig().weatherConfig;
+        WeatherConfig config = ScorchfulConfig.getWeatherConfig();
         addModifier(
                 entity,
                 EntityAttributes.MOVEMENT_SPEED,

@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.entity.effect;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.SParticleTypes;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
@@ -35,7 +36,7 @@ public class FearStatusEffect extends StatusEffect {
 
     public static double modifyDetectionDistance(LivingEntity target, double original) {
         return target.hasStatusEffect(SStatusEffects.FEAR)
-                ? Scorchful.getConfig().combatConfig.getFearDetectionRangeMultiplier() * original
+                ? ScorchfulConfig.getCombatConfig().getFearDetectionRangeMultiplier() * original
                 : original;
     }
 

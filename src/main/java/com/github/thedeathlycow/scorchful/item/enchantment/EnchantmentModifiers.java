@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.item.enchantment;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.CombatConfig;
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import com.github.thedeathlycow.thermoo.api.predicate.SoakedLootCondition;
 import net.fabricmc.fabric.api.item.v1.EnchantmentEvents;
@@ -28,7 +29,7 @@ public class EnchantmentModifiers {
             return;
         }
 
-        CombatConfig config = Scorchful.getConfig().combatConfig;
+        CombatConfig config = ScorchfulConfig.getCombatConfig();
 
         builder.addEffect(
                 EnchantmentEffectComponentTypes.DAMAGE,
@@ -59,7 +60,7 @@ public class EnchantmentModifiers {
             return;
         }
 
-        double valuePerLevel = Scorchful.getConfig().combatConfig.getFireProtectionHeatResistancePerLevel();
+        double valuePerLevel = ScorchfulConfig.getCombatConfig().getFireProtectionHeatResistancePerLevel();
         builder.addEffect(
                 EnchantmentEffectComponentTypes.ATTRIBUTES,
                 new AttributeEnchantmentEffect(

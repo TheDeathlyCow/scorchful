@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.mixin.client;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.hud.BurningHeartsOverlay;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -63,7 +64,7 @@ public abstract class InGameHudMixin {
             @Local ItemStack stack
     ) {
         if (stack.contains(SDataComponentTypes.SUN_HAT_RENDERER)) {
-            return Scorchful.getConfig().clientConfig.getSunHatShadeOpacity();
+            return ScorchfulConfig.getClientConfig().getSunHatShadeOpacity();
         }
 
         return opacity;

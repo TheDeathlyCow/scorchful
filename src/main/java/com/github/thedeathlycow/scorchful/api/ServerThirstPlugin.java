@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.api;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.compat.ServerThirstPluginManager;
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import net.minecraft.entity.player.PlayerEntity;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,7 +51,7 @@ public interface ServerThirstPlugin {
      * @return Returns the size of the rehydration drink captured, in soaked ticks.
      */
     default int getRehydrationThreshold() {
-        return Scorchful.getConfig().thirstConfig.getRehydrationDrinkSize();
+        return ScorchfulConfig.getThirstConfig().getRehydrationDrinkSize();
     }
 
     /**

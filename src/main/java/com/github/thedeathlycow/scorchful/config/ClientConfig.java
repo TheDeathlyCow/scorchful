@@ -7,13 +7,10 @@ import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
 import dev.isxander.yacl3.config.v2.api.autogen.TickBox;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
-import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.annotation.Config;
 
 import java.nio.file.Path;
 
-@Config(name = Scorchful.MODID + ".client_config")
-public class ClientConfig implements ConfigData {
+public class ClientConfig {
     static final Path PATH = Scorchful.getConfigDir().resolve("client.json5");
 
     public static final ConfigClassHandler<ClientConfig> HANDLER = ConfigClassHandler.createBuilder(ClientConfig.class)

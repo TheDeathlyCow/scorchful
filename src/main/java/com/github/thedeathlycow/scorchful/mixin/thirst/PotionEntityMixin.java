@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.mixin.thirst;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.thrown.PotionEntity;
@@ -30,7 +31,7 @@ public abstract class PotionEntityMixin extends ThrownItemEntity {
         }
         Box box = this.getBoundingBox().expand(4.0, 2.0, 4.0);
 
-        int waterAmount = Scorchful.getConfig().thirstConfig.getSoakingFromSplashPotions();
+        int waterAmount = ScorchfulConfig.getThirstConfig().getSoakingFromSplashPotions();
 
         world.getNonSpectatingEntities(LivingEntity.class, box)
                 .forEach(

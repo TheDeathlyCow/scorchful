@@ -37,8 +37,6 @@ public class Scorchful implements ModInitializer {
 
     public static final int CONFIG_VERSION = 6;
 
-    private static ConfigHolder<ScorchfulConfig> configHolder = null;
-
     @Contract("_->new")
     public static Identifier id(String path) {
         return Identifier.of(MODID, path);
@@ -86,11 +84,6 @@ public class Scorchful implements ModInitializer {
         PayloadTypeRegistry.playS2C().register(TemperatureSoundEventPacket.PACKET_ID, TemperatureSoundEventPacket.PACKET_CODEC);
 
         LOGGER.info("Scorchful initialized!");
-    }
-
-    @NotNull
-    public static ScorchfulConfig getConfig() {
-        return configHolder.getConfig();
     }
 
     public static Path getConfigDir() {

@@ -1,7 +1,8 @@
 package com.github.thedeathlycow.scorchful.temperature;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.config.HeatingConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.scorchful.config.ThirstConfig;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.github.thedeathlycow.thermoo.api.environment.component.EnvironmentComponentTypes;
 import com.github.thedeathlycow.thermoo.api.environment.component.RelativeHumidityComponent;
@@ -30,28 +31,27 @@ public final class PassiveTemperatureEffects {
 
         int total = 0;
 
-        ScorchfulConfig config = Scorchful.getConfig();
-        total += getIcyFloorTemperatureChange(context, config);
-        total += getTemperatureFromSweat(context, config);
+        total += getIcyFloorTemperatureChange(context, ScorchfulConfig.getHeatingConfig());
+        total += getTemperatureFromSweat(context, ScorchfulConfig.getThirstConfig());
 
         return total;
     }
 
-    private static int getIcyFloorTemperatureChange(EnvironmentTickContext<? extends LivingEntity> context, ScorchfulConfig config) {
+    private static int getIcyFloorTemperatureChange(EnvironmentTickContext<? extends LivingEntity> context, HeatingConfig config) {
         LivingEntity entity = context.affected();
         BlockState steppingState = entity.getSteppingBlockState();
 
         if (steppingState.isIn(SBlockTags.HEAVY_ICE) && entity.thermoo$isWarm()) {
-            return -config.heatingConfig.getCoolingFromIce();
+            return -config.getCoolingFromIce();
         }
 
         return 0;
     }
 
-    private static int getTemperatureFromSweat(EnvironmentTickContext<? extends LivingEntity> context, ScorchfulConfig config) {
+    private static int getTemperatureFromSweat(EnvironmentTickContext<? extends LivingEntity> context, ThirstConfig config) {
         LivingEntity entity = context.affected();
         if (entity.thermoo$isWet()) {
-            int temperatureChange = config.thirstConfig.getTemperatureFromWetness();
+            int temperatureChange = config.getTemperatureFromWetness();
             if (!context.affected().isSubmergedInWater()) {
                 float efficiency = getSweatEfficiency(context, config);
                 temperatureChange = MathHelper.floor(temperatureChange * efficiency);
@@ -62,14 +62,14 @@ public final class PassiveTemperatureEffects {
         return 0;
     }
 
-    private static float getSweatEfficiency(EnvironmentTickContext<? extends LivingEntity> context, ScorchfulConfig config) {
+    private static float getSweatEfficiency(EnvironmentTickContext<? extends LivingEntity> context, ThirstConfig config) {
         double relativeHumidity = context.components().getOrDefault(EnvironmentComponentTypes.RELATIVE_HUMIDITY, RelativeHumidityComponent.DEFAULT);
         if (relativeHumidity <= LOW_HUMIDITY) {
-            return config.thirstConfig.getAridBiomeSweatEfficiency();
+            return config.getAridBiomeSweatEfficiency();
         } else if (relativeHumidity >= VERY_HIGH_HUMIDITY) {
-            return config.thirstConfig.getExtraHumidBiomeSweatEfficiency();
+            return config.getExtraHumidBiomeSweatEfficiency();
         } else if (relativeHumidity >= HIGH_HUMIDITY) {
-            return config.thirstConfig.getHumidBiomeSweatEfficiency();
+            return config.getHumidBiomeSweatEfficiency();
         } else {
             return 1f;
         }

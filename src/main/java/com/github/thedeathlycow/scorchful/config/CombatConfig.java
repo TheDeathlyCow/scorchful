@@ -9,15 +9,10 @@ import dev.isxander.yacl3.config.v2.api.autogen.EnumCycler;
 import dev.isxander.yacl3.config.v2.api.autogen.FloatField;
 import dev.isxander.yacl3.config.v2.api.autogen.TickBox;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
-import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.annotation.Config;
-import me.shedaniel.autoconfig.annotation.ConfigEntry;
-import net.minecraft.util.math.MathHelper;
 
 import java.nio.file.Path;
 
-@Config(name = Scorchful.MODID + ".combat_config")
-public class CombatConfig implements ConfigData {
+public class CombatConfig {
     static final Path PATH = Scorchful.getConfigDir().resolve("combat.json5");
 
     public static final ConfigClassHandler<CombatConfig> HANDLER = ConfigClassHandler.createBuilder(CombatConfig.class)

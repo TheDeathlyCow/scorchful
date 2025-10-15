@@ -5,14 +5,10 @@ import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.autogen.*;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
-import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.annotation.Config;
-import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 import java.nio.file.Path;
 
-@Config(name = Scorchful.MODID + ".heating_config")
-public class HeatingConfig implements ConfigData {
+public class HeatingConfig {
     static final Path PATH = Scorchful.getConfigDir().resolve("heating.json5");
 
     public static final ConfigClassHandler<HeatingConfig> HANDLER = ConfigClassHandler.createBuilder(HeatingConfig.class)
@@ -185,18 +181,5 @@ public class HeatingConfig implements ConfigData {
 
     public int getTemperatureFromCoolingFood() {
         return temperatureFromCoolingFood;
-    }
-
-    @Override
-    public void validatePostLoad() throws ValidationException {
-        ConfigData.super.validatePostLoad();
-
-        if (this.minTemperatureForHeatC < 25) {
-            this.minTemperatureForHeatC = 25;
-        }
-
-        if (this.degreesCPerTemperatureIncrease <= 0) {
-            throw new ValidationException("Degrees C Per Temperature Increase must be positive!");
-        }
     }
 }

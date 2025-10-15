@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
 import com.github.thedeathlycow.scorchful.item.SunHatItem;
@@ -107,7 +108,7 @@ public final class SItems {
         ScorchfulItemEvents.CONSUME_ITEM.register((stack, player) -> {
             if (stack.isIn(SItemTags.IS_COOLING_FOOD)) {
                 player.thermoo$addTemperature(
-                        Scorchful.getConfig().heatingConfig.getTemperatureFromCoolingFood(),
+                        ScorchfulConfig.getHeatingConfig().getTemperatureFromCoolingFood(),
                         HeatingModes.ACTIVE
                 );
             }
