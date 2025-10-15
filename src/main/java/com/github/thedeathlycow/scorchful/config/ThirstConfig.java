@@ -1,36 +1,109 @@
 package com.github.thedeathlycow.scorchful.config;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
+import dev.isxander.yacl3.config.v2.api.SerialEntry;
+import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
+import dev.isxander.yacl3.config.v2.api.autogen.FloatSlider;
+import dev.isxander.yacl3.config.v2.api.autogen.IntField;
+import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 
+import java.nio.file.Path;
+
 @Config(name = Scorchful.MODID + ".thirst_config")
 public class ThirstConfig implements ConfigData {
+    static final Path PATH = Scorchful.getConfigDir().resolve("thirst.json5");
 
+    public static final ConfigClassHandler<ThirstConfig> HANDLER = ConfigClassHandler.createBuilder(ThirstConfig.class)
+            .id(Scorchful.id("thirst"))
+            .serializer(
+                    config -> GsonConfigSerializerBuilder.create(config)
+                            .setPath(PATH)
+                            .setJson5(true)
+                            .build()
+            )
+            .build();
+
+    private static final String CATEGORY = "thirst";
+
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Temperature from Wetness")
+    @SerialEntry(comment = "How much temperature to remove from wet entities, each tick.")
+    @IntField
     int temperatureFromWetness = -6;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Water from Refreshing food")
+    @SerialEntry(comment = "The amount of body water provided by consuming Refreshing food and drink.")
+    @IntField
     int waterFromRefreshingFood = 60;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Water from Sustaining food")
+    @SerialEntry(comment = "The amount of body water provided by consuming Sustaining food and drink.")
+    @IntField
     int waterFromSustainingFood = 120;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Water from Hydrating food")
+    @SerialEntry(comment = "The amount of body water provided by consuming Hydrating food and drink.")
+    @IntField
     int waterFromHydratingFood = 300;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Water from Parching food")
+    @SerialEntry(comment = "The amount of body water provided by consuming Parching food and drink.")
+    @IntField
     int waterFromParchingFood = -120;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Rehydration drink size")
+    @SerialEntry(comment = "The threshold for how much body water needs to be collected before Rehydration will automatically rehydrate the player.")
+    @IntField
     int rehydrationDrinkSize = 120;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Soaking from Splash Potions")
+    @SerialEntry(comment = "How much soaking is applied when an entity is hit with any Splash Potion.")
+    @IntField
     int soakingFromSplashPotions = 300;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Touching water or rain wetness increase per tick")
+    @SerialEntry(comment = "How much to increase wetness by when touching water or rain each tick. Note that submerging yourself in water will fully soak you, regardless of what this is set to.")
+    @IntField
     int touchingWaterWetnessIncrease = 1;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("On fire dry rate")
+    @SerialEntry(comment = "How many wetness points to remove each tick when on fire.")
+    @IntField
     int onFireDryDate = 3;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Humid biome sweating efficiency")
+    @SerialEntry(comment = "A multiplier for temperatureFromWetness when the humidity is in the range [65%, 80%). This applies to rainy climates like Jungles, Swamps, etc.")
+    @FloatSlider(min = 0f, max = 1f, step = 0.05f)
     float humidBiomeSweatEfficiency = 1f / 3f;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Extra Humid biome sweating efficiency")
+    @SerialEntry(comment = "A multiplier for temperatureFromWetness when the humidity is at or above 80%. This applies to rainy climates like Jungles, Swamps during the Wet Season; to cave biomes; and to all non-arid biomes when it rains.")
+    @FloatSlider(min = 0f, max = 1f, step = 0.05f)
     float extraHumidBiomeSweatEfficiency = 1f / 6f;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Arid biome sweating efficiency")
+    @SerialEntry(comment = "A multiplier for temperatureFromWetness when the humidity is at or below 20%. This applies to arid climates like Deserts, Badlands, and Savannas, as well as The Nether.")
+    @FloatSlider(min = 0f, max = 1f, step = 0.05f)
     float aridBiomeSweatEfficiency = 1.5f;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Maximum Rehydration Enchantment efficiency")
+    @SerialEntry(comment = "Multiplier for rehydrationDrinkSize that controls the maximum amount of body water provided by a full suit of Rehydration armor.")
+    @FloatSlider(min = 0f, max = 1f, step = 0.05f)
     float maxRehydrationEfficiency = 0.75f;
 
     public int getTemperatureFromWetness() {
