@@ -26,6 +26,12 @@ public class WeatherConfig implements ConfigData {
 
     private static final String CATEGORY = "weather";
 
+    private static final int VERSION = 1;
+
+    @Translate.Name("Schema version")
+    @SerialEntry(comment = "Config version, do not touch! Changing this value may result in unexpected behaviour.")
+    int version = VERSION;
+
     @AutoGen(category = CATEGORY)
     @Translate.Name("Do Sand Pile accumulation")
     @SerialEntry(comment = "Enable/disable sand piles accumulating on the ground during sandstorms.")

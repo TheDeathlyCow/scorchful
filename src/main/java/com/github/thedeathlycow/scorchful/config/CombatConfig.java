@@ -27,6 +27,12 @@ public class CombatConfig {
 
     private static final String CATEGORY = "combat";
 
+    private static final int VERSION = 1;
+
+    @Translate.Name("Schema version")
+    @SerialEntry(comment = "Config version, do not touch! Changing this value may result in unexpected behaviour.")
+    int version = VERSION;
+
     @AutoGen(category = CATEGORY)
     @Translate.Name("Fireball throwing type")
     @SerialEntry(comment = "Controls what type of fireball is creating when throwing a fire charge. Small is just like firing from a Dispener and creates a fire on impact. Large is more like a Ghast and creates an explosion, and disabled disables this feature.")

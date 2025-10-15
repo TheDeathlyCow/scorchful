@@ -23,6 +23,12 @@ public class HeatingConfig {
 
     private static final String CATEGORY = "heating";
 
+    private static final int VERSION = 1;
+
+    @Translate.Name("Schema version")
+    @SerialEntry(comment = "Config version, do not touch! Changing this value may result in unexpected behaviour.")
+    int version = VERSION;
+
     @AutoGen(category = CATEGORY)
     @Translate.Name("Do passive heating")
     @SerialEntry(comment = "Enable/disable passive environmental heating.")
