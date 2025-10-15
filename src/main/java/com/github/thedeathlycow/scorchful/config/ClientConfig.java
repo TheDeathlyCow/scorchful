@@ -5,6 +5,7 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
+import dev.isxander.yacl3.config.v2.api.autogen.FloatSlider;
 import dev.isxander.yacl3.config.v2.api.autogen.TickBox;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 
@@ -75,7 +76,7 @@ public class ClientConfig {
 
     @AutoGen(category = CATEGORY)
     @Translate.Name("Enable Fear post processing")
-    @TickBox
+    @FloatSlider(min = 0f, max = 1f, step = 0.05f)
     @SerialEntry(comment = "Toggle the darkening and desaturation screen effects from the Heat Stroke status effect.")
     float sunHatShadeOpacity = 0.2f;
 

@@ -4,10 +4,7 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
-import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
-import dev.isxander.yacl3.config.v2.api.autogen.EnumCycler;
-import dev.isxander.yacl3.config.v2.api.autogen.FloatField;
-import dev.isxander.yacl3.config.v2.api.autogen.TickBox;
+import dev.isxander.yacl3.config.v2.api.autogen.*;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 
 import java.nio.file.Path;
@@ -48,19 +45,19 @@ public class CombatConfig {
     @AutoGen(category = CATEGORY)
     @Translate.Name("Fire Protection heat resistance per level")
     @SerialEntry(comment = "How much Heat Resistance the Fire Protection enchantment should give, per level of Fire Protection.")
-    @FloatField
+    @DoubleField
     double fireProtectionHeatResistancePerLevel = 0.125;
 
     @AutoGen(category = CATEGORY)
     @Translate.Name("Fear detection range multiplier")
     @SerialEntry(comment = "How much to multiply an entity's (including players) hostile mob detection range by.")
-    @FloatField(min = 0, max = 128)
+    @DoubleField(min = 0, max = 128)
     double fearDetectionRangeMultiplier = 2.0;
 
     @AutoGen(category = CATEGORY)
     @Translate.Name("Impaling damage per level")
     @SerialEntry(comment = "How much damage the Impaling enchantment should do to wet entities, per level of Impaling")
-    @FloatField(min = 0)
+    @FloatField(min = 0f)
     float impalingDamagePerLevel = 2.5f;
 
     public FireChargeThrower.FireballFactory getFireBallThrownType() {
