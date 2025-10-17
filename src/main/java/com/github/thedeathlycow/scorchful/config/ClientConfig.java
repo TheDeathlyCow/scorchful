@@ -75,9 +75,9 @@ public class ClientConfig {
     boolean enableFearPostProcessing = true;
 
     @AutoGen(category = CATEGORY)
-    @Translate.Name("Enable Fear post processing")
+    @Translate.Name("Sun Hat shade opacity")
     @FloatSlider(min = 0f, max = 1f, step = 0.05f)
-    @SerialEntry(comment = "Toggle the darkening and desaturation screen effects from the Heat Stroke status effect.")
+    @SerialEntry(comment = "Controls how dark the sun hat shading is.")
     float sunHatShadeOpacity = 0.2f;
 
     public float getSunHatShadeOpacity() {
