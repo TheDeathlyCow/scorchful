@@ -4,16 +4,22 @@ import com.github.thedeathlycow.scorchful.registry.*;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.minecraft.advancement.Advancement;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 
+import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
 
 public class EnglishUSGenerator extends FabricLanguageProvider {
@@ -84,6 +90,25 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
 
         builder.add(statusEffect(SStatusEffects.HEAT_STROKE), "Heat Stroke");
         builder.add(statusEffect(SStatusEffects.FEAR), "Fear");
+
+        addDamageType(builder, SDamageTypes.HEAT, "%1$s couldn't handle the heat", "%1$s couldn't handle the heat of %2$s");
+
+        addAdvancement(builder, SAdvancements.DRINK_CACTUS_JUICE, "It's the Quenchiest!", "Drink a Bottle of Cactus Juice");
+        addAdvancement(builder, SAdvancements.OBTAIN_TURTLE_ARMOR, "Duck and Cover", "Obtain a piece of Turtle Armor");
+        addAdvancement(builder, SAdvancements.SHOOT_PARANOIA_ARROW, "The Mind Killer", "Be struck with Fear");
+
+        builder.add(SSoundEvents.ITEM_WATER_SKIN_FILL, "Waterskin fills");
+        builder.add(SSoundEvents.TEMPERATURE_EFFECT_HEARTBEAT, "Heart beats");
+        builder.add(SSoundEvents.REHYDRATE, "Player Rehydrates");
+        builder.add(SSoundEvents.CRIMSON_LILY_SQUELCH, "Crimson Lily Squelches");
+        builder.add(SSoundEvents.WEATHER_SANDSTORM, "Wind blows");
+        builder.add(SSoundEvents.ENTITY_GULP, "Player gulps");
+        builder.add(SSoundEvents.DISCOVER_VISION, "Player discovers vision");
+        builder.add(SSoundEvents.TEMPERATURE_EFFECT_PANT, "Dog pants");
+
+        addStat(builder, SStats.FILL_CRIMSON_LILY, "Filled Crimson Lily");
+        addStat(builder, SStats.SOAKED_BY_CRIMSON_LILY, "Soaked by Crimson Lily");
+        addStat(builder, SStats.USE_WARPED_LILY, "Harvest Warped Lily");
     }
 
     private String itemSuffix(Item item, String suffix) {
@@ -112,5 +137,37 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
 
     private String statusEffect(RegistryEntry<StatusEffect> effect) {
         return Util.createTranslationKey("effect", effect.getKey().orElseThrow().getValue());
+    }
+
+    private void addDamageType(
+            TranslationBuilder builder,
+            RegistryKey<DamageType> key,
+            String deathMessage,
+            String playerDeathMessage
+    ) {
+        String translationKey = Util.createTranslationKey("death.attack", key.getValue());
+
+        builder.add(translationKey, deathMessage);
+        builder.add(translationKey + ".player", playerDeathMessage);
+    }
+
+    private void addAdvancement(
+            TranslationBuilder builder,
+            RegistryKey<Advancement> key,
+            String title,
+            String desc
+    ) {
+        String translationKey = Util.createTranslationKey("advancements", key.getValue());
+
+        builder.add(translationKey + ".title", title);
+        builder.add(translationKey + ".desc", desc);
+    }
+
+    private void addStat(
+            TranslationBuilder builder,
+            Identifier stat,
+            String name
+    ) {
+        builder.add(Util.createTranslationKey("stat", stat), name);
     }
 }

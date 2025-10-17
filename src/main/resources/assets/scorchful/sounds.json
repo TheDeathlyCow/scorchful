@@ -6,19 +6,19 @@
             "scorchful:item/water_skin/fill3",
             "scorchful:item/water_skin/fill4"
         ],
-        "subtitle": "subtitles.item.scorchful.water_skin.fill"
+        "subtitle": "subtitles.scorchful.item.water_skin.fill"
     },
     "temperature_effect.scorchful.heartbeat": {
         "sounds": [
             "scorchful:entity/heartbeat"
         ],
-        "subtitle": "subtitles.temperature_effect.scorchful.heartbeat"
+        "subtitle": "subtitles.scorchful.temperature_effect.heartbeat"
     },
     "temperature_effect.scorchful.pant": {
         "sounds": [
             "scorchful:entity/pant_maybe"
         ],
-        "subtitle": "subtitles.temperature_effect.scorchful.pant"
+        "subtitle": "subtitles.scorchful.temperature_effect.pant"
     },
     "enchantment.scorchful.rehydration": {
         "sounds": [
@@ -27,13 +27,13 @@
             "item/bottle/fill3",
             "item/bottle/fill4"
         ],
-        "subtitle": "subtitles.enchantment.scorchful.rehydration"
+        "subtitle": "subtitles.scorchful.enchantment.rehydration"
     },
     "block.scorchful.crimson_lily.squelch": {
         "sounds": [
             "scorchful:block/squelch"
         ],
-        "subtitle": "subtitles.block.scorchful.crimson_lily.squelch"
+        "subtitle": "subtitles.scorchful.block.crimson_lily.squelch"
     },
     "weather.sandstorm": {
         "sounds": [
@@ -47,7 +47,7 @@
             "scorchful:weather/sandstorm/sandstorm8",
             "scorchful:weather/sandstorm/sandstorm9"
         ],
-        "subtitle": "subtitles.weather.scorchful.sandstorm"
+        "subtitle": "subtitles.scorchful.weather.sandstorm"
     },
     "entity.gulp": {
         "sounds": [
