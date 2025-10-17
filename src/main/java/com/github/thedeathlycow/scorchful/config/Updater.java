@@ -11,8 +11,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
-public class Updater {
-    public static void run() {
+class Updater {
+    static void run() {
         Path clothConfigPath = FabricLoader.getInstance().getConfigDir().resolve("scorchful.json");
         if (Files.exists(clothConfigPath)) {
             try {
@@ -49,6 +49,7 @@ public class Updater {
 
     private static void copyOldConfigObject(JsonObject json, Path dest) throws IOException {
         if (!Files.exists(dest)) {
+            json.addProperty("version", 1);
             Files.createDirectories(dest.getParent());
             Files.writeString(dest, json.toString(), StandardOpenOption.CREATE);
         } else {
