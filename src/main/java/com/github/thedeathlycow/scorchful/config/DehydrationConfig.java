@@ -26,7 +26,7 @@ public class DehydrationConfig {
             )
             .build();
 
-    private static final String CATEGORY = "dehydration";
+    private static final String CATEGORY = ScorchfulConfig.MAIN_CATEGORY_NAME;
 
     private static final int VERSION = 1;
 

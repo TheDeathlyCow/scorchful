@@ -26,7 +26,7 @@ public class ThirstConfig implements ConfigData {
             )
             .build();
 
-    private static final String CATEGORY = "thirst";
+    private static final String CATEGORY = ScorchfulConfig.MAIN_CATEGORY_NAME;
 
     private static final int VERSION = 1;
 

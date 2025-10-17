@@ -14,8 +14,6 @@ import java.lang.reflect.Field;
 
 import com.github.thedeathlycow.scorchful.registry.*;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.damage.DamageType;
@@ -24,15 +22,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.Util;
 
-import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
 
 public class EnglishUSGenerator extends FabricLanguageProvider {
@@ -124,9 +118,22 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         // Config values
         builder.add(ScorchfulModMenu.TITLE, "Scorchful Config");
         builder.add(ScorchfulModMenu.CLIENT_CATEGORY, "Client Settings");
-        builder.add(ScorchfulModMenu.CLIENT_CATEGORY_DESC, "Display settings for Scorchful");
+        builder.add(ScorchfulModMenu.CLIENT_DESC, "Display settings for Scorchful");
+
         builder.add(ScorchfulModMenu.COMBAT_CATEGORY, "Combat Settings");
-        builder.add(ScorchfulModMenu.COMBAT_CATEGORY_DESC, "Specific settings for combat");
+        builder.add(ScorchfulModMenu.COMBAT_DESC, "Specific settings for combat");
+
+        builder.add(ScorchfulModMenu.HEATING_CATEGORY, "Heat Settings");
+        builder.add(ScorchfulModMenu.HEATING_DESC, "Specific settings for heat and temperature");
+
+        builder.add(ScorchfulModMenu.THIRST_CATEGORY, "Thirst Settings");
+        builder.add(ScorchfulModMenu.THIRST_DESC, "Specific settings for Scorchful's native thirst system");
+
+        builder.add(ScorchfulModMenu.WEATHER_CATEGORY, "Weather Settings");
+        builder.add(ScorchfulModMenu.WEATHER_DESC, "Specific settings for Scorchful's weather-related effects");
+
+        builder.add(ScorchfulModMenu.DEHYDRATION_CATEGORY, "Dehydration Compatibility Settings");
+        builder.add(ScorchfulModMenu.DEHYDRATION_DESC, "Specific settings for Scorchful's builtin compatibility with the Dehydration mod. This is only relevant if you use Dehydration.");
 
         generateConfigOptionTranslations(ClientConfig.HANDLER, builder);
         generateConfigOptionTranslations(CombatConfig.HANDLER, builder);

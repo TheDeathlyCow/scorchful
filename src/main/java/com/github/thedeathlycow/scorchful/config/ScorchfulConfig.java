@@ -1,6 +1,8 @@
 package com.github.thedeathlycow.scorchful.config;
 
 public final class ScorchfulConfig {
+    public static final String MAIN_CATEGORY_NAME = "main";
+
     public static ClientConfig getClientConfig() {
         return ClientConfig.HANDLER.instance();
     }

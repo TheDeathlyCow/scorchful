@@ -22,7 +22,7 @@ public class CombatConfig {
             )
             .build();
 
-    private static final String CATEGORY = "combat";
+    private static final String CATEGORY = ScorchfulConfig.MAIN_CATEGORY_NAME;
 
     private static final int VERSION = 1;
 

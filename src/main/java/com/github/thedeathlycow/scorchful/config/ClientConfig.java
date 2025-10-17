@@ -24,7 +24,7 @@ public class ClientConfig {
             )
             .build();
 
-    private static final String CATEGORY = "client";
+    private static final String CATEGORY = ScorchfulConfig.MAIN_CATEGORY_NAME;
 
     private static final int VERSION = 1;
 
