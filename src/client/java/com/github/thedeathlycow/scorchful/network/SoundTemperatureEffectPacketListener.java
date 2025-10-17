@@ -1,6 +1,5 @@
 package com.github.thedeathlycow.scorchful.network;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;

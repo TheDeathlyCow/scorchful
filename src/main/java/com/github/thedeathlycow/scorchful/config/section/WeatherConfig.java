@@ -5,15 +5,15 @@ import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.Translate;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
-import dev.isxander.yacl3.config.v2.api.autogen.*;
+import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
+import dev.isxander.yacl3.config.v2.api.autogen.DoubleSlider;
+import dev.isxander.yacl3.config.v2.api.autogen.IntSlider;
+import dev.isxander.yacl3.config.v2.api.autogen.TickBox;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
-import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.annotation.Config;
 
 import java.nio.file.Path;
 
-@Config(name = Scorchful.MODID + ".weather_config")
-public class WeatherConfig implements ConfigData {
+public class WeatherConfig {
     public static final Path PATH = Scorchful.getConfigDir().resolve("weather.json5");
 
     public static final ConfigClassHandler<WeatherConfig> HANDLER = ConfigClassHandler.createBuilder(WeatherConfig.class)

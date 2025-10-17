@@ -9,13 +9,10 @@ import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
 import dev.isxander.yacl3.config.v2.api.autogen.FloatSlider;
 import dev.isxander.yacl3.config.v2.api.autogen.IntField;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
-import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.annotation.Config;
 
 import java.nio.file.Path;
 
-@Config(name = Scorchful.MODID + ".thirst_config")
-public class ThirstConfig implements ConfigData {
+public class ThirstConfig {
     public static final Path PATH = Scorchful.getConfigDir().resolve("thirst.json5");
 
     public static final ConfigClassHandler<ThirstConfig> HANDLER = ConfigClassHandler.createBuilder(ThirstConfig.class)

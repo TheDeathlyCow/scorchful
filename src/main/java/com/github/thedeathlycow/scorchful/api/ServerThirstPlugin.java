@@ -1,6 +1,5 @@
 package com.github.thedeathlycow.scorchful.api;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.compat.ServerThirstPluginManager;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;

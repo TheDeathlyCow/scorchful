@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.client;
 
-import com.github.thedeathlycow.scorchful.config.section.ClientConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.scorchful.config.section.ClientConfig;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.PostEffectProcessor;

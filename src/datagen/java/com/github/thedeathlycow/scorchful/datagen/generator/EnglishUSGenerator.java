@@ -2,19 +2,15 @@ package com.github.thedeathlycow.scorchful.datagen.generator;
 
 
 import com.github.thedeathlycow.scorchful.ScorchfulModMenu;
-import com.github.thedeathlycow.scorchful.config.*;
+import com.github.thedeathlycow.scorchful.config.Translate;
 import com.github.thedeathlycow.scorchful.config.section.*;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
+import com.github.thedeathlycow.scorchful.registry.*;
+import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.minecraft.registry.RegistryWrapper;
-
-import java.lang.reflect.Field;
-
-import com.github.thedeathlycow.scorchful.registry.*;
-import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.damage.DamageType;
@@ -23,11 +19,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.Util;
 
+import java.lang.reflect.Field;
 import java.util.concurrent.CompletableFuture;
 
 public class EnglishUSGenerator extends FabricLanguageProvider {

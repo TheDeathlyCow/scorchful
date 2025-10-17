@@ -2,10 +2,10 @@ package com.github.thedeathlycow.scorchful.gametest.common.cauldron;
 
 import com.github.thedeathlycow.scorchful.block.SandCauldronBlock;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
+import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
-import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.test.TestContext;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;

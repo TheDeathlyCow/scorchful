@@ -1,6 +1,5 @@
 package com.github.thedeathlycow.scorchful.mixin.client;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.hud.BurningHeartsOverlay;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;

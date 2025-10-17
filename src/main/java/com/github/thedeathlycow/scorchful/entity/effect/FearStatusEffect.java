@@ -1,6 +1,5 @@
 package com.github.thedeathlycow.scorchful.entity.effect;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.SParticleTypes;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;

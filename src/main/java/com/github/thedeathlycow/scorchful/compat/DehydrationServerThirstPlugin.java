@@ -1,8 +1,8 @@
 package com.github.thedeathlycow.scorchful.compat;
 
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
-import com.github.thedeathlycow.scorchful.config.section.DehydrationConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.scorchful.config.section.DehydrationConfig;
 import net.dehydration.access.ThirstManagerAccess;
 import net.dehydration.thirst.ThirstManager;
 import net.minecraft.entity.player.PlayerEntity;

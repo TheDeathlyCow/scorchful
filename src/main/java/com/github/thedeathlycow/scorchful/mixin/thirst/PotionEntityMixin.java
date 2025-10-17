@@ -1,6 +1,5 @@
 package com.github.thedeathlycow.scorchful.mixin.thirst;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

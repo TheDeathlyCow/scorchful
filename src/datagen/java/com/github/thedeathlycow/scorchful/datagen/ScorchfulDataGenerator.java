@@ -5,7 +5,6 @@ import com.github.thedeathlycow.scorchful.datagen.generator.*;
 import com.github.thedeathlycow.scorchful.datagen.generator.client.SModelGenerator;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
