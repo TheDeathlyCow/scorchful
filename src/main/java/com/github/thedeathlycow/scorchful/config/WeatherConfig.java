@@ -15,7 +15,7 @@ public class WeatherConfig implements ConfigData {
     static final Path PATH = Scorchful.getConfigDir().resolve("weather.json5");
 
     public static final ConfigClassHandler<WeatherConfig> HANDLER = ConfigClassHandler.createBuilder(WeatherConfig.class)
-            .id(Scorchful.id("thirst"))
+            .id(Scorchful.id("weather"))
             .serializer(
                     config -> GsonConfigSerializerBuilder.create(config)
                             .setPath(PATH)
