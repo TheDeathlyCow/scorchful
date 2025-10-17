@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.temperature;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.scorchful.config.section.HeatingConfig;
 import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentTickContext;
 import com.github.thedeathlycow.thermoo.api.temperature.event.LivingEntityTemperatureTickEvents;
 import net.minecraft.entity.EntityType;
@@ -22,7 +22,7 @@ public final class ActiveTemperatureEffects {
         }
 
         int total = 0;
-        ScorchfulConfig config = Scorchful.getConfig();
+        HeatingConfig config = ScorchfulConfig.getHeatingConfig();
         total += getOnFireTemperatureChange(entity, config);
         total += getInLavaTemperatureChange(entity, config);
         total += getPowderSnowTemperatureChange(entity, config);
@@ -30,28 +30,28 @@ public final class ActiveTemperatureEffects {
         return total;
     }
 
-    private static int getOnFireTemperatureChange(LivingEntity entity, ScorchfulConfig config) {
+    private static int getOnFireTemperatureChange(LivingEntity entity, HeatingConfig config) {
         if (entity.thermoo$canOverheat() && entity.isOnFire() && !entity.isFireImmune()) {
             return entity.hasStatusEffect(StatusEffects.FIRE_RESISTANCE)
-                    ? config.heatingConfig.getOnFireWarmRateWithFireResistance()
-                    : config.heatingConfig.getOnFireWarmRate();
+                    ? config.getOnFireWarmRateWithFireResistance()
+                    : config.getOnFireWarmRate();
         }
         return 0;
     }
 
-    private static int getInLavaTemperatureChange(LivingEntity entity, ScorchfulConfig config) {
+    private static int getInLavaTemperatureChange(LivingEntity entity, HeatingConfig config) {
         if (entity.isInLava()) {
-            return config.heatingConfig.getInLavaWarmRate();
+            return config.getInLavaWarmRate();
         } else if (entity.getType() == EntityType.STRIDER) {
-            return -config.heatingConfig.getStriderOutOfLavaCoolRate();
+            return -config.getStriderOutOfLavaCoolRate();
         } else {
             return 0;
         }
     }
 
-    private static int getPowderSnowTemperatureChange(LivingEntity entity, ScorchfulConfig config) {
+    private static int getPowderSnowTemperatureChange(LivingEntity entity, HeatingConfig config) {
         if (entity.wasInPowderSnow && entity.thermoo$canFreeze()) {
-            return -config.heatingConfig.getPowderSnowCoolRate();
+            return -config.getPowderSnowCoolRate();
         }
         return 0;
     }

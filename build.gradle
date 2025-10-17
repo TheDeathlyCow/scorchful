@@ -96,9 +96,6 @@ dependencies {
 
     modImplementation "com.terraformersmc:modmenu:${project.mod_menu_version}"
 
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
     modImplementation "dev.isxander:yet-another-config-lib:${project.yacl_version}-fabric"
 
     modImplementation "com.github.thedeathlycow:thermoo:v${project.thermoo_version}"
@@ -177,14 +174,14 @@ publishMods {
     curseforge {
         accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
         projectId = "981400"
-        minecraftVersions.addAll("1.21.6", "1.21.7", "1.21.8")
+        minecraftVersions.addAll("1.21.9")
 
         javaVersions.add(JavaVersion.VERSION_21)
 
         clientRequired = true
         serverRequired = true
 
-        requires("fabric-api", "cardinal-components-api", "thermoo", "cloth-config")
+        requires("fabric-api", "cardinal-components-api", "thermoo", "yacl")
 
         optional("thermoo-patches", "frostiful", "modmenu", "dehydration")
 
@@ -194,9 +191,9 @@ publishMods {
     modrinth {
         accessToken = providers.environmentVariable("MODRINTH_TOKEN")
         projectId = "SZQ5qcdn"
-        minecraftVersions.addAll("1.21.6", "1.21.7", "1.21.8")
+        minecraftVersions.addAll("1.21.9")
 
-        requires("fabric-api", "cardinal-components-api", "thermoo", "cloth-config")
+        requires("fabric-api", "cardinal-components-api", "thermoo", "yacl")
 
         optional("thermoo-patches", "frostiful", "modmenu", "dehydration")
 

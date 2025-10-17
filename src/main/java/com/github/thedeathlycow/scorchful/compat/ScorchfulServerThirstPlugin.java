@@ -1,10 +1,10 @@
 package com.github.thedeathlycow.scorchful.compat;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
-import com.github.thedeathlycow.scorchful.config.ThirstConfig;
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.scorchful.config.section.ThirstConfig;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
 
@@ -49,7 +49,7 @@ public final class ScorchfulServerThirstPlugin implements ServerThirstPlugin {
             return;
         }
 
-        ThirstConfig config = Scorchful.getConfig().thirstConfig;
+        ThirstConfig config = ScorchfulConfig.getThirstConfig();
         double efficiency = config.getMaxRehydrationEfficiency() * rehydrationEfficiency;
         int drinkToAdd = MathHelper.floor(waterCaptured * efficiency);
 

@@ -1,7 +1,14 @@
 package com.github.thedeathlycow.scorchful.datagen.generator;
 
+
+import com.github.thedeathlycow.scorchful.ScorchfulModMenu;
+import com.github.thedeathlycow.scorchful.config.Translate;
+import com.github.thedeathlycow.scorchful.config.section.*;
+import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
 import com.github.thedeathlycow.scorchful.registry.*;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
+import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
+import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.advancement.Advancement;
@@ -12,25 +19,22 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.Util;
 
-import java.nio.file.Path;
+import java.lang.reflect.Field;
 import java.util.concurrent.CompletableFuture;
 
 public class EnglishUSGenerator extends FabricLanguageProvider {
     public EnglishUSGenerator(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
-        super(dataOutput, registryLookup);
+        super(dataOutput, "en_us", registryLookup);
     }
 
     @Override
     public void generateTranslations(RegistryWrapper.WrapperLookup lookup, TranslationBuilder builder) {
-        builder.add("scorchful.title", "Scorchful");
-
         builder.add(SItems.WATER_SKIN, "Waterskin");
         builder.add(waterSkinSuffix("empty"), "Empty Waterskin");
         builder.add(waterSkinSuffix("partially_filled"), "Partially Filled Waterskin");
@@ -109,6 +113,35 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         addStat(builder, SStats.FILL_CRIMSON_LILY, "Filled Crimson Lily");
         addStat(builder, SStats.SOAKED_BY_CRIMSON_LILY, "Soaked by Crimson Lily");
         addStat(builder, SStats.USE_WARPED_LILY, "Harvest Warped Lily");
+
+        // Config values
+        builder.add(ScorchfulModMenu.TITLE, "Scorchful Config");
+        builder.add(ScorchfulModMenu.CLIENT_CATEGORY, "Client Settings");
+        builder.add(ScorchfulModMenu.CLIENT_DESC, "Display settings for Scorchful");
+
+        builder.add(ScorchfulModMenu.COMBAT_CATEGORY, "Combat Settings");
+        builder.add(ScorchfulModMenu.COMBAT_DESC, "Specific settings for combat");
+
+        builder.add(ScorchfulModMenu.HEATING_CATEGORY, "Heat Settings");
+        builder.add(ScorchfulModMenu.HEATING_DESC, "Specific settings for heat and temperature");
+
+        builder.add(ScorchfulModMenu.THIRST_CATEGORY, "Thirst Settings");
+        builder.add(ScorchfulModMenu.THIRST_DESC, "Specific settings for Scorchful's native thirst system");
+
+        builder.add(ScorchfulModMenu.WEATHER_CATEGORY, "Weather Settings");
+        builder.add(ScorchfulModMenu.WEATHER_DESC, "Specific settings for Scorchful's weather-related effects");
+
+        builder.add(ScorchfulModMenu.DEHYDRATION_CATEGORY, "Dehydration Compatibility Settings");
+        builder.add(ScorchfulModMenu.DEHYDRATION_DESC, "Specific settings for Scorchful's builtin compatibility with the Dehydration mod. This is only relevant if you use Dehydration.");
+
+        generateConfigOptionTranslations(ClientConfig.HANDLER, builder);
+        generateConfigOptionTranslations(CombatConfig.HANDLER, builder);
+        generateConfigOptionTranslations(HeatingConfig.HANDLER, builder);
+        generateConfigOptionTranslations(ThirstConfig.HANDLER, builder);
+        generateConfigOptionTranslations(WeatherConfig.HANDLER, builder);
+        generateConfigOptionTranslations(DehydrationConfig.HANDLER, builder);
+
+        generateConfigEnumTranslations(builder, FireChargeThrower.FireballFactory.class, "Disabled", "Small", "Large");
     }
 
     private String itemSuffix(Item item, String suffix) {
@@ -169,5 +202,64 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
             String name
     ) {
         builder.add(Util.createTranslationKey("stat", stat), name);
+    }
+
+    private <T> void generateConfigOptionTranslations(
+            ConfigClassHandler<T> handler,
+            TranslationBuilder builder
+    ) {
+        final String prefix = Translate.prefixKey(handler);
+
+        for (Field field : handler.configClass().getDeclaredFields()) {
+            SerialEntry entry = field.getAnnotation(SerialEntry.class);
+            if (entry == null) {
+                continue;
+            }
+
+            Translate.Name nameData = field.getAnnotation(Translate.Name.class);
+            String nameKey = configOption(prefix, field.getName());
+
+            if (nameData != null) {
+                builder.add(nameKey, nameData.value());
+            } else {
+                throw new IllegalStateException("Option name missing for" + nameKey);
+            }
+
+            String comment = entry.comment();
+            String commentKey = commentKey(prefix, field.getName());
+
+            if (comment != null && !comment.isEmpty()) {
+                builder.add(commentKey, comment);
+            } else if (field.getAnnotation(Translate.NoComment.class) == null) {
+                throw new IllegalStateException("Missing comment or @NoComment marker for " + commentKey);
+            }
+        }
+    }
+
+    private <E extends Enum<E> & StringIdentifiable> void generateConfigEnumTranslations(
+            TranslationBuilder builder,
+            Class<E> enumClass,
+            String... names
+    ) {
+        E[] entries = enumClass.getEnumConstants();
+        if (entries.length != names.length) {
+            throw new IllegalStateException(
+                    "Names array length %d is different from enums array length %d"
+                            .formatted(names.length, entries.length)
+            );
+        }
+
+        for (E entry : enumClass.getEnumConstants()) {
+            String key = "yacl3.config.enum.%s.%s".formatted(enumClass.getSimpleName(), entry.asString());
+            builder.add(key, names[entry.ordinal()]);
+        }
+    }
+
+    private static String configOption(String prefix, String name) {
+        return prefix + "." + name;
+    }
+
+    private static String commentKey(String prefix, String name) {
+        return configOption(prefix, name) + ".desc";
     }
 }

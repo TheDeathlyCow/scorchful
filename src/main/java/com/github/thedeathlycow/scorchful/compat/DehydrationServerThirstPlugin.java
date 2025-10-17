@@ -1,8 +1,8 @@
 package com.github.thedeathlycow.scorchful.compat;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
-import com.github.thedeathlycow.scorchful.config.DehydrationConfig;
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.scorchful.config.section.DehydrationConfig;
 import net.dehydration.access.ThirstManagerAccess;
 import net.dehydration.thirst.ThirstManager;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,7 +11,7 @@ import net.minecraft.util.math.MathHelper;
 public class DehydrationServerThirstPlugin implements ServerThirstPlugin {
     @Override
     public boolean dehydrateFromSweating(PlayerEntity player) {
-        DehydrationConfig config = Scorchful.getConfig().integrationConfig.dehydrationConfig;
+        DehydrationConfig config = ScorchfulConfig.getDehydrationConfig();
         ThirstManager thirstManager = ((ThirstManagerAccess) player).getThirstManager();
         if (thirstManager.getThirstLevel() > config.getMinWaterLevelForSweat()
                 && player.thermoo$getTemperature() > 0) {
@@ -26,7 +26,7 @@ public class DehydrationServerThirstPlugin implements ServerThirstPlugin {
     public void rehydrateFromEnchantment(PlayerEntity player, int waterCaptured, double rehydrationEfficiency) {
         ThirstManager thirstManager = ((ThirstManagerAccess) player).getThirstManager();
 
-        DehydrationConfig dehydrationConfig = Scorchful.getConfig().integrationConfig.dehydrationConfig;
+        DehydrationConfig dehydrationConfig = ScorchfulConfig.getDehydrationConfig();
         // dont drink if dont have to - prevents rehydration spam
         if (thirstManager.getThirstLevel() > dehydrationConfig.getMinWaterLevelForSweat()) {
             return;
@@ -39,6 +39,6 @@ public class DehydrationServerThirstPlugin implements ServerThirstPlugin {
 
     @Override
     public int getRehydrationThreshold() {
-        return Scorchful.getConfig().integrationConfig.dehydrationConfig.getRehydrationDrinkSize();
+        return ScorchfulConfig.getDehydrationConfig().getRehydrationDrinkSize();
     }
 }

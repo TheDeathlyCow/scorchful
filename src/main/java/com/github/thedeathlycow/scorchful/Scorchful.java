@@ -12,30 +12,22 @@ import com.github.thedeathlycow.scorchful.temperature.PassiveTemperatureEffects;
 import com.github.thedeathlycow.scorchful.temperature.ServerPlayerEnvironmentTickListeners;
 import com.github.thedeathlycow.scorchful.temperature.SoakingEffects;
 import com.github.thedeathlycow.scorchful.worldgen.NetherBiomeModifications;
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.ConfigHolder;
-import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.nio.file.Path;
 
 public class Scorchful implements ModInitializer {
 
     public static final String MODID = "scorchful";
 
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
-
-    public static final int CONFIG_VERSION = 6;
-
-    private static ConfigHolder<ScorchfulConfig> configHolder = null;
 
     @Contract("_->new")
     public static Identifier id(String path) {
@@ -44,9 +36,7 @@ public class Scorchful implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        AutoConfig.register(ScorchfulConfig.class, GsonConfigSerializer::new);
-        configHolder = AutoConfig.getConfigHolder(ScorchfulConfig.class); //NOSONAR: this is correct usage for mods
-        ScorchfulConfig.updateConfig(configHolder);
+        ScorchfulConfig.initialize();
 
         if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
             CommandRegistrationCallback.EVENT.register(
@@ -86,11 +76,9 @@ public class Scorchful implements ModInitializer {
         LOGGER.info("Scorchful initialized!");
     }
 
-    @NotNull
-    public static ScorchfulConfig getConfig() {
-        return configHolder.getConfig();
+    public static Path getConfigDir() {
+        return FabricLoader.getInstance().getConfigDir().resolve(MODID);
     }
-
 
     private void registerThermooEventListeners() {
         ServerPlayerEnvironmentTickListeners.initialize();

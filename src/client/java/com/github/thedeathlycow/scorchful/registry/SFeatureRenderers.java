@@ -1,7 +1,6 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.entity.feature.SunHatFeatureRenderer;
-import com.github.thedeathlycow.scorchful.entity.model.SunHatModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;

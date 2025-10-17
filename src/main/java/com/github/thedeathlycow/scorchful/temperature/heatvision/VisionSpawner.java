@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import com.github.thedeathlycow.scorchful.util.SMth;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,7 +22,7 @@ public class VisionSpawner {
 
     public static void tick(PlayerEntity player) {
 
-        if (!Scorchful.getConfig().combatConfig.enableDesertVisions()) {
+        if (!ScorchfulConfig.getCombatConfig().enableDesertVisions()) {
             return;
         }
 

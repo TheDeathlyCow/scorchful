@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.client;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.config.ClientConfig;
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.scorchful.config.section.ClientConfig;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.PostEffectProcessor;
@@ -40,7 +40,7 @@ public final class ShaderStatusEffectManager implements ShaderEffectRenderCallba
     }
 
     public void onEffectAdded(RegistryEntry<StatusEffect> addedEffect) {
-        if (addedEffect == potionEffect && this.enabledPredicate.test(Scorchful.getConfig().clientConfig)) {
+        if (addedEffect == potionEffect && this.enabledPredicate.test(ScorchfulConfig.getClientConfig())) {
             enabled = true;
         }
     }
