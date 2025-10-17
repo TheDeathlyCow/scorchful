@@ -27,12 +27,6 @@ public class ThirstConfig {
 
     private static final String CATEGORY = ScorchfulConfig.MAIN_CATEGORY_NAME;
 
-    private static final int VERSION = 1;
-
-    @Translate.Name("Schema version")
-    @SerialEntry(comment = "Config version, do not touch! Changing this value may result in unexpected behaviour.")
-    int version = VERSION;
-
     @AutoGen(category = CATEGORY)
     @Translate.Name("Temperature from Wetness")
     @SerialEntry(comment = "How much temperature to remove from wet entities, each tick.")

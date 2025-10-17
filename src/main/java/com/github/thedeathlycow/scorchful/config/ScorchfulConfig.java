@@ -32,6 +32,9 @@ public final class ScorchfulConfig {
     public static void initialize() {
         Updater.run();
 
+        SchemaConfig.HANDLER.load();
+        SchemaConfig.HANDLER.save();
+
         ClientConfig.HANDLER.load();
         ClientConfig.HANDLER.save();
 

@@ -37,23 +37,30 @@ class Updater {
         JsonObject thirstConfig = root.remove("thirstConfig").getAsJsonObject();
         JsonObject dehydrationConfig = root.getAsJsonObject("integrationConfig").remove("dehydrationConfig").getAsJsonObject();
 
-        copyOldConfigObject(clientConfig, ClientConfig.PATH);
-        copyOldConfigObject(combatConfig, CombatConfig.PATH);
-        copyOldConfigObject(heatingConfig, HeatingConfig.PATH);
-        copyOldConfigObject(weatherConfig, WeatherConfig.PATH);
-        copyOldConfigObject(thirstConfig, ThirstConfig.PATH);
-        copyOldConfigObject(dehydrationConfig, DehydrationConfig.PATH);
+        boolean writeSchemaFile = copyOldConfigObject(clientConfig, ClientConfig.PATH);
+        writeSchemaFile &= copyOldConfigObject(combatConfig, CombatConfig.PATH);
+        writeSchemaFile &= copyOldConfigObject(heatingConfig, HeatingConfig.PATH);
+        writeSchemaFile &= copyOldConfigObject(weatherConfig, WeatherConfig.PATH);
+        writeSchemaFile &= copyOldConfigObject(thirstConfig, ThirstConfig.PATH);
+        writeSchemaFile &= copyOldConfigObject(dehydrationConfig, DehydrationConfig.PATH);
+
+        if (writeSchemaFile) {
+            JsonObject json = new JsonObject();
+            json.addProperty("schemaVersion", 1);
+            Files.writeString(SchemaConfig.PATH, json.toString(), StandardOpenOption.CREATE);
+        }
 
         Files.delete(oldConfigPath);
     }
 
-    private static void copyOldConfigObject(JsonObject json, Path dest) throws IOException {
+    private static boolean copyOldConfigObject(JsonObject json, Path dest) throws IOException {
         if (!Files.exists(dest)) {
-            json.addProperty("version", 1);
             Files.createDirectories(dest.getParent());
             Files.writeString(dest, json.toString(), StandardOpenOption.CREATE);
+            return true;
         } else {
             Scorchful.LOGGER.warn("Config file {} already exists, skipping upgrade", dest);
+            return false;
         }
     }
 
