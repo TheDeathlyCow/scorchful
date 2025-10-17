@@ -1,6 +1,5 @@
 package com.github.thedeathlycow.scorchful.item;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
@@ -61,15 +61,15 @@ public class FireChargeThrower implements UseItemCallback {
         return ActionResult.SUCCESS;
     }
 
-    public enum FireballFactory {
-        DISABLED {
+    public enum FireballFactory implements StringIdentifiable {
+        DISABLED("disabled") {
             @Override
             @Nullable
             public AbstractFireballEntity create(World world, PlayerEntity player, Vec3d velocity) {
                 return null;
             }
         },
-        SMALL {
+        SMALL("small") {
             @Override
             @NotNull
             public AbstractFireballEntity create(World world, PlayerEntity player, Vec3d velocity) {
@@ -79,7 +79,7 @@ public class FireChargeThrower implements UseItemCallback {
                 );
             }
         },
-        LARGE {
+        LARGE("large") {
             @Override
             @NotNull
             public AbstractFireballEntity create(World world, PlayerEntity player, Vec3d velocity) {
@@ -90,7 +90,19 @@ public class FireChargeThrower implements UseItemCallback {
             }
         };
 
+        private final String name;
+
+        FireballFactory(String name) {
+            this.name = name;
+        }
+
         @Nullable
         public abstract AbstractFireballEntity create(World world, PlayerEntity player, Vec3d velocity);
+
+
+        @Override
+        public String asString() {
+            return this.name;
+        }
     }
 }

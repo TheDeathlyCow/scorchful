@@ -2,9 +2,8 @@ package com.github.thedeathlycow.scorchful.datagen.generator;
 
 
 import com.github.thedeathlycow.scorchful.ScorchfulModMenu;
-import com.github.thedeathlycow.scorchful.config.ClientConfig;
-import com.github.thedeathlycow.scorchful.config.CombatConfig;
-import com.github.thedeathlycow.scorchful.config.Translate;
+import com.github.thedeathlycow.scorchful.config.*;
+import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -12,6 +11,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.registry.RegistryWrapper;
 
 import java.lang.reflect.Field;
+
 import com.github.thedeathlycow.scorchful.registry.*;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -29,6 +29,7 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.Util;
 
 import java.nio.file.Path;
@@ -41,8 +42,6 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
 
     @Override
     public void generateTranslations(RegistryWrapper.WrapperLookup lookup, TranslationBuilder builder) {
-        builder.add("scorchful.title", "Scorchful");
-
         builder.add(SItems.WATER_SKIN, "Waterskin");
         builder.add(waterSkinSuffix("empty"), "Empty Waterskin");
         builder.add(waterSkinSuffix("partially_filled"), "Partially Filled Waterskin");
@@ -123,7 +122,7 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         addStat(builder, SStats.USE_WARPED_LILY, "Harvest Warped Lily");
 
         // Config values
-        builder.add(ScorchfulModMenu.TITLE, "Immersive Storms Config");
+        builder.add(ScorchfulModMenu.TITLE, "Scorchful Config");
         builder.add(ScorchfulModMenu.CLIENT_CATEGORY, "Client Settings");
         builder.add(ScorchfulModMenu.CLIENT_CATEGORY_DESC, "Display settings for Scorchful");
         builder.add(ScorchfulModMenu.COMBAT_CATEGORY, "Combat Settings");
@@ -131,6 +130,12 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
 
         generateConfigOptionTranslations(ClientConfig.HANDLER, builder);
         generateConfigOptionTranslations(CombatConfig.HANDLER, builder);
+        generateConfigOptionTranslations(HeatingConfig.HANDLER, builder);
+        generateConfigOptionTranslations(ThirstConfig.HANDLER, builder);
+        generateConfigOptionTranslations(WeatherConfig.HANDLER, builder);
+        generateConfigOptionTranslations(DehydrationConfig.HANDLER, builder);
+
+        generateConfigEnumTranslations(builder, FireChargeThrower.FireballFactory.class, "Disabled", "Small", "Large");
     }
 
     private String itemSuffix(Item item, String suffix) {
@@ -222,6 +227,25 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
             } else if (field.getAnnotation(Translate.NoComment.class) == null) {
                 throw new IllegalStateException("Missing comment or @NoComment marker for " + commentKey);
             }
+        }
+    }
+
+    private <E extends Enum<E> & StringIdentifiable> void generateConfigEnumTranslations(
+            TranslationBuilder builder,
+            Class<E> enumClass,
+            String... names
+    ) {
+        E[] entries = enumClass.getEnumConstants();
+        if (entries.length != names.length) {
+            throw new IllegalStateException(
+                    "Names array length %d is different from enums array length %d"
+                            .formatted(names.length, entries.length)
+            );
+        }
+
+        for (E entry : enumClass.getEnumConstants()) {
+            String key = "yacl3.config.enum.%s.%s".formatted(enumClass.getSimpleName(), entry.asString());
+            builder.add(key, names[entry.ordinal()]);
         }
     }
 
