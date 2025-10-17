@@ -40,7 +40,7 @@ public class CrimsonLilyTests {
         context.assertFalse(isPlayerWet.getAsBoolean(), Text.literal("Newly created player should be dry"));
 
         BlockState lilyState = context.getBlockState(lilyPos);
-        lilyState.onEntityCollision(context.getWorld(), context.getAbsolutePos(lilyPos), player, EntityCollisionHandler.DUMMY);
+        lilyState.onEntityCollision(context.getWorld(), context.getAbsolutePos(lilyPos), player, EntityCollisionHandler.DUMMY, true);
 
         context.assertTrue(isPlayerWet.getAsBoolean(), Text.literal("Player should be wet"));
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
@@ -63,7 +63,7 @@ public class CrimsonLilyTests {
         context.assertFalse(isPlayerWet.getAsBoolean(), Text.literal("Newly created player should be dry"));
 
         BlockState lilyState = context.getBlockState(lilyPos);
-        lilyState.onEntityCollision(context.getWorld(), context.getAbsolutePos(lilyPos), player, EntityCollisionHandler.DUMMY);
+        lilyState.onEntityCollision(context.getWorld(), context.getAbsolutePos(lilyPos), player, EntityCollisionHandler.DUMMY, true);
 
         context.assertFalse(isPlayerWet.getAsBoolean(), Text.literal("Player should NOT be wet"));
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);
@@ -86,7 +86,7 @@ public class CrimsonLilyTests {
         context.assertFalse(isPlayerWet.getAsBoolean(), Text.literal("Newly created player should be dry"));
 
         BlockState lilyState = context.getBlockState(lilyPos);
-        lilyState.onEntityCollision(context.getWorld(), context.getAbsolutePos(lilyPos), player, EntityCollisionHandler.DUMMY);
+        lilyState.onEntityCollision(context.getWorld(), context.getAbsolutePos(lilyPos), player, EntityCollisionHandler.DUMMY, true);
 
         context.assertFalse(isPlayerWet.getAsBoolean(), Text.literal("Player should NOT be wet"));
         context.expectBlock(SBlocks.CRIMSON_LILY, lilyPos);

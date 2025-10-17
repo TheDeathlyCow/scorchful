@@ -24,7 +24,7 @@ public class CrimsonLilyBlock extends NetherLilyBlock {
     }
 
     @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler, boolean bl) {
         if (state.get(WATER_SATURATION_LEVEL) != 3) {
             return;
         }

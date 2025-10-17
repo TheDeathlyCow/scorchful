@@ -109,7 +109,7 @@ public class SandCauldronBlock extends AbstractCauldronBlock {
     }
 
     @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler, boolean bl) {
         // stub: don't extinguish entities on fire
     }
 
