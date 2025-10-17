@@ -1,5 +1,5 @@
 {
-    "item.scorchful.water_skin.fill": {
+    "item.water_skin.fill": {
         "sounds": [
             "scorchful:item/water_skin/fill1",
             "scorchful:item/water_skin/fill2",
@@ -8,19 +8,19 @@
         ],
         "subtitle": "subtitles.scorchful.item.water_skin.fill"
     },
-    "temperature_effect.scorchful.heartbeat": {
+    "temperature_effect.heartbeat": {
         "sounds": [
             "scorchful:entity/heartbeat"
         ],
         "subtitle": "subtitles.scorchful.temperature_effect.heartbeat"
     },
-    "temperature_effect.scorchful.pant": {
+    "temperature_effect.pant": {
         "sounds": [
             "scorchful:entity/pant_maybe"
         ],
         "subtitle": "subtitles.scorchful.temperature_effect.pant"
     },
-    "enchantment.scorchful.rehydration": {
+    "enchantment.rehydration": {
         "sounds": [
             "item/bottle/fill1",
             "item/bottle/fill2",
@@ -29,7 +29,7 @@
         ],
         "subtitle": "subtitles.scorchful.enchantment.rehydration"
     },
-    "block.scorchful.crimson_lily.squelch": {
+    "block.crimson_lily.squelch": {
         "sounds": [
             "scorchful:block/squelch"
         ],

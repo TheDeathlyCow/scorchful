@@ -18,6 +18,11 @@ public class SSoundEvents {
 
     public static void initialize() {
         Scorchful.LOGGER.debug("Initialized Scorchful sound events");
+        Registries.SOUND_EVENT.addAlias(Scorchful.id("temperature_effect.scorchful.heartbeat"), TEMPERATURE_EFFECT_HEARTBEAT.id());
+        Registries.SOUND_EVENT.addAlias(Scorchful.id("item.scorchful.water_skin.fill"), ITEM_WATER_SKIN_FILL.id());
+        Registries.SOUND_EVENT.addAlias(Scorchful.id("temperature_effect.scorchful.pant"), TEMPERATURE_EFFECT_PANT.id());
+        Registries.SOUND_EVENT.addAlias(Scorchful.id("enchantment.scorchful.rehydration"), REHYDRATE.id());
+        Registries.SOUND_EVENT.addAlias(Scorchful.id("block.scorchful.crimson_lily.squelch"), CRIMSON_LILY_SQUELCH.id());
     }
 
     private static SoundEvent register(String name) {
