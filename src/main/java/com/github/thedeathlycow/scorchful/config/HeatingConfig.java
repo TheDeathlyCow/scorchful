@@ -21,7 +21,7 @@ public class HeatingConfig {
             )
             .build();
 
-    private static final String CATEGORY = "heating";
+    private static final String CATEGORY = ScorchfulConfig.MAIN_CATEGORY_NAME;
 
     private static final int VERSION = 1;
 
