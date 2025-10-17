@@ -68,11 +68,11 @@
   "advancements.scorchful.adventure.shoot_paranoia_arrow.title": "Kẻ Sát Nhân Tâm Trí",
   "advancements.scorchful.adventure.shoot_paranoia_arrow.description": "Bị đánh trúng bởi Sợ Hãi",
 
-  "subtitles.item.scorchful.water_skin.fill": "Đổ đầy bình nước da",
-  "subtitles.temperature_effect.scorchful.heartbeat": "Tim đập",
-  "subtitles.enchantment.scorchful.rehydration": "Người chơi tái cung cấp nước",
-  "subtitles.block.scorchful.crimson_lily.squelch": "Hoa Huệ Đỏ Thẫm nhai nhẹp",
-  "subtitles.weather.scorchful.sandstorm": "Gió thổi",
+  "subtitles.scorchful.item.water_skin.fill": "Đổ đầy bình nước da",
+  "subtitles.scorchful.temperature_effect.heartbeat": "Tim đập",
+  "subtitles.scorchful.enchantment.rehydration": "Người chơi tái cung cấp nước",
+  "subtitles.scorchful.block.crimson_lily.squelch": "Hoa Huệ Đỏ Thẫm nhai nhẹp",
+  "subtitles.scorchful.weather.sandstorm": "Gió thổi",
   "subtitles.scorchful.entity.gulp": "Người chơi nuốt",
   "subtitles.scorchful.discover_vision": "Người chơi phát hiện tầm nhìn",
 

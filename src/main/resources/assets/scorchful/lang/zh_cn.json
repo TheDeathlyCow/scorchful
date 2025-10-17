@@ -45,11 +45,11 @@
     "advancements.scorchful.husbandry.obtain_turtle_armor.title": "卧倒并掩护",
     "advancements.scorchful.husbandry.obtain_turtle_armor.description": "拥有一件海龟盔甲",
     
-    "subtitles.item.scorchful.water_skin.fill": "水壶",
-    "subtitles.temperature_effect.scorchful.heartbeat": "心跳",
-    "subtitles.enchantment.scorchful.rehydration": "湿润",
-    "subtitles.block.scorchful.crimson_lily.squelch": "绯红百合：扑哧",
-    "subtitles.weather.scorchful.sandstorm": "刮风",
+    "subtitles.scorchful.item.water_skin.fill": "水壶",
+    "subtitles.scorchful.temperature_effect.heartbeat": "心跳",
+    "subtitles.scorchful.enchantment.rehydration": "湿润",
+    "subtitles.scorchful.block.crimson_lily.squelch": "绯红百合：扑哧",
+    "subtitles.scorchful.weather.sandstorm": "刮风",
     
     
     "stat.scorchful.fill_crimson_lily": "填满绯红百合",

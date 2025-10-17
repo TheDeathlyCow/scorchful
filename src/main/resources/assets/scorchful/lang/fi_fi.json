@@ -49,12 +49,12 @@
     "advancements.scorchful.husbandry.obtain_turtle_armor.title": "Kummarru ja piiloudu",
     "advancements.scorchful.husbandry.obtain_turtle_armor.description": "Hanki pala kilpikonnan haarniskaa",
     
-    "subtitles.item.scorchful.water_skin.fill": "Leili täyttyy",
-    "subtitles.temperature_effect.scorchful.heartbeat": "Sydän sykkii",
-    "subtitles.enchantment.scorchful.rehydration": "Pelaaja uudelleennesteytyy",
-    "subtitles.block.scorchful.crimson_lily.squelch": "Karmiinililja tukahtuu",
-    "subtitles.weather.scorchful.sandstorm": "Tuuli puhaltaa",
+    "subtitles.scorchful.block.crimson_lily.squelch": "Karmiinililja tukahtuu",
+    "subtitles.scorchful.enchantment.rehydration": "Pelaaja uudelleennesteytyy",
     "subtitles.scorchful.entity.gulp": "Pelaaja kulauttaa",
+    "subtitles.scorchful.item.water_skin.fill": "Leili täyttyy",
+    "subtitles.scorchful.temperature_effect.heartbeat": "Sydän sykkii",
+    "subtitles.scorchful.weather.sandstorm": "Tuuli puhaltaa",
     
     "stat.scorchful.fill_crimson_lily": "Täytetty Karmiinililja",
     "stat.scorchful.soaked_by_crimson_lily": "Kasteltiin läpimäräksi Karmiinililjalla",
