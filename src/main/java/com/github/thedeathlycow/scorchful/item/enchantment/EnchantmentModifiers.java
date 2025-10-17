@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.item.enchantment;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.config.CombatConfig;
+import com.github.thedeathlycow.scorchful.config.section.CombatConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import com.github.thedeathlycow.thermoo.api.predicate.SoakedLootCondition;

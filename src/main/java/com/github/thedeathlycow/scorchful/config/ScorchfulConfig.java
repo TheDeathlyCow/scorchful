@@ -1,5 +1,7 @@
 package com.github.thedeathlycow.scorchful.config;
 
+import com.github.thedeathlycow.scorchful.config.section.*;
+
 public final class ScorchfulConfig {
     public static final String MAIN_CATEGORY_NAME = "main";
 

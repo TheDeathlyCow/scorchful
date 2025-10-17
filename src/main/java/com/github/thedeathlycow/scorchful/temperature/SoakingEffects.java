@@ -4,7 +4,7 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.components.RehydrationComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.scorchful.config.ThirstConfig;
+import com.github.thedeathlycow.scorchful.config.section.ThirstConfig;
 import com.github.thedeathlycow.scorchful.mixin.accessor.EntityAccessor;
 import com.github.thedeathlycow.scorchful.registry.SEntityAttributes;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;

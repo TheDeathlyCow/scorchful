@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.datagen.generator;
 
 import com.github.thedeathlycow.scorchful.ScorchfulModMenu;
 import com.github.thedeathlycow.scorchful.config.*;
+import com.github.thedeathlycow.scorchful.config.section.*;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;

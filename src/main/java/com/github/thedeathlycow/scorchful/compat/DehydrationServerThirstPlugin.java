@@ -1,8 +1,7 @@
 package com.github.thedeathlycow.scorchful.compat;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
-import com.github.thedeathlycow.scorchful.config.DehydrationConfig;
+import com.github.thedeathlycow.scorchful.config.section.DehydrationConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import net.dehydration.access.ThirstManagerAccess;
 import net.dehydration.thirst.ThirstManager;

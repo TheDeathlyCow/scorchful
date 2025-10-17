@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful;
 
 import com.github.thedeathlycow.scorchful.config.*;
+import com.github.thedeathlycow.scorchful.config.section.*;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import dev.isxander.yacl3.api.ButtonOption;

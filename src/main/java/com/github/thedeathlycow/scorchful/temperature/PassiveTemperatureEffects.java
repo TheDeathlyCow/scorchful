@@ -1,8 +1,8 @@
 package com.github.thedeathlycow.scorchful.temperature;
 
-import com.github.thedeathlycow.scorchful.config.HeatingConfig;
+import com.github.thedeathlycow.scorchful.config.section.HeatingConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.scorchful.config.ThirstConfig;
+import com.github.thedeathlycow.scorchful.config.section.ThirstConfig;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.github.thedeathlycow.thermoo.api.environment.component.EnvironmentComponentTypes;
 import com.github.thedeathlycow.thermoo.api.environment.component.RelativeHumidityComponent;
