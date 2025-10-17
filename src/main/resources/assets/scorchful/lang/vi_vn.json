@@ -1,5 +1,5 @@
 {
-  "item_group.scorchful": "Scorchful",
+  "scorchful.title": "Scorchful",
 
   "item.scorchful.water_skin": "Bình Nước Da",
   "item.scorchful.water_skin.empty": "Bình Nước Da Rỗng",
@@ -61,12 +61,12 @@
   "death.attack.scorchful.heat.player": "%1$s không thể chịu nổi cái nóng từ %2$s",
 
   
-  "advancement.scorchful.adventure.drink_cactus_juice.title": "Nó Làm Dịu Cơn Khát!",
-  "advancement.scorchful.adventure.drink_cactus_juice.description": "Uống một bình nước ép xương rồng",
+  "advancements.scorchful.adventure.drink_cactus_juice.title": "Nó Làm Dịu Cơn Khát!",
+  "advancements.scorchful.adventure.drink_cactus_juice.desc": "Uống một bình nước ép xương rồng",
   "advancements.scorchful.husbandry.obtain_turtle_armor.title": "Che Chắn",
-  "advancements.scorchful.husbandry.obtain_turtle_armor.description": "Nhận được một mảnh giáp rùa",
-  "advancements.scorchful.adventure.shoot_paranoia_arrow.title": "Kẻ Sát Nhân Tâm Trí",
-  "advancements.scorchful.adventure.shoot_paranoia_arrow.description": "Bị đánh trúng bởi Sợ Hãi",
+  "advancements.scorchful.husbandry.obtain_turtle_armor.desc": "Nhận được một mảnh giáp rùa",
+  "advancements.scorchful.husbandry.shoot_paranoia_arrow.title": "Kẻ Sát Nhân Tâm Trí",
+  "advancements.scorchful.husbandry.shoot_paranoia_arrow.desc": "Bị đánh trúng bởi Sợ Hãi",
 
   "subtitles.scorchful.item.water_skin.fill": "Đổ đầy bình nước da",
   "subtitles.scorchful.temperature_effect.heartbeat": "Tim đập",

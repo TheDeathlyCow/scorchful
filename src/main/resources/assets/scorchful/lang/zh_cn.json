@@ -1,5 +1,5 @@
 {
-    "item_group.scorchful": "焦土",
+    "scorchful.title": "焦土",
     
     "item.scorchful.water_skin": "革制水袋",
     "item.scorchful.water_skin.empty": "空革制水袋",
@@ -40,10 +40,10 @@
     "death.attack.scorchful.heat.player": "%1$s因%2$s中暑",
     
     
-    "advancement.scorchful.adventure.drink_cactus_juice.title": "解渴贵族",
-    "advancement.scorchful.adventure.drink_cactus_juice.description": "喝一杯仙人掌汁",
+    "advancements.scorchful.adventure.drink_cactus_juice.title": "解渴贵族",
+    "advancements.scorchful.adventure.drink_cactus_juice.desc": "喝一杯仙人掌汁",
     "advancements.scorchful.husbandry.obtain_turtle_armor.title": "卧倒并掩护",
-    "advancements.scorchful.husbandry.obtain_turtle_armor.description": "拥有一件海龟盔甲",
+    "advancements.scorchful.husbandry.obtain_turtle_armor.desc": "拥有一件海龟盔甲",
     
     "subtitles.scorchful.item.water_skin.fill": "水壶",
     "subtitles.scorchful.temperature_effect.heartbeat": "心跳",

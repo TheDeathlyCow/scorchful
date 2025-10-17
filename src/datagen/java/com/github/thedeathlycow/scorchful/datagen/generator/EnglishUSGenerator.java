@@ -132,7 +132,7 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
     }
 
     private String enchantmentDesc(RegistryKey<Enchantment> key) {
-        return Util.createTranslationKey("enchantment.desc", key.getValue());
+        return Util.createTranslationKey("enchantment", key.getValue()) + ".desc";
     }
 
     private String statusEffect(RegistryEntry<StatusEffect> effect) {
