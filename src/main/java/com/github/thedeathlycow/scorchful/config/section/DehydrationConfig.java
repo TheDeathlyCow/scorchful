@@ -16,7 +16,7 @@ import java.nio.file.Path;
  * Config for changes to thirst system when using Dehydration
  */
 public class DehydrationConfig {
-    static final Path PATH = Scorchful.getConfigDir().resolve("compat").resolve("dehydration.json5");
+    public static final Path PATH = Scorchful.getConfigDir().resolve("compat").resolve("dehydration.json5");
 
     public static final ConfigClassHandler<DehydrationConfig> HANDLER = ConfigClassHandler.createBuilder(DehydrationConfig.class)
             .id(Scorchful.id("compat/dehydration"))

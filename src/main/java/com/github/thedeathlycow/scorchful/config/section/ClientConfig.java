@@ -14,7 +14,7 @@ import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import java.nio.file.Path;
 
 public class ClientConfig {
-    static final Path PATH = Scorchful.getConfigDir().resolve("client.json5");
+    public static final Path PATH = Scorchful.getConfigDir().resolve("client.json5");
 
     public static final ConfigClassHandler<ClientConfig> HANDLER = ConfigClassHandler.createBuilder(ClientConfig.class)
             .id(Scorchful.id("client"))

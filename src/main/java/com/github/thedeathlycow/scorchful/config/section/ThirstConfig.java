@@ -16,7 +16,7 @@ import java.nio.file.Path;
 
 @Config(name = Scorchful.MODID + ".thirst_config")
 public class ThirstConfig implements ConfigData {
-    static final Path PATH = Scorchful.getConfigDir().resolve("thirst.json5");
+    public static final Path PATH = Scorchful.getConfigDir().resolve("thirst.json5");
 
     public static final ConfigClassHandler<ThirstConfig> HANDLER = ConfigClassHandler.createBuilder(ThirstConfig.class)
             .id(Scorchful.id("thirst"))

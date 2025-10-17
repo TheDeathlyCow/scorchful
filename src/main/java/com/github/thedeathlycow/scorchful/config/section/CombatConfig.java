@@ -12,7 +12,7 @@ import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import java.nio.file.Path;
 
 public class CombatConfig {
-    static final Path PATH = Scorchful.getConfigDir().resolve("combat.json5");
+    public static final Path PATH = Scorchful.getConfigDir().resolve("combat.json5");
 
     public static final ConfigClassHandler<CombatConfig> HANDLER = ConfigClassHandler.createBuilder(CombatConfig.class)
             .id(Scorchful.id("combat"))

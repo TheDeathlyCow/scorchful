@@ -14,7 +14,7 @@ import java.nio.file.Path;
 
 @Config(name = Scorchful.MODID + ".weather_config")
 public class WeatherConfig implements ConfigData {
-    static final Path PATH = Scorchful.getConfigDir().resolve("weather.json5");
+    public static final Path PATH = Scorchful.getConfigDir().resolve("weather.json5");
 
     public static final ConfigClassHandler<WeatherConfig> HANDLER = ConfigClassHandler.createBuilder(WeatherConfig.class)
             .id(Scorchful.id("weather"))
