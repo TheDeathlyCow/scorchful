@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.client;
 
+import com.github.thedeathlycow.scorchful.config.ScorchfulClientConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
@@ -22,7 +23,7 @@ public final class SoakedEffects {
         if (world.isClient()) { // only show particles on client to save bandwidth
 
             // config to disable
-            if (!ScorchfulConfig.getClientConfig().enableWetDripParticles()) {
+            if (!ScorchfulClientConfig.getDisplaySettings().enableWetDripParticles()) {
                 return;
             }
 

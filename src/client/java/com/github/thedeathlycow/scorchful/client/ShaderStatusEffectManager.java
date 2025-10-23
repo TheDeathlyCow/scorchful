@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.client;
 
-import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.scorchful.config.section.ClientConfig;
+import com.github.thedeathlycow.scorchful.config.ScorchfulClientConfig;
+import com.github.thedeathlycow.scorchful.config.section.AccessibilitySettings;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.PostEffectProcessor;
@@ -23,7 +23,7 @@ public final class ShaderStatusEffectManager implements ShaderEffectRenderCallba
 
     private final RegistryEntry<StatusEffect> potionEffect;
 
-    private final Predicate<ClientConfig> enabledPredicate;
+    private final Predicate<AccessibilitySettings> enabledPredicate;
 
     private boolean enabled = false;
 
@@ -31,7 +31,7 @@ public final class ShaderStatusEffectManager implements ShaderEffectRenderCallba
 //            ManagedShaderEffect managedShaderEffect,
             Identifier shaderID,
             RegistryEntry<StatusEffect> potionEffect,
-            Predicate<ClientConfig> enabledPredicate
+            Predicate<AccessibilitySettings> enabledPredicate
     ) {
 //        this.managedShaderEffect = managedShaderEffect;
         this.shaderID = shaderID;
@@ -40,7 +40,7 @@ public final class ShaderStatusEffectManager implements ShaderEffectRenderCallba
     }
 
     public void onEffectAdded(RegistryEntry<StatusEffect> addedEffect) {
-        if (addedEffect == potionEffect && this.enabledPredicate.test(ScorchfulConfig.getClientConfig())) {
+        if (addedEffect == potionEffect && this.enabledPredicate.test(ScorchfulClientConfig.getAccessibilitySettings())) {
             enabled = true;
         }
     }

@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.config;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.config.schema.SchemaV2;
 import com.github.thedeathlycow.scorchful.config.section.*;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -37,7 +38,7 @@ class Updater {
         JsonObject thirstConfig = root.remove("thirstConfig").getAsJsonObject();
         JsonObject dehydrationConfig = root.getAsJsonObject("integrationConfig").remove("dehydrationConfig").getAsJsonObject();
 
-        boolean writeSchemaFile = copyOldConfigObject(clientConfig, ClientConfig.PATH);
+        boolean writeSchemaFile = copyOldConfigObject(clientConfig, SchemaV2.getOldClientConfigPath());
         writeSchemaFile &= copyOldConfigObject(combatConfig, CombatConfig.PATH);
         writeSchemaFile &= copyOldConfigObject(heatingConfig, HeatingConfig.PATH);
         writeSchemaFile &= copyOldConfigObject(weatherConfig, WeatherConfig.PATH);

@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful;
 
 import com.github.thedeathlycow.scorchful.client.ShaderStatusEffectManagers;
+import com.github.thedeathlycow.scorchful.config.ScorchfulClientConfig;
 import com.github.thedeathlycow.scorchful.hud.BurningHeartsOverlay;
 import com.github.thedeathlycow.scorchful.hud.MountHealthOverlay;
 import com.github.thedeathlycow.scorchful.hud.SoakingUnderlay;
@@ -23,6 +24,7 @@ public class ScorchfulClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        ScorchfulClientConfig.initialize();
         SEntityModelLayers.registerAll();
         SFeatureRenderers.registerAll();
         SCutouts.registerCutouts();
