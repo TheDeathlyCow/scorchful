@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.config;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.config.schema.ConfigUpdater;
 import com.github.thedeathlycow.scorchful.config.schema.SchemaV2;
 import com.github.thedeathlycow.scorchful.config.section.*;
 import com.google.gson.JsonObject;
@@ -16,7 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
 class Updater {
-    private static final Int2ObjectMap<Runnable> SCHEMAS = Util.make(
+    private static final Int2ObjectMap<ConfigUpdater> SCHEMAS = Util.make(
             new Int2ObjectArrayMap<>(),
             map -> {
                 map.put(2, SchemaV2::run);
@@ -40,9 +41,14 @@ class Updater {
         final int currentSchemaVersion = SchemaConfig.HANDLER.instance().getSchemaVersion();
 
         for (int step = currentSchemaVersion; step < latestSchemaVersion; step++) {
-            Runnable updater = SCHEMAS.get(step);
+            ConfigUpdater updater = SCHEMAS.get(step);
             if (updater != null) {
-                updater.run();
+                try {
+                    updater.run();
+                } catch (IOException e) {
+                    Scorchful.LOGGER.warn("Unable to upgrade config file from schema version {} to {}, due to IO exception. Aborting upgrade.", step - 1, step, e);
+                    break;
+                }
             }
         }
     }
