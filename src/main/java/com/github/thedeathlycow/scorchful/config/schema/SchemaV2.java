@@ -3,6 +3,8 @@ package com.github.thedeathlycow.scorchful.config.schema;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,6 +18,13 @@ public class SchemaV2 {
 
     public static void run() throws IOException {
         Path oldPath = getOldClientConfigPath();
+
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) {
+            Scorchful.LOGGER.warn("Removing client config from dedicated server, this did nothing anyway.");
+            Files.delete(oldPath);
+            return;
+        }
+
         String content = Files.readString(oldPath);
 
         JsonObject oldClientConfig = JsonParser.parseString(content).getAsJsonObject();
