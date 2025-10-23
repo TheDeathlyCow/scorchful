@@ -8,4 +8,8 @@ public class SchemaV2 {
     public static Path getOldClientConfigPath() {
         return Scorchful.getConfigDir().resolve("client.json5");
     }
+
+    public static void run() {
+
+    }
 }

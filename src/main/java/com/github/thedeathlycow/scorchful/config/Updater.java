@@ -5,7 +5,10 @@ import com.github.thedeathlycow.scorchful.config.schema.SchemaV2;
 import com.github.thedeathlycow.scorchful.config.section.*;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.util.Util;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,6 +16,13 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
 class Updater {
+    private static final Int2ObjectMap<Runnable> SCHEMAS = Util.make(
+            new Int2ObjectArrayMap<>(),
+            map -> {
+                map.put(2, SchemaV2::run);
+            }
+    );
+
     static void run() {
         Path clothConfigPath = FabricLoader.getInstance().getConfigDir().resolve("scorchful.json");
         if (Files.exists(clothConfigPath)) {
@@ -21,6 +31,18 @@ class Updater {
                 Scorchful.LOGGER.info("Scorchful config files successfully updated to YACL format");
             } catch (Exception e) {
                 Scorchful.LOGGER.error("Unable to update config file to YACL", e);
+            }
+        }
+
+        SchemaConfig.HANDLER.load();
+
+        final int latestSchemaVersion = SchemaConfig.CONFIG_VERSION;
+        final int currentSchemaVersion = SchemaConfig.HANDLER.instance().getSchemaVersion();
+
+        for (int step = currentSchemaVersion; step < latestSchemaVersion; step++) {
+            Runnable updater = SCHEMAS.get(step);
+            if (updater != null) {
+                updater.run();
             }
         }
     }
