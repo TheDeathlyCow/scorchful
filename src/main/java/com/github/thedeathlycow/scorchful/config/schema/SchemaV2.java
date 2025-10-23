@@ -36,13 +36,17 @@ public class SchemaV2 {
         JsonCopyHelper.copyBooleanProperty(oldClientConfig, accessibility, "enableSoundTemperatureEffects");
         JsonCopyHelper.copyBooleanProperty(oldClientConfig, accessibility, "enableHeatStrokePostProcessing");
         JsonCopyHelper.copyBooleanProperty(oldClientConfig, accessibility, "enableFearPostProcessing");
-        JsonCopyHelper.copyBooleanProperty(oldClientConfig, accessibility, "sunHatShadeOpacity");
+        JsonCopyHelper.copyBooleanProperty(oldClientConfig, accessibility, "doSunHatShading");
+        JsonCopyHelper.copyFloatProperty(oldClientConfig, accessibility, "sunHatShadeOpacity");
 
         // save new files and remove old files
-        Path path = Scorchful.getConfigDir().resolve("client/accessibility.json5");
+        Path basePath = Scorchful.getConfigDir().resolve("client");
+        Files.createDirectories(basePath);
+
+        Path path = basePath.resolve("accessibility.json5");
         Files.writeString(path, accessibility.toString(), StandardOpenOption.CREATE);
 
-        path = Scorchful.getConfigDir().resolve("client/display.json5");
+        path = basePath.resolve("display.json5");
         Files.writeString(path, display.toString(), StandardOpenOption.CREATE);
 
         Files.delete(oldPath);

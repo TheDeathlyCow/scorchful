@@ -36,12 +36,22 @@ class Updater {
         }
 
         SchemaConfig.HANDLER.load();
+        SchemaConfig schemaConfig = SchemaConfig.HANDLER.instance();
 
         final int latestSchemaVersion = SchemaConfig.CONFIG_VERSION;
-        final int currentSchemaVersion = SchemaConfig.HANDLER.instance().getSchemaVersion();
+        final int currentSchemaVersion = schemaConfig.getSchemaVersion();
 
-        for (int step = currentSchemaVersion; step < latestSchemaVersion; step++) {
+        if (currentSchemaVersion < latestSchemaVersion) {
+            Scorchful.LOGGER.info("Scorchful config is out of date! Beginning automatic upgrade...");
+        } else {
+            Scorchful.LOGGER.info("Scorchful config is up tp date!");
+            SchemaConfig.HANDLER.save();
+            return;
+        }
+
+        for (int step = currentSchemaVersion + 1; step <= latestSchemaVersion; step++) {
             ConfigUpdater updater = SCHEMAS.get(step);
+
             if (updater != null) {
                 try {
                     updater.run();
@@ -50,7 +60,12 @@ class Updater {
                     break;
                 }
             }
+
+            schemaConfig.setSchemaVersion(step);
         }
+
+        SchemaConfig.HANDLER.save();
+        Scorchful.LOGGER.info("Scorchful config successfully updated from schema version {} to {}.", currentSchemaVersion, latestSchemaVersion);
     }
 
     private static void updateToYACL(Path oldConfigPath) throws IOException {
