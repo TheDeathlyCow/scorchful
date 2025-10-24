@@ -41,11 +41,26 @@ class Updater {
         final int latestSchemaVersion = SchemaConfig.CONFIG_VERSION;
         final int currentSchemaVersion = schemaConfig.getSchemaVersion();
 
+        boolean continueUpgrade;
+
         if (currentSchemaVersion < latestSchemaVersion) {
-            Scorchful.LOGGER.info("Scorchful config is out of date! Beginning automatic upgrade...");
+            Scorchful.LOGGER.info("Scorchful config is out of date! Config files will be automatically upgraded.");
+            continueUpgrade = true;
+        } else if (currentSchemaVersion > latestSchemaVersion) {
+            Scorchful.LOGGER.error(
+                    "Current scorchful config schema version {} is greater than the latest supported by " +
+                            "this version ({}). This may result in unexpected changes to the config files, are you " +
+                            "sure you're using the right mod version?",
+                    currentSchemaVersion,
+                    latestSchemaVersion
+            );
+            continueUpgrade = false;
         } else {
             Scorchful.LOGGER.info("Scorchful config is up tp date!");
-            SchemaConfig.HANDLER.save();
+            continueUpgrade = false;
+        }
+
+        if (!continueUpgrade) {
             return;
         }
 
@@ -56,7 +71,12 @@ class Updater {
                 try {
                     updater.run();
                 } catch (IOException e) {
-                    Scorchful.LOGGER.warn("Unable to upgrade config file from schema version {} to {}, due to IO exception. Aborting upgrade.", step - 1, step, e);
+                    Scorchful.LOGGER.warn(
+                            "Unable to upgrade config file from schema version {} to {}, due to IO error. Aborting upgrade.",
+                            step - 1,
+                            step,
+                            e
+                    );
                     break;
                 }
             }
@@ -65,7 +85,11 @@ class Updater {
         }
 
         SchemaConfig.HANDLER.save();
-        Scorchful.LOGGER.info("Scorchful config successfully updated from schema version {} to {}.", currentSchemaVersion, latestSchemaVersion);
+        Scorchful.LOGGER.info(
+                "Scorchful config successfully updated from schema version {} to {}.",
+                currentSchemaVersion,
+                latestSchemaVersion
+        );
     }
 
     private static void updateToYACL(Path oldConfigPath) throws IOException {
@@ -79,7 +103,9 @@ class Updater {
         JsonObject combatConfig = root.remove("combatConfig").getAsJsonObject();
         JsonObject weatherConfig = root.remove("weatherConfig").getAsJsonObject();
         JsonObject thirstConfig = root.remove("thirstConfig").getAsJsonObject();
-        JsonObject dehydrationConfig = root.getAsJsonObject("integrationConfig").remove("dehydrationConfig").getAsJsonObject();
+        JsonObject dehydrationConfig = root.getAsJsonObject("integrationConfig")
+                .remove("dehydrationConfig")
+                .getAsJsonObject();
 
         boolean writeSchemaFile = copyOldConfigObject(clientConfig, SchemaV2.getOldClientConfigPath());
         writeSchemaFile &= copyOldConfigObject(combatConfig, CombatConfig.PATH);
