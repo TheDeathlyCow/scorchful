@@ -132,8 +132,8 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         builder.add(ScorchfulModMenu.COMBAT_CATEGORY, "Combat Settings");
         builder.add(ScorchfulModMenu.COMBAT_DESC, "Specific settings for combat");
 
-        builder.add(ScorchfulModMenu.HEATING_CATEGORY, "Heat Settings");
-        builder.add(ScorchfulModMenu.HEATING_DESC, "Specific settings for heat and temperature");
+        builder.add(ScorchfulModMenu.ITEM_CATEGORY, "Heat Settings");
+        builder.add(ScorchfulModMenu.ITEM_DESC, "Specific settings for heat and temperature");
 
         builder.add(ScorchfulModMenu.THIRST_CATEGORY, "Thirst Settings");
         builder.add(ScorchfulModMenu.THIRST_DESC, "Specific settings for Scorchful's native thirst system");
@@ -148,7 +148,7 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         generateConfigOptionTranslations(DisplaySettings.HANDLER, builder);
         generateConfigOptionTranslations(TemperatureConfig.HANDLER, builder);
         generateConfigOptionTranslations(CombatConfig.HANDLER, builder);
-        generateConfigOptionTranslations(HeatingConfig.HANDLER, builder);
+        generateConfigOptionTranslations(ItemConfig.HANDLER, builder);
         generateConfigOptionTranslations(ThirstConfig.HANDLER, builder);
         generateConfigOptionTranslations(WeatherConfig.HANDLER, builder);
         generateConfigOptionTranslations(DehydrationConfig.HANDLER, builder);

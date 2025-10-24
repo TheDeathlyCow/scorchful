@@ -112,7 +112,7 @@ class Updater {
 
         boolean writeSchemaFile = copyOldConfigObject(clientConfig, SchemaV2.getOldClientConfigPath());
         writeSchemaFile &= copyOldConfigObject(combatConfig, CombatConfig.PATH);
-        writeSchemaFile &= copyOldConfigObject(heatingConfig, HeatingConfig.PATH);
+        writeSchemaFile &= copyOldConfigObject(heatingConfig, SchemaV3.getHeatingConfigPath());
         writeSchemaFile &= copyOldConfigObject(weatherConfig, WeatherConfig.PATH);
         writeSchemaFile &= copyOldConfigObject(thirstConfig, ThirstConfig.PATH);
         writeSchemaFile &= copyOldConfigObject(dehydrationConfig, DehydrationConfig.PATH);

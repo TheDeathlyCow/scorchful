@@ -2,7 +2,7 @@ package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.scorchful.config.section.HeatingConfig;
+import com.github.thedeathlycow.scorchful.config.section.ItemConfig;
 import com.github.thedeathlycow.scorchful.registry.SEntityAttributes;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
@@ -24,7 +24,7 @@ public class TurtleArmorEffects {
             return;
         }
 
-        HeatingConfig config = ScorchfulConfig.getHeatingConfig();
+        ItemConfig config = ScorchfulConfig.getItemConfig();
         if (!config.isTurtleArmorEffectsEnabled()) {
             return;
         }
