@@ -132,6 +132,10 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         builder.add(ScorchfulModMenu.COMBAT_CATEGORY, "Combat Settings");
         builder.add(ScorchfulModMenu.COMBAT_DESC, "Specific settings for combat");
 
+        builder.add(Translate.categoryKey(ItemConfig.HANDLER, ItemConfig.TOOLS_AND_ARMOR_CATEGORY_NAME), "Tool & Armor Settings");
+        builder.add(Translate.categoryKey(ItemConfig.HANDLER, ItemConfig.CONSUMABLE_CATEGORY_NAME), "Consumable Settings");
+        builder.add(Translate.categoryKey(ItemConfig.HANDLER, ItemConfig.MISC_CATEGORY_NAME), "Miscellaneous Settings");
+
         builder.add(ScorchfulModMenu.ITEM_CATEGORY, "Item Settings");
         builder.add(ScorchfulModMenu.ITEM_DESC, "Specific settings for items");
 
