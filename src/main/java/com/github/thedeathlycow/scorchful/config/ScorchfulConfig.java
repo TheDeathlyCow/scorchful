@@ -5,10 +5,6 @@ import com.github.thedeathlycow.scorchful.config.section.*;
 public final class ScorchfulConfig {
     public static final String MAIN_CATEGORY_NAME = "main";
 
-    public static ClientConfig getClientConfig() {
-        return ClientConfig.HANDLER.instance();
-    }
-
     public static HeatingConfig getHeatingConfig() {
         return HeatingConfig.HANDLER.instance();
     }
@@ -31,12 +27,6 @@ public final class ScorchfulConfig {
 
     public static void initialize() {
         Updater.run();
-
-        SchemaConfig.HANDLER.load();
-        SchemaConfig.HANDLER.save();
-
-        ClientConfig.HANDLER.load();
-        ClientConfig.HANDLER.save();
 
         CombatConfig.HANDLER.load();
         CombatConfig.HANDLER.save();

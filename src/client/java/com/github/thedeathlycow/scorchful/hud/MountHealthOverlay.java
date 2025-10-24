@@ -1,6 +1,8 @@
 package com.github.thedeathlycow.scorchful.hud;
 
+import com.github.thedeathlycow.scorchful.config.ScorchfulClientConfig;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.scorchful.config.section.DisplaySettings;
 import com.github.thedeathlycow.thermoo.api.client.HeartBarContext;
 import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
 import net.minecraft.client.gl.RenderPipelines;
@@ -19,7 +21,8 @@ public final class MountHealthOverlay implements StatusBarOverlayRenderEvents.Re
             PlayerEntity player, LivingEntity mount,
             HeartBarContext heartBarContext
     ) {
-        if (!ScorchfulConfig.getClientConfig().doBurningHeartOverlay() || mount.thermoo$isCold()) {
+        DisplaySettings settings = ScorchfulClientConfig.getDisplaySettings();
+        if (!settings.enableBurningHeartOverlay() || mount.thermoo$isCold()) {
             return;
         }
 

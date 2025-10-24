@@ -1,6 +1,5 @@
 package com.github.thedeathlycow.scorchful.config.section;
 
-
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.Translate;
@@ -13,11 +12,11 @@ import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 
 import java.nio.file.Path;
 
-public class ClientConfig {
-    public static final Path PATH = Scorchful.getConfigDir().resolve("client.json5");
+public class AccessibilitySettings {
+    public static final Path PATH = Scorchful.getConfigDir().resolve("client/accessibility.json5");
 
-    public static final ConfigClassHandler<ClientConfig> HANDLER = ConfigClassHandler.createBuilder(ClientConfig.class)
-            .id(Scorchful.id("client"))
+    public static final ConfigClassHandler<AccessibilitySettings> HANDLER = ConfigClassHandler.createBuilder(AccessibilitySettings.class)
+            .id(Scorchful.id("client/accessibility"))
             .serializer(
                     config -> GsonConfigSerializerBuilder.create(config)
                             .setPath(PATH)
@@ -29,34 +28,10 @@ public class ClientConfig {
     private static final String CATEGORY = ScorchfulConfig.MAIN_CATEGORY_NAME;
 
     @AutoGen(category = CATEGORY)
-    @Translate.Name("Do burning heart overlay")
-    @SerialEntry(comment = "Toggle the burning heart temperature display on the health bar")
-    @TickBox
-    boolean doBurningHeartOverlay = true;
-
-    @AutoGen(category = CATEGORY)
-    @Translate.Name("Do soaking overlay")
-    @TickBox
-    @SerialEntry(comment = "Toggle the soaking display on the health bar")
-    boolean doSoakingOverlay = true;
-
-    @AutoGen(category = CATEGORY)
-    @Translate.Name("Do Sun Hat shading")
-    @TickBox
-    @SerialEntry(comment = "Toggle the darkening effect of the Sun Hat")
-    boolean doSunHatShading = true;
-
-    @AutoGen(category = CATEGORY)
     @Translate.Name("Enable sound temperature effects")
     @TickBox
     @SerialEntry(comment = "Toggle the sound effects of temperature, particularly the heart beat")
     boolean enableSoundTemperatureEffects = true;
-
-    @AutoGen(category = CATEGORY)
-    @Translate.Name("Enable wet drip particles")
-    @TickBox
-    @SerialEntry(comment = "Toggle the dripping particles when wet. This setting overrides Frostiful if installed.")
-    boolean enableWetDripParticles = true;
 
     @AutoGen(category = CATEGORY)
     @Translate.Name("Enable Heat Stroke post processing")
@@ -71,21 +46,19 @@ public class ClientConfig {
     boolean enableFearPostProcessing = true;
 
     @AutoGen(category = CATEGORY)
-    @Translate.Name("Sun Hat shade opacity")
-    @FloatSlider(min = 0f, max = 1f, step = 0.05f)
-    @SerialEntry(comment = "Controls how dark the sun hat shading is.")
-    float sunHatShadeOpacity = 0.2f;
+    @Translate.Name("Enable Sun Hat shading")
+    @TickBox
+    @SerialEntry(comment = "Toggle the darkening effect of the Sun Hat")
+    boolean enableSunHatShading = true;
 
-    public float getSunHatShadeOpacity() {
-        return doSunHatShading ? sunHatShadeOpacity : 0f;
-    }
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Sun Hat shade darkness")
+    @FloatSlider(min = 0f, max = 1f, step = 0.05f)
+    @SerialEntry(comment = "Controls the strength of how dark the sun hat shading is.")
+    float sunHatShadeOpacity = 0.2f;
 
     public boolean enableSoundTemperatureEffects() {
         return enableSoundTemperatureEffects;
-    }
-
-    public boolean enableWetDripParticles() {
-        return enableWetDripParticles;
     }
 
     public boolean enableHeatStrokePostProcessing() {
@@ -96,11 +69,7 @@ public class ClientConfig {
         return enableFearPostProcessing;
     }
 
-    public boolean doBurningHeartOverlay() {
-        return doBurningHeartOverlay;
-    }
-
-    public boolean doSoakingOverlay() {
-        return doSoakingOverlay;
+    public float getSunHatShadeOpacity() {
+        return enableSunHatShading ? sunHatShadeOpacity : 0f;
     }
 }

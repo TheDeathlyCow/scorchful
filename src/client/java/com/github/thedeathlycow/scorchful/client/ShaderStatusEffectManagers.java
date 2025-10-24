@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.client;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.config.section.ClientConfig;
+import com.github.thedeathlycow.scorchful.config.section.AccessibilitySettings;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -24,13 +24,13 @@ public final class ShaderStatusEffectManagers {
     private static final ShaderStatusEffectManager HEAT_STROKE = createAndTrack(
             Scorchful.id("heat_stroke"),
             SStatusEffects.HEAT_STROKE,
-            ClientConfig::enableHeatStrokePostProcessing
+            AccessibilitySettings::enableHeatStrokePostProcessing
     );
 
     private static final ShaderStatusEffectManager FEAR = createAndTrack(
             Scorchful.id("fear"),
             SStatusEffects.FEAR,
-            ClientConfig::enableFearPostProcessing
+            AccessibilitySettings::enableFearPostProcessing
     );
 
     public static void initialize() {
@@ -67,7 +67,7 @@ public final class ShaderStatusEffectManagers {
     public static ShaderStatusEffectManager createAndTrack(
             Identifier shaderID,
             RegistryEntry<StatusEffect> potionEffect,
-            Predicate<ClientConfig> enabledPredicate
+            Predicate<AccessibilitySettings> enabledPredicate
     ) {
 //        ManagedShaderEffect managedShaderEffect = ShaderEffectManager.getInstance().manage(shaderID);
         var statusEffectShader = new ShaderStatusEffectManager(

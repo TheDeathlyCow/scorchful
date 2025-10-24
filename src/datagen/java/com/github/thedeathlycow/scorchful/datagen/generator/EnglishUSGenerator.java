@@ -116,8 +116,11 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
 
         // Config values
         builder.add(ScorchfulModMenu.TITLE, "Scorchful Config");
-        builder.add(ScorchfulModMenu.CLIENT_CATEGORY, "Client Settings");
-        builder.add(ScorchfulModMenu.CLIENT_DESC, "Display settings for Scorchful");
+        builder.add(ScorchfulModMenu.ACCESSIBILITY_CATEGORY, "Accessibility Settings");
+        builder.add(ScorchfulModMenu.ACCESSIBILITY_DESC , "Accessibility settings for Scorchful");
+
+        builder.add(ScorchfulModMenu.DISPLAY_CATEGORY, "Display Settings");
+        builder.add(ScorchfulModMenu.DISPLAY_DESC , "Display settings for Scorchful");
 
         builder.add(ScorchfulModMenu.COMBAT_CATEGORY, "Combat Settings");
         builder.add(ScorchfulModMenu.COMBAT_DESC, "Specific settings for combat");
@@ -134,7 +137,8 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         builder.add(ScorchfulModMenu.DEHYDRATION_CATEGORY, "Dehydration Compatibility Settings");
         builder.add(ScorchfulModMenu.DEHYDRATION_DESC, "Specific settings for Scorchful's builtin compatibility with the Dehydration mod. This is only relevant if you use Dehydration.");
 
-        generateConfigOptionTranslations(ClientConfig.HANDLER, builder);
+        generateConfigOptionTranslations(AccessibilitySettings.HANDLER, builder);
+        generateConfigOptionTranslations(DisplaySettings.HANDLER, builder);
         generateConfigOptionTranslations(CombatConfig.HANDLER, builder);
         generateConfigOptionTranslations(HeatingConfig.HANDLER, builder);
         generateConfigOptionTranslations(ThirstConfig.HANDLER, builder);
