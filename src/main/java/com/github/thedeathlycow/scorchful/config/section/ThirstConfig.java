@@ -105,10 +105,6 @@ public class ThirstConfig {
     @FloatSlider(min = 0f, max = 1f, step = 0.05f)
     float maxRehydrationEfficiency = 0.75f;
 
-    public int getTemperatureFromWetness() {
-        return temperatureFromWetness;
-    }
-
     public int getWaterFromRefreshingFood() {
         return waterFromRefreshingFood;
     }
@@ -139,18 +135,6 @@ public class ThirstConfig {
 
     public int getOnFireDryDate() {
         return onFireDryDate;
-    }
-
-    public float getHumidBiomeSweatEfficiency() {
-        return humidBiomeSweatEfficiency;
-    }
-
-    public float getExtraHumidBiomeSweatEfficiency() {
-        return extraHumidBiomeSweatEfficiency;
-    }
-
-    public float getAridBiomeSweatEfficiency() {
-        return aridBiomeSweatEfficiency;
     }
 
     public float getMaxRehydrationEfficiency() {

@@ -31,8 +31,9 @@ public final class PassiveTemperatureEffects {
 
         int total = 0;
 
-        total += getIcyFloorTemperatureChange(context, ScorchfulConfig.getTemperatureConfig());
-        total += getTemperatureFromSweat(context, ScorchfulConfig.getThirstConfig());
+        TemperatureConfig config = ScorchfulConfig.getTemperatureConfig();
+        total += getIcyFloorTemperatureChange(context, config);
+        total += getTemperatureFromSweat(context, config);
 
         return total;
     }
@@ -48,7 +49,7 @@ public final class PassiveTemperatureEffects {
         return 0;
     }
 
-    private static int getTemperatureFromSweat(EnvironmentTickContext<? extends LivingEntity> context, ThirstConfig config) {
+    private static int getTemperatureFromSweat(EnvironmentTickContext<? extends LivingEntity> context, TemperatureConfig config) {
         LivingEntity entity = context.affected();
         if (entity.thermoo$isWet()) {
             int temperatureChange = config.getTemperatureFromWetness();
@@ -62,7 +63,7 @@ public final class PassiveTemperatureEffects {
         return 0;
     }
 
-    private static float getSweatEfficiency(EnvironmentTickContext<? extends LivingEntity> context, ThirstConfig config) {
+    private static float getSweatEfficiency(EnvironmentTickContext<? extends LivingEntity> context, TemperatureConfig config) {
         double relativeHumidity = context.components().getOrDefault(EnvironmentComponentTypes.RELATIVE_HUMIDITY, RelativeHumidityComponent.DEFAULT);
         if (relativeHumidity <= LOW_HUMIDITY) {
             return config.getAridBiomeSweatEfficiency();
