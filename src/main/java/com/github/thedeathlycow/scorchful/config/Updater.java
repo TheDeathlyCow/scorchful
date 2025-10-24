@@ -3,26 +3,27 @@ package com.github.thedeathlycow.scorchful.config;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.schema.ConfigUpdater;
 import com.github.thedeathlycow.scorchful.config.schema.SchemaV2;
+import com.github.thedeathlycow.scorchful.config.schema.SchemaV3;
 import com.github.thedeathlycow.scorchful.config.section.*;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.util.Util;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.function.Supplier;
 
 class Updater {
-    private static final Int2ObjectMap<ConfigUpdater> SCHEMAS = Util.make(
-            new Int2ObjectArrayMap<>(),
-            map -> {
-                map.put(2, SchemaV2::run);
-            }
-    );
+    private static final Supplier<Int2ObjectMap<ConfigUpdater>> SCHEMAS = () -> {
+        Int2ObjectMap<ConfigUpdater> map = new Int2ObjectArrayMap<>();
+        map.put(2, SchemaV2::run);
+        map.put(3, SchemaV3::run);
+        return map;
+    };
 
     static void run() {
         Path clothConfigPath = FabricLoader.getInstance().getConfigDir().resolve("scorchful.json");
@@ -64,8 +65,10 @@ class Updater {
             return;
         }
 
+        Int2ObjectMap<ConfigUpdater> schemas = SCHEMAS.get();
+
         for (int step = currentSchemaVersion + 1; step <= latestSchemaVersion; step++) {
-            ConfigUpdater updater = SCHEMAS.get(step);
+            ConfigUpdater updater = schemas.get(step);
 
             if (updater != null) {
                 try {

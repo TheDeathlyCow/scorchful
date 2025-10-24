@@ -28,12 +28,6 @@ public class ThirstConfig {
     private static final String CATEGORY = ScorchfulConfig.MAIN_CATEGORY_NAME;
 
     @AutoGen(category = CATEGORY)
-    @Translate.Name("Temperature from Wetness")
-    @SerialEntry(comment = "How much temperature to remove from wet entities, each tick.")
-    @IntField
-    int temperatureFromWetness = -6;
-
-    @AutoGen(category = CATEGORY)
     @Translate.Name("Water from Refreshing food")
     @SerialEntry(comment = "The amount of body water provided by consuming Refreshing food and drink.")
     @IntField
@@ -80,24 +74,6 @@ public class ThirstConfig {
     @SerialEntry(comment = "How many wetness points to remove each tick when on fire.")
     @IntField
     int onFireDryDate = 3;
-
-    @AutoGen(category = CATEGORY)
-    @Translate.Name("Humid biome sweating efficiency")
-    @SerialEntry(comment = "A multiplier for temperatureFromWetness when the humidity is in the range [65%, 80%). This applies to rainy climates like Jungles, Swamps, etc.")
-    @FloatSlider(min = 0f, max = 1f, step = 0.05f)
-    float humidBiomeSweatEfficiency = 1f / 3f;
-
-    @AutoGen(category = CATEGORY)
-    @Translate.Name("Extra Humid biome sweating efficiency")
-    @SerialEntry(comment = "A multiplier for temperatureFromWetness when the humidity is at or above 80%. This applies to rainy climates like Jungles, Swamps during the Wet Season; to cave biomes; and to all non-arid biomes when it rains.")
-    @FloatSlider(min = 0f, max = 1f, step = 0.05f)
-    float extraHumidBiomeSweatEfficiency = 1f / 6f;
-
-    @AutoGen(category = CATEGORY)
-    @Translate.Name("Arid biome sweating efficiency")
-    @SerialEntry(comment = "A multiplier for temperatureFromWetness when the humidity is at or below 20%. This applies to arid climates like Deserts, Badlands, and Savannas, as well as The Nether.")
-    @FloatSlider(min = 0f, max = 1f, step = 0.05f)
-    float aridBiomeSweatEfficiency = 1.5f;
 
     @AutoGen(category = CATEGORY)
     @Translate.Name("Maximum Rehydration Enchantment efficiency")

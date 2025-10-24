@@ -61,7 +61,7 @@ public class TemperatureConfig {
     @Translate.Name("Enable environment heating")
     @SerialEntry(comment = "Global toggle on all heating from the environment.")
     @TickBox
-    boolean enablePassiveHeating = true;
+    boolean enableEnvironmentHeating = true;
 
     @AutoGen(category = ENVIRONMENT_CATEGORY_NAME)
     @Translate.Name("Environment heating tick interval")
@@ -111,8 +111,8 @@ public class TemperatureConfig {
     @FloatSlider(min = 0f, max = 2f, step = 0.05f, format = "%.2f")
     float aridBiomeSweatEfficiencyMultiplier = 1.0f;
 
-    public boolean isEnablePassiveHeating() {
-        return enablePassiveHeating && environmentTemperatureMultiplier > 0f;
+    public boolean isEnableEnvironmentHeating() {
+        return enableEnvironmentHeating && environmentTemperatureMultiplier > 0f;
     }
 
     public int getEnvironmentHeatingTickInterval() {

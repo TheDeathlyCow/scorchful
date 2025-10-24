@@ -2,7 +2,6 @@ package com.github.thedeathlycow.scorchful.temperature;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.scorchful.config.section.HeatingConfig;
 import com.github.thedeathlycow.scorchful.config.section.TemperatureConfig;
 import com.github.thedeathlycow.thermoo.api.environment.component.EnvironmentComponentTypes;
 import com.github.thedeathlycow.thermoo.api.environment.component.TemperatureRecordComponent;
@@ -50,7 +49,7 @@ public final class ServerPlayerEnvironmentTickListeners {
             return TriState.FALSE;
         }
 
-        if (!config.isEnablePassiveHeating()) {
+        if (!config.isEnableEnvironmentHeating()) {
             return TriState.FALSE;
         } else {
             return TriState.of(player.thermoo$getTemperatureScale() < config.getMaxEnvironmentHeatingScale());
