@@ -3,11 +3,10 @@ package com.github.thedeathlycow.scorchful.config.section;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.Translate;
+import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
-import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
-import dev.isxander.yacl3.config.v2.api.autogen.FloatField;
-import dev.isxander.yacl3.config.v2.api.autogen.TickBox;
+import dev.isxander.yacl3.config.v2.api.autogen.*;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 
 import java.nio.file.Path;
@@ -39,11 +38,41 @@ public class ItemConfig {
     @FloatField(min = 0f)
     float turtleArmorLungCapacityMultiplier = 1.0f;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Fire Protection heat resistance per level")
+    @SerialEntry(comment = "How much Heat Resistance the Fire Protection enchantment should give, per level of Fire Protection.")
+    @DoubleField
+    double fireProtectionHeatResistancePerLevel = 0.125;
+
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Impaling damage per level")
+    @SerialEntry(comment = "How much damage the Impaling enchantment should do to wet entities, per level of Impaling")
+    @FloatField(min = 0f)
+    float impalingDamagePerLevel = 2.5f;
+
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Fireball throwing type")
+    @SerialEntry(comment = "Controls what type of fireball is creating when throwing a fire charge. Small is just like firing from a Dispener and creates a fire on impact. Large is more like a Ghast and creates an explosion, and disabled disables this feature.")
+    @EnumCycler
+    FireChargeThrower.FireballFactory fireBallThrownType = FireChargeThrower.FireballFactory.SMALL;
+
     public boolean isTurtleArmorEffectsEnabled() {
         return enableTurtleArmorEffects;
     }
 
     public float getTurtleArmorLungCapacityMultiplier() {
         return turtleArmorLungCapacityMultiplier;
+    }
+
+    public FireChargeThrower.FireballFactory getFireBallThrownType() {
+        return fireBallThrownType;
+    }
+
+    public double getFireProtectionHeatResistancePerLevel() {
+        return fireProtectionHeatResistancePerLevel;
+    }
+
+    public float getImpalingDamagePerLevel() {
+        return impalingDamagePerLevel;
     }
 }

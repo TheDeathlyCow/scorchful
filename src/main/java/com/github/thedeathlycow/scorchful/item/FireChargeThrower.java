@@ -27,7 +27,7 @@ public class FireChargeThrower implements UseItemCallback {
             return ActionResult.PASS;
         }
 
-        FireballFactory throwingTypes = ScorchfulConfig.getCombatConfig().getFireBallThrownType();
+        FireballFactory throwingTypes = ScorchfulConfig.getItemConfig().getFireBallThrownType();
 
         ItemStack stack = player.getStackInHand(hand);
         if (!stack.isOf(Items.FIRE_CHARGE) || throwingTypes == FireballFactory.DISABLED) {
