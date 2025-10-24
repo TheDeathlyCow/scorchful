@@ -121,32 +121,8 @@ public class HeatingConfig {
     @IntField
     int temperatureFromCoolingFood = -1260;
 
-    public boolean doPassiveHeating() {
-        return doPassiveHeating;
-    }
-
-    public int getPassiveHeatingTickInterval() {
-        return passiveHeatingTickInterval;
-    }
-
-    public float getMaxPassiveHeatingScale() {
-        return maxPassiveHeatingScale;
-    }
-
     public boolean isTurtleArmorEffectsEnabled() {
         return enableTurtleArmorEffects;
-    }
-
-    public double getMinTemperatureForHeatC() {
-        return minTemperatureForHeatC;
-    }
-
-    public double getDegreesCPerTemperatureIncrease() {
-        return degreesCPerTemperatureIncrease;
-    }
-
-    public double getEnvironmentTemperatureMultiplier() {
-        return environmentTemperatureMultiplier;
     }
 
     public int getCoolingFromIce() {
