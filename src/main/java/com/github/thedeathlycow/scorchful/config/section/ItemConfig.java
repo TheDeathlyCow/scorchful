@@ -1,7 +1,6 @@
 package com.github.thedeathlycow.scorchful.config.section;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.Translate;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
@@ -24,37 +23,45 @@ public class ItemConfig {
             )
             .build();
 
-    private static final String CATEGORY = ScorchfulConfig.MAIN_CATEGORY_NAME;
+    public static final String TOOLS_AND_ARMOR_CATEGORY_NAME = "tools_and_armor";
+    public static final String CONSUMABLE_CATEGORY_NAME = "consumable";
+    public static final String MISC_CATEGORY_NAME = "misc";
 
-    @AutoGen(category = CATEGORY)
+    @AutoGen(category = TOOLS_AND_ARMOR_CATEGORY_NAME)
     @Translate.Name("Enable Turtle Armor status effects")
     @SerialEntry(comment = "Toggle the water breathing effect from Turtle Armor")
     @TickBox
     boolean enableTurtleArmorEffects = true;
 
-    @AutoGen(category = CATEGORY)
+    @AutoGen(category = TOOLS_AND_ARMOR_CATEGORY_NAME)
     @Translate.Name("Turtle Armor Lung Capacity Multiplier")
     @SerialEntry(comment = "Multiplies the Lung Capacity attribute value of Turtle Armor.")
     @FloatField(min = 0f)
     float turtleArmorLungCapacityMultiplier = 1.0f;
 
-    @AutoGen(category = CATEGORY)
+    @AutoGen(category = TOOLS_AND_ARMOR_CATEGORY_NAME)
     @Translate.Name("Fire Protection heat resistance per level")
     @SerialEntry(comment = "How much Heat Resistance the Fire Protection enchantment should give, per level of Fire Protection.")
     @DoubleField
     double fireProtectionHeatResistancePerLevel = 0.125;
 
-    @AutoGen(category = CATEGORY)
+    @AutoGen(category = TOOLS_AND_ARMOR_CATEGORY_NAME)
     @Translate.Name("Impaling damage per level")
     @SerialEntry(comment = "How much damage the Impaling enchantment should do to wet entities, per level of Impaling")
     @FloatField(min = 0f)
     float impalingDamagePerLevel = 2.5f;
 
-    @AutoGen(category = CATEGORY)
-    @Translate.Name("Fireball throwing type")
-    @SerialEntry(comment = "Controls what type of fireball is creating when throwing a fire charge. Small is just like firing from a Dispener and creates a fire on impact. Large is more like a Ghast and creates an explosion, and disabled disables this feature.")
-    @EnumCycler
-    FireChargeThrower.FireballFactory fireBallThrownType = FireChargeThrower.FireballFactory.SMALL;
+    @AutoGen(category = TOOLS_AND_ARMOR_CATEGORY_NAME)
+    @Translate.Name("Rehydration drink size")
+    @SerialEntry(comment = "The threshold for how much body water needs to be collected before Rehydration will automatically rehydrate the player.")
+    @IntField
+    int rehydrationDrinkSize = 120;
+
+    @AutoGen(category = TOOLS_AND_ARMOR_CATEGORY_NAME)
+    @Translate.Name("Maximum Rehydration Enchantment efficiency")
+    @SerialEntry(comment = "Multiplier for rehydrationDrinkSize that controls the maximum amount of body water provided by a full suit of Rehydration armor.")
+    @FloatSlider(min = 0f, max = 1f, step = 0.05f)
+    float maxRehydrationEfficiency = 0.75f;
 
     public boolean isTurtleArmorEffectsEnabled() {
         return enableTurtleArmorEffects;
@@ -64,15 +71,69 @@ public class ItemConfig {
         return turtleArmorLungCapacityMultiplier;
     }
 
-    public FireChargeThrower.FireballFactory getFireBallThrownType() {
-        return fireBallThrownType;
-    }
-
     public double getFireProtectionHeatResistancePerLevel() {
         return fireProtectionHeatResistancePerLevel;
     }
 
     public float getImpalingDamagePerLevel() {
         return impalingDamagePerLevel;
+    }
+
+    public int getRehydrationDrinkSize() {
+        return rehydrationDrinkSize;
+    }
+
+    public float getMaxRehydrationEfficiency() {
+        return maxRehydrationEfficiency;
+    }
+
+    @AutoGen(category = CONSUMABLE_CATEGORY_NAME)
+    @Translate.Name("Water from Refreshing food")
+    @SerialEntry(comment = "The amount of body water provided by consuming Refreshing food and drink.")
+    @IntField
+    int waterFromRefreshingFood = 60;
+
+    @AutoGen(category = CONSUMABLE_CATEGORY_NAME)
+    @Translate.Name("Water from Sustaining food")
+    @SerialEntry(comment = "The amount of body water provided by consuming Sustaining food and drink.")
+    @IntField
+    int waterFromSustainingFood = 120;
+
+    @AutoGen(category = CONSUMABLE_CATEGORY_NAME)
+    @Translate.Name("Water from Hydrating food")
+    @SerialEntry(comment = "The amount of body water provided by consuming Hydrating food and drink.")
+    @IntField
+    int waterFromHydratingFood = 300;
+
+    @AutoGen(category = CONSUMABLE_CATEGORY_NAME)
+    @Translate.Name("Water from Parching food")
+    @SerialEntry(comment = "The amount of body water provided by consuming Parching food and drink.")
+    @IntField
+    int waterFromParchingFood = -120;
+
+    public int getWaterFromRefreshingFood() {
+        return waterFromRefreshingFood;
+    }
+
+    public int getWaterFromSustainingFood() {
+        return waterFromSustainingFood;
+    }
+
+    public int getWaterFromHydratingFood() {
+        return waterFromHydratingFood;
+    }
+
+    public int getWaterFromParchingFood() {
+        return waterFromParchingFood;
+    }
+
+    @AutoGen(category = MISC_CATEGORY_NAME)
+    @Translate.Name("Fireball throwing type")
+    @SerialEntry(comment = "Controls what type of fireball is creating when throwing a fire charge. Small is just like firing from a Dispener and creates a fire on impact. Large is more like a Ghast and creates an explosion, and disabled disables this feature.")
+    @EnumCycler
+    FireChargeThrower.FireballFactory fireBallThrownType = FireChargeThrower.FireballFactory.SMALL;
+
+    public FireChargeThrower.FireballFactory getFireBallThrownType() {
+        return fireBallThrownType;
     }
 }

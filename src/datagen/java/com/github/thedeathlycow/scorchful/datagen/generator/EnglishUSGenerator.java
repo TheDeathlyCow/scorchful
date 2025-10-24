@@ -132,8 +132,8 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         builder.add(ScorchfulModMenu.COMBAT_CATEGORY, "Combat Settings");
         builder.add(ScorchfulModMenu.COMBAT_DESC, "Specific settings for combat");
 
-        builder.add(ScorchfulModMenu.ITEM_CATEGORY, "Heat Settings");
-        builder.add(ScorchfulModMenu.ITEM_DESC, "Specific settings for heat and temperature");
+        builder.add(ScorchfulModMenu.ITEM_CATEGORY, "Item Settings");
+        builder.add(ScorchfulModMenu.ITEM_DESC, "Specific settings for items");
 
         builder.add(ScorchfulModMenu.THIRST_CATEGORY, "Thirst Settings");
         builder.add(ScorchfulModMenu.THIRST_DESC, "Specific settings for Scorchful's native thirst system");

@@ -4,7 +4,7 @@ import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.scorchful.config.section.ThirstConfig;
+import com.github.thedeathlycow.scorchful.config.section.ItemConfig;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.mixin.accessor.RegistryEntryReferenceAccessor;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
@@ -42,25 +42,25 @@ public enum DrinkLevelComponent implements StringIdentifiable, Consumable, Toolt
             "parching",
             SItemTags.IS_PARCHING,
             Text.translatable("item.scorchful.tooltip.parching").setStyle(WaterSkinItem.PARCHING_STYLE),
-            ThirstConfig::getWaterFromParchingFood
+            ItemConfig::getWaterFromParchingFood
     ),
     REFRESHING(
             "refreshing",
             SItemTags.IS_REFRESHING,
             Text.translatable("item.scorchful.tooltip.refreshing").setStyle(WaterSkinItem.TOOLTIP_STYLE),
-            ThirstConfig::getWaterFromRefreshingFood
+            ItemConfig::getWaterFromRefreshingFood
     ),
     SUSTAINING(
             "sustaining",
             SItemTags.IS_SUSTAINING,
             Text.translatable("item.scorchful.tooltip.sustaining").setStyle(WaterSkinItem.TOOLTIP_STYLE),
-            ThirstConfig::getWaterFromSustainingFood
+            ItemConfig::getWaterFromSustainingFood
     ),
     HYDRATING(
             "hydrating",
             SItemTags.IS_HYDRATING,
             Text.translatable("item.scorchful.tooltip.hydrating").setStyle(WaterSkinItem.TOOLTIP_STYLE),
-            ThirstConfig::getWaterFromHydratingFood
+            ItemConfig::getWaterFromHydratingFood
     );
 
     public static final Codec<DrinkLevelComponent> CODEC = StringIdentifiable.createCodec(DrinkLevelComponent::values);
@@ -77,9 +77,9 @@ public enum DrinkLevelComponent implements StringIdentifiable, Consumable, Toolt
 
     private final Text tooltipText;
 
-    private final ToIntFunction<ThirstConfig> waterProvider;
+    private final ToIntFunction<ItemConfig> waterProvider;
 
-    DrinkLevelComponent(String name, TagKey<Item> tag, Text tooltipText, ToIntFunction<ThirstConfig> waterProvider) {
+    DrinkLevelComponent(String name, TagKey<Item> tag, Text tooltipText, ToIntFunction<ItemConfig> waterProvider) {
         this.name = name;
         this.tag = tag;
         this.tooltipText = tooltipText;
@@ -135,7 +135,7 @@ public enum DrinkLevelComponent implements StringIdentifiable, Consumable, Toolt
         return null;
     }
 
-    public int getDrinkingWater(ThirstConfig config) {
+    public int getDrinkingWater(ItemConfig config) {
         return this.waterProvider.applyAsInt(config);
     }
 
@@ -156,7 +156,7 @@ public enum DrinkLevelComponent implements StringIdentifiable, Consumable, Toolt
 
         PlayerWaterComponent waterComponent = ScorchfulComponents.PLAYER_WATER.getNullable(user);
         if (waterComponent != null) {
-            int water = this.getDrinkingWater(ScorchfulConfig.getThirstConfig());
+            int water = this.getDrinkingWater(ScorchfulConfig.getItemConfig());
             waterComponent.drink(water);
 
             if (waterComponent.getWaterDrunk() >= PlayerWaterComponent.MAX_WATER * 0.9) {
