@@ -46,6 +46,7 @@ public class SchemaV2 {
         JsonCopyHelper.copyBooleanProperty(oldClientConfig, accessibility, "enableHeatStrokePostProcessing");
         JsonCopyHelper.copyBooleanProperty(oldClientConfig, accessibility, "enableFearPostProcessing");
         JsonCopyHelper.copyBooleanProperty(oldClientConfig, accessibility, "doSunHatShading");
+        JsonCopyHelper.rename(accessibility, "doSunHatShading", "enableSunHatShading");
         JsonCopyHelper.copyFloatProperty(oldClientConfig, accessibility, "sunHatShadeOpacity");
 
         // save new files and remove old files

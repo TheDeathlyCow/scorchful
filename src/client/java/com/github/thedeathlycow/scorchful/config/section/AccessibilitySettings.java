@@ -46,10 +46,10 @@ public class AccessibilitySettings {
     boolean enableFearPostProcessing = true;
 
     @AutoGen(category = CATEGORY)
-    @Translate.Name("Do Sun Hat shading")
+    @Translate.Name("Enable Sun Hat shading")
     @TickBox
     @SerialEntry(comment = "Toggle the darkening effect of the Sun Hat")
-    boolean doSunHatShading = true;
+    boolean enableSunHatShading = true;
 
     @AutoGen(category = CATEGORY)
     @Translate.Name("Sun Hat shade darkness")
@@ -70,6 +70,6 @@ public class AccessibilitySettings {
     }
 
     public float getSunHatShadeOpacity() {
-        return doSunHatShading ? sunHatShadeOpacity : 0f;
+        return enableSunHatShading ? sunHatShadeOpacity : 0f;
     }
 }
