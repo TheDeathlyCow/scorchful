@@ -122,6 +122,13 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         builder.add(ScorchfulModMenu.DISPLAY_CATEGORY, "Display Settings");
         builder.add(ScorchfulModMenu.DISPLAY_DESC , "Display settings for Scorchful");
 
+        builder.add(Translate.categoryKey(TemperatureConfig.HANDLER, TemperatureConfig.GENERAL_CATEGORY_NAME), "General Settings");
+        builder.add(Translate.categoryKey(TemperatureConfig.HANDLER, TemperatureConfig.ENVIRONMENT_CATEGORY_NAME), "Environment Settings");
+        builder.add(Translate.categoryKey(TemperatureConfig.HANDLER, TemperatureConfig.TEMPERATURE_SOURCES_CATEGORY_NAME), "Temperature Sources");
+
+        builder.add(ScorchfulModMenu.TEMPERATURE_CATEGORY, "Temperature Settings");
+        builder.add(ScorchfulModMenu.TEMPERATURE_DESC, "Settings for the Scorchful temperature system");
+
         builder.add(ScorchfulModMenu.COMBAT_CATEGORY, "Combat Settings");
         builder.add(ScorchfulModMenu.COMBAT_DESC, "Specific settings for combat");
 
@@ -139,6 +146,7 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
 
         generateConfigOptionTranslations(AccessibilitySettings.HANDLER, builder);
         generateConfigOptionTranslations(DisplaySettings.HANDLER, builder);
+        generateConfigOptionTranslations(TemperatureConfig.HANDLER, builder);
         generateConfigOptionTranslations(CombatConfig.HANDLER, builder);
         generateConfigOptionTranslations(HeatingConfig.HANDLER, builder);
         generateConfigOptionTranslations(ThirstConfig.HANDLER, builder);

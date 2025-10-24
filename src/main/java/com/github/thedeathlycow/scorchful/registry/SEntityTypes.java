@@ -17,7 +17,7 @@ public final class SEntityTypes {
                 (entity, source, baseDamageTaken, damageTaken, blocked) -> {
                     if (!blocked && source.isIn(SDamageTypeTags.FIREBALL)) {
                         entity.thermoo$addTemperature(
-                                ScorchfulConfig.getHeatingConfig().getFireballHeat(),
+                                ScorchfulConfig.getTemperatureConfig().getFireballHeat(),
                                 HeatingModes.ACTIVE
                         );
                     }

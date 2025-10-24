@@ -107,7 +107,7 @@ public final class SItems {
         ScorchfulItemEvents.CONSUME_ITEM.register((stack, player) -> {
             if (stack.isIn(SItemTags.IS_COOLING_FOOD)) {
                 player.thermoo$addTemperature(
-                        ScorchfulConfig.getHeatingConfig().getTemperatureFromCoolingFood(),
+                        ScorchfulConfig.getTemperatureConfig().getFoodCooling(),
                         HeatingModes.ACTIVE
                 );
             }

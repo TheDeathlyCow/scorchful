@@ -2,7 +2,7 @@ package com.github.thedeathlycow.scorchful.temperature;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.scorchful.config.section.HeatingConfig;
+import com.github.thedeathlycow.scorchful.config.section.TemperatureConfig;
 import com.github.thedeathlycow.thermoo.api.environment.component.EnvironmentComponentTypes;
 import com.github.thedeathlycow.thermoo.api.environment.component.TemperatureRecordComponent;
 import com.github.thedeathlycow.thermoo.api.environment.event.ServerPlayerEnvironmentTickEvents;
@@ -27,7 +27,7 @@ public final class ServerPlayerEnvironmentTickListeners {
         TemperatureRecord temperature = context.components()
                 .getOrDefault(EnvironmentComponentTypes.TEMPERATURE, TemperatureRecordComponent.DEFAULT);
 
-        int total = environmentTemperatureToTemperatureChange(temperature, ScorchfulConfig.getHeatingConfig());
+        int total = environmentTemperatureToTemperatureChange(temperature, ScorchfulConfig.getTemperatureConfig());
 
         if (context.affected().age % 20 == 0 && Scorchful.LOGGER.isDebugEnabled()) {
             Scorchful.LOGGER.debug("Adding {} temperature to {}", total, context.affected().getNameForScoreboard());
@@ -42,21 +42,21 @@ public final class ServerPlayerEnvironmentTickListeners {
         }
 
         ServerPlayerEntity player = context.affected();
-        HeatingConfig config = ScorchfulConfig.getHeatingConfig();
+        TemperatureConfig config = ScorchfulConfig.getTemperatureConfig();
 
-        int tickInterval = config.getPassiveHeatingTickInterval();
+        int tickInterval = config.getEnvironmentHeatingTickInterval();
         if (tickInterval > 1 && player.age % tickInterval != 0) {
             return TriState.FALSE;
         }
 
-        if (!config.doPassiveHeating()) {
+        if (!config.isEnableEnvironmentHeating()) {
             return TriState.FALSE;
         } else {
-            return TriState.of(player.thermoo$getTemperatureScale() < config.getMaxPassiveHeatingScale());
+            return TriState.of(player.thermoo$getTemperatureScale() < config.getMaxEnvironmentHeatingScale());
         }
     }
 
-    static int environmentTemperatureToTemperatureChange(TemperatureRecord temperature, HeatingConfig config) {
+    static int environmentTemperatureToTemperatureChange(TemperatureRecord temperature, TemperatureConfig config) {
         double temperatureC = temperature.valueInUnit(TemperatureUnit.CELSIUS);
 
         double thresholdC = config.getMinTemperatureForHeatC();
