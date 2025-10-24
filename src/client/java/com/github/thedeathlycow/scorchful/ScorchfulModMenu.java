@@ -20,6 +20,7 @@ public class ScorchfulModMenu implements ModMenuApi {
 
     public static final String ACCESSIBILITY_CATEGORY = Translate.mainCategoryKey(AccessibilitySettings.HANDLER);
     public static final String DISPLAY_CATEGORY = Translate.mainCategoryKey(DisplaySettings.HANDLER);
+    public static final String TEMPERATURE_CATEGORY = Translate.mainCategoryKey(TemperatureConfig.HANDLER);
     public static final String COMBAT_CATEGORY = Translate.mainCategoryKey(CombatConfig.HANDLER);
     public static final String HEATING_CATEGORY = Translate.mainCategoryKey(HeatingConfig.HANDLER);
     public static final String THIRST_CATEGORY = Translate.mainCategoryKey(ThirstConfig.HANDLER);
@@ -28,6 +29,7 @@ public class ScorchfulModMenu implements ModMenuApi {
 
     public static final String ACCESSIBILITY_DESC = Translate.descKey(AccessibilitySettings.HANDLER);
     public static final String DISPLAY_DESC = Translate.descKey(DisplaySettings.HANDLER);
+    public static final String TEMPERATURE_DESC = Translate.descKey(TemperatureConfig.HANDLER);
     public static final String COMBAT_DESC = Translate.descKey(CombatConfig.HANDLER);
     public static final String HEATING_DESC = Translate.descKey(HeatingConfig.HANDLER);
     public static final String THIRST_DESC = Translate.descKey(ThirstConfig.HANDLER);
@@ -44,6 +46,7 @@ public class ScorchfulModMenu implements ModMenuApi {
                                 .name(Text.translatable(TITLE))
                                 .option(createSubsectionButton(AccessibilitySettings.HANDLER, ACCESSIBILITY_CATEGORY, ACCESSIBILITY_DESC))
                                 .option(createSubsectionButton(DisplaySettings.HANDLER, DISPLAY_CATEGORY, DISPLAY_DESC))
+                                .option(createSubsectionButton(TemperatureConfig.HANDLER, TEMPERATURE_CATEGORY, TEMPERATURE_DESC))
                                 .option(createSubsectionButton(CombatConfig.HANDLER, COMBAT_CATEGORY, COMBAT_DESC))
                                 .option(createSubsectionButton(HeatingConfig.HANDLER, HEATING_CATEGORY, HEATING_DESC))
                                 .option(createSubsectionButton(ThirstConfig.HANDLER, THIRST_CATEGORY, THIRST_DESC))

@@ -17,6 +17,10 @@ public final class ScorchfulConfig {
         return WeatherConfig.HANDLER.instance();
     }
 
+    public static TemperatureConfig getTemperatureConfig() {
+        return TemperatureConfig.HANDLER.instance();
+    }
+
     public static ThirstConfig getThirstConfig() {
         return ThirstConfig.HANDLER.instance();
     }
@@ -36,6 +40,9 @@ public final class ScorchfulConfig {
 
         HeatingConfig.HANDLER.load();
         HeatingConfig.HANDLER.save();
+
+        TemperatureConfig.HANDLER.load();
+        TemperatureConfig.HANDLER.save();
 
         ThirstConfig.HANDLER.load();
         ThirstConfig.HANDLER.save();

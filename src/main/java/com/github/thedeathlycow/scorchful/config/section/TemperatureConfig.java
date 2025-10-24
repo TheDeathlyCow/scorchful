@@ -12,7 +12,7 @@ import java.nio.file.Path;
 public class TemperatureConfig {
     public static final Path PATH = Scorchful.getConfigDir().resolve("common").resolve("temperature.json5");
 
-    public static final ConfigClassHandler<HeatingConfig> HANDLER = ConfigClassHandler.createBuilder(HeatingConfig.class)
+    public static final ConfigClassHandler<TemperatureConfig> HANDLER = ConfigClassHandler.createBuilder(TemperatureConfig.class)
             .id(Scorchful.id("common/temperature"))
             .serializer(
                     config -> GsonConfigSerializerBuilder.create(config)
