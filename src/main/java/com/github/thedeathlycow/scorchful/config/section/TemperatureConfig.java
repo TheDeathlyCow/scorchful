@@ -6,6 +6,7 @@ import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.autogen.*;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
+import net.minecraft.util.math.MathHelper;
 
 import java.nio.file.Path;
 
@@ -30,19 +31,19 @@ public class TemperatureConfig {
     @Translate.Name("Heating multiplier")
     @SerialEntry(comment = "Multiplies the final temperature point change of all non-environment heating sources like fire and lava.")
     @FloatField(min = 0.0f)
-    float heatingMultiplier;
+    float heatingMultiplier = 1.0f;
 
     @AutoGen(category = GENERAL_CATEGORY_NAME)
     @Translate.Name("Cooling multiplier")
     @SerialEntry(comment = "Multiplies the final temperature point change of all non-environment cooling sources like sweating and powder snow.")
     @FloatField(min = 0.0f)
-    float coolingMultiplier;
+    float coolingMultiplier = 1.0f;
 
     @AutoGen(category = GENERAL_CATEGORY_NAME)
     @Translate.Name("Environment temperature multiplier")
     @SerialEntry(comment = "Multiplies the final temperature point change of an environment temperature change.")
     @FloatField(min = 0.0f)
-    float environmentTemperatureMultiplier;
+    float environmentTemperatureMultiplier = 1.0f;
 
     public float getHeatingMultiplier() {
         return heatingMultiplier;
@@ -104,5 +105,83 @@ public class TemperatureConfig {
 
     public double getDegreesCPerTemperatureIncrease() {
         return degreesCPerTemperatureIncrease;
+    }
+
+    @AutoGen(category = TEMPERATURE_SOURCES_CATEGORY_NAME)
+    @Translate.Name("Fireball temperature multiplier")
+    @SerialEntry(comment = "Multiplies the temperature point change applied to entities when struck by a Fire Charge.")
+    @FloatField(min = 0.0f)
+    float fireballTemperatureMultiplier = 1.0f;
+
+    @AutoGen(category = TEMPERATURE_SOURCES_CATEGORY_NAME)
+    @Translate.Name("Burning temperature multiplier")
+    @SerialEntry(comment = "Multiplies the temperature point change applied to entities on fire each tick.")
+    @FloatField(min = 0.0f)
+    float burningTemperatureMultiplier = 1.0f;
+
+    @AutoGen(category = TEMPERATURE_SOURCES_CATEGORY_NAME)
+    @Translate.Name("Burning temperature multiplier with Fire Resistance")
+    @SerialEntry(comment = "Multiplies the temperature point change applied to entities that are on fire, but also have the Fire Resistance effect, each tick.")
+    @FloatField(min = 0.0f)
+    float burningTemperatureMultiplierWithFireResistance = 0.25f;
+
+    @AutoGen(category = TEMPERATURE_SOURCES_CATEGORY_NAME)
+    @Translate.Name("In lava warm rate temperature multiplier")
+    @SerialEntry(comment = "Multiplies the temperature point change applied to entities swimming in Lava each tick.")
+    @FloatField(min = 0.0f)
+    float inLavaTemperatureMultiplier = 1.0f;
+
+    @AutoGen(category = TEMPERATURE_SOURCES_CATEGORY_NAME)
+    @Translate.Name("Powder Snow temperature multiplier")
+    @SerialEntry(comment = "Multiplies the temperature point change applied to entities in Powder Snow each tick. This only applies to entities that are currently warm.")
+    @FloatField(min = 0.0f)
+    float powderSnowTemperatureMultiplier = 1.0f;
+
+    @AutoGen(category = TEMPERATURE_SOURCES_CATEGORY_NAME)
+    @Translate.Name("Ice temperature multiplier")
+    @SerialEntry(comment = "Multiplies the temperature point change applied each tick from entities standing on ice.")
+    @FloatField(min = 0.0f)
+    float iceTemperatureMultiplier = 1.0f;
+
+    @AutoGen(category = TEMPERATURE_SOURCES_CATEGORY_NAME)
+    @Translate.Name("Cooling food temperature multiplier")
+    @SerialEntry(comment = "Multiplies the temperature point change applied to players after eating items with the tag #scorchful:is_cooling_food.")
+    @FloatField(min = 0.0f)
+    float coolingFoodTemperatureMultiplier = 1.0f;
+
+    @AutoGen(category = TEMPERATURE_SOURCES_CATEGORY_NAME)
+    @Translate.Name("Strider cooling temperature multiplier")
+    @SerialEntry(comment = "Multiplies the cooling to applied only to Striders each tick they are not in Lava.")
+    @FloatField(min = 0.0f)
+    float striderCoolingTemperatureMultiplier = 1.0f;
+
+
+    public int getFireballHeat() {
+        return MathHelper.floor(1000 * fireballTemperatureMultiplier * getHeatingMultiplier());
+    }
+
+    public int getOnFireWarmRate(boolean hasFireResistance) {
+        float multiplier = hasFireResistance ? burningTemperatureMultiplierWithFireResistance : burningTemperatureMultiplier;
+        return MathHelper.floor(24 * multiplier * getHeatingMultiplier());
+    }
+
+    public int getInLavaWarmRate() {
+        return MathHelper.floor(24 * inLavaTemperatureMultiplier * getHeatingMultiplier());
+    }
+
+    public int getPowderSnowCooling() {
+        return MathHelper.floor(-24 * powderSnowTemperatureMultiplier * getCoolingMultiplier());
+    }
+
+    public int getIceCooling() {
+        return MathHelper.floor(-12 * iceTemperatureMultiplier * getCoolingMultiplier());
+    }
+
+    public int getFoodCooling() {
+        return MathHelper.floor(-1260 * coolingFoodTemperatureMultiplier * getCoolingMultiplier());
+    }
+
+    public int getStriderCooling() {
+        return MathHelper.floor(-24 * striderCoolingTemperatureMultiplier * getCoolingMultiplier());
     }
 }

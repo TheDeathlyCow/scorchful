@@ -129,35 +129,7 @@ public class HeatingConfig {
         return coolingFromIce;
     }
 
-    public int getOnFireWarmRate() {
-        return onFireWarmRate;
-    }
-
-    public int getOnFireWarmRateWithFireResistance() {
-        return onFireWarmRateWithFireResistance;
-    }
-
-    public int getInLavaWarmRate() {
-        return inLavaWarmRate;
-    }
-
-    public int getStriderOutOfLavaCoolRate() {
-        return striderOutOfLavaCoolRate;
-    }
-
-    public int getPowderSnowCoolRate() {
-        return powderSnowCoolRate;
-    }
-
-    public int getFireballHeat() {
-        return fireballHeat;
-    }
-
     public float getTurtleArmorLungCapacityMultiplier() {
         return turtleArmorLungCapacityMultiplier;
-    }
-
-    public int getTemperatureFromCoolingFood() {
-        return temperatureFromCoolingFood;
     }
 }

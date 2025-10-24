@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.temperature;
 
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.scorchful.config.section.HeatingConfig;
+import com.github.thedeathlycow.scorchful.config.section.TemperatureConfig;
 import com.github.thedeathlycow.scorchful.config.section.ThirstConfig;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.github.thedeathlycow.thermoo.api.environment.component.EnvironmentComponentTypes;
@@ -31,18 +31,18 @@ public final class PassiveTemperatureEffects {
 
         int total = 0;
 
-        total += getIcyFloorTemperatureChange(context, ScorchfulConfig.getHeatingConfig());
+        total += getIcyFloorTemperatureChange(context, ScorchfulConfig.getTemperatureConfig());
         total += getTemperatureFromSweat(context, ScorchfulConfig.getThirstConfig());
 
         return total;
     }
 
-    private static int getIcyFloorTemperatureChange(EnvironmentTickContext<? extends LivingEntity> context, HeatingConfig config) {
+    private static int getIcyFloorTemperatureChange(EnvironmentTickContext<? extends LivingEntity> context, TemperatureConfig config) {
         LivingEntity entity = context.affected();
         BlockState steppingState = entity.getSteppingBlockState();
 
         if (steppingState.isIn(SBlockTags.HEAVY_ICE) && entity.thermoo$isWarm()) {
-            return -config.getCoolingFromIce();
+            return config.getIceCooling();
         }
 
         return 0;
