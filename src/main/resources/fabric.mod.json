@@ -33,6 +33,9 @@
 		],
 		"cardinal-components-entity": [
 			"com.github.thedeathlycow.scorchful.components.ScorchfulComponents"
+		],
+		"thermoo-dependent-mod": [
+			"com.github.thedeathlycow.scorchful.compat.NaturesSpiritPatch"
 		]
 	},
 	"mixins": [

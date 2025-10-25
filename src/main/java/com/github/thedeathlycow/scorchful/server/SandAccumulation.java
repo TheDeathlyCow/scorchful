@@ -4,11 +4,14 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.block.SandPileBlock;
 import com.github.thedeathlycow.scorchful.config.WeatherConfig;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
+import com.google.common.base.Suppliers;
+import net.fabricmc.fabric.api.event.Event;
+import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.SnowBlock;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.random.Random;
@@ -17,11 +20,22 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.WorldChunk;
 import net.minecraft.world.event.GameEvent;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Supplier;
 
 public class SandAccumulation {
-
+    public static final Supplier<Map<Sandstorms.SandstormType, Block>> SANDSTORM_BLOCK_TYPES = Suppliers.memoize(
+            () -> {
+                Map<Sandstorms.SandstormType, Block> map = new EnumMap<>(Sandstorms.SandstormType.class);
+                map.put(Sandstorms.SandstormType.REGULAR, SBlocks.SAND_PILE);
+                map.put(Sandstorms.SandstormType.RED, SBlocks.RED_SAND_PILE);
+                return map;
+            }
+    );
 
     public static void tickChunk(ServerWorld world, WorldChunk chunk, int randomTickSpeed) {
         // choose position
@@ -42,13 +56,14 @@ public class SandAccumulation {
         }
 
         // sand pile placement
-        Block sandPile = null;
-        WeatherConfig config = Scorchful.getConfig().weatherConfig;
-        if (Objects.requireNonNull(sandstorm) == Sandstorms.SandstormType.REGULAR) {
-            sandPile = SBlocks.SAND_PILE;
-        } else if (sandstorm == Sandstorms.SandstormType.RED) {
-            sandPile = SBlocks.RED_SAND_PILE;
+        Block sandPile = SANDSTORM_BLOCK_TYPES.get().get(sandstorm);
+
+        if (sandPile == null) {
+            return;
         }
+
+        WeatherConfig config = Scorchful.getConfig().weatherConfig;
+
         placeSandPile(world, topPos, sandPile, config);
 
         // cauldron tick

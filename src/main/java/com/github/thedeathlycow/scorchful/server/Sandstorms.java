@@ -15,7 +15,8 @@ public class Sandstorms {
     public enum SandstormType implements StringIdentifiable {
         NONE("no_sandstorm"),
         REGULAR("regular_sandstorm"),
-        RED("red_sandstorm");
+        RED("red_sandstorm"),
+        PINK("pink_sandstorm");
 
         public static final Codec<SandstormType> CODEC = StringIdentifiable.createCodec(SandstormType::values);
 
@@ -55,6 +56,8 @@ public class Sandstorms {
             return SandstormType.REGULAR;
         } else if (hasRedSandStorms(biome)) {
             return SandstormType.RED;
+        } else if (hasPinkSandStorms(biome)) {
+            return SandstormType.RED;
         } else {
             return SandstormType.NONE;
         }
@@ -86,6 +89,10 @@ public class Sandstorms {
 
     public static boolean hasRedSandStorms(RegistryEntry<Biome> biome) {
         return !biome.value().hasPrecipitation() && biome.isIn(SBiomeTags.HAS_RED_SAND_STORMS);
+    }
+
+    public static boolean hasPinkSandStorms(RegistryEntry<Biome> biome) {
+        return !biome.value().hasPrecipitation() && biome.isIn(SBiomeTags.HAS_PINK_SAND_STORMS);
     }
 
     private Sandstorms() {
