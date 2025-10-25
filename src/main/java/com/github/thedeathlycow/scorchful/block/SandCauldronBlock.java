@@ -73,10 +73,11 @@ public class SandCauldronBlock extends AbstractCauldronBlock {
     }
 
     public static boolean canFillWithSand(World world, Sandstorms.SandstormType sandstormType) {
-        return switch (sandstormType) {
-            case RED, REGULAR -> world.getRandom().nextFloat() < FILL_WITH_SAND_CHANCE;
-            default -> false;
-        };
+        if (sandstormType != Sandstorms.SandstormType.NONE) {
+            return world.getRandom().nextFloat() < FILL_WITH_SAND_CHANCE;
+        }
+
+        return false;
     }
 
     @Override

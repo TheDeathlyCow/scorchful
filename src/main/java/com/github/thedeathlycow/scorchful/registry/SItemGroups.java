@@ -17,8 +17,6 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Contract;
 
 public class SItemGroups {
-    private static RegistryKey<Item> pinkSandPileKey = null;
-
     public static final ItemGroup SCORCHFUL = Registry.register(
             Registries.ITEM_GROUP,
             Scorchful.id("main"),
@@ -44,14 +42,6 @@ public class SItemGroups {
 
                         entries.add(SItems.SAND_PILE.getDefaultStack());
                         entries.add(SItems.RED_SAND_PILE.getDefaultStack());
-
-                        if (ScorchfulIntegrations.isModLoaded(ScorchfulIntegrations.NATURES_SPIRIT_ID)) {
-                            Item pinkSandItem = context.lookup()
-                                    .getWrapperOrThrow(RegistryKeys.ITEM)
-                                    .getOrThrow(getPinkSandPileKey())
-                                    .value();
-                            entries.add(pinkSandItem);
-                        }
                     }).build()
     );
 
@@ -64,17 +54,6 @@ public class SItemGroups {
         var filledWaterSkin = SItems.WATER_SKIN.getDefaultStack();
         WaterSkinItem.addDrinks(filledWaterSkin, WaterSkinItem.MAX_DRINKS);
         return filledWaterSkin;
-    }
-
-    private static RegistryKey<Item> getPinkSandPileKey() {
-        if (pinkSandPileKey == null) {
-            pinkSandPileKey = RegistryKey.of(
-                    RegistryKeys.ITEM,
-                    Scorchful.id("natures_spirit/pink_sand_pile")
-            );
-        }
-
-        return pinkSandPileKey;
     }
 
     private SItemGroups() {

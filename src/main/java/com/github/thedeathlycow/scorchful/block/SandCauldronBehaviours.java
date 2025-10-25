@@ -157,7 +157,7 @@ public class SandCauldronBehaviours {
         return ItemActionResult.success(world.isClient);
     }
 
-    private static CauldronBehavior fillWithSand(BlockState filledState) {
+    public static CauldronBehavior fillWithSand(BlockState filledState) {
         return (state, world, pos, player, hand, stack) -> {
             return fillCauldronWithBlock(
                     world,
