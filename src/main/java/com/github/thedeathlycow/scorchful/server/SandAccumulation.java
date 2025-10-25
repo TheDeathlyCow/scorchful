@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SnowBlock;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.random.Random;
@@ -23,7 +24,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class SandAccumulation {
-    public static final Supplier<Map<Sandstorms.SandstormType, Block>> SAND_PILES = Suppliers.memoize(
+    public static final Map<Sandstorms.SandstormType, Block> SAND_PILES = Util.make(
             () -> {
                 Map<Sandstorms.SandstormType, Block> map = new EnumMap<>(Sandstorms.SandstormType.class);
                 map.put(Sandstorms.SandstormType.REGULAR, SBlocks.SAND_PILE);
@@ -32,7 +33,7 @@ public class SandAccumulation {
             }
     );
 
-    public static final Supplier<Map<Sandstorms.SandstormType, Block>> SAND_CAULDRONS = Suppliers.memoize(
+    public static final Map<Sandstorms.SandstormType, Block> SAND_CAULDRONS = Util.make(
             () -> {
                 Map<Sandstorms.SandstormType, Block> map = new EnumMap<>(Sandstorms.SandstormType.class);
                 map.put(Sandstorms.SandstormType.REGULAR, SBlocks.SAND_CAULDRON);
@@ -60,8 +61,7 @@ public class SandAccumulation {
         }
 
         // sand pile placement
-        Block sandPile = SAND_PILES.get().get(sandstorm);
-
+        Block sandPile = SAND_PILES.get(sandstorm);
         if (sandPile == null) {
             return;
         }
@@ -80,7 +80,7 @@ public class SandAccumulation {
     public static boolean cauldronSandstormTick(BlockState state, World world, BlockPos pos) {
         Sandstorms.SandstormType sandstorm = Sandstorms.getCurrentSandStorm(world, pos.up());
 
-        Block cauldron = SAND_CAULDRONS.get().get(sandstorm);
+        Block cauldron = SAND_CAULDRONS.get(sandstorm);
 
         if (cauldron != null) {
             world.setBlockState(pos, cauldron.getDefaultState());

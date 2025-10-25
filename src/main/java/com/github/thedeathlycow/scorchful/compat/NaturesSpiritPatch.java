@@ -19,7 +19,6 @@ import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.SoundEvents;
@@ -58,8 +57,8 @@ public class NaturesSpiritPatch implements DependentModInitializer {
                 settings -> new BlockItem(pinkSandPileBlock, settings)
         );
 
-        SandAccumulation.SAND_PILES.get().put(Sandstorms.SandstormType.PINK, pinkSandPileBlock);
-        SandAccumulation.SAND_CAULDRONS.get().put(Sandstorms.SandstormType.PINK, pinkSandCauldronBlock);
+        SandAccumulation.SAND_PILES.put(Sandstorms.SandstormType.PINK, pinkSandPileBlock);
+        SandAccumulation.SAND_CAULDRONS.put(Sandstorms.SandstormType.PINK, pinkSandCauldronBlock);
 
         RegistryKey<ItemGroup> group = RegistryKey.of(RegistryKeys.ITEM_GROUP, Scorchful.id("main"));
         ItemGroupEvents.modifyEntriesEvent(group).register(entries -> {

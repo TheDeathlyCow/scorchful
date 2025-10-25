@@ -52,12 +52,12 @@ public class Sandstorms {
             return SandstormType.NONE;
         }
         RegistryEntry<Biome> biome = world.getBiome(pos);
-        if (hasRegularSandStorms(biome)) {
-            return SandstormType.REGULAR;
-        } else if (hasRedSandStorms(biome)) {
+        if (hasRedSandStorms(biome)) {
             return SandstormType.RED;
         } else if (hasPinkSandStorms(biome)) {
-            return SandstormType.RED;
+            return SandstormType.PINK;
+        } else if (hasRegularSandStorms(biome)) {
+            return SandstormType.REGULAR;
         } else {
             return SandstormType.NONE;
         }
