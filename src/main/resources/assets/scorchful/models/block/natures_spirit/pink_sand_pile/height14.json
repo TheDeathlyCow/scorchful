@@ -1,0 +1,7 @@
+{
+    "parent": "scorchful:block/layered/height14",
+    "textures": {
+        "particle": "natures_spirit:block/pink_sand",
+        "texture": "natures_spirit:block/pink_sand"
+    }
+}

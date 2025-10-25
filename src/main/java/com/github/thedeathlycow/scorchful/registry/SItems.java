@@ -140,11 +140,11 @@ public final class SItems {
         EnchantmentModifiers.initialize();
     }
 
-    private static Item register(String id, Function<Item.Settings, Item> itemFactory) {
+    public static Item register(String id, Function<Item.Settings, Item> itemFactory) {
         return register(id, itemFactory, new Item.Settings());
     }
 
-    private static Item register(String id, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
+    public static Item register(String id, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
         Item item = itemFactory.apply(settings);
 
         return Registry.register(Registries.ITEM, Scorchful.id(id), item);
