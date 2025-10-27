@@ -4,11 +4,14 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.block.SandCauldronBehaviours;
 import com.github.thedeathlycow.scorchful.block.SandCauldronBlock;
 import com.github.thedeathlycow.scorchful.block.SandPileBlock;
+import com.github.thedeathlycow.scorchful.mixin.accessor.PointOfInterestTypeAccessor;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
 import com.github.thedeathlycow.scorchful.registry.SItems;
+import com.github.thedeathlycow.scorchful.registry.SPointsOfInterest;
 import com.github.thedeathlycow.scorchful.server.SandAccumulation;
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
 import com.github.thedeathlycow.thermoo.impl.compat.init.DependentModInitializer;
+import com.google.common.collect.ImmutableSet;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.hibiscus.naturespirit.registration.NSMiscBlocks;
@@ -19,9 +22,18 @@ import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.world.poi.PointOfInterestType;
+import net.minecraft.world.poi.PointOfInterestTypes;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class NaturesSpiritPatch implements DependentModInitializer {
     @Override
@@ -72,6 +84,21 @@ public class NaturesSpiritPatch implements DependentModInitializer {
                                 .with(SandCauldronBlock.LEVEL, SandCauldronBlock.MAX_LEVEL)
                 )
         );
+
+        RegistryEntry<PointOfInterestType> leatherWorkerPOI = Registries.POINT_OF_INTEREST_TYPE
+                .getEntry(PointOfInterestTypes.LEATHERWORKER)
+                .orElseThrow();
+
+        Set<BlockState> blockStates = new HashSet<>(pinkSandCauldronBlock.getStateManager().getStates());
+
+        ((PointOfInterestTypeAccessor) (Object) leatherWorkerPOI.value()).scorchful$setBlockStates(
+                ImmutableSet.<BlockState>builder()
+                        .addAll(leatherWorkerPOI.value().blockStates())
+                        .addAll(blockStates)
+                        .build()
+        );
+
+        SPointsOfInterest.registerStates(leatherWorkerPOI, blockStates);
     }
 
     @Override

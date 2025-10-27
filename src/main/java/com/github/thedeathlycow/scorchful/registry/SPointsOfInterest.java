@@ -38,7 +38,7 @@ public final class SPointsOfInterest {
         registerStates(leatherWorkerPOI, SPointsOfInterest.SAND_CAULDRONS);
     }
 
-    private static void registerStates(RegistryEntry<PointOfInterestType> poiTypeEntry, Set<BlockState> states) {
+    public static void registerStates(RegistryEntry<PointOfInterestType> poiTypeEntry, Set<BlockState> states) {
         states.forEach(state -> {
             RegistryEntry<PointOfInterestType> existing = PointOfInterestTypesAccessor.scorchful$getStatesToType()
                     .put(state, poiTypeEntry);
