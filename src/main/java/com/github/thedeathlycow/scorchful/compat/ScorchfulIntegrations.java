@@ -10,6 +10,8 @@ public class ScorchfulIntegrations {
 
     public static final String DEHYDRATION_ID = "dehydration";
 
+    public static final String NATURES_SPIRIT_ID = "natures_spirit";
+
     public static boolean isDehydrationLoaded() {
         return isModLoaded(DEHYDRATION_ID);
     }

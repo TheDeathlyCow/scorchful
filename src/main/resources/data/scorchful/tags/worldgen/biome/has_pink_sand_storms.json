@@ -1,14 +1,13 @@
 {
     "replace": false,
     "values": [
-        "#minecraft:is_badlands",
         {
             "required": false,
-            "id": "#c:is_badlands"
+            "id": "natures_spirit:drylands"
         },
         {
             "required": false,
-            "id": "natures_spirit:scorched_dunes"
+            "id": "natures_spirit:wooded_drylands"
         }
     ]
 }

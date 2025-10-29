@@ -120,11 +120,11 @@ public final class SBlocks {
         NetherLilyBehaviours.initialize();
     }
 
-    private static Block register(String id, Function<AbstractBlock.Settings, Block> blockFactory) {
+    public static Block register(String id, Function<AbstractBlock.Settings, Block> blockFactory) {
         return register(id, blockFactory, AbstractBlock.Settings.create());
     }
 
-    private static Block register(String id, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings) {
+    public static Block register(String id, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings) {
         Block block = blockFactory.apply(settings);
         return Registry.register(Registries.BLOCK, Scorchful.id(id), block);
     }

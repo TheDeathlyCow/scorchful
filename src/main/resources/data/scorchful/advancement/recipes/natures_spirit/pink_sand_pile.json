@@ -1,0 +1,42 @@
+{
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+        "has_pink_sand": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "natures_spirit:pink_sand"
+                        ]
+                    }
+                ]
+            }
+        },
+        "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+                "recipe": "scorchful:natures_spirit/pink_sand_pile"
+            }
+        }
+    },
+    "requirements": [
+        [
+            "has_the_recipe",
+            "has_pink_sand"
+        ]
+    ],
+    "rewards": {
+        "recipes": [
+            "scorchful:natures_spirit/pink_sand_pile"
+        ]
+    },
+    "fabric:load_conditions": [
+        {
+            "condition": "fabric:all_mods_loaded",
+            "values": [
+                "natures_spirit"
+            ]
+        }
+    ]
+}

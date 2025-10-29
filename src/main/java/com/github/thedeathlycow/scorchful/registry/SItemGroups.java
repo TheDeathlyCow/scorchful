@@ -1,14 +1,19 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Contract;
 
 public class SItemGroups {
@@ -32,7 +37,7 @@ public class SItemGroups {
                         entries.add(SItems.CRIMSON_LILY.getDefaultStack());
                         entries.add(SItems.WARPED_LILY.getDefaultStack());
                         entries.add(SItems.ROOTED_NETHERRACK.getDefaultStack());
-                        entries.add(SItems. ROOTED_CRIMSON_NYLIUM.getDefaultStack());
+                        entries.add(SItems.ROOTED_CRIMSON_NYLIUM.getDefaultStack());
                         entries.add(SItems.ROOTED_WARPED_NYLIUM.getDefaultStack());
 
                         entries.add(SItems.SAND_PILE.getDefaultStack());

@@ -150,6 +150,7 @@ dependencies {
 
     modCompileOnly "dev.emi:trinkets:${project.trinkets_version}"
     modCompileOnly("maven.modrinth:dehydration:${project.dehydration_version}") { transitive = false }
+    modCompileOnly("maven.modrinth:natures-spirit:${project.natures_spirit_version}")
 
     afterEvaluate {
         subprojects.each {
