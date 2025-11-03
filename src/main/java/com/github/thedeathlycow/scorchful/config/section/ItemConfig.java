@@ -7,6 +7,7 @@ import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.autogen.*;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
+import net.minecraft.util.math.MathHelper;
 
 import java.nio.file.Path;
 
@@ -89,42 +90,42 @@ public class ItemConfig {
 
     @AutoGen(category = CONSUMABLE_CATEGORY_NAME)
     @Translate.Name("Water from Refreshing food")
-    @SerialEntry(comment = "The amount of body water provided by consuming Refreshing food and drink.")
-    @IntField
-    int waterFromRefreshingFood = 60;
+    @SerialEntry(comment = "Multiplies the amount of body water provided by consuming Refreshing food and drink.")
+    @FloatField
+    float refreshingWaterMultiplier = 1.0f;
 
     @AutoGen(category = CONSUMABLE_CATEGORY_NAME)
     @Translate.Name("Water from Sustaining food")
-    @SerialEntry(comment = "The amount of body water provided by consuming Sustaining food and drink.")
-    @IntField
-    int waterFromSustainingFood = 120;
+    @SerialEntry(comment = "Multiplies the amount of body water provided by consuming Sustaining food and drink.")
+    @FloatField
+    float sustainingWaterMultiplier = 1.0f;
 
     @AutoGen(category = CONSUMABLE_CATEGORY_NAME)
     @Translate.Name("Water from Hydrating food")
-    @SerialEntry(comment = "The amount of body water provided by consuming Hydrating food and drink.")
-    @IntField
-    int waterFromHydratingFood = 300;
+    @SerialEntry(comment = "Multiplies the amount of body water provided by consuming Hydrating food and drink.")
+    @FloatField
+    float hydratingWaterMultiplier = 1.0f;
 
     @AutoGen(category = CONSUMABLE_CATEGORY_NAME)
     @Translate.Name("Water from Parching food")
-    @SerialEntry(comment = "The amount of body water provided by consuming Parching food and drink.")
-    @IntField
-    int waterFromParchingFood = -120;
+    @SerialEntry(comment = "Multiplies the amount of body water lost from consuming Hydrating food and drink.")
+    @FloatField
+    float parchingWaterMultiplier = 1.0f;
 
     public int getWaterFromRefreshingFood() {
-        return waterFromRefreshingFood;
+        return MathHelper.floor(60 * refreshingWaterMultiplier);
     }
 
     public int getWaterFromSustainingFood() {
-        return waterFromSustainingFood;
+        return MathHelper.floor(120 * sustainingWaterMultiplier);
     }
 
     public int getWaterFromHydratingFood() {
-        return waterFromHydratingFood;
+        return MathHelper.floor(300 * hydratingWaterMultiplier);
     }
 
     public int getWaterFromParchingFood() {
-        return waterFromParchingFood;
+        return MathHelper.floor(-120 * parchingWaterMultiplier);
     }
 
     @AutoGen(category = MISC_CATEGORY_NAME)
