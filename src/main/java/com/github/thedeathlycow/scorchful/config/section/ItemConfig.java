@@ -11,7 +11,7 @@ import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import java.nio.file.Path;
 
 public class ItemConfig {
-    public static final Path PATH = Scorchful.getConfigDir().resolve("item.json5");
+    public static final Path PATH = Scorchful.getConfigDir().resolve("common").resolve("item.json5");
 
     public static final ConfigClassHandler<ItemConfig> HANDLER = ConfigClassHandler.createBuilder(ItemConfig.class)
             .id(Scorchful.id("common/item"))
@@ -59,7 +59,7 @@ public class ItemConfig {
 
     @AutoGen(category = TOOLS_AND_ARMOR_CATEGORY_NAME)
     @Translate.Name("Maximum Rehydration Enchantment efficiency")
-    @SerialEntry(comment = "Multiplier for rehydrationDrinkSize that controls the maximum amount of body water provided by a full suit of Rehydration armor.")
+    @SerialEntry(comment = "Multiplier for the Rehydration drink size that controls the maximum amount of body water provided by a full suit of Rehydration armor.")
     @FloatSlider(min = 0f, max = 1f, step = 0.05f)
     float maxRehydrationEfficiency = 0.75f;
 

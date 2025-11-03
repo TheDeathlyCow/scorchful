@@ -9,6 +9,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public final class JsonCopyHelper {
+    public static void copyStringProperty(JsonObject src, JsonObject dest, String propertyName) {
+        dest.addProperty(propertyName, src.remove(propertyName).getAsString());
+    }
+
     public static void copyBooleanProperty(JsonObject src, JsonObject dest, String propertyName) {
         dest.addProperty(propertyName, src.remove(propertyName).getAsBoolean());
     }
