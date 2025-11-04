@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 
 public final class SchemaV5 {
     public static Path getCombatConfigPath() {
@@ -34,8 +33,8 @@ public final class SchemaV5 {
         JsonCopyHelper.convertIntToFloatMultiplier(entityConfig, "onFireDryRateMultiplier", 3);
 
 
-        Path path = Scorchful.getConfigDir().resolve("common").resolve("item.json5");
-        Files.writeString(path, entityConfig.toString(), StandardOpenOption.CREATE);
+        Path path = Scorchful.getConfigDir().resolve("common").resolve("entity.json5");
+        Files.writeString(path, entityConfig.toString());
 
         Files.delete(getCombatConfigPath());
         Files.delete(getThirstConfigPath());

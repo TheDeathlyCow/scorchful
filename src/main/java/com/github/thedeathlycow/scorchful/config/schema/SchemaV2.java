@@ -9,7 +9,6 @@ import net.fabricmc.loader.api.FabricLoader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 
 public class SchemaV2 {
     public static Path getOldClientConfigPath() {
@@ -54,10 +53,10 @@ public class SchemaV2 {
         Files.createDirectories(basePath);
 
         Path path = basePath.resolve("accessibility.json5");
-        Files.writeString(path, accessibility.toString(), StandardOpenOption.CREATE);
+        Files.writeString(path, accessibility.toString());
 
         path = basePath.resolve("display.json5");
-        Files.writeString(path, display.toString(), StandardOpenOption.CREATE);
+        Files.writeString(path, display.toString());
 
         Files.delete(oldPath);
     }
