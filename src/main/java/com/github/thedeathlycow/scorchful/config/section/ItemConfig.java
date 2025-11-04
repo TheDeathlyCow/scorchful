@@ -53,10 +53,10 @@ public class ItemConfig {
     float impalingDamagePerLevel = 2.5f;
 
     @AutoGen(category = TOOLS_AND_ARMOR_CATEGORY_NAME)
-    @Translate.Name("Rehydration drink size")
+    @Translate.Name("Rehydration drink size multiplier")
     @SerialEntry(comment = "The threshold for how much body water needs to be collected before Rehydration will automatically rehydrate the player.")
-    @IntField
-    int rehydrationDrinkSize = 120;
+    @FloatSlider(min = 0f, max = 1f, step = 0.05f)
+    float rehydrationDrinkSizeMultiplier = 1.0f;
 
     @AutoGen(category = TOOLS_AND_ARMOR_CATEGORY_NAME)
     @Translate.Name("Maximum Rehydration Enchantment efficiency")
@@ -81,7 +81,7 @@ public class ItemConfig {
     }
 
     public int getRehydrationDrinkSize() {
-        return rehydrationDrinkSize;
+        return MathHelper.floor(120 * rehydrationDrinkSizeMultiplier);
     }
 
     public float getMaxRehydrationEfficiency() {

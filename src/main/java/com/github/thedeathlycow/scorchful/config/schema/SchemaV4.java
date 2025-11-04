@@ -45,11 +45,13 @@ public final class SchemaV4 {
         JsonCopyHelper.rename(itemConfig, "waterFromSustainingFood", "sustainingWaterMultiplier");
         JsonCopyHelper.rename(itemConfig, "waterFromHydratingFood", "hydratingWaterMultiplier");
         JsonCopyHelper.rename(itemConfig, "waterFromParchingFood", "parchingWaterMultiplier");
+        JsonCopyHelper.rename(itemConfig, "rehydrationDrinkSize", "rehydrationDrinkSizeMultiplier");
 
         JsonCopyHelper.convertIntToFloatMultiplier(itemConfig, "refreshingWaterMultiplier", 60);
         JsonCopyHelper.convertIntToFloatMultiplier(itemConfig, "sustainingWaterMultiplier", 120);
         JsonCopyHelper.convertIntToFloatMultiplier(itemConfig, "hydratingWaterMultiplier", 300);
         JsonCopyHelper.convertIntToFloatMultiplier(itemConfig, "parchingWaterMultiplier", 120);
+        JsonCopyHelper.convertIntToFloatMultiplier(itemConfig, "rehydrationDrinkSizeMultiplier", 120);
 
         // clean up files
         Path basePath = Scorchful.getConfigDir().resolve("common");
