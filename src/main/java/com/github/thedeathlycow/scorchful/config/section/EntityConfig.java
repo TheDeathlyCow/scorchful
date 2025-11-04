@@ -54,15 +54,15 @@ public class EntityConfig {
 
     @AutoGen(category = SOAKING_CATEGORY)
     @Translate.Name("Touching water or rain wetness increase per tick")
-    @SerialEntry(comment = "How much to increase wetness by when touching water or rain each tick. Note that submerging yourself in water will fully soak you, regardless of what this is set to.")
+    @SerialEntry(comment = "How many soaking points to add when touching water or rain each tick. Note that submerging yourself in water will fully soak you, regardless of what this is set to.")
     @IntField
     int touchingWaterWetnessIncrease = 1;
 
     @AutoGen(category = SOAKING_CATEGORY)
-    @Translate.Name("On fire dry rate")
-    @SerialEntry(comment = "How many wetness points to remove each tick when on fire.")
-    @IntField
-    int onFireDryDate = 3;
+    @Translate.Name("On fire dry rate multiplier")
+    @SerialEntry(comment = "Multiplies the soaking points that are removed from an entity that is on fire each tick.")
+    @FloatField
+    float onFireDryRateMultiplier = 1.0f;
 
     public int getSoakingFromSplashPotions() {
         return MathHelper.floor(300 * soakingFromSplashPotionsMultiplier);
@@ -73,6 +73,6 @@ public class EntityConfig {
     }
 
     public int getOnFireDryDate() {
-        return onFireDryDate;
+        return MathHelper.floor(3 * onFireDryRateMultiplier);
     }
 }

@@ -21,6 +21,7 @@ public final class SchemaV5 {
         JsonObject oldCombatConfig = JsonCopyHelper.read(getCombatConfigPath());
         JsonObject oldThirstConfig = JsonCopyHelper.read(getThirstConfigPath());
 
+
         var entityConfig = new JsonObject();
 
         JsonCopyHelper.moveInto(oldCombatConfig, entityConfig);
@@ -28,6 +29,10 @@ public final class SchemaV5 {
 
         JsonCopyHelper.rename(entityConfig, "soakingFromSplashPotions", "soakingFromSplashPotionsMultiplier");
         JsonCopyHelper.convertIntToFloatMultiplier(entityConfig, "soakingFromSplashPotionsMultiplier", 300);
+
+        JsonCopyHelper.rename(entityConfig, "onFireDryDate", "onFireDryRateMultiplier");
+        JsonCopyHelper.convertIntToFloatMultiplier(entityConfig, "onFireDryRateMultiplier", 3);
+
 
         Path path = Scorchful.getConfigDir().resolve("common").resolve("item.json5");
         Files.writeString(path, entityConfig.toString(), StandardOpenOption.CREATE);
