@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class SchemaV2 {
+public final class SchemaV2 {
     public static Path getOldClientConfigPath() {
         return Scorchful.getConfigDir().resolve("client.json5");
     }
@@ -59,5 +59,9 @@ public class SchemaV2 {
         Files.writeString(path, display.toString());
 
         Files.delete(oldPath);
+    }
+
+    private SchemaV2() {
+
     }
 }

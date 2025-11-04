@@ -71,7 +71,7 @@ public class TemperatureConfig {
 
     @AutoGen(category = ENVIRONMENT_CATEGORY_NAME)
     @Translate.Name("Max environment heating scale")
-    @SerialEntry(comment = "The maximum temperature scale that the environment can heat heat players to. Given as a percentage from 0 to 1 (0 = 0%, 1 = 100%)")
+    @SerialEntry(comment = "The maximum temperature scale that the environment can heat players to. Given as a percentage from 0 to 1 (0 = 0%, 1 = 100%)")
     @FloatSlider(min = 0f, max = 1f, step = 0.05f, format = "%.2f")
     float maxEnvironmentHeatingScale = 1.0f;
 
