@@ -58,7 +58,7 @@ public final class SchemaV4 {
         Path path = basePath.resolve("item.json5");
         Files.writeString(path, itemConfig.toString(), StandardOpenOption.CREATE);
 
-        Files.writeString(getCombatConfigPath(), oldHeatingConfig.toString(), StandardOpenOption.CREATE);
+        Files.writeString(getCombatConfigPath(), oldCombatConfig.toString(), StandardOpenOption.CREATE);
 
         Files.writeString(getThirstConfigPath(), oldThirstConfig.toString(), StandardOpenOption.CREATE);
 
