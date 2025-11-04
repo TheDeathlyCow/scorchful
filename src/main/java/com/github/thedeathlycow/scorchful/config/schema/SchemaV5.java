@@ -1,0 +1,46 @@
+package com.github.thedeathlycow.scorchful.config.schema;
+
+import com.github.thedeathlycow.scorchful.Scorchful;
+import com.google.gson.JsonObject;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+public final class SchemaV5 {
+    public static Path getCombatConfigPath() {
+        return Scorchful.getConfigDir().resolve("combat.json5");
+    }
+
+    public static Path getThirstConfigPath() {
+        return Scorchful.getConfigDir().resolve("thirst.json5");
+    }
+
+    public static void run() throws IOException {
+        JsonObject oldCombatConfig = JsonCopyHelper.read(getCombatConfigPath());
+        JsonObject oldThirstConfig = JsonCopyHelper.read(getThirstConfigPath());
+
+
+        var entityConfig = new JsonObject();
+
+        JsonCopyHelper.moveInto(oldCombatConfig, entityConfig);
+        JsonCopyHelper.moveInto(oldThirstConfig, entityConfig);
+
+        JsonCopyHelper.rename(entityConfig, "soakingFromSplashPotions", "soakingFromSplashPotionsMultiplier");
+        JsonCopyHelper.convertIntToFloatMultiplier(entityConfig, "soakingFromSplashPotionsMultiplier", 300);
+
+        JsonCopyHelper.rename(entityConfig, "onFireDryDate", "onFireDryRateMultiplier");
+        JsonCopyHelper.convertIntToFloatMultiplier(entityConfig, "onFireDryRateMultiplier", 3);
+
+
+        Path path = Scorchful.getConfigDir().resolve("common").resolve("entity.json5");
+        Files.writeString(path, entityConfig.toString());
+
+        Files.delete(getCombatConfigPath());
+        Files.delete(getThirstConfigPath());
+    }
+
+    private SchemaV5() {
+
+    }
+}

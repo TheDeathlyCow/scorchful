@@ -4,7 +4,7 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.components.RehydrationComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.scorchful.config.section.ThirstConfig;
+import com.github.thedeathlycow.scorchful.config.section.EntityConfig;
 import com.github.thedeathlycow.scorchful.mixin.accessor.EntityAccessor;
 import com.github.thedeathlycow.scorchful.registry.SEntityAttributes;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
@@ -47,7 +47,7 @@ public final class SoakingEffects {
             return entity.thermoo$getMaxWetTicks();
         }
 
-        ThirstConfig config = ScorchfulConfig.getThirstConfig();
+        EntityConfig config = ScorchfulConfig.getEntityConfig();
         int total = 0;
 
         total += getTouchingWaterChange(entity, config);
@@ -56,7 +56,7 @@ public final class SoakingEffects {
         return total;
     }
 
-    private static int getTouchingWaterChange(LivingEntity entity, ThirstConfig config) {
+    private static int getTouchingWaterChange(LivingEntity entity, EntityConfig config) {
         // add wetness when touching, but not submerged in, water or rain
         if (isTouchingWater(entity) || entity.getBlockStateAtPos().isOf(Blocks.WATER_CAULDRON)) {
             return config.getTouchingWaterWetnessIncrease();
@@ -65,7 +65,7 @@ public final class SoakingEffects {
         return 0;
     }
 
-    private static int getOnFireChange(LivingEntity entity, ThirstConfig config) {
+    private static int getOnFireChange(LivingEntity entity, EntityConfig config) {
         return entity.isOnFire()
                 ? config.getOnFireDryDate()
                 : 0;

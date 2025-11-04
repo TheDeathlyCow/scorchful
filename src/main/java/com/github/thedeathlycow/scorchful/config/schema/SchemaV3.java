@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 
 public final class SchemaV3 {
     public static Path getHeatingConfigPath() {
@@ -97,11 +96,11 @@ public final class SchemaV3 {
         Files.createDirectories(basePath);
 
         Path path = basePath.resolve("temperature.json5");
-        Files.writeString(path, temperatureConfig.toString(), StandardOpenOption.CREATE);
+        Files.writeString(path, temperatureConfig.toString());
 
-        Files.writeString(getHeatingConfigPath(), oldHeatingConfig.toString(), StandardOpenOption.CREATE);
+        Files.writeString(getHeatingConfigPath(), oldHeatingConfig.toString());
 
-        Files.writeString(getThirstConfigPath(), oldThirstConfig.toString(), StandardOpenOption.CREATE);
+        Files.writeString(getThirstConfigPath(), oldThirstConfig.toString());
     }
 
     private SchemaV3() {

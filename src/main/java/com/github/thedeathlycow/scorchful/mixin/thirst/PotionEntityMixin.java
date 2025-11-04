@@ -30,7 +30,7 @@ public abstract class PotionEntityMixin extends ThrownItemEntity {
         }
         Box box = this.getBoundingBox().expand(4.0, 2.0, 4.0);
 
-        int waterAmount = ScorchfulConfig.getThirstConfig().getSoakingFromSplashPotions();
+        int waterAmount = ScorchfulConfig.getEntityConfig().getSoakingFromSplashPotions();
 
         world.getNonSpectatingEntities(LivingEntity.class, box)
                 .forEach(
