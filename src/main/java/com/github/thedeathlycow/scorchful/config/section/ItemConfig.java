@@ -89,25 +89,25 @@ public class ItemConfig {
     }
 
     @AutoGen(category = CONSUMABLE_CATEGORY_NAME)
-    @Translate.Name("Water from Refreshing food")
+    @Translate.Name("Water from Refreshing food multiplier")
     @SerialEntry(comment = "Multiplies the amount of body water provided by consuming Refreshing food and drink.")
     @FloatField
     float refreshingWaterMultiplier = 1.0f;
 
     @AutoGen(category = CONSUMABLE_CATEGORY_NAME)
-    @Translate.Name("Water from Sustaining food")
+    @Translate.Name("Water from Sustaining food multiplier")
     @SerialEntry(comment = "Multiplies the amount of body water provided by consuming Sustaining food and drink.")
     @FloatField
     float sustainingWaterMultiplier = 1.0f;
 
     @AutoGen(category = CONSUMABLE_CATEGORY_NAME)
-    @Translate.Name("Water from Hydrating food")
+    @Translate.Name("Water from Hydrating food multiplier")
     @SerialEntry(comment = "Multiplies the amount of body water provided by consuming Hydrating food and drink.")
     @FloatField
     float hydratingWaterMultiplier = 1.0f;
 
     @AutoGen(category = CONSUMABLE_CATEGORY_NAME)
-    @Translate.Name("Water from Parching food")
+    @Translate.Name("Water from Parching food multiplier")
     @SerialEntry(comment = "Multiplies the amount of body water lost from consuming Hydrating food and drink.")
     @FloatField
     float parchingWaterMultiplier = 1.0f;
