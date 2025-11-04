@@ -28,36 +28,6 @@ public class ThirstConfig {
     private static final String CATEGORY = ScorchfulConfig.MAIN_CATEGORY_NAME;
 
     @AutoGen(category = CATEGORY)
-    @Translate.Name("Water from Refreshing food")
-    @SerialEntry(comment = "The amount of body water provided by consuming Refreshing food and drink.")
-    @IntField
-    int waterFromRefreshingFood = 60;
-
-    @AutoGen(category = CATEGORY)
-    @Translate.Name("Water from Sustaining food")
-    @SerialEntry(comment = "The amount of body water provided by consuming Sustaining food and drink.")
-    @IntField
-    int waterFromSustainingFood = 120;
-
-    @AutoGen(category = CATEGORY)
-    @Translate.Name("Water from Hydrating food")
-    @SerialEntry(comment = "The amount of body water provided by consuming Hydrating food and drink.")
-    @IntField
-    int waterFromHydratingFood = 300;
-
-    @AutoGen(category = CATEGORY)
-    @Translate.Name("Water from Parching food")
-    @SerialEntry(comment = "The amount of body water provided by consuming Parching food and drink.")
-    @IntField
-    int waterFromParchingFood = -120;
-
-    @AutoGen(category = CATEGORY)
-    @Translate.Name("Rehydration drink size")
-    @SerialEntry(comment = "The threshold for how much body water needs to be collected before Rehydration will automatically rehydrate the player.")
-    @IntField
-    int rehydrationDrinkSize = 120;
-
-    @AutoGen(category = CATEGORY)
     @Translate.Name("Soaking from Splash Potions")
     @SerialEntry(comment = "How much soaking is applied when an entity is hit with any Splash Potion.")
     @IntField
@@ -75,32 +45,6 @@ public class ThirstConfig {
     @IntField
     int onFireDryDate = 3;
 
-    @AutoGen(category = CATEGORY)
-    @Translate.Name("Maximum Rehydration Enchantment efficiency")
-    @SerialEntry(comment = "Multiplier for rehydrationDrinkSize that controls the maximum amount of body water provided by a full suit of Rehydration armor.")
-    @FloatSlider(min = 0f, max = 1f, step = 0.05f)
-    float maxRehydrationEfficiency = 0.75f;
-
-    public int getWaterFromRefreshingFood() {
-        return waterFromRefreshingFood;
-    }
-
-    public int getWaterFromSustainingFood() {
-        return waterFromSustainingFood;
-    }
-
-    public int getWaterFromHydratingFood() {
-        return waterFromHydratingFood;
-    }
-
-    public int getWaterFromParchingFood() {
-        return waterFromParchingFood;
-    }
-
-    public int getRehydrationDrinkSize() {
-        return rehydrationDrinkSize;
-    }
-
     public int getSoakingFromSplashPotions() {
         return soakingFromSplashPotions;
     }
@@ -111,9 +55,5 @@ public class ThirstConfig {
 
     public int getOnFireDryDate() {
         return onFireDryDate;
-    }
-
-    public float getMaxRehydrationEfficiency() {
-        return maxRehydrationEfficiency;
     }
 }

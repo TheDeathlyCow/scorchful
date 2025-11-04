@@ -5,8 +5,8 @@ import com.github.thedeathlycow.scorchful.config.section.*;
 public final class ScorchfulConfig {
     public static final String MAIN_CATEGORY_NAME = "main";
 
-    public static HeatingConfig getHeatingConfig() {
-        return HeatingConfig.HANDLER.instance();
+    public static ItemConfig getItemConfig() {
+        return ItemConfig.HANDLER.instance();
     }
 
     public static CombatConfig getCombatConfig() {
@@ -38,8 +38,8 @@ public final class ScorchfulConfig {
         DehydrationConfig.HANDLER.load();
         DehydrationConfig.HANDLER.save();
 
-        HeatingConfig.HANDLER.load();
-        HeatingConfig.HANDLER.save();
+        ItemConfig.HANDLER.load();
+        ItemConfig.HANDLER.save();
 
         TemperatureConfig.HANDLER.load();
         TemperatureConfig.HANDLER.save();

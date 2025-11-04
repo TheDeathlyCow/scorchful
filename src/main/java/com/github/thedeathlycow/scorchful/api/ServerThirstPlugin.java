@@ -50,7 +50,7 @@ public interface ServerThirstPlugin {
      * @return Returns the size of the rehydration drink captured, in soaked ticks.
      */
     default int getRehydrationThreshold() {
-        return ScorchfulConfig.getThirstConfig().getRehydrationDrinkSize();
+        return ScorchfulConfig.getItemConfig().getRehydrationDrinkSize();
     }
 
     /**

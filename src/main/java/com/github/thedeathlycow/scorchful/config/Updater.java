@@ -4,6 +4,7 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.schema.ConfigUpdater;
 import com.github.thedeathlycow.scorchful.config.schema.SchemaV2;
 import com.github.thedeathlycow.scorchful.config.schema.SchemaV3;
+import com.github.thedeathlycow.scorchful.config.schema.SchemaV4;
 import com.github.thedeathlycow.scorchful.config.section.*;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -22,6 +23,7 @@ class Updater {
         Int2ObjectMap<ConfigUpdater> map = new Int2ObjectArrayMap<>();
         map.put(2, SchemaV2::run);
         map.put(3, SchemaV3::run);
+        map.put(4, SchemaV4::run);
         return map;
     };
 
@@ -112,7 +114,7 @@ class Updater {
 
         boolean writeSchemaFile = copyOldConfigObject(clientConfig, SchemaV2.getOldClientConfigPath());
         writeSchemaFile &= copyOldConfigObject(combatConfig, CombatConfig.PATH);
-        writeSchemaFile &= copyOldConfigObject(heatingConfig, HeatingConfig.PATH);
+        writeSchemaFile &= copyOldConfigObject(heatingConfig, SchemaV3.getHeatingConfigPath());
         writeSchemaFile &= copyOldConfigObject(weatherConfig, WeatherConfig.PATH);
         writeSchemaFile &= copyOldConfigObject(thirstConfig, ThirstConfig.PATH);
         writeSchemaFile &= copyOldConfigObject(dehydrationConfig, DehydrationConfig.PATH);
