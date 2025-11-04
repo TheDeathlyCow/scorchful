@@ -24,6 +24,7 @@ class Updater {
         map.put(3, SchemaV3::run);
         map.put(4, SchemaV4::run);
         map.put(5, SchemaV5::run);
+        map.put(6, SchemaV6::run);
         return map;
     };
 
@@ -115,7 +116,7 @@ class Updater {
         boolean writeSchemaFile = copyOldConfigObject(clientConfig, SchemaV2.getOldClientConfigPath());
         writeSchemaFile &= copyOldConfigObject(combatConfig, SchemaV5.getCombatConfigPath());
         writeSchemaFile &= copyOldConfigObject(heatingConfig, SchemaV3.getHeatingConfigPath());
-        writeSchemaFile &= copyOldConfigObject(weatherConfig, WeatherConfig.PATH);
+        writeSchemaFile &= copyOldConfigObject(weatherConfig, SchemaV6.getOldWeatherPath());
         writeSchemaFile &= copyOldConfigObject(thirstConfig, SchemaV5.getThirstConfigPath());
         writeSchemaFile &= copyOldConfigObject(dehydrationConfig, DehydrationConfig.PATH);
 

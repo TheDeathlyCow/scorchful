@@ -14,10 +14,10 @@ import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import java.nio.file.Path;
 
 public class WeatherConfig {
-    public static final Path PATH = Scorchful.getConfigDir().resolve("weather.json5");
+    public static final Path PATH = Scorchful.getConfigDir().resolve("common").resolve("weather.json5");
 
     public static final ConfigClassHandler<WeatherConfig> HANDLER = ConfigClassHandler.createBuilder(WeatherConfig.class)
-            .id(Scorchful.id("weather"))
+            .id(Scorchful.id("common/weather"))
             .serializer(
                     config -> GsonConfigSerializerBuilder.create(config)
                             .setPath(PATH)

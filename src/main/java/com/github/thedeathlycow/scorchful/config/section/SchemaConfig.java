@@ -20,7 +20,7 @@ public class SchemaConfig {
             )
             .build();
 
-    public static final int CONFIG_VERSION = 5;
+    public static final int CONFIG_VERSION = 6;
 
     @SerialEntry(comment = "Config schema version, do not touch! Changing this value may result in unexpected behaviour.")
     int schemaVersion = CONFIG_VERSION;
