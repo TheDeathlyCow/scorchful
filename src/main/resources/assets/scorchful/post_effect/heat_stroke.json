@@ -4,7 +4,7 @@
     },
     "passes": [
         {
-            "vertex_shader": "scorchful:post/periodic_blur",
+            "vertex_shader": "minecraft:core/screenquad",
             "fragment_shader": "scorchful:post/periodic_blur",
             "inputs": [
                 {
@@ -35,12 +35,13 @@
             }
         },
         {
-            "vertex_shader": "minecraft:post/blit",
+            "vertex_shader": "minecraft:core/screenquad",
             "fragment_shader": "scorchful:post/wobble",
             "inputs": [
                 {
                     "sampler_name": "In",
-                    "target": "swap"
+                    "target": "swap",
+                    "bilinear": true
                 }
             ],
             "output": "minecraft:main",
