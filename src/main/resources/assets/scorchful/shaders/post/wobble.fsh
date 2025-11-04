@@ -1,9 +1,10 @@
-#version 150
+#version 330
+
+#moj_import <minecraft:globals.glsl>
 
 #define PI 3.1415926535
 
 uniform sampler2D InSampler;
-uniform float GameTime;
 
 layout (std140) uniform WobbleConfig {
     vec2 Frequency;

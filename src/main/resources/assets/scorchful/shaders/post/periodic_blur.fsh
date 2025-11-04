@@ -1,10 +1,15 @@
-#version 150
+#version 330
 
 #moj_import <minecraft:globals.glsl>
 
 #define PI 3.1415926535
 
 uniform sampler2D InSampler;
+
+layout(std140) uniform SamplerInfo {
+    vec2 OutSize;
+    vec2 InSize;
+};
 
 layout (std140) uniform BlurConfig {
     float Period;
@@ -13,12 +18,13 @@ layout (std140) uniform BlurConfig {
 };
 
 in vec2 texCoord;
-in vec2 sampleStep;
 
 // rgba color with elements in range 0-1
 out vec4 fragColor;
 
 vec3 blur(vec2 centerPos, vec2 direction, float radius) {
+    vec2 oneTexel = 1.0 / InSize;
+    vec2 sampleStep = oneTexel * BlurDir;
     vec3 result = vec3(0.0, 0.0, 0.0);
     int count = 0;
 
