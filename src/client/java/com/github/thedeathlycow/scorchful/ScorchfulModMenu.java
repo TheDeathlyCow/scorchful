@@ -21,18 +21,16 @@ public class ScorchfulModMenu implements ModMenuApi {
     public static final String ACCESSIBILITY_CATEGORY = Translate.mainCategoryKey(AccessibilitySettings.HANDLER);
     public static final String DISPLAY_CATEGORY = Translate.mainCategoryKey(DisplaySettings.HANDLER);
     public static final String TEMPERATURE_CATEGORY = Translate.mainCategoryKey(TemperatureConfig.HANDLER);
-    public static final String COMBAT_CATEGORY = Translate.mainCategoryKey(CombatConfig.HANDLER);
+    public static final String ENTITY_CATEGORY = Translate.mainCategoryKey(EntityConfig.HANDLER);
     public static final String ITEM_CATEGORY = Translate.mainCategoryKey(ItemConfig.HANDLER);
-    public static final String THIRST_CATEGORY = Translate.mainCategoryKey(ThirstConfig.HANDLER);
     public static final String WEATHER_CATEGORY = Translate.mainCategoryKey(WeatherConfig.HANDLER);
     public static final String DEHYDRATION_CATEGORY = Translate.mainCategoryKey(DehydrationConfig.HANDLER);
 
     public static final String ACCESSIBILITY_DESC = Translate.descKey(AccessibilitySettings.HANDLER);
     public static final String DISPLAY_DESC = Translate.descKey(DisplaySettings.HANDLER);
     public static final String TEMPERATURE_DESC = Translate.descKey(TemperatureConfig.HANDLER);
-    public static final String COMBAT_DESC = Translate.descKey(CombatConfig.HANDLER);
+    public static final String ENTITY_DESC = Translate.descKey(EntityConfig.HANDLER);
     public static final String ITEM_DESC = Translate.descKey(ItemConfig.HANDLER);
-    public static final String THIRST_DESC = Translate.descKey(ThirstConfig.HANDLER);
     public static final String WEATHER_DESC = Translate.descKey(WeatherConfig.HANDLER);
     public static final String DEHYDRATION_DESC = Translate.descKey(DehydrationConfig.HANDLER);
 
@@ -47,9 +45,8 @@ public class ScorchfulModMenu implements ModMenuApi {
                                 .option(createSubsectionButton(AccessibilitySettings.HANDLER, ACCESSIBILITY_CATEGORY, ACCESSIBILITY_DESC))
                                 .option(createSubsectionButton(DisplaySettings.HANDLER, DISPLAY_CATEGORY, DISPLAY_DESC))
                                 .option(createSubsectionButton(TemperatureConfig.HANDLER, TEMPERATURE_CATEGORY, TEMPERATURE_DESC))
-                                .option(createSubsectionButton(CombatConfig.HANDLER, COMBAT_CATEGORY, COMBAT_DESC))
+                                .option(createSubsectionButton(EntityConfig.HANDLER, ENTITY_CATEGORY, ENTITY_DESC))
                                 .option(createSubsectionButton(ItemConfig.HANDLER, ITEM_CATEGORY, ITEM_DESC))
-                                .option(createSubsectionButton(ThirstConfig.HANDLER, THIRST_CATEGORY, THIRST_DESC))
                                 .option(createSubsectionButton(WeatherConfig.HANDLER, WEATHER_CATEGORY, WEATHER_DESC))
                                 .option(createSubsectionButton(DehydrationConfig.HANDLER, DEHYDRATION_CATEGORY, DEHYDRATION_DESC))
                                 .build()

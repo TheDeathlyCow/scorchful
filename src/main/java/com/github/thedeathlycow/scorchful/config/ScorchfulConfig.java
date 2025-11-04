@@ -9,8 +9,8 @@ public final class ScorchfulConfig {
         return ItemConfig.HANDLER.instance();
     }
 
-    public static CombatConfig getCombatConfig() {
-        return CombatConfig.HANDLER.instance();
+    public static EntityConfig getEntityConfig() {
+        return EntityConfig.HANDLER.instance();
     }
 
     public static WeatherConfig getWeatherConfig() {
@@ -21,10 +21,6 @@ public final class ScorchfulConfig {
         return TemperatureConfig.HANDLER.instance();
     }
 
-    public static ThirstConfig getThirstConfig() {
-        return ThirstConfig.HANDLER.instance();
-    }
-
     public static DehydrationConfig getDehydrationConfig() {
         return DehydrationConfig.HANDLER.instance();
     }
@@ -32,20 +28,17 @@ public final class ScorchfulConfig {
     public static void initialize() {
         Updater.run();
 
-        CombatConfig.HANDLER.load();
-        CombatConfig.HANDLER.save();
-
         DehydrationConfig.HANDLER.load();
         DehydrationConfig.HANDLER.save();
+
+        EntityConfig.HANDLER.load();
+        EntityConfig.HANDLER.save();
 
         ItemConfig.HANDLER.load();
         ItemConfig.HANDLER.save();
 
         TemperatureConfig.HANDLER.load();
         TemperatureConfig.HANDLER.save();
-
-        ThirstConfig.HANDLER.load();
-        ThirstConfig.HANDLER.save();
 
         WeatherConfig.HANDLER.load();
         WeatherConfig.HANDLER.save();

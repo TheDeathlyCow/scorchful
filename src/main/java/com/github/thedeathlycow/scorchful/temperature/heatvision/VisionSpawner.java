@@ -22,7 +22,7 @@ public class VisionSpawner {
 
     public static void tick(PlayerEntity player) {
 
-        if (!ScorchfulConfig.getCombatConfig().enableDesertVisions()) {
+        if (!ScorchfulConfig.getEntityConfig().enableDesertVisions()) {
             return;
         }
 

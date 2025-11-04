@@ -1,11 +1,10 @@
 package com.github.thedeathlycow.scorchful.config;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.config.schema.ConfigUpdater;
-import com.github.thedeathlycow.scorchful.config.schema.SchemaV2;
-import com.github.thedeathlycow.scorchful.config.schema.SchemaV3;
-import com.github.thedeathlycow.scorchful.config.schema.SchemaV4;
-import com.github.thedeathlycow.scorchful.config.section.*;
+import com.github.thedeathlycow.scorchful.config.schema.*;
+import com.github.thedeathlycow.scorchful.config.section.DehydrationConfig;
+import com.github.thedeathlycow.scorchful.config.section.SchemaConfig;
+import com.github.thedeathlycow.scorchful.config.section.WeatherConfig;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
@@ -113,10 +112,10 @@ class Updater {
                 .getAsJsonObject();
 
         boolean writeSchemaFile = copyOldConfigObject(clientConfig, SchemaV2.getOldClientConfigPath());
-        writeSchemaFile &= copyOldConfigObject(combatConfig, CombatConfig.PATH);
+        writeSchemaFile &= copyOldConfigObject(combatConfig, SchemaV5.getCombatConfigPath());
         writeSchemaFile &= copyOldConfigObject(heatingConfig, SchemaV3.getHeatingConfigPath());
         writeSchemaFile &= copyOldConfigObject(weatherConfig, WeatherConfig.PATH);
-        writeSchemaFile &= copyOldConfigObject(thirstConfig, ThirstConfig.PATH);
+        writeSchemaFile &= copyOldConfigObject(thirstConfig, SchemaV5.getThirstConfigPath());
         writeSchemaFile &= copyOldConfigObject(dehydrationConfig, DehydrationConfig.PATH);
 
         if (writeSchemaFile) {

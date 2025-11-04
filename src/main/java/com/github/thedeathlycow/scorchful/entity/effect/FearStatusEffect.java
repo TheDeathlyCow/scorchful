@@ -35,7 +35,7 @@ public class FearStatusEffect extends StatusEffect {
 
     public static double modifyDetectionDistance(LivingEntity target, double original) {
         return target.hasStatusEffect(SStatusEffects.FEAR)
-                ? ScorchfulConfig.getCombatConfig().getFearDetectionRangeMultiplier() * original
+                ? ScorchfulConfig.getEntityConfig().getFearDetectionRangeMultiplier() * original
                 : original;
     }
 
