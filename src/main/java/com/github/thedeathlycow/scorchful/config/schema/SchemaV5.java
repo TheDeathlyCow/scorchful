@@ -26,6 +26,9 @@ public final class SchemaV5 {
         JsonCopyHelper.moveInto(oldCombatConfig, entityConfig);
         JsonCopyHelper.moveInto(oldThirstConfig, entityConfig);
 
+        JsonCopyHelper.rename(entityConfig, "soakingFromSplashPotions", "soakingFromSplashPotionsMultiplier");
+        JsonCopyHelper.convertIntToFloatMultiplier(entityConfig, "soakingFromSplashPotionsMultiplier", 300);
+
         Path path = Scorchful.getConfigDir().resolve("common").resolve("item.json5");
         Files.writeString(path, entityConfig.toString(), StandardOpenOption.CREATE);
 

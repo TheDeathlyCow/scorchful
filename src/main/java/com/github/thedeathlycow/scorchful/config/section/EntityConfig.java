@@ -4,11 +4,9 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.Translate;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
-import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
-import dev.isxander.yacl3.config.v2.api.autogen.DoubleField;
-import dev.isxander.yacl3.config.v2.api.autogen.IntField;
-import dev.isxander.yacl3.config.v2.api.autogen.TickBox;
+import dev.isxander.yacl3.config.v2.api.autogen.*;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
+import net.minecraft.util.math.MathHelper;
 
 import java.nio.file.Path;
 
@@ -49,10 +47,10 @@ public class EntityConfig {
     }
 
     @AutoGen(category = SOAKING_CATEGORY)
-    @Translate.Name("Soaking from Splash Potions")
-    @SerialEntry(comment = "How much soaking is applied when an entity is hit with any Splash Potion.")
-    @IntField
-    int soakingFromSplashPotions = 300;
+    @Translate.Name("Soaking from Splash Potions multiplier")
+    @SerialEntry(comment = "Multiplies the soaking points that are applied when an entity is hit with any Splash Potion.")
+    @FloatSlider(min = 0f, max = 1f, step = 0.05f)
+    float soakingFromSplashPotionsMultiplier = 1.0f;
 
     @AutoGen(category = SOAKING_CATEGORY)
     @Translate.Name("Touching water or rain wetness increase per tick")
@@ -67,7 +65,7 @@ public class EntityConfig {
     int onFireDryDate = 3;
 
     public int getSoakingFromSplashPotions() {
-        return soakingFromSplashPotions;
+        return MathHelper.floor(300 * soakingFromSplashPotionsMultiplier);
     }
 
     public int getTouchingWaterWetnessIncrease() {
