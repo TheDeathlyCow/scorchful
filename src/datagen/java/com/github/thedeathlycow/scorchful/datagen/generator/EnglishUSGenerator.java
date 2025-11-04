@@ -116,6 +116,10 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
 
         // Config values
         builder.add(ScorchfulModMenu.TITLE, "Scorchful Config");
+        builder.add(ScorchfulModMenu.CLIENT_TITLE, "Client Settings");
+        builder.add(ScorchfulModMenu.COMMON_TITLE, "Common Settings");
+        builder.add(ScorchfulModMenu.COMPAT_TITLE, "Compatibility Settings");
+
         builder.add(ScorchfulModMenu.ACCESSIBILITY_CATEGORY, "Accessibility Settings");
         builder.add(ScorchfulModMenu.ACCESSIBILITY_DESC, "Client-side accessibility settings for Scorchful.");
 
