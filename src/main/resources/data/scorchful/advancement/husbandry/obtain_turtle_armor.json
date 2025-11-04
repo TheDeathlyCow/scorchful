@@ -7,7 +7,7 @@
             "translate": "advancements.scorchful.husbandry.obtain_turtle_armor.title"
         },
         "description": {
-            "translate": "advancements.scorchful.husbandry.obtain_turtle_armor.description"
+            "translate": "advancements.scorchful.husbandry.obtain_turtle_armor.desc"
         }
     },
     "parent": "minecraft:husbandry/breed_an_animal",

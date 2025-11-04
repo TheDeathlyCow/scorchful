@@ -5,10 +5,10 @@
             "count": 1
         },
         "title": {
-            "translate": "advancements.scorchful.adventure.shoot_paranoia_arrow.title"
+            "translate": "advancements.scorchful.husbandry.shoot_paranoia_arrow.title"
         },
         "description": {
-            "translate": "advancements.scorchful.adventure.shoot_paranoia_arrow.description"
+            "translate": "advancements.scorchful.husbandry.shoot_paranoia_arrow.desc"
         }
     },
     "parent": "minecraft:adventure/shoot_arrow",
