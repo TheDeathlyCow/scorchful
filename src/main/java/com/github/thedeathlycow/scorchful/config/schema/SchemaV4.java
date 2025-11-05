@@ -16,7 +16,7 @@ public final class SchemaV4 {
         return Scorchful.getConfigDir().resolve("thirst.json5");
     }
 
-    public static void run() throws IOException {
+    public static void run(int originalSchemaVersion) throws IOException {
         JsonObject oldHeatingConfig = JsonCopyHelper.read(SchemaV3.getHeatingConfigPath());
         JsonObject oldCombatConfig = JsonCopyHelper.read(getCombatConfigPath());
         JsonObject oldThirstConfig = JsonCopyHelper.read(getThirstConfigPath());

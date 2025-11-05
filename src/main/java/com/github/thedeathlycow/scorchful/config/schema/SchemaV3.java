@@ -16,7 +16,7 @@ public final class SchemaV3 {
         return Scorchful.getConfigDir().resolve("thirst.json5");
     }
 
-    public static void run() throws IOException {
+    public static void run(int originalSchemaVersion) throws IOException {
         JsonObject oldHeatingConfig = JsonCopyHelper.read(getHeatingConfigPath());
         JsonObject oldThirstConfig = JsonCopyHelper.read(getThirstConfigPath());
 
@@ -68,7 +68,7 @@ public final class SchemaV3 {
 
         JsonCopyHelper.copyIntProperty(oldHeatingConfig, temperatureConfig, "temperatureFromCoolingFood");
         JsonCopyHelper.rename(temperatureConfig, "temperatureFromCoolingFood", "coolingFoodTemperatureMultiplier");
-        JsonCopyHelper.convertIntToFloatMultiplier(temperatureConfig, "coolingFoodTemperatureMultiplier", -1260);
+        JsonCopyHelper.convertIntToFloatMultiplier(temperatureConfig, "coolingFoodTemperatureMultiplier", 1260);
 
         JsonCopyHelper.copyIntProperty(oldHeatingConfig, temperatureConfig, "striderOutOfLavaCoolRate");
         JsonCopyHelper.rename(temperatureConfig, "striderOutOfLavaCoolRate", "striderCoolingTemperatureMultiplier");
@@ -77,17 +77,17 @@ public final class SchemaV3 {
         // thirst config update
         JsonCopyHelper.copyIntProperty(oldThirstConfig, temperatureConfig, "temperatureFromWetness");
         JsonCopyHelper.rename(temperatureConfig, "temperatureFromWetness", "soakedTemperatureMultiplier");
-        JsonCopyHelper.convertIntToFloatMultiplier(temperatureConfig, "soakedTemperatureMultiplier", -6);
+        JsonCopyHelper.convertIntToFloatMultiplier(temperatureConfig, "soakedTemperatureMultiplier", 6);
 
-        JsonCopyHelper.copyIntProperty(oldThirstConfig, temperatureConfig, "humidBiomeSweatEfficiency");
+        JsonCopyHelper.copyFloatProperty(oldThirstConfig, temperatureConfig, "humidBiomeSweatEfficiency");
         JsonCopyHelper.rename(temperatureConfig, "humidBiomeSweatEfficiency", "humidBiomeSweatEfficiencyMultiplier");
         JsonCopyHelper.normalizeFloat(temperatureConfig, "humidBiomeSweatEfficiencyMultiplier", 1f / 3f);
 
-        JsonCopyHelper.copyIntProperty(oldThirstConfig, temperatureConfig, "extraHumidBiomeSweatEfficiency");
+        JsonCopyHelper.copyFloatProperty(oldThirstConfig, temperatureConfig, "extraHumidBiomeSweatEfficiency");
         JsonCopyHelper.rename(temperatureConfig, "extraHumidBiomeSweatEfficiency", "extraHumidBiomeSweatEfficiencyMultiplier");
         JsonCopyHelper.normalizeFloat(temperatureConfig, "extraHumidBiomeSweatEfficiencyMultiplier", 1f / 6f);
 
-        JsonCopyHelper.copyIntProperty(oldThirstConfig, temperatureConfig, "aridBiomeSweatEfficiency");
+        JsonCopyHelper.copyFloatProperty(oldThirstConfig, temperatureConfig, "aridBiomeSweatEfficiency");
         JsonCopyHelper.rename(temperatureConfig, "aridBiomeSweatEfficiency", "aridBiomeSweatEfficiencyMultiplier");
         JsonCopyHelper.normalizeFloat(temperatureConfig, "aridBiomeSweatEfficiencyMultiplier", 1.5f);
 

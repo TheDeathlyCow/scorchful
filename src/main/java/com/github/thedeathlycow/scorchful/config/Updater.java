@@ -25,6 +25,7 @@ class Updater {
         map.put(4, SchemaV4::run);
         map.put(5, SchemaV5::run);
         map.put(6, SchemaV6::run);
+        map.put(7, SchemaV7::run);
         return map;
     };
 
@@ -75,7 +76,7 @@ class Updater {
 
             if (updater != null) {
                 try {
-                    updater.run();
+                    updater.run(currentSchemaVersion);
                 } catch (IOException e) {
                     Scorchful.LOGGER.warn(
                             "Unable to upgrade config file from schema version {} to {}, due to IO error. Aborting upgrade.",

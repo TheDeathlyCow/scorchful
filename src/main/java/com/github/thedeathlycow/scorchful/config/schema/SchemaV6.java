@@ -15,7 +15,7 @@ public final class SchemaV6 {
         return Scorchful.getConfigDir().resolve("common").resolve("weather.json5");
     }
 
-    public static void run() throws IOException {
+    public static void run(int originalSchemaVersion) throws IOException {
         Files.move(getOldWeatherPath(), getNewWeatherPath());
     }
 

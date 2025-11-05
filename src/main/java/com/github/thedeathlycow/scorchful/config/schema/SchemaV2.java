@@ -15,7 +15,7 @@ public final class SchemaV2 {
         return Scorchful.getConfigDir().resolve("client.json5");
     }
 
-    public static void run() throws IOException {
+    public static void run(int originalSchemaVersion) throws IOException {
         Path oldPath = getOldClientConfigPath();
 
         if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) {
