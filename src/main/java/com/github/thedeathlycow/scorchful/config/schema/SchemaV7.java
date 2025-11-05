@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.config.schema;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.section.TemperatureConfig;
 import com.google.gson.JsonObject;
 
@@ -28,6 +29,8 @@ public final class SchemaV7 {
             temperatureConfig.addProperty("aridBiomeSweatEfficiencyMultiplier", 1.0f);
 
             Files.writeString(getTemperatureConfigPath(), temperatureConfig.toString());
+
+            Scorchful.LOGGER.warn("A few options in Scorchful's Temperature Settings config were reset by Schema V7 to fix a bug in the auto update script. If you have modified the config, you may need to manually re-adjust these settings.");
         }
     }
 
