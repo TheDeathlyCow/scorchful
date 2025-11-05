@@ -20,7 +20,7 @@ public final class SoakingUnderlay implements StatusBarOverlayRenderEvents.Rende
 
     public static final Identifier TEXTURE = Scorchful.id("textures/gui/soaking_overlay.png");
 
-    public static final int TEXTURE_WIDTH = 9;
+    public static final int TEXTURE_WIDTH = 18;
     public static final int TEXTURE_HEIGHT = 10;
 
 
@@ -37,7 +37,7 @@ public final class SoakingUnderlay implements StatusBarOverlayRenderEvents.Rende
 
         final int soakedPoints = getNumSoakingPoints(player, heartBarContext.positions().size());
         final int soakedHearts = getFullSoakedHeartsFromPoints(soakedPoints);
-        final boolean drawHalfHeartAtEnd = soakedHearts % 2 != 0;
+        final boolean drawHalfHeartAtEnd = soakedPoints % 2 != 0;
 
         int heartsRendered = 0;
 
@@ -45,15 +45,17 @@ public final class SoakingUnderlay implements StatusBarOverlayRenderEvents.Rende
             if (heartsRendered >= soakedHearts) {
                 break;
             }
-            boolean isHalfHeart = drawHalfHeartAtEnd && heartsRendered == soakedHearts - 1;
-            int width = isHalfHeart ? 5 : 9;
+
+            int x = position.x();
+            int y = position.y() - 1;
+            int u = drawHalfHeartAtEnd && heartsRendered == soakedHearts - 1 ? 9 : 0;
 
             context.drawTexture(
                     RenderPipelines.GUI_TEXTURED,
                     TEXTURE,
-                    position.x(), position.y() - 1,
-                    0, 0,
-                    width, 10,
+                    x, y,
+                    u, 0,
+                    9, 10,
                     TEXTURE_WIDTH, TEXTURE_HEIGHT
             );
 
@@ -61,12 +63,12 @@ public final class SoakingUnderlay implements StatusBarOverlayRenderEvents.Rende
         }
     }
 
-    private static int getNumSoakingPoints(@NotNull PlayerEntity player, int maxDisplayHealth) {
+    static int getNumSoakingPoints(@NotNull PlayerEntity player, int maxDisplayHealth) {
         float soakedScale = player.thermoo$getSoakedScale();
         return Math.round(soakedScale * maxDisplayHealth * 2);
     }
 
-    private static int getFullSoakedHeartsFromPoints(int soakedPoints) {
+    static int getFullSoakedHeartsFromPoints(int soakedPoints) {
         // number of whole hearts
         return MathHelper.ceil(soakedPoints / 2.0f);
     }
