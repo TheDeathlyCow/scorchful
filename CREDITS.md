@@ -12,6 +12,7 @@
 * [noawx](https://github.com/noawx) - Finnish
 * [JellyBubb1e](https://github.com/JellyBubb1e) - Chinese
 * [StarmanMine142](https://github.com/StarmanMine142) - Ukrainian
+* [aiocringe](https://github.com/aiocringe) - Russian
 
 # Sound Effects
 
