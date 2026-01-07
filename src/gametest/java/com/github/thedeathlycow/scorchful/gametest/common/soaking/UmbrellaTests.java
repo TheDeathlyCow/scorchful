@@ -16,10 +16,6 @@ public class UmbrellaTests {
             environment = "scorchful-test:rainy_night"
     )
     public void holding_leather_in_mainhand_blocks_rain(TestContext context) {
-        context.getWorld().setWeather(0, 1000, true, false);
-        long time = context.getWorld().getTimeOfDay();
-        context.setTime(18_000);
-
         var pos = new BlockPos(1, 0, 1);
         ZombieEntity zombie = context.spawnMob(EntityType.ZOMBIE, pos);
 
@@ -28,9 +24,6 @@ public class UmbrellaTests {
 
         context.waitAndRun(20L, () -> {
             context.expectEntityWithData(pos, EntityType.ZOMBIE, Soakable::thermoo$getWetTicks, 0);
-
-            context.setTime(0);
-            context.getWorld().resetWeather();
             context.complete();
         });
     }
@@ -40,10 +33,6 @@ public class UmbrellaTests {
             environment = "scorchful-test:rainy_night"
     )
     public void holding_leather_in_offhand_blocks_rain(TestContext context) {
-        context.getWorld().setWeather(0, 1000, true, false);
-        long time = context.getWorld().getTimeOfDay();
-        context.setTime(18_000);
-
         var pos = new BlockPos(1, 0, 1);
         ZombieEntity zombie = context.spawnMob(EntityType.ZOMBIE, pos);
 
@@ -52,9 +41,6 @@ public class UmbrellaTests {
 
         context.waitAndRun(20L, () -> {
             context.expectEntityWithData(pos, EntityType.ZOMBIE, Soakable::thermoo$getWetTicks, 0);
-
-            context.setTime(0);
-            context.getWorld().resetWeather();
             context.complete();
         });
     }

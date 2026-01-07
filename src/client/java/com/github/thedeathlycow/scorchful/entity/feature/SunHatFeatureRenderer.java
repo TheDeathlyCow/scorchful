@@ -8,6 +8,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
@@ -54,7 +55,7 @@ public class SunHatFeatureRenderer<S extends BipedEntityRenderState, M extends B
                             this.model,
                             state,
                             matrices,
-                            RenderLayer.getArmorCutoutNoCull(TEXTURE),
+                            RenderLayers.armorCutoutNoCull(TEXTURE),
                             light,
                             OverlayTexture.DEFAULT_UV,
                             -1,

@@ -1,8 +1,10 @@
 package com.github.thedeathlycow.scorchful.server;
 
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
+import com.github.thedeathlycow.thermoo.api.command.TemperatureCommand;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.command.DefaultPermissions;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
@@ -31,7 +33,7 @@ public class ThirstCommand {
 
 
         dispatcher.register(
-                literal("thirst").requires(src -> src.hasPermissionLevel(2))
+                literal("thirst").requires(src -> src.getPermissions().hasPermission(DefaultPermissions.GAMEMASTERS))
                         .then(
                                 thirst
                         )
