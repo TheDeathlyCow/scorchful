@@ -9,7 +9,7 @@ import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.particle.AbstractDustParticleEffect;
 import net.minecraft.particle.ParticleType;
 import net.minecraft.util.dynamic.Codecs;
-import org.joml.Vector3f;
+import org.joml.Vector3fc;
 
 public class DustGrainParticleEffect extends AbstractDustParticleEffect {
 
@@ -32,9 +32,9 @@ public class DustGrainParticleEffect extends AbstractDustParticleEffect {
             DustGrainParticleEffect::new
     );
 
-    private final Vector3f color;
+    private final Vector3fc color;
 
-    public DustGrainParticleEffect(Vector3f color, float scale) {
+    public DustGrainParticleEffect(Vector3fc color, float scale) {
         super(scale);
         this.color = color;
     }
@@ -44,7 +44,7 @@ public class DustGrainParticleEffect extends AbstractDustParticleEffect {
         return SParticleTypes.DUST_GRAIN;
     }
 
-    public Vector3f getColor() {
+    public Vector3fc getColor() {
         return color;
     }
 }

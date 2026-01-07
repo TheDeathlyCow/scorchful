@@ -4,13 +4,11 @@ import com.github.thedeathlycow.scorchful.event.HeatVisionActivation;
 import com.github.thedeathlycow.scorchful.particle.DustGrainParticleEffect;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.util.math.Vec3d;
-import org.joml.Vector3f;
+import net.minecraft.util.math.ColorHelper;
+import org.joml.Vector3fc;
 
 public class ApproachEffects {
-
-
-    private static final Vector3f COLOR = Vec3d.unpackRgb(0xD9AA84).toVector3f();
+    private static final Vector3fc COLOR = ColorHelper.toRgbVector(0xD9AA84);
 
     public static void initialize() {
         HeatVisionActivation.EVENT.register((vision, world, pos, player) -> {

@@ -22,10 +22,10 @@ public record CheckTimeEnvironmentProvider(
                     NumberRange.IntRange.CODEC
                             .fieldOf("time_range")
                             .forGetter(CheckTimeEnvironmentProvider::timeRange),
-                    EnvironmentProvider.ENTRY_CODEC
+                    EnvironmentProvider.HOLDER_CODEC
                             .fieldOf("in")
                             .forGetter(CheckTimeEnvironmentProvider::in),
-                    EnvironmentProvider.ENTRY_CODEC
+                    EnvironmentProvider.HOLDER_CODEC
                             .fieldOf("out")
                             .forGetter(CheckTimeEnvironmentProvider::out)
             ).apply(instance, CheckTimeEnvironmentProvider::new)
