@@ -26,6 +26,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.tick.ScheduledTickView;
@@ -148,8 +149,8 @@ public class NetherLilyBlock extends Block {
             return;
         }
 
-        DimensionType dimension = world.getDimension();
-        if (dimension.ultrawarm()) {
+        var attributes = world.getEnvironmentAttributes();
+        if (Boolean.TRUE.equals(attributes.getAttributeValue(EnvironmentAttributes.WATER_EVAPORATES_GAMEPLAY, pos))) {
             BlockState below = world.getBlockState(pos.down());
             if (below.isIn(SBlockTags.NETHER_LILY_CAN_ABSORB_WATER)) {
                 this.tryGrow(state, world, pos, random);
