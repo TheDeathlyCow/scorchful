@@ -1,9 +1,12 @@
 name: Publish Mod
 on: [workflow_dispatch] # Manual trigger
 
+permissions:
+  contents: write
+
 jobs:
   curseforge:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/openjdk/jdk:21-ubuntu
       options: --user root
@@ -17,7 +20,7 @@ jobs:
         env:
           CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
   modrinth:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/openjdk/jdk:21-ubuntu
       options: --user root
