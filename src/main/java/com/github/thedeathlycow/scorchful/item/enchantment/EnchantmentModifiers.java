@@ -7,15 +7,15 @@ import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import com.github.thedeathlycow.thermoo.api.predicate.SoakedLootCondition;
 import net.fabricmc.fabric.api.item.v1.EnchantmentEvents;
 import net.fabricmc.fabric.api.item.v1.EnchantmentSource;
-import net.minecraft.component.EnchantmentEffectComponentTypes;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentLevelBasedValue;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.enchantment.effect.AttributeEnchantmentEffect;
-import net.minecraft.enchantment.effect.value.AddEnchantmentEffect;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.predicate.NumberRange;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.advancements.criterion.MinMaxBounds;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.enchantment.LevelBasedValue;
+import net.minecraft.world.item.enchantment.effects.AddValue;
+import net.minecraft.world.item.enchantment.effects.EnchantmentAttributeEffect;
 
 public class EnchantmentModifiers {
 
@@ -24,17 +24,17 @@ public class EnchantmentModifiers {
         EnchantmentEvents.MODIFY.register(EnchantmentModifiers::modifyImpaling);
     }
 
-    private static void modifyImpaling(RegistryKey<Enchantment> key, Enchantment.Builder builder, EnchantmentSource source) {
+    private static void modifyImpaling(ResourceKey<Enchantment> key, Enchantment.Builder builder, EnchantmentSource source) {
         if (!source.isBuiltin() || key != Enchantments.IMPALING) {
             return;
         }
 
         ItemConfig config = ScorchfulConfig.getItemConfig();
 
-        builder.addEffect(
-                EnchantmentEffectComponentTypes.DAMAGE,
-                new AddEnchantmentEffect(EnchantmentLevelBasedValue.linear(config.getImpalingDamagePerLevel())),
-                SoakedLootCondition.builder(NumberRange.IntRange.atLeast(1))
+        builder.withEffect(
+                EnchantmentEffectComponents.DAMAGE,
+                new AddValue(LevelBasedValue.perLevel(config.getImpalingDamagePerLevel())),
+                SoakedLootCondition.builder(MinMaxBounds.Ints.atLeast(1))
                 // TODO: registry lookup doesnt work, throws: java.lang.IllegalStateException: Missing tag TagKey[minecraft:entity_type / minecraft:sensitive_to_impaling]
 //                AllOfLootCondition.builder(
 //                        () -> new SoakedLootCondition(
@@ -55,19 +55,19 @@ public class EnchantmentModifiers {
         );
     }
 
-    private static void modifyFireProtection(RegistryKey<Enchantment> key, Enchantment.Builder builder, EnchantmentSource source) {
+    private static void modifyFireProtection(ResourceKey<Enchantment> key, Enchantment.Builder builder, EnchantmentSource source) {
         if (!source.isBuiltin() || key != Enchantments.FIRE_PROTECTION) {
             return;
         }
 
         double valuePerLevel = ScorchfulConfig.getItemConfig().getFireProtectionHeatResistancePerLevel();
-        builder.addEffect(
-                EnchantmentEffectComponentTypes.ATTRIBUTES,
-                new AttributeEnchantmentEffect(
+        builder.withEffect(
+                EnchantmentEffectComponents.ATTRIBUTES,
+                new EnchantmentAttributeEffect(
                         Scorchful.id("enchantment.fire_protection.heat_resistance"),
                         ThermooAttributes.HEAT_RESISTANCE,
-                        EnchantmentLevelBasedValue.linear((float) valuePerLevel),
-                        EntityAttributeModifier.Operation.ADD_VALUE
+                        LevelBasedValue.perLevel((float) valuePerLevel),
+                        AttributeModifier.Operation.ADD_VALUE
                 )
         );
     }

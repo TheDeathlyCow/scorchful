@@ -6,9 +6,8 @@ import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.autogen.*;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
-import net.minecraft.util.math.MathHelper;
-
 import java.nio.file.Path;
+import net.minecraft.util.Mth;
 
 public class EntityConfig {
     public static final Path PATH = Scorchful.getConfigDir().resolve("common").resolve("entity.json5");
@@ -65,7 +64,7 @@ public class EntityConfig {
     float onFireDryRateMultiplier = 1.0f;
 
     public int getSoakingFromSplashPotions() {
-        return MathHelper.floor(300 * soakingFromSplashPotionsMultiplier);
+        return Mth.floor(300 * soakingFromSplashPotionsMultiplier);
     }
 
     public int getTouchingWaterWetnessIncrease() {
@@ -73,6 +72,6 @@ public class EntityConfig {
     }
 
     public int getOnFireDryDate() {
-        return MathHelper.floor(3 * onFireDryRateMultiplier);
+        return Mth.floor(3 * onFireDryRateMultiplier);
     }
 }

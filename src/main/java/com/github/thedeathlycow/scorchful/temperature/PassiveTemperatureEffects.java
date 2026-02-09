@@ -7,9 +7,9 @@ import com.github.thedeathlycow.thermoo.api.environment.component.EnvironmentCom
 import com.github.thedeathlycow.thermoo.api.environment.component.RelativeHumidityComponent;
 import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentTickContext;
 import com.github.thedeathlycow.thermoo.api.temperature.event.LivingEntityTemperatureTickEvents;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 public final class PassiveTemperatureEffects {
     private static final double LOW_HUMIDITY = 0.2;
@@ -39,9 +39,9 @@ public final class PassiveTemperatureEffects {
 
     private static int getIcyFloorTemperatureChange(EnvironmentTickContext<? extends LivingEntity> context, TemperatureConfig config) {
         LivingEntity entity = context.affected();
-        BlockState steppingState = entity.getSteppingBlockState();
+        BlockState steppingState = entity.getBlockStateOn();
 
-        if (steppingState.isIn(SBlockTags.HEAVY_ICE) && entity.thermoo$isWarm()) {
+        if (steppingState.is(SBlockTags.HEAVY_ICE) && entity.thermoo$isWarm()) {
             return config.getIceCooling();
         }
 
@@ -52,9 +52,9 @@ public final class PassiveTemperatureEffects {
         LivingEntity entity = context.affected();
         if (entity.thermoo$isWet()) {
             int temperatureChange = config.getTemperatureFromWetness();
-            if (!context.affected().isSubmergedInWater()) {
+            if (!context.affected().isUnderWater()) {
                 float efficiency = getSweatEfficiency(context, config);
-                temperatureChange = MathHelper.floor(temperatureChange * efficiency);
+                temperatureChange = Mth.floor(temperatureChange * efficiency);
             }
             return temperatureChange;
         }

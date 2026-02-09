@@ -5,26 +5,25 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.component.ComponentsAccess;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipAppender;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.dynamic.Codecs;
-import net.minecraft.util.math.MathHelper;
-
 import java.util.function.Consumer;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponentGetter;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.util.ExtraCodecs;
+import net.minecraft.util.Mth;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipProvider;
 
-public record DrinkContainerComponent(int numDrinks, int maxDrinks) implements TooltipAppender {
+public record DrinkContainerComponent(int numDrinks, int maxDrinks) implements TooltipProvider {
     public static final Style TOOLTIP_STYLE = Style.EMPTY
-            .withColor(Formatting.AQUA);
+            .withColor(ChatFormatting.AQUA);
 
     public static final DrinkContainerComponent DEFAULT = new DrinkContainerComponent(0, 16);
 
@@ -33,7 +32,7 @@ public record DrinkContainerComponent(int numDrinks, int maxDrinks) implements T
                     Codec.INT
                             .fieldOf("num_drinks")
                             .forGetter(DrinkContainerComponent::numDrinks),
-                    Codecs.POSITIVE_INT
+                    ExtraCodecs.POSITIVE_INT
                             .optionalFieldOf("max_drinks", DEFAULT.maxDrinks)
                             .forGetter(DrinkContainerComponent::maxDrinks)
             ).apply(instance, DrinkContainerComponent::new)
@@ -45,22 +44,22 @@ public record DrinkContainerComponent(int numDrinks, int maxDrinks) implements T
         }
     });
 
-    public static final Codec<DrinkContainerComponent> CODEC = Codec.either(Codecs.rangedInt(0, DEFAULT.maxDrinks), VALUE_CODEC)
+    public static final Codec<DrinkContainerComponent> CODEC = Codec.either(ExtraCodecs.intRange(0, DEFAULT.maxDrinks), VALUE_CODEC)
             .xmap(
                     either -> either.map(i -> new DrinkContainerComponent(i, DEFAULT.maxDrinks), container -> container),
                     Either::right
             );
 
-    public static final PacketCodec<RegistryByteBuf, DrinkContainerComponent> PACKET_CODEC = PacketCodec.tuple(
-            PacketCodecs.VAR_INT,
+    public static final StreamCodec<RegistryFriendlyByteBuf, DrinkContainerComponent> PACKET_CODEC = StreamCodec.composite(
+            ByteBufCodecs.VAR_INT,
             DrinkContainerComponent::numDrinks,
-            PacketCodecs.VAR_INT,
+            ByteBufCodecs.VAR_INT,
             DrinkContainerComponent::maxDrinks,
             DrinkContainerComponent::new
     );
 
     public static DrinkContainerComponent addDrinks(ItemStack stack, int value) {
-        return stack.apply(
+        return stack.update(
                 SDataComponentTypes.DRINK_CONTAINER,
                 DEFAULT,
                 current -> current.addDrinks(value)
@@ -68,7 +67,7 @@ public record DrinkContainerComponent(int numDrinks, int maxDrinks) implements T
     }
 
     public static DrinkContainerComponent fillCompletely(ItemStack stack) {
-        return stack.apply(
+        return stack.update(
                 SDataComponentTypes.DRINK_CONTAINER,
                 DEFAULT,
                 current -> current.addDrinks(current.maxDrinks)
@@ -77,7 +76,7 @@ public record DrinkContainerComponent(int numDrinks, int maxDrinks) implements T
 
     public DrinkContainerComponent addDrinks(int value) {
         return new DrinkContainerComponent(
-                MathHelper.clamp(this.numDrinks + value, 0, this.maxDrinks),
+                Mth.clamp(this.numDrinks + value, 0, this.maxDrinks),
                 this.maxDrinks
         );
     }
@@ -99,10 +98,10 @@ public record DrinkContainerComponent(int numDrinks, int maxDrinks) implements T
     }
 
     @Override
-    public void appendTooltip(Item.TooltipContext context, Consumer<Text> tooltip, TooltipType type, ComponentsAccess components) {
-        MutableText text = this.hasDrink()
-                ? Text.translatable("item.scorchful.water_skin.tooltip.count", this.numDrinks(), this.maxDrinks())
-                : Text.translatable("item.scorchful.water_skin.tooltip.empty");
+    public void addToTooltip(Item.TooltipContext context, Consumer<Component> tooltip, TooltipFlag type, DataComponentGetter components) {
+        MutableComponent text = this.hasDrink()
+                ? Component.translatable("item.scorchful.water_skin.tooltip.count", this.numDrinks(), this.maxDrinks())
+                : Component.translatable("item.scorchful.water_skin.tooltip.empty");
         text.setStyle(TOOLTIP_STYLE);
         tooltip.accept(text);
     }

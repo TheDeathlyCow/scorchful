@@ -6,14 +6,13 @@ import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import com.github.thedeathlycow.thermoo.api.item.ModifyItemAttributeModifiersCallback;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.AttributeModifierSlot;
-import net.minecraft.component.type.AttributeModifiersComponent;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.item.Items;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -32,23 +31,23 @@ public final class HeatResistanceModifier {
             context.modify(
                     Items.WOLF_ARMOR,
                     builder -> {
-                        AttributeModifiersComponent attributes = builder.getOrDefault(
-                                DataComponentTypes.ATTRIBUTE_MODIFIERS,
-                                AttributeModifiersComponent.DEFAULT
+                        ItemAttributeModifiers attributes = builder.getOrDefault(
+                                DataComponents.ATTRIBUTE_MODIFIERS,
+                                ItemAttributeModifiers.EMPTY
                         );
 
-                        attributes = attributes.with(
+                        attributes = attributes.withModifierAdded(
                                 ThermooAttributes.HEAT_RESISTANCE,
-                                new EntityAttributeModifier(
+                                new AttributeModifier(
                                         Scorchful.id("base_heat_resistance"),
                                         8.0,
-                                        EntityAttributeModifier.Operation.ADD_VALUE
+                                        AttributeModifier.Operation.ADD_VALUE
                                 ),
-                                AttributeModifierSlot.BODY
+                                EquipmentSlotGroup.BODY
                         );
 
-                        builder.add(DataComponentTypes.ATTRIBUTE_MODIFIERS, attributes);
-                        builder.add(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.NEUTRAL);
+                        builder.set(DataComponents.ATTRIBUTE_MODIFIERS, attributes);
+                        builder.set(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.NEUTRAL);
                     }
             );
         });
@@ -66,7 +65,7 @@ public final class HeatResistanceModifier {
                             Items.CHAINMAIL_BOOTS
                     ),
                     (builder, item) -> {
-                        builder.add(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.NEUTRAL);
+                        builder.set(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.NEUTRAL);
                     }
             );
         });
@@ -80,7 +79,7 @@ public final class HeatResistanceModifier {
                             Items.NETHERITE_BOOTS
                     ),
                     (builder, item) -> {
-                        builder.add(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.PROTECTIVE);
+                        builder.set(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.PROTECTIVE);
                     }
             );
         });
@@ -89,7 +88,7 @@ public final class HeatResistanceModifier {
             context.modify(
                     Items.TURTLE_HELMET,
                     builder -> {
-                        builder.add(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE);
+                        builder.set(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE);
                     }
             );
         });
@@ -98,22 +97,22 @@ public final class HeatResistanceModifier {
     private static void initializeItemModifiers() {
         ModifyItemAttributeModifiersCallback.EVENT.register(
                 (stack, builder) -> {
-                    if (stack.isIn(ConventionalItemTags.ARMORS) && stack.contains(DataComponentTypes.EQUIPPABLE)) {
+                    if (stack.is(ConventionalItemTags.ARMORS) && stack.has(DataComponents.EQUIPPABLE)) {
                         HeatResistanceComponent resistance = HeatResistanceComponent.get(stack);
 
-                        EquipmentSlot slot = stack.get(DataComponentTypes.EQUIPPABLE).slot();
-                        AttributeModifierSlot modifierSlot = AttributeModifierSlot.forEquipmentSlot(slot);
+                        EquipmentSlot slot = stack.get(DataComponents.EQUIPPABLE).slot();
+                        EquipmentSlotGroup modifierSlot = EquipmentSlotGroup.bySlot(slot);
 
                         if (resistance.heatResistance() != 0) {
                             builder.add(
                                     ThermooAttributes.HEAT_RESISTANCE,
-                                    new EntityAttributeModifier(
+                                    new AttributeModifier(
                                             SLOT_IDS.computeIfAbsent(
                                                     slot,
-                                                    sl -> Scorchful.id("base_heat_resistance/" + sl.asString())
+                                                    sl -> Scorchful.id("base_heat_resistance/" + sl.getSerializedName())
                                             ),
                                             resistance.heatResistance(),
-                                            EntityAttributeModifier.Operation.ADD_VALUE
+                                            AttributeModifier.Operation.ADD_VALUE
                                     ),
                                     modifierSlot
                             );
@@ -122,10 +121,10 @@ public final class HeatResistanceModifier {
                         if (resistance.environmentHeatResistance() != 0) {
                             builder.add(
                                     ThermooAttributes.ENVIRONMENT_HEAT_RESISTANCE,
-                                    new EntityAttributeModifier(
-                                            ENVIRONMENT_SLOT_IDS.computeIfAbsent(slot, sl -> Scorchful.id("base_environment_heat_resistance/" + sl.asString())),
+                                    new AttributeModifier(
+                                            ENVIRONMENT_SLOT_IDS.computeIfAbsent(slot, sl -> Scorchful.id("base_environment_heat_resistance/" + sl.getSerializedName())),
                                             resistance.environmentHeatResistance(),
-                                            EntityAttributeModifier.Operation.ADD_VALUE
+                                            AttributeModifier.Operation.ADD_VALUE
                                     ),
                                     modifierSlot
                             );

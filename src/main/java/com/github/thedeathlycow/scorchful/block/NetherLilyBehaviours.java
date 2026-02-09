@@ -4,17 +4,17 @@ import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import com.github.thedeathlycow.scorchful.registry.SStats;
-import net.minecraft.component.type.PotionContentsComponent;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsage;
-import net.minecraft.item.Items;
-import net.minecraft.potion.Potions;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.stat.Stats;
-import net.minecraft.util.ActionResult;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.gameevent.GameEvent;
 
 public class NetherLilyBehaviours {
     public static final NetherLilyBehaviour.NetherLilyBehaviourMap WARPED_LILY_BEHAVIOUR = NetherLilyBehaviour.createMap("scorchful_warped_lily");
@@ -22,23 +22,23 @@ public class NetherLilyBehaviours {
     public static final NetherLilyBehaviour.NetherLilyBehaviourMap CRIMSON_LILY_BEHAVIOUR = NetherLilyBehaviour.createMap("scorchful_crimson_lily");
 
     private static final NetherLilyBehaviour ADD_WATER = (state, world, pos, player, hand, stack) -> {
-        if (!world.isClient()) {
-            if (state.get(NetherLilyBlock.WATER_SATURATION_LEVEL) >= NetherLilyBlock.MAX_LEVEL) {
-                return ActionResult.FAIL;
+        if (!world.isClientSide()) {
+            if (state.getValue(NetherLilyBlock.WATER_SATURATION_LEVEL) >= NetherLilyBlock.MAX_LEVEL) {
+                return InteractionResult.FAIL;
             }
             Item item = stack.getItem();
-            player.incrementStat(SStats.FILL_CRIMSON_LILY);
-            player.incrementStat(Stats.USED.getOrCreateStat(item));
+            player.awardStat(SStats.FILL_CRIMSON_LILY);
+            player.awardStat(Stats.ITEM_USED.get(item));
             NetherLilyBlock.setWater(state, world, pos, 3);
             world.playSound(
                     null,
                     pos,
-                    SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS,
+                    SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS,
                     1.0f, 1.0f
             );
-            world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
+            world.gameEvent(null, GameEvent.FLUID_PICKUP, pos);
         }
-        return ActionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     };
 
     public static void initialize() {
@@ -46,32 +46,32 @@ public class NetherLilyBehaviours {
                 Items.GLASS_BOTTLE,
                 (state, world, pos, player, hand, stack) -> {
 
-                    if (state.get(NetherLilyBlock.WATER_SATURATION_LEVEL) < 3) {
-                        return ActionResult.FAIL;
+                    if (state.getValue(NetherLilyBlock.WATER_SATURATION_LEVEL) < 3) {
+                        return InteractionResult.FAIL;
                     }
 
-                    if (!world.isClient()) {
+                    if (!world.isClientSide()) {
                         Item item = stack.getItem();
-                        player.setStackInHand(
+                        player.setItemInHand(
                                 hand,
-                                ItemUsage.exchangeStack(
+                                ItemUtils.createFilledResult(
                                         stack,
                                         player,
-                                        PotionContentsComponent.createStack(Items.POTION, Potions.WATER)
+                                        PotionContents.createItemStack(Items.POTION, Potions.WATER)
                                 )
                         );
-                        player.incrementStat(SStats.USE_WARPED_LILY);
-                        player.incrementStat(Stats.USED.getOrCreateStat(item));
+                        player.awardStat(SStats.USE_WARPED_LILY);
+                        player.awardStat(Stats.ITEM_USED.get(item));
                         NetherLilyBlock.setWater(state, world, pos, 0);
                         world.playSound(
                                 null,
                                 pos,
-                                SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS,
+                                SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS,
                                 1.0f, 1.0f
                         );
-                        world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
+                        world.gameEvent(null, GameEvent.FLUID_PICKUP, pos);
                     }
-                    return ActionResult.SUCCESS;
+                    return InteractionResult.SUCCESS;
                 }
         );
         WARPED_LILY_BEHAVIOUR.map().put(SItems.WATER_SKIN, ((WaterSkinItem) SItems.WATER_SKIN)::onWarpedLilyInteract);
@@ -80,12 +80,12 @@ public class NetherLilyBehaviours {
                 Items.POTION,
                 (state, world, pos, player, hand, stack) -> {
 
-                    ActionResult result = ADD_WATER.interact(state, world, pos, player, hand, stack);
+                    InteractionResult result = ADD_WATER.interact(state, world, pos, player, hand, stack);
 
-                    if (!world.isClient() && result.isAccepted()) {
-                        player.setStackInHand(
+                    if (!world.isClientSide() && result.consumesAction()) {
+                        player.setItemInHand(
                                 hand,
-                                ItemUsage.exchangeStack(stack, player, new ItemStack(Items.GLASS_BOTTLE))
+                                ItemUtils.createFilledResult(stack, player, new ItemStack(Items.GLASS_BOTTLE))
                         );
                     }
 
@@ -95,14 +95,14 @@ public class NetherLilyBehaviours {
         CRIMSON_LILY_BEHAVIOUR.map().put(
                 SItems.WATER_SKIN,
                 (state, world, pos, player, hand, stack) -> {
-                    ActionResult result;
+                    InteractionResult result;
                     if (WaterSkinItem.hasDrink(stack)) {
                         result = ADD_WATER.interact(state, world, pos, player, hand, stack);
                     } else {
-                        result = ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+                        result = InteractionResult.TRY_WITH_EMPTY_HAND;
                     }
 
-                    if (!world.isClient() && result.isAccepted()) {
+                    if (!world.isClientSide() && result.consumesAction()) {
                         DrinkContainerComponent.addDrinks(stack, -1);
                     }
                     return result;

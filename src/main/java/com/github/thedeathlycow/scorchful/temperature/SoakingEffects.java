@@ -12,11 +12,11 @@ import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentTickCon
 import com.github.thedeathlycow.thermoo.api.temperature.event.LivingEntitySoakingTickEvents;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.util.TriState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Blocks;
 
 public final class SoakingEffects {
     public static final Identifier REHYDRATION_TICK_PHASE = Scorchful.id("rehydration_tick");
@@ -43,7 +43,7 @@ public final class SoakingEffects {
         LivingEntity entity = context.affected();
 
         // fully soak in water
-        if (entity.isSubmergedIn(FluidTags.WATER)) {
+        if (entity.isEyeInFluid(FluidTags.WATER)) {
             return entity.thermoo$getMaxWetTicks();
         }
 
@@ -58,7 +58,7 @@ public final class SoakingEffects {
 
     private static int getTouchingWaterChange(LivingEntity entity, EntityConfig config) {
         // add wetness when touching, but not submerged in, water or rain
-        if (isTouchingWater(entity) || entity.getBlockStateAtPos().isOf(Blocks.WATER_CAULDRON)) {
+        if (isTouchingWater(entity) || entity.getInBlockState().is(Blocks.WATER_CAULDRON)) {
             return config.getTouchingWaterWetnessIncrease();
         }
 
@@ -72,7 +72,7 @@ public final class SoakingEffects {
     }
 
     private static void tickRehydration(EnvironmentTickContext<? extends LivingEntity> context, int wetChange) {
-        if (context.affected() instanceof PlayerEntity player) {
+        if (context.affected() instanceof Player player) {
             double rehydrationEfficiency = player.getAttributeValue(SEntityAttributes.REHYDRATION_EFFICIENCY);
             RehydrationComponent component = ScorchfulComponents.REHYDRATION.get(player);
             component.tickRehydration(rehydrationEfficiency, wetChange);
@@ -80,12 +80,12 @@ public final class SoakingEffects {
     }
 
     private static boolean isTouchingWater(LivingEntity entity) {
-        if (entity.isTouchingWater()) {
+        if (entity.isInWater()) {
             return true;
         }
 
         return ((EntityAccessor) entity).scorchful$invokeIsBeingRainedOn()
-                && !entity.isHolding(stack -> stack.isIn(SItemTags.BLOCKS_RAIN_WHEN_HOLDING));
+                && !entity.isHolding(stack -> stack.is(SItemTags.BLOCKS_RAIN_WHEN_HOLDING));
     }
 
     private SoakingEffects() {

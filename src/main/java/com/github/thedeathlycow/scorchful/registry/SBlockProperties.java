@@ -1,9 +1,9 @@
 package com.github.thedeathlycow.scorchful.registry;
 
-import net.minecraft.state.property.IntProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 public final class SBlockProperties {
-    public static final IntProperty WATER_LEVEL_0_3 = IntProperty.of("water_level", 0, 3);
+    public static final IntegerProperty WATER_LEVEL_0_3 = IntegerProperty.create("water_level", 0, 3);
 
     private SBlockProperties() {
 

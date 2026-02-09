@@ -3,76 +3,76 @@ package com.github.thedeathlycow.scorchful.block;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.stat.Stats;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.cauldron.CauldronInteraction;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 
 public class SandCauldronBehaviours {
-    public static final CauldronBehavior.CauldronBehaviorMap SAND_CAULDRON_BEHAVIOUR = CauldronBehavior.createMap("scorchful_sand_cauldron");
-    public static final CauldronBehavior.CauldronBehaviorMap RED_SAND_CAULDRON_BEHAVIOUR = CauldronBehavior.createMap("scorchful_red_sand_cauldron");
+    public static final CauldronInteraction.InteractionMap SAND_CAULDRON_BEHAVIOUR = CauldronInteraction.newInteractionMap("scorchful_sand_cauldron");
+    public static final CauldronInteraction.InteractionMap RED_SAND_CAULDRON_BEHAVIOUR = CauldronInteraction.newInteractionMap("scorchful_red_sand_cauldron");
 
-    public static final CauldronBehavior EMPTY_SAND_CAULDRON = (state, world, pos, player, hand, stack) -> {
+    public static final CauldronInteraction EMPTY_SAND_CAULDRON = (state, world, pos, player, hand, stack) -> {
         return emptyBlockFromCauldron(
                 state,
                 world,
                 pos,
                 player,
                 stack,
-                Items.SAND.getDefaultStack(),
-                SoundEvents.BLOCK_SAND_PLACE
+                Items.SAND.getDefaultInstance(),
+                SoundEvents.SAND_PLACE
         );
     };
 
-    public static final CauldronBehavior EMPTY_RED_SAND_CAULDRON = (state, world, pos, player, hand, stack) -> {
+    public static final CauldronInteraction EMPTY_RED_SAND_CAULDRON = (state, world, pos, player, hand, stack) -> {
         return emptyBlockFromCauldron(
                 state,
                 world,
                 pos,
                 player,
                 stack,
-                Items.RED_SAND.getDefaultStack(),
-                SoundEvents.BLOCK_SAND_PLACE
+                Items.RED_SAND.getDefaultInstance(),
+                SoundEvents.SAND_PLACE
         );
     };
 
     public static void initialize() {
-        CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.map().put(
+        CauldronInteraction.EMPTY.map().put(
                 Items.SAND,
                 fillWithSand(
-                        SBlocks.SAND_CAULDRON.getDefaultState()
-                                .with(SandCauldronBlock.LEVEL, SandCauldronBlock.MAX_LEVEL)
+                        SBlocks.SAND_CAULDRON.defaultBlockState()
+                                .setValue(SandCauldronBlock.LEVEL, SandCauldronBlock.MAX_LEVEL)
                 )
         );
 
-        CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.map().put(
+        CauldronInteraction.EMPTY.map().put(
                 Items.RED_SAND,
                 fillWithSand(
-                        SBlocks.RED_SAND_CAULDRON.getDefaultState()
-                                .with(SandCauldronBlock.LEVEL, SandCauldronBlock.MAX_LEVEL)
+                        SBlocks.RED_SAND_CAULDRON.defaultBlockState()
+                                .setValue(SandCauldronBlock.LEVEL, SandCauldronBlock.MAX_LEVEL)
                 )
         );
 
-        if (SAND_CAULDRON_BEHAVIOUR.map() instanceof Object2ObjectOpenHashMap<Item, CauldronBehavior> sandCauldronOpenMap) {
+        if (SAND_CAULDRON_BEHAVIOUR.map() instanceof Object2ObjectOpenHashMap<Item, CauldronInteraction> sandCauldronOpenMap) {
             sandCauldronOpenMap.defaultReturnValue(EMPTY_SAND_CAULDRON);
         } else {
             Scorchful.LOGGER.error("Unable to register default sand cauldron behaviour");
         }
 
-        if (RED_SAND_CAULDRON_BEHAVIOUR.map() instanceof Object2ObjectOpenHashMap<Item, CauldronBehavior> redSandCauldronOpenMap) {
+        if (RED_SAND_CAULDRON_BEHAVIOUR.map() instanceof Object2ObjectOpenHashMap<Item, CauldronInteraction> redSandCauldronOpenMap) {
             redSandCauldronOpenMap.defaultReturnValue(EMPTY_RED_SAND_CAULDRON);
         } else {
             Scorchful.LOGGER.error("Unable to register default red sand cauldron behaviour");
@@ -92,28 +92,28 @@ public class SandCauldronBehaviours {
      * @param player     the interacting player
      * @param state      the filled cauldron state
      * @param stack      the block item stack in the player's hand
-     * @return a {@linkplain ActionResult#isAccepted successful} action result
+     * @return a {@linkplain InteractionResult#consumesAction successful} action result
      */
-    public static ActionResult fillCauldronWithBlock(
-            World world, BlockPos pos,
-            PlayerEntity player,
-            Hand hand,
+    public static InteractionResult fillCauldronWithBlock(
+            Level world, BlockPos pos,
+            Player player,
+            InteractionHand hand,
             ItemStack stack,
             BlockState state,
             SoundEvent soundEvent
     ) {
-        if (!world.isClient()) {
+        if (!world.isClientSide()) {
             Item item = stack.getItem();
             if (!player.isCreative()) {
-                stack.decrement(1);
+                stack.shrink(1);
             }
-            player.incrementStat(Stats.FILL_CAULDRON);
-            player.incrementStat(Stats.USED.getOrCreateStat(item));
-            world.setBlockState(pos, state);
-            world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.0f);
-            world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
+            player.awardStat(Stats.FILL_CAULDRON);
+            player.awardStat(Stats.ITEM_USED.get(item));
+            world.setBlockAndUpdate(pos, state);
+            world.playSound(null, pos, soundEvent, SoundSource.BLOCKS, 1.0f, 1.0f);
+            world.gameEvent(null, GameEvent.BLOCK_CHANGE, pos);
         }
-        return ActionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     /**
@@ -126,37 +126,37 @@ public class SandCauldronBehaviours {
      * @param pos        the cauldron's position
      * @param world      the world where the cauldron is located
      * @param state      the cauldron block state
-     * @return a {@linkplain ActionResult#isAccepted successful} action result if emptied, {@link ActionResult#PASS} otherwise
+     * @return a {@linkplain InteractionResult#consumesAction successful} action result if emptied, {@link InteractionResult#PASS} otherwise
      */
-    public static ActionResult emptyBlockFromCauldron(
+    public static InteractionResult emptyBlockFromCauldron(
             BlockState state,
-            World world, BlockPos pos,
-            PlayerEntity player,
+            Level world, BlockPos pos,
+            Player player,
             ItemStack stack, ItemStack output,
             SoundEvent soundEvent
     ) {
-        if (!world.isClient()) {
-            if (state.contains(SandCauldronBlock.LEVEL) && state.get(SandCauldronBlock.LEVEL) < SandCauldronBlock.MAX_LEVEL) {
-                return ActionResult.FAIL;
+        if (!world.isClientSide()) {
+            if (state.hasProperty(SandCauldronBlock.LEVEL) && state.getValue(SandCauldronBlock.LEVEL) < SandCauldronBlock.MAX_LEVEL) {
+                return InteractionResult.FAIL;
             }
 
             Item item = stack.getItem();
 
-            PlayerInventory inventory = player.getInventory();
+            Inventory inventory = player.getInventory();
             if (!player.isCreative() || !inventory.contains(output)) {
-                inventory.insertStack(output);
+                inventory.add(output);
             }
 
-            player.incrementStat(Stats.USE_CAULDRON);
-            player.incrementStat(Stats.USED.getOrCreateStat(item));
-            world.setBlockState(pos, Blocks.CAULDRON.getDefaultState());
-            world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.0f);
-            world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
+            player.awardStat(Stats.USE_CAULDRON);
+            player.awardStat(Stats.ITEM_USED.get(item));
+            world.setBlockAndUpdate(pos, Blocks.CAULDRON.defaultBlockState());
+            world.playSound(null, pos, soundEvent, SoundSource.BLOCKS, 1.0f, 1.0f);
+            world.gameEvent(null, GameEvent.BLOCK_CHANGE, pos);
         }
-        return ActionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
-    private static CauldronBehavior fillWithSand(BlockState filledState) {
+    private static CauldronInteraction fillWithSand(BlockState filledState) {
         return (state, world, pos, player, hand, stack) -> {
             return fillCauldronWithBlock(
                     world,
@@ -165,7 +165,7 @@ public class SandCauldronBehaviours {
                     hand,
                     stack,
                     filledState,
-                    SoundEvents.BLOCK_SAND_PLACE
+                    SoundEvents.SAND_PLACE
             );
         };
     }

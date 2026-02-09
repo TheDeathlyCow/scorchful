@@ -1,32 +1,31 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import net.minecraft.item.equipment.ArmorMaterial;
-import net.minecraft.item.equipment.EquipmentAssetKeys;
-import net.minecraft.item.equipment.EquipmentType;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Util;
-
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.EquipmentAssets;
 import java.util.EnumMap;
 
 public final class SArmorMaterials {
     public static final ArmorMaterial TURTLE = new ArmorMaterial(
             25,
-            Util.make(new EnumMap<>(EquipmentType.class), map -> {
-                map.put(EquipmentType.BOOTS, 2);
-                map.put(EquipmentType.LEGGINGS, 5);
-                map.put(EquipmentType.CHESTPLATE, 6);
-                map.put(EquipmentType.HELMET, 2);
-                map.put(EquipmentType.BODY, 5);
+            Util.make(new EnumMap<>(ArmorType.class), map -> {
+                map.put(ArmorType.BOOTS, 2);
+                map.put(ArmorType.LEGGINGS, 5);
+                map.put(ArmorType.CHESTPLATE, 6);
+                map.put(ArmorType.HELMET, 2);
+                map.put(ArmorType.BODY, 5);
             }),
             9,
-            SoundEvents.ITEM_ARMOR_EQUIP_TURTLE,
+            SoundEvents.ARMOR_EQUIP_TURTLE,
             0.0f,
             0.0f,
             ItemTags.REPAIRS_TURTLE_HELMET,
-            RegistryKey.of(EquipmentAssetKeys.REGISTRY_KEY, Scorchful.id("turtle"))
+            ResourceKey.create(EquipmentAssets.ROOT_ID, Scorchful.id("turtle"))
     );
 
     private SArmorMaterials() {

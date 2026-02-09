@@ -12,62 +12,62 @@ import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.component.ComponentsAccess;
-import net.minecraft.component.type.Consumable;
-import net.minecraft.component.type.ConsumableComponent;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipAppender;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.text.Text;
-import net.minecraft.util.StringIdentifiable;
-import net.minecraft.util.function.ValueLists;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 import java.util.function.IntFunction;
 import java.util.function.ToIntFunction;
+import net.minecraft.core.component.DataComponentGetter;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.ByIdMap;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.Consumable;
+import net.minecraft.world.item.component.ConsumableListener;
+import net.minecraft.world.item.component.TooltipProvider;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
-public enum DrinkLevelComponent implements StringIdentifiable, Consumable, TooltipAppender {
+public enum DrinkLevelComponent implements StringRepresentable, ConsumableListener, TooltipProvider {
     PARCHING(
             "parching",
             SItemTags.IS_PARCHING,
-            Text.translatable("item.scorchful.tooltip.parching").setStyle(WaterSkinItem.PARCHING_STYLE),
+            Component.translatable("item.scorchful.tooltip.parching").setStyle(WaterSkinItem.PARCHING_STYLE),
             ItemConfig::getWaterFromParchingFood
     ),
     REFRESHING(
             "refreshing",
             SItemTags.IS_REFRESHING,
-            Text.translatable("item.scorchful.tooltip.refreshing").setStyle(WaterSkinItem.TOOLTIP_STYLE),
+            Component.translatable("item.scorchful.tooltip.refreshing").setStyle(WaterSkinItem.TOOLTIP_STYLE),
             ItemConfig::getWaterFromRefreshingFood
     ),
     SUSTAINING(
             "sustaining",
             SItemTags.IS_SUSTAINING,
-            Text.translatable("item.scorchful.tooltip.sustaining").setStyle(WaterSkinItem.TOOLTIP_STYLE),
+            Component.translatable("item.scorchful.tooltip.sustaining").setStyle(WaterSkinItem.TOOLTIP_STYLE),
             ItemConfig::getWaterFromSustainingFood
     ),
     HYDRATING(
             "hydrating",
             SItemTags.IS_HYDRATING,
-            Text.translatable("item.scorchful.tooltip.hydrating").setStyle(WaterSkinItem.TOOLTIP_STYLE),
+            Component.translatable("item.scorchful.tooltip.hydrating").setStyle(WaterSkinItem.TOOLTIP_STYLE),
             ItemConfig::getWaterFromHydratingFood
     );
 
-    public static final Codec<DrinkLevelComponent> CODEC = StringIdentifiable.createCodec(DrinkLevelComponent::values);
-    public static final IntFunction<DrinkLevelComponent> ID_TO_VALUE = ValueLists.createIndexToValueFunction(
-            DrinkLevelComponent::ordinal, values(), ValueLists.OutOfBoundsHandling.ZERO
+    public static final Codec<DrinkLevelComponent> CODEC = StringRepresentable.fromEnum(DrinkLevelComponent::values);
+    public static final IntFunction<DrinkLevelComponent> ID_TO_VALUE = ByIdMap.continuous(
+            DrinkLevelComponent::ordinal, values(), ByIdMap.OutOfBoundsStrategy.ZERO
     );
-    public static final PacketCodec<ByteBuf, DrinkLevelComponent> PACKET_CODEC = PacketCodecs.indexed(
+    public static final StreamCodec<ByteBuf, DrinkLevelComponent> PACKET_CODEC = ByteBufCodecs.idMapper(
             ID_TO_VALUE, DrinkLevelComponent::ordinal
     );
 
@@ -75,11 +75,11 @@ public enum DrinkLevelComponent implements StringIdentifiable, Consumable, Toolt
 
     private final TagKey<Item> tag;
 
-    private final Text tooltipText;
+    private final Component tooltipText;
 
     private final ToIntFunction<ItemConfig> waterProvider;
 
-    DrinkLevelComponent(String name, TagKey<Item> tag, Text tooltipText, ToIntFunction<ItemConfig> waterProvider) {
+    DrinkLevelComponent(String name, TagKey<Item> tag, Component tooltipText, ToIntFunction<ItemConfig> waterProvider) {
         this.name = name;
         this.tag = tag;
         this.tooltipText = tooltipText;
@@ -87,11 +87,11 @@ public enum DrinkLevelComponent implements StringIdentifiable, Consumable, Toolt
     }
 
     public static void applyToNewStack(ItemStack stack) {
-        if (stack.contains(SDataComponentTypes.DRINK_LEVEL)) {
+        if (stack.has(SDataComponentTypes.DRINK_LEVEL)) {
             return;
         }
 
-        if (((RegistryEntryReferenceAccessor) stack.getItem().getRegistryEntry()).scorchful$tags() == null) {
+        if (((RegistryEntryReferenceAccessor) stack.getItem().builtInRegistryHolder()).scorchful$tags() == null) {
             return;
         }
 
@@ -101,22 +101,22 @@ public enum DrinkLevelComponent implements StringIdentifiable, Consumable, Toolt
         }
     }
 
-    public static void spawnWaterParticles(World world, LivingEntity entity, int count) {
-        Random random = entity.getRandom();
+    public static void spawnWaterParticles(Level world, LivingEntity entity, int count) {
+        RandomSource random = entity.getRandom();
 
         for (int i = 0; i < count; i++) {
 
-            var velocity = new Vec3d((random.nextFloat() - 0.5) * 0.1, Math.random() * 0.1 + 1, 0);
-            velocity = velocity.rotateX(-entity.getPitch() * (MathHelper.PI / 180f));
-            velocity = velocity.rotateY(-entity.getYaw() * (MathHelper.PI / 180f));
+            var velocity = new Vec3((random.nextFloat() - 0.5) * 0.1, Math.random() * 0.1 + 1, 0);
+            velocity = velocity.xRot(-entity.getXRot() * (Mth.PI / 180f));
+            velocity = velocity.yRot(-entity.getYRot() * (Mth.PI / 180f));
 
             double y = -random.nextFloat() * 0.6 - 0.3;
-            var postion = new Vec3d((random.nextFloat() - 0.5) * 0.3, y, 0.6);
-            postion = postion.rotateX(-entity.getPitch() * (MathHelper.PI / 180f));
-            postion = postion.rotateY(-entity.getYaw() * (MathHelper.PI / 180f));
+            var postion = new Vec3((random.nextFloat() - 0.5) * 0.3, y, 0.6);
+            postion = postion.xRot(-entity.getXRot() * (Mth.PI / 180f));
+            postion = postion.yRot(-entity.getYRot() * (Mth.PI / 180f));
             postion = postion.add(entity.getX(), entity.getEyeY(), entity.getZ());
 
-            world.addParticleClient(
+            world.addParticle(
                     ParticleTypes.SPLASH,
                     postion.x, postion.y, postion.z,
                     velocity.x, velocity.y + 1, velocity.z
@@ -127,7 +127,7 @@ public enum DrinkLevelComponent implements StringIdentifiable, Consumable, Toolt
     @Nullable
     private static DrinkLevelComponent byTag(ItemStack stack) {
         for (DrinkLevelComponent level : values()) {
-            if (stack.isIn(level.tag)) {
+            if (stack.is(level.tag)) {
                 return level;
             }
         }
@@ -139,17 +139,17 @@ public enum DrinkLevelComponent implements StringIdentifiable, Consumable, Toolt
         return this.waterProvider.applyAsInt(config);
     }
 
-    public Text getTooltipText() {
+    public Component getTooltipText() {
         return tooltipText;
     }
 
     @Override
-    public String asString() {
+    public String getSerializedName() {
         return this.name;
     }
 
     @Override
-    public void onConsume(World world, LivingEntity user, ItemStack stack, ConsumableComponent consumable) {
+    public void onConsume(Level world, LivingEntity user, ItemStack stack, Consumable consumable) {
         if (ServerThirstPlugin.isCustomPluginLoaded()) {
             return;
         }
@@ -166,7 +166,7 @@ public enum DrinkLevelComponent implements StringIdentifiable, Consumable, Toolt
     }
 
     @Override
-    public void appendTooltip(Item.TooltipContext context, Consumer<Text> tooltip, TooltipType type, ComponentsAccess components) {
+    public void addToTooltip(Item.TooltipContext context, Consumer<Component> tooltip, TooltipFlag type, DataComponentGetter components) {
         tooltip.accept(this.tooltipText);
     }
 }

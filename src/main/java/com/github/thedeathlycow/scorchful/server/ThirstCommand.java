@@ -4,36 +4,36 @@ import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.thermoo.api.command.TemperatureCommand;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.command.DefaultPermissions;
-import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.server.permissions.Permissions;
+import net.minecraft.world.entity.player.Player;
 
-import static net.minecraft.server.command.CommandManager.argument;
-import static net.minecraft.server.command.CommandManager.literal;
+import static net.minecraft.commands.Commands.argument;
+import static net.minecraft.commands.Commands.literal;
 
 public class ThirstCommand {
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
 
         if (!FabricLoader.getInstance().isDevelopmentEnvironment()) {
             return;
         }
 
         var thirst =
-                argument("target", EntityArgumentType.player())
+                argument("target", EntityArgument.player())
                         .executes(
                                 context -> {
                                     return run(
                                             context.getSource(),
-                                            EntityArgumentType.getPlayer(context, "target")
+                                            EntityArgument.getPlayer(context, "target")
                                     );
                                 }
                         );
 
 
         dispatcher.register(
-                literal("thirst").requires(src -> src.getPermissions().hasPermission(DefaultPermissions.GAMEMASTERS))
+                literal("thirst").requires(src -> src.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER))
                         .then(
                                 thirst
                         )
@@ -41,8 +41,8 @@ public class ThirstCommand {
     }
 
     private static int run(
-            ServerCommandSource source,
-            PlayerEntity target
+            CommandSourceStack source,
+            Player target
     ) {
         return ScorchfulComponents.PLAYER_WATER.get(target).getWaterDrunk();
     }

@@ -3,24 +3,23 @@ package com.github.thedeathlycow.scorchful.item.component;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.component.ComponentsAccess;
-import net.minecraft.item.Item;
-import net.minecraft.item.tooltip.TooltipAppender;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
-
 import java.util.function.Consumer;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponentGetter;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipProvider;
 
 public record SunHatRendererComponent(
         boolean replaceArmorModel,
         boolean showTooltip
-) implements TooltipAppender {
+) implements TooltipProvider {
     public static final SunHatRendererComponent DEFAULT = new SunHatRendererComponent(true, true);
 
     public static final Codec<SunHatRendererComponent> CODEC = RecordCodecBuilder.create(
@@ -34,26 +33,26 @@ public record SunHatRendererComponent(
             ).apply(instance, SunHatRendererComponent::new)
     );
 
-    public static final PacketCodec<RegistryByteBuf, SunHatRendererComponent> PACKET_CODEC = PacketCodec.tuple(
-            PacketCodecs.BOOLEAN,
+    public static final StreamCodec<RegistryFriendlyByteBuf, SunHatRendererComponent> PACKET_CODEC = StreamCodec.composite(
+            ByteBufCodecs.BOOL,
             SunHatRendererComponent::replaceArmorModel,
-            PacketCodecs.BOOLEAN,
+            ByteBufCodecs.BOOL,
             SunHatRendererComponent::showTooltip,
             SunHatRendererComponent::new
     );
 
     public static final Identifier SHADE_OVERLAY_TEXTURE = Scorchful.id("misc/shade_overlay");
 
-    private static final Text TOOLTIP = Text.translatable(
+    private static final Component TOOLTIP = Component.translatable(
             "item.scorchful.sun_hat.tooltip"
     ).setStyle(
             Style.EMPTY
-                    .withColor(Formatting.BLUE)
+                    .withColor(ChatFormatting.BLUE)
                     .withItalic(true)
     );
 
     @Override
-    public void appendTooltip(Item.TooltipContext context, Consumer<Text> tooltip, TooltipType type, ComponentsAccess components) {
+    public void addToTooltip(Item.TooltipContext context, Consumer<Component> tooltip, TooltipFlag type, DataComponentGetter components) {
         if (this.showTooltip()) {
             tooltip.accept(TOOLTIP);
         }

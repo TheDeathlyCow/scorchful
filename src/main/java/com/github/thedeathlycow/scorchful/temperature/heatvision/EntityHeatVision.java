@@ -1,15 +1,15 @@
 package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.biome.Biome;
 
 public class EntityHeatVision<E extends Entity> extends HeatVision {
 
@@ -22,14 +22,14 @@ public class EntityHeatVision<E extends Entity> extends HeatVision {
     }
 
     @Override
-    public boolean spawn(PlayerEntity player, ServerWorld world, BlockPos pos) {
-        E entity = entityType.create(world, SpawnReason.NATURAL);
+    public boolean spawn(Player player, ServerLevel world, BlockPos pos) {
+        E entity = entityType.create(world, EntitySpawnReason.NATURAL);
 
         if (entity != null) {
-            entity.refreshPositionAndAngles(pos, 0f, 0f);
+            entity.snapTo(pos, 0f, 0f);
             this.initializeEntity(entity);
             ScorchfulComponents.ENTITY_DESERT_VISION.get(entity).applyDesertVision(this, player);
-            boolean spawned = world.spawnEntity(entity);
+            boolean spawned = world.addFreshEntity(entity);
             if (spawned) {
                 ScorchfulComponents.ENTITY_DESERT_VISION.sync(entity);
             }
@@ -43,8 +43,8 @@ public class EntityHeatVision<E extends Entity> extends HeatVision {
         entity.setInvulnerable(true);
         entity.setNoGravity(true);
         entity.setSilent(true);
-        if (entity instanceof MobEntity mob) {
-            mob.setAiDisabled(true);
+        if (entity instanceof Mob mob) {
+            mob.setNoAi(true);
         }
     }
 

@@ -1,11 +1,11 @@
 package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.biome.Biome;
 
 public abstract class HeatVision {
 
@@ -20,10 +20,10 @@ public abstract class HeatVision {
         this.weight = weight;
     }
 
-    public abstract boolean spawn(PlayerEntity player, ServerWorld world, BlockPos pos);
+    public abstract boolean spawn(Player player, ServerLevel world, BlockPos pos);
 
-    public final boolean canApplyToBiome(RegistryEntry<Biome> biome) {
-        return biome.isIn(allowedBiomes);
+    public final boolean canApplyToBiome(Holder<Biome> biome) {
+        return biome.is(allowedBiomes);
     }
 
     public final int getWeight() {

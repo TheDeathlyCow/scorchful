@@ -4,13 +4,6 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.event.HeatVisionActivation;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import com.github.thedeathlycow.scorchful.temperature.heatvision.HeatVision;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.ladysnake.cca.api.v3.component.Component;
@@ -19,6 +12,13 @@ import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
 
 import java.util.Optional;
 import java.util.UUID;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 public class EntityDesertVisionComponent implements Component, AutoSyncedComponent, ServerTickingComponent {
 
@@ -26,7 +26,7 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
     private final Entity provider;
 
     @Nullable
-    private PlayerEntity cause;
+    private Player cause;
 
     @Nullable
     private HeatVision vision;
@@ -41,34 +41,34 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
         return this.cause != null;
     }
 
-    public void applyDesertVision(@NotNull HeatVision vision, @NotNull PlayerEntity cause) {
+    public void applyDesertVision(@NotNull HeatVision vision, @NotNull Player cause) {
         this.cause = cause;
         this.vision = vision;
     }
 
     @Override
-    public void readData(ReadView readView) {
+    public void readData(ValueInput readView) {
         // visions should be transient, so not saved to NBT
     }
 
     @Override
-    public void writeData(WriteView writeView) {
+    public void writeData(ValueOutput writeView) {
         // visions should be transient, so not saved to NBT
     }
 
     @Override
-    public void writeSyncPacket(RegistryByteBuf buf, ServerPlayerEntity recipient) {
-        buf.writeOptional(Optional.ofNullable(cause), (pBuf, player) -> pBuf.writeUuid(player.getUuid()));
+    public void writeSyncPacket(RegistryFriendlyByteBuf buf, ServerPlayer recipient) {
+        buf.writeOptional(Optional.ofNullable(cause), (pBuf, player) -> pBuf.writeUUID(player.getUUID()));
 
         Scorchful.LOGGER.debug("Writing sync packet to entity desert vision");
     }
 
     @Override
-    public void applySyncPacket(RegistryByteBuf buf) {
-        UUID uuid = buf.readOptional(RegistryByteBuf::readUuid).orElse(null);
+    public void applySyncPacket(RegistryFriendlyByteBuf buf) {
+        UUID uuid = buf.readOptional(RegistryFriendlyByteBuf::readUUID).orElse(null);
 
         this.cause = uuid != null
-                ? this.provider.getEntityWorld().getPlayerByUuid(uuid)
+                ? this.provider.level().getPlayerByUUID(uuid)
                 : null;
 
         Scorchful.LOGGER.debug("Applying sync packet to entity desert vision");
@@ -82,7 +82,7 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
         }
     }
 
-    public PlayerEntity getCause() {
+    public Player getCause() {
         return cause;
     }
 
@@ -93,16 +93,16 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
             return false;
         } else {
             double activationDistance = HeatVision.ACTIVATION_DISTANCE * HeatVision.ACTIVATION_DISTANCE;
-            if (this.provider.squaredDistanceTo(cause) < activationDistance) {
+            if (this.provider.distanceToSqr(cause) < activationDistance) {
                 HeatVisionActivation.EVENT.invoker().onActivated(
                         this.vision,
-                        (ServerWorld) this.provider.getEntityWorld(),
-                        this.provider.getBlockPos(),
+                        (ServerLevel) this.provider.level(),
+                        this.provider.blockPosition(),
                         cause
                 );
                 return false;
             }
-            return cause.hasStatusEffect(SStatusEffects.HEAT_STROKE);
+            return cause.hasEffect(SStatusEffects.HEAT_STROKE);
         }
     }
 }

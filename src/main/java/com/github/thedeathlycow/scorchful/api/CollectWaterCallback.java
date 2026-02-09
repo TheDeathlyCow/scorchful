@@ -2,9 +2,9 @@ package com.github.thedeathlycow.scorchful.api;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 /**
  * Event that is invoked after the water skin item successfully collects water from a water source such as a water block,
@@ -26,5 +26,5 @@ public interface CollectWaterCallback {
      * @param stack     The water skin item stack
      * @param sourcePos The block position of the collection source
      */
-    void onWaterCollected(PlayerEntity user, ItemStack stack, BlockPos sourcePos);
+    void onWaterCollected(Player user, ItemStack stack, BlockPos sourcePos);
 }

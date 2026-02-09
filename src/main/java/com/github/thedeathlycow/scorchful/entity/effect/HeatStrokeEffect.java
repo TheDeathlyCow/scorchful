@@ -1,10 +1,10 @@
 package com.github.thedeathlycow.scorchful.entity.effect;
 
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 
-public class HeatStrokeEffect extends StatusEffect {
-    public HeatStrokeEffect(StatusEffectCategory category, int color) {
+public class HeatStrokeEffect extends MobEffect {
+    public HeatStrokeEffect(MobEffectCategory category, int color) {
         super(category, color);
     }
 }

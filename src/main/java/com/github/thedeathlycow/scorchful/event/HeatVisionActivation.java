@@ -3,9 +3,9 @@ package com.github.thedeathlycow.scorchful.event;
 import com.github.thedeathlycow.scorchful.temperature.heatvision.HeatVision;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.player.Player;
 
 @FunctionalInterface
 public interface HeatVisionActivation {
@@ -22,5 +22,5 @@ public interface HeatVisionActivation {
             }
     );
 
-    void onActivated(HeatVision vision, ServerWorld world, BlockPos pos, PlayerEntity cause);
+    void onActivated(HeatVision vision, ServerLevel world, BlockPos pos, Player cause);
 }

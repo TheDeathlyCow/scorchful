@@ -4,23 +4,23 @@ import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FallingBlock;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.IntProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FallingBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class SandPileBlock extends FallingBlock {
@@ -30,83 +30,83 @@ public class SandPileBlock extends FallingBlock {
                             Codec.INT
                                     .fieldOf("color")
                                     .forGetter(b -> b.color),
-                            createSettingsCodec()
+                            propertiesCodec()
                     )
                     .apply(instance, SandPileBlock::new)
     );
 
     public static final int MAX_LAYERS = 8;
-    public static final IntProperty LAYERS = Properties.LAYERS;
+    public static final IntegerProperty LAYERS = BlockStateProperties.LAYERS;
     protected static final VoxelShape[] LAYERS_TO_SHAPE = new VoxelShape[]{
-            VoxelShapes.empty(),
-            Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
-            Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 4.0, 16.0),
-            Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 6.0, 16.0),
-            Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 8.0, 16.0),
-            Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 10.0, 16.0),
-            Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 12.0, 16.0),
-            Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 14.0, 16.0),
-            Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 16.0)
+            Shapes.empty(),
+            Block.box(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
+            Block.box(0.0, 0.0, 0.0, 16.0, 4.0, 16.0),
+            Block.box(0.0, 0.0, 0.0, 16.0, 6.0, 16.0),
+            Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0),
+            Block.box(0.0, 0.0, 0.0, 16.0, 10.0, 16.0),
+            Block.box(0.0, 0.0, 0.0, 16.0, 12.0, 16.0),
+            Block.box(0.0, 0.0, 0.0, 16.0, 14.0, 16.0),
+            Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0)
     };
     public static final int MAX_PATH_FINDING_LAYERS = 5;
     private final int color;
 
-    public SandPileBlock(int color, Settings settings) {
+    public SandPileBlock(int color, Properties settings) {
         super(settings);
         this.color = color;
-        this.setDefaultState(this.getDefaultState().with(LAYERS, 1));
+        this.registerDefaultState(this.defaultBlockState().setValue(LAYERS, 1));
     }
 
     @Override
-    protected boolean canPathfindThrough(BlockState state, NavigationType type) {
+    protected boolean isPathfindable(BlockState state, PathComputationType type) {
         return switch (type) {
-            case LAND -> state.get(LAYERS) < MAX_PATH_FINDING_LAYERS;
+            case LAND -> state.getValue(LAYERS) < MAX_PATH_FINDING_LAYERS;
             case WATER, AIR -> false;
         };
     }
 
     @Override
-    protected boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        BlockState anchorState = world.getBlockState(pos.down());
-        if (anchorState.isIn(SBlockTags.SAND_PILE_CANNOT_SURVIVE_ON)) {
+    protected boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+        BlockState anchorState = world.getBlockState(pos.below());
+        if (anchorState.is(SBlockTags.SAND_PILE_CANNOT_SURVIVE_ON)) {
             return false;
         }
-        if (anchorState.isIn(SBlockTags.SAND_PILE_CAN_SURVIVE_ON)) {
+        if (anchorState.is(SBlockTags.SAND_PILE_CAN_SURVIVE_ON)) {
             return true;
         }
 
-        return Block.isFaceFullSquare(anchorState.getCollisionShape(world, pos.down()), Direction.UP)
-                || (anchorState.getBlock() instanceof SandPileBlock) && anchorState.get(LAYERS) >= MAX_LAYERS;
+        return Block.isFaceFull(anchorState.getCollisionShape(world, pos.below()), Direction.UP)
+                || (anchorState.getBlock() instanceof SandPileBlock) && anchorState.getValue(LAYERS) >= MAX_LAYERS;
     }
 
     @Override
-    protected MapCodec<? extends FallingBlock> getCodec() {
+    protected MapCodec<? extends FallingBlock> codec() {
         return CODEC;
     }
 
     @Override
-    protected void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (!this.canPlaceAt(state, world, pos)) {
-            super.scheduledTick(state, world, pos, random);
+    protected void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+        if (!this.canSurvive(state, world, pos)) {
+            super.tick(state, world, pos, random);
         }
     }
 
     @Override
-    protected boolean hasSidedTransparency(BlockState state) {
+    protected boolean useShapeForLightOcclusion(BlockState state) {
         return true;
     }
 
     @Override
-    protected float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {
-        return state.get(LAYERS) == MAX_LAYERS ? 0.2f : 1.0f;
+    protected float getShadeBrightness(BlockState state, BlockGetter world, BlockPos pos) {
+        return state.getValue(LAYERS) == MAX_LAYERS ? 0.2f : 1.0f;
     }
 
     @Override
-    protected boolean canReplace(BlockState state, ItemPlacementContext context) {
-        int i = state.get(LAYERS);
-        if (context.getStack().isOf(this.asItem()) && i < MAX_LAYERS) {
-            if (context.canReplaceExisting()) {
-                return context.getSide() == Direction.UP;
+    protected boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
+        int i = state.getValue(LAYERS);
+        if (context.getItemInHand().is(this.asItem()) && i < MAX_LAYERS) {
+            if (context.replacingClickedOnBlock()) {
+                return context.getClickedFace() == Direction.UP;
             }
             return true;
         }
@@ -115,43 +115,43 @@ public class SandPileBlock extends FallingBlock {
 
     @Override
     @Nullable
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        BlockState blockState = ctx.getWorld().getBlockState(ctx.getBlockPos());
-        if (blockState.isOf(this)) {
-            int i = blockState.get(LAYERS);
-            return blockState.with(LAYERS, Math.min(MAX_LAYERS, i + 1));
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        BlockState blockState = ctx.getLevel().getBlockState(ctx.getClickedPos());
+        if (blockState.is(this)) {
+            int i = blockState.getValue(LAYERS);
+            return blockState.setValue(LAYERS, Math.min(MAX_LAYERS, i + 1));
         }
-        return super.getPlacementState(ctx);
+        return super.getStateForPlacement(ctx);
     }
 
     @Override
-    public int getColor(BlockState state, BlockView world, BlockPos pos) {
+    public int getDustColor(BlockState state, BlockGetter world, BlockPos pos) {
         return this.color;
     }
 
     @Override
-    protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return LAYERS_TO_SHAPE[state.get(LAYERS)];
+    protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return LAYERS_TO_SHAPE[state.getValue(LAYERS)];
     }
 
     @Override
-    protected VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return LAYERS_TO_SHAPE[state.get(LAYERS) - 1];
+    protected VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return LAYERS_TO_SHAPE[state.getValue(LAYERS) - 1];
     }
 
     @Override
-    protected VoxelShape getSidesShape(BlockState state, BlockView world, BlockPos pos) {
-        return LAYERS_TO_SHAPE[state.get(LAYERS)];
+    protected VoxelShape getBlockSupportShape(BlockState state, BlockGetter world, BlockPos pos) {
+        return LAYERS_TO_SHAPE[state.getValue(LAYERS)];
     }
 
     @Override
-    protected VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return LAYERS_TO_SHAPE[state.get(LAYERS)];
+    protected VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return LAYERS_TO_SHAPE[state.getValue(LAYERS)];
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(LAYERS);
     }
 }

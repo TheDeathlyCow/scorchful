@@ -5,8 +5,8 @@ import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
 import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.section.ItemConfig;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
 
 /**
  * The default behaviour for Scorchful's thirst interactions
@@ -20,7 +20,7 @@ public final class ScorchfulServerThirstPlugin implements ServerThirstPlugin {
      * {@linkplain com.github.thedeathlycow.thermoo.api.temperature.Soakable soaked ticks}.
      */
     @Override
-    public boolean dehydrateFromSweating(PlayerEntity player) {
+    public boolean dehydrateFromSweating(Player player) {
         PlayerWaterComponent waterComponent = ScorchfulComponents.PLAYER_WATER.get(player);
         if (waterComponent.getWaterDrunk() > 0 && player.thermoo$getTemperature() > 0) {
             waterComponent.drink(-1);
@@ -33,7 +33,7 @@ public final class ScorchfulServerThirstPlugin implements ServerThirstPlugin {
     /**
      * Rehydrates the player from {@linkplain com.github.thedeathlycow.scorchful.components.RehydrationComponent Rehydration}.
      * <p>
-     * Rehydration is usually provided as an {@link net.minecraft.enchantment.Enchantment}, but is internally based on an
+     * Rehydration is usually provided as an {@link net.minecraft.world.item.enchantment.Enchantment}, but is internally based on an
      * {@linkplain com.github.thedeathlycow.scorchful.registry.SEntityAttributes#REHYDRATION_EFFICIENCY attribute}.
      *
      * @param player                The player to rehydrate
@@ -42,7 +42,7 @@ public final class ScorchfulServerThirstPlugin implements ServerThirstPlugin {
      *                              between 0 and 1.
      */
     @Override
-    public void rehydrateFromEnchantment(PlayerEntity player, int waterCaptured, double rehydrationEfficiency) {
+    public void rehydrateFromEnchantment(Player player, int waterCaptured, double rehydrationEfficiency) {
         // don't drink if we already have water (and dont need to) - prevents rehydration spam
         PlayerWaterComponent waterComponent = ScorchfulComponents.PLAYER_WATER.get(player);
         if (waterComponent.getWaterDrunk() > 1) {
@@ -51,7 +51,7 @@ public final class ScorchfulServerThirstPlugin implements ServerThirstPlugin {
 
         ItemConfig config = ScorchfulConfig.getItemConfig();
         double efficiency = config.getMaxRehydrationEfficiency() * rehydrationEfficiency;
-        int drinkToAdd = MathHelper.floor(waterCaptured * efficiency);
+        int drinkToAdd = Mth.floor(waterCaptured * efficiency);
 
         if (drinkToAdd > 0) {
             waterComponent.drink(drinkToAdd);

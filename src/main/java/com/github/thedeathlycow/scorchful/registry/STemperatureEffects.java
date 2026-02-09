@@ -5,7 +5,7 @@ import com.github.thedeathlycow.scorchful.temperature.ChangeTemperatureEffect;
 import com.github.thedeathlycow.scorchful.temperature.SoundTemperatureEffect;
 import com.github.thedeathlycow.thermoo.api.ThermooRegistries;
 import com.github.thedeathlycow.thermoo.api.temperature.effects.TemperatureEffect;
-import net.minecraft.registry.Registry;
+import net.minecraft.core.Registry;
 
 public class STemperatureEffects {
     public static final TemperatureEffect<SoundTemperatureEffect.Config> SOUND = register(

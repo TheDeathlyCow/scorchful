@@ -6,9 +6,8 @@ import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.autogen.*;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
-import net.minecraft.util.math.MathHelper;
-
 import java.nio.file.Path;
+import net.minecraft.util.Mth;
 
 public class TemperatureConfig {
     public static final Path PATH = Scorchful.getConfigDir().resolve("common").resolve("temperature.json5");
@@ -199,35 +198,35 @@ public class TemperatureConfig {
 
 
     public int getFireballHeat() {
-        return MathHelper.floor(1000 * fireballTemperatureMultiplier * getHeatingMultiplier());
+        return Mth.floor(1000 * fireballTemperatureMultiplier * getHeatingMultiplier());
     }
 
     public int getOnFireWarmRate(boolean hasFireResistance) {
         float multiplier = hasFireResistance ? burningTemperatureMultiplierWithFireResistance : burningTemperatureMultiplier;
-        return MathHelper.floor(24 * multiplier * getHeatingMultiplier());
+        return Mth.floor(24 * multiplier * getHeatingMultiplier());
     }
 
     public int getInLavaWarmRate() {
-        return MathHelper.floor(24 * inLavaTemperatureMultiplier * getHeatingMultiplier());
+        return Mth.floor(24 * inLavaTemperatureMultiplier * getHeatingMultiplier());
     }
 
     public int getTemperatureFromWetness() {
-        return MathHelper.floor(-6 * soakedTemperatureMultiplier * getCoolingMultiplier());
+        return Mth.floor(-6 * soakedTemperatureMultiplier * getCoolingMultiplier());
     }
 
     public int getPowderSnowCooling() {
-        return MathHelper.floor(-24 * powderSnowTemperatureMultiplier * getCoolingMultiplier());
+        return Mth.floor(-24 * powderSnowTemperatureMultiplier * getCoolingMultiplier());
     }
 
     public int getIceCooling() {
-        return MathHelper.floor(-12 * iceTemperatureMultiplier * getCoolingMultiplier());
+        return Mth.floor(-12 * iceTemperatureMultiplier * getCoolingMultiplier());
     }
 
     public int getFoodCooling() {
-        return MathHelper.floor(-1260 * coolingFoodTemperatureMultiplier * getCoolingMultiplier());
+        return Mth.floor(-1260 * coolingFoodTemperatureMultiplier * getCoolingMultiplier());
     }
 
     public int getStriderCooling() {
-        return MathHelper.floor(-24 * striderCoolingTemperatureMultiplier * getCoolingMultiplier());
+        return Mth.floor(-24 * striderCoolingTemperatureMultiplier * getCoolingMultiplier());
     }
 }

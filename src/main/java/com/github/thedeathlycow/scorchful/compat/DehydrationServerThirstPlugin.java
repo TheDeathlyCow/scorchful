@@ -5,12 +5,12 @@ import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.section.DehydrationConfig;
 import net.dehydration.access.ThirstManagerAccess;
 import net.dehydration.thirst.ThirstManager;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
 
 public class DehydrationServerThirstPlugin implements ServerThirstPlugin {
     @Override
-    public boolean dehydrateFromSweating(PlayerEntity player) {
+    public boolean dehydrateFromSweating(Player player) {
         DehydrationConfig config = ScorchfulConfig.getDehydrationConfig();
         ThirstManager thirstManager = ((ThirstManagerAccess) player).getThirstManager();
         if (thirstManager.getThirstLevel() > config.getMinWaterLevelForSweat()
@@ -23,7 +23,7 @@ public class DehydrationServerThirstPlugin implements ServerThirstPlugin {
     }
 
     @Override
-    public void rehydrateFromEnchantment(PlayerEntity player, int waterCaptured, double rehydrationEfficiency) {
+    public void rehydrateFromEnchantment(Player player, int waterCaptured, double rehydrationEfficiency) {
         ThirstManager thirstManager = ((ThirstManagerAccess) player).getThirstManager();
 
         DehydrationConfig dehydrationConfig = ScorchfulConfig.getDehydrationConfig();
@@ -32,8 +32,8 @@ public class DehydrationServerThirstPlugin implements ServerThirstPlugin {
             return;
         }
 
-        int maxWater = MathHelper.floor(rehydrationEfficiency * dehydrationConfig.getMaxWaterLost());
-        int waterToAdd = player.getRandom().nextBetween(1, maxWater);
+        int maxWater = Mth.floor(rehydrationEfficiency * dehydrationConfig.getMaxWaterLost());
+        int waterToAdd = player.getRandom().nextIntBetweenInclusive(1, maxWater);
         thirstManager.add(waterToAdd);
     }
 

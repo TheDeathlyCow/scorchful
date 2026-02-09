@@ -1,11 +1,11 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.stat.StatFormatter;
-import net.minecraft.stat.Stats;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.stats.StatFormatter;
+import net.minecraft.stats.Stats;
 
 public final class SStats {
     public static final Identifier SOAKED_BY_CRIMSON_LILY = register("soaked_by_crimson_lily", StatFormatter.DEFAULT);
@@ -20,8 +20,8 @@ public final class SStats {
 
     private static Identifier register(String name, StatFormatter formatter) {
         Identifier id = Scorchful.id(name);
-        Registry.register(Registries.CUSTOM_STAT, id, id);
-        Stats.CUSTOM.getOrCreateStat(id, formatter);
+        Registry.register(BuiltInRegistries.CUSTOM_STAT, id, id);
+        Stats.CUSTOM.get(id, formatter);
         return id;
     }
 

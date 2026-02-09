@@ -17,18 +17,17 @@ import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.minecraft.block.Block;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.ConsumableComponents;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.item.equipment.EquipmentType;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-
+import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.level.block.Block;
 import java.util.function.Function;
 
 public final class SItems {
@@ -36,8 +35,8 @@ public final class SItems {
             "water_skin",
             settings -> new WaterSkinItem(
                     settings
-                            .maxCount(1)
-                            .component(DataComponentTypes.CONSUMABLE, ConsumableComponents.DRINK)
+                            .stacksTo(1)
+                            .component(DataComponents.CONSUMABLE, Consumables.DEFAULT_DRINK)
                             .component(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT)
                             .component(SDataComponentTypes.DRINK_LEVEL, DrinkLevelComponent.HYDRATING)
             )
@@ -48,10 +47,10 @@ public final class SItems {
     public static final Item CACTUS_JUICE = register(
             "cactus_juice",
             settings -> new Item(
-                    settings.maxCount(16)
-                            .recipeRemainder(Items.GLASS_BOTTLE)
-                            .useRemainder(Items.GLASS_BOTTLE)
-                            .component(DataComponentTypes.CONSUMABLE, ConsumableComponents.DRINK)
+                    settings.stacksTo(16)
+                            .craftRemainder(Items.GLASS_BOTTLE)
+                            .usingConvertsTo(Items.GLASS_BOTTLE)
+                            .component(DataComponents.CONSUMABLE, Consumables.DEFAULT_DRINK)
                             .component(SDataComponentTypes.DRINK_LEVEL, DrinkLevelComponent.HYDRATING)
             )
     );
@@ -74,8 +73,8 @@ public final class SItems {
             "turtle_chestplate",
             settings -> new Item(
                     settings
-                            .armor(SArmorMaterials.TURTLE, EquipmentType.CHESTPLATE)
-                            .maxDamage(EquipmentType.CHESTPLATE.getMaxDamage(25))
+                            .humanoidArmor(SArmorMaterials.TURTLE, ArmorType.CHESTPLATE)
+                            .durability(ArmorType.CHESTPLATE.getDurability(25))
                             .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE)
             )
     );
@@ -84,8 +83,8 @@ public final class SItems {
             "turtle_leggings",
             settings -> new Item(
                     settings
-                            .armor(SArmorMaterials.TURTLE, EquipmentType.LEGGINGS)
-                            .maxDamage(EquipmentType.LEGGINGS.getMaxDamage(25))
+                            .humanoidArmor(SArmorMaterials.TURTLE, ArmorType.LEGGINGS)
+                            .durability(ArmorType.LEGGINGS.getDurability(25))
                             .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE)
             )
     );
@@ -94,8 +93,8 @@ public final class SItems {
             "turtle_boots",
             settings -> new Item(
                     settings
-                            .armor(SArmorMaterials.TURTLE, EquipmentType.BOOTS)
-                            .maxDamage(EquipmentType.BOOTS.getMaxDamage(25))
+                            .humanoidArmor(SArmorMaterials.TURTLE, ArmorType.BOOTS)
+                            .durability(ArmorType.BOOTS.getDurability(25))
                             .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE)
             )
     );
@@ -105,7 +104,7 @@ public final class SItems {
         UseItemCallback.EVENT.register(new FireChargeThrower());
         ScorchfulItemEvents.GET_DEFAULT_STACK.register(DrinkLevelComponent::applyToNewStack);
         ScorchfulItemEvents.CONSUME_ITEM.register((stack, player) -> {
-            if (stack.isIn(SItemTags.IS_COOLING_FOOD)) {
+            if (stack.is(SItemTags.IS_COOLING_FOOD)) {
                 player.thermoo$addTemperature(
                         ScorchfulConfig.getTemperatureConfig().getFoodCooling(),
                         HeatingModes.ACTIVE
@@ -119,17 +118,17 @@ public final class SItems {
     }
 
     private static Item register(String id, Block block) {
-        return register(id, settings -> new BlockItem(block, settings.useBlockPrefixedTranslationKey()));
+        return register(id, settings -> new BlockItem(block, settings.useBlockDescriptionPrefix()));
     }
 
-    private static Item register(String id, Function<Item.Settings, Item> itemFactory) {
-        return register(id, itemFactory, new Item.Settings());
+    private static Item register(String id, Function<Item.Properties, Item> itemFactory) {
+        return register(id, itemFactory, new Item.Properties());
     }
 
-    private static Item register(String id, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
-        RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, Scorchful.id(id));
-        Item item = itemFactory.apply(settings.registryKey(key));
-        return Registry.register(Registries.ITEM, key, item);
+    private static Item register(String id, Function<Item.Properties, Item> itemFactory, Item.Properties settings) {
+        ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, Scorchful.id(id));
+        Item item = itemFactory.apply(settings.setId(key));
+        return Registry.register(BuiltInRegistries.ITEM, key, item);
     }
 
     private SItems() {

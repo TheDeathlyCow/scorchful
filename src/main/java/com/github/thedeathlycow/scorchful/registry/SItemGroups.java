@@ -3,40 +3,40 @@ package com.github.thedeathlycow.scorchful.registry;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.text.Text;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.Contract;
 
 public class SItemGroups {
-    public static final ItemGroup SCORCHFUL = Registry.register(
-            Registries.ITEM_GROUP,
+    public static final CreativeModeTab SCORCHFUL = Registry.register(
+            BuiltInRegistries.CREATIVE_MODE_TAB,
             Scorchful.id("main"),
             FabricItemGroup.builder()
-                    .icon(SItems.SUN_HAT::getDefaultStack)
-                    .displayName(Text.translatable("scorchful.title"))
-                    .entries((context, entries) -> {
-                        entries.add(SItems.SUN_HAT.getDefaultStack());
-                        entries.add(Items.TURTLE_HELMET.getDefaultStack());
-                        entries.add(SItems.TURTLE_CHESTPLATE.getDefaultStack());
-                        entries.add(SItems.TURTLE_LEGGINGS.getDefaultStack());
-                        entries.add(SItems.TURTLE_BOOTS.getDefaultStack());
+                    .icon(SItems.SUN_HAT::getDefaultInstance)
+                    .title(Component.translatable("scorchful.title"))
+                    .displayItems((context, entries) -> {
+                        entries.accept(SItems.SUN_HAT.getDefaultInstance());
+                        entries.accept(Items.TURTLE_HELMET.getDefaultInstance());
+                        entries.accept(SItems.TURTLE_CHESTPLATE.getDefaultInstance());
+                        entries.accept(SItems.TURTLE_LEGGINGS.getDefaultInstance());
+                        entries.accept(SItems.TURTLE_BOOTS.getDefaultInstance());
 
-                        entries.add(SItems.WATER_SKIN.getDefaultStack());
-                        entries.add(makeFilledWaterSkin());
-                        entries.add(SItems.CACTUS_JUICE.getDefaultStack());
+                        entries.accept(SItems.WATER_SKIN.getDefaultInstance());
+                        entries.accept(makeFilledWaterSkin());
+                        entries.accept(SItems.CACTUS_JUICE.getDefaultInstance());
 
-                        entries.add(SItems.CRIMSON_LILY.getDefaultStack());
-                        entries.add(SItems.WARPED_LILY.getDefaultStack());
-                        entries.add(SItems.ROOTED_NETHERRACK.getDefaultStack());
-                        entries.add(SItems. ROOTED_CRIMSON_NYLIUM.getDefaultStack());
-                        entries.add(SItems.ROOTED_WARPED_NYLIUM.getDefaultStack());
+                        entries.accept(SItems.CRIMSON_LILY.getDefaultInstance());
+                        entries.accept(SItems.WARPED_LILY.getDefaultInstance());
+                        entries.accept(SItems.ROOTED_NETHERRACK.getDefaultInstance());
+                        entries.accept(SItems. ROOTED_CRIMSON_NYLIUM.getDefaultInstance());
+                        entries.accept(SItems.ROOTED_WARPED_NYLIUM.getDefaultInstance());
 
-                        entries.add(SItems.SAND_PILE.getDefaultStack());
-                        entries.add(SItems.RED_SAND_PILE.getDefaultStack());
+                        entries.accept(SItems.SAND_PILE.getDefaultInstance());
+                        entries.accept(SItems.RED_SAND_PILE.getDefaultInstance());
                     }).build()
     );
 
@@ -46,7 +46,7 @@ public class SItemGroups {
 
     @Contract("->new")
     public static ItemStack makeFilledWaterSkin() {
-        var filledWaterSkin = SItems.WATER_SKIN.getDefaultStack();
+        var filledWaterSkin = SItems.WATER_SKIN.getDefaultInstance();
         DrinkContainerComponent.fillCompletely(filledWaterSkin);
         return filledWaterSkin;
     }

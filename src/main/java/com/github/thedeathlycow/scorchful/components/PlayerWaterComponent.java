@@ -1,10 +1,10 @@
 package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.ladysnake.cca.api.v3.component.Component;
 import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
 
@@ -17,11 +17,11 @@ public class PlayerWaterComponent implements Component, ServerTickingComponent {
     private static final String REHYDRATION_DRINK_KEY = "rehydration_drink";
 
 
-    private final PlayerEntity provider;
+    private final Player provider;
 
     private int waterDrunk = 0;
 
-    public PlayerWaterComponent(PlayerEntity provider) {
+    public PlayerWaterComponent(Player provider) {
         this.provider = provider;
     }
 
@@ -30,16 +30,16 @@ public class PlayerWaterComponent implements Component, ServerTickingComponent {
     }
 
     public void drink(int amount) {
-        this.waterDrunk = MathHelper.clamp(this.waterDrunk + amount, 0, MAX_WATER);
+        this.waterDrunk = Mth.clamp(this.waterDrunk + amount, 0, MAX_WATER);
     }
 
     @Override
-    public void readData(ReadView readView) {
-        this.waterDrunk = readView.getInt(WATER_KEY, 0);
+    public void readData(ValueInput readView) {
+        this.waterDrunk = readView.getIntOr(WATER_KEY, 0);
     }
 
     @Override
-    public void writeData(WriteView writeView) {
+    public void writeData(ValueOutput writeView) {
         if (this.waterDrunk > 0) {
             writeView.putInt(WATER_KEY, this.waterDrunk);
         }

@@ -4,42 +4,42 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.component.SunHatRendererComponent;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.AttributeModifierSlot;
-import net.minecraft.component.type.AttributeModifiersComponent;
-import net.minecraft.component.type.EquippableComponent;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.item.Item;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.equipment.Equippable;
 
 public final class SunHatItem {
-    public static Item createItem(Item.Settings settings) {
+    public static Item createItem(Item.Properties settings) {
         return new Item(
                 settings
                         .equipmentSlot((entity, stack) -> EquipmentSlot.HEAD)
-                        .attributeModifiers(SunHatItem.attributeModifiers())
-                        .maxCount(1)
+                        .attributes(SunHatItem.attributeModifiers())
+                        .stacksTo(1)
                         .component(
-                                DataComponentTypes.EQUIPPABLE,
-                                EquippableComponent.builder(EquipmentSlot.HEAD)
-                                        .damageOnHurt(false)
-                                        .cameraOverlay(SunHatRendererComponent.SHADE_OVERLAY_TEXTURE)
+                                DataComponents.EQUIPPABLE,
+                                Equippable.builder(EquipmentSlot.HEAD)
+                                        .setDamageOnHurt(false)
+                                        .setCameraOverlay(SunHatRendererComponent.SHADE_OVERLAY_TEXTURE)
                                         .build()
                         )
                         .component(SDataComponentTypes.SUN_HAT_RENDERER, SunHatRendererComponent.DEFAULT)
         );
     }
 
-    private static AttributeModifiersComponent attributeModifiers() {
-        return AttributeModifiersComponent.builder()
+    private static ItemAttributeModifiers attributeModifiers() {
+        return ItemAttributeModifiers.builder()
                 .add(
                         ThermooAttributes.ENVIRONMENT_HEAT_RESISTANCE,
-                        new EntityAttributeModifier(
+                        new AttributeModifier(
                                 Scorchful.id("sun_hat_resistance"),
                                 0.25,
-                                EntityAttributeModifier.Operation.ADD_VALUE
+                                AttributeModifier.Operation.ADD_VALUE
                         ),
-                        AttributeModifierSlot.HEAD
+                        EquipmentSlotGroup.HEAD
                 )
                 .build();
     }

@@ -1,9 +1,9 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.sound.SoundEvent;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.sounds.SoundEvent;
 
 public class SSoundEvents {
 
@@ -18,17 +18,17 @@ public class SSoundEvents {
 
     public static void initialize() {
         Scorchful.LOGGER.debug("Initialized Scorchful sound events");
-        Registries.SOUND_EVENT.addAlias(Scorchful.id("temperature_effect.scorchful.heartbeat"), TEMPERATURE_EFFECT_HEARTBEAT.id());
-        Registries.SOUND_EVENT.addAlias(Scorchful.id("item.scorchful.water_skin.fill"), ITEM_WATER_SKIN_FILL.id());
-        Registries.SOUND_EVENT.addAlias(Scorchful.id("temperature_effect.scorchful.pant"), TEMPERATURE_EFFECT_PANT.id());
-        Registries.SOUND_EVENT.addAlias(Scorchful.id("enchantment.scorchful.rehydration"), REHYDRATE.id());
-        Registries.SOUND_EVENT.addAlias(Scorchful.id("block.scorchful.crimson_lily.squelch"), CRIMSON_LILY_SQUELCH.id());
+        BuiltInRegistries.SOUND_EVENT.addAlias(Scorchful.id("temperature_effect.scorchful.heartbeat"), TEMPERATURE_EFFECT_HEARTBEAT.location());
+        BuiltInRegistries.SOUND_EVENT.addAlias(Scorchful.id("item.scorchful.water_skin.fill"), ITEM_WATER_SKIN_FILL.location());
+        BuiltInRegistries.SOUND_EVENT.addAlias(Scorchful.id("temperature_effect.scorchful.pant"), TEMPERATURE_EFFECT_PANT.location());
+        BuiltInRegistries.SOUND_EVENT.addAlias(Scorchful.id("enchantment.scorchful.rehydration"), REHYDRATE.location());
+        BuiltInRegistries.SOUND_EVENT.addAlias(Scorchful.id("block.scorchful.crimson_lily.squelch"), CRIMSON_LILY_SQUELCH.location());
     }
 
     private static SoundEvent register(String name) {
-        SoundEvent event = SoundEvent.of(Scorchful.id(name));
+        SoundEvent event = SoundEvent.createVariableRangeEvent(Scorchful.id(name));
 
-        return Registry.register(Registries.SOUND_EVENT, event.id(), event);
+        return Registry.register(BuiltInRegistries.SOUND_EVENT, event.location(), event);
     }
 
     private SSoundEvents() {

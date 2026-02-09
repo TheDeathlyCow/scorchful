@@ -1,24 +1,24 @@
 package com.github.thedeathlycow.scorchful.mixin.server;
 
 import com.github.thedeathlycow.scorchful.server.SandAccumulation;
-import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.profiler.Profiler;
-import net.minecraft.util.profiler.Profilers;
-import net.minecraft.world.MutableWorldProperties;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.WorldChunk;
-import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.core.Holder;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.profiling.Profiler;
+import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.dimension.DimensionType;
+import net.minecraft.world.level.storage.WritableLevelData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ServerWorld.class)
-public abstract class SandAccumulationServerWorldMixin extends World {
-    protected SandAccumulationServerWorldMixin(MutableWorldProperties properties, RegistryKey<World> registryRef, DynamicRegistryManager registryManager, RegistryEntry<DimensionType> dimensionEntry, boolean isClient, boolean debugWorld, long seed, int maxChainedNeighborUpdates) {
+@Mixin(ServerLevel.class)
+public abstract class SandAccumulationServerWorldMixin extends Level {
+    protected SandAccumulationServerWorldMixin(WritableLevelData properties, ResourceKey<Level> registryRef, RegistryAccess registryManager, Holder<DimensionType> dimensionEntry, boolean isClient, boolean debugWorld, long seed, int maxChainedNeighborUpdates) {
         super(properties, registryRef, registryManager, dimensionEntry, isClient, debugWorld, seed, maxChainedNeighborUpdates);
     }
 
@@ -26,10 +26,10 @@ public abstract class SandAccumulationServerWorldMixin extends World {
             method = "tickChunk",
             at = @At("TAIL")
     )
-    private void doSandPileAccumulation(WorldChunk chunk, int randomTickSpeed, CallbackInfo ci) {
-        Profiler profiler = Profilers.get();
+    private void doSandPileAccumulation(LevelChunk chunk, int randomTickSpeed, CallbackInfo ci) {
+        ProfilerFiller profiler = Profiler.get();
         profiler.push("scorchful_sandpiles");
-        SandAccumulation.tickChunk((ServerWorld) (Object) this, chunk, randomTickSpeed);
+        SandAccumulation.tickChunk((ServerLevel) (Object) this, chunk, randomTickSpeed);
         profiler.pop();
     }
 }
