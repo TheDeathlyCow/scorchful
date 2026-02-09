@@ -31,62 +31,62 @@ public class ScorchfulRecipeGenerator extends FabricRecipeProvider {
             @Override
             public void buildRecipes() {
                 shapeless(RecipeCategory.FOOD, SItems.CACTUS_JUICE)
-                        .criterion(getHasName(Items.CACTUS), has(Items.CACTUS))
-                        .input(Items.GLASS_BOTTLE)
-                        .input(Items.CACTUS)
-                        .input(Items.CACTUS)
-                        .offerTo(output);
+                        .unlockedBy(getHasName(Items.CACTUS), has(Items.CACTUS))
+                        .requires(Items.GLASS_BOTTLE)
+                        .requires(Items.CACTUS)
+                        .requires(Items.CACTUS)
+                        .save(output);
 
                 shaped(RecipeCategory.BUILDING_BLOCKS, SItems.RED_SAND_PILE, 6)
-                        .criterion(getHasName(Items.RED_SAND), has(Items.RED_SAND))
+                        .unlockedBy(getHasName(Items.RED_SAND), has(Items.RED_SAND))
                         .pattern("###")
-                        .input('#', Items.RED_SAND)
-                        .offerTo(output);
+                        .define('#', Items.RED_SAND)
+                        .save(output);
 
                 shaped(RecipeCategory.BUILDING_BLOCKS, SItems.SAND_PILE, 6)
-                        .criterion(getHasName(Items.SAND), has(Items.SAND))
+                        .unlockedBy(getHasName(Items.SAND), has(Items.SAND))
                         .pattern("###")
-                        .input('#', Items.SAND)
-                        .offerTo(output);
+                        .define('#', Items.SAND)
+                        .save(output);
 
                 shaped(RecipeCategory.COMBAT, SItems.SUN_HAT)
-                        .criterion("is_player_warm", createWarmPlayerCondition())
+                        .unlockedBy("is_player_warm", createWarmPlayerCondition())
                         .pattern("###")
                         .pattern("# #")
-                        .input('#', Items.WHEAT)
-                        .offerTo(output);
+                        .define('#', Items.WHEAT)
+                        .save(output);
 
                 shaped(RecipeCategory.FOOD, SItems.WATER_SKIN)
-                        .criterion("in_water", EnterBlockTrigger.TriggerInstance.entersBlock(Blocks.WATER))
+                        .unlockedBy("in_water", EnterBlockTrigger.TriggerInstance.entersBlock(Blocks.WATER))
                         .pattern(" #I")
                         .pattern("# #")
                         .pattern(" # ")
-                        .input('#', Items.LEATHER)
-                        .input('I', Items.IRON_INGOT)
-                        .offerTo(output);
+                        .define('#', Items.LEATHER)
+                        .define('I', Items.IRON_INGOT)
+                        .save(output);
 
                 shaped(RecipeCategory.COMBAT, SItems.TURTLE_CHESTPLATE)
-                        .criterion(getHasName(Items.TURTLE_SCUTE), has(Items.TURTLE_SCUTE))
+                        .unlockedBy(getHasName(Items.TURTLE_SCUTE), has(Items.TURTLE_SCUTE))
                         .pattern("# #")
                         .pattern("###")
                         .pattern("###")
-                        .input('#', Items.TURTLE_SCUTE)
-                        .offerTo(output);
+                        .define('#', Items.TURTLE_SCUTE)
+                        .save(output);
 
                 shaped(RecipeCategory.COMBAT, SItems.TURTLE_LEGGINGS)
-                        .criterion(getHasName(Items.TURTLE_SCUTE), has(Items.TURTLE_SCUTE))
+                        .unlockedBy(getHasName(Items.TURTLE_SCUTE), has(Items.TURTLE_SCUTE))
                         .pattern("###")
                         .pattern("# #")
                         .pattern("# #")
-                        .input('#', Items.TURTLE_SCUTE)
-                        .offerTo(output);
+                        .define('#', Items.TURTLE_SCUTE)
+                        .save(output);
 
                 shaped(RecipeCategory.COMBAT, SItems.TURTLE_BOOTS)
-                        .criterion(getHasName(Items.TURTLE_SCUTE), has(Items.TURTLE_SCUTE))
+                        .unlockedBy(getHasName(Items.TURTLE_SCUTE), has(Items.TURTLE_SCUTE))
                         .pattern("# #")
                         .pattern("# #")
-                        .input('#', Items.TURTLE_SCUTE)
-                        .offerTo(output);
+                        .define('#', Items.TURTLE_SCUTE)
+                        .save(output);
             }
         };
     }

@@ -35,7 +35,7 @@ public class SunHatFeatureRenderer<S extends HumanoidRenderState, M extends Huma
     }
 
     @Override
-    public void render(
+    public void submit(
             PoseStack matrices,
             SubmitNodeCollector queue,
             int light,
