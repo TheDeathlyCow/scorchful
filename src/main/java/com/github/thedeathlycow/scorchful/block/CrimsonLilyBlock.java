@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.block;
 
-import com.github.thedeathlycow.scorchful.particle.SpurtingWaterParticleEffect;
+import com.github.thedeathlycow.scorchful.particle.SpurtingWaterOption;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.SStats;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
@@ -77,7 +77,7 @@ public class CrimsonLilyBlock extends NetherLilyBlock {
             double z = center.z + (random.nextDouble() / 3) - (1.0 / 6.0);
 
             world.addParticle(
-                    new SpurtingWaterParticleEffect(i),
+                    new SpurtingWaterOption(i),
                     x, y, z,
                     0, 0, 0
             );

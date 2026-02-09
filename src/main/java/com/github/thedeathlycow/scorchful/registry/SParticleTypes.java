@@ -1,8 +1,8 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.particle.DustGrainParticleEffect;
-import com.github.thedeathlycow.scorchful.particle.SpurtingWaterParticleEffect;
+import com.github.thedeathlycow.scorchful.particle.DustGrainOptions;
+import com.github.thedeathlycow.scorchful.particle.SpurtingWaterOption;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
@@ -12,19 +12,19 @@ import net.minecraft.core.registries.BuiltInRegistries;
 
 public final class SParticleTypes {
 
-    public static final ParticleType<SpurtingWaterParticleEffect> SPURTING_WATER = register(
+    public static final ParticleType<SpurtingWaterOption> SPURTING_WATER = register(
             "spurting_water",
             FabricParticleTypes.complex(
-                    SpurtingWaterParticleEffect.CODEC,
-                    SpurtingWaterParticleEffect.PACKET_CODEC
+                    SpurtingWaterOption.CODEC,
+                    SpurtingWaterOption.PACKET_CODEC
             )
     );
 
-    public static final ParticleType<DustGrainParticleEffect> DUST_GRAIN = register(
+    public static final ParticleType<DustGrainOptions> DUST_GRAIN = register(
             "dust_grain",
             FabricParticleTypes.complex(
-                    DustGrainParticleEffect.CODEC,
-                    DustGrainParticleEffect.PACKET_CODEC
+                    DustGrainOptions.CODEC,
+                    DustGrainOptions.PACKET_CODEC
             )
     );
 

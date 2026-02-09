@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
 import com.github.thedeathlycow.scorchful.event.HeatVisionActivation;
-import com.github.thedeathlycow.scorchful.particle.DustGrainParticleEffect;
+import com.github.thedeathlycow.scorchful.particle.DustGrainOptions;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ARGB;
@@ -12,7 +12,7 @@ public class ApproachEffects {
 
     public static void initialize() {
         HeatVisionActivation.EVENT.register((vision, world, pos, player) -> {
-            var particle = new DustGrainParticleEffect(COLOR, 1f);
+            var particle = new DustGrainOptions(COLOR, 1f);
             world.sendParticles(
                     particle,
                     pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5,

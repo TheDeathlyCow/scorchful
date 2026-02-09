@@ -10,12 +10,12 @@ import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
-public class DustGrainParticle extends DustParticleBase<DustGrainParticleEffect> {
+public class DustGrainParticle extends DustParticleBase<DustGrainOptions> {
     public DustGrainParticle(
             ClientLevel world,
             double x, double y, double z,
             double velocityX, double velocityY, double velocityZ,
-            DustGrainParticleEffect parameters,
+            DustGrainOptions parameters,
             SpriteSet spriteProvider
     ) {
         super(world, x, y, z, velocityX, velocityY, velocityZ, parameters, spriteProvider);
@@ -31,7 +31,7 @@ public class DustGrainParticle extends DustParticleBase<DustGrainParticleEffect>
     }
 
     @Environment(EnvType.CLIENT)
-    public static class Factory implements ParticleProvider<DustGrainParticleEffect> {
+    public static class Factory implements ParticleProvider<DustGrainOptions> {
 
         private final SpriteSet spriteProvider;
 
@@ -42,7 +42,7 @@ public class DustGrainParticle extends DustParticleBase<DustGrainParticleEffect>
         @Override
         @Nullable
         public Particle createParticle(
-                DustGrainParticleEffect parameters,
+                DustGrainOptions parameters,
                 ClientLevel world,
                 double x, double y, double z,
                 double velocityX, double velocityY, double velocityZ,

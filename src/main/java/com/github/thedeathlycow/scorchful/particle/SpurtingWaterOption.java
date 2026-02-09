@@ -10,25 +10,25 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ExtraCodecs;
 
-public class SpurtingWaterParticleEffect implements ParticleOptions {
+public class SpurtingWaterOption implements ParticleOptions {
 
-    public static final MapCodec<SpurtingWaterParticleEffect> CODEC = RecordCodecBuilder.mapCodec(
+    public static final MapCodec<SpurtingWaterOption> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
                             ExtraCodecs.NON_NEGATIVE_INT
                                     .fieldOf("delay")
-                                    .forGetter(SpurtingWaterParticleEffect::getDelay)
+                                    .forGetter(SpurtingWaterOption::getDelay)
                     )
-                    .apply(instance, SpurtingWaterParticleEffect::new)
+                    .apply(instance, SpurtingWaterOption::new)
     );
-    public static final StreamCodec<RegistryFriendlyByteBuf, SpurtingWaterParticleEffect> PACKET_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, SpurtingWaterOption> PACKET_CODEC = StreamCodec.composite(
             ByteBufCodecs.VAR_INT,
-            SpurtingWaterParticleEffect::getDelay,
-            SpurtingWaterParticleEffect::new
+            SpurtingWaterOption::getDelay,
+            SpurtingWaterOption::new
     );
 
     private final int delay;
 
-    public SpurtingWaterParticleEffect(int delay) {
+    public SpurtingWaterOption(int delay) {
         this.delay = delay;
     }
 
@@ -37,7 +37,7 @@ public class SpurtingWaterParticleEffect implements ParticleOptions {
     }
 
     @Override
-    public ParticleType<SpurtingWaterParticleEffect> getType() {
+    public ParticleType<SpurtingWaterOption> getType() {
         return SParticleTypes.SPURTING_WATER;
     }
 

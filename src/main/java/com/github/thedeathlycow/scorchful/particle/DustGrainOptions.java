@@ -11,36 +11,36 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ExtraCodecs;
 import org.joml.Vector3fc;
 
-public class DustGrainParticleEffect extends ScalableParticleOptionsBase {
+public class DustGrainOptions extends ScalableParticleOptionsBase {
 
-    public static final MapCodec<DustGrainParticleEffect> CODEC = RecordCodecBuilder.mapCodec(
+    public static final MapCodec<DustGrainOptions> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
                             ExtraCodecs.VECTOR3F
                                     .fieldOf("color")
-                                    .forGetter(DustGrainParticleEffect::getColor),
+                                    .forGetter(DustGrainOptions::getColor),
                             SCALE
                                     .fieldOf("scale")
-                                    .forGetter(DustGrainParticleEffect::getScale)
+                                    .forGetter(DustGrainOptions::getScale)
                     )
-                    .apply(instance, DustGrainParticleEffect::new)
+                    .apply(instance, DustGrainOptions::new)
     );
-    public static final StreamCodec<RegistryFriendlyByteBuf, DustGrainParticleEffect> PACKET_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, DustGrainOptions> PACKET_CODEC = StreamCodec.composite(
             ByteBufCodecs.VECTOR3F,
-            DustGrainParticleEffect::getColor,
+            DustGrainOptions::getColor,
             ByteBufCodecs.FLOAT,
-            DustGrainParticleEffect::getScale,
-            DustGrainParticleEffect::new
+            DustGrainOptions::getScale,
+            DustGrainOptions::new
     );
 
     private final Vector3fc color;
 
-    public DustGrainParticleEffect(Vector3fc color, float scale) {
+    public DustGrainOptions(Vector3fc color, float scale) {
         super(scale);
         this.color = color;
     }
 
     @Override
-    public ParticleType<DustGrainParticleEffect> getType() {
+    public ParticleType<DustGrainOptions> getType() {
         return SParticleTypes.DUST_GRAIN;
     }
 

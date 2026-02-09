@@ -41,7 +41,7 @@ public class SpurtingWaterParticle extends RisingParticle {
         return SingleQuadParticle.Layer.OPAQUE;
     }
     @Environment(EnvType.CLIENT)
-    public static class Factory implements ParticleProvider<SpurtingWaterParticleEffect> {
+    public static class Factory implements ParticleProvider<SpurtingWaterOption> {
 
         private final SpriteSet spriteProvider;
 
@@ -52,7 +52,7 @@ public class SpurtingWaterParticle extends RisingParticle {
         @Override
         @Nullable
         public Particle createParticle(
-                SpurtingWaterParticleEffect parameters,
+                SpurtingWaterOption parameters,
                 ClientLevel world,
                 double x, double y, double z,
                 double velocityX, double velocityY, double velocityZ,
