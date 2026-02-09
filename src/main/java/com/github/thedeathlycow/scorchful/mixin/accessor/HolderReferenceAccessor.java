@@ -8,7 +8,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.tags.TagKey;
 
 @Mixin(Holder.Reference.class)
-public interface RegistryEntryReferenceAccessor {
+public interface HolderReferenceAccessor {
     @Accessor("tags")
     Set<TagKey<?>> scorchful$tags();
 }

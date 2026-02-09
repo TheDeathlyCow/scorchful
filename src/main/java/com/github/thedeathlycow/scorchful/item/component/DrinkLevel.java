@@ -6,7 +6,7 @@ import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.section.ItemConfig;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
-import com.github.thedeathlycow.scorchful.mixin.accessor.RegistryEntryReferenceAccessor;
+import com.github.thedeathlycow.scorchful.mixin.accessor.HolderReferenceAccessor;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
@@ -91,7 +91,7 @@ public enum DrinkLevel implements StringRepresentable, ConsumableListener, Toolt
             return;
         }
 
-        if (((RegistryEntryReferenceAccessor) stack.getItem().builtInRegistryHolder()).scorchful$tags() == null) {
+        if (((HolderReferenceAccessor) stack.getItem().builtInRegistryHolder()).scorchful$tags() == null) {
             return;
         }
 

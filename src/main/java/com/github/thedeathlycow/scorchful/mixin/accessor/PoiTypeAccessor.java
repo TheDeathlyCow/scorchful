@@ -9,7 +9,7 @@ import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.level.block.state.BlockState;
 
 @Mixin(PoiType.class)
-public interface PointOfInterestTypeAccessor {
+public interface PoiTypeAccessor {
     @Accessor("matchingStates")
     @Mutable
     void scorchful$setBlockStates(Set<BlockState> states);

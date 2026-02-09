@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(TargetingConditions.class)
-public class TargetPredicateMixin {
+public class TargetingConditionsMixin {
     @WrapOperation(
             method = "test",
             at = @At(

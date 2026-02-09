@@ -1,7 +1,6 @@
 package com.github.thedeathlycow.scorchful.mixin.client;
 
 import com.github.thedeathlycow.scorchful.config.ScorchfulClientConfig;
-import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.hud.BurningHeartsOverlay;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -18,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Gui.class)
-public abstract class InGameHudMixin {
+public abstract class GuiMixin {
     @Shadow
     @Nullable
     protected abstract Player getCameraPlayer();

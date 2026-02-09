@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Player.class)
-public class PlayerEntityMixin {
+public class PlayerMixin {
     @Inject(
             method = "turtleHelmetTick",
             at = @At("HEAD"),

@@ -15,11 +15,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Player.class)
 @Environment(EnvType.CLIENT)
-public abstract class DrippingWetPlayerMixin extends LivingEntity {
+public abstract class PlayerMixin extends LivingEntity {
     @Shadow
     protected boolean wasUnderwater;
 
-    protected DrippingWetPlayerMixin(EntityType<? extends LivingEntity> entityType, Level world) {
+    protected PlayerMixin(EntityType<? extends LivingEntity> entityType, Level world) {
         super(entityType, world);
     }
 

@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Consumable.class)
-public class ConsumableComponentMixin {
+public class ConsumableMixin {
     @WrapMethod(
             method = "canConsume"
     )

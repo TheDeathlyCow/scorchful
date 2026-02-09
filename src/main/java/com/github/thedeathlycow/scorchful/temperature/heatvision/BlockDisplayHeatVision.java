@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
-import com.github.thedeathlycow.scorchful.mixin.accessor.BlockDisplayAccess;
+import com.github.thedeathlycow.scorchful.mixin.accessor.BlockDisplayAccessor;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -31,6 +31,6 @@ public class BlockDisplayHeatVision extends EntityHeatVision<Display.BlockDispla
     @Override
     protected void initializeEntity(Display.BlockDisplay entity) {
         super.initializeEntity(entity);
-        ((BlockDisplayAccess) entity).scorchful$setBlockState(blockStateProvider.get());
+        ((BlockDisplayAccessor) entity).scorchful$setBlockState(blockStateProvider.get());
     }
 }

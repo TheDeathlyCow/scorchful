@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(HumanoidMobRenderer.class)
-public class BipedEntityRendererMixin {
+public class HumanoidMobRendererMixin {
     @Inject(
             method = "extractHumanoidRenderState",
             at = @At("TAIL")

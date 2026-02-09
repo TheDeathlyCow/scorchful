@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(HumanoidArmorLayer.class)
-public class ArmorFeatureRendererMixin {
+public class HumanoidArmorLayerMixin {
     @WrapMethod(method = "shouldRender(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/EquipmentSlot;)Z")
     private static boolean hasSunHatOrModel(ItemStack stack, EquipmentSlot slot, Operation<Boolean> original) {
         SunHatRenderer renderer = stack.get(SDataComponentTypes.SUN_HAT_RENDERER);

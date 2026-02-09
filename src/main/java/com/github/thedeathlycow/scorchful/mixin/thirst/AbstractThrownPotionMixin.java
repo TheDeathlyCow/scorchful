@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(AbstractThrownPotion.class)
-public abstract class PotionEntityMixin extends ThrowableItemProjectile {
-    protected PotionEntityMixin(EntityType<? extends ThrowableItemProjectile> entityType, Level world) {
+public abstract class AbstractThrownPotionMixin extends ThrowableItemProjectile {
+    protected AbstractThrownPotionMixin(EntityType<? extends ThrowableItemProjectile> entityType, Level world) {
         super(entityType, world);
     }
 

@@ -10,7 +10,7 @@ import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.level.block.state.BlockState;
 
 @Mixin(PoiTypes.class)
-public interface PointOfInterestTypesAccessor {
+public interface PoiTypesAccessor {
     @Accessor("TYPE_BY_STATE")
     static Map<BlockState, Holder<PoiType>> scorchful$getStatesToType() {
         throw new AssertionError();
