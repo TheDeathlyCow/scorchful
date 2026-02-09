@@ -3,7 +3,6 @@ package com.github.thedeathlycow.scorchful.block;
 import com.mojang.serialization.Codec;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import java.util.Map;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -12,6 +11,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.Map;
 
 @FunctionalInterface
 public interface NetherLilyBehaviour {

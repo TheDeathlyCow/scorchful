@@ -28,6 +28,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.Block;
+
 import java.util.function.Function;
 
 public final class SItems {

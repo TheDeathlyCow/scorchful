@@ -4,7 +4,6 @@ import com.github.thedeathlycow.scorchful.block.SandPileBlock;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.section.WeatherConfig;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
-import java.util.Objects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -17,6 +16,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.levelgen.Heightmap;
+
+import java.util.Objects;
 
 public class SandAccumulation {
     public static void tickChunk(ServerLevel world, LevelChunk chunk, int randomTickSpeed) {

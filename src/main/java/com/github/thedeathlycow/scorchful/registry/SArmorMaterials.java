@@ -8,6 +8,7 @@ import net.minecraft.util.Util;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.equipment.EquipmentAssets;
+
 import java.util.EnumMap;
 
 public final class SArmorMaterials {

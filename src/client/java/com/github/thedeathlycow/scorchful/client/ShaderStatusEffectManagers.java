@@ -12,6 +12,7 @@ import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;

@@ -12,11 +12,6 @@ import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.function.Consumer;
-import java.util.function.IntFunction;
-import java.util.function.ToIntFunction;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -36,6 +31,11 @@ import net.minecraft.world.item.component.ConsumableListener;
 import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Consumer;
+import java.util.function.IntFunction;
+import java.util.function.ToIntFunction;
 
 public enum DrinkLevel implements StringRepresentable, ConsumableListener, TooltipProvider {
     PARCHING(

@@ -2,16 +2,11 @@ package com.github.thedeathlycow.scorchful.entity.model;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.model.*;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
 import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.CubeDeformation;
-import net.minecraft.client.model.geom.builders.CubeListBuilder;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.client.model.geom.builders.MeshTransformer;
-import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 
 @Environment(EnvType.CLIENT)

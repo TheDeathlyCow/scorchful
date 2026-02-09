@@ -1,8 +1,8 @@
 package com.github.thedeathlycow.scorchful.entity.effect;
 
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.scorchful.registry.SParticleTypes;
 import com.github.thedeathlycow.scorchful.registry.SMobEffects;
+import com.github.thedeathlycow.scorchful.registry.SParticleTypes;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;

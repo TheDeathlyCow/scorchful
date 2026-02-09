@@ -24,6 +24,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.enchantment.Enchantment;
+
 import java.lang.reflect.Field;
 import java.util.concurrent.CompletableFuture;
 

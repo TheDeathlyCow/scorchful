@@ -17,6 +17,7 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 

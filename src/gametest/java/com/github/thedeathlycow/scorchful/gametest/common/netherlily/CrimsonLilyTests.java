@@ -19,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.state.BlockState;
+
 import java.util.function.BooleanSupplier;
 
 @SuppressWarnings("unused")

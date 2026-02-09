@@ -4,9 +4,6 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.SMobEffects;
 import com.github.thedeathlycow.scorchful.util.SMth;
-import org.joml.Vector2i;
-
-import java.util.OptionalInt;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -15,6 +12,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.levelgen.Heightmap;
+import org.joml.Vector2i;
+
+import java.util.OptionalInt;
 
 public class VisionSpawner {
 

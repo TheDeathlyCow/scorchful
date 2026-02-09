@@ -7,8 +7,9 @@ import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.autogen.*;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
-import java.nio.file.Path;
 import net.minecraft.util.Mth;
+
+import java.nio.file.Path;
 
 public class ItemConfig {
     public static final Path PATH = Scorchful.getConfigDir().resolve("common").resolve("item.json5");

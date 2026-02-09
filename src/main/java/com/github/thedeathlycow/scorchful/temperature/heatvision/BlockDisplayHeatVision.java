@@ -1,7 +1,6 @@
 package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
 import com.github.thedeathlycow.scorchful.mixin.accessor.BlockDisplayAccessor;
-import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
@@ -10,6 +9,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.function.Supplier;
 
 public class BlockDisplayHeatVision extends EntityHeatVision<Display.BlockDisplay> {
 

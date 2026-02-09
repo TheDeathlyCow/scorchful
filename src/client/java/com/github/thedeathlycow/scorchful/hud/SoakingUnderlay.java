@@ -2,7 +2,6 @@ package com.github.thedeathlycow.scorchful.hud;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulClientConfig;
-import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.section.DisplaySettings;
 import com.github.thedeathlycow.thermoo.api.client.HeartBarContext;
 import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;

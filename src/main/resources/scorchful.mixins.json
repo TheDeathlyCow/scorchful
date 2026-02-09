@@ -11,14 +11,14 @@
         "TargetingConditionsMixin",
         "accessor.BlockDisplayAccessor",
         "accessor.EntityAccessor",
+        "accessor.HolderReferenceAccessor",
         "accessor.PoiTypeAccessor",
         "accessor.PoiTypesAccessor",
-        "accessor.HolderReferenceAccessor",
         "compat.frostiful.absent.EntityMixin",
         "server.ServerLevelMixin",
+        "thirst.AbstractThrownPotionMixin",
         "thirst.ConsumableMixin",
-        "thirst.ConsumeItemTriggerMixin",
-        "thirst.AbstractThrownPotionMixin"
+        "thirst.ConsumeItemTriggerMixin"
     ],
     "injectors": {
         "defaultRequire": 1

@@ -14,6 +14,7 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
+
 import java.util.concurrent.CompletableFuture;
 
 public class ClimateBiomeTagGenerator extends FabricTagProvider<Biome> {

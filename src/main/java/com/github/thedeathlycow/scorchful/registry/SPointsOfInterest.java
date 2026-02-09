@@ -10,6 +10,7 @@ import net.minecraft.util.Util;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.level.block.state.BlockState;
+
 import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Stream;

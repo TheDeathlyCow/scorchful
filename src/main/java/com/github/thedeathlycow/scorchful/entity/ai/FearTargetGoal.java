@@ -1,15 +1,15 @@
 package com.github.thedeathlycow.scorchful.entity.ai;
 
 import com.github.thedeathlycow.scorchful.registry.SMobEffects;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.EnumSet;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.EnumSet;
 
 public class FearTargetGoal extends Goal {
 

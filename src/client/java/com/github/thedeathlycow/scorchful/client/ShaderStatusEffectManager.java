@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.PostChain;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
+
 import java.util.function.Predicate;
 
 public final class ShaderStatusEffectManager implements ShaderEffectRenderCallback, ClientPlayConnectionEvents.Disconnect {

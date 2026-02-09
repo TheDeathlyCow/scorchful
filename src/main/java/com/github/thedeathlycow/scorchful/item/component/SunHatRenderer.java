@@ -3,7 +3,6 @@ package com.github.thedeathlycow.scorchful.item.component;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import java.util.function.Consumer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -15,6 +14,8 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
+
+import java.util.function.Consumer;
 
 public record SunHatRenderer(
         boolean replaceArmorModel,

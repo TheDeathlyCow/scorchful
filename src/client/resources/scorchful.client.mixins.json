@@ -5,13 +5,13 @@
     "plugin": "com.github.thedeathlycow.scorchful.mixin.client.compat.Plugin",
     "client": [
         "ClientPacketListenerMixin",
-        "PlayerMixin",
         "GameRendererMixin",
         "GuiMixin",
-        "entity.feature.HumanoidArmorLayerMixin",
+        "PlayerMixin",
         "entity.feature.CustomHeadLayerMixin",
-        "entity.render.HumanoidMobRendererMixin",
+        "entity.feature.HumanoidArmorLayerMixin",
         "entity.render.EntityRendererMixin",
+        "entity.render.HumanoidMobRendererMixin",
         "entity.render.LivingEntityRenderStateMixin"
     ],
     "injectors": {

@@ -3,10 +3,10 @@ package com.github.thedeathlycow.scorchful.api;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.compat.ServerThirstPluginManager;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
-import net.minecraft.world.entity.player.Player;
 
 /**
  * An adapter for delegating thirst-based interactions in Scorchful to an alternative thirst system on the logical server.

@@ -5,7 +5,6 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import java.util.function.Consumer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -20,6 +19,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
+
+import java.util.function.Consumer;
 
 public record DrinkContainer(int numDrinks, int maxDrinks) implements TooltipProvider {
     public static final Style TOOLTIP_STYLE = Style.EMPTY

@@ -5,10 +5,11 @@ import com.github.thedeathlycow.scorchful.item.component.DrinkContainer;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevel;
 import com.github.thedeathlycow.scorchful.item.component.HeatResistance;
 import com.github.thedeathlycow.scorchful.item.component.SunHatRenderer;
-import java.util.function.UnaryOperator;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
+
+import java.util.function.UnaryOperator;
 
 public final class SDataComponentTypes {
     public static final DataComponentType<DrinkLevel> DRINK_LEVEL = register(
