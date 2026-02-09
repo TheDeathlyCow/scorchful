@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.mixin.thirst;
 
-import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
-import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
+import com.github.thedeathlycow.scorchful.item.component.DrinkContainer;
+import com.github.thedeathlycow.scorchful.item.component.DrinkLevel;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -23,7 +23,7 @@ public class ConsumableComponentMixin {
             method = "canConsume"
     )
     private boolean blockConsumptionIfContainerIsEmpty(LivingEntity user, ItemStack stack, Operation<Boolean> original) {
-        DrinkContainerComponent container = stack.get(SDataComponentTypes.DRINK_CONTAINER);
+        DrinkContainer container = stack.get(SDataComponentTypes.DRINK_CONTAINER);
         if (container != null && container.isEmpty()) {
             return false;
         }
@@ -50,7 +50,7 @@ public class ConsumableComponentMixin {
             at = @At("TAIL")
     )
     private void decrementContainer(Level world, LivingEntity user, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
-        DrinkContainerComponent component = stack.get(SDataComponentTypes.DRINK_CONTAINER);
+        DrinkContainer component = stack.get(SDataComponentTypes.DRINK_CONTAINER);
         if (component != null && component.hasDrink()) {
             stack.set(SDataComponentTypes.DRINK_CONTAINER, component.addDrinks(-1));
         }
@@ -61,9 +61,9 @@ public class ConsumableComponentMixin {
             at = @At("TAIL")
     )
     private void spawnWaterParticles(RandomSource random, LivingEntity user, ItemStack stack, int particleCount, CallbackInfo ci) {
-        DrinkLevelComponent level = stack.get(SDataComponentTypes.DRINK_LEVEL);
-        if (level == DrinkLevelComponent.HYDRATING) {
-            DrinkLevelComponent.spawnWaterParticles(user.level(), user, particleCount);
+        DrinkLevel level = stack.get(SDataComponentTypes.DRINK_LEVEL);
+        if (level == DrinkLevel.HYDRATING) {
+            DrinkLevel.spawnWaterParticles(user.level(), user, particleCount);
         }
     }
 }

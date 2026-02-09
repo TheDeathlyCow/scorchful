@@ -7,9 +7,9 @@ import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
 import com.github.thedeathlycow.scorchful.item.SunHatItem;
 import com.github.thedeathlycow.scorchful.item.TurtleArmorEffects;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
-import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
-import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
-import com.github.thedeathlycow.scorchful.item.component.HeatResistanceComponent;
+import com.github.thedeathlycow.scorchful.item.component.DrinkContainer;
+import com.github.thedeathlycow.scorchful.item.component.DrinkLevel;
+import com.github.thedeathlycow.scorchful.item.component.HeatResistance;
 import com.github.thedeathlycow.scorchful.item.component.HeatResistanceModifier;
 import com.github.thedeathlycow.scorchful.item.enchantment.EnchantmentModifiers;
 import com.github.thedeathlycow.scorchful.item.loot.TurtleScuteLootTableModifier;
@@ -37,8 +37,8 @@ public final class SItems {
                     settings
                             .stacksTo(1)
                             .component(DataComponents.CONSUMABLE, Consumables.DEFAULT_DRINK)
-                            .component(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT)
-                            .component(SDataComponentTypes.DRINK_LEVEL, DrinkLevelComponent.HYDRATING)
+                            .component(SDataComponentTypes.DRINK_CONTAINER, DrinkContainer.DEFAULT)
+                            .component(SDataComponentTypes.DRINK_LEVEL, DrinkLevel.HYDRATING)
             )
     );
 
@@ -51,7 +51,7 @@ public final class SItems {
                             .craftRemainder(Items.GLASS_BOTTLE)
                             .usingConvertsTo(Items.GLASS_BOTTLE)
                             .component(DataComponents.CONSUMABLE, Consumables.DEFAULT_DRINK)
-                            .component(SDataComponentTypes.DRINK_LEVEL, DrinkLevelComponent.HYDRATING)
+                            .component(SDataComponentTypes.DRINK_LEVEL, DrinkLevel.HYDRATING)
             )
     );
 
@@ -75,7 +75,7 @@ public final class SItems {
                     settings
                             .humanoidArmor(SArmorMaterials.TURTLE, ArmorType.CHESTPLATE)
                             .durability(ArmorType.CHESTPLATE.getDurability(25))
-                            .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE)
+                            .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistance.VERY_PROTECTIVE)
             )
     );
 
@@ -85,7 +85,7 @@ public final class SItems {
                     settings
                             .humanoidArmor(SArmorMaterials.TURTLE, ArmorType.LEGGINGS)
                             .durability(ArmorType.LEGGINGS.getDurability(25))
-                            .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE)
+                            .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistance.VERY_PROTECTIVE)
             )
     );
 
@@ -95,14 +95,14 @@ public final class SItems {
                     settings
                             .humanoidArmor(SArmorMaterials.TURTLE, ArmorType.BOOTS)
                             .durability(ArmorType.BOOTS.getDurability(25))
-                            .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE)
+                            .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistance.VERY_PROTECTIVE)
             )
     );
 
     public static void initialize() {
         Scorchful.LOGGER.debug("Initialized Scorchful items");
         UseItemCallback.EVENT.register(new FireChargeThrower());
-        ScorchfulItemEvents.GET_DEFAULT_STACK.register(DrinkLevelComponent::applyToNewStack);
+        ScorchfulItemEvents.GET_DEFAULT_STACK.register(DrinkLevel::applyToNewStack);
         ScorchfulItemEvents.CONSUME_ITEM.register((stack, player) -> {
             if (stack.is(SItemTags.IS_COOLING_FOOD)) {
                 player.thermoo$addTemperature(

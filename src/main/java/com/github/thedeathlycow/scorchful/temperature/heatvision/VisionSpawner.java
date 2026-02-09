@@ -2,7 +2,7 @@ package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
+import com.github.thedeathlycow.scorchful.registry.SMobEffects;
 import com.github.thedeathlycow.scorchful.util.SMth;
 import org.joml.Vector2i;
 
@@ -28,7 +28,7 @@ public class VisionSpawner {
 
         Level world = player.level();
 
-        if (world.isClientSide() || !player.hasEffect(SStatusEffects.HEAT_STROKE)) {
+        if (world.isClientSide() || !player.hasEffect(SMobEffects.HEAT_STROKE)) {
             return;
         }
 

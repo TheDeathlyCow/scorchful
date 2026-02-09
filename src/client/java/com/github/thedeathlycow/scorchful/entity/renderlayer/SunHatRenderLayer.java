@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.entity.feature;
+package com.github.thedeathlycow.scorchful.entity.renderlayer;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.entity.model.SunHatModel;
@@ -18,14 +18,14 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 
 @Environment(EnvType.CLIENT)
-public class SunHatFeatureRenderer<S extends HumanoidRenderState, M extends HumanoidModel<S>> extends RenderLayer<S, M> {
+public class SunHatRenderLayer<S extends HumanoidRenderState, M extends HumanoidModel<S>> extends RenderLayer<S, M> {
 
     private static final Identifier TEXTURE = Scorchful.id("textures/entity/sun_hat.png");
 
     private final SunHatModel<S> model;
     private final SunHatModel<S> babyModel;
 
-    public SunHatFeatureRenderer(
+    public SunHatRenderLayer(
             RenderLayerParent<S, M> context,
             EntityModelSet modelLoader
     ) {

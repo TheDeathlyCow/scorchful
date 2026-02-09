@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.registry;
 
-import com.github.thedeathlycow.scorchful.entity.feature.SunHatFeatureRenderer;
+import com.github.thedeathlycow.scorchful.entity.renderlayer.SunHatRenderLayer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
@@ -17,28 +17,28 @@ public class SFeatureRenderers {
                 (entityType, entityRenderer, registrationHelper, context) -> {
                     if (entityRenderer instanceof HumanoidMobRenderer<?, ?, ?> bipedEntityRenderer) {
                         registrationHelper.register(
-                                new SunHatFeatureRenderer<>(
+                                new SunHatRenderLayer<>(
                                         bipedEntityRenderer,
                                         context.getModelSet()
                                 )
                         );
                     } else if (entityRenderer instanceof AvatarRenderer<?> playerEntityRenderer) {
                         registrationHelper.register(
-                                new SunHatFeatureRenderer<>(
+                                new SunHatRenderLayer<>(
                                         playerEntityRenderer,
                                         context.getModelSet()
                                 )
                         );
                     } else if (entityRenderer instanceof ArmorStandRenderer armorStandEntityRenderer) {
                         registrationHelper.register(
-                                new SunHatFeatureRenderer<>(
+                                new SunHatRenderLayer<>(
                                         armorStandEntityRenderer,
                                         context.getModelSet()
                                 )
                         );
                     } else if (entityRenderer instanceof GiantMobRenderer giantEntityRenderer) {
                         registrationHelper.register(
-                                new SunHatFeatureRenderer<>(
+                                new SunHatRenderLayer<>(
                                         giantEntityRenderer,
                                         context.getModelSet()
                                 )

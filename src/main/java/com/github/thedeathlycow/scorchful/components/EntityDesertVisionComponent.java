@@ -2,7 +2,7 @@ package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.event.HeatVisionActivation;
-import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
+import com.github.thedeathlycow.scorchful.registry.SMobEffects;
 import com.github.thedeathlycow.scorchful.temperature.heatvision.HeatVision;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -102,7 +102,7 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
                 );
                 return false;
             }
-            return cause.hasEffect(SStatusEffects.HEAT_STROKE);
+            return cause.hasEffect(SMobEffects.HEAT_STROKE);
         }
     }
 }

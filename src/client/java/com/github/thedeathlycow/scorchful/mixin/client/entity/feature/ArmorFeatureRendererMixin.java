@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.mixin.client.entity.feature;
 
-import com.github.thedeathlycow.scorchful.item.component.SunHatRendererComponent;
+import com.github.thedeathlycow.scorchful.item.component.SunHatRenderer;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 public class ArmorFeatureRendererMixin {
     @WrapMethod(method = "shouldRender(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/EquipmentSlot;)Z")
     private static boolean hasSunHatOrModel(ItemStack stack, EquipmentSlot slot, Operation<Boolean> original) {
-        SunHatRendererComponent renderer = stack.get(SDataComponentTypes.SUN_HAT_RENDERER);
+        SunHatRenderer renderer = stack.get(SDataComponentTypes.SUN_HAT_RENDERER);
 
         if (renderer != null && renderer.replaceArmorModel()) {
             return false;

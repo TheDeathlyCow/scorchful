@@ -2,7 +2,7 @@ package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.api.CollectWaterCallback;
 import com.github.thedeathlycow.scorchful.block.NetherLilyBlock;
-import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
+import com.github.thedeathlycow.scorchful.item.component.DrinkContainer;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.SStats;
@@ -30,7 +30,7 @@ import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class WaterSkinItem extends Item {
-    public static final Style TOOLTIP_STYLE = DrinkContainerComponent.TOOLTIP_STYLE;
+    public static final Style TOOLTIP_STYLE = DrinkContainer.TOOLTIP_STYLE;
 
     public static final Style PARCHING_STYLE = Style.EMPTY
             .withColor(ChatFormatting.RED);
@@ -47,16 +47,16 @@ public class WaterSkinItem extends Item {
     @Override
     public ItemStack getDefaultInstance() {
         var itemStack = super.getDefaultInstance();
-        itemStack.set(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT);
+        itemStack.set(SDataComponentTypes.DRINK_CONTAINER, DrinkContainer.DEFAULT);
         return itemStack;
     }
 
-    public static DrinkContainerComponent getContainer(ItemStack stack) {
-        return stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT);
+    public static DrinkContainer getContainer(ItemStack stack) {
+        return stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainer.DEFAULT);
     }
 
     public static boolean hasDrink(ItemStack stack) {
-        return stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT).hasDrink();
+        return stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainer.DEFAULT).hasDrink();
     }
 
     @Override
@@ -73,7 +73,7 @@ public class WaterSkinItem extends Item {
 
     @Override
     public Component getName(ItemStack stack) {
-        DrinkContainerComponent container = getContainer(stack);
+        DrinkContainer container = getContainer(stack);
 
         if (container.isEmpty()) {
             return EMPTY_ITEM_NAME;
@@ -91,7 +91,7 @@ public class WaterSkinItem extends Item {
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        DrinkContainerComponent container = getContainer(stack);
+        DrinkContainer container = getContainer(stack);
 
         if (container.isEmpty()) {
             return 0;
@@ -118,7 +118,7 @@ public class WaterSkinItem extends Item {
         );
         world.gameEvent(player, GameEvent.FLUID_PICKUP, sourcePos);
         player.awardStat(Stats.ITEM_USED.get(this));
-        DrinkContainerComponent.addDrinks(stack, amount);
+        DrinkContainer.addDrinks(stack, amount);
 
         CollectWaterCallback.EVENT.invoker().onWaterCollected(player, stack, sourcePos);
     }
@@ -129,7 +129,7 @@ public class WaterSkinItem extends Item {
         if (blockHitResult.getType() == HitResult.Type.BLOCK) {
             BlockPos hitPos = blockHitResult.getBlockPos();
 
-            DrinkContainerComponent container = stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT);
+            DrinkContainer container = stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainer.DEFAULT);
 
             if (!world.mayInteract(user, hitPos) || container.isFull()) {
                 return null;

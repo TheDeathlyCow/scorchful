@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.entity.ai;
 
-import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
+import com.github.thedeathlycow.scorchful.registry.SMobEffects;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
@@ -34,7 +34,7 @@ public class FearTargetGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        if (this.mob.getTarget() == null || !this.mob.hasEffect(SStatusEffects.FEAR)) {
+        if (this.mob.getTarget() == null || !this.mob.hasEffect(SMobEffects.FEAR)) {
             return false;
         }
 

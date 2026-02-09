@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.mixin;
 
-import com.github.thedeathlycow.scorchful.entity.effect.FearStatusEffect;
+import com.github.thedeathlycow.scorchful.entity.effect.FearEffect;
 import com.github.thedeathlycow.scorchful.server.SandstormSlowing;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.util.profiling.Profiler;
@@ -45,7 +45,7 @@ public abstract class LivingEntityMixin extends Entity {
             at = @At("RETURN")
     )
     private double extendMobDetectionWhenFeared(double original) {
-        return FearStatusEffect.modifyDetectionDistance((LivingEntity) (Object) this, original);
+        return FearEffect.modifyDetectionDistance((LivingEntity) (Object) this, original);
     }
 
     @Inject(
@@ -54,7 +54,7 @@ public abstract class LivingEntityMixin extends Entity {
             cancellable = true
     )
     private void blockFear(MobEffectInstance effect, CallbackInfoReturnable<Boolean> cir) {
-        if (!FearStatusEffect.canHaveFear((LivingEntity) (Object) this, effect)) {
+        if (!FearEffect.canHaveFear((LivingEntity) (Object) this, effect)) {
             cir.setReturnValue(false);
         }
     }

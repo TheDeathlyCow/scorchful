@@ -16,29 +16,29 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
 
-public record SunHatRendererComponent(
+public record SunHatRenderer(
         boolean replaceArmorModel,
         boolean showTooltip
 ) implements TooltipProvider {
-    public static final SunHatRendererComponent DEFAULT = new SunHatRendererComponent(true, true);
+    public static final SunHatRenderer DEFAULT = new SunHatRenderer(true, true);
 
-    public static final Codec<SunHatRendererComponent> CODEC = RecordCodecBuilder.create(
+    public static final Codec<SunHatRenderer> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
                     Codec.BOOL
                             .lenientOptionalFieldOf("replace_armor_model", DEFAULT.replaceArmorModel)
-                            .forGetter(SunHatRendererComponent::replaceArmorModel),
+                            .forGetter(SunHatRenderer::replaceArmorModel),
                     Codec.BOOL
                             .lenientOptionalFieldOf("show_tooltip", DEFAULT.showTooltip)
-                            .forGetter(SunHatRendererComponent::showTooltip)
-            ).apply(instance, SunHatRendererComponent::new)
+                            .forGetter(SunHatRenderer::showTooltip)
+            ).apply(instance, SunHatRenderer::new)
     );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, SunHatRendererComponent> PACKET_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, SunHatRenderer> PACKET_CODEC = StreamCodec.composite(
             ByteBufCodecs.BOOL,
-            SunHatRendererComponent::replaceArmorModel,
+            SunHatRenderer::replaceArmorModel,
             ByteBufCodecs.BOOL,
-            SunHatRendererComponent::showTooltip,
-            SunHatRendererComponent::new
+            SunHatRenderer::showTooltip,
+            SunHatRenderer::new
     );
 
     public static final Identifier SHADE_OVERLAY_TEXTURE = Scorchful.id("misc/shade_overlay");

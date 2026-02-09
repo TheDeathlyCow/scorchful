@@ -37,7 +37,7 @@ import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-public enum DrinkLevelComponent implements StringRepresentable, ConsumableListener, TooltipProvider {
+public enum DrinkLevel implements StringRepresentable, ConsumableListener, TooltipProvider {
     PARCHING(
             "parching",
             SItemTags.IS_PARCHING,
@@ -63,12 +63,12 @@ public enum DrinkLevelComponent implements StringRepresentable, ConsumableListen
             ItemConfig::getWaterFromHydratingFood
     );
 
-    public static final Codec<DrinkLevelComponent> CODEC = StringRepresentable.fromEnum(DrinkLevelComponent::values);
-    public static final IntFunction<DrinkLevelComponent> ID_TO_VALUE = ByIdMap.continuous(
-            DrinkLevelComponent::ordinal, values(), ByIdMap.OutOfBoundsStrategy.ZERO
+    public static final Codec<DrinkLevel> CODEC = StringRepresentable.fromEnum(DrinkLevel::values);
+    public static final IntFunction<DrinkLevel> ID_TO_VALUE = ByIdMap.continuous(
+            DrinkLevel::ordinal, values(), ByIdMap.OutOfBoundsStrategy.ZERO
     );
-    public static final StreamCodec<ByteBuf, DrinkLevelComponent> PACKET_CODEC = ByteBufCodecs.idMapper(
-            ID_TO_VALUE, DrinkLevelComponent::ordinal
+    public static final StreamCodec<ByteBuf, DrinkLevel> PACKET_CODEC = ByteBufCodecs.idMapper(
+            ID_TO_VALUE, DrinkLevel::ordinal
     );
 
     private final String name;
@@ -79,7 +79,7 @@ public enum DrinkLevelComponent implements StringRepresentable, ConsumableListen
 
     private final ToIntFunction<ItemConfig> waterProvider;
 
-    DrinkLevelComponent(String name, TagKey<Item> tag, Component tooltipText, ToIntFunction<ItemConfig> waterProvider) {
+    DrinkLevel(String name, TagKey<Item> tag, Component tooltipText, ToIntFunction<ItemConfig> waterProvider) {
         this.name = name;
         this.tag = tag;
         this.tooltipText = tooltipText;
@@ -95,7 +95,7 @@ public enum DrinkLevelComponent implements StringRepresentable, ConsumableListen
             return;
         }
 
-        DrinkLevelComponent level = byTag(stack);
+        DrinkLevel level = byTag(stack);
         if (level != null) {
             stack.set(SDataComponentTypes.DRINK_LEVEL, level);
         }
@@ -125,8 +125,8 @@ public enum DrinkLevelComponent implements StringRepresentable, ConsumableListen
     }
 
     @Nullable
-    private static DrinkLevelComponent byTag(ItemStack stack) {
-        for (DrinkLevelComponent level : values()) {
+    private static DrinkLevel byTag(ItemStack stack) {
+        for (DrinkLevel level : values()) {
             if (stack.is(level.tag)) {
                 return level;
             }

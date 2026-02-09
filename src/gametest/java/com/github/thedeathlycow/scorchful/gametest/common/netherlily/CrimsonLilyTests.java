@@ -3,7 +3,7 @@ package com.github.thedeathlycow.scorchful.gametest.common.netherlily;
 import com.github.thedeathlycow.scorchful.block.CrimsonLilyBlock;
 import com.github.thedeathlycow.scorchful.block.NetherLilyBlock;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
-import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
+import com.github.thedeathlycow.scorchful.item.component.DrinkContainer;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
@@ -169,7 +169,7 @@ public class CrimsonLilyTests {
 
         Player player = context.makeMockPlayer(GameType.SURVIVAL);
         ItemStack filledWaterSkin = SItems.WATER_SKIN.getDefaultInstance();
-        DrinkContainerComponent.addDrinks(filledWaterSkin, 1);
+        DrinkContainer.addDrinks(filledWaterSkin, 1);
         player.setItemInHand(InteractionHand.MAIN_HAND, filledWaterSkin);
 
         BooleanSupplier isWaterSkinEmpty = () -> {
@@ -228,7 +228,7 @@ public class CrimsonLilyTests {
         Player player = context.makeMockPlayer(GameType.SURVIVAL);
         var waterSkin = SItems.WATER_SKIN.getDefaultInstance();
 
-        DrinkContainerComponent.addDrinks(waterSkin, 1);
+        DrinkContainer.addDrinks(waterSkin, 1);
         player.setItemInHand(InteractionHand.MAIN_HAND, waterSkin);
 
         BooleanSupplier isWaterSkinEmpty = () -> !WaterSkinItem.hasDrink(player.getItemInHand(InteractionHand.MAIN_HAND));

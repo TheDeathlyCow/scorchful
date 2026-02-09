@@ -21,21 +21,21 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
 
-public record DrinkContainerComponent(int numDrinks, int maxDrinks) implements TooltipProvider {
+public record DrinkContainer(int numDrinks, int maxDrinks) implements TooltipProvider {
     public static final Style TOOLTIP_STYLE = Style.EMPTY
             .withColor(ChatFormatting.AQUA);
 
-    public static final DrinkContainerComponent DEFAULT = new DrinkContainerComponent(0, 16);
+    public static final DrinkContainer DEFAULT = new DrinkContainer(0, 16);
 
-    private static final Codec<DrinkContainerComponent> VALUE_CODEC = RecordCodecBuilder.<DrinkContainerComponent>create(
+    private static final Codec<DrinkContainer> VALUE_CODEC = RecordCodecBuilder.<DrinkContainer>create(
             instance -> instance.group(
                     Codec.INT
                             .fieldOf("num_drinks")
-                            .forGetter(DrinkContainerComponent::numDrinks),
+                            .forGetter(DrinkContainer::numDrinks),
                     ExtraCodecs.POSITIVE_INT
                             .optionalFieldOf("max_drinks", DEFAULT.maxDrinks)
-                            .forGetter(DrinkContainerComponent::maxDrinks)
-            ).apply(instance, DrinkContainerComponent::new)
+                            .forGetter(DrinkContainer::maxDrinks)
+            ).apply(instance, DrinkContainer::new)
     ).validate(component -> {
         if (component.numDrinks < 0 || component.numDrinks > component.maxDrinks) {
             return DataResult.error(() -> "Num drinks not in range [0, " + component.maxDrinks + "]: " + component.numDrinks);
@@ -44,21 +44,21 @@ public record DrinkContainerComponent(int numDrinks, int maxDrinks) implements T
         }
     });
 
-    public static final Codec<DrinkContainerComponent> CODEC = Codec.either(ExtraCodecs.intRange(0, DEFAULT.maxDrinks), VALUE_CODEC)
+    public static final Codec<DrinkContainer> CODEC = Codec.either(ExtraCodecs.intRange(0, DEFAULT.maxDrinks), VALUE_CODEC)
             .xmap(
-                    either -> either.map(i -> new DrinkContainerComponent(i, DEFAULT.maxDrinks), container -> container),
+                    either -> either.map(i -> new DrinkContainer(i, DEFAULT.maxDrinks), container -> container),
                     Either::right
             );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, DrinkContainerComponent> PACKET_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, DrinkContainer> PACKET_CODEC = StreamCodec.composite(
             ByteBufCodecs.VAR_INT,
-            DrinkContainerComponent::numDrinks,
+            DrinkContainer::numDrinks,
             ByteBufCodecs.VAR_INT,
-            DrinkContainerComponent::maxDrinks,
-            DrinkContainerComponent::new
+            DrinkContainer::maxDrinks,
+            DrinkContainer::new
     );
 
-    public static DrinkContainerComponent addDrinks(ItemStack stack, int value) {
+    public static DrinkContainer addDrinks(ItemStack stack, int value) {
         return stack.update(
                 SDataComponentTypes.DRINK_CONTAINER,
                 DEFAULT,
@@ -66,7 +66,7 @@ public record DrinkContainerComponent(int numDrinks, int maxDrinks) implements T
         );
     }
 
-    public static DrinkContainerComponent fillCompletely(ItemStack stack) {
+    public static DrinkContainer fillCompletely(ItemStack stack) {
         return stack.update(
                 SDataComponentTypes.DRINK_CONTAINER,
                 DEFAULT,
@@ -74,8 +74,8 @@ public record DrinkContainerComponent(int numDrinks, int maxDrinks) implements T
         );
     }
 
-    public DrinkContainerComponent addDrinks(int value) {
-        return new DrinkContainerComponent(
+    public DrinkContainer addDrinks(int value) {
+        return new DrinkContainer(
                 Mth.clamp(this.numDrinks + value, 0, this.maxDrinks),
                 this.maxDrinks
         );

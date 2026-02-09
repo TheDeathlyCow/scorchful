@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.item.component.SunHatRendererComponent;
+import com.github.thedeathlycow.scorchful.item.component.SunHatRenderer;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import net.minecraft.core.component.DataComponents;
@@ -23,10 +23,10 @@ public final class SunHatItem {
                                 DataComponents.EQUIPPABLE,
                                 Equippable.builder(EquipmentSlot.HEAD)
                                         .setDamageOnHurt(false)
-                                        .setCameraOverlay(SunHatRendererComponent.SHADE_OVERLAY_TEXTURE)
+                                        .setCameraOverlay(SunHatRenderer.SHADE_OVERLAY_TEXTURE)
                                         .build()
                         )
-                        .component(SDataComponentTypes.SUN_HAT_RENDERER, SunHatRendererComponent.DEFAULT)
+                        .component(SDataComponentTypes.SUN_HAT_RENDERER, SunHatRenderer.DEFAULT)
         );
     }
 

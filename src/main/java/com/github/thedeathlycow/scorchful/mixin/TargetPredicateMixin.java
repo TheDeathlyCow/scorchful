@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.mixin;
 
-import com.github.thedeathlycow.scorchful.entity.effect.FearStatusEffect;
+import com.github.thedeathlycow.scorchful.entity.effect.FearEffect;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.world.entity.Entity;
@@ -19,7 +19,7 @@ public class TargetPredicateMixin {
             )
     )
     private boolean canAlwaysSeeFearedTargets(Sensing instance, Entity targetEntity, Operation<Boolean> original) {
-        if (FearStatusEffect.isFeared(targetEntity)) {
+        if (FearEffect.isFeared(targetEntity)) {
             return true;
         }
         return original.call(instance, targetEntity);

@@ -54,7 +54,7 @@ public class Scorchful implements ModInitializer {
         SItemGroups.initialize();
         SSoundEvents.initialize();
         STemperatureEffects.initialize();
-        SStatusEffects.initialize();
+        SMobEffects.initialize();
         SParticleTypes.initialize();
         NetherBiomeModifications.initialize();
         SStats.initialize();

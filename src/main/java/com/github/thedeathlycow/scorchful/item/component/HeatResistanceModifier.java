@@ -47,7 +47,7 @@ public final class HeatResistanceModifier {
                         );
 
                         builder.set(DataComponents.ATTRIBUTE_MODIFIERS, attributes);
-                        builder.set(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.NEUTRAL);
+                        builder.set(SDataComponentTypes.HEAT_RESISTANCE, HeatResistance.NEUTRAL);
                     }
             );
         });
@@ -65,7 +65,7 @@ public final class HeatResistanceModifier {
                             Items.CHAINMAIL_BOOTS
                     ),
                     (builder, item) -> {
-                        builder.set(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.NEUTRAL);
+                        builder.set(SDataComponentTypes.HEAT_RESISTANCE, HeatResistance.NEUTRAL);
                     }
             );
         });
@@ -79,7 +79,7 @@ public final class HeatResistanceModifier {
                             Items.NETHERITE_BOOTS
                     ),
                     (builder, item) -> {
-                        builder.set(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.PROTECTIVE);
+                        builder.set(SDataComponentTypes.HEAT_RESISTANCE, HeatResistance.PROTECTIVE);
                     }
             );
         });
@@ -88,7 +88,7 @@ public final class HeatResistanceModifier {
             context.modify(
                     Items.TURTLE_HELMET,
                     builder -> {
-                        builder.set(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE);
+                        builder.set(SDataComponentTypes.HEAT_RESISTANCE, HeatResistance.VERY_PROTECTIVE);
                     }
             );
         });
@@ -98,7 +98,7 @@ public final class HeatResistanceModifier {
         ModifyItemAttributeModifiersCallback.EVENT.register(
                 (stack, builder) -> {
                     if (stack.is(ConventionalItemTags.ARMORS) && stack.has(DataComponents.EQUIPPABLE)) {
-                        HeatResistanceComponent resistance = HeatResistanceComponent.get(stack);
+                        HeatResistance resistance = HeatResistance.get(stack);
 
                         EquipmentSlot slot = stack.get(DataComponents.EQUIPPABLE).slot();
                         EquipmentSlotGroup modifierSlot = EquipmentSlotGroup.bySlot(slot);

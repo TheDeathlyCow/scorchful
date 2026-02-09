@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.item;
 
-import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
+import com.github.thedeathlycow.scorchful.item.component.DrinkContainer;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -21,7 +21,7 @@ public record WaterSkinIsEmptyProperty() implements ConditionalItemModelProperty
             int seed,
             ItemDisplayContext displayContext
     ) {
-        return stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT).isEmpty();
+        return stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainer.DEFAULT).isEmpty();
     }
 
     @Override

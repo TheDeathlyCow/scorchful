@@ -2,7 +2,7 @@ package com.github.thedeathlycow.scorchful.client;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.section.AccessibilitySettings;
-import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
+import com.github.thedeathlycow.scorchful.registry.SMobEffects;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
@@ -22,13 +22,13 @@ public final class ShaderStatusEffectManagers {
 
     private static final ShaderStatusEffectManager HEAT_STROKE = createAndTrack(
             Scorchful.id("heat_stroke"),
-            SStatusEffects.HEAT_STROKE,
+            SMobEffects.HEAT_STROKE,
             AccessibilitySettings::enableHeatStrokePostProcessing
     );
 
     private static final ShaderStatusEffectManager FEAR = createAndTrack(
             Scorchful.id("fear"),
-            SStatusEffects.FEAR,
+            SMobEffects.FEAR,
             AccessibilitySettings::enableFearPostProcessing
     );
 

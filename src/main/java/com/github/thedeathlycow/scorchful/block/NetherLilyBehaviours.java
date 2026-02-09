@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.block;
 
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
-import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
+import com.github.thedeathlycow.scorchful.item.component.DrinkContainer;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import com.github.thedeathlycow.scorchful.registry.SStats;
 import net.minecraft.sounds.SoundEvents;
@@ -103,7 +103,7 @@ public class NetherLilyBehaviours {
                     }
 
                     if (!world.isClientSide() && result.consumesAction()) {
-                        DrinkContainerComponent.addDrinks(stack, -1);
+                        DrinkContainer.addDrinks(stack, -1);
                     }
                     return result;
                 }

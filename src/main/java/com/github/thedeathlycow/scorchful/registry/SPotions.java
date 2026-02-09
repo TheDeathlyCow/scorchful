@@ -19,7 +19,7 @@ public final class SPotions {
             PARANOIA_NAME,
             create(
                     PARANOIA_NAME,
-                    new MobEffectInstance(SStatusEffects.FEAR, ONE_MINUTE * 3, 0),
+                    new MobEffectInstance(SMobEffects.FEAR, ONE_MINUTE * 3, 0),
                     new MobEffectInstance(MobEffects.DARKNESS, ONE_MINUTE * 3, 0)
             )
     );
@@ -28,7 +28,7 @@ public final class SPotions {
             "long_" + PARANOIA_NAME,
             create(
                     PARANOIA_NAME,
-                    new MobEffectInstance(SStatusEffects.FEAR, ONE_MINUTE * 8, 0),
+                    new MobEffectInstance(SMobEffects.FEAR, ONE_MINUTE * 8, 0),
                     new MobEffectInstance(MobEffects.DARKNESS, ONE_MINUTE * 8, 0)
             )
     );

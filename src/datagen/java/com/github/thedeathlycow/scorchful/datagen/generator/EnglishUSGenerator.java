@@ -91,8 +91,8 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         builder.addEnchantment(SEnchantmentKeys.REHYDRATION, "Rehydration");
         builder.add(enchantmentDesc(SEnchantmentKeys.REHYDRATION), "Replenishes body water lost from sweating");
 
-        builder.add(statusEffect(SStatusEffects.HEAT_STROKE), "Heat Stroke");
-        builder.add(statusEffect(SStatusEffects.FEAR), "Fear");
+        builder.add(statusEffect(SMobEffects.HEAT_STROKE), "Heat Stroke");
+        builder.add(statusEffect(SMobEffects.FEAR), "Fear");
 
         addDamageType(builder, SDamageTypes.HEAT, "%1$s couldn't handle the heat", "%1$s couldn't handle the heat of %2$s");
 
