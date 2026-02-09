@@ -4,90 +4,89 @@ import com.github.thedeathlycow.scorchful.registry.SItems;
 import com.github.thedeathlycow.thermoo.api.predicate.TemperatureLootCondition;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.advancement.AdvancementCriterion;
-import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.advancement.criterion.EnterBlockCriterion;
-import net.minecraft.advancement.criterion.TickCriterion;
-import net.minecraft.block.Blocks;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.item.Items;
-import net.minecraft.loot.condition.LootCondition;
-import net.minecraft.predicate.NumberRange;
-import net.minecraft.predicate.entity.LootContextPredicate;
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.RegistryWrapper;
-
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.criterion.ContextAwarePredicate;
+import net.minecraft.advancements.criterion.EnterBlockTrigger;
+import net.minecraft.advancements.criterion.MinMaxBounds;
+import net.minecraft.advancements.criterion.PlayerTrigger;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class ScorchfulRecipeGenerator extends FabricRecipeProvider {
-    public ScorchfulRecipeGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+    public ScorchfulRecipeGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 
     @Override
-    protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup registryLookup, RecipeExporter exporter) {
-        return new RecipeGenerator(registryLookup, exporter) {
+    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registryLookup, RecipeOutput exporter) {
+        return new RecipeProvider(registryLookup, exporter) {
             @Override
-            public void generate() {
-                createShapeless(RecipeCategory.FOOD, SItems.CACTUS_JUICE)
-                        .criterion(hasItem(Items.CACTUS), conditionsFromItem(Items.CACTUS))
+            public void buildRecipes() {
+                shapeless(RecipeCategory.FOOD, SItems.CACTUS_JUICE)
+                        .criterion(getHasName(Items.CACTUS), has(Items.CACTUS))
                         .input(Items.GLASS_BOTTLE)
                         .input(Items.CACTUS)
                         .input(Items.CACTUS)
-                        .offerTo(exporter);
+                        .offerTo(output);
 
-                createShaped(RecipeCategory.BUILDING_BLOCKS, SItems.RED_SAND_PILE, 6)
-                        .criterion(hasItem(Items.RED_SAND), conditionsFromItem(Items.RED_SAND))
+                shaped(RecipeCategory.BUILDING_BLOCKS, SItems.RED_SAND_PILE, 6)
+                        .criterion(getHasName(Items.RED_SAND), has(Items.RED_SAND))
                         .pattern("###")
                         .input('#', Items.RED_SAND)
-                        .offerTo(exporter);
+                        .offerTo(output);
 
-                createShaped(RecipeCategory.BUILDING_BLOCKS, SItems.SAND_PILE, 6)
-                        .criterion(hasItem(Items.SAND), conditionsFromItem(Items.SAND))
+                shaped(RecipeCategory.BUILDING_BLOCKS, SItems.SAND_PILE, 6)
+                        .criterion(getHasName(Items.SAND), has(Items.SAND))
                         .pattern("###")
                         .input('#', Items.SAND)
-                        .offerTo(exporter);
+                        .offerTo(output);
 
-                createShaped(RecipeCategory.COMBAT, SItems.SUN_HAT)
+                shaped(RecipeCategory.COMBAT, SItems.SUN_HAT)
                         .criterion("is_player_warm", createWarmPlayerCondition())
                         .pattern("###")
                         .pattern("# #")
                         .input('#', Items.WHEAT)
-                        .offerTo(exporter);
+                        .offerTo(output);
 
-                createShaped(RecipeCategory.FOOD, SItems.WATER_SKIN)
-                        .criterion("in_water", EnterBlockCriterion.Conditions.block(Blocks.WATER))
+                shaped(RecipeCategory.FOOD, SItems.WATER_SKIN)
+                        .criterion("in_water", EnterBlockTrigger.TriggerInstance.entersBlock(Blocks.WATER))
                         .pattern(" #I")
                         .pattern("# #")
                         .pattern(" # ")
                         .input('#', Items.LEATHER)
                         .input('I', Items.IRON_INGOT)
-                        .offerTo(exporter);
+                        .offerTo(output);
 
-                createShaped(RecipeCategory.COMBAT, SItems.TURTLE_CHESTPLATE)
-                        .criterion(hasItem(Items.TURTLE_SCUTE), conditionsFromItem(Items.TURTLE_SCUTE))
+                shaped(RecipeCategory.COMBAT, SItems.TURTLE_CHESTPLATE)
+                        .criterion(getHasName(Items.TURTLE_SCUTE), has(Items.TURTLE_SCUTE))
                         .pattern("# #")
                         .pattern("###")
                         .pattern("###")
                         .input('#', Items.TURTLE_SCUTE)
-                        .offerTo(exporter);
+                        .offerTo(output);
 
-                createShaped(RecipeCategory.COMBAT, SItems.TURTLE_LEGGINGS)
-                        .criterion(hasItem(Items.TURTLE_SCUTE), conditionsFromItem(Items.TURTLE_SCUTE))
+                shaped(RecipeCategory.COMBAT, SItems.TURTLE_LEGGINGS)
+                        .criterion(getHasName(Items.TURTLE_SCUTE), has(Items.TURTLE_SCUTE))
                         .pattern("###")
                         .pattern("# #")
                         .pattern("# #")
                         .input('#', Items.TURTLE_SCUTE)
-                        .offerTo(exporter);
+                        .offerTo(output);
 
-                createShaped(RecipeCategory.COMBAT, SItems.TURTLE_BOOTS)
-                        .criterion(hasItem(Items.TURTLE_SCUTE), conditionsFromItem(Items.TURTLE_SCUTE))
+                shaped(RecipeCategory.COMBAT, SItems.TURTLE_BOOTS)
+                        .criterion(getHasName(Items.TURTLE_SCUTE), has(Items.TURTLE_SCUTE))
                         .pattern("# #")
                         .pattern("# #")
                         .input('#', Items.TURTLE_SCUTE)
-                        .offerTo(exporter);
+                        .offerTo(output);
             }
         };
     }
@@ -98,12 +97,12 @@ public class ScorchfulRecipeGenerator extends FabricRecipeProvider {
     }
 
 
-    private static AdvancementCriterion<TickCriterion.Conditions> createWarmPlayerCondition() {
-        LootCondition condition = TemperatureLootCondition
-                .builder(NumberRange.DoubleRange.atLeast(0.25))
+    private static Criterion<PlayerTrigger.TriggerInstance> createWarmPlayerCondition() {
+        LootItemCondition condition = TemperatureLootCondition
+                .builder(MinMaxBounds.Doubles.atLeast(0.25))
                 .build();
-        return Criteria.LOCATION.create(
-                new TickCriterion.Conditions(Optional.of(LootContextPredicate.create(condition)))
+        return CriteriaTriggers.LOCATION.createCriterion(
+                new PlayerTrigger.TriggerInstance(Optional.of(ContextAwarePredicate.create(condition)))
         );
     }
 }

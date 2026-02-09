@@ -11,30 +11,29 @@ import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.minecraft.advancement.Advancement;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.damage.DamageType;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.potion.Potion;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.StringIdentifiable;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.util.Util;
-
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.enchantment.Enchantment;
 import java.lang.reflect.Field;
 import java.util.concurrent.CompletableFuture;
 
 public class EnglishUSGenerator extends FabricLanguageProvider {
-    public EnglishUSGenerator(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+    public EnglishUSGenerator(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(dataOutput, "en_us", registryLookup);
     }
 
     @Override
-    public void generateTranslations(RegistryWrapper.WrapperLookup lookup, TranslationBuilder builder) {
+    public void generateTranslations(HolderLookup.Provider lookup, TranslationBuilder builder) {
         builder.add(SItems.WATER_SKIN, "Waterskin");
         builder.add(waterSkinSuffix("empty"), "Empty Waterskin");
         builder.add(waterSkinSuffix("partially_filled"), "Partially Filled Waterskin");
@@ -164,7 +163,7 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
     }
 
     private String itemSuffix(Item item, String suffix) {
-        return item.getTranslationKey() + "." + suffix;
+        return item.getDescriptionId() + "." + suffix;
     }
 
     private String tooltip(Item item) {
@@ -179,25 +178,25 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         return itemSuffix(SItems.WATER_SKIN, suffix);
     }
 
-    private String potionItem(Item item, RegistryEntry<Potion> potion) {
-        return item.getTranslationKey() + ".effect." + potion.value().getBaseName();
+    private String potionItem(Item item, Holder<Potion> potion) {
+        return item.getDescriptionId() + ".effect." + potion.value().name();
     }
 
-    private String enchantmentDesc(RegistryKey<Enchantment> key) {
-        return Util.createTranslationKey("enchantment", key.getValue()) + ".desc";
+    private String enchantmentDesc(ResourceKey<Enchantment> key) {
+        return Util.makeDescriptionId("enchantment", key.identifier()) + ".desc";
     }
 
-    private String statusEffect(RegistryEntry<StatusEffect> effect) {
-        return Util.createTranslationKey("effect", effect.getKey().orElseThrow().getValue());
+    private String statusEffect(Holder<MobEffect> effect) {
+        return Util.makeDescriptionId("effect", effect.unwrapKey().orElseThrow().identifier());
     }
 
     private void addDamageType(
             TranslationBuilder builder,
-            RegistryKey<DamageType> key,
+            ResourceKey<DamageType> key,
             String deathMessage,
             String playerDeathMessage
     ) {
-        String translationKey = Util.createTranslationKey("death.attack", key.getValue());
+        String translationKey = Util.makeDescriptionId("death.attack", key.identifier());
 
         builder.add(translationKey, deathMessage);
         builder.add(translationKey + ".player", playerDeathMessage);
@@ -205,11 +204,11 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
 
     private void addAdvancement(
             TranslationBuilder builder,
-            RegistryKey<Advancement> key,
+            ResourceKey<Advancement> key,
             String title,
             String desc
     ) {
-        String translationKey = Util.createTranslationKey("advancements", key.getValue());
+        String translationKey = Util.makeDescriptionId("advancements", key.identifier());
 
         builder.add(translationKey + ".title", title);
         builder.add(translationKey + ".desc", desc);
@@ -220,7 +219,7 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
             Identifier stat,
             String name
     ) {
-        builder.add(Util.createTranslationKey("stat", stat), name);
+        builder.add(Util.makeDescriptionId("stat", stat), name);
     }
 
     private <T> void generateConfigOptionTranslations(
@@ -255,7 +254,7 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         }
     }
 
-    private <E extends Enum<E> & StringIdentifiable> void generateConfigEnumTranslations(
+    private <E extends Enum<E> & StringRepresentable> void generateConfigEnumTranslations(
             TranslationBuilder builder,
             Class<E> enumClass,
             String... names
@@ -269,7 +268,7 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         }
 
         for (E entry : enumClass.getEnumConstants()) {
-            String key = "yacl3.config.enum.%s.%s".formatted(enumClass.getSimpleName(), entry.asString());
+            String key = "yacl3.config.enum.%s.%s".formatted(enumClass.getSimpleName(), entry.getSerializedName());
             builder.add(key, names[entry.ordinal()]);
         }
     }

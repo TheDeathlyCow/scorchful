@@ -5,7 +5,7 @@ import com.github.thedeathlycow.scorchful.datagen.generator.*;
 import com.github.thedeathlycow.scorchful.datagen.generator.client.SModelGenerator;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +40,6 @@ public class ScorchfulDataGenerator implements DataGeneratorEntrypoint {
     }
 
     public static Identifier commonID(String path) {
-        return Identifier.of("c", path);
+        return Identifier.fromNamespaceAndPath("c", path);
     }
 }
