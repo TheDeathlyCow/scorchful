@@ -2,12 +2,12 @@ package com.github.thedeathlycow.scorchful.gametest.common.soaking;
 
 import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.mob.ZombieEntity;
-import net.minecraft.item.Items;
-import net.minecraft.test.TestContext;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.monster.zombie.Zombie;
+import net.minecraft.world.item.Items;
 
 @SuppressWarnings("unused")
 public class UmbrellaTests {
@@ -15,16 +15,16 @@ public class UmbrellaTests {
             skyAccess = true,
             environment = "scorchful-test:rainy_night"
     )
-    public void holding_leather_in_mainhand_blocks_rain(TestContext context) {
+    public void holding_leather_in_mainhand_blocks_rain(GameTestHelper context) {
         var pos = new BlockPos(1, 0, 1);
-        ZombieEntity zombie = context.spawnMob(EntityType.ZOMBIE, pos);
+        Zombie zombie = context.spawnWithNoFreeWill(EntityType.ZOMBIE, pos);
 
-        zombie.setStackInHand(Hand.MAIN_HAND, Items.LEATHER.getDefaultStack());
+        zombie.setItemInHand(InteractionHand.MAIN_HAND, Items.LEATHER.getDefaultInstance());
         zombie.thermoo$setWetTicks(0);
 
-        context.waitAndRun(20L, () -> {
-            context.expectEntityWithData(pos, EntityType.ZOMBIE, Soakable::thermoo$getWetTicks, 0);
-            context.complete();
+        context.runAfterDelay(20L, () -> {
+            context.assertEntityData(pos, EntityType.ZOMBIE, Soakable::thermoo$getWetTicks, 0);
+            context.succeed();
         });
     }
 
@@ -32,16 +32,16 @@ public class UmbrellaTests {
             skyAccess = true,
             environment = "scorchful-test:rainy_night"
     )
-    public void holding_leather_in_offhand_blocks_rain(TestContext context) {
+    public void holding_leather_in_offhand_blocks_rain(GameTestHelper context) {
         var pos = new BlockPos(1, 0, 1);
-        ZombieEntity zombie = context.spawnMob(EntityType.ZOMBIE, pos);
+        Zombie zombie = context.spawnWithNoFreeWill(EntityType.ZOMBIE, pos);
 
-        zombie.setStackInHand(Hand.OFF_HAND, Items.LEATHER.getDefaultStack());
+        zombie.setItemInHand(InteractionHand.OFF_HAND, Items.LEATHER.getDefaultInstance());
         zombie.thermoo$setWetTicks(0);
 
-        context.waitAndRun(20L, () -> {
-            context.expectEntityWithData(pos, EntityType.ZOMBIE, Soakable::thermoo$getWetTicks, 0);
-            context.complete();
+        context.runAfterDelay(20L, () -> {
+            context.assertEntityData(pos, EntityType.ZOMBIE, Soakable::thermoo$getWetTicks, 0);
+            context.succeed();
         });
     }
 }
