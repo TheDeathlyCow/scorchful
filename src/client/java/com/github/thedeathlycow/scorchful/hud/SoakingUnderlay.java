@@ -6,11 +6,11 @@ import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.section.DisplaySettings;
 import com.github.thedeathlycow.thermoo.api.client.HeartBarContext;
 import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
-import net.minecraft.client.gl.RenderPipelines;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2i;
 
@@ -26,8 +26,8 @@ public final class SoakingUnderlay implements StatusBarOverlayRenderEvents.Rende
 
     @Override
     public void render(
-            DrawContext context,
-            PlayerEntity player,
+            GuiGraphics context,
+            Player player,
             HeartBarContext heartBarContext
     ) {
         DisplaySettings settings = ScorchfulClientConfig.getDisplaySettings();
@@ -50,7 +50,7 @@ public final class SoakingUnderlay implements StatusBarOverlayRenderEvents.Rende
             int y = position.y() - 1;
             int u = drawHalfHeartAtEnd && heartsRendered == soakedHearts - 1 ? 9 : 0;
 
-            context.drawTexture(
+            context.blit(
                     RenderPipelines.GUI_TEXTURED,
                     TEXTURE,
                     x, y,
@@ -63,14 +63,14 @@ public final class SoakingUnderlay implements StatusBarOverlayRenderEvents.Rende
         }
     }
 
-    static int getNumSoakingPoints(@NotNull PlayerEntity player, int maxDisplayHealth) {
+    static int getNumSoakingPoints(@NotNull Player player, int maxDisplayHealth) {
         float soakedScale = player.thermoo$getSoakedScale();
         return Math.round(soakedScale * maxDisplayHealth * 2);
     }
 
     static int getFullSoakedHeartsFromPoints(int soakedPoints) {
         // number of whole hearts
-        return MathHelper.ceil(soakedPoints / 2.0f);
+        return Mth.ceil(soakedPoints / 2.0f);
     }
 
     private SoakingUnderlay() {

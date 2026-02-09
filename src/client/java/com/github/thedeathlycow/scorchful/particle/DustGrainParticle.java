@@ -2,40 +2,40 @@ package com.github.thedeathlycow.scorchful.particle;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.particle.AbstractDustParticle;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.DustParticleBase;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleFactory;
-import net.minecraft.client.particle.SpriteProvider;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
-public class DustGrainParticle extends AbstractDustParticle<DustGrainParticleEffect> {
+public class DustGrainParticle extends DustParticleBase<DustGrainParticleEffect> {
     public DustGrainParticle(
-            ClientWorld world,
+            ClientLevel world,
             double x, double y, double z,
             double velocityX, double velocityY, double velocityZ,
             DustGrainParticleEffect parameters,
-            SpriteProvider spriteProvider
+            SpriteSet spriteProvider
     ) {
         super(world, x, y, z, velocityX, velocityY, velocityZ, parameters, spriteProvider);
-        this.velocityX = velocityX;
-        this.velocityY = velocityY;
-        this.velocityZ = velocityZ;
-        this.gravityStrength = 1e-1f;
+        this.xd = velocityX;
+        this.yd = velocityY;
+        this.zd = velocityZ;
+        this.gravity = 1e-1f;
 
         float multiplier = this.random.nextFloat() * 0.4F + 0.6F;
-        this.red = this.darken(parameters.getColor().x(), multiplier);
-        this.green = this.darken(parameters.getColor().y(), multiplier);
-        this.blue = this.darken(parameters.getColor().z(), multiplier);
+        this.rCol = this.randomizeColor(parameters.getColor().x(), multiplier);
+        this.gCol = this.randomizeColor(parameters.getColor().y(), multiplier);
+        this.bCol = this.randomizeColor(parameters.getColor().z(), multiplier);
     }
 
     @Environment(EnvType.CLIENT)
-    public static class Factory implements ParticleFactory<DustGrainParticleEffect> {
+    public static class Factory implements ParticleProvider<DustGrainParticleEffect> {
 
-        private final SpriteProvider spriteProvider;
+        private final SpriteSet spriteProvider;
 
-        public Factory(SpriteProvider spriteProvider) {
+        public Factory(SpriteSet spriteProvider) {
             this.spriteProvider = spriteProvider;
         }
 
@@ -43,10 +43,10 @@ public class DustGrainParticle extends AbstractDustParticle<DustGrainParticleEff
         @Nullable
         public Particle createParticle(
                 DustGrainParticleEffect parameters,
-                ClientWorld world,
+                ClientLevel world,
                 double x, double y, double z,
                 double velocityX, double velocityY, double velocityZ,
-                Random random
+                RandomSource random
         ) {
             return new DustGrainParticle(
                     world,

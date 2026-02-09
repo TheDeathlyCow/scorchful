@@ -3,14 +3,20 @@ package com.github.thedeathlycow.scorchful.entity.model;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.client.render.entity.model.EntityModelPartNames;
-import net.minecraft.client.render.entity.model.ModelTransformer;
-import net.minecraft.client.render.entity.state.BipedEntityRenderState;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartNames;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.MeshTransformer;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 
 @Environment(EnvType.CLIENT)
-public class SunHatModel<S extends BipedEntityRenderState> extends BipedEntityModel<S> {
-    public static final ModelTransformer BABY_TRANSFORMER = ModelTransformer.scaling(0.5f);
+public class SunHatModel<S extends HumanoidRenderState> extends HumanoidModel<S> {
+    public static final MeshTransformer BABY_TRANSFORMER = MeshTransformer.scaling(0.5f);
 
     public SunHatModel(ModelPart root) {
         super(root);
@@ -18,31 +24,31 @@ public class SunHatModel<S extends BipedEntityRenderState> extends BipedEntityMo
         this.head.visible = true;
     }
 
-    public static TexturedModelData getTexturedModelData() {
-        ModelData modelData = BipedEntityModel.getModelData(Dilation.NONE, 0.0f);
-        ModelPartData root = modelData.getRoot();
-        root.addChild(
-                EntityModelPartNames.HEAD,
-                ModelPartBuilder.create()
-                        .uv(0, 0)
-                        .cuboid(
+    public static LayerDefinition getTexturedModelData() {
+        MeshDefinition modelData = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0f);
+        PartDefinition root = modelData.getRoot();
+        root.addOrReplaceChild(
+                PartNames.HEAD,
+                CubeListBuilder.create()
+                        .texOffs(0, 0)
+                        .addBox(
                                 -8.0F, -4.5F, -8.0F,
                                 16.0F, 0.0F, 16.0F,
-                                Dilation.NONE.add(0.1f, 0f, 0.1f)
+                                CubeDeformation.NONE.extend(0.1f, 0f, 0.1f)
                         )
-                        .uv(0, 16)
-                        .cuboid(
+                        .texOffs(0, 16)
+                        .addBox(
                                 -4.0F, -9.0F, -4.0F,
                                 8.0F, 4.0F, 8.0F,
-                                Dilation.NONE.add(0.6f)
+                                CubeDeformation.NONE.extend(0.6f)
                         ),
-                ModelTransform.origin(0.0f, 0f, 0.0f)
+                PartPose.offset(0.0f, 0f, 0.0f)
         );
 
-        return TexturedModelData.of(modelData, 64, 64);
+        return LayerDefinition.create(modelData, 64, 64);
     }
 
-    public static TexturedModelData getBabyTexturedModelData() {
-        return getTexturedModelData().transform(BABY_TRANSFORMER);
+    public static LayerDefinition getBabyTexturedModelData() {
+        return getTexturedModelData().apply(BABY_TRANSFORMER);
     }
 }

@@ -8,8 +8,8 @@ import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.text.Text;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 
 @Environment(EnvType.CLIENT)
 public class ScorchfulModMenu implements ModMenuApi {
@@ -38,20 +38,20 @@ public class ScorchfulModMenu implements ModMenuApi {
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return parent -> YetAnotherConfigLib.createBuilder()
-                .title(Text.literal("Immersive Storms Test"))
+                .title(Component.literal("Immersive Storms Test"))
                 .category(
                         ConfigCategory.createBuilder()
-                                .name(Text.translatable(TITLE))
+                                .name(Component.translatable(TITLE))
                                 .group(
                                         OptionGroup.createBuilder()
-                                                .name(Text.translatable(CLIENT_TITLE))
+                                                .name(Component.translatable(CLIENT_TITLE))
                                                 .option(createSubsectionButton(AccessibilitySettings.HANDLER, ACCESSIBILITY_CATEGORY, ACCESSIBILITY_DESC))
                                                 .option(createSubsectionButton(DisplaySettings.HANDLER, DISPLAY_CATEGORY, DISPLAY_DESC))
                                                 .build()
                                 )
                                 .group(
                                         OptionGroup.createBuilder()
-                                                .name(Text.translatable(COMMON_TITLE))
+                                                .name(Component.translatable(COMMON_TITLE))
                                                 .option(createSubsectionButton(TemperatureConfig.HANDLER, TEMPERATURE_CATEGORY, TEMPERATURE_DESC))
                                                 .option(createSubsectionButton(EntityConfig.HANDLER, ENTITY_CATEGORY, ENTITY_DESC))
                                                 .option(createSubsectionButton(ItemConfig.HANDLER, ITEM_CATEGORY, ITEM_DESC))
@@ -60,7 +60,7 @@ public class ScorchfulModMenu implements ModMenuApi {
                                 )
                                 .group(
                                         OptionGroup.createBuilder()
-                                                .name(Text.translatable(COMPAT_TITLE))
+                                                .name(Component.translatable(COMPAT_TITLE))
                                                 .option(createSubsectionButton(DehydrationConfig.HANDLER, DEHYDRATION_CATEGORY, DEHYDRATION_DESC))
                                                 .build()
                                 )
@@ -72,15 +72,15 @@ public class ScorchfulModMenu implements ModMenuApi {
 
     private static ButtonOption createSubsectionButton(ConfigClassHandler<?> handler, String titleKey, String descKey) {
         return ButtonOption.createBuilder()
-                .name(Text.translatable(titleKey))
+                .name(Component.translatable(titleKey))
                 .description(
                         OptionDescription.createBuilder()
-                                .text(Text.translatable(descKey))
+                                .text(Component.translatable(descKey))
                                 .build()
                 )
-                .text(Text.literal(""))
+                .text(Component.literal(""))
                 .action((yaclScreen, buttonOption) -> {
-                    MinecraftClient.getInstance()
+                    Minecraft.getInstance()
                             .setScreen(handler
                                     .generateGui()
                                     .generateScreen(yaclScreen));

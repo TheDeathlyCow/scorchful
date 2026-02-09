@@ -5,12 +5,12 @@ import com.github.thedeathlycow.scorchful.entity.model.SunHatModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 
 @Environment(EnvType.CLIENT)
 public class SEntityModelLayers {
-    public static final EntityModelLayer SUN_HAT = new EntityModelLayer(Scorchful.id("sun_hat"), "main");
-    public static final EntityModelLayer SUN_HAT_BABY = new EntityModelLayer(Scorchful.id("sun_hat_baby"), "main");
+    public static final ModelLayerLocation SUN_HAT = new ModelLayerLocation(Scorchful.id("sun_hat"), "main");
+    public static final ModelLayerLocation SUN_HAT_BABY = new ModelLayerLocation(Scorchful.id("sun_hat_baby"), "main");
 
     public static void registerAll() {
         EntityModelLayerRegistry.registerModelLayer(SUN_HAT, SunHatModel::getTexturedModelData);

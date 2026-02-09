@@ -3,20 +3,20 @@ package com.github.thedeathlycow.scorchful.item;
 import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.client.render.item.property.bool.BooleanProperty;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemDisplayContext;
-import net.minecraft.item.ItemStack;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperty;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-public record WaterSkinIsEmptyProperty() implements BooleanProperty {
+public record WaterSkinIsEmptyProperty() implements ConditionalItemModelProperty {
     public static final MapCodec<WaterSkinIsEmptyProperty> CODEC = MapCodec.unit(new WaterSkinIsEmptyProperty());
 
     @Override
-    public boolean test(
+    public boolean get(
             ItemStack stack,
-            @Nullable ClientWorld world,
+            @Nullable ClientLevel world,
             @Nullable LivingEntity entity,
             int seed,
             ItemDisplayContext displayContext
@@ -25,7 +25,7 @@ public record WaterSkinIsEmptyProperty() implements BooleanProperty {
     }
 
     @Override
-    public MapCodec<? extends BooleanProperty> getCodec() {
+    public MapCodec<? extends ConditionalItemModelProperty> type() {
         return CODEC;
     }
 }

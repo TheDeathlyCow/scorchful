@@ -5,10 +5,10 @@ import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.section.DisplaySettings;
 import com.github.thedeathlycow.thermoo.api.client.HeartBarContext;
 import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
-import net.minecraft.client.gl.RenderPipelines;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import org.joml.Vector2i;
 
 public final class MountHealthOverlay implements StatusBarOverlayRenderEvents.RenderMountHealthBarCallback {
@@ -17,8 +17,8 @@ public final class MountHealthOverlay implements StatusBarOverlayRenderEvents.Re
 
     @Override
     public void render(
-            DrawContext context,
-            PlayerEntity player, LivingEntity mount,
+            GuiGraphics context,
+            Player player, LivingEntity mount,
             HeartBarContext heartBarContext
     ) {
         DisplaySettings settings = ScorchfulClientConfig.getDisplaySettings();
@@ -42,7 +42,7 @@ public final class MountHealthOverlay implements StatusBarOverlayRenderEvents.Re
             boolean isHalfHeart = drawHalfHeartAtEnd && heartsRendered == fireHearts - 1;
 
             if (isHalfHeart) {
-                context.drawTexture(
+                context.blit(
                         RenderPipelines.GUI_TEXTURED,
                         BurningHeartsOverlay.HEART_OVERLAY_TEXTURE,
                         x + 4, y,
@@ -51,7 +51,7 @@ public final class MountHealthOverlay implements StatusBarOverlayRenderEvents.Re
                         BurningHeartsOverlay.TEXTURE_WIDTH, BurningHeartsOverlay.TEXTURE_HEIGHT
                 );
             } else {
-                context.drawTexture(
+                context.blit(
                         RenderPipelines.GUI_TEXTURED,
                         BurningHeartsOverlay.HEART_OVERLAY_TEXTURE,
                         x, y,

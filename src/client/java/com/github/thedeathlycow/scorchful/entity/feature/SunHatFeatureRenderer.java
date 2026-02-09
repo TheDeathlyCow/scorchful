@@ -4,22 +4,21 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.entity.model.SunHatModel;
 import com.github.thedeathlycow.scorchful.entity.state.SLivingEntityRenderState;
 import com.github.thedeathlycow.scorchful.registry.SEntityModelLayers;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.RenderLayers;
-import net.minecraft.client.render.command.OrderedRenderCommandQueue;
-import net.minecraft.client.render.entity.feature.FeatureRenderer;
-import net.minecraft.client.render.entity.feature.FeatureRendererContext;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.client.render.entity.model.LoadedEntityModels;
-import net.minecraft.client.render.entity.state.BipedEntityRenderState;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.Identifier;
 
 @Environment(EnvType.CLIENT)
-public class SunHatFeatureRenderer<S extends BipedEntityRenderState, M extends BipedEntityModel<S>> extends FeatureRenderer<S, M> {
+public class SunHatFeatureRenderer<S extends HumanoidRenderState, M extends HumanoidModel<S>> extends RenderLayer<S, M> {
 
     private static final Identifier TEXTURE = Scorchful.id("textures/entity/sun_hat.png");
 
@@ -27,44 +26,44 @@ public class SunHatFeatureRenderer<S extends BipedEntityRenderState, M extends B
     private final SunHatModel<S> babyModel;
 
     public SunHatFeatureRenderer(
-            FeatureRendererContext<S, M> context,
-            LoadedEntityModels modelLoader
+            RenderLayerParent<S, M> context,
+            EntityModelSet modelLoader
     ) {
         super(context);
-        this.model = new SunHatModel<>(modelLoader.getModelPart(SEntityModelLayers.SUN_HAT));
-        this.babyModel = new SunHatModel<>(modelLoader.getModelPart(SEntityModelLayers.SUN_HAT_BABY));
+        this.model = new SunHatModel<>(modelLoader.bakeLayer(SEntityModelLayers.SUN_HAT));
+        this.babyModel = new SunHatModel<>(modelLoader.bakeLayer(SEntityModelLayers.SUN_HAT_BABY));
     }
 
     @Override
     public void render(
-            MatrixStack matrices,
-            OrderedRenderCommandQueue queue,
+            PoseStack matrices,
+            SubmitNodeCollector queue,
             int light,
             S state,
             float limbAngle,
             float limbDistance
     ) {
         if (((SLivingEntityRenderState) state).scorchful$hasSunHat()) {
-            matrices.push();
+            matrices.pushPose();
 
-            M contextModel = this.getContextModel();
-            contextModel.getRootPart().applyTransform(matrices);
+            M contextModel = this.getParentModel();
+            contextModel.root().translateAndRotate(matrices);
 
-            queue.getBatchingQueue(1)
+            queue.order(1)
                     .submitModel(
                             this.model,
                             state,
                             matrices,
-                            RenderLayers.armorCutoutNoCull(TEXTURE),
+                            RenderTypes.armorCutoutNoCull(TEXTURE),
                             light,
-                            OverlayTexture.DEFAULT_UV,
+                            OverlayTexture.NO_OVERLAY,
                             -1,
                             null,
                             state.outlineColor,
                             null
                     );
 
-            matrices.pop();
+            matrices.popPose();
         }
     }
 }
