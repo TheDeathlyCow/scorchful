@@ -3,6 +3,8 @@ package com.github.thedeathlycow.scorchful.mixin;
 import com.github.thedeathlycow.scorchful.item.TurtleArmorEffects;
 import com.github.thedeathlycow.scorchful.registry.SEntityAttributes;
 import com.github.thedeathlycow.scorchful.temperature.heatvision.VisionSpawner;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,13 +34,12 @@ public class PlayerEntityMixin {
         VisionSpawner.tick((PlayerEntity) (Object) this);
     }
 
-    @Inject(
-            method = "createPlayerAttributes",
-            at = @At("TAIL")
+    @WrapMethod(
+            method = "createPlayerAttributes"
     )
-    private static void appendAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
-        DefaultAttributeContainer.Builder builder = cir.getReturnValue();
+    private static DefaultAttributeContainer.Builder appendAttributes(Operation<DefaultAttributeContainer.Builder> original) {
+        DefaultAttributeContainer.Builder builder = original.call();
         builder.add(SEntityAttributes.REHYDRATION_EFFICIENCY);
+        return builder;
     }
-
 }
