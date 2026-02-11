@@ -72,7 +72,7 @@ public final class SoakingEffects {
     }
 
     private static void tickRehydration(EnvironmentTickContext<? extends LivingEntity> context, int wetChange) {
-        if (context.affected() instanceof Player player) {
+        if (context.affected().thermoo$isWet() && context.affected() instanceof Player player) {
             double rehydrationEfficiency = player.getAttributeValue(SEntityAttributes.REHYDRATION_EFFICIENCY);
             RehydrationComponent component = ScorchfulComponents.REHYDRATION.get(player);
             component.tickRehydration(rehydrationEfficiency, wetChange);
