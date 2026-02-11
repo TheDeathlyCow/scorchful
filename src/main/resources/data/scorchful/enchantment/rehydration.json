@@ -21,7 +21,7 @@
         "minecraft:attributes": [
             {
                 "id": "scorchful:enchantment.rehydration_efficiency",
-                "attribute": "scorchful:player.rehydration_efficiency",
+                "attribute": "scorchful:rehydration_efficiency",
                 "amount": 0.25,
                 "operation": "add_value"
             }
