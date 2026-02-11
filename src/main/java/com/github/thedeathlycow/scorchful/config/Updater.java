@@ -4,7 +4,6 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.schema.*;
 import com.github.thedeathlycow.scorchful.config.section.DehydrationConfig;
 import com.github.thedeathlycow.scorchful.config.section.SchemaConfig;
-import com.github.thedeathlycow.scorchful.config.section.WeatherConfig;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;

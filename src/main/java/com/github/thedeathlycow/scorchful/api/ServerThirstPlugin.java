@@ -3,7 +3,7 @@ package com.github.thedeathlycow.scorchful.api;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.compat.ServerThirstPluginManager;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -28,12 +28,12 @@ public interface ServerThirstPlugin {
      * @return Returns {@code true} if the player was successfully dehydrated and can have that water added to their
      * {@linkplain com.github.thedeathlycow.thermoo.api.temperature.Soakable soaked ticks}.
      */
-    boolean dehydrateFromSweating(PlayerEntity player);
+    boolean dehydrateFromSweating(Player player);
 
     /**
      * Rehydrates the player from {@linkplain com.github.thedeathlycow.scorchful.components.RehydrationComponent Rehydration}.
      * <p>
-     * Rehydration is usually provided as an {@link net.minecraft.enchantment.Enchantment}, but is internally based on an
+     * Rehydration is usually provided as an {@link net.minecraft.world.item.enchantment.Enchantment}, but is internally based on an
      * {@linkplain com.github.thedeathlycow.scorchful.registry.SEntityAttributes#REHYDRATION_EFFICIENCY attribute}.
      *
      * @param player                The player to rehydrate
@@ -41,7 +41,7 @@ public interface ServerThirstPlugin {
      * @param rehydrationEfficiency How much of the water recaptured should be converted to thirst water, as a percentage
      *                              between 0 and 1.
      */
-    void rehydrateFromEnchantment(PlayerEntity player, int waterCaptured, double rehydrationEfficiency);
+    void rehydrateFromEnchantment(Player player, int waterCaptured, double rehydrationEfficiency);
 
     /**
      * Gets the amount of water that the Rehydration Enchantment must recapture before the player can drink it, as

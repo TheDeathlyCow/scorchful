@@ -7,7 +7,7 @@ import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.autogen.*;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 
 import java.nio.file.Path;
 
@@ -81,7 +81,7 @@ public class ItemConfig {
     }
 
     public int getRehydrationDrinkSize() {
-        return MathHelper.floor(120 * rehydrationDrinkSizeMultiplier);
+        return Mth.floor(120 * rehydrationDrinkSizeMultiplier);
     }
 
     public float getMaxRehydrationEfficiency() {
@@ -113,19 +113,19 @@ public class ItemConfig {
     float parchingWaterMultiplier = 1.0f;
 
     public int getWaterFromRefreshingFood() {
-        return MathHelper.floor(60 * refreshingWaterMultiplier);
+        return Mth.floor(60 * refreshingWaterMultiplier);
     }
 
     public int getWaterFromSustainingFood() {
-        return MathHelper.floor(120 * sustainingWaterMultiplier);
+        return Mth.floor(120 * sustainingWaterMultiplier);
     }
 
     public int getWaterFromHydratingFood() {
-        return MathHelper.floor(300 * hydratingWaterMultiplier);
+        return Mth.floor(300 * hydratingWaterMultiplier);
     }
 
     public int getWaterFromParchingFood() {
-        return MathHelper.floor(-120 * parchingWaterMultiplier);
+        return Mth.floor(-120 * parchingWaterMultiplier);
     }
 
     @AutoGen(category = MISC_CATEGORY_NAME)

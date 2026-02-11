@@ -16,7 +16,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.Contract;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +31,7 @@ public class Scorchful implements ModInitializer {
 
     @Contract("_->new")
     public static Identifier id(String path) {
-        return Identifier.of(MODID, path);
+        return Identifier.fromNamespaceAndPath(MODID, path);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class Scorchful implements ModInitializer {
         SItemGroups.initialize();
         SSoundEvents.initialize();
         STemperatureEffects.initialize();
-        SStatusEffects.initialize();
+        SMobEffects.initialize();
         SParticleTypes.initialize();
         NetherBiomeModifications.initialize();
         SStats.initialize();

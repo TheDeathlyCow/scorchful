@@ -2,68 +2,68 @@ package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.api.CollectWaterCallback;
 import com.github.thedeathlycow.scorchful.block.NetherLilyBlock;
-import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
+import com.github.thedeathlycow.scorchful.item.component.DrinkContainer;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.SStats;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.LeveledCauldronBlock;
-import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.stat.Stats;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.RaycastContext;
-import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.cauldron.CauldronInteraction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.LayeredCauldronBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class WaterSkinItem extends Item {
-    public static final Style TOOLTIP_STYLE = DrinkContainerComponent.TOOLTIP_STYLE;
+    public static final Style TOOLTIP_STYLE = DrinkContainer.TOOLTIP_STYLE;
 
     public static final Style PARCHING_STYLE = Style.EMPTY
-            .withColor(Formatting.RED);
+            .withColor(ChatFormatting.RED);
 
-    public static final Text FULL_ITEM_NAME = Text.translatable("item.scorchful.water_skin.filled");
-    public static final Text PARTIALLY_FULL_ITEM_NAME = Text.translatable("item.scorchful.water_skin.partially_filled");
-    public static final Text EMPTY_ITEM_NAME = Text.translatable("item.scorchful.water_skin.empty");
+    public static final Component FULL_ITEM_NAME = Component.translatable("item.scorchful.water_skin.filled");
+    public static final Component PARTIALLY_FULL_ITEM_NAME = Component.translatable("item.scorchful.water_skin.partially_filled");
+    public static final Component EMPTY_ITEM_NAME = Component.translatable("item.scorchful.water_skin.empty");
 
-    public WaterSkinItem(Settings settings) {
+    public WaterSkinItem(Properties settings) {
         super(settings);
-        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.map().put(this, this::onCauldronInteract);
+        CauldronInteraction.WATER.map().put(this, this::onCauldronInteract);
     }
 
     @Override
-    public ItemStack getDefaultStack() {
-        var itemStack = super.getDefaultStack();
-        itemStack.set(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT);
+    public ItemStack getDefaultInstance() {
+        var itemStack = super.getDefaultInstance();
+        itemStack.set(SDataComponentTypes.DRINK_CONTAINER, DrinkContainer.DEFAULT);
         return itemStack;
     }
 
-    public static DrinkContainerComponent getContainer(ItemStack stack) {
-        return stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT);
+    public static DrinkContainer getContainer(ItemStack stack) {
+        return stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainer.DEFAULT);
     }
 
     public static boolean hasDrink(ItemStack stack) {
-        return stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT).hasDrink();
+        return stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainer.DEFAULT).hasDrink();
     }
 
     @Override
-    public ActionResult use(World world, PlayerEntity user, Hand hand) {
-        ItemStack stack = user.getStackInHand(hand);
+    public InteractionResult use(Level world, Player user, InteractionHand hand) {
+        ItemStack stack = user.getItemInHand(hand);
 
-        ActionResult refillResult = this.tryRefill(world, user, stack);
+        InteractionResult refillResult = this.tryRefill(world, user, stack);
         if (refillResult != null) {
             return refillResult;
         }
@@ -72,8 +72,8 @@ public class WaterSkinItem extends Item {
     }
 
     @Override
-    public Text getName(ItemStack stack) {
-        DrinkContainerComponent container = getContainer(stack);
+    public Component getName(ItemStack stack) {
+        DrinkContainer container = getContainer(stack);
 
         if (container.isEmpty()) {
             return EMPTY_ITEM_NAME;
@@ -85,13 +85,13 @@ public class WaterSkinItem extends Item {
     }
 
     @Override
-    public boolean isItemBarVisible(ItemStack stack) {
+    public boolean isBarVisible(ItemStack stack) {
         return !getContainer(stack).isFull();
     }
 
     @Override
-    public int getItemBarStep(ItemStack stack) {
-        DrinkContainerComponent container = getContainer(stack);
+    public int getBarWidth(ItemStack stack) {
+        DrinkContainer container = getContainer(stack);
 
         if (container.isEmpty()) {
             return 0;
@@ -101,88 +101,88 @@ public class WaterSkinItem extends Item {
     }
 
     @Override
-    public int getItemBarColor(ItemStack stack) {
+    public int getBarColor(ItemStack stack) {
         float fill = Math.max(0.0f, getContainer(stack).getCurrentFill());
 
-        float saturationValue = MathHelper.clampedMap(fill, 0f, 1f, 0.5f, 1.0f);
+        float saturationValue = Mth.clampedMap(fill, 0f, 1f, 0.5f, 1.0f);
 
-        return MathHelper.hsvToRgb(210f / 360f, saturationValue, saturationValue);
+        return Mth.hsvToRgb(210f / 360f, saturationValue, saturationValue);
     }
 
-    protected void fill(ItemStack stack, PlayerEntity player, World world, BlockPos sourcePos, int amount) {
+    protected void fill(ItemStack stack, Player player, Level world, BlockPos sourcePos, int amount) {
         world.playSound(
                 null,
-                player.getBlockPos(),
-                SSoundEvents.ITEM_WATER_SKIN_FILL, SoundCategory.PLAYERS,
+                player.blockPosition(),
+                SSoundEvents.ITEM_WATER_SKIN_FILL, SoundSource.PLAYERS,
                 1.0f, 1.0f
         );
-        world.emitGameEvent(player, GameEvent.FLUID_PICKUP, sourcePos);
-        player.incrementStat(Stats.USED.getOrCreateStat(this));
-        DrinkContainerComponent.addDrinks(stack, amount);
+        world.gameEvent(player, GameEvent.FLUID_PICKUP, sourcePos);
+        player.awardStat(Stats.ITEM_USED.get(this));
+        DrinkContainer.addDrinks(stack, amount);
 
         CollectWaterCallback.EVENT.invoker().onWaterCollected(player, stack, sourcePos);
     }
 
     @Nullable
-    private ActionResult tryRefill(World world, PlayerEntity user, ItemStack stack) {
-        BlockHitResult blockHitResult = Item.raycast(world, user, RaycastContext.FluidHandling.SOURCE_ONLY);
+    private InteractionResult tryRefill(Level world, Player user, ItemStack stack) {
+        BlockHitResult blockHitResult = Item.getPlayerPOVHitResult(world, user, ClipContext.Fluid.SOURCE_ONLY);
         if (blockHitResult.getType() == HitResult.Type.BLOCK) {
             BlockPos hitPos = blockHitResult.getBlockPos();
 
-            DrinkContainerComponent container = stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainerComponent.DEFAULT);
+            DrinkContainer container = stack.getOrDefault(SDataComponentTypes.DRINK_CONTAINER, DrinkContainer.DEFAULT);
 
-            if (!world.canEntityModifyAt(user, hitPos) || container.isFull()) {
+            if (!world.mayInteract(user, hitPos) || container.isFull()) {
                 return null;
             }
 
-            if (world.getFluidState(hitPos).isIn(FluidTags.WATER)) {
-                if (!world.isClient()) {
+            if (world.getFluidState(hitPos).is(FluidTags.WATER)) {
+                if (!world.isClientSide()) {
                     this.fill(stack, user, world, hitPos, 4);
                 }
-                return ActionResult.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
         }
         return null;
     }
 
-    private ActionResult onCauldronInteract(
+    private InteractionResult onCauldronInteract(
             BlockState state,
-            World world,
+            Level world,
             BlockPos pos,
-            PlayerEntity player,
-            Hand hand,
+            Player player,
+            InteractionHand hand,
             ItemStack stack
     ) {
 
-        if (!world.isClient()) {
+        if (!world.isClientSide()) {
             this.fill(stack, player, world, pos, 1);
-            player.incrementStat(Stats.USE_CAULDRON);
-            LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
+            player.awardStat(Stats.USE_CAULDRON);
+            LayeredCauldronBlock.lowerFillLevel(state, world, pos);
         }
-        return ActionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
-    public ActionResult onWarpedLilyInteract(
+    public InteractionResult onWarpedLilyInteract(
             BlockState state,
-            World world,
+            Level world,
             BlockPos pos,
-            PlayerEntity player,
-            Hand hand,
+            Player player,
+            InteractionHand hand,
             ItemStack stack
     ) {
         if (getContainer(stack).isFull()) {
-            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+            return InteractionResult.TRY_WITH_EMPTY_HAND;
         }
 
-        if (state.get(NetherLilyBlock.WATER_SATURATION_LEVEL) < 3) {
-            return ActionResult.FAIL;
+        if (state.getValue(NetherLilyBlock.WATER_SATURATION_LEVEL) < 3) {
+            return InteractionResult.FAIL;
         }
 
-        if (!world.isClient()) {
+        if (!world.isClientSide()) {
             this.fill(stack, player, world, pos, 4);
-            player.incrementStat(SStats.USE_WARPED_LILY);
+            player.awardStat(SStats.USE_WARPED_LILY);
             NetherLilyBlock.setWater(state, world, pos, 0);
         }
-        return ActionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 }

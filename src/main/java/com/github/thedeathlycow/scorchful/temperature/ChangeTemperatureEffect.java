@@ -4,10 +4,10 @@ import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import com.github.thedeathlycow.thermoo.api.temperature.effects.TemperatureEffect;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.StringIdentifiable;
-import net.minecraft.util.dynamic.Codecs;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.ExtraCodecs;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.entity.LivingEntity;
 
 public class ChangeTemperatureEffect extends TemperatureEffect<ChangeTemperatureEffect.Config> {
 
@@ -19,13 +19,13 @@ public class ChangeTemperatureEffect extends TemperatureEffect<ChangeTemperature
     }
 
     @Override
-    public void apply(LivingEntity victim, ServerWorld serverWorld, Config config) {
+    public void apply(LivingEntity victim, ServerLevel serverWorld, Config config) {
         victim.thermoo$addTemperature(config.temperatureChange(), config.heatingMode());
     }
 
     @Override
     public boolean shouldApply(LivingEntity victim, Config config) {
-        return victim.age % config.interval() == 0;
+        return victim.tickCount % config.interval() == 0;
     }
 
     public record Config(
@@ -33,14 +33,14 @@ public class ChangeTemperatureEffect extends TemperatureEffect<ChangeTemperature
             int interval,
             HeatingModes heatingMode
     ) {
-        public static final Codec<HeatingModes> HEATING_MODES_CODEC = StringIdentifiable.createCodec(HeatingModes::values);
+        public static final Codec<HeatingModes> HEATING_MODES_CODEC = StringRepresentable.fromEnum(HeatingModes::values);
 
         public static final Codec<Config> CODEC = RecordCodecBuilder.create(
                 instance -> instance.group(
                         Codec.INT
                                 .fieldOf("temperature_change")
                                 .forGetter(Config::temperatureChange),
-                        Codecs.POSITIVE_INT
+                        ExtraCodecs.POSITIVE_INT
                                 .fieldOf("interval")
                                 .forGetter(Config::interval),
                         HEATING_MODES_CODEC

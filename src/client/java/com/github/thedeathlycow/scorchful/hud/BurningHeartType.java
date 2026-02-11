@@ -2,7 +2,7 @@ package com.github.thedeathlycow.scorchful.hud;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
@@ -17,7 +17,7 @@ public enum BurningHeartType {
     }
 
     @Nullable
-    public static BurningHeartType forPlayer(@Nullable PlayerEntity player, boolean hardcore) {
+    public static BurningHeartType forPlayer(@Nullable Player player, boolean hardcore) {
         if (player != null) {
             int maxTemperature = player.thermoo$getMaxTemperature();
             int temperature = player.thermoo$getTemperature();

@@ -1,29 +1,29 @@
 package com.github.thedeathlycow.scorchful.mixin.thirst;
 
-import com.github.thedeathlycow.scorchful.item.component.DrinkContainerComponent;
-import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
+import com.github.thedeathlycow.scorchful.item.component.DrinkContainer;
+import com.github.thedeathlycow.scorchful.item.component.DrinkLevel;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.minecraft.component.type.ConsumableComponent;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.Consumable;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(ConsumableComponent.class)
-public class ConsumableComponentMixin {
+@Mixin(Consumable.class)
+public class ConsumableMixin {
     @WrapMethod(
             method = "canConsume"
     )
     private boolean blockConsumptionIfContainerIsEmpty(LivingEntity user, ItemStack stack, Operation<Boolean> original) {
-        DrinkContainerComponent container = stack.get(SDataComponentTypes.DRINK_CONTAINER);
+        DrinkContainer container = stack.get(SDataComponentTypes.DRINK_CONTAINER);
         if (container != null && container.isEmpty()) {
             return false;
         }
@@ -32,38 +32,38 @@ public class ConsumableComponentMixin {
     }
 
     @WrapOperation(
-            method = "finishConsumption",
+            method = "onConsume",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/item/ItemStack;decrementUnlessCreative(ILnet/minecraft/entity/LivingEntity;)V"
+                    target = "Lnet/minecraft/world/item/ItemStack;consume(ILnet/minecraft/world/entity/LivingEntity;)V"
             )
     )
     private void blockContainerDeletion(ItemStack instance, int amount, LivingEntity entity, Operation<Void> original) {
         // we don't want to remove the item when it has a drink container, instead decrement drink count with below method
-        if (!instance.contains(SDataComponentTypes.DRINK_CONTAINER)) {
+        if (!instance.has(SDataComponentTypes.DRINK_CONTAINER)) {
             original.call(instance, amount, entity);
         }
     }
 
     @Inject(
-            method = "finishConsumption",
+            method = "onConsume",
             at = @At("TAIL")
     )
-    private void decrementContainer(World world, LivingEntity user, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
-        DrinkContainerComponent component = stack.get(SDataComponentTypes.DRINK_CONTAINER);
+    private void decrementContainer(Level world, LivingEntity user, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
+        DrinkContainer component = stack.get(SDataComponentTypes.DRINK_CONTAINER);
         if (component != null && component.hasDrink()) {
             stack.set(SDataComponentTypes.DRINK_CONTAINER, component.addDrinks(-1));
         }
     }
 
     @Inject(
-            method = "spawnParticlesAndPlaySound",
+            method = "emitParticlesAndSounds",
             at = @At("TAIL")
     )
-    private void spawnWaterParticles(Random random, LivingEntity user, ItemStack stack, int particleCount, CallbackInfo ci) {
-        DrinkLevelComponent level = stack.get(SDataComponentTypes.DRINK_LEVEL);
-        if (level == DrinkLevelComponent.HYDRATING) {
-            DrinkLevelComponent.spawnWaterParticles(user.getEntityWorld(), user, particleCount);
+    private void spawnWaterParticles(RandomSource random, LivingEntity user, ItemStack stack, int particleCount, CallbackInfo ci) {
+        DrinkLevel level = stack.get(SDataComponentTypes.DRINK_LEVEL);
+        if (level == DrinkLevel.HYDRATING) {
+            DrinkLevel.spawnWaterParticles(user.level(), user, particleCount);
         }
     }
 }

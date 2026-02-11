@@ -1,9 +1,9 @@
 package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.player.Player;
 
 public class DesertWellHeatVision extends HeatVision {
 
@@ -12,7 +12,7 @@ public class DesertWellHeatVision extends HeatVision {
     }
 
     @Override
-    public boolean spawn(PlayerEntity player, ServerWorld world, BlockPos pos) {
+    public boolean spawn(Player player, ServerLevel world, BlockPos pos) {
         return false;
     }
 

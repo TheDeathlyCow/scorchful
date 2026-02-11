@@ -7,12 +7,12 @@ import com.github.thedeathlycow.thermoo.api.client.HeartBarContext;
 import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.gl.RenderPipelines;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector2i;
@@ -28,14 +28,14 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
     public static final int TEXTURE_HEIGHT = 30;
 
     public boolean drawEngulfedHeart(
-            DrawContext context,
-            @Nullable PlayerEntity player,
+            GuiGraphics context,
+            @Nullable Player player,
             int x, int y,
             boolean hardcore, boolean halfHeart
     ) {
         BurningHeartType type = BurningHeartType.forPlayer(player, hardcore);
         if (type != null) {
-            context.drawTexture(
+            context.blit(
                     RenderPipelines.GUI_TEXTURED,
                     HEART_OVERLAY_TEXTURE,
                     x, y - 1,
@@ -51,8 +51,8 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
 
     @Override
     public void render(
-            DrawContext context,
-            PlayerEntity player,
+            GuiGraphics context,
+            Player player,
             HeartBarContext heartBarContext
     ) {
         DisplaySettings settings = ScorchfulClientConfig.getDisplaySettings();
@@ -75,7 +75,7 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
             int y = position.y() - 1;
             int u = drawHalfHeartAtEnd && heartsRendered == fireHearts - 1 ? 9 : 0;
 
-            context.drawTexture(
+            context.blit(
                     RenderPipelines.GUI_TEXTURED,
                     HEART_OVERLAY_TEXTURE,
                     x, y,
@@ -95,7 +95,7 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
 
     static int getNumFireHearts(int burningPoints) {
         // number of whole hearts
-        return MathHelper.ceil(burningPoints / 2.0f);
+        return Mth.ceil(burningPoints / 2.0f);
     }
 
 

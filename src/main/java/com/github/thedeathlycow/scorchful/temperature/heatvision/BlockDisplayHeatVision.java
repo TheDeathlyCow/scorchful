@@ -1,18 +1,18 @@
 package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
-import com.github.thedeathlycow.scorchful.mixin.accessor.BlockDisplayAccess;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.decoration.DisplayEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.biome.Biome;
+import com.github.thedeathlycow.scorchful.mixin.accessor.BlockDisplayAccessor;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Display;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.function.Supplier;
 
-public class BlockDisplayHeatVision extends EntityHeatVision<DisplayEntity.BlockDisplayEntity> {
+public class BlockDisplayHeatVision extends EntityHeatVision<Display.BlockDisplay> {
 
     private final Supplier<BlockState> blockStateProvider;
 
@@ -22,16 +22,16 @@ public class BlockDisplayHeatVision extends EntityHeatVision<DisplayEntity.Block
     }
 
     @Override
-    public boolean spawn(PlayerEntity player, ServerWorld world, BlockPos pos) {
-        if (world.getBlockState(pos).isReplaceable()) {
+    public boolean spawn(Player player, ServerLevel world, BlockPos pos) {
+        if (world.getBlockState(pos).canBeReplaced()) {
             return super.spawn(player, world, pos);
         }
         return false;
     }
 
     @Override
-    protected void initializeEntity(DisplayEntity.BlockDisplayEntity entity) {
+    protected void initializeEntity(Display.BlockDisplay entity) {
         super.initializeEntity(entity);
-        ((BlockDisplayAccess) entity).scorchful$setBlockState(blockStateProvider.get());
+        ((BlockDisplayAccessor) entity).scorchful$setBlockState(blockStateProvider.get());
     }
 }

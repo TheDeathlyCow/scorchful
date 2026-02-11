@@ -2,16 +2,16 @@ package com.github.thedeathlycow.scorchful.client;
 
 import com.github.thedeathlycow.scorchful.config.ScorchfulClientConfig;
 import com.github.thedeathlycow.scorchful.config.section.AccessibilitySettings;
+import com.mojang.blaze3d.resource.CrossFrameResourcePool;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gl.PostEffectProcessor;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.client.render.DefaultFramebufferSet;
-import net.minecraft.client.render.RenderTickCounter;
-import net.minecraft.client.util.Pool;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.client.renderer.LevelTargetBundle;
+import net.minecraft.client.renderer.PostChain;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.effect.MobEffect;
 
 import java.util.function.Predicate;
 
@@ -21,7 +21,7 @@ public final class ShaderStatusEffectManager implements ShaderEffectRenderCallba
 
     private final Identifier shaderID;
 
-    private final RegistryEntry<StatusEffect> potionEffect;
+    private final Holder<MobEffect> potionEffect;
 
     private final Predicate<AccessibilitySettings> enabledPredicate;
 
@@ -30,7 +30,7 @@ public final class ShaderStatusEffectManager implements ShaderEffectRenderCallba
     public ShaderStatusEffectManager(
 //            ManagedShaderEffect managedShaderEffect,
             Identifier shaderID,
-            RegistryEntry<StatusEffect> potionEffect,
+            Holder<MobEffect> potionEffect,
             Predicate<AccessibilitySettings> enabledPredicate
     ) {
 //        this.managedShaderEffect = managedShaderEffect;
@@ -39,13 +39,13 @@ public final class ShaderStatusEffectManager implements ShaderEffectRenderCallba
         this.enabledPredicate = enabledPredicate;
     }
 
-    public void onEffectAdded(RegistryEntry<StatusEffect> addedEffect) {
+    public void onEffectAdded(Holder<MobEffect> addedEffect) {
         if (addedEffect == potionEffect && this.enabledPredicate.test(ScorchfulClientConfig.getAccessibilitySettings())) {
             enabled = true;
         }
     }
 
-    public void onEffectRemoved(RegistryEntry<StatusEffect> removedEffect) {
+    public void onEffectRemoved(Holder<MobEffect> removedEffect) {
         if (removedEffect == potionEffect) {
             enabled = false;
         }
@@ -56,17 +56,17 @@ public final class ShaderStatusEffectManager implements ShaderEffectRenderCallba
     }
 
     @Override
-    public void onPlayDisconnect(ClientPlayNetworkHandler handler, MinecraftClient client) {
+    public void onPlayDisconnect(ClientPacketListener handler, Minecraft client) {
         this.enabled = false;
     }
 
     @Override
-    public void renderShaderEffects(MinecraftClient client, Pool pool, RenderTickCounter tickDelta) {
+    public void renderShaderEffects(Minecraft client, CrossFrameResourcePool pool, DeltaTracker tickDelta) {
         if (enabled) {
 //            this.managedShaderEffect.render(tickDelta);
-            PostEffectProcessor postEffectProcessor = client.getShaderLoader().loadPostEffect(this.shaderID, DefaultFramebufferSet.MAIN_ONLY);
+            PostChain postEffectProcessor = client.getShaderManager().getPostChain(this.shaderID, LevelTargetBundle.MAIN_TARGETS);
             if (postEffectProcessor != null) {
-                postEffectProcessor.render(client.getFramebuffer(), pool);
+                postEffectProcessor.process(client.getMainRenderTarget(), pool);
             }
         }
     }

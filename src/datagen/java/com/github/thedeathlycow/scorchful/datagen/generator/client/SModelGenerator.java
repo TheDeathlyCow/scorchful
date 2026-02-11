@@ -5,54 +5,54 @@ import com.github.thedeathlycow.scorchful.registry.SArmorMaterials;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.client.data.BlockStateModelGenerator;
-import net.minecraft.client.data.ItemModelGenerator;
-import net.minecraft.client.data.ItemModels;
-import net.minecraft.client.data.ModelIds;
-import net.minecraft.client.render.item.model.ItemModel;
-import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.model.ItemModelUtils;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
 
 public class SModelGenerator extends FabricModelProvider {
-    private static final Identifier CHESTPLATE_TRIM_ASSET_ID_PREFIX = ItemModelGenerator.getTrimAssetIdPrefix("chestplate");
-    private static final Identifier LEGGINGS_TRIM_ASSET_ID_PREFIX = ItemModelGenerator.getTrimAssetIdPrefix("leggings");
-    private static final Identifier BOOTS_TRIM_ASSET_ID_PREFIX = ItemModelGenerator.getTrimAssetIdPrefix("boots");
+    private static final Identifier CHESTPLATE_TRIM_ASSET_ID_PREFIX = ItemModelGenerators.prefixForSlotTrim("chestplate");
+    private static final Identifier LEGGINGS_TRIM_ASSET_ID_PREFIX = ItemModelGenerators.prefixForSlotTrim("leggings");
+    private static final Identifier BOOTS_TRIM_ASSET_ID_PREFIX = ItemModelGenerators.prefixForSlotTrim("boots");
 
     public SModelGenerator(FabricDataOutput output) {
         super(output);
     }
 
     @Override
-    public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+    public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
         // no blockstates are generated right now
     }
 
     @Override
-    public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        itemModelGenerator.register(SItems.CRIMSON_LILY);
-        itemModelGenerator.register(SItems.WARPED_LILY);
-        itemModelGenerator.register(SItems.SAND_PILE);
-        itemModelGenerator.register(SItems.RED_SAND_PILE);
-        itemModelGenerator.register(SItems.ROOTED_CRIMSON_NYLIUM);
-        itemModelGenerator.register(SItems.ROOTED_NETHERRACK);
-        itemModelGenerator.register(SItems.ROOTED_WARPED_NYLIUM);
+    public void generateItemModels(ItemModelGenerators itemModelGenerator) {
+        itemModelGenerator.declareCustomModelItem(SItems.CRIMSON_LILY);
+        itemModelGenerator.declareCustomModelItem(SItems.WARPED_LILY);
+        itemModelGenerator.declareCustomModelItem(SItems.SAND_PILE);
+        itemModelGenerator.declareCustomModelItem(SItems.RED_SAND_PILE);
+        itemModelGenerator.declareCustomModelItem(SItems.ROOTED_CRIMSON_NYLIUM);
+        itemModelGenerator.declareCustomModelItem(SItems.ROOTED_NETHERRACK);
+        itemModelGenerator.declareCustomModelItem(SItems.ROOTED_WARPED_NYLIUM);
 
 
-        itemModelGenerator.register(SItems.SUN_HAT);
-        itemModelGenerator.registerArmor(SItems.TURTLE_CHESTPLATE, SArmorMaterials.TURTLE.assetId(), CHESTPLATE_TRIM_ASSET_ID_PREFIX, false);
-        itemModelGenerator.registerArmor(SItems.TURTLE_LEGGINGS, SArmorMaterials.TURTLE.assetId(), LEGGINGS_TRIM_ASSET_ID_PREFIX, false);
-        itemModelGenerator.registerArmor(SItems.TURTLE_BOOTS, SArmorMaterials.TURTLE.assetId(), BOOTS_TRIM_ASSET_ID_PREFIX, false);
-        itemModelGenerator.register(SItems.CACTUS_JUICE);
+        itemModelGenerator.declareCustomModelItem(SItems.SUN_HAT);
+        itemModelGenerator.generateTrimmableItem(SItems.TURTLE_CHESTPLATE, SArmorMaterials.TURTLE.assetId(), CHESTPLATE_TRIM_ASSET_ID_PREFIX, false);
+        itemModelGenerator.generateTrimmableItem(SItems.TURTLE_LEGGINGS, SArmorMaterials.TURTLE.assetId(), LEGGINGS_TRIM_ASSET_ID_PREFIX, false);
+        itemModelGenerator.generateTrimmableItem(SItems.TURTLE_BOOTS, SArmorMaterials.TURTLE.assetId(), BOOTS_TRIM_ASSET_ID_PREFIX, false);
+        itemModelGenerator.declareCustomModelItem(SItems.CACTUS_JUICE);
 
         registerWaterSkin(itemModelGenerator, SItems.WATER_SKIN);
     }
 
-    private void registerWaterSkin(ItemModelGenerator itemModelGenerator, Item item) {
-        ItemModel.Unbaked empty = ItemModels.basic(ModelIds.getItemModelId(item).withSuffixedPath("/empty"));
-        ItemModel.Unbaked full = ItemModels.basic(ModelIds.getItemModelId(item).withSuffixedPath("/full"));
-        itemModelGenerator.output.accept(
+    private void registerWaterSkin(ItemModelGenerators itemModelGenerator, Item item) {
+        ItemModel.Unbaked empty = ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(item).withSuffix("/empty"));
+        ItemModel.Unbaked full = ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(item).withSuffix("/full"));
+        itemModelGenerator.itemModelOutput.accept(
                 item,
-                ItemModels.condition(
+                ItemModelUtils.conditional(
                         new WaterSkinIsEmptyProperty(),
                         empty,
                         full

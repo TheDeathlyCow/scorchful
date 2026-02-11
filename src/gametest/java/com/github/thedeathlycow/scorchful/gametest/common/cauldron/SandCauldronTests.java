@@ -3,13 +3,13 @@ package com.github.thedeathlycow.scorchful.gametest.common.cauldron;
 import com.github.thedeathlycow.scorchful.block.SandCauldronBlock;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.test.TestContext;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.GameMode;
+import net.minecraft.core.BlockPos;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.block.Blocks;
 
 @SuppressWarnings("unused")
 public class SandCauldronTests {
@@ -17,68 +17,68 @@ public class SandCauldronTests {
     @GameTest(
             structure = "scorchful-test:cauldron/sand_cauldron"
     )
-    public void remove_sand_from_sand_cauldron(TestContext context) {
+    public void remove_sand_from_sand_cauldron(GameTestHelper context) {
         final BlockPos cauldronPos = new BlockPos(2, 1, 2);
-        context.checkBlock(
+        context.assertBlock(
                 cauldronPos,
                 block -> block == SBlocks.SAND_CAULDRON,
-                block -> Text.literal("Sand Cauldron not present!")
+                block -> Component.literal("Sand Cauldron not present!")
         );
 
-        final PlayerEntity mockPlayer = context.createMockPlayer(GameMode.SURVIVAL);
+        final Player mockPlayer = context.makeMockPlayer(GameType.SURVIVAL);
         context.useBlock(cauldronPos, mockPlayer);
 
-        boolean hasSand = mockPlayer.getInventory().containsAny(stack -> stack.isOf(Items.SAND));
-        context.expectBlock(Blocks.CAULDRON, cauldronPos);
-        context.assertTrue(hasSand, Text.literal("Player should have sand!"));
-        context.complete();
+        boolean hasSand = mockPlayer.getInventory().hasAnyMatching(stack -> stack.is(Items.SAND));
+        context.assertBlockPresent(Blocks.CAULDRON, cauldronPos);
+        context.assertTrue(hasSand, Component.literal("Player should have sand!"));
+        context.succeed();
     }
 
     @GameTest(
             structure = "scorchful-test:cauldron/red_sand_cauldron"
     )
-    public void remove_red_sand_from_red_sand_cauldron(TestContext context) {
+    public void remove_red_sand_from_red_sand_cauldron(GameTestHelper context) {
         final BlockPos cauldronPos = new BlockPos(2, 1, 2);
-        context.checkBlock(
+        context.assertBlock(
                 cauldronPos,
                 block -> block == SBlocks.RED_SAND_CAULDRON,
-                block -> Text.literal("Red Sand Cauldron not present!")
+                block -> Component.literal("Red Sand Cauldron not present!")
         );
 
-        final PlayerEntity mockPlayer = context.createMockPlayer(GameMode.SURVIVAL);
+        final Player mockPlayer = context.makeMockPlayer(GameType.SURVIVAL);
         context.useBlock(cauldronPos, mockPlayer);
 
-        boolean hasSand = mockPlayer.getInventory().containsAny(stack -> stack.isOf(Items.RED_SAND));
-        context.expectBlock(Blocks.CAULDRON, cauldronPos);
-        context.assertTrue(hasSand, Text.literal("Player should have red sand!"));
-        context.complete();
+        boolean hasSand = mockPlayer.getInventory().hasAnyMatching(stack -> stack.is(Items.RED_SAND));
+        context.assertBlockPresent(Blocks.CAULDRON, cauldronPos);
+        context.assertTrue(hasSand, Component.literal("Player should have red sand!"));
+        context.succeed();
     }
 
     @GameTest(
             structure = "scorchful-test:cauldron/partially_filled_sand_cauldron"
     )
-    public void try_remove_sand_from_partially_filled_sand_cauldron(TestContext context) {
+    public void try_remove_sand_from_partially_filled_sand_cauldron(GameTestHelper context) {
         final BlockPos cauldronPos = new BlockPos(2, 1, 2);
-        context.checkBlock(
+        context.assertBlock(
                 cauldronPos,
                 block -> block == SBlocks.SAND_CAULDRON,
-                block -> Text.literal("Sand Cauldron not present!")
+                block -> Component.literal("Sand Cauldron not present!")
         );
-        context.checkBlockProperty(
+        context.assertBlockProperty(
                 cauldronPos,
                 SandCauldronBlock.LEVEL,
                 i -> i == SandCauldronBlock.MIN_LEVEL,
-                Text.literal("Sand Cauldron is not partially filled!")
+                Component.literal("Sand Cauldron is not partially filled!")
         );
 
-        final PlayerEntity mockPlayer = context.createMockPlayer(GameMode.SURVIVAL);
+        final Player mockPlayer = context.makeMockPlayer(GameType.SURVIVAL);
         context.useBlock(cauldronPos, mockPlayer);
 
-        boolean hasSand = mockPlayer.getInventory().containsAny(stack -> stack.isOf(Items.SAND));
-        context.expectBlock(SBlocks.SAND_CAULDRON, cauldronPos);
-        context.expectBlockProperty(cauldronPos, SandCauldronBlock.LEVEL, SandCauldronBlock.MIN_LEVEL);
-        context.assertFalse(hasSand, Text.literal("Player should NOT have sand!"));
-        context.complete();
+        boolean hasSand = mockPlayer.getInventory().hasAnyMatching(stack -> stack.is(Items.SAND));
+        context.assertBlockPresent(SBlocks.SAND_CAULDRON, cauldronPos);
+        context.assertBlockProperty(cauldronPos, SandCauldronBlock.LEVEL, SandCauldronBlock.MIN_LEVEL);
+        context.assertFalse(hasSand, Component.literal("Player should NOT have sand!"));
+        context.succeed();
     }
 
 }

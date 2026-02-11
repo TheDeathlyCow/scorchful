@@ -1,12 +1,11 @@
 package com.github.thedeathlycow.scorchful.client;
 
 import com.github.thedeathlycow.scorchful.config.ScorchfulClientConfig;
-import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -19,8 +18,8 @@ public final class SoakedEffects {
      * as the player's wetness scale.
      * This is done on the client side to avoid sending unnecessary packets and save bandwidth.
      */
-    public static void tickDripParticles(PlayerEntity player, World world, boolean submergedInWater) {
-        if (world.isClient()) { // only show particles on client to save bandwidth
+    public static void tickDripParticles(Player player, Level world, boolean submergedInWater) {
+        if (world.isClientSide()) { // only show particles on client to save bandwidth
 
             // config to disable
             if (!ScorchfulClientConfig.getDisplaySettings().enableWetDripParticles()) {
@@ -48,14 +47,14 @@ public final class SoakedEffects {
             // Spawn drip with probability proportional to wetness scale
             if (SLOW_DRIP_MULTIPLIER * random.nextFloat() < player.thermoo$getSoakedScale()) {
 
-                Box boundingBox = player.getBoundingBox();
+                AABB boundingBox = player.getBoundingBox();
 
                 // pick random pos in player bounding box
-                double x = boundingBox.getMin(Direction.Axis.X) + random.nextDouble(boundingBox.getLengthX());
-                double y = boundingBox.getMin(Direction.Axis.Y) + random.nextDouble(boundingBox.getLengthY());
-                double z = boundingBox.getMin(Direction.Axis.Z) + random.nextDouble(boundingBox.getLengthZ());
+                double x = boundingBox.min(Direction.Axis.X) + random.nextDouble(boundingBox.getXsize());
+                double y = boundingBox.min(Direction.Axis.Y) + random.nextDouble(boundingBox.getYsize());
+                double z = boundingBox.min(Direction.Axis.Z) + random.nextDouble(boundingBox.getZsize());
 
-                world.addParticleClient(
+                world.addParticle(
                         ParticleTypes.FALLING_DRIPSTONE_WATER,
                         x, y, z,
                         0, 0, 0

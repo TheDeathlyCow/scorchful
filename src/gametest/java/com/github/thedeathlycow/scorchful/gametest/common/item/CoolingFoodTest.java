@@ -4,14 +4,14 @@ import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.FoodComponent;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.test.TestContext;
-import net.minecraft.text.Text;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
@@ -23,14 +23,14 @@ public class CoolingFoodTest {
     private static final String TEMPERATURE_PROPERTY = "Temperature";
 
     @GameTest()
-    public void consume_cooling_steak_applies_cooling(TestContext context) {
+    public void consume_cooling_steak_applies_cooling(GameTestHelper context) {
         final int originalTemperature = 6300;
         final Item testItem = Items.COOKED_BEEF;
 
-        ServerPlayerEntity mockPlayer = createMockPlayer();
+        ServerPlayer mockPlayer = createMockPlayer();
         ItemStack steak = createFoodStack(testItem);
 
-        context.assertTrue(steak.isIn(SItemTags.IS_COOLING_FOOD), Text.literal("Steak SHOULD be cooling food"));
+        context.assertTrue(steak.is(SItemTags.IS_COOLING_FOOD), Component.literal("Steak SHOULD be cooling food"));
 
         ScorchfulItemEvents.CONSUME_ITEM.invoker().consume(steak, mockPlayer);
 
@@ -39,18 +39,18 @@ public class CoolingFoodTest {
                         ArgumentMatchers.anyInt(),
                         ArgumentMatchers.any(HeatingModes.class)
                 );
-        context.complete();
+        context.succeed();
     }
 
     @GameTest()
-    public void consume_not_cooling_pork_does_not_apply_cooling(TestContext context) {
+    public void consume_not_cooling_pork_does_not_apply_cooling(GameTestHelper context) {
         final int originalTemperature = 6300;
         final Item testItem = Items.PORKCHOP;
 
-        ServerPlayerEntity mockPlayer = createMockPlayer();
+        ServerPlayer mockPlayer = createMockPlayer();
         ItemStack porkchop = createFoodStack(testItem);
 
-        context.assertFalse(porkchop.isIn(SItemTags.IS_COOLING_FOOD), Text.literal("Porkchop should NOT be cooling food"));
+        context.assertFalse(porkchop.is(SItemTags.IS_COOLING_FOOD), Component.literal("Porkchop should NOT be cooling food"));
 
         ScorchfulItemEvents.CONSUME_ITEM.invoker().consume(porkchop, mockPlayer);
 
@@ -59,15 +59,15 @@ public class CoolingFoodTest {
                         ArgumentMatchers.anyInt(),
                         ArgumentMatchers.any(HeatingModes.class)
                 );
-        context.complete();
+        context.succeed();
     }
 
     @NotNull
     private static ItemStack createFoodStack(Item testItem) {
-        ItemStack stack = testItem.getDefaultStack();
+        ItemStack stack = testItem.getDefaultInstance();
         stack.set(
-                DataComponentTypes.FOOD,
-                new FoodComponent.Builder()
+                DataComponents.FOOD,
+                new FoodProperties.Builder()
                         .nutrition(1)
                         .saturationModifier(1)
                         .alwaysEdible()
@@ -76,8 +76,8 @@ public class CoolingFoodTest {
         return stack;
     }
 
-    private static ServerPlayerEntity createMockPlayer() {
-        ServerPlayerEntity mockPlayer = Mockito.mock(ServerPlayerEntity.class);
+    private static ServerPlayer createMockPlayer() {
+        ServerPlayer mockPlayer = Mockito.mock(ServerPlayer.class);
         Mockito.doNothing()
                 .when(mockPlayer)
                 .thermoo$addTemperature(

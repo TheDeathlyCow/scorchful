@@ -7,16 +7,16 @@ import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProv
 import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProviderType;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.component.ComponentMap;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 
 public record RelativeHumidityThresholdEnvironmentProvider(
         double relativeHumidityThreshold,
-        RegistryEntry<EnvironmentProvider> above,
-        RegistryEntry<EnvironmentProvider> below
+        Holder<EnvironmentProvider> above,
+        Holder<EnvironmentProvider> below
 ) implements EnvironmentProvider {
     public static final MapCodec<RelativeHumidityThresholdEnvironmentProvider> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
@@ -33,7 +33,7 @@ public record RelativeHumidityThresholdEnvironmentProvider(
     );
 
     @Override
-    public void buildCurrentComponents(World world, BlockPos pos, RegistryEntry<Biome> biome, ComponentMap.Builder builder) {
+    public void buildCurrentComponents(Level world, BlockPos pos, Holder<Biome> biome, DataComponentMap.Builder builder) {
         double relativeHumidity = builder.getOrDefault(EnvironmentComponentTypes.RELATIVE_HUMIDITY, RelativeHumidityComponent.DEFAULT);
         if (relativeHumidity >= relativeHumidityThreshold) {
             above.value().buildCurrentComponents(world, pos, biome, builder);

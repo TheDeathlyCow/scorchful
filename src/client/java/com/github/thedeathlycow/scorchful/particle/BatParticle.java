@@ -2,48 +2,48 @@ package com.github.thedeathlycow.scorchful.particle;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.SimpleParticleType;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
-public class BatParticle extends AbstractSlowingParticle  {
+public class BatParticle extends RisingParticle  {
 
-    private final SpriteProvider spriteProvider;
+    private final SpriteSet spriteProvider;
 
-    public BatParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
-        super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider.getFirst());
+    public BatParticle(ClientLevel world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteSet spriteProvider) {
+        super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider.first());
         this.spriteProvider = spriteProvider;
-        this.maxAge = 12 + this.random.nextInt(4);
-        this.scale = 0.15f;
-        this.setBoundingBoxSpacing(1.0f, 1.0f);
+        this.lifetime = 12 + this.random.nextInt(4);
+        this.quadSize = 0.15f;
+        this.setSize(1.0f, 1.0f);
     }
 
     @Override
-    protected RenderType getRenderType() {
-        return BillboardParticle.RenderType.PARTICLE_ATLAS_OPAQUE;
+    protected Layer getLayer() {
+        return SingleQuadParticle.Layer.OPAQUE;
     }
 
     @Override
-    public int getBrightness(float tint) {
+    public int getLightColor(float tint) {
         return 0xF000F0;
     }
 
     @Override
     public void tick() {
-        if (this.age++ >= this.maxAge) {
-            this.markDead();
+        if (this.age++ >= this.lifetime) {
+            this.remove();
         } else {
-            this.updateSprite(this.spriteProvider);
+            this.setSpriteFromAge(this.spriteProvider);
         }
     }
 
     @Environment(EnvType.CLIENT)
-    public static class Factory implements ParticleFactory<SimpleParticleType> {
-        private final SpriteProvider spriteProvider;
+    public static class Factory implements ParticleProvider<SimpleParticleType> {
+        private final SpriteSet spriteProvider;
 
-        public Factory(SpriteProvider spriteProvider) {
+        public Factory(SpriteSet spriteProvider) {
             this.spriteProvider = spriteProvider;
         }
 
@@ -51,10 +51,10 @@ public class BatParticle extends AbstractSlowingParticle  {
         @Nullable
         public Particle createParticle(
                 SimpleParticleType parameters,
-                ClientWorld clientWorld,
+                ClientLevel clientWorld,
                 double x, double y, double z,
                 double velocityX, double velocityY, double velocityZ,
-                Random random
+                RandomSource random
         ) {
             return new BatParticle(clientWorld, x, y, z, velocityX, velocityY, velocityZ, this.spriteProvider);
         }

@@ -1,10 +1,10 @@
 package com.github.thedeathlycow.scorchful.client;
 
+import com.mojang.blaze3d.resource.CrossFrameResourcePool;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.RenderTickCounter;
-import net.minecraft.client.util.Pool;
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.Minecraft;
 
 /**
  * A port of the same event from Satin API, distributed under LGPLv3. This is not meant to be stable; prefer Satin when it comes out
@@ -24,5 +24,5 @@ public interface ShaderEffectRenderCallback {
             }
     );
 
-    void renderShaderEffects(MinecraftClient client, Pool pool, RenderTickCounter tickCounter);
+    void renderShaderEffects(Minecraft client, CrossFrameResourcePool pool, DeltaTracker tickCounter);
 }

@@ -17,7 +17,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.item.v1.ComponentTooltipAppenderRegistry;
-import net.minecraft.client.render.item.property.bool.BooleanProperties;
+import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperties;
 
 @Environment(EnvType.CLIENT)
 public class ScorchfulClient implements ClientModInitializer {
@@ -47,7 +47,7 @@ public class ScorchfulClient implements ClientModInitializer {
 
         ShaderStatusEffectManagers.initialize();
 
-        BooleanProperties.ID_MAPPER.put(Scorchful.id("water_skin/is_empty"), WaterSkinIsEmptyProperty.CODEC);
+        ConditionalItemModelProperties.ID_MAPPER.put(Scorchful.id("water_skin/is_empty"), WaterSkinIsEmptyProperty.CODEC);
     }
 
 }

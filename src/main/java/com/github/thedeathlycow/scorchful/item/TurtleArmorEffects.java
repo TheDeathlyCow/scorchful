@@ -6,21 +6,21 @@ import com.github.thedeathlycow.scorchful.config.section.ItemConfig;
 import com.github.thedeathlycow.scorchful.registry.SEntityAttributes;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
-import net.minecraft.component.ComponentMap;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.AttributeModifierSlot;
-import net.minecraft.component.type.AttributeModifiersComponent;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 public class TurtleArmorEffects {
-    public static void update(PlayerEntity player) {
-        if (player.isSubmergedIn(FluidTags.WATER)) {
+    public static void update(Player player) {
+        if (player.isEyeInFluid(FluidTags.WATER)) {
             return;
         }
 
@@ -30,12 +30,12 @@ public class TurtleArmorEffects {
         }
 
         double lungCapacitySeconds = player.getAttributeValue(SEntityAttributes.LUNG_CAPACITY) * config.getTurtleArmorLungCapacityMultiplier();
-        int lungCapacityTicks = MathHelper.ceil(lungCapacitySeconds * 20);
+        int lungCapacityTicks = Mth.ceil(lungCapacitySeconds * 20);
 
         if (lungCapacityTicks > 0) {
-            player.addStatusEffect(
-                    new StatusEffectInstance(
-                            StatusEffects.WATER_BREATHING,
+            player.addEffect(
+                    new MobEffectInstance(
+                            MobEffects.WATER_BREATHING,
                             lungCapacityTicks, 0,
                             false, false, true
                     )
@@ -47,44 +47,44 @@ public class TurtleArmorEffects {
         DefaultItemComponentEvents.MODIFY.register(context -> {
             context.modify(
                     Items.TURTLE_HELMET,
-                    builder -> addLungCapacity(builder, AttributeModifierSlot.HEAD)
+                    builder -> addLungCapacity(builder, EquipmentSlotGroup.HEAD)
             );
             context.modify(
                     SItems.TURTLE_CHESTPLATE,
-                    builder -> addLungCapacity(builder, AttributeModifierSlot.CHEST)
+                    builder -> addLungCapacity(builder, EquipmentSlotGroup.CHEST)
             );
             context.modify(
                     SItems.TURTLE_LEGGINGS,
-                    builder -> addLungCapacity(builder, AttributeModifierSlot.LEGS)
+                    builder -> addLungCapacity(builder, EquipmentSlotGroup.LEGS)
             );
             context.modify(
                     SItems.TURTLE_BOOTS,
-                    builder -> addLungCapacity(builder, AttributeModifierSlot.FEET)
+                    builder -> addLungCapacity(builder, EquipmentSlotGroup.FEET)
             );
         });
     }
 
     private static void addLungCapacity(
-            ComponentMap.Builder builder,
-            AttributeModifierSlot slot
+            DataComponentMap.Builder builder,
+            EquipmentSlotGroup slot
     ) {
-        AttributeModifiersComponent attributes = builder.getOrDefault(
-                DataComponentTypes.ATTRIBUTE_MODIFIERS,
-                AttributeModifiersComponent.DEFAULT
+        ItemAttributeModifiers attributes = builder.getOrDefault(
+                DataComponents.ATTRIBUTE_MODIFIERS,
+                ItemAttributeModifiers.EMPTY
         );
 
         attributes = attributes
-                .with(
+                .withModifierAdded(
                         SEntityAttributes.LUNG_CAPACITY,
-                        new EntityAttributeModifier(
-                                Scorchful.id("lung_capacity/").withSuffixedPath(slot.asString()),
+                        new AttributeModifier(
+                                Scorchful.id("lung_capacity/").withSuffix(slot.getSerializedName()),
                                 10.0,
-                                EntityAttributeModifier.Operation.ADD_VALUE
+                                AttributeModifier.Operation.ADD_VALUE
                         ),
                         slot
                 );
 
-        builder.add(DataComponentTypes.ATTRIBUTE_MODIFIERS, attributes);
+        builder.set(DataComponents.ATTRIBUTE_MODIFIERS, attributes);
     }
 
     private TurtleArmorEffects() {
