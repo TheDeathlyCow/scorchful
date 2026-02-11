@@ -12,7 +12,7 @@ public class SEntityAttributes {
     public static final double BASE_MAX_TEMPERATURE = 45.0;
 
     public static final Holder<Attribute> REHYDRATION_EFFICIENCY = register(
-            "player.rehydration_efficiency",
+            "rehydration_efficiency",
             new RangedAttribute(
                     "attribute.name.scorchful.rehydration_efficiency",
                     0.0,
@@ -31,6 +31,8 @@ public class SEntityAttributes {
 
     public static void initialize() {
         Scorchful.LOGGER.debug("Initialized scorchful entity attributes");
+
+        BuiltInRegistries.ATTRIBUTE.addAlias(Scorchful.id("player.rehydration_efficiency"), Scorchful.id("rehydration_efficiency"));
 
         ThermooAttributes.baseValueEvent(ThermooAttributes.MAX_TEMPERATURE).register((entity, baseValue) -> BASE_MAX_TEMPERATURE);
     }
