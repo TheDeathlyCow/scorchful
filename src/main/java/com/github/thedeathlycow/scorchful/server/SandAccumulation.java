@@ -33,7 +33,7 @@ public class SandAccumulation {
         if (sandstorm == Sandstorms.SandstormType.NONE) {
             return;
         }
-        RandomSource random = world.random;
+        RandomSource random = world.getRandom();
         if (random.nextInt(16) != 0) {
             return;
         }

@@ -1,53 +1,41 @@
 // TODO(Ravel): Failed to fully resolve file: null cannot be cast to non-null type com.intellij.psi.PsiClass
 package com.github.thedeathlycow.scorchful.temperature;
 
-import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
-import com.github.thedeathlycow.thermoo.api.temperature.effects.TemperatureEffect;
+import com.github.thedeathlycow.thermoo.api.core.v2.TemperatureChange;
+import com.github.thedeathlycow.thermoo.api.core.v2.registry.ThermooRegistries;
+import com.github.thedeathlycow.thermoo.api.core.v2.source.TemperatureSource;
+import com.github.thedeathlycow.thermoo.api.temperature.status.v2.TemperatureEffect;
+import com.github.thedeathlycow.thermoo.api.temperature.status.v2.TemperatureEffectContext;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.ExtraCodecs;
-import net.minecraft.util.StringRepresentable;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.world.entity.LivingEntity;
 
-public class ChangeTemperatureEffect extends TemperatureEffect<ChangeTemperatureEffect.Config> {
+public record ChangeTemperatureEffect(
+        int amount,
+        Holder<TemperatureSource> source
+) implements TemperatureEffect {
+    public static final MapCodec<ChangeTemperatureEffect> CODEC = RecordCodecBuilder.mapCodec(
+            instance -> instance.group(
+                    Codec.INT
+                            .fieldOf("amount")
+                            .forGetter(ChangeTemperatureEffect::amount),
+                    RegistryFixedCodec.create(ThermooRegistries.TEMPERATURE_SOURCE)
+                            .fieldOf("interval")
+                            .forGetter(ChangeTemperatureEffect::source)
+            ).apply(instance, ChangeTemperatureEffect::new)
+    );
 
-    /**
-     * @param configCodec Codec for the config type
-     */
-    public ChangeTemperatureEffect(Codec<Config> configCodec) {
-        super(configCodec);
+    @Override
+    public boolean apply(LivingEntity target, TemperatureEffectContext context) {
+        target.thermoo$addTemperature(this.amount, TemperatureChange.create(this.source));
+        return true;
     }
 
     @Override
-    public void apply(LivingEntity victim, ServerLevel serverWorld, Config config) {
-        victim.thermoo$addTemperature(config.temperatureChange(), config.heatingMode());
-    }
-
-    @Override
-    public boolean shouldApply(LivingEntity victim, Config config) {
-        return victim.tickCount % config.interval() == 0;
-    }
-
-    public record Config(
-            int temperatureChange,
-            int interval,
-            HeatingModes heatingMode
-    ) {
-        public static final Codec<HeatingModes> HEATING_MODES_CODEC = StringRepresentable.fromEnum(HeatingModes::values);
-
-        public static final Codec<Config> CODEC = RecordCodecBuilder.create(
-                instance -> instance.group(
-                        Codec.INT
-                                .fieldOf("temperature_change")
-                                .forGetter(Config::temperatureChange),
-                        ExtraCodecs.POSITIVE_INT
-                                .fieldOf("interval")
-                                .forGetter(Config::interval),
-                        HEATING_MODES_CODEC
-                                .lenientOptionalFieldOf("heating_mode", HeatingModes.ABSOLUTE)
-                                .forGetter(Config::heatingMode)
-                ).apply(instance, Config::new)
-        );
+    public MapCodec<ChangeTemperatureEffect> codec() {
+        return CODEC;
     }
 }

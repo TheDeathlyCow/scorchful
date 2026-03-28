@@ -21,7 +21,7 @@ public class SandstormSlowing {
 
     public static boolean tickSandstormSlow(LivingEntity entity, boolean wasInSandstorm) {
 
-        if (entity.getType().is(SEntityTypeTags.DOES_NOT_SLOW_IN_SANDSTORM)) {
+        if (entity.is(SEntityTypeTags.DOES_NOT_SLOW_IN_SANDSTORM)) {
             return false;
         }
 

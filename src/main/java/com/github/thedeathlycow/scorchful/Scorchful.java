@@ -71,7 +71,7 @@ public class Scorchful implements ModInitializer {
 
         this.registerThermooEventListeners();
 
-        PayloadTypeRegistry.playS2C().register(TemperatureSoundEventPacket.PACKET_ID, TemperatureSoundEventPacket.PACKET_CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(TemperatureSoundEventPacket.PACKET_ID, TemperatureSoundEventPacket.PACKET_CODEC);
 
         LOGGER.info("Scorchful initialized!");
     }

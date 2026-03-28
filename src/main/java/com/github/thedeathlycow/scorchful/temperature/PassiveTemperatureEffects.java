@@ -3,10 +3,11 @@ package com.github.thedeathlycow.scorchful.temperature;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.section.TemperatureConfig;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;
-import com.github.thedeathlycow.thermoo.api.environment.component.EnvironmentComponentTypes;
-import com.github.thedeathlycow.thermoo.api.environment.component.RelativeHumidityComponent;
-import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentTickContext;
-import com.github.thedeathlycow.thermoo.api.temperature.event.LivingEntityTemperatureTickEvents;
+import com.github.thedeathlycow.thermoo.api.core.v2.event.EnvironmentTickContext;
+import com.github.thedeathlycow.thermoo.api.core.v2.event.LivingEntityTemperatureTickEvents;
+import com.github.thedeathlycow.thermoo.api.core.v2.source.TemperatureSources;
+import com.github.thedeathlycow.thermoo.api.environment.v2.component.EnvironmentComponentTypes;
+import com.github.thedeathlycow.thermoo.api.environment.v2.component.RelativeHumidityComponent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,7 +18,7 @@ public final class PassiveTemperatureEffects {
     private static final double VERY_HIGH_HUMIDITY = 0.8;
 
     public static void initialize() {
-        LivingEntityTemperatureTickEvents.GET_PASSIVE_TEMPERATURE_CHANGE.register(PassiveTemperatureEffects::getPassiveChange);
+        LivingEntityTemperatureTickEvents.getTemperatureChange(TemperatureSources.PASSIVE).register(PassiveTemperatureEffects::getPassiveChange);
     }
 
     private static int getPassiveChange(EnvironmentTickContext<? extends LivingEntity> context) {

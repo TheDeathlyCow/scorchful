@@ -1,11 +1,8 @@
-// TODO(Ravel): Failed to fully resolve file: null cannot be cast to non-null type com.intellij.psi.PsiClass
 package com.github.thedeathlycow.scorchful.temperature.environment.provider;
 
-import com.github.thedeathlycow.scorchful.registry.SEnvironmentProviderTypes;
-import com.github.thedeathlycow.thermoo.api.environment.component.EnvironmentComponentTypes;
-import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProvider;
-import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProviderType;
-import com.github.thedeathlycow.thermoo.api.util.TemperatureRecord;
+import com.github.thedeathlycow.thermoo.api.core.v2.TemperatureRecord;
+import com.github.thedeathlycow.thermoo.api.environment.v2.component.EnvironmentComponentTypes;
+import com.github.thedeathlycow.thermoo.api.environment.v2.provider.EnvironmentProvider;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -62,7 +59,7 @@ public record SeaLevelAltitudeTemperatureEnvironmentProvider(
     }
 
     @Override
-    public EnvironmentProviderType<SeaLevelAltitudeTemperatureEnvironmentProvider> getType() {
-        return SEnvironmentProviderTypes.SEA_LEVEL_ALTITUDE_TEMPERATURE;
+    public MapCodec<SeaLevelAltitudeTemperatureEnvironmentProvider> codec() {
+        return CODEC;
     }
 }

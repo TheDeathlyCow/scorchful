@@ -12,7 +12,7 @@ public final class SRegistries {
     );
 
     public static final Registry<HeatVision> HEAT_VISION =
-            FabricRegistryBuilder.createSimple(
+            FabricRegistryBuilder.create(
                     HEAT_VISION_KEY
             ).buildAndRegister();
 

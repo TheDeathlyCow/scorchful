@@ -1,10 +1,8 @@
 package com.github.thedeathlycow.scorchful.temperature.environment.provider;
 
-import com.github.thedeathlycow.scorchful.registry.SEnvironmentProviderTypes;
-import com.github.thedeathlycow.thermoo.api.environment.component.EnvironmentComponentTypes;
-import com.github.thedeathlycow.thermoo.api.environment.component.RelativeHumidityComponent;
-import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProvider;
-import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProviderType;
+import com.github.thedeathlycow.thermoo.api.environment.v2.component.EnvironmentComponentTypes;
+import com.github.thedeathlycow.thermoo.api.environment.v2.component.RelativeHumidityComponent;
+import com.github.thedeathlycow.thermoo.api.environment.v2.provider.EnvironmentProvider;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -43,7 +41,7 @@ public record RelativeHumidityThresholdEnvironmentProvider(
     }
 
     @Override
-    public EnvironmentProviderType<RelativeHumidityThresholdEnvironmentProvider> getType() {
-        return SEnvironmentProviderTypes.RELATIVE_HUMIDITY_THRESHOLD;
+    public MapCodec<RelativeHumidityThresholdEnvironmentProvider> codec() {
+        return CODEC;
     }
 }

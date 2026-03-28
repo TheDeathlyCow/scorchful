@@ -3,7 +3,6 @@ package com.github.thedeathlycow.scorchful.registry;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.tag.SDamageTypeTags;
-import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -18,7 +17,7 @@ public final class SEntityTypes {
                     if (!blocked && source.is(SDamageTypeTags.FIREBALL)) {
                         entity.thermoo$addTemperature(
                                 ScorchfulConfig.getTemperatureConfig().getFireballHeat(),
-                                HeatingModes.ACTIVE
+                                entity.level().thermoo$temperatureSources().active()
                         );
                     }
                 }

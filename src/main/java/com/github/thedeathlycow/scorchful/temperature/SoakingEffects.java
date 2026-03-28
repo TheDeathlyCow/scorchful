@@ -8,10 +8,9 @@ import com.github.thedeathlycow.scorchful.config.section.EntityConfig;
 import com.github.thedeathlycow.scorchful.mixin.accessor.EntityAccessor;
 import com.github.thedeathlycow.scorchful.registry.SEntityAttributes;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
-import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentTickContext;
-import com.github.thedeathlycow.thermoo.api.temperature.event.LivingEntitySoakingTickEvents;
-import net.fabricmc.fabric.api.event.Event;
-import net.fabricmc.fabric.api.util.TriState;
+import com.github.thedeathlycow.thermoo.api.core.v2.event.EnvironmentTickContext;
+import com.github.thedeathlycow.thermoo.api.core.v2.event.LivingEntitySoakingTickEvents;
+import dev.yumi.commons.TriState;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,7 +24,7 @@ public final class SoakingEffects {
         LivingEntitySoakingTickEvents.GET_SOAKING_CHANGE.register(SoakingEffects::getSoakingChange);
 
         // place in an earlier phase in case of cancellation
-        LivingEntitySoakingTickEvents.ALLOW_SOAKING_CHANGE.addPhaseOrdering(REHYDRATION_TICK_PHASE, Event.DEFAULT_PHASE);
+        LivingEntitySoakingTickEvents.ALLOW_SOAKING_CHANGE.addPhaseOrdering(REHYDRATION_TICK_PHASE, Identifier.fromNamespaceAndPath("thermoo", "default"));
         LivingEntitySoakingTickEvents.ALLOW_SOAKING_CHANGE.register(
                 REHYDRATION_TICK_PHASE,
                 (context, soakingChange) -> {

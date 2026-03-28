@@ -62,7 +62,7 @@ public class RootedNyliumBlock extends Block implements BonemealableBlock {
 
     private static boolean stayAlive(BlockState state, LevelReader world, BlockPos pos) {
         BlockState aboveState = world.getBlockState(pos.above());
-        int i = LightEngine.getLightBlockInto(state, aboveState, Direction.UP, aboveState.getLightBlock());
+        int i = LightEngine.getLightBlockInto(state, aboveState, Direction.UP, aboveState.getLightDampening());
         return i < 15;
     }
 }

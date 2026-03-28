@@ -14,7 +14,6 @@ import com.github.thedeathlycow.scorchful.item.component.HeatResistanceModifier;
 import com.github.thedeathlycow.scorchful.item.enchantment.EnchantmentModifiers;
 import com.github.thedeathlycow.scorchful.item.loot.TurtleScuteLootTableModifier;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
-import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.core.Registry;
@@ -108,7 +107,7 @@ public final class SItems {
             if (stack.is(SItemTags.IS_COOLING_FOOD)) {
                 player.thermoo$addTemperature(
                         ScorchfulConfig.getTemperatureConfig().getFoodCooling(),
-                        HeatingModes.ACTIVE
+                        player.level().thermoo$temperatureSources().active()
                 );
             }
         });

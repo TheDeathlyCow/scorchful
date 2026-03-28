@@ -3,7 +3,7 @@ package com.github.thedeathlycow.scorchful.item;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.component.SunHatRenderer;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
-import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
+import com.github.thedeathlycow.thermoo.api.entity.v1.ThermooAttributes;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;

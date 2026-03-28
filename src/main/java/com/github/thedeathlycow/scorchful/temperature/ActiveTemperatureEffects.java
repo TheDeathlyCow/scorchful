@@ -2,15 +2,16 @@ package com.github.thedeathlycow.scorchful.temperature;
 
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.section.TemperatureConfig;
-import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentTickContext;
-import com.github.thedeathlycow.thermoo.api.temperature.event.LivingEntityTemperatureTickEvents;
+import com.github.thedeathlycow.thermoo.api.core.v2.event.EnvironmentTickContext;
+import com.github.thedeathlycow.thermoo.api.core.v2.event.LivingEntityTemperatureTickEvents;
+import com.github.thedeathlycow.thermoo.api.core.v2.source.TemperatureSources;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 
 public final class ActiveTemperatureEffects {
     public static void initialize() {
-        LivingEntityTemperatureTickEvents.GET_ACTIVE_TEMPERATURE_CHANGE.register(ActiveTemperatureEffects::getActiveChange);
+        LivingEntityTemperatureTickEvents.getTemperatureChange(TemperatureSources.ACTIVE).register(ActiveTemperatureEffects::getActiveChange);
     }
 
     private static int getActiveChange(EnvironmentTickContext<? extends LivingEntity> context) {

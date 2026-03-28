@@ -3,28 +3,21 @@ package com.github.thedeathlycow.scorchful.registry;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.temperature.ChangeTemperatureEffect;
 import com.github.thedeathlycow.scorchful.temperature.SoundTemperatureEffect;
-import com.github.thedeathlycow.thermoo.api.ThermooRegistries;
-import com.github.thedeathlycow.thermoo.api.temperature.effects.TemperatureEffect;
+import com.github.thedeathlycow.thermoo.api.core.v2.registry.ThermooBuiltInRegistries;
+import com.github.thedeathlycow.thermoo.api.temperature.status.v2.TemperatureEffect;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Registry;
 
 public class STemperatureEffects {
-    public static final TemperatureEffect<SoundTemperatureEffect.Config> SOUND = register(
-            "sound",
-            new SoundTemperatureEffect(SoundTemperatureEffect.Config.CODEC)
-    );
-    public static final TemperatureEffect<ChangeTemperatureEffect.Config> CHANGE_TEMPERATURE = register(
-            "change_temperature",
-            new ChangeTemperatureEffect(
-                    ChangeTemperatureEffect.Config.CODEC
-            )
-    );
-
     public static void initialize() {
         Scorchful.LOGGER.debug("Initialized Scorchful temperature effects");
+
+        register("sound", SoundTemperatureEffect.CODEC);
+        register("change_temperature", ChangeTemperatureEffect.CODEC);
     }
 
-    private static <T> TemperatureEffect<T> register(String name, TemperatureEffect<T> effect) {
-        return Registry.register(ThermooRegistries.TEMPERATURE_EFFECTS, Scorchful.id(name), effect);
+    private static void register(String name, MapCodec<? extends TemperatureEffect> effect) {
+        Registry.register(ThermooBuiltInRegistries.TEMPERATURE_EFFECT_TYPE, Scorchful.id(name), effect);
     }
 
     private STemperatureEffects() {

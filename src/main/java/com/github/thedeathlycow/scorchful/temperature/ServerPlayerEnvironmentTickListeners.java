@@ -3,13 +3,13 @@ package com.github.thedeathlycow.scorchful.temperature;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.section.TemperatureConfig;
-import com.github.thedeathlycow.thermoo.api.environment.component.EnvironmentComponentTypes;
-import com.github.thedeathlycow.thermoo.api.environment.component.TemperatureRecordComponent;
-import com.github.thedeathlycow.thermoo.api.environment.event.ServerPlayerEnvironmentTickEvents;
-import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentTickContext;
-import com.github.thedeathlycow.thermoo.api.util.TemperatureRecord;
-import com.github.thedeathlycow.thermoo.api.util.TemperatureUnit;
-import net.fabricmc.fabric.api.util.TriState;
+import com.github.thedeathlycow.thermoo.api.core.v2.TemperatureRecord;
+import com.github.thedeathlycow.thermoo.api.core.v2.TemperatureUnit;
+import com.github.thedeathlycow.thermoo.api.core.v2.event.EnvironmentTickContext;
+import com.github.thedeathlycow.thermoo.api.environment.v2.component.EnvironmentComponentTypes;
+import com.github.thedeathlycow.thermoo.api.environment.v2.component.TemperatureRecordComponent;
+import com.github.thedeathlycow.thermoo.api.environment.v2.event.ServerPlayerEnvironmentTickEvents;
+import dev.yumi.commons.TriState;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 
@@ -52,7 +52,7 @@ public final class ServerPlayerEnvironmentTickListeners {
         if (!config.isEnableEnvironmentHeating()) {
             return TriState.FALSE;
         } else {
-            return TriState.of(player.thermoo$getTemperatureScale() < config.getMaxEnvironmentHeatingScale());
+            return TriState.from(player.thermoo$getTemperatureScale() < config.getMaxEnvironmentHeatingScale());
         }
     }
 
