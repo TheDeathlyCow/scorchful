@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.15-SNAPSHOT'
+    id 'net.fabricmc.fabric-loom' version '1.15-SNAPSHOT'
     id 'maven-publish'
     id "me.modmuss50.mod-publish-plugin" version "0.8.4"
 }
@@ -87,40 +87,37 @@ loom {
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.layered() {
-        officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-1.21.10:2025.10.12@zip")
-    }
 
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     // Fabric API.
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     // Uncomment the following line to enable the deprecated Fabric API modules.
     // These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 
     // modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 
-    modImplementation "com.terraformersmc:modmenu:${project.mod_menu_version}"
+    implementation "com.terraformersmc:modmenu:${project.mod_menu_version}"
 
-    modImplementation "dev.isxander:yet-another-config-lib:${project.yacl_version}-fabric"
+    implementation "dev.isxander:yet-another-config-lib:${project.yacl_version}"
 
-    modImplementation "com.github.thedeathlycow:thermoo:v${project.thermoo_version}"
+    implementation "com.github.thedeathlycow:thermoo:v${project.thermoo_version}"
 
-    modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-base:${project.cca_version}"
-    modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
+    implementation "org.ladysnake.cardinal-components-api:cardinal-components-base:${project.cca_version}"
+    implementation "org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
     // modImplementation "org.ladysnake:satin:${satin_version}"
 
     // temporarily using cursemaven since modrinth is delayed
-    modImplementation "maven.modrinth:immersive-storms:${project.immersive_storms_version}"
+    implementation "maven.modrinth:immersive-storms:${project.immersive_storms_version}"
     include "maven.modrinth:immersive-storms:${project.immersive_storms_version}"
 
     gametestImplementation "org.mockito:mockito-core:3.+"
     // still not updated :(
     // include "org.ladysnake:satin:${satin_version}"
 
-    modCompileOnly("maven.modrinth:dehydration:${project.dehydration_version}") { transitive = false }
+    // TODO: can no longer include this in 26.1 as it is obfuscated
+//    modCompileOnly("maven.modrinth:dehydration:${project.dehydration_version}") { transitive = false }
 }
 
 processResources {
@@ -132,7 +129,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    it.options.release = 21
+    it.options.release = 25
 }
 
 java {
@@ -141,8 +138,8 @@ java {
     // If you remove this line, sources will not be generated.
     withSourcesJar()
 
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 
 jar {
@@ -172,8 +169,8 @@ publishMods {
     changelog = file("changelogs/${mod_version}.md").text
     type = BETA
 
-    file = remapJar.archiveFile
-    additionalFiles.from(remapSourcesJar.archiveFile)
+    file = jar.archiveFile
+    additionalFiles.from(sourcesJar.archiveFile)
     displayName = "Scorchful ${mod_version}"
 
     modLoaders.add("fabric")
@@ -182,9 +179,9 @@ publishMods {
     curseforge {
         accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
         projectId = "981400"
-        minecraftVersions.addAll("1.21.11")
+        minecraftVersions.addAll("26.1")
 
-        javaVersions.add(JavaVersion.VERSION_21)
+        javaVersions.add(JavaVersion.VERSION_25)
 
         clientRequired = true
         serverRequired = true
@@ -199,7 +196,7 @@ publishMods {
     modrinth {
         accessToken = providers.environmentVariable("MODRINTH_TOKEN")
         projectId = "SZQ5qcdn"
-        minecraftVersions.addAll("1.21.11")
+        minecraftVersions.addAll("26.1")
 
         requires("fabric-api", "cardinal-components-api", "thermoo", "yacl")
 
