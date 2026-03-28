@@ -3,11 +3,11 @@ package com.github.thedeathlycow.scorchful.hud;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulClientConfig;
 import com.github.thedeathlycow.scorchful.config.section.DisplaySettings;
-import com.github.thedeathlycow.thermoo.api.client.HeartBarContext;
-import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
+import com.github.thedeathlycow.thermoo.api.client.v1.HeartBarContext;
+import com.github.thedeathlycow.thermoo.api.client.v1.StatusBarOverlayRenderEvents;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
@@ -28,14 +28,14 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
     public static final int TEXTURE_HEIGHT = 30;
 
     public boolean drawEngulfedHeart(
-            GuiGraphics context,
+            GuiGraphicsExtractor extractor,
             @Nullable Player player,
             int x, int y,
             boolean hardcore, boolean halfHeart
     ) {
         BurningHeartType type = BurningHeartType.forPlayer(player, hardcore);
         if (type != null) {
-            context.blit(
+            extractor.blit(
                     RenderPipelines.GUI_TEXTURED,
                     HEART_OVERLAY_TEXTURE,
                     x, y - 1,
@@ -51,7 +51,7 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
 
     @Override
     public void render(
-            GuiGraphics context,
+            GuiGraphicsExtractor context,
             Player player,
             HeartBarContext heartBarContext
     ) {

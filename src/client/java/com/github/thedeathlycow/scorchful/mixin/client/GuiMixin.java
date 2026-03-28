@@ -5,7 +5,7 @@ import com.github.thedeathlycow.scorchful.hud.BurningHeartsOverlay;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -23,12 +23,12 @@ public abstract class GuiMixin {
     protected abstract Player getCameraPlayer();
 
     @Inject(
-            method = "renderHeart",
+            method = "extractHeart",
             at = @At("HEAD"),
             cancellable = true
     )
     private void drawEngulfedHearts(
-            GuiGraphics context,
+            GuiGraphicsExtractor extractor,
             Gui.HeartType type,
             int x, int y,
             boolean hardcore, boolean blinking, boolean half,
@@ -38,7 +38,7 @@ public abstract class GuiMixin {
             return;
         }
         boolean drawn = BurningHeartsOverlay.INSTANCE.drawEngulfedHeart(
-                context,
+                extractor,
                 this.getCameraPlayer(),
                 x, y,
                 hardcore, half
@@ -50,22 +50,19 @@ public abstract class GuiMixin {
     }
 
     @ModifyArg(
-            method = "renderCameraOverlays",
+            method = "extractCameraOverlays",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/Gui;renderTextureOverlay(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/resources/Identifier;F)V",
+                    target = "Lnet/minecraft/client/gui/Gui;extractTextureOverlay(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/resources/Identifier;F)V",
                     ordinal = 0
             ),
             index = 2
     )
-    private float modifyEquipmentOpacity(
-            float opacity,
-            @Local ItemStack stack
-    ) {
+    private float modifyEquipmentOpacity(float alpha, @Local(name = "item") ItemStack stack) {
         if (stack.has(SDataComponentTypes.SUN_HAT_RENDERER)) {
             return ScorchfulClientConfig.getAccessibilitySettings().getSunHatShadeOpacity();
         }
 
-        return opacity;
+        return alpha;
     }
 }

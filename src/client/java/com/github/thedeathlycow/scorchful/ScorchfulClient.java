@@ -8,9 +8,12 @@ import com.github.thedeathlycow.scorchful.hud.SoakingUnderlay;
 import com.github.thedeathlycow.scorchful.item.CoolingItemTooltip;
 import com.github.thedeathlycow.scorchful.item.WaterSkinIsEmptyProperty;
 import com.github.thedeathlycow.scorchful.network.SoundTemperatureEffectPacketListener;
-import com.github.thedeathlycow.scorchful.registry.*;
+import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
+import com.github.thedeathlycow.scorchful.registry.SEntityModelLayers;
+import com.github.thedeathlycow.scorchful.registry.SFeatureRenderers;
+import com.github.thedeathlycow.scorchful.registry.SParticleFactories;
 import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
-import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
+import com.github.thedeathlycow.thermoo.api.client.v1.StatusBarOverlayRenderEvents;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -27,7 +30,6 @@ public class ScorchfulClient implements ClientModInitializer {
         ScorchfulClientConfig.initialize();
         SEntityModelLayers.registerAll();
         SFeatureRenderers.registerAll();
-        SCutouts.registerCutouts();
 
         SParticleFactories.registerFactories();
 

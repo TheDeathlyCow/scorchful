@@ -4,7 +4,7 @@ import com.github.thedeathlycow.scorchful.particle.SpurtingWaterOption;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.SStats;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
-import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
+import com.github.thedeathlycow.thermoo.api.core.v2.Soakable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -51,7 +51,7 @@ public class CrimsonLilyBlock extends NetherLilyBlock {
             player.awardStat(SStats.SOAKED_BY_CRIMSON_LILY);
         }
 
-        if (entity.getType().is(SEntityTypeTags.CRIMSON_LILY_HURTS)) {
+        if (entity.is(SEntityTypeTags.CRIMSON_LILY_HURTS)) {
             entity.hurtServer(
                     world,
                     world.damageSources().generic(),

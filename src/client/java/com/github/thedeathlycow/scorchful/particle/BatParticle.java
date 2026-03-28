@@ -26,7 +26,7 @@ public class BatParticle extends RisingParticle  {
     }
 
     @Override
-    public int getLightColor(float tint) {
+    protected int getLightCoords(float a) {
         return 0xF000F0;
     }
 

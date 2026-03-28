@@ -3,9 +3,9 @@ package com.github.thedeathlycow.scorchful.hud;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulClientConfig;
 import com.github.thedeathlycow.scorchful.config.section.DisplaySettings;
-import com.github.thedeathlycow.thermoo.api.client.HeartBarContext;
-import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
-import net.minecraft.client.gui.GuiGraphics;
+import com.github.thedeathlycow.thermoo.api.client.v1.HeartBarContext;
+import com.github.thedeathlycow.thermoo.api.client.v1.StatusBarOverlayRenderEvents;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
@@ -25,7 +25,7 @@ public final class SoakingUnderlay implements StatusBarOverlayRenderEvents.Rende
 
     @Override
     public void render(
-            GuiGraphics context,
+            GuiGraphicsExtractor context,
             Player player,
             HeartBarContext heartBarContext
     ) {

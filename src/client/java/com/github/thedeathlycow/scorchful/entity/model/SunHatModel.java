@@ -15,7 +15,11 @@ public class SunHatModel<S extends HumanoidRenderState> extends HumanoidModel<S>
 
     public SunHatModel(ModelPart root) {
         super(root);
-        this.setAllVisible(false);
+
+        for (ModelPart part : this.allParts()) {
+            part.visible = false;
+        }
+
         this.head.visible = true;
     }
 

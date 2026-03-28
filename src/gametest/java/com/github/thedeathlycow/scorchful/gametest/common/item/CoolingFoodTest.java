@@ -2,7 +2,7 @@ package com.github.thedeathlycow.scorchful.gametest.common.item;
 
 import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
-import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
+import com.github.thedeathlycow.thermoo.api.core.v2.TemperatureChange;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -37,7 +37,7 @@ public class CoolingFoodTest {
         Mockito.verify(mockPlayer, Mockito.atLeastOnce())
                 .thermoo$addTemperature(
                         ArgumentMatchers.anyInt(),
-                        ArgumentMatchers.any(HeatingModes.class)
+                        ArgumentMatchers.any(TemperatureChange.class)
                 );
         context.succeed();
     }
@@ -57,7 +57,7 @@ public class CoolingFoodTest {
         Mockito.verify(mockPlayer, Mockito.never())
                 .thermoo$addTemperature(
                         ArgumentMatchers.anyInt(),
-                        ArgumentMatchers.any(HeatingModes.class)
+                        ArgumentMatchers.any(TemperatureChange.class)
                 );
         context.succeed();
     }
@@ -82,7 +82,7 @@ public class CoolingFoodTest {
                 .when(mockPlayer)
                 .thermoo$addTemperature(
                         ArgumentMatchers.intThat(temp -> temp < 0),
-                        ArgumentMatchers.any(HeatingModes.class)
+                        ArgumentMatchers.any(TemperatureChange.class)
                 );
         return mockPlayer;
     }
