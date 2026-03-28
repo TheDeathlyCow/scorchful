@@ -17,14 +17,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-@SuppressWarnings("deprecation")
 public class CrimsonLilyBlock extends NetherLilyBlock {
     public CrimsonLilyBlock(NetherLilyBehaviour.NetherLilyBehaviourMap behaviorMap, Properties settings) {
         super(behaviorMap, settings);
     }
 
     @Override
-    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity, InsideBlockEffectApplier handler, boolean bl) {
+    protected void entityInside(BlockState state, Level world, BlockPos pos, Entity entity, InsideBlockEffectApplier handler, boolean bl) {
         if (state.getValue(WATER_SATURATION_LEVEL) != 3) {
             return;
         }
@@ -83,5 +82,4 @@ public class CrimsonLilyBlock extends NetherLilyBlock {
             );
         }
     }
-
 }
