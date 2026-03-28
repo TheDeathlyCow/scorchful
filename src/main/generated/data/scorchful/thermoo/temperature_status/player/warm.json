@@ -10,6 +10,7 @@
     }
   ],
   "entity_type": "#scorchful:has_player_temperature_statuses",
+  "interval": 40,
   "temperature_scale_range": {
     "min": 0.5
   }

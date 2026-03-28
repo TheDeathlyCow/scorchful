@@ -57,7 +57,7 @@ public class ScorchfulDataGenerator implements DataGeneratorEntrypoint {
         );
 
         // actual generators
-        
+
         registryBuilder.add(
                 Registries.DAMAGE_TYPE,
                 DamageTypeBootstrap::bootstrap

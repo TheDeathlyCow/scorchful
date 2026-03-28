@@ -20,6 +20,8 @@ public final class STemperatureStatuses {
     public static final ResourceKey<TemperatureStatus> PLAYER_HEART_BEAT_FAST = key("player/heart_beat/fast");
     public static final ResourceKey<TemperatureStatus> PLAYER_HEART_BEAT_RACING = key("player/heart_beat/racing");
 
+    public static final ResourceKey<TemperatureStatus> STRIDER_HOT = key("strider/hot");
+    public static final ResourceKey<TemperatureStatus> STRIDER_SPEED = key("strider/speed");
 
     private static ResourceKey<TemperatureStatus> key(String name) {
         return ResourceKey.create(ThermooRegistries.TEMPERATURE_STATUS, Scorchful.id(name));

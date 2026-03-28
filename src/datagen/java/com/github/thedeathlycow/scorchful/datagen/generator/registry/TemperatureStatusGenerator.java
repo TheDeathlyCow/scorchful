@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.datagen.generator.registry;
 
+import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.registry.SDamageTypes;
 import com.github.thedeathlycow.scorchful.registry.SMobEffects;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
@@ -12,35 +13,34 @@ import com.github.thedeathlycow.thermoo.api.core.v2.registry.ThermooRegistries;
 import com.github.thedeathlycow.thermoo.api.core.v2.source.TemperatureSource;
 import com.github.thedeathlycow.thermoo.api.core.v2.source.TemperatureSources;
 import com.github.thedeathlycow.thermoo.api.temperature.status.v2.TemperatureStatus;
+import com.github.thedeathlycow.thermoo.api.temperature.status.v2.effect.AttributeModifierEffect;
 import com.github.thedeathlycow.thermoo.api.temperature.status.v2.effect.DamageEffect;
 import com.github.thedeathlycow.thermoo.api.temperature.status.v2.effect.MobEffectEffect;
-import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.advancements.criterion.EntityPredicate;
 import net.minecraft.advancements.criterion.MobEffectsPredicate;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.valueproviders.ConstantFloat;
-import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.InvertedLootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 
-import java.util.concurrent.CompletableFuture;
-
 public final class TemperatureStatusGenerator {
 
     public static void bootstrap(BootstrapContext<TemperatureStatus> context) {
-        HolderGetter<EntityType<?>> entityTypes = context.lookup(Registries.ENTITY_TYPE);
         HolderGetter<TemperatureSource> temperatureSources = context.lookup(ThermooRegistries.TEMPERATURE_SOURCE);
+
+        HolderGetter<EntityType<?>> entityTypes = context.lookup(Registries.ENTITY_TYPE);
         HolderSet<EntityType<?>> playerAffected = entityTypes.getOrThrow(SEntityTypeTags.HAS_PLAYER_TEMPERATURE_STATUSES);
+        HolderSet<EntityType<?>> striderAffected = HolderSet.direct(EntityType::builtInRegistryHolder, EntityType.STRIDER);
 
         context.register(
                 STemperatureStatuses.HEAT_DAMAGE,
@@ -68,7 +68,7 @@ public final class TemperatureStatusGenerator {
                                 TemperatureStatus.selector(playerAffected)
                                         .temperatureIsAtLeast(0.5f)
                         )
-                        .withInterval(20)
+                        .withInterval(40)
                         .addEffect(
                                 MobEffectEffect.builder()
                                         .addEffect(MobEffectEffect.effect(MobEffects.WEAKNESS))
@@ -83,7 +83,7 @@ public final class TemperatureStatusGenerator {
                                 TemperatureStatus.selector(playerAffected)
                                         .temperatureIsAtLeast(0.75f)
                         )
-                        .withInterval(20)
+                        .withInterval(40)
                         .addEffect(
                                 MobEffectEffect.builder()
                                         .addEffect(MobEffectEffect.effect(MobEffects.MINING_FATIGUE))
@@ -99,7 +99,7 @@ public final class TemperatureStatusGenerator {
                                 TemperatureStatus.selector(playerAffected)
                                         .temperatureIsAtLeast(0.99f)
                         )
-                        .withInterval(20)
+                        .withInterval(40)
                         .addEffect(
                                 MobEffectEffect.builder()
                                         .addEffect(MobEffectEffect.effect(MobEffects.WEAKNESS).withAmplifier(1))
@@ -116,7 +116,7 @@ public final class TemperatureStatusGenerator {
                                         .withCondition(doesNotHaveFireResistance())
                                         .temperatureIsAtLeast(0.99f)
                         )
-                        .withInterval(20)
+                        .withInterval(40)
                         .addEffect(
                                 MobEffectEffect.builder()
                                         .addEffect(MobEffectEffect.effect(SMobEffects.HEAT_STROKE).withDuration(40))
@@ -143,6 +143,47 @@ public final class TemperatureStatusGenerator {
         context.register(
                 STemperatureStatuses.PLAYER_HEART_BEAT_RACING,
                 heartBeatEffect(playerAffected, 6, 0.99, 1.01).build()
+        );
+
+        context.register(
+                STemperatureStatuses.STRIDER_HOT,
+                TemperatureStatus.builder(
+                                TemperatureStatus.selector(striderAffected)
+                                        .temperatureIsAtLeast(0.99f)
+                        )
+                        .withInterval(40)
+                        .addEffect(
+                                MobEffectEffect.builder()
+                                        .addEffect(MobEffectEffect.effect(MobEffects.REGENERATION).withDuration(40))
+                                        .build()
+                        )
+                        .addEffect(
+                                AttributeModifierEffect.create(
+                                        Attributes.ARMOR,
+                                        6,
+                                        Scorchful.id("temperature_effect.strider_armor"),
+                                        AttributeModifier.Operation.ADD_VALUE
+                                )
+                        )
+                        .build()
+        );
+
+        context.register(
+                STemperatureStatuses.STRIDER_SPEED,
+                TemperatureStatus.builder(
+                                TemperatureStatus.selector(striderAffected)
+                                        .temperatureIsAtLeast(0f)
+                        )
+                        .withInterval(1)
+                        .addEffect(
+                                AttributeModifierEffect.createScaled(
+                                        Attributes.MOVEMENT_SPEED,
+                                        0.1,
+                                        Scorchful.id("temperature_effect.strider_speed"),
+                                        AttributeModifier.Operation.ADD_VALUE
+                                )
+                        )
+                        .build()
         );
     }
 

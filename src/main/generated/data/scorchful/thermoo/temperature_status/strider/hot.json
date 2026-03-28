@@ -1,0 +1,25 @@
+{
+  "effects": [
+    {
+      "type": "thermoo:mob_effect",
+      "effects": [
+        {
+          "duration": 40,
+          "effect": "minecraft:regeneration"
+        }
+      ]
+    },
+    {
+      "type": "thermoo:attribute_modifier",
+      "attribute_type": "minecraft:armor",
+      "id": "scorchful:temperature_effect.strider_armor",
+      "operation": "add_value",
+      "value": 6.0
+    }
+  ],
+  "entity_type": "minecraft:strider",
+  "interval": 40,
+  "temperature_scale_range": {
+    "min": 0.9900000095367432
+  }
+}

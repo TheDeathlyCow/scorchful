@@ -11,6 +11,7 @@
     }
   ],
   "entity_type": "#scorchful:has_player_temperature_statuses",
+  "interval": 40,
   "predicate": {
     "condition": "minecraft:inverted",
     "term": {

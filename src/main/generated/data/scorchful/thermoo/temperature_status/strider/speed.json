@@ -1,0 +1,17 @@
+{
+  "effects": [
+    {
+      "type": "thermoo:attribute_modifier",
+      "attribute_type": "minecraft:movement_speed",
+      "id": "scorchful:temperature_effect.strider_speed",
+      "operation": "add_value",
+      "scale_with_temperature": true,
+      "value": 0.1
+    }
+  ],
+  "entity_type": "minecraft:strider",
+  "interval": 1,
+  "temperature_scale_range": {
+    "min": 0.0
+  }
+}
