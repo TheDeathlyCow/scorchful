@@ -18,6 +18,14 @@ public class BlockTagGenerator extends FabricTagsProvider.BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider wrapperLookup) {
+        generateScorchfulTags();
+
+        generateConventionTags();
+
+        generateMinecraftTags();
+    }
+
+    private void generateScorchfulTags() {
         valueLookupBuilder(SBlockTags.SAND_PILE_CANNOT_SURVIVE_ON)
                 .add(Blocks.BARRIER);
 
@@ -51,12 +59,46 @@ public class BlockTagGenerator extends FabricTagsProvider.BlockTagsProvider {
 
         valueLookupBuilder(SBlockTags.HEAVY_ICE)
                 .addOptionalTag(BlockTags.ICE);
+    }
 
+    private void generateConventionTags() {
         valueLookupBuilder(ConventionalBlockTags.NETHERRACKS)
                 .add(SBlocks.ROOTED_NETHERRACK);
+    }
+
+    private void generateMinecraftTags() {
+        valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(SBlocks.ROOTED_NETHERRACK)
+                .add(SBlocks.ROOTED_CRIMSON_NYLIUM)
+                .add(SBlocks.ROOTED_WARPED_NYLIUM);
+
+        valueLookupBuilder(BlockTags.MINEABLE_WITH_SHOVEL)
+                .add(SBlocks.SAND_PILE)
+                .add(SBlocks.RED_SAND_PILE);
+
+        valueLookupBuilder(BlockTags.CAULDRONS)
+                .add(SBlocks.SAND_CAULDRON);
+
+        valueLookupBuilder(BlockTags.ENDERMAN_HOLDABLE)
+                .add(SBlocks.ROOTED_NETHERRACK)
+                .add(SBlocks.ROOTED_CRIMSON_NYLIUM)
+                .add(SBlocks.ROOTED_WARPED_NYLIUM);
+
+        valueLookupBuilder(BlockTags.OVERRIDES_MUSHROOM_LIGHT_REQUIREMENT)
+                .add(SBlocks.ROOTED_CRIMSON_NYLIUM)
+                .add(SBlocks.ROOTED_WARPED_NYLIUM);
 
         valueLookupBuilder(BlockTags.NYLIUM)
                 .add(SBlocks.ROOTED_WARPED_NYLIUM)
                 .add(SBlocks.ROOTED_CRIMSON_NYLIUM);
+
+        valueLookupBuilder(BlockTags.NETHER_CARVER_REPLACEABLES)
+                .add(SBlocks.ROOTED_NETHERRACK);
+
+        valueLookupBuilder(BlockTags.SCULK_REPLACEABLE)
+                .add(SBlocks.ROOTED_NETHERRACK);
+
+        valueLookupBuilder(BlockTags.SCULK_REPLACEABLE_WORLD_GEN)
+                .add(SBlocks.ROOTED_NETHERRACK);
     }
 }
