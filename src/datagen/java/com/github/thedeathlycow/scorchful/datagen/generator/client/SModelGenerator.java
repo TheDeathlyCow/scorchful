@@ -4,7 +4,7 @@ import com.github.thedeathlycow.scorchful.item.WaterSkinIsEmptyProperty;
 import com.github.thedeathlycow.scorchful.registry.SArmorMaterials;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.model.ItemModelUtils;
@@ -18,7 +18,7 @@ public class SModelGenerator extends FabricModelProvider {
     private static final Identifier LEGGINGS_TRIM_ASSET_ID_PREFIX = ItemModelGenerators.prefixForSlotTrim("leggings");
     private static final Identifier BOOTS_TRIM_ASSET_ID_PREFIX = ItemModelGenerators.prefixForSlotTrim("boots");
 
-    public SModelGenerator(FabricDataOutput output) {
+    public SModelGenerator(FabricPackOutput output) {
         super(output);
     }
 

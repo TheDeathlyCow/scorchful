@@ -2,8 +2,8 @@ package com.github.thedeathlycow.scorchful.datagen.generator;
 
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -14,8 +14,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ItemTagGenerator extends FabricTagProvider.ItemTagProvider {
-    public ItemTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, @Nullable FabricTagProvider.BlockTagProvider blockTagProvider) {
+public class ItemTagGenerator extends FabricTagsProvider.ItemTagsProvider {
+    public ItemTagGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, @Nullable FabricTagsProvider.BlockTagsProvider blockTagProvider) {
         super(output, completableFuture, blockTagProvider);
     }
 

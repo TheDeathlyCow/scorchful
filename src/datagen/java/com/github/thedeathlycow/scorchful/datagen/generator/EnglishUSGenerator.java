@@ -9,7 +9,7 @@ import com.github.thedeathlycow.scorchful.registry.*;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.core.Holder;
@@ -29,7 +29,7 @@ import java.lang.reflect.Field;
 import java.util.concurrent.CompletableFuture;
 
 public class EnglishUSGenerator extends FabricLanguageProvider {
-    public EnglishUSGenerator(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+    public EnglishUSGenerator(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(dataOutput, "en_us", registryLookup);
     }
 

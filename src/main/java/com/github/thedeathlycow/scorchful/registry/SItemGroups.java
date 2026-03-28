@@ -2,7 +2,7 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.component.DrinkContainer;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -15,7 +15,7 @@ public class SItemGroups {
     public static final CreativeModeTab SCORCHFUL = Registry.register(
             BuiltInRegistries.CREATIVE_MODE_TAB,
             Scorchful.id("main"),
-            FabricItemGroup.builder()
+            FabricCreativeModeTab.builder()
                     .icon(SItems.SUN_HAT::getDefaultInstance)
                     .title(Component.translatable("scorchful.title"))
                     .displayItems((context, entries) -> {

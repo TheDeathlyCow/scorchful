@@ -16,7 +16,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.item.v1.ComponentTooltipAppenderRegistry;
+import net.fabricmc.fabric.api.item.v1.ItemComponentTooltipProviderRegistry;
 import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperties;
 
 @Environment(EnvType.CLIENT)
@@ -35,9 +35,9 @@ public class ScorchfulClient implements ClientModInitializer {
         StatusBarOverlayRenderEvents.AFTER_HEALTH_BAR.register(BurningHeartsOverlay.INSTANCE);
         StatusBarOverlayRenderEvents.AFTER_MOUNT_HEALTH_BAR.register(MountHealthOverlay.INSTANCE);
 
-        ComponentTooltipAppenderRegistry.addFirst(SDataComponentTypes.DRINK_CONTAINER);
-        ComponentTooltipAppenderRegistry.addLast(SDataComponentTypes.DRINK_LEVEL);
-        ComponentTooltipAppenderRegistry.addLast(SDataComponentTypes.SUN_HAT_RENDERER);
+        ItemComponentTooltipProviderRegistry.addFirst(SDataComponentTypes.DRINK_CONTAINER);
+        ItemComponentTooltipProviderRegistry.addLast(SDataComponentTypes.DRINK_LEVEL);
+        ItemComponentTooltipProviderRegistry.addLast(SDataComponentTypes.SUN_HAT_RENDERER);
         ItemTooltipCallback.EVENT.register(new CoolingItemTooltip());
 
         ClientPlayNetworking.registerGlobalReceiver(

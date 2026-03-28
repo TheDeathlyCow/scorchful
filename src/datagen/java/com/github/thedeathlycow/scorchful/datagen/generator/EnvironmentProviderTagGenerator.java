@@ -4,14 +4,14 @@ import com.github.thedeathlycow.scorchful.registry.SEnvironmentProviders;
 import com.github.thedeathlycow.scorchful.registry.tag.SEnvironmentProviderTags;
 import com.github.thedeathlycow.thermoo.api.ThermooRegistryKeys;
 import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProvider;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 
 import java.util.concurrent.CompletableFuture;
 
-public class EnvironmentProviderTagGenerator extends FabricTagProvider<EnvironmentProvider> {
-    public EnvironmentProviderTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+public class EnvironmentProviderTagGenerator extends FabricTagsProvider<EnvironmentProvider> {
+    public EnvironmentProviderTagGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, ThermooRegistryKeys.ENVIRONMENT_PROVIDER, registriesFuture);
     }
 

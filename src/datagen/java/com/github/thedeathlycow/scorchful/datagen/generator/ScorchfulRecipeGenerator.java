@@ -2,7 +2,7 @@ package com.github.thedeathlycow.scorchful.datagen.generator;
 
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import com.github.thedeathlycow.thermoo.api.predicate.TemperatureLootCondition;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.Criterion;
@@ -22,7 +22,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class ScorchfulRecipeGenerator extends FabricRecipeProvider {
-    public ScorchfulRecipeGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public ScorchfulRecipeGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 

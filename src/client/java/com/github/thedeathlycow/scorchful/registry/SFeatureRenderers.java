@@ -3,7 +3,7 @@ package com.github.thedeathlycow.scorchful.registry;
 import com.github.thedeathlycow.scorchful.entity.renderlayer.SunHatRenderLayer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityRenderLayerRegistrationCallback;
 import net.minecraft.client.renderer.entity.ArmorStandRenderer;
 import net.minecraft.client.renderer.entity.GiantMobRenderer;
 import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 public class SFeatureRenderers {
 
     public static void registerAll() {
-        LivingEntityFeatureRendererRegistrationCallback.EVENT.register(
+        LivingEntityRenderLayerRegistrationCallback.EVENT.register(
                 (entityType, entityRenderer, registrationHelper, context) -> {
                     if (entityRenderer instanceof HumanoidMobRenderer<?, ?, ?> bipedEntityRenderer) {
                         registrationHelper.register(

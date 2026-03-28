@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
+import net.fabricmc.fabric.api.registry.FabricPotionBrewingBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -35,7 +35,7 @@ public final class SPotions {
 
     public static void initialize() {
         Scorchful.LOGGER.debug("Initialized Scorchful potions");
-        FabricBrewingRecipeRegistryBuilder.BUILD.register(
+        FabricPotionBrewingBuilder.BUILD.register(
                 builder -> {
                     builder.addMix(Potions.AWKWARD, Items.WITHER_ROSE, PARANOIA);
                     builder.addMix(PARANOIA, Items.REDSTONE, LONG_PARANOIA);
