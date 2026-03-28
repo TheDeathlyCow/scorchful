@@ -1,0 +1,17 @@
+{
+  "effects": [
+    {
+      "type": "scorchful:wolf_pant_sound",
+      "chance": 1.0
+    },
+    {
+      "type": "scorchful:change_temperature",
+      "amount": -20,
+      "source": "thermoo:passive"
+    }
+  ],
+  "entity_type": "#scorchful:mobs_that_pant",
+  "temperature_scale_range": {
+    "min": 0.25
+  }
+}

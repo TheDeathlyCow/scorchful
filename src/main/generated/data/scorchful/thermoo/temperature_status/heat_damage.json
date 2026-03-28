@@ -1,0 +1,12 @@
+{
+  "effects": [
+    {
+      "type": "thermoo:damage",
+      "amount": 1.0,
+      "damage_type": "scorchful:heat"
+    }
+  ],
+  "temperature_scale_range": {
+    "min": 0.99
+  }
+}

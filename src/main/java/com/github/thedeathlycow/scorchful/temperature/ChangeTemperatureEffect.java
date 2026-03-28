@@ -1,4 +1,3 @@
-// TODO(Ravel): Failed to fully resolve file: null cannot be cast to non-null type com.intellij.psi.PsiClass
 package com.github.thedeathlycow.scorchful.temperature;
 
 import com.github.thedeathlycow.thermoo.api.core.v2.TemperatureChange;
@@ -23,7 +22,7 @@ public record ChangeTemperatureEffect(
                             .fieldOf("amount")
                             .forGetter(ChangeTemperatureEffect::amount),
                     RegistryFixedCodec.create(ThermooRegistries.TEMPERATURE_SOURCE)
-                            .fieldOf("interval")
+                            .fieldOf("source")
                             .forGetter(ChangeTemperatureEffect::source)
             ).apply(instance, ChangeTemperatureEffect::new)
     );

@@ -13,6 +13,8 @@ public class SEntityTypeTags {
 
     public static final TagKey<EntityType<?>> IMMUNE_TO_FEAR = of("immune_to_fear");
 
+    public static final TagKey<EntityType<?>> MOBS_THAT_PANT = of("mobs_that_pant");
+
 
     private static TagKey<EntityType<?>> of(String path) {
         return TagKey.create(Registries.ENTITY_TYPE, Scorchful.id(path));

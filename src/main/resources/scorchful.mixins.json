@@ -16,6 +16,7 @@
         "accessor.HolderReferenceAccessor",
         "accessor.PoiTypeAccessor",
         "accessor.PoiTypesAccessor",
+        "accessor.WolfAccessor",
         "compat.frostiful.absent.EntityMixin",
         "server.ServerLevelMixin",
         "thirst.AbstractThrownPotionMixin",
