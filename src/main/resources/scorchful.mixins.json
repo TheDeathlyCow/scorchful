@@ -14,7 +14,6 @@
         "accessor.CauldronInteractionsAccessor",
         "accessor.EntityAccessor",
         "accessor.HolderReferenceAccessor",
-        "accessor.LevelAccessor",
         "accessor.PoiTypeAccessor",
         "accessor.PoiTypesAccessor",
         "compat.frostiful.absent.EntityMixin",

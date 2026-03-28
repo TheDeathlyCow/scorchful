@@ -7,11 +7,12 @@ import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.GameType;
 import org.jetbrains.annotations.NotNull;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
@@ -23,14 +24,14 @@ public class CoolingFoodTest {
     private static final String TEMPERATURE_PROPERTY = "Temperature";
 
     @GameTest()
-    public void consume_cooling_steak_applies_cooling(GameTestHelper context) {
+    public void consumeCoolingSteakAppliesCooling(GameTestHelper helper) {
         final int originalTemperature = 6300;
         final Item testItem = Items.COOKED_BEEF;
 
-        ServerPlayer mockPlayer = createMockPlayer();
+        Player mockPlayer = Mockito.spy(helper.makeMockPlayer(GameType.SURVIVAL));
         ItemStack steak = createFoodStack(testItem);
 
-        context.assertTrue(steak.is(SItemTags.IS_COOLING_FOOD), Component.literal("Steak SHOULD be cooling food"));
+        helper.assertTrue(steak.is(SItemTags.IS_COOLING_FOOD), Component.literal("Steak SHOULD be cooling food"));
 
         ScorchfulItemEvents.CONSUME_ITEM.invoker().consume(steak, mockPlayer);
 
@@ -39,18 +40,18 @@ public class CoolingFoodTest {
                         ArgumentMatchers.anyInt(),
                         ArgumentMatchers.any(TemperatureChange.class)
                 );
-        context.succeed();
+        helper.succeed();
     }
 
     @GameTest()
-    public void consume_not_cooling_pork_does_not_apply_cooling(GameTestHelper context) {
+    public void consumeNonCoolingPorkDoesNotApplyCooling(GameTestHelper helper) {
         final int originalTemperature = 6300;
         final Item testItem = Items.PORKCHOP;
 
-        ServerPlayer mockPlayer = createMockPlayer();
+        Player mockPlayer = Mockito.spy(helper.makeMockPlayer(GameType.SURVIVAL));
         ItemStack porkchop = createFoodStack(testItem);
 
-        context.assertFalse(porkchop.is(SItemTags.IS_COOLING_FOOD), Component.literal("Porkchop should NOT be cooling food"));
+        helper.assertFalse(porkchop.is(SItemTags.IS_COOLING_FOOD), Component.literal("Porkchop should NOT be cooling food"));
 
         ScorchfulItemEvents.CONSUME_ITEM.invoker().consume(porkchop, mockPlayer);
 
@@ -59,7 +60,7 @@ public class CoolingFoodTest {
                         ArgumentMatchers.anyInt(),
                         ArgumentMatchers.any(TemperatureChange.class)
                 );
-        context.succeed();
+        helper.succeed();
     }
 
     @NotNull
@@ -74,16 +75,5 @@ public class CoolingFoodTest {
                         .build()
         );
         return stack;
-    }
-
-    private static ServerPlayer createMockPlayer() {
-        ServerPlayer mockPlayer = Mockito.mock(ServerPlayer.class);
-        Mockito.doNothing()
-                .when(mockPlayer)
-                .thermoo$addTemperature(
-                        ArgumentMatchers.intThat(temp -> temp < 0),
-                        ArgumentMatchers.any(TemperatureChange.class)
-                );
-        return mockPlayer;
     }
 }

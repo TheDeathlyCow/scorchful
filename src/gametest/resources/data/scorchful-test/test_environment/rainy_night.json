@@ -2,8 +2,9 @@
     "type": "minecraft:all_of",
     "definitions": [
         {
-            "type": "minecraft:time_of_day",
-            "time": 18000
+            "type": "minecraft:clock_time",
+            "time": 18000,
+            "clock": "minecraft:overworld"
         },
         {
             "type": "minecraft:weather",

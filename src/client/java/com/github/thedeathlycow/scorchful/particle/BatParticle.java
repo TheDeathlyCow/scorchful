@@ -8,7 +8,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
-public class BatParticle extends RisingParticle  {
+public class BatParticle extends RisingParticle {
 
     private final SpriteSet spriteProvider;
 

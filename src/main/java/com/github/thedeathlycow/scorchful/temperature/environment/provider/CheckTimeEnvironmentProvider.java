@@ -1,13 +1,11 @@
 package com.github.thedeathlycow.scorchful.temperature.environment.provider;
 
-import com.github.thedeathlycow.scorchful.mixin.accessor.LevelAccessor;
 import com.github.thedeathlycow.thermoo.api.environment.v2.provider.EnvironmentProvider;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.advancements.criterion.MinMaxBounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.RegistryCodecs;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.RegistryFixedCodec;
@@ -42,7 +40,9 @@ public record CheckTimeEnvironmentProvider(
 
     @Override
     public void buildCurrentComponents(Level level, BlockPos pos, Holder<Biome> biome, DataComponentMap.Builder builder) {
-        long time = ((LevelAccessor)level).scorchful$getClockTimeTicks(clock);
+        long time = this.clock
+                .map(c -> level.clockManager().getTotalTicks(c))
+                .orElseGet(level::getDefaultClockTime);
 
         if (timeRange.matches((int) time)) {
             in.value().buildCurrentComponents(level, pos, biome, builder);
