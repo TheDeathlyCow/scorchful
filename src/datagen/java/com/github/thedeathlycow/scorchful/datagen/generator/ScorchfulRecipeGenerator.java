@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.datagen.generator;
 
 import com.github.thedeathlycow.scorchful.registry.SItems;
-import com.github.thedeathlycow.thermoo.api.predicate.TemperatureLootCondition;
+import com.github.thedeathlycow.thermoo.api.entity.v1.predicate.TemperatureLootCondition;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -99,9 +99,7 @@ public class ScorchfulRecipeGenerator extends FabricRecipeProvider {
 
 
     private static Criterion<PlayerTrigger.TriggerInstance> createWarmPlayerCondition() {
-        LootItemCondition condition = TemperatureLootCondition
-                .builder(MinMaxBounds.Doubles.atLeast(0.25))
-                .build();
+        LootItemCondition condition = TemperatureLootCondition.builder(MinMaxBounds.Doubles.atLeast(0.25)).build();
         return CriteriaTriggers.LOCATION.createCriterion(
                 new PlayerTrigger.TriggerInstance(Optional.of(ContextAwarePredicate.create(condition)))
         );

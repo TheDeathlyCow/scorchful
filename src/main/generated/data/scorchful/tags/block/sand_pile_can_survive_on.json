@@ -1,0 +1,11 @@
+{
+  "values": [
+    "minecraft:honey_block",
+    "minecraft:soul_sand",
+    "minecraft:mud",
+    {
+      "id": "#minecraft:support_override_snow_layer",
+      "required": false
+    }
+  ]
+}
