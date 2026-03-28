@@ -6,9 +6,16 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.cauldron.CauldronInteraction;
+import net.minecraft.core.cauldron.CauldronInteractions;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
@@ -20,17 +27,22 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.phys.BlockHitResult;
+
+import java.util.function.Supplier;
 
 public class SandCauldronBlock extends AbstractCauldronBlock {
-
     public static final MapCodec<SandCauldronBlock> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
                             Sandstorms.SandstormType.CODEC
                                     .fieldOf("sandstorm_type")
                                     .forGetter(block -> block.sandstormType),
-                            CauldronInteraction.CODEC
+                            CauldronInteractions.CODEC
                                     .fieldOf("interactions")
                                     .forGetter(block -> block.interactions),
+                            ItemStackTemplate.CODEC
+                                    .fieldOf("returned_item")
+                                    .forGetter(block -> block.returnedItem.get()),
                             propertiesCodec()
                     )
                     .apply(instance, SandCauldronBlock::new)
@@ -45,24 +57,34 @@ public class SandCauldronBlock extends AbstractCauldronBlock {
     private static final float FILL_WITH_SAND_CHANCE = 0.1f;
 
     private final Sandstorms.SandstormType sandstormType;
+    private final Supplier<ItemStackTemplate> returnedItem;
 
-    /**
-     * Constructs a leveled cauldron block.
-     *
-     * @param settings
-     * @param sandstormType     The type of sandstorm this will fill in
-     * @param behaviorMap       other behaviours for this cauldron
-     */
     public SandCauldronBlock(
             Sandstorms.SandstormType sandstormType,
-            CauldronInteraction.InteractionMap behaviorMap,
+            CauldronInteraction.Dispatcher behaviorMap,
+            Supplier<ItemStackTemplate> returnedItem,
             Properties settings
     ) {
         super(settings, behaviorMap);
         this.sandstormType = sandstormType;
+        this.returnedItem = returnedItem;
         this.registerDefaultState(
                 this.defaultBlockState()
                         .setValue(LEVEL, 3)
+        );
+    }
+
+    private SandCauldronBlock(
+            Sandstorms.SandstormType sandstormType,
+            CauldronInteraction.Dispatcher behaviorMap,
+            ItemStackTemplate returnedItem,
+            Properties settings
+    ) {
+        this(
+                sandstormType,
+                behaviorMap,
+                () -> returnedItem,
+                settings
         );
     }
 
@@ -79,7 +101,33 @@ public class SandCauldronBlock extends AbstractCauldronBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
+    protected InteractionResult useItemOn(
+            final ItemStack itemStack,
+            final BlockState state,
+            final Level level,
+            final BlockPos pos,
+            final Player player,
+            final InteractionHand hand,
+            final BlockHitResult hitResult
+    ) {
+        InteractionResult result = super.useItemOn(itemStack, state, level, pos, player, hand, hitResult);
+
+        if (result == InteractionResult.TRY_WITH_EMPTY_HAND) {
+            return SandCauldronInteractions.emptyBlockFromCauldron(
+                    state,
+                    level,
+                    pos,
+                    player,
+                    itemStack,
+                    returnedItem.get().create(),
+                    SoundEvents.SAND_PLACE
+            );
+        }
+
+        return result;
+    }
+
+    @Override
     protected int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos, Direction direction) {
         return state.getValue(LEVEL);
     }

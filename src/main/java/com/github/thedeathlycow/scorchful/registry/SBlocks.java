@@ -7,6 +7,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
@@ -97,7 +99,8 @@ public final class SBlocks {
             "sand_cauldron",
             settings -> new SandCauldronBlock(
                     Sandstorms.SandstormType.REGULAR,
-                    SandCauldronBehaviours.SAND_CAULDRON_BEHAVIOUR,
+                    SandCauldronInteractions.SAND_CAULDRON_BEHAVIOUR,
+                    () -> new ItemStackTemplate(Items.SAND),
                     settings
             ),
             BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)
@@ -107,7 +110,8 @@ public final class SBlocks {
             "red_sand_cauldron",
             settings -> new SandCauldronBlock(
                     Sandstorms.SandstormType.RED,
-                    SandCauldronBehaviours.RED_SAND_CAULDRON_BEHAVIOUR,
+                    SandCauldronInteractions.RED_SAND_CAULDRON_BEHAVIOUR,
+                    () -> new ItemStackTemplate(Items.RED_SAND),
                     settings
             ),
             BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)
@@ -115,7 +119,7 @@ public final class SBlocks {
 
     public static void initialize() {
         Scorchful.LOGGER.debug("Initialized Scorchful blocks");
-        SandCauldronBehaviours.initialize();
+        SandCauldronInteractions.initialize();
         NetherLilyBehaviours.initialize();
     }
 

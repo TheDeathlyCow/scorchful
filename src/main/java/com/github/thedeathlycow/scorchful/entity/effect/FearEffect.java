@@ -18,7 +18,7 @@ public class FearEffect extends MobEffect {
 
     public static boolean canHaveFear(LivingEntity entity, MobEffectInstance effectInstance) {
         if (effectInstance.is(SMobEffects.FEAR)) {
-            if (entity.getType().is(SEntityTypeTags.IMMUNE_TO_FEAR)) {
+            if (entity.is(SEntityTypeTags.IMMUNE_TO_FEAR)) {
                 return false;
             } else {
                 return entity.isAlwaysTicking() || entity instanceof PathfinderMob;

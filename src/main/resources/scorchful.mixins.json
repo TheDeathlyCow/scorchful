@@ -10,6 +10,8 @@
         "PlayerMixin",
         "TargetingConditionsMixin",
         "accessor.BlockDisplayAccessor",
+        "accessor.CauldronInteractionDispatcherAccessor",
+        "accessor.CauldronInteractionsAccessor",
         "accessor.EntityAccessor",
         "accessor.HolderReferenceAccessor",
         "accessor.LevelAccessor",

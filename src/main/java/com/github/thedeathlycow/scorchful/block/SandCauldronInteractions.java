@@ -1,10 +1,11 @@
 package com.github.thedeathlycow.scorchful.block;
 
-import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.mixin.accessor.CauldronInteractionDispatcherAccessor;
+import com.github.thedeathlycow.scorchful.mixin.accessor.CauldronInteractionsAccessor;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
+import net.minecraft.core.cauldron.CauldronInteractions;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -21,36 +22,15 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 
-public class SandCauldronBehaviours {
-    public static final CauldronInteraction.InteractionMap SAND_CAULDRON_BEHAVIOUR = CauldronInteraction.newInteractionMap("scorchful_sand_cauldron");
-    public static final CauldronInteraction.InteractionMap RED_SAND_CAULDRON_BEHAVIOUR = CauldronInteraction.newInteractionMap("scorchful_red_sand_cauldron");
+public class SandCauldronInteractions {
+    public static final CauldronInteraction.Dispatcher SAND_CAULDRON_BEHAVIOUR = CauldronInteractionsAccessor.scorchful$newDispatcher("scorchful_sand_cauldron");
 
-    public static final CauldronInteraction EMPTY_SAND_CAULDRON = (state, world, pos, player, hand, stack) -> {
-        return emptyBlockFromCauldron(
-                state,
-                world,
-                pos,
-                player,
-                stack,
-                Items.SAND.getDefaultInstance(),
-                SoundEvents.SAND_PLACE
-        );
-    };
-
-    public static final CauldronInteraction EMPTY_RED_SAND_CAULDRON = (state, world, pos, player, hand, stack) -> {
-        return emptyBlockFromCauldron(
-                state,
-                world,
-                pos,
-                player,
-                stack,
-                Items.RED_SAND.getDefaultInstance(),
-                SoundEvents.SAND_PLACE
-        );
-    };
+    public static final CauldronInteraction.Dispatcher RED_SAND_CAULDRON_BEHAVIOUR = CauldronInteractionsAccessor.scorchful$newDispatcher("scorchful_red_sand_cauldron");
 
     public static void initialize() {
-        CauldronInteraction.EMPTY.map().put(
+        CauldronInteractionDispatcherAccessor emptyInteractionAccessor = (CauldronInteractionDispatcherAccessor) CauldronInteractions.EMPTY;
+
+        emptyInteractionAccessor.scorchful$put(
                 Items.SAND,
                 fillWithSand(
                         SBlocks.SAND_CAULDRON.defaultBlockState()
@@ -58,25 +38,13 @@ public class SandCauldronBehaviours {
                 )
         );
 
-        CauldronInteraction.EMPTY.map().put(
+        emptyInteractionAccessor.scorchful$put(
                 Items.RED_SAND,
                 fillWithSand(
                         SBlocks.RED_SAND_CAULDRON.defaultBlockState()
                                 .setValue(SandCauldronBlock.LEVEL, SandCauldronBlock.MAX_LEVEL)
                 )
         );
-
-        if (SAND_CAULDRON_BEHAVIOUR.map() instanceof Object2ObjectOpenHashMap<Item, CauldronInteraction> sandCauldronOpenMap) {
-            sandCauldronOpenMap.defaultReturnValue(EMPTY_SAND_CAULDRON);
-        } else {
-            Scorchful.LOGGER.error("Unable to register default sand cauldron behaviour");
-        }
-
-        if (RED_SAND_CAULDRON_BEHAVIOUR.map() instanceof Object2ObjectOpenHashMap<Item, CauldronInteraction> redSandCauldronOpenMap) {
-            redSandCauldronOpenMap.defaultReturnValue(EMPTY_RED_SAND_CAULDRON);
-        } else {
-            Scorchful.LOGGER.error("Unable to register default red sand cauldron behaviour");
-        }
     }
 
     /**
@@ -153,6 +121,7 @@ public class SandCauldronBehaviours {
             world.playSound(null, pos, soundEvent, SoundSource.BLOCKS, 1.0f, 1.0f);
             world.gameEvent(null, GameEvent.BLOCK_CHANGE, pos);
         }
+
         return InteractionResult.SUCCESS;
     }
 
@@ -170,7 +139,7 @@ public class SandCauldronBehaviours {
         };
     }
 
-    private SandCauldronBehaviours() {
+    private SandCauldronInteractions() {
 
     }
 }

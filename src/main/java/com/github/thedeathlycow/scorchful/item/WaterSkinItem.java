@@ -3,12 +3,13 @@ package com.github.thedeathlycow.scorchful.item;
 import com.github.thedeathlycow.scorchful.api.CollectWaterCallback;
 import com.github.thedeathlycow.scorchful.block.NetherLilyBlock;
 import com.github.thedeathlycow.scorchful.item.component.DrinkContainer;
+import com.github.thedeathlycow.scorchful.mixin.accessor.CauldronInteractionDispatcherAccessor;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.SStats;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.cauldron.CauldronInteraction;
+import net.minecraft.core.cauldron.CauldronInteractions;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundSource;
@@ -41,7 +42,7 @@ public class WaterSkinItem extends Item {
 
     public WaterSkinItem(Properties settings) {
         super(settings);
-        CauldronInteraction.WATER.map().put(this, this::onCauldronInteract);
+        ((CauldronInteractionDispatcherAccessor) CauldronInteractions.WATER).scorchful$put(this, this::onCauldronInteract);
     }
 
     @Override
