@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.datagen.generator;
 
+import com.github.thedeathlycow.thermoo.api.core.v2.registry.ThermooRegistries;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.HolderLookup;
@@ -15,6 +16,7 @@ public class BootstrappedRegistryGenerator extends FabricDynamicRegistryProvider
     @Override
     protected void configure(HolderLookup.Provider registries, Entries entries) {
         entries.addAll(registries.lookupOrThrow(Registries.DAMAGE_TYPE));
+        entries.addAll(registries.lookupOrThrow(ThermooRegistries.TEMPERATURE_STATUS));
     }
 
     @Override

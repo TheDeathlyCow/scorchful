@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.datagen.generator;
+package com.github.thedeathlycow.scorchful.datagen.generator.tag;
 
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
 import com.github.thedeathlycow.scorchful.registry.tag.SBlockTags;

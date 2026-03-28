@@ -1,0 +1,29 @@
+{
+  "effects": [
+    {
+      "type": "thermoo:mob_effect",
+      "effects": [
+        {
+          "duration": 40,
+          "effect": "scorchful:heat_stroke"
+        }
+      ]
+    }
+  ],
+  "entity_type": "#scorchful:has_player_temperature_statuses",
+  "predicate": {
+    "condition": "minecraft:inverted",
+    "term": {
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "effects": {
+          "minecraft:fire_resistance": {}
+        }
+      }
+    }
+  },
+  "temperature_scale_range": {
+    "min": 0.9900000095367432
+  }
+}

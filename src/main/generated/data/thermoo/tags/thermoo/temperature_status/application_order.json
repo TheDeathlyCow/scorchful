@@ -1,0 +1,14 @@
+{
+  "values": [
+    "scorchful:player/heart_beat/slow",
+    "scorchful:player/heart_beat/medium",
+    "scorchful:player/heart_beat/fast",
+    "scorchful:player/heart_beat/racing",
+    "scorchful:player/warm",
+    "scorchful:player/hot",
+    "scorchful:player/overheating",
+    "scorchful:player/heat_stroke",
+    "scorchful:dog/panting",
+    "scorchful:heat_damage"
+  ]
+}

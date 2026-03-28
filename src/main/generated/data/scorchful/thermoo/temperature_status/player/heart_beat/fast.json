@@ -1,0 +1,18 @@
+{
+  "effects": [
+    {
+      "type": "scorchful:sound",
+      "category": 7,
+      "only_play_to_source": true,
+      "pitch": 1.0,
+      "sound": "scorchful:temperature_effect.heartbeat",
+      "volume": 1.0
+    }
+  ],
+  "entity_type": "#scorchful:has_player_temperature_statuses",
+  "interval": 11,
+  "temperature_scale_range": {
+    "max": 0.99,
+    "min": 0.9
+  }
+}

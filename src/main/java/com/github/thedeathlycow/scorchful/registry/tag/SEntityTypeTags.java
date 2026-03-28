@@ -14,6 +14,7 @@ public class SEntityTypeTags {
     public static final TagKey<EntityType<?>> IMMUNE_TO_FEAR = of("immune_to_fear");
 
     public static final TagKey<EntityType<?>> MOBS_THAT_PANT = of("mobs_that_pant");
+    public static final TagKey<EntityType<?>> HAS_PLAYER_TEMPERATURE_STATUSES = of("has_player_temperature_statuses");
 
 
     private static TagKey<EntityType<?>> of(String path) {

@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.datagen.generator;
+package com.github.thedeathlycow.scorchful.datagen.generator.tag;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;

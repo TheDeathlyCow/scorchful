@@ -1,0 +1,19 @@
+{
+  "effects": [
+    {
+      "type": "thermoo:mob_effect",
+      "effects": [
+        {
+          "effect": "minecraft:mining_fatigue"
+        },
+        {
+          "effect": "minecraft:hunger"
+        }
+      ]
+    }
+  ],
+  "entity_type": "#scorchful:has_player_temperature_statuses",
+  "temperature_scale_range": {
+    "min": 0.75
+  }
+}

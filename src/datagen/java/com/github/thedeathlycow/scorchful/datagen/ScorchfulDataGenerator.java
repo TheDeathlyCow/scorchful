@@ -5,6 +5,10 @@ import com.github.thedeathlycow.scorchful.datagen.generator.*;
 import com.github.thedeathlycow.scorchful.datagen.generator.client.SModelGenerator;
 import com.github.thedeathlycow.scorchful.datagen.generator.registry.DamageTypeBootstrap;
 import com.github.thedeathlycow.scorchful.datagen.generator.registry.TemperatureStatusGenerator;
+import com.github.thedeathlycow.scorchful.datagen.generator.tag.BlockTagGenerator;
+import com.github.thedeathlycow.scorchful.datagen.generator.tag.ClimateBiomeTagGenerator;
+import com.github.thedeathlycow.scorchful.datagen.generator.tag.ItemTagGenerator;
+import com.github.thedeathlycow.scorchful.datagen.generator.tag.TemperatureStatusTagGenerator;
 import com.github.thedeathlycow.thermoo.api.core.v2.registry.ThermooRegistries;
 import com.github.thedeathlycow.thermoo.api.core.v2.source.TemperatureSource;
 import com.github.thedeathlycow.thermoo.api.core.v2.source.TemperatureSources;
@@ -29,7 +33,7 @@ public class ScorchfulDataGenerator implements DataGeneratorEntrypoint {
         LOGGER.info("Running Scorchful datagen");
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
         pack.addProvider(BootstrappedRegistryGenerator::new);
-        pack.addProvider(TemperatureStatusGenerator::new);
+        pack.addProvider(TemperatureStatusTagGenerator::new);
         pack.addProvider(EnvironmentProviderTagGenerator::new);
         pack.addProvider(ClimateBiomeTagGenerator::new);
 
@@ -47,6 +51,11 @@ public class ScorchfulDataGenerator implements DataGeneratorEntrypoint {
         registryBuilder.add(
                 Registries.DAMAGE_TYPE,
                 DamageTypeBootstrap::bootstrap
+        );
+
+        registryBuilder.add(
+                ThermooRegistries.TEMPERATURE_STATUS,
+                TemperatureStatusGenerator::bootstrap
         );
 
         // this is needed to prevent crashes when looking up sources in generators

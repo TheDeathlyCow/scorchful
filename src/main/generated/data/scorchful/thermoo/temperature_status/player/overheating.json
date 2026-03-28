@@ -1,0 +1,21 @@
+{
+  "effects": [
+    {
+      "type": "thermoo:mob_effect",
+      "effects": [
+        {
+          "amplifier": 1,
+          "effect": "minecraft:weakness"
+        },
+        {
+          "amplifier": 1,
+          "effect": "minecraft:hunger"
+        }
+      ]
+    }
+  ],
+  "entity_type": "#scorchful:has_player_temperature_statuses",
+  "temperature_scale_range": {
+    "min": 0.9900000095367432
+  }
+}

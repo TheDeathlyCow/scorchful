@@ -2,7 +2,7 @@
   "effects": [
     {
       "type": "scorchful:wolf_pant_sound",
-      "chance": 1.0
+      "chance": 0.75
     },
     {
       "type": "scorchful:change_temperature",
