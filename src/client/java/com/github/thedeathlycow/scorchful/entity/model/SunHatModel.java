@@ -20,6 +20,7 @@ public class SunHatModel<S extends HumanoidRenderState> extends HumanoidModel<S>
             part.visible = false;
         }
 
+        this.root.visible = true;
         this.head.visible = true;
     }
 
