@@ -19,7 +19,6 @@ import net.minecraft.resources.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class SunHatRenderLayer<S extends HumanoidRenderState, M extends HumanoidModel<S>> extends RenderLayer<S, M> {
-
     private static final Identifier TEXTURE = Scorchful.id("textures/entity/sun_hat.png");
 
     private final SunHatModel<S> model;
@@ -46,7 +45,7 @@ public class SunHatRenderLayer<S extends HumanoidRenderState, M extends Humanoid
         if (((SLivingEntityRenderState) state).scorchful$hasSunHat()) {
             matrices.pushPose();
 
-            M contextModel = this.getParentModel();
+            SunHatModel<S> contextModel = state.isBaby ? this.babyModel : this.model;
             contextModel.root().translateAndRotate(matrices);
 
             queue.order(1)

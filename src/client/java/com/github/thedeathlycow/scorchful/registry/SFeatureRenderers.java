@@ -13,39 +13,44 @@ import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 public class SFeatureRenderers {
 
     public static void registerAll() {
-        LivingEntityRenderLayerRegistrationCallback.EVENT.register(
-                (entityType, entityRenderer, registrationHelper, context) -> {
-                    if (entityRenderer instanceof HumanoidMobRenderer<?, ?, ?> bipedEntityRenderer) {
-                        registrationHelper.register(
-                                new SunHatRenderLayer<>(
-                                        bipedEntityRenderer,
-                                        context.getModelSet()
-                                )
-                        );
-                    } else if (entityRenderer instanceof AvatarRenderer<?> playerEntityRenderer) {
-                        registrationHelper.register(
-                                new SunHatRenderLayer<>(
-                                        playerEntityRenderer,
-                                        context.getModelSet()
-                                )
-                        );
-                    } else if (entityRenderer instanceof ArmorStandRenderer armorStandEntityRenderer) {
-                        registrationHelper.register(
-                                new SunHatRenderLayer<>(
-                                        armorStandEntityRenderer,
-                                        context.getModelSet()
-                                )
-                        );
-                    } else if (entityRenderer instanceof GiantMobRenderer giantEntityRenderer) {
-                        registrationHelper.register(
-                                new SunHatRenderLayer<>(
-                                        giantEntityRenderer,
-                                        context.getModelSet()
-                                )
-                        );
-                    }
+        LivingEntityRenderLayerRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {
+            switch (entityRenderer) {
+                case HumanoidMobRenderer<?, ?, ?> humanoidMobRenderer -> {
+                    registrationHelper.register(
+                            new SunHatRenderLayer<>(
+                                    humanoidMobRenderer,
+                                    context.getModelSet()
+                            )
+                    );
                 }
-        );
+                case AvatarRenderer<?> avatarRenderer -> {
+                    registrationHelper.register(
+                            new SunHatRenderLayer<>(
+                                    avatarRenderer,
+                                    context.getModelSet()
+                            )
+                    );
+                }
+                case ArmorStandRenderer armorStandRenderer -> {
+                    registrationHelper.register(
+                            new SunHatRenderLayer<>(
+                                    armorStandRenderer,
+                                    context.getModelSet()
+                            )
+                    );
+                }
+                case GiantMobRenderer giantEntityRenderer -> {
+                    registrationHelper.register(
+                            new SunHatRenderLayer<>(
+                                    giantEntityRenderer,
+                                    context.getModelSet()
+                            )
+                    );
+                }
+                default -> {
+                }
+            }
+        });
     }
 
     private SFeatureRenderers() {

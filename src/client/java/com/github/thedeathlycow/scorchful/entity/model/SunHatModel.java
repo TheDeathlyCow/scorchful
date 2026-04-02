@@ -2,12 +2,15 @@ package com.github.thedeathlycow.scorchful.entity.model;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.model.BabyModelTransform;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+
+import java.util.Set;
 
 @Environment(EnvType.CLIENT)
 public class SunHatModel<S extends HumanoidRenderState> extends HumanoidModel<S> {
@@ -30,12 +33,15 @@ public class SunHatModel<S extends HumanoidRenderState> extends HumanoidModel<S>
         root.addOrReplaceChild(
                 PartNames.HEAD,
                 CubeListBuilder.create()
+                        // brim
                         .texOffs(0, 0)
                         .addBox(
                                 -8.0F, -4.5F, -8.0F,
                                 16.0F, 0.0F, 16.0F,
                                 CubeDeformation.NONE.extend(0.1f, 0f, 0.1f)
                         )
+
+                        // head
                         .texOffs(0, 16)
                         .addBox(
                                 -4.0F, -9.0F, -4.0F,
