@@ -9,6 +9,11 @@
             {
                 "texture": "scorchful:turtle"
             }
+        ],
+        "humanoid_baby": [
+            {
+                "texture": "scorchful:turtle"
+            }
         ]
     }
 }
