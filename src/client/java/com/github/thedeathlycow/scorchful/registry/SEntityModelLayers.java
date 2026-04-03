@@ -19,15 +19,20 @@ public class SEntityModelLayers {
     public static final ModelLayerLocation HUSK_SUN_HAT = new ModelLayerLocation(Scorchful.id("husk/sun_hat"), HELMET_LAYER);
     public static final ModelLayerLocation HUSK_BABY_SUN_HAT = new ModelLayerLocation(Scorchful.id("husk/sun_hat_baby"), HELMET_LAYER);
 
+    public static final ModelLayerLocation PIGLIN_SUN_HAT = new ModelLayerLocation(Scorchful.id("piglin/sun_hat"), HELMET_LAYER);
+    public static final ModelLayerLocation PIGLIN_BABY_SUN_HAT = new ModelLayerLocation(Scorchful.id("piglin/sun_hat_baby"), HELMET_LAYER);
+
     public static void registerAll() {
         var babyDeformation = new CubeDeformation(-0.1F, 0.3F, 0.3F);;
 
         ModelLayerRegistry.registerModelLayer(GENERIC_SUN_HAT, () -> SunHatModel.createLayer(CubeDeformation.NONE));
         ModelLayerRegistry.registerModelLayer(GENERIC_BABY_SUN_HAT, () -> SunHatModel.createBabyLayer(babyDeformation));
 
-        var huskScale = MeshTransformer.scaling(1.0625f);
-        ModelLayerRegistry.registerModelLayer(HUSK_SUN_HAT, () -> SunHatModel.createLayer(CubeDeformation.NONE).apply(huskScale));
-        ModelLayerRegistry.registerModelLayer(HUSK_BABY_SUN_HAT, () -> SunHatModel.createBabyLayer(CubeDeformation.NONE));
+        ModelLayerRegistry.registerModelLayer(HUSK_SUN_HAT, () -> SunHatModel.createHuskLayer(CubeDeformation.NONE));
+        ModelLayerRegistry.registerModelLayer(HUSK_BABY_SUN_HAT, () -> SunHatModel.createBabyLayer(babyDeformation));
+
+        ModelLayerRegistry.registerModelLayer(PIGLIN_SUN_HAT, () -> SunHatModel.createLayer(new CubeDeformation(1.02F)));
+        ModelLayerRegistry.registerModelLayer(PIGLIN_BABY_SUN_HAT, () -> SunHatModel.createBabyLayer(new CubeDeformation(1.02F)));
     }
 
     private SEntityModelLayers() {

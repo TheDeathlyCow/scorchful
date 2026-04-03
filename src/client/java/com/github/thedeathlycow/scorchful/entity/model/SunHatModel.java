@@ -11,8 +11,6 @@ import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 
 @Environment(EnvType.CLIENT)
 public class SunHatModel<S extends HumanoidRenderState> extends HumanoidModel<S> {
-    public static final MeshTransformer BABY_TRANSFORMER = MeshTransformer.scaling(0.5f);
-
     public SunHatModel(ModelPart root) {
         super(root);
 
@@ -51,11 +49,24 @@ public class SunHatModel<S extends HumanoidRenderState> extends HumanoidModel<S>
         return mesh;
     }
 
+    public static MeshDefinition createBabyMesh(CubeDeformation deformation) {
+        MeshDefinition adultMesh = createMesh(deformation);
+        return adultMesh
+                .apply(MeshTransformer.scaling(0.5f))
+                .apply(mesh -> mesh.transformed(pose -> pose.scaled(1.5f).translated(0.0F, -2f, 0.0F)));
+    }
+
     public static LayerDefinition createLayer(CubeDeformation deformation) {
         return LayerDefinition.create(createMesh(deformation), 64, 64);
     }
 
     public static LayerDefinition createBabyLayer(CubeDeformation deformation) {
-        return createLayer(deformation).apply(BABY_TRANSFORMER);
+        return LayerDefinition.create(createBabyMesh(deformation), 64, 64);
+    }
+
+    public static LayerDefinition createHuskLayer(CubeDeformation deformation) {
+        return SunHatModel.createLayer(deformation)
+                .apply(MeshTransformer.scaling(1.0625f))
+                .apply(mesh -> mesh.transformed(pose -> pose.translated(0f, 1f, 0f)));
     }
 }

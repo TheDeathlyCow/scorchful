@@ -4,10 +4,7 @@ import com.github.thedeathlycow.scorchful.entity.renderlayer.SunHatRenderLayer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityRenderLayerRegistrationCallback;
-import net.minecraft.client.renderer.entity.ArmorStandRenderer;
-import net.minecraft.client.renderer.entity.GiantMobRenderer;
-import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
-import net.minecraft.client.renderer.entity.HuskRenderer;
+import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.world.entity.EntityType;
 
@@ -54,6 +51,26 @@ public class SFeatureRenderers {
                                     context.getModelSet(),
                                     SEntityModelLayers.HUSK_SUN_HAT,
                                     SEntityModelLayers.HUSK_BABY_SUN_HAT
+                            )
+                    );
+                }
+                case PiglinRenderer piglinRenderer -> {
+                    registrationHelper.register(
+                            new SunHatRenderLayer<>(
+                                    piglinRenderer,
+                                    context.getModelSet(),
+                                    SEntityModelLayers.PIGLIN_SUN_HAT,
+                                    SEntityModelLayers.PIGLIN_BABY_SUN_HAT
+                            )
+                    );
+                }
+                case ZombifiedPiglinRenderer piglinRenderer -> {
+                    registrationHelper.register(
+                            new SunHatRenderLayer<>(
+                                    piglinRenderer,
+                                    context.getModelSet(),
+                                    SEntityModelLayers.PIGLIN_SUN_HAT,
+                                    SEntityModelLayers.PIGLIN_BABY_SUN_HAT
                             )
                     );
                 }
