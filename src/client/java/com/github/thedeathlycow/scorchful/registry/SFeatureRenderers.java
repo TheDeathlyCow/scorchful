@@ -72,6 +72,16 @@ public class SFeatureRenderers {
                             )
                     );
                 }
+                case ZombieVillagerRenderer zombieVillagerRenderer -> {
+                    registrationHelper.register(
+                            new SunHatRenderLayer<>(
+                                    zombieVillagerRenderer,
+                                    context.getModelSet(),
+                                    SEntityModelLayers.ZOMBIE_VILLAGER_SUN_HAT,
+                                    SEntityModelLayers.ZOMBIE_VILLAGER_BABY_SUN_HAT
+                            )
+                    );
+                }
                 case HumanoidMobRenderer<?, ?, ?> humanoidMobRenderer -> {
                     registrationHelper.register(
                             new SunHatRenderLayer<>(

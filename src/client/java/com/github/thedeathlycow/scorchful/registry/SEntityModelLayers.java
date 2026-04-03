@@ -22,6 +22,9 @@ public class SEntityModelLayers {
     public static final ModelLayerLocation PIGLIN_SUN_HAT = new ModelLayerLocation(Scorchful.id("piglin/sun_hat"), HELMET_LAYER);
     public static final ModelLayerLocation PIGLIN_BABY_SUN_HAT = new ModelLayerLocation(Scorchful.id("piglin/sun_hat_baby"), HELMET_LAYER);
 
+    public static final ModelLayerLocation ZOMBIE_VILLAGER_SUN_HAT = new ModelLayerLocation(Scorchful.id("zombie_villager/sun_hat"), HELMET_LAYER);
+    public static final ModelLayerLocation ZOMBIE_VILLAGER_BABY_SUN_HAT = new ModelLayerLocation(Scorchful.id("zombie_villager/sun_hat_baby"), HELMET_LAYER);
+
     public static void registerAll() {
         var babyDeformation = new CubeDeformation(-0.1f, 0f, 0.3f);
 
@@ -33,6 +36,9 @@ public class SEntityModelLayers {
 
         ModelLayerRegistry.registerModelLayer(PIGLIN_SUN_HAT, () -> SunHatModel.createLayer(new CubeDeformation(1.02f, 0f, 1.02f)));
         ModelLayerRegistry.registerModelLayer(PIGLIN_BABY_SUN_HAT, () -> SunHatModel.createBabyLayer(new CubeDeformation(1.02f, 0f, 1.04f)));
+
+        ModelLayerRegistry.registerModelLayer(ZOMBIE_VILLAGER_SUN_HAT, () -> SunHatModel.createZombieVillagerLayer(CubeDeformation.NONE));
+        ModelLayerRegistry.registerModelLayer(ZOMBIE_VILLAGER_BABY_SUN_HAT, () -> SunHatModel.createBabyZombieVillagerLayer(CubeDeformation.NONE));
     }
 
     private SEntityModelLayers() {

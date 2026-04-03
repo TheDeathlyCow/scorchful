@@ -69,4 +69,14 @@ public class SunHatModel<S extends HumanoidRenderState> extends HumanoidModel<S>
                 .apply(MeshTransformer.scaling(1.0625f))
                 .apply(mesh -> mesh.transformed(pose -> pose.translated(0f, 1f, 0f)));
     }
+
+    public static LayerDefinition createZombieVillagerLayer(CubeDeformation deformation) {
+        return SunHatModel.createLayer(deformation)
+                .apply(mesh -> mesh.transformed(pose -> pose.translated(0f, -0.5f, 0f)));
+    }
+
+    public static LayerDefinition createBabyZombieVillagerLayer(CubeDeformation deformation) {
+        return SunHatModel.createBabyLayer(deformation)
+                .apply(mesh -> mesh.transformed(pose -> pose.translated(0f, -0.5f, 0f)));
+    }
 }
