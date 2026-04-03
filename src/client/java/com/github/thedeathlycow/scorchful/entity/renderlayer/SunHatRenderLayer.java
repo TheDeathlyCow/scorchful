@@ -20,6 +20,7 @@ import net.minecraft.resources.Identifier;
 @Environment(EnvType.CLIENT)
 public class SunHatRenderLayer<S extends HumanoidRenderState, M extends HumanoidModel<S>> extends RenderLayer<S, M> {
     private static final Identifier TEXTURE = Scorchful.id("textures/entity/sun_hat.png");
+    private static final Identifier BABY_TEXTURE = Scorchful.id("textures/entity/sun_hat_baby.png");
 
     private final SunHatModel<S> model;
     private final SunHatModel<S> babyModel;
@@ -47,24 +48,31 @@ public class SunHatRenderLayer<S extends HumanoidRenderState, M extends Humanoid
         if (((SLivingEntityRenderState) state).scorchful$hasSunHat()) {
             matrices.pushPose();
 
-            SunHatModel<S> contextModel = state.isBaby ? this.babyModel : this.model;
-            contextModel.root().translateAndRotate(matrices);
-
-            queue.order(1)
-                    .submitModel(
-                            contextModel,
-                            state,
-                            matrices,
-                            RenderTypes.armorCutoutNoCull(TEXTURE),
-                            light,
-                            OverlayTexture.NO_OVERLAY,
-                            -1,
-                            null,
-                            state.outlineColor,
-                            null
-                    );
+            if (state.isBaby) {
+                this.submitModel(this.babyModel, BABY_TEXTURE, matrices, queue, light, state);
+            } else {
+                this.submitModel(this.model, TEXTURE, matrices, queue, light, state);
+            }
 
             matrices.popPose();
         }
     }
+
+    private void submitModel(SunHatModel<S> contextModel, Identifier textureId, PoseStack matrices, SubmitNodeCollector queue, int light, S state) {
+        contextModel.root().translateAndRotate(matrices);
+        queue.order(1)
+                .submitModel(
+                        contextModel,
+                        state,
+                        matrices,
+                        RenderTypes.armorCutoutNoCull(textureId),
+                        light,
+                        OverlayTexture.NO_OVERLAY,
+                        -1,
+                        null,
+                        state.outlineColor,
+                        null
+                );
+    }
+
 }
