@@ -54,21 +54,4 @@ Scorchful is built using [Gradle](https://gradle.org/). You can use the followin
 
 # LTS Policy
 
-These are the current versions being supported by Scorchful.
-
-| Minecraft Version | Support Status         |
-|-------------------|------------------------|
-| 1.21.4            | ✅ Supported            | 
-| 1.21.3            | ⚠️ Critical fixes only | 
-| 1.21.1            | ✅ Supported            | 
-| 1.20.4            | ❌ Unsupported          | 
-| 1.20.2            | ❌ Unsupported          | 
-| 1.20.1            | ❌ Unsupported          |
-| 1.19.4            | ❌ Unsupported          |
-| 1.19.2            | ❌ Unsupported          | 
-
-Status Definitions:
-
-* ✅ Supported: This version is fully supported and will receive all new features, fixes, and updates (where possible)
-* ⚠️ Critical fixes only: This version will receive only critical crash and security fixes, as well as minor features where they can be easily cherry-picked
-* ❌ Unsupported: This version will receive no future updates, except for critical security fixes
+Minecraft 1.21.4 is now unsupported. See the full LTS policy at https://github.com/TheDeathlyCow/scorchful/?tab=readme-ov-file#lts-policy
