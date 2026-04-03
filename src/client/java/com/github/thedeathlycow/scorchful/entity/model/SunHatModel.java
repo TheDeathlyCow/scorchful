@@ -2,15 +2,12 @@ package com.github.thedeathlycow.scorchful.entity.model;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.model.BabyModelTransform;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
-
-import java.util.Set;
 
 @Environment(EnvType.CLIENT)
 public class SunHatModel<S extends HumanoidRenderState> extends HumanoidModel<S> {
@@ -27,9 +24,9 @@ public class SunHatModel<S extends HumanoidRenderState> extends HumanoidModel<S>
         this.head.visible = true;
     }
 
-    public static LayerDefinition getTexturedModelData() {
-        MeshDefinition modelData = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0f);
-        PartDefinition root = modelData.getRoot();
+    public static MeshDefinition createMesh(CubeDeformation deformation) {
+        MeshDefinition mesh = HumanoidModel.createMesh(deformation, 0.0f);
+        PartDefinition root = mesh.getRoot();
         root.addOrReplaceChild(
                 PartNames.HEAD,
                 CubeListBuilder.create()
@@ -51,10 +48,14 @@ public class SunHatModel<S extends HumanoidRenderState> extends HumanoidModel<S>
                 PartPose.offset(0.0f, 0f, 0.0f)
         );
 
-        return LayerDefinition.create(modelData, 64, 64);
+        return mesh;
     }
 
-    public static LayerDefinition getBabyTexturedModelData() {
-        return getTexturedModelData().apply(BABY_TRANSFORMER);
+    public static LayerDefinition createLayer(CubeDeformation deformation) {
+        return LayerDefinition.create(createMesh(deformation), 64, 64);
+    }
+
+    public static LayerDefinition createBabyLayer(CubeDeformation deformation) {
+        return createLayer(deformation).apply(BABY_TRANSFORMER);
     }
 }

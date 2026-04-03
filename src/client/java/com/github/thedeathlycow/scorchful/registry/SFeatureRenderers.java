@@ -7,7 +7,9 @@ import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityRenderLayerRegist
 import net.minecraft.client.renderer.entity.ArmorStandRenderer;
 import net.minecraft.client.renderer.entity.GiantMobRenderer;
 import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
+import net.minecraft.client.renderer.entity.HuskRenderer;
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
+import net.minecraft.world.entity.EntityType;
 
 @Environment(EnvType.CLIENT)
 public class SFeatureRenderers {
@@ -15,19 +17,13 @@ public class SFeatureRenderers {
     public static void registerAll() {
         LivingEntityRenderLayerRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {
             switch (entityRenderer) {
-                case HumanoidMobRenderer<?, ?, ?> humanoidMobRenderer -> {
-                    registrationHelper.register(
-                            new SunHatRenderLayer<>(
-                                    humanoidMobRenderer,
-                                    context.getModelSet()
-                            )
-                    );
-                }
                 case AvatarRenderer<?> avatarRenderer -> {
                     registrationHelper.register(
                             new SunHatRenderLayer<>(
                                     avatarRenderer,
-                                    context.getModelSet()
+                                    context.getModelSet(),
+                                    SEntityModelLayers.GENERIC_SUN_HAT,
+                                    SEntityModelLayers.GENERIC_BABY_SUN_HAT
                             )
                     );
                 }
@@ -35,7 +31,9 @@ public class SFeatureRenderers {
                     registrationHelper.register(
                             new SunHatRenderLayer<>(
                                     armorStandRenderer,
-                                    context.getModelSet()
+                                    context.getModelSet(),
+                                    SEntityModelLayers.GENERIC_SUN_HAT,
+                                    SEntityModelLayers.GENERIC_BABY_SUN_HAT
                             )
                     );
                 }
@@ -43,7 +41,29 @@ public class SFeatureRenderers {
                     registrationHelper.register(
                             new SunHatRenderLayer<>(
                                     giantEntityRenderer,
-                                    context.getModelSet()
+                                    context.getModelSet(),
+                                    SEntityModelLayers.GENERIC_SUN_HAT,
+                                    SEntityModelLayers.GENERIC_BABY_SUN_HAT
+                            )
+                    );
+                }
+                case HuskRenderer huskRenderer -> {
+                    registrationHelper.register(
+                            new SunHatRenderLayer<>(
+                                    huskRenderer,
+                                    context.getModelSet(),
+                                    SEntityModelLayers.HUSK_SUN_HAT,
+                                    SEntityModelLayers.HUSK_BABY_SUN_HAT
+                            )
+                    );
+                }
+                case HumanoidMobRenderer<?, ?, ?> humanoidMobRenderer -> {
+                    registrationHelper.register(
+                            new SunHatRenderLayer<>(
+                                    humanoidMobRenderer,
+                                    context.getModelSet(),
+                                    SEntityModelLayers.GENERIC_SUN_HAT,
+                                    SEntityModelLayers.GENERIC_BABY_SUN_HAT
                             )
                     );
                 }
@@ -56,5 +76,4 @@ public class SFeatureRenderers {
     private SFeatureRenderers() {
 
     }
-
 }

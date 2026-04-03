@@ -9,6 +9,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
@@ -26,11 +27,13 @@ public class SunHatRenderLayer<S extends HumanoidRenderState, M extends Humanoid
 
     public SunHatRenderLayer(
             RenderLayerParent<S, M> context,
-            EntityModelSet modelLoader
+            EntityModelSet modelLoader,
+            ModelLayerLocation layerLocation,
+            ModelLayerLocation babyLayerLoction
     ) {
         super(context);
-        this.model = new SunHatModel<>(modelLoader.bakeLayer(SEntityModelLayers.SUN_HAT));
-        this.babyModel = new SunHatModel<>(modelLoader.bakeLayer(SEntityModelLayers.SUN_HAT_BABY));
+        this.model = new SunHatModel<>(modelLoader.bakeLayer(layerLocation));
+        this.babyModel = new SunHatModel<>(modelLoader.bakeLayer(babyLayerLoction));
     }
 
     @Override
