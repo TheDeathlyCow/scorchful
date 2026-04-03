@@ -3,7 +3,6 @@ package com.github.thedeathlycow.scorchful.entity.renderlayer;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.entity.model.SunHatModel;
 import com.github.thedeathlycow.scorchful.entity.state.SLivingEntityRenderState;
-import com.github.thedeathlycow.scorchful.registry.SEntityModelLayers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -29,11 +28,11 @@ public class SunHatRenderLayer<S extends HumanoidRenderState, M extends Humanoid
             RenderLayerParent<S, M> context,
             EntityModelSet modelLoader,
             ModelLayerLocation layerLocation,
-            ModelLayerLocation babyLayerLoction
+            ModelLayerLocation babyLayerLocation
     ) {
         super(context);
         this.model = new SunHatModel<>(modelLoader.bakeLayer(layerLocation));
-        this.babyModel = new SunHatModel<>(modelLoader.bakeLayer(babyLayerLoction));
+        this.babyModel = new SunHatModel<>(modelLoader.bakeLayer(babyLayerLocation));
     }
 
     @Override
@@ -53,7 +52,7 @@ public class SunHatRenderLayer<S extends HumanoidRenderState, M extends Humanoid
 
             queue.order(1)
                     .submitModel(
-                            this.model,
+                            contextModel,
                             state,
                             matrices,
                             RenderTypes.armorCutoutNoCull(TEXTURE),

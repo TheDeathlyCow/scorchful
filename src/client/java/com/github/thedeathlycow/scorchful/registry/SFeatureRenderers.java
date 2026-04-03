@@ -6,11 +6,9 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityRenderLayerRegistrationCallback;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
-import net.minecraft.world.entity.EntityType;
 
 @Environment(EnvType.CLIENT)
 public class SFeatureRenderers {
-
     public static void registerAll() {
         LivingEntityRenderLayerRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {
             switch (entityRenderer) {

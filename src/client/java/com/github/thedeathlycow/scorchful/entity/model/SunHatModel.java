@@ -33,7 +33,7 @@ public class SunHatModel<S extends HumanoidRenderState> extends HumanoidModel<S>
                         .addBox(
                                 -8.0F, -4.5F, -8.0F,
                                 16.0F, 0.0F, 16.0F,
-                                CubeDeformation.NONE.extend(0.1f, 0f, 0.1f)
+                                deformation.extend(0.1f, 0f, 0.1f)
                         )
 
                         // head
@@ -41,7 +41,7 @@ public class SunHatModel<S extends HumanoidRenderState> extends HumanoidModel<S>
                         .addBox(
                                 -4.0F, -9.0F, -4.0F,
                                 8.0F, 4.0F, 8.0F,
-                                CubeDeformation.NONE.extend(0.6f)
+                                deformation.extend(0.6f)
                         ),
                 PartPose.offset(0.0f, 0f, 0.0f)
         );
@@ -52,8 +52,8 @@ public class SunHatModel<S extends HumanoidRenderState> extends HumanoidModel<S>
     public static MeshDefinition createBabyMesh(CubeDeformation deformation) {
         MeshDefinition adultMesh = createMesh(deformation);
         return adultMesh
-                .apply(MeshTransformer.scaling(0.5f))
-                .apply(mesh -> mesh.transformed(pose -> pose.scaled(1.5f).translated(0.0F, -2f, 0.0F)));
+                .apply(HumanoidModel.BABY_TRANSFORMER)
+                .apply(mesh -> mesh.transformed(pose -> pose.scaled(1.1f).translated(0.0f, 1.2f, 0.0f)));
     }
 
     public static LayerDefinition createLayer(CubeDeformation deformation) {
