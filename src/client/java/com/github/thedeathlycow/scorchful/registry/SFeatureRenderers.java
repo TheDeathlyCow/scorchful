@@ -82,6 +82,16 @@ public class SFeatureRenderers {
                             )
                     );
                 }
+                case WitherSkeletonRenderer witherSkeletonRenderer -> {
+                    registrationHelper.register(
+                            new SunHatRenderLayer<>(
+                                    witherSkeletonRenderer,
+                                    context.getModelSet(),
+                                    SEntityModelLayers.WITHER_SKELETON_SUN_HAT,
+                                    SEntityModelLayers.WITHER_SKELETON_SUN_HAT
+                            )
+                    );
+                }
                 case HumanoidMobRenderer<?, ?, ?> humanoidMobRenderer -> {
                     registrationHelper.register(
                             new SunHatRenderLayer<>(
