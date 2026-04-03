@@ -60,7 +60,7 @@ Scorchful is built using [Gradle](https://gradle.org/) using the [Fabric Loom Gr
 
 # LTS Policy
 
-This is my current intended support status for each version of Minecraft that Scorchful is available for. The current Long-Term Support (LTS) policy for Scorchful versions is to fully support only the latest game drop.
+This is my current intended support status for each version of Minecraft that Scorchful is available for. The current Long-Term Support (LTS) policy for Scorchful versions is to fully support the first game drop of the current year. If a patch for that game drop breaks compatibility with Scorchful somehow, then I will only support the latest patch.
 
 Supported versions will receive all new features, fixes, and updates.
 
@@ -70,13 +70,8 @@ Unsupported versions version will receive no future updates, except for critical
 
 | Minecraft Version | Support Status |
 |-------------------|----------------|
-| 1.21.11           | ✅ Supported    | 
-| 1.21.10           | ❌ Unsupported  | 
-| 1.21.9            | ❌ Unsupported  | 
-| 1.21.6-8          | ❌ Unsupported  | 
-| 1.21.5            | ❌ Unsupported  | 
-| 1.21.4            | ❌ Unsupported  | 
-| 1.21.3            | ❌ Unsupported  | 
+| 26.1.x            | ✅ Supported    | 
+| 1.21.2-11         | ❌ Unsupported  | 
 | 1.21.1            | ⚠️ Fixes only  | 
 | 1.20.4            | ❌ Unsupported  | 
 | 1.20.2            | ❌ Unsupported  | 
