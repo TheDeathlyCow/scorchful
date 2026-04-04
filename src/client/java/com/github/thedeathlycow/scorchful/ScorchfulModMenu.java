@@ -1,5 +1,7 @@
 package com.github.thedeathlycow.scorchful;
 
+import com.github.thedeathlycow.scorchful.client.config.section.AccessibilitySettings;
+import com.github.thedeathlycow.scorchful.client.config.section.DisplaySettings;
 import com.github.thedeathlycow.scorchful.config.Translate;
 import com.github.thedeathlycow.scorchful.config.section.*;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;

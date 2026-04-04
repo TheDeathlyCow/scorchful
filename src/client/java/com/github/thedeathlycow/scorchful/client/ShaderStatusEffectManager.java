@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.client;
 
-import com.github.thedeathlycow.scorchful.config.ScorchfulClientConfig;
-import com.github.thedeathlycow.scorchful.config.section.AccessibilitySettings;
+import com.github.thedeathlycow.scorchful.client.config.ScorchfulClientConfig;
+import com.github.thedeathlycow.scorchful.client.config.section.AccessibilitySettings;
 import com.mojang.blaze3d.resource.CrossFrameResourcePool;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.DeltaTracker;

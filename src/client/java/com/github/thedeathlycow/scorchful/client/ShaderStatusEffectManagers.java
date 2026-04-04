@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.client;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.config.section.AccessibilitySettings;
+import com.github.thedeathlycow.scorchful.client.config.section.AccessibilitySettings;
 import com.github.thedeathlycow.scorchful.registry.SMobEffects;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.multiplayer.ClientLevel;

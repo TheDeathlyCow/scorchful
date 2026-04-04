@@ -2,6 +2,8 @@ package com.github.thedeathlycow.scorchful.datagen.generator;
 
 
 import com.github.thedeathlycow.scorchful.ScorchfulModMenu;
+import com.github.thedeathlycow.scorchful.client.config.section.AccessibilitySettings;
+import com.github.thedeathlycow.scorchful.client.config.section.DisplaySettings;
 import com.github.thedeathlycow.scorchful.config.Translate;
 import com.github.thedeathlycow.scorchful.config.section.*;
 import com.github.thedeathlycow.scorchful.item.FireChargeThrower;

@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.datagen.generator.client;
 
-import com.github.thedeathlycow.scorchful.item.WaterSkinIsEmptyProperty;
+import com.github.thedeathlycow.scorchful.client.item.WaterSkinIsEmptyProperty;
 import com.github.thedeathlycow.scorchful.registry.SArmorMaterials;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;

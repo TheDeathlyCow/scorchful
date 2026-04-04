@@ -1,17 +1,17 @@
 package com.github.thedeathlycow.scorchful;
 
 import com.github.thedeathlycow.scorchful.client.ShaderStatusEffectManagers;
-import com.github.thedeathlycow.scorchful.config.ScorchfulClientConfig;
-import com.github.thedeathlycow.scorchful.hud.BurningHeartsOverlay;
-import com.github.thedeathlycow.scorchful.hud.MountHealthOverlay;
-import com.github.thedeathlycow.scorchful.hud.SoakingUnderlay;
-import com.github.thedeathlycow.scorchful.item.CoolingItemTooltip;
-import com.github.thedeathlycow.scorchful.item.WaterSkinIsEmptyProperty;
-import com.github.thedeathlycow.scorchful.network.SoundTemperatureEffectPacketListener;
+import com.github.thedeathlycow.scorchful.client.config.ScorchfulClientConfig;
+import com.github.thedeathlycow.scorchful.client.hud.BurningHeartsOverlay;
+import com.github.thedeathlycow.scorchful.client.hud.MountHealthOverlay;
+import com.github.thedeathlycow.scorchful.client.hud.SoakingUnderlay;
+import com.github.thedeathlycow.scorchful.client.item.CoolingItemTooltip;
+import com.github.thedeathlycow.scorchful.client.item.WaterSkinIsEmptyProperty;
+import com.github.thedeathlycow.scorchful.client.network.SoundTemperatureEffectPacketListener;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
-import com.github.thedeathlycow.scorchful.registry.SEntityModelLayers;
-import com.github.thedeathlycow.scorchful.registry.SFeatureRenderers;
-import com.github.thedeathlycow.scorchful.registry.SParticleFactories;
+import com.github.thedeathlycow.scorchful.client.registry.SEntityModelLayers;
+import com.github.thedeathlycow.scorchful.client.registry.SFeatureRenderers;
+import com.github.thedeathlycow.scorchful.client.registry.SParticleFactories;
 import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
 import com.github.thedeathlycow.thermoo.api.client.v1.StatusBarOverlayRenderEvents;
 import net.fabricmc.api.ClientModInitializer;
