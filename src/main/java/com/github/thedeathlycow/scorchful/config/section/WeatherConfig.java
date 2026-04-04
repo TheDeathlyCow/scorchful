@@ -53,7 +53,7 @@ public class WeatherConfig {
     @AutoGen(category = CATEGORY)
     @Translate.Name("Enable suffocating sandstorms")
     @SerialEntry(comment = "When enabled, Sandstorms will choke the player causing them to suffocate")
-    @MasterTickBox("requireThunderStormsForSuffocation")
+    @MasterTickBox({"requireThunderStormsForSuffocation", "suffocatingDamageMultiplier"})
     boolean enableSuffocatingSandstorms = false;
 
     @AutoGen(category = CATEGORY, group = SUFFOCATING_GROUP)
