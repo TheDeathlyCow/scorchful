@@ -3,6 +3,8 @@ package com.github.thedeathlycow.scorchful.mixin;
 import com.github.thedeathlycow.scorchful.entity.effect.FearEffect;
 import com.github.thedeathlycow.scorchful.world.SandstormEffects;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -33,11 +35,26 @@ public abstract class LivingEntityMixin extends Entity {
     private void afterTickMovement(CallbackInfo ci) {
         ProfilerFiller profiler = Profiler.get();
         profiler.push("scorchful_sandstorm_slow");
-        scorchful_wasInSandstorm = SandstormEffects.tickSandstormSlow(
+        scorchful_wasInSandstorm = SandstormEffects.tickSandstormEffects(
                 (LivingEntity) (Object) this,
                 scorchful_wasInSandstorm
         );
         profiler.pop();
+    }
+    
+    @WrapOperation(
+            method = "baseTick",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/LivingEntity;increaseAirSupply(I)I"
+            )
+    )
+    private int preventAirRefillWhileSuffocating(LivingEntity instance, int currentSupply, Operation<Integer> original) {
+        if (scorchful_wasInSandstorm && SandstormEffects.canSuffocate(instance)) {
+            return currentSupply;
+        } else {
+            return original.call(instance, currentSupply);
+        }
     }
 
     @ModifyReturnValue(

@@ -34,6 +34,7 @@ public class ScorchfulDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(EnvironmentProviderTagGenerator::new);
         pack.addProvider(ClimateBiomeTagGenerator::new);
         pack.addProvider(EntityTypeTagGenerator::new);
+        pack.addProvider(DamageTypeTagGenerator::new);
 
         BlockTagGenerator blockTags = pack.addProvider(BlockTagGenerator::new);
         pack.addProvider((output, registriesFuture) -> new ItemTagGenerator(output, registriesFuture, blockTags));

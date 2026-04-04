@@ -98,6 +98,7 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         builder.add(statusEffect(SMobEffects.FEAR), "Fear");
 
         addDamageType(builder, SDamageTypes.HEAT, "%1$s couldn't handle the heat", "%1$s couldn't handle the heat of %2$s");
+        addDamageType(builder, SDamageTypes.SUFFOCATE, "%1$s suffocated", "%1$s was suffocated by %2$s");
 
         addAdvancement(builder, SAdvancements.DRINK_CACTUS_JUICE, "It's the Quenchiest!", "Drink a Bottle of Cactus Juice");
         addAdvancement(builder, SAdvancements.OBTAIN_TURTLE_ARMOR, "Duck and Cover", "Obtain a piece of Turtle Armor");
@@ -150,6 +151,7 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
 
         builder.add(ScorchfulModMenu.WEATHER_CATEGORY, "Weather Settings");
         builder.add(ScorchfulModMenu.WEATHER_DESC, "Specific settings for Scorchful's weather-related effects.");
+        builder.add(Translate.mainGroupKey(WeatherConfig.HANDLER, WeatherConfig.SUFFOCATING_GROUP), "Suffocating Sandstorms");
 
         builder.add(ScorchfulModMenu.DEHYDRATION_CATEGORY, "Dehydration Compatibility Settings");
         builder.add(ScorchfulModMenu.DEHYDRATION_DESC, "Specific settings for Scorchful's builtin compatibility with the Dehydration mod. This is only relevant if you use Dehydration.");

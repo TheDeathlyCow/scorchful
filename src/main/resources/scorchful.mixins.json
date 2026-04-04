@@ -3,6 +3,7 @@
     "package": "com.github.thedeathlycow.scorchful.mixin",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
+        "DamageSourcesMixin",
         "EntityMixin",
         "ItemStackMixin",
         "LivingEntityMixin",
@@ -14,6 +15,7 @@
         "accessor.CauldronInteractionsAccessor",
         "accessor.EntityAccessor",
         "accessor.HolderReferenceAccessor",
+        "accessor.LivingEntityAccessor",
         "accessor.PoiTypeAccessor",
         "accessor.PoiTypesAccessor",
         "accessor.WolfAccessor",

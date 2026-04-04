@@ -3,35 +3,56 @@ package com.github.thedeathlycow.scorchful.world;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.section.WeatherConfig;
+import com.github.thedeathlycow.scorchful.mixin.accessor.LivingEntityAccessor;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
+import com.github.thedeathlycow.thermoo.api.temperature.status.v2.effect.DamageEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class SandstormEffects {
-
     private static final Identifier SPEED_MODIFIER_ID = Scorchful.id("sandstorm_slowing");
     private static final Identifier FOLLOW_RANGE_MODIFIER_ID = Scorchful.id("sandstorm_reduced_visibility");
 
-    public static boolean tickSandstormSlow(LivingEntity entity, boolean wasInSandstorm) {
+    public static boolean canSuffocate(LivingEntity entity) {
+        WeatherConfig config = ScorchfulConfig.getWeatherConfig();
+
+        if (config.enableSuffocatingSandstorms()) {
+            if (!entity.is(SEntityTypeTags.SUFFOCATES_IN_SANDSTORMS)) {
+                return false;
+            } else if (entity instanceof Player player && player.getAbilities().invulnerable) {
+                return false;
+            } else if (config.requireThunderStormsForSuffocation() && !entity.level().isThundering()) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean tickSandstormEffects(LivingEntity entity, boolean wasInSandstorm) {
         if (entity.is(SEntityTypeTags.DOES_NOT_SLOW_IN_SANDSTORM)) {
             return false;
         }
 
-        Level world = entity.level();
+        Level level = entity.level();
         BlockPos pos = entity.blockPosition();
 
-        if (world.isClientSide()) {
+        if (!(level instanceof ServerLevel serverLevel)) {
             return false;
         }
 
-        if (Sandstorms.getCurrentSandStorm(world, pos) == Sandstorms.SandstormType.NONE) {
+        if (Sandstorms.getCurrentSandStorm(level, pos) == Sandstorms.SandstormType.NONE) {
             if (wasInSandstorm) {
                 removeModifiers(entity);
             }
@@ -40,6 +61,17 @@ public class SandstormEffects {
 
         if (!wasInSandstorm) {
             addSlow(entity);
+        }
+
+        if (canSuffocate(entity)) {
+            LivingEntityAccessor accessor = (LivingEntityAccessor) entity;
+            entity.setAirSupply(accessor.scorchfulInvokeDecreaseAirSupply(entity.getAirSupply()));
+
+            if (accessor.scorchfulInvokeShouldTakeDrowningDamage()) {
+                entity.setAirSupply(0);
+                float damage = 2.0f * ScorchfulConfig.getWeatherConfig().suffocatingDamageMultiplier();
+                entity.hurtServer(serverLevel, entity.damageSources().scorchfulSuffocate(), damage);
+            }
         }
 
         return true;

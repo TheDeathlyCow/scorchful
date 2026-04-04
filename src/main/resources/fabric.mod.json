@@ -59,6 +59,11 @@
 	},
 	"accessWidener": "scorchful.accesswidener",
 	"custom": {
+		"loom:injected_interfaces": {
+			"net/minecraft/world/damagesource/DamageSources": [
+				"com/github/thedeathlycow/scorchful/world/ScorchfulDamageSources"
+			]
+		},
 		"cardinal-components": [
 			"scorchful:player_water",
 			"scorchful:entity_desert_vision",
