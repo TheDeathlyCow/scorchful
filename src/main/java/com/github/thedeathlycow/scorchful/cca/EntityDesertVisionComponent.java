@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.components;
+package com.github.thedeathlycow.scorchful.cca;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.event.HeatVisionActivation;
@@ -13,14 +13,14 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.ladysnake.cca.api.v3.component.Component;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
+import org.ladysnake.cca.api.v8.component.CardinalComponent;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public class EntityDesertVisionComponent implements Component, AutoSyncedComponent, ServerTickingComponent {
+public class EntityDesertVisionComponent implements CardinalComponent, AutoSyncedComponent, ServerTickingComponent {
 
 
     private final Entity provider;

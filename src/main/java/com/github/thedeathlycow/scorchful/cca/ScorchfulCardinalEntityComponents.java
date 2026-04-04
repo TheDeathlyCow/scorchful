@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.components;
+package com.github.thedeathlycow.scorchful.cca;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import net.minecraft.world.entity.Entity;
@@ -8,8 +8,7 @@ import org.ladysnake.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import org.ladysnake.cca.api.v3.entity.EntityComponentInitializer;
 import org.ladysnake.cca.api.v3.entity.RespawnCopyStrategy;
 
-public class ScorchfulComponents implements EntityComponentInitializer {
-
+public class ScorchfulCardinalEntityComponents implements EntityComponentInitializer {
     public static final ComponentKey<PlayerWaterComponent> PLAYER_WATER = ComponentRegistry.getOrCreate(
             Scorchful.id("player_water"),
             PlayerWaterComponent.class

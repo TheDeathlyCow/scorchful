@@ -1,8 +1,8 @@
 package com.github.thedeathlycow.scorchful.item.component;
 
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
-import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
-import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
+import com.github.thedeathlycow.scorchful.cca.PlayerWaterComponent;
+import com.github.thedeathlycow.scorchful.cca.ScorchfulCardinalEntityComponents;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.section.ItemConfig;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
@@ -154,7 +154,7 @@ public enum DrinkLevel implements StringRepresentable, ConsumableListener, Toolt
             return;
         }
 
-        PlayerWaterComponent waterComponent = ScorchfulComponents.PLAYER_WATER.getNullable(user);
+        PlayerWaterComponent waterComponent = ScorchfulCardinalEntityComponents.PLAYER_WATER.getNullable(user);
         if (waterComponent != null) {
             int water = this.getDrinkingWater(ScorchfulConfig.getItemConfig());
             waterComponent.drink(water);

@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.components;
+package com.github.thedeathlycow.scorchful.cca;
 
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
@@ -8,9 +8,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
-import org.ladysnake.cca.api.v3.component.Component;
+import org.ladysnake.cca.api.v8.component.CardinalComponent;
 
-public class RehydrationComponent implements Component {
+public class RehydrationComponent implements CardinalComponent {
     private final Player provider;
     private int waterCaptured = 0;
     private static final String WATER_CAPTURED_KEY = "water_captured";

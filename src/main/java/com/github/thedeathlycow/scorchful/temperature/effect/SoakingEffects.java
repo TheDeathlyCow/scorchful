@@ -1,8 +1,8 @@
 package com.github.thedeathlycow.scorchful.temperature.effect;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.components.RehydrationComponent;
-import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
+import com.github.thedeathlycow.scorchful.cca.RehydrationComponent;
+import com.github.thedeathlycow.scorchful.cca.ScorchfulCardinalEntityComponents;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.section.EntityConfig;
 import com.github.thedeathlycow.scorchful.mixin.accessor.EntityAccessor;
@@ -73,7 +73,7 @@ public final class SoakingEffects {
     private static void tickRehydration(EnvironmentTickContext<? extends LivingEntity> context, int wetChange) {
         if (context.affected().thermoo$isWet() && context.affected() instanceof Player player) {
             double rehydrationEfficiency = player.getAttributeValue(SEntityAttributes.REHYDRATION_EFFICIENCY);
-            RehydrationComponent component = ScorchfulComponents.REHYDRATION.get(player);
+            RehydrationComponent component = ScorchfulCardinalEntityComponents.REHYDRATION.get(player);
             component.tickRehydration(rehydrationEfficiency, wetChange);
         }
     }

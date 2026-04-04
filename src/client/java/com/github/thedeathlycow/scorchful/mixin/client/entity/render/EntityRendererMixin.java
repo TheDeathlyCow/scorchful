@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.mixin.client.entity.render;
 
-import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
+import com.github.thedeathlycow.scorchful.cca.ScorchfulCardinalEntityComponents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -24,7 +24,7 @@ public class EntityRendererMixin<T extends Entity> {
             double x, double y, double z,
             CallbackInfoReturnable<Boolean> cir
     ) {
-        var component = ScorchfulComponents.ENTITY_DESERT_VISION.get(entity);
+        var component = ScorchfulCardinalEntityComponents.ENTITY_DESERT_VISION.get(entity);
         if (component.hasDesertVision()) {
             Player mainPlayer = Minecraft.getInstance().player;
             cir.setReturnValue(mainPlayer == null || mainPlayer.equals(component.getCause()));

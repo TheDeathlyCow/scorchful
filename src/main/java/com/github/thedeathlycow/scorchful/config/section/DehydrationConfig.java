@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.config.section;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
+import com.github.thedeathlycow.scorchful.cca.PlayerWaterComponent;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.Translate;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;

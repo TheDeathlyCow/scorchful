@@ -34,7 +34,7 @@
 			"com.github.thedeathlycow.scorchful.ScorchfulModMenu"
 		],
 		"cardinal-components-entity": [
-			"com.github.thedeathlycow.scorchful.components.ScorchfulComponents"
+			"com.github.thedeathlycow.scorchful.cca.ScorchfulCardinalEntityComponents"
 		]
 	},
 	"mixins": [

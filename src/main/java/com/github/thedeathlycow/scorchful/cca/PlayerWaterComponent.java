@@ -1,14 +1,14 @@
-package com.github.thedeathlycow.scorchful.components;
+package com.github.thedeathlycow.scorchful.cca;
 
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import org.ladysnake.cca.api.v3.component.Component;
 import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
+import org.ladysnake.cca.api.v8.component.CardinalComponent;
 
-public class PlayerWaterComponent implements Component, ServerTickingComponent {
+public class PlayerWaterComponent implements CardinalComponent, ServerTickingComponent {
 
     public static final int MAX_WATER = 300;
 
