@@ -11,7 +11,7 @@ import com.github.thedeathlycow.scorchful.temperature.tick.ActiveTemperatureTick
 import com.github.thedeathlycow.scorchful.temperature.tick.PassiveTemperatureTickListeners;
 import com.github.thedeathlycow.scorchful.temperature.tick.ServerPlayerEnvironmentTickListeners;
 import com.github.thedeathlycow.scorchful.temperature.effect.SoakingEffects;
-import com.github.thedeathlycow.scorchful.worldgen.NetherBiomeModifications;
+import com.github.thedeathlycow.scorchful.world.gen.NetherBiomeModifications;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;

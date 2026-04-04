@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.worldgen;
+package com.github.thedeathlycow.scorchful.world.gen;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;

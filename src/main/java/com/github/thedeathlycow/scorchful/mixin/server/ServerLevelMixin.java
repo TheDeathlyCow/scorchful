@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.mixin.server;
 
-import com.github.thedeathlycow.scorchful.server.SandAccumulation;
+import com.github.thedeathlycow.scorchful.world.SandAccumulation;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceKey;

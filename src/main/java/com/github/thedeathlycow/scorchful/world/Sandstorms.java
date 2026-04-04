@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.server;
+package com.github.thedeathlycow.scorchful.world;
 
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.mojang.serialization.Codec;

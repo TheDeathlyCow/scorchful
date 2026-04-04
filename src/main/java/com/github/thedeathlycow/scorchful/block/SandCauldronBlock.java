@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.block;
 
-import com.github.thedeathlycow.scorchful.server.Sandstorms;
+import com.github.thedeathlycow.scorchful.world.Sandstorms;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;

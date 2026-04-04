@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.mixin;
 
 import com.github.thedeathlycow.scorchful.entity.effect.FearEffect;
-import com.github.thedeathlycow.scorchful.server.SandstormSlowing;
+import com.github.thedeathlycow.scorchful.world.SandstormSlowing;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;

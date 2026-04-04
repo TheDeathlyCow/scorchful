@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.server;
+package com.github.thedeathlycow.scorchful.world;
 
 import com.github.thedeathlycow.scorchful.block.SandPileBlock;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;

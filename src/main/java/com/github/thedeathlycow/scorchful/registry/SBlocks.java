@@ -2,7 +2,7 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.block.*;
-import com.github.thedeathlycow.scorchful.server.Sandstorms;
+import com.github.thedeathlycow.scorchful.world.Sandstorms;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
