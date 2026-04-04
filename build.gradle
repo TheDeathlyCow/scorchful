@@ -68,6 +68,10 @@ fabricApi {
 loom {
     accessWidenerPath = file("src/main/resources/scorchful.accesswidener")
 
+    interfaceInjection {
+        enableDependencyInterfaceInjection = true
+    }
+
     runs {
         gametestClient {
             client()

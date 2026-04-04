@@ -5,6 +5,7 @@ import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.section.WeatherConfig;
 import com.github.thedeathlycow.scorchful.mixin.accessor.LivingEntityAccessor;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
+import com.github.thedeathlycow.thermoo.api.temperature.status.v2.effect.DamageEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
@@ -69,7 +70,7 @@ public class SandstormEffects {
             if (accessor.scorchfulInvokeShouldTakeDrowningDamage()) {
                 entity.setAirSupply(0);
                 float damage = 2.0f * ScorchfulConfig.getWeatherConfig().suffocatingDamageMultiplier();
-                entity.hurtServer(serverLevel, entity.damageSources().inWall(), damage);
+                entity.hurtServer(serverLevel, entity.damageSources().scorchfulSuffocate(), damage);
             }
         }
 

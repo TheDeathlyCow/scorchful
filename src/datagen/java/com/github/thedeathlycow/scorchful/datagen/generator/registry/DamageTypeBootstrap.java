@@ -10,6 +10,11 @@ public final class DamageTypeBootstrap {
                 SDamageTypes.HEAT,
                 new DamageType("scorchful.heat", 0f)
         );
+
+        context.register(
+                SDamageTypes.SUFFOCATE,
+                new DamageType("scorchful.suffocate", 0f)
+        );
     }
 
     private DamageTypeBootstrap() {

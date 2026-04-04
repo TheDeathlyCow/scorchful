@@ -98,6 +98,7 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         builder.add(statusEffect(SMobEffects.FEAR), "Fear");
 
         addDamageType(builder, SDamageTypes.HEAT, "%1$s couldn't handle the heat", "%1$s couldn't handle the heat of %2$s");
+        addDamageType(builder, SDamageTypes.SUFFOCATE, "%1$s suffocated", "%1$s was suffocated by %2$s");
 
         addAdvancement(builder, SAdvancements.DRINK_CACTUS_JUICE, "It's the Quenchiest!", "Drink a Bottle of Cactus Juice");
         addAdvancement(builder, SAdvancements.OBTAIN_TURTLE_ARMOR, "Duck and Cover", "Obtain a piece of Turtle Armor");
