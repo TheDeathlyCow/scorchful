@@ -14,13 +14,12 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 
-public class SandstormSlowing {
+public class SandstormEffects {
 
     private static final Identifier SPEED_MODIFIER_ID = Scorchful.id("sandstorm_slowing");
     private static final Identifier FOLLOW_RANGE_MODIFIER_ID = Scorchful.id("sandstorm_reduced_visibility");
 
     public static boolean tickSandstormSlow(LivingEntity entity, boolean wasInSandstorm) {
-
         if (entity.is(SEntityTypeTags.DOES_NOT_SLOW_IN_SANDSTORM)) {
             return false;
         }
@@ -99,7 +98,7 @@ public class SandstormSlowing {
         }
     }
 
-    private SandstormSlowing() {
+    private SandstormEffects() {
 
     }
 
