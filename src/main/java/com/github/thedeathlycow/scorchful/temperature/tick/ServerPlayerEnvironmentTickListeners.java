@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.temperature;
+package com.github.thedeathlycow.scorchful.temperature.tick;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;

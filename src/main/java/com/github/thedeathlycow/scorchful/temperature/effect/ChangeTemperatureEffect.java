@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.temperature;
+package com.github.thedeathlycow.scorchful.temperature.effect;
 
 import com.github.thedeathlycow.thermoo.api.core.v2.TemperatureChange;
 import com.github.thedeathlycow.thermoo.api.core.v2.registry.ThermooRegistries;

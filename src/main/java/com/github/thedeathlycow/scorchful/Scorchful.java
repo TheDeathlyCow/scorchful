@@ -7,10 +7,10 @@ import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.*;
 import com.github.thedeathlycow.scorchful.server.ThirstCommand;
 import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
-import com.github.thedeathlycow.scorchful.temperature.ActiveTemperatureEffects;
-import com.github.thedeathlycow.scorchful.temperature.PassiveTemperatureEffects;
-import com.github.thedeathlycow.scorchful.temperature.ServerPlayerEnvironmentTickListeners;
-import com.github.thedeathlycow.scorchful.temperature.SoakingEffects;
+import com.github.thedeathlycow.scorchful.temperature.tick.ActiveTemperatureTickListeners;
+import com.github.thedeathlycow.scorchful.temperature.tick.PassiveTemperatureTickListeners;
+import com.github.thedeathlycow.scorchful.temperature.tick.ServerPlayerEnvironmentTickListeners;
+import com.github.thedeathlycow.scorchful.temperature.effect.SoakingEffects;
 import com.github.thedeathlycow.scorchful.worldgen.NetherBiomeModifications;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -82,8 +82,8 @@ public class Scorchful implements ModInitializer {
 
     private void registerThermooEventListeners() {
         ServerPlayerEnvironmentTickListeners.initialize();
-        ActiveTemperatureEffects.initialize();
-        PassiveTemperatureEffects.initialize();
+        ActiveTemperatureTickListeners.initialize();
+        PassiveTemperatureTickListeners.initialize();
         SoakingEffects.initialize();
     }
 }

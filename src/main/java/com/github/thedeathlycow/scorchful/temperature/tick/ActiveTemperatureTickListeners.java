@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.temperature;
+package com.github.thedeathlycow.scorchful.temperature.tick;
 
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.section.TemperatureConfig;
@@ -9,9 +9,9 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 
-public final class ActiveTemperatureEffects {
+public final class ActiveTemperatureTickListeners {
     public static void initialize() {
-        LivingEntityTemperatureTickEvents.getTemperatureChange(TemperatureSources.ACTIVE).register(ActiveTemperatureEffects::getActiveChange);
+        LivingEntityTemperatureTickEvents.getTemperatureChange(TemperatureSources.ACTIVE).register(ActiveTemperatureTickListeners::getActiveChange);
     }
 
     private static int getActiveChange(EnvironmentTickContext<? extends LivingEntity> context) {
@@ -55,7 +55,7 @@ public final class ActiveTemperatureEffects {
         return 0;
     }
 
-    private ActiveTemperatureEffects() {
+    private ActiveTemperatureTickListeners() {
 
     }
 }

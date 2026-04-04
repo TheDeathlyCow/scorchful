@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.temperature;
+package com.github.thedeathlycow.scorchful.temperature.effect;
 
 import com.github.thedeathlycow.scorchful.mixin.accessor.WolfAccessor;
 import com.github.thedeathlycow.thermoo.api.temperature.status.v2.TemperatureEffect;

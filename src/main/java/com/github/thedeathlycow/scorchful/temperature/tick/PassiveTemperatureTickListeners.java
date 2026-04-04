@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.temperature;
+package com.github.thedeathlycow.scorchful.temperature.tick;
 
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.section.TemperatureConfig;
@@ -12,13 +12,13 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-public final class PassiveTemperatureEffects {
+public final class PassiveTemperatureTickListeners {
     private static final double LOW_HUMIDITY = 0.2;
     private static final double HIGH_HUMIDITY = 0.65;
     private static final double VERY_HIGH_HUMIDITY = 0.8;
 
     public static void initialize() {
-        LivingEntityTemperatureTickEvents.getTemperatureChange(TemperatureSources.PASSIVE).register(PassiveTemperatureEffects::getPassiveChange);
+        LivingEntityTemperatureTickEvents.getTemperatureChange(TemperatureSources.PASSIVE).register(PassiveTemperatureTickListeners::getPassiveChange);
     }
 
     private static int getPassiveChange(EnvironmentTickContext<? extends LivingEntity> context) {
@@ -76,7 +76,7 @@ public final class PassiveTemperatureEffects {
         }
     }
 
-    private PassiveTemperatureEffects() {
+    private PassiveTemperatureTickListeners() {
 
     }
 }
