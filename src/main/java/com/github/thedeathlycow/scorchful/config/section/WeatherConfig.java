@@ -5,10 +5,7 @@ import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.Translate;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
-import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
-import dev.isxander.yacl3.config.v2.api.autogen.DoubleSlider;
-import dev.isxander.yacl3.config.v2.api.autogen.IntSlider;
-import dev.isxander.yacl3.config.v2.api.autogen.TickBox;
+import dev.isxander.yacl3.config.v2.api.autogen.*;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 
 import java.nio.file.Path;
@@ -27,6 +24,7 @@ public class WeatherConfig {
             .build();
 
     private static final String CATEGORY = ScorchfulConfig.MAIN_CATEGORY_NAME;
+    public static final String SUFFOCATING_GROUP = "suffocating";
 
     @AutoGen(category = CATEGORY)
     @Translate.Name("Do Sand Pile accumulation")
@@ -52,6 +50,24 @@ public class WeatherConfig {
     @DoubleSlider(min = -1.0, max = 1.0, step = 0.1)
     double sandstormFollowRangeReductionPercent = -0.5;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Enable suffocating sandstorms")
+    @SerialEntry(comment = "When enabled, Sandstorms will choke the player causing them to suffocate")
+    @MasterTickBox("requireThunderStormsForSuffocation")
+    boolean enableSuffocatingSandstorms = false;
+
+    @AutoGen(category = CATEGORY, group = SUFFOCATING_GROUP)
+    @Translate.Name("Require thunder storms for suffocation")
+    @SerialEntry(comment = "When enabled, sandstorm suffocation will only apply during Thunderstorms")
+    @TickBox
+    boolean requireThunderStormsForSuffocation = true;
+
+    @AutoGen(category = CATEGORY, group = SUFFOCATING_GROUP)
+    @Translate.Name("Suffocating damage multiplier")
+    @SerialEntry(comment = "Multiplies the damage caused by suffocating in a sandstorm")
+    @FloatField(min = 0f, format = "%.2f")
+    float suffocatingDamageMultiplier = 1.0f;
+
     public boolean isSandPileAccumulationEnabled() {
         return doSandPileAccumulation;
     }
@@ -66,5 +82,17 @@ public class WeatherConfig {
 
     public double getSandstormFollowRangeReductionPercent() {
         return sandstormFollowRangeReductionPercent;
+    }
+
+    public boolean enableSuffocatingSandstorms() {
+        return enableSuffocatingSandstorms;
+    }
+
+    public boolean requireThunderStormsForSuffocation() {
+        return requireThunderStormsForSuffocation;
+    }
+
+    public float suffocatingDamageMultiplier() {
+        return suffocatingDamageMultiplier;
     }
 }

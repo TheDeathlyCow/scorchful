@@ -18,5 +18,8 @@ public class EntityTypeTagGenerator extends FabricTagsProvider.EntityTypeTagsPro
         valueLookupBuilder(SEntityTypeTags.HAS_PLAYER_TEMPERATURE_STATUSES)
                 .add(EntityType.PLAYER)
                 .add(EntityType.MANNEQUIN);
+
+        valueLookupBuilder(SEntityTypeTags.SUFFOCATES_IN_SANDSTORMS)
+                .add(EntityType.PLAYER);
     }
 }

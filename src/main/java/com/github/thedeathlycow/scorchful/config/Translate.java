@@ -24,6 +24,14 @@ public final class Translate {
         return categoryKey(handler, ScorchfulConfig.MAIN_CATEGORY_NAME);
     }
 
+    public static String groupKey(ConfigClassHandler<?> handler, String category, String group) {
+        return prefixKey(handler) + ".category." + category + ".group." + group;
+    }
+
+    public static String mainGroupKey(ConfigClassHandler<?> handler, String group) {
+        return groupKey(handler, ScorchfulConfig.MAIN_CATEGORY_NAME, group);
+    }
+
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
     public @interface Name {

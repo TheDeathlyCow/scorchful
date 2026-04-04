@@ -1,8 +1,11 @@
 package com.github.thedeathlycow.scorchful.mixin;
 
 import com.github.thedeathlycow.scorchful.entity.effect.FearEffect;
+import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
 import com.github.thedeathlycow.scorchful.world.SandstormEffects;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -11,6 +14,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -33,11 +37,26 @@ public abstract class LivingEntityMixin extends Entity {
     private void afterTickMovement(CallbackInfo ci) {
         ProfilerFiller profiler = Profiler.get();
         profiler.push("scorchful_sandstorm_slow");
-        scorchful_wasInSandstorm = SandstormEffects.tickSandstormSlow(
+        scorchful_wasInSandstorm = SandstormEffects.tickSandstormEffects(
                 (LivingEntity) (Object) this,
                 scorchful_wasInSandstorm
         );
         profiler.pop();
+    }
+    
+    @WrapOperation(
+            method = "baseTick",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/LivingEntity;increaseAirSupply(I)I"
+            )
+    )
+    private int tickSandstormSuffocation(LivingEntity instance, int currentSupply, Operation<Integer> original) {
+        if (scorchful_wasInSandstorm && SandstormEffects.canSuffocate(instance)) {
+            return currentSupply;
+        } else {
+            return original.call(instance, currentSupply);
+        }
     }
 
     @ModifyReturnValue(

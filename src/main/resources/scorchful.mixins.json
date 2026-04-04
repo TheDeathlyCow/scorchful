@@ -14,6 +14,7 @@
         "accessor.CauldronInteractionsAccessor",
         "accessor.EntityAccessor",
         "accessor.HolderReferenceAccessor",
+        "accessor.LivingEntityAccessor",
         "accessor.PoiTypeAccessor",
         "accessor.PoiTypesAccessor",
         "accessor.WolfAccessor",

@@ -150,6 +150,7 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
 
         builder.add(ScorchfulModMenu.WEATHER_CATEGORY, "Weather Settings");
         builder.add(ScorchfulModMenu.WEATHER_DESC, "Specific settings for Scorchful's weather-related effects.");
+        builder.add(Translate.mainGroupKey(WeatherConfig.HANDLER, WeatherConfig.SUFFOCATING_GROUP), "Suffocating Sandstorms");
 
         builder.add(ScorchfulModMenu.DEHYDRATION_CATEGORY, "Dehydration Compatibility Settings");
         builder.add(ScorchfulModMenu.DEHYDRATION_DESC, "Specific settings for Scorchful's builtin compatibility with the Dehydration mod. This is only relevant if you use Dehydration.");
