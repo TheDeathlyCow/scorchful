@@ -7,10 +7,10 @@ import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.*;
 import com.github.thedeathlycow.scorchful.server.ThirstCommand;
 import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
+import com.github.thedeathlycow.scorchful.temperature.effect.SoakingEffects;
 import com.github.thedeathlycow.scorchful.temperature.tick.ActiveTemperatureTickListeners;
 import com.github.thedeathlycow.scorchful.temperature.tick.PassiveTemperatureTickListeners;
 import com.github.thedeathlycow.scorchful.temperature.tick.ServerPlayerEnvironmentTickListeners;
-import com.github.thedeathlycow.scorchful.temperature.effect.SoakingEffects;
 import com.github.thedeathlycow.scorchful.world.gen.NetherBiomeModifications;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -56,13 +56,13 @@ public class Scorchful implements ModInitializer {
         STemperatureEffects.initialize();
         SMobEffects.initialize();
         SParticleTypes.initialize();
-        NetherBiomeModifications.initialize();
         SStats.initialize();
         SHeatVisions.initialize();
         SEnvironmentProviderTypes.initialize();
         SEntityAttributes.initialize();
         SPointsOfInterest.initialize();
 
+        NetherBiomeModifications.initialize();
 
         if (ScorchfulIntegrations.isDehydrationLoaded() && !ServerThirstPlugin.isCustomPluginLoaded()) {
             LOGGER.debug("Applying Dehydration thirst plugin");

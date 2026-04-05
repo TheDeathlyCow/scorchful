@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.config.section;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.Translate;
+import com.sun.jna.platform.win32.WinNT;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.autogen.*;
@@ -51,22 +52,10 @@ public class WeatherConfig {
     double sandstormFollowRangeReductionPercent = -0.5;
 
     @AutoGen(category = CATEGORY)
-    @Translate.Name("Enable suffocating sandstorms")
-    @SerialEntry(comment = "When enabled, Sandstorms will choke the player causing them to suffocate")
-    @MasterTickBox({"requireThunderStormsForSuffocation", "suffocatingDamageMultiplier"})
-    boolean enableSuffocatingSandstorms = false;
-
-    @AutoGen(category = CATEGORY, group = SUFFOCATING_GROUP)
-    @Translate.Name("Require thunder storms for suffocation")
-    @SerialEntry(comment = "When enabled, sandstorm suffocation will only apply during Thunderstorms")
+    @Translate.Name("Enable Breezes in sandstorms")
+    @SerialEntry(comment = "When enabled, Breezes will spawn during sandstorms")
     @TickBox
-    boolean requireThunderStormsForSuffocation = true;
-
-    @AutoGen(category = CATEGORY, group = SUFFOCATING_GROUP)
-    @Translate.Name("Suffocating damage multiplier")
-    @SerialEntry(comment = "Multiplies the damage caused by suffocating in a sandstorm")
-    @FloatField(min = 0f, format = "%.2f")
-    float suffocatingDamageMultiplier = 1.0f;
+    boolean enableBreezesInSandstorms = true;
 
     public boolean isSandPileAccumulationEnabled() {
         return doSandPileAccumulation;
@@ -83,6 +72,28 @@ public class WeatherConfig {
     public double getSandstormFollowRangeReductionPercent() {
         return sandstormFollowRangeReductionPercent;
     }
+
+    public boolean enableBreezesInSandstorms() {
+        return enableBreezesInSandstorms;
+    }
+
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Enable suffocating sandstorms")
+    @SerialEntry(comment = "When enabled, Sandstorms will choke the player causing them to suffocate")
+    @MasterTickBox({"requireThunderStormsForSuffocation", "suffocatingDamageMultiplier"})
+    boolean enableSuffocatingSandstorms = false;
+
+    @AutoGen(category = CATEGORY, group = SUFFOCATING_GROUP)
+    @Translate.Name("Require thunder storms for suffocation")
+    @SerialEntry(comment = "When enabled, sandstorm suffocation will only apply during Thunderstorms")
+    @TickBox
+    boolean requireThunderStormsForSuffocation = true;
+
+    @AutoGen(category = CATEGORY, group = SUFFOCATING_GROUP)
+    @Translate.Name("Suffocating damage multiplier")
+    @SerialEntry(comment = "Multiplies the damage caused by suffocating in a sandstorm")
+    @FloatField(min = 0f, format = "%.2f")
+    float suffocatingDamageMultiplier = 1.0f;
 
     public boolean enableSuffocatingSandstorms() {
         return enableSuffocatingSandstorms;
