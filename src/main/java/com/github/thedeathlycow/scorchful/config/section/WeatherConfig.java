@@ -52,8 +52,8 @@ public class WeatherConfig {
     double sandstormFollowRangeReductionPercent = -0.5;
 
     @AutoGen(category = CATEGORY)
-    @Translate.Name("Enable Breezes in sandstorms")
-    @SerialEntry(comment = "When enabled, Breezes will spawn during sandstorms")
+    @Translate.Name("Enable Breezes in sandstorms and blizzards")
+    @SerialEntry(comment = "When enabled, Breezes will naturally spawn on the surface during sandstorms and blizzards. Note that they will spawn regardless of whether it is day or night.")
     @TickBox
     boolean enableBreezesInSandstorms = true;
 

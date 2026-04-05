@@ -6,6 +6,7 @@ import com.github.thedeathlycow.scorchful.config.section.WeatherConfig;
 import com.github.thedeathlycow.scorchful.mixin.accessor.LivingEntityAccessor;
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
+import com.thedeathlycow.immersive.storms.registry.ISBiomeTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
@@ -30,7 +31,7 @@ public class SandstormEffects {
     ) {
         return ScorchfulConfig.getWeatherConfig().enableBreezesInSandstorms()
                 && level.isRaining()
-                && biome.is(SBiomeTags.SPAWNS_BREEZES_IN_STORMS)
+                && hasSandstormsOrBlizzards(level, biome)
                 && level.canSeeSky(pos); // this prevents breezes in caves
     }
 
@@ -87,6 +88,16 @@ public class SandstormEffects {
         }
 
         return true;
+    }
+
+    private static boolean hasSandstormsOrBlizzards(ServerLevel level, Holder<Biome> biome) {
+        if (biome.is(SBiomeTags.HAS_SANDSTORMS) && level.isRaining()) {
+            return true;
+        } else if (biome.is(ISBiomeTags.HAS_BLIZZARDS) && level.isThundering()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private static void removeModifiers(LivingEntity entity) {

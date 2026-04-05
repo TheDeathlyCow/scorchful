@@ -9,7 +9,7 @@ public class SBiomeTags {
     public static final TagKey<Biome> HUMID_BIOMES = SBiomeTags.register("humid_biomes");
     public static final TagKey<Biome> IS_NEVER_WARM_TEMPERATURE = SBiomeTags.register("temperature/is_never_warm");
 
-    public static final TagKey<Biome> SPAWNS_BREEZES_IN_STORMS = SBiomeTags.register("spawns_breezes_in_storms");
+    public static final TagKey<Biome> HAS_SANDSTORMS = SBiomeTags.register("has_sandstorms");
     public static final TagKey<Biome> HAS_REGULAR_SAND_STORMS = SBiomeTags.register("has_regular_sand_storms");
     public static final TagKey<Biome> HAS_RED_SAND_STORMS = SBiomeTags.register("has_red_sand_storms");
 

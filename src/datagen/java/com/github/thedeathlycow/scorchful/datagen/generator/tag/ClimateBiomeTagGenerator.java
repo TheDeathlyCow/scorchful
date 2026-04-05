@@ -100,9 +100,10 @@ public class ClimateBiomeTagGenerator extends FabricTagsProvider<Biome> {
                 .add(Biomes.DESERT)
                 .addOptionalTag(ConventionalBiomeTags.IS_DESERT);
 
-        builder(SBiomeTags.SPAWNS_BREEZES_IN_STORMS)
+        builder(SBiomeTags.HAS_SANDSTORMS)
                 .addOptionalTag(ISBiomeTags.HAS_SANDSTORMS)
-                .addOptionalTag(ISBiomeTags.HAS_BLIZZARDS);
+                .addOptionalTag(SBiomeTags.HAS_REGULAR_SAND_STORMS)
+                .addOptionalTag(SBiomeTags.HAS_RED_SAND_STORMS);
     }
 
     private static TagKey<Biome> scorchfulKey(String path) {
