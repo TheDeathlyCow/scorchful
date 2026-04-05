@@ -3,6 +3,7 @@
     "package": "com.github.thedeathlycow.scorchful.mixin",
     "compatibilityLevel": "JAVA_25",
     "mixins": [
+        "BiomeMixin",
         "DamageSourcesMixin",
         "EntityMixin",
         "ItemStackMixin",

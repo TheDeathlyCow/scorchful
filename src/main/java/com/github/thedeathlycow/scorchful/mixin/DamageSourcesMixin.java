@@ -29,7 +29,7 @@ public abstract class DamageSourcesMixin implements ScorchfulDamageSources {
 
     @Override
     @Unique
-    public DamageSource scorchfulSuffocate() {
+    public DamageSource scorchful$Suffocate() {
         return this.scorchfulSuffocate;
     }
 }

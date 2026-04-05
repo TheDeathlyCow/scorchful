@@ -17,7 +17,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.biome.Biome;
 
 public class SandstormEffects {
@@ -32,7 +31,7 @@ public class SandstormEffects {
         return ScorchfulConfig.getWeatherConfig().enableBreezesInSandstorms()
                 && level.isRaining()
                 && biome.is(SBiomeTags.SPAWNS_BREEZES_IN_STORMS)
-                && level.getBrightness(LightLayer.SKY, pos) >= 14; // this prevents breezes in caves
+                && level.canSeeSky(pos); // this prevents breezes in caves
     }
 
     public static boolean canSuffocate(LivingEntity entity) {
@@ -83,7 +82,7 @@ public class SandstormEffects {
             if (accessor.scorchfulInvokeShouldTakeDrowningDamage()) {
                 entity.setAirSupply(0);
                 float damage = 2.0f * ScorchfulConfig.getWeatherConfig().suffocatingDamageMultiplier();
-                entity.hurtServer(serverLevel, entity.damageSources().scorchfulSuffocate(), damage);
+                entity.hurtServer(serverLevel, entity.damageSources().scorchful$Suffocate(), damage);
             }
         }
 
