@@ -4,8 +4,8 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.section.WeatherConfig;
 import com.github.thedeathlycow.scorchful.mixin.accessor.LivingEntityAccessor;
+import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
-import com.github.thedeathlycow.thermoo.api.temperature.status.v2.effect.DamageEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
@@ -17,10 +17,23 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.biome.Biome;
 
 public class SandstormEffects {
     private static final Identifier SPEED_MODIFIER_ID = Scorchful.id("sandstorm_slowing");
     private static final Identifier FOLLOW_RANGE_MODIFIER_ID = Scorchful.id("sandstorm_reduced_visibility");
+
+    public static boolean canBreezesSpawnAt(
+            ServerLevel level,
+            BlockPos pos,
+            Holder<Biome> biome
+    ) {
+        return ScorchfulConfig.getWeatherConfig().enableBreezesInSandstorms()
+                && level.isRaining()
+                && biome.is(SBiomeTags.SPAWNS_BREEZES_IN_STORMS)
+                && level.getBrightness(LightLayer.SKY, pos) >= 14; // this prevents breezes in caves
+    }
 
     public static boolean canSuffocate(LivingEntity entity) {
         WeatherConfig config = ScorchfulConfig.getWeatherConfig();

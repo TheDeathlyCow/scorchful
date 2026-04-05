@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.mixin;
 
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
+import com.github.thedeathlycow.scorchful.world.SandstormEffects;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -41,12 +42,8 @@ public class NaturalSpawnerMixin {
             @Local(argsOnly = true) ServerLevel level
     ) {
         WeightedList<MobSpawnSettings.SpawnerData> mobs = original.call(instance, biome, structureManager, category, pos);
-        boolean spawnBreezes = category == MobCategory.MONSTER
-                && ScorchfulConfig.getWeatherConfig().enableBreezesInSandstorms()
-                && level.isRaining()
-                && biome.is(SBiomeTags.SPAWNS_BREEZES_IN_STORMS);
 
-        if (spawnBreezes) {
+        if (category == MobCategory.MONSTER && SandstormEffects.canBreezesSpawnAt(level, pos, biome)) {
             // TODO: replace with cached value from injected field in biome
             var modifiedMobs = new ArrayList<>(mobs.unwrap());
             modifiedMobs.add(new Weighted<>(new MobSpawnSettings.SpawnerData(EntityType.BREEZE, 1, 3), 100));
