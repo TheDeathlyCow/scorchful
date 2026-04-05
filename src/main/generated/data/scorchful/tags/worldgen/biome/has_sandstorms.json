@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "#immersive-storms:has_sandstorms",
+      "required": false
+    },
+    {
+      "id": "#scorchful:has_regular_sand_storms",
+      "required": false
+    },
+    {
+      "id": "#scorchful:has_red_sand_storms",
+      "required": false
+    }
+  ]
+}

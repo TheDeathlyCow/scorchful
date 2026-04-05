@@ -189,6 +189,8 @@
   "yacl3.config.scorchful:common/weather.desc": "Specific settings for Scorchful's weather-related effects.",
   "yacl3.config.scorchful:common/weather.doSandPileAccumulation": "Do Sand Pile accumulation",
   "yacl3.config.scorchful:common/weather.doSandPileAccumulation.desc": "Enable/disable sand piles accumulating on the ground during sandstorms.",
+  "yacl3.config.scorchful:common/weather.enableBreezesInSandstorms": "Enable Breezes in sandstorms and blizzards",
+  "yacl3.config.scorchful:common/weather.enableBreezesInSandstorms.desc": "When enabled, Breezes will naturally spawn on the surface during sandstorms and blizzards. Note that they will spawn regardless of whether it is day or night.",
   "yacl3.config.scorchful:common/weather.enableSuffocatingSandstorms": "Enable suffocating sandstorms",
   "yacl3.config.scorchful:common/weather.enableSuffocatingSandstorms.desc": "When enabled, Sandstorms will choke the player causing them to suffocate",
   "yacl3.config.scorchful:common/weather.requireThunderStormsForSuffocation": "Require thunder storms for suffocation",

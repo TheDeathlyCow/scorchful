@@ -26,7 +26,8 @@ import java.util.function.BooleanSupplier;
 public class CrimsonLilyTests {
 
     @GameTest(
-            structure = "scorchful-test:nether_lily/crimson_wet"
+            structure = "scorchful-test:nether_lily/crimson_wet",
+            environment = "scorchful-test:no_random_ticks"
     )
     public void stepping_on_wet_crimson_lily_soaks_player(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -49,7 +50,8 @@ public class CrimsonLilyTests {
     }
 
     @GameTest(
-            structure = "scorchful-test:nether_lily/crimson_dry"
+            structure = "scorchful-test:nether_lily/crimson_dry",
+            environment = "scorchful-test:no_random_ticks"
     )
     public void stepping_on_dry_crimson_lily_does_not_soak_player(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -72,7 +74,8 @@ public class CrimsonLilyTests {
     }
 
     @GameTest(
-            structure = "scorchful-test:nether_lily/crimson_partially_wet"
+            structure = "scorchful-test:nether_lily/crimson_partially_wet",
+            environment = "scorchful-test:no_random_ticks"
     )
     public void stepping_on_partially_wet_crimson_lily_does_not_soak_player(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -95,7 +98,8 @@ public class CrimsonLilyTests {
     }
 
     @GameTest(
-            structure = "scorchful-test:nether_lily/crimson_wet"
+            structure = "scorchful-test:nether_lily/crimson_wet",
+            environment = "scorchful-test:no_random_ticks"
     )
     public void stepping_on_wet_crimson_lily_soaks_and_hurts_strider(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -133,7 +137,8 @@ public class CrimsonLilyTests {
     }
 
     @GameTest(
-            structure = "scorchful-test:nether_lily/crimson_dry"
+            structure = "scorchful-test:nether_lily/crimson_dry",
+            environment = "scorchful-test:no_random_ticks"
     )
     public void using_water_bottle_on_dry_crimson_lily_saturates_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -161,7 +166,8 @@ public class CrimsonLilyTests {
     }
 
     @GameTest(
-            structure = "scorchful-test:nether_lily/crimson_dry"
+            structure = "scorchful-test:nether_lily/crimson_dry",
+            environment = "scorchful-test:no_random_ticks"
     )
     public void using_water_skin_on_dry_crimson_lily_saturates_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -191,7 +197,8 @@ public class CrimsonLilyTests {
     }
 
     @GameTest(
-            structure = "scorchful-test:nether_lily/crimson_wet"
+            structure = "scorchful-test:nether_lily/crimson_wet",
+            environment = "scorchful-test:no_random_ticks"
     )
     public void using_water_bottle_on_wet_crimson_lily_does_not_consume_bottle(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -219,7 +226,8 @@ public class CrimsonLilyTests {
     }
 
     @GameTest(
-            structure = "scorchful-test:nether_lily/crimson_wet"
+            structure = "scorchful-test:nether_lily/crimson_wet",
+            environment = "scorchful-test:no_random_ticks"
     )
     public void using_water_skin_on_wet_crimson_lily_does_not_consume_skin(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);

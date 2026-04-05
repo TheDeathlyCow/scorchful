@@ -62,6 +62,9 @@
 		"loom:injected_interfaces": {
 			"net/minecraft/world/damagesource/DamageSources": [
 				"com/github/thedeathlycow/scorchful/world/ScorchfulDamageSources"
+			],
+			"net/minecraft/world/level/biome/Biome": [
+				"com/github/thedeathlycow/scorchful/world/ScorchfulBiome"
 			]
 		},
 		"cardinal-components": [

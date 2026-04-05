@@ -4,8 +4,9 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.section.WeatherConfig;
 import com.github.thedeathlycow.scorchful.mixin.accessor.LivingEntityAccessor;
+import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
-import com.github.thedeathlycow.thermoo.api.temperature.status.v2.effect.DamageEffect;
+import com.thedeathlycow.immersive.storms.registry.ISBiomeTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
@@ -17,10 +18,22 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 
 public class SandstormEffects {
     private static final Identifier SPEED_MODIFIER_ID = Scorchful.id("sandstorm_slowing");
     private static final Identifier FOLLOW_RANGE_MODIFIER_ID = Scorchful.id("sandstorm_reduced_visibility");
+
+    public static boolean canBreezesSpawnAt(
+            ServerLevel level,
+            BlockPos pos,
+            Holder<Biome> biome
+    ) {
+        return ScorchfulConfig.getWeatherConfig().enableBreezesInSandstorms()
+                && level.isRaining()
+                && hasSandstormsOrBlizzards(level, biome)
+                && level.canSeeSky(pos); // this prevents breezes in caves
+    }
 
     public static boolean canSuffocate(LivingEntity entity) {
         WeatherConfig config = ScorchfulConfig.getWeatherConfig();
@@ -70,11 +83,21 @@ public class SandstormEffects {
             if (accessor.scorchfulInvokeShouldTakeDrowningDamage()) {
                 entity.setAirSupply(0);
                 float damage = 2.0f * ScorchfulConfig.getWeatherConfig().suffocatingDamageMultiplier();
-                entity.hurtServer(serverLevel, entity.damageSources().scorchfulSuffocate(), damage);
+                entity.hurtServer(serverLevel, entity.damageSources().scorchful$Suffocate(), damage);
             }
         }
 
         return true;
+    }
+
+    private static boolean hasSandstormsOrBlizzards(ServerLevel level, Holder<Biome> biome) {
+        if (biome.is(SBiomeTags.HAS_SANDSTORMS) && level.isRaining()) {
+            return true;
+        } else if (biome.is(ISBiomeTags.HAS_BLIZZARDS) && level.isThundering()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private static void removeModifiers(LivingEntity entity) {

@@ -19,7 +19,8 @@ import java.util.function.BooleanSupplier;
 public class WarpedLilyTests {
 
     @GameTest(
-            structure = "scorchful-test:nether_lily/warped_wet"
+            structure = "scorchful-test:nether_lily/warped_wet",
+            environment = "scorchful-test:no_random_ticks"
     )
     public void using_glass_bottle_on_wet_warped_lily_fills_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -55,7 +56,8 @@ public class WarpedLilyTests {
     }
 
     @GameTest(
-            structure = "scorchful-test:nether_lily/warped_dry"
+            structure = "scorchful-test:nether_lily/warped_dry",
+            environment = "scorchful-test:no_random_ticks"
     )
     public void using_glass_bottle_on_dry_warped_lily_does_not_fill_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -90,7 +92,8 @@ public class WarpedLilyTests {
     }
 
     @GameTest(
-            structure = "scorchful-test:nether_lily/warped_partially_wet"
+            structure = "scorchful-test:nether_lily/warped_partially_wet",
+            environment = "scorchful-test:no_random_ticks"
     )
     public void using_glass_bottle_on_partially_wet_warped_lily_does_not_fill_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -125,7 +128,8 @@ public class WarpedLilyTests {
     }
 
     @GameTest(
-            structure = "scorchful-test:nether_lily/warped_wet"
+            structure = "scorchful-test:nether_lily/warped_wet",
+            environment = "scorchful-test:no_random_ticks"
     )
     public void using_water_skin_on_wet_warped_lily_fills_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
@@ -153,7 +157,8 @@ public class WarpedLilyTests {
     }
 
     @GameTest(
-            structure = "scorchful-test:nether_lily/warped_dry"
+            structure = "scorchful-test:nether_lily/warped_dry",
+            environment = "scorchful-test:no_random_ticks"
     )
     public void using_water_skin_on_dry_warped_lily_does_not_fill_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 1, 2);
