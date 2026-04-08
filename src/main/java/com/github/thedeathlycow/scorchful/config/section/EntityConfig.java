@@ -29,6 +29,12 @@ public class EntityConfig {
 
     public static final String EFFECTS_GROUP = "effects";
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Enable Drowned armor spawning")
+    @SerialEntry(comment = "When enabled, Drowned may randomly spawn with Copper or Turtle armor, similar to Zombies on land.")
+    @TickBox
+    boolean enableDrownedArmorSpawning = true;
+
     @AutoGen(category = CATEGORY, group = EFFECTS_GROUP)
     @Translate.Name("Enable desert visions")
     @SerialEntry(comment = "Toggles hallucinations when overheating in the desert like boats and flowers.")
@@ -40,6 +46,10 @@ public class EntityConfig {
     @SerialEntry(comment = "How much to multiply an entity's (including players) hostile mob detection range by.")
     @DoubleField(min = 0, max = 128)
     double fearDetectionRangeMultiplier = 2.0;
+
+    public boolean enableDrownedArmorSpawning() {
+        return enableDrownedArmorSpawning;
+    }
 
     public boolean enableDesertVisions() {
         return enableDesertVisions;

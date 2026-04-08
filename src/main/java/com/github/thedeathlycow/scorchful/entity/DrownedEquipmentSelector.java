@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.entity;
 
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.WeightedList;
@@ -28,6 +29,10 @@ public final class DrownedEquipmentSelector {
             .build();
 
     public static void populateDrownedArmor(Drowned drowned, RandomSource random, DifficultyInstance difficulty) {
+        if (!ScorchfulConfig.getEntityConfig().enableDrownedArmorSpawning()) {
+            return;
+        }
+
         if (random.nextFloat() < 0.25f * difficulty.getSpecialMultiplier()) {
             final DrownedArmorType armorType = ARMOR_POOL.getRandomOrThrow(random);
             final float partialChance = drowned.level().getDifficulty() == Difficulty.HARD ? 0.1f : 0.25f;
