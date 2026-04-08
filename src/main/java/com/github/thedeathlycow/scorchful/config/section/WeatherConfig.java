@@ -27,10 +27,10 @@ public class WeatherConfig {
     public static final String SUFFOCATING_GROUP = "suffocating";
 
     @AutoGen(category = CATEGORY)
-    @Translate.Name("Do Sand Pile accumulation")
-    @SerialEntry(comment = "Enable/disable sand piles accumulating on the ground during sandstorms.")
+    @Translate.Name("Enable Sand Pile accumulation")
+    @SerialEntry(comment = "When enabled, sand piles will accumulate on the ground during sandstorms.")
     @TickBox
-    boolean doSandPileAccumulation = true;
+    boolean enableSandPileAccumulation = true;
 
     @AutoGen(category = CATEGORY)
     @Translate.Name("Sand Pile accumulation height")
@@ -56,8 +56,8 @@ public class WeatherConfig {
     @TickBox
     boolean enableBreezesInSandstorms = true;
 
-    public boolean isSandPileAccumulationEnabled() {
-        return doSandPileAccumulation;
+    public boolean enableSandPileAccumulation() {
+        return enableSandPileAccumulation;
     }
 
     public int getSandPileAccumulationHeight() {
