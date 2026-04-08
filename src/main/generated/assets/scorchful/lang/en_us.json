@@ -92,6 +92,8 @@
   "yacl3.config.scorchful:client/display.desc": "Client-side display settings for Scorchful.",
   "yacl3.config.scorchful:client/display.enableBurningHeartOverlay": "Enable burning heart overlay",
   "yacl3.config.scorchful:client/display.enableBurningHeartOverlay.desc": "Toggle the burning heart temperature display on the health bar",
+  "yacl3.config.scorchful:client/display.enableFearArmorBar": "Enable Fear armor bar",
+  "yacl3.config.scorchful:client/display.enableFearArmorBar.desc": "When enabled, the armor bar will be made red when the player has the Fear effect.",
   "yacl3.config.scorchful:client/display.enableSoakingOverlay": "Enable soaking overlay",
   "yacl3.config.scorchful:client/display.enableSoakingOverlay.desc": "Toggle the soaking display on the health bar",
   "yacl3.config.scorchful:client/display.enableWetDripParticles": "Enable wet drip particles",
