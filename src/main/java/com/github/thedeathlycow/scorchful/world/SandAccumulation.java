@@ -78,7 +78,7 @@ public class SandAccumulation {
     private static void placeSandPile(ServerLevel world, BlockPos topPos, Block sandPileBlock, WeatherConfig config) {
 
         int accumulationHeight = config.getSandPileAccumulationHeight();
-        if (!config.isSandPileAccumulationEnabled() || accumulationHeight <= 0) {
+        if (!config.enableSandPileAccumulation() || accumulationHeight <= 0) {
             return;
         }
 

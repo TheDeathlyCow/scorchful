@@ -25,6 +25,7 @@ class Updater {
         map.put(5, SchemaV5::run);
         map.put(6, SchemaV6::run);
         map.put(7, SchemaV7::run);
+        map.put(8, SchemaV8::run);
         return map;
     };
 
