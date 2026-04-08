@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.config.section;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.config.Translate;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
@@ -23,16 +24,18 @@ public class EntityConfig {
             )
             .build();
 
-    public static final String EFFECTS_CATEGORY = "effects";
+    private static final String CATEGORY = ScorchfulConfig.MAIN_CATEGORY_NAME;
     public static final String SOAKING_CATEGORY = "soaking";
 
-    @AutoGen(category = EFFECTS_CATEGORY)
+    public static final String EFFECTS_GROUP = "effects";
+
+    @AutoGen(category = CATEGORY, group = EFFECTS_GROUP)
     @Translate.Name("Enable desert visions")
     @SerialEntry(comment = "Toggles hallucinations when overheating in the desert like boats and flowers.")
     @TickBox
     boolean enableDesertVisions = true;
 
-    @AutoGen(category = EFFECTS_CATEGORY)
+    @AutoGen(category = CATEGORY, group = EFFECTS_GROUP)
     @Translate.Name("Fear detection range multiplier")
     @SerialEntry(comment = "How much to multiply an entity's (including players) hostile mob detection range by.")
     @DoubleField(min = 0, max = 128)
