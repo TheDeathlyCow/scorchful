@@ -104,6 +104,8 @@
   "yacl3.config.scorchful:common/entity.desc": "Specific settings for entities and mobs.",
   "yacl3.config.scorchful:common/entity.enableDesertVisions": "Enable desert visions",
   "yacl3.config.scorchful:common/entity.enableDesertVisions.desc": "Toggles hallucinations when overheating in the desert like boats and flowers.",
+  "yacl3.config.scorchful:common/entity.enableDrownedArmorSpawning": "Enable Drowned armor spawning",
+  "yacl3.config.scorchful:common/entity.enableDrownedArmorSpawning.desc": "When enabled, Drowned may randomly spawn with Copper or Turtle armor, similar to Zombies on land.",
   "yacl3.config.scorchful:common/entity.fearDetectionRangeMultiplier": "Fear detection range multiplier",
   "yacl3.config.scorchful:common/entity.fearDetectionRangeMultiplier.desc": "How much to multiply an entity's (including players) hostile mob detection range by.",
   "yacl3.config.scorchful:common/entity.onFireDryRateMultiplier": "On fire dry rate multiplier",
