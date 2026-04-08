@@ -8,6 +8,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 
 public class SMobEffects {
 
@@ -19,6 +21,8 @@ public class SMobEffects {
     public static final Holder<MobEffect> FEAR = register(
             "fear",
             new FearEffect(MobEffectCategory.HARMFUL, 0x510359)
+                    .addAttributeModifier(Attributes.ARMOR, Scorchful.id("fear_effect/armor"), -0.5, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
+                    .addAttributeModifier(Attributes.ARMOR_TOUGHNESS, Scorchful.id("fear_effect/armor_toughness"), -0.5, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
     );
 
     public static void initialize() {
