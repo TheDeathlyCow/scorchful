@@ -10,6 +10,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -19,7 +20,6 @@ import org.joml.Vector2i;
 
 @Environment(EnvType.CLIENT)
 public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.RenderHealthBarCallback {
-
     public static final BurningHeartsOverlay INSTANCE = new BurningHeartsOverlay();
 
     public static final Identifier HEART_OVERLAY_TEXTURE = Scorchful.id("textures/gui/fire_heart_overlay.png");
@@ -27,13 +27,14 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
     public static final int TEXTURE_WIDTH = 18;
     public static final int TEXTURE_HEIGHT = 30;
 
-    public boolean drawEngulfedHeart(
+    public boolean extractEngulfedHeart(
             GuiGraphicsExtractor extractor,
             @Nullable Player player,
             int x, int y,
             boolean hardcore, boolean halfHeart
     ) {
         BurningHeartType type = BurningHeartType.forPlayer(player, hardcore);
+
         if (type != null) {
             extractor.blit(
                     RenderPipelines.GUI_TEXTURED,
@@ -46,6 +47,7 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
 
             return true;
         }
+
         return false;
     }
 

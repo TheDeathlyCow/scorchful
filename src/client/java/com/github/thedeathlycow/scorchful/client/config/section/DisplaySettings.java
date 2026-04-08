@@ -44,6 +44,12 @@ public class DisplaySettings {
     @SerialEntry(comment = "Toggle the dripping particles when wet. This setting overrides Frostiful if installed.")
     boolean enableWetDripParticles = true;
 
+    @AutoGen(category = CATEGORY)
+    @Translate.Name("Enable Fear armor bar")
+    @TickBox
+    @SerialEntry(comment = "When enabled, the armor bar will be made red when the player has the Fear effect.")
+    boolean enableFearArmorBar = true;
+
     public boolean enableBurningHeartOverlay() {
         return enableBurningHeartOverlay;
     }
@@ -54,5 +60,9 @@ public class DisplaySettings {
 
     public boolean enableWetDripParticles() {
         return enableWetDripParticles;
+    }
+
+    public boolean enableFearArmorBar() {
+        return enableFearArmorBar;
     }
 }
