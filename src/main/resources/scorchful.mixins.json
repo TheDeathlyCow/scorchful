@@ -6,6 +6,7 @@
         "BiomeMixin",
         "BreezeMixin",
         "DamageSourcesMixin",
+        "DrownedMixin",
         "EntityMixin",
         "ItemStackMixin",
         "LivingEntityMixin",
