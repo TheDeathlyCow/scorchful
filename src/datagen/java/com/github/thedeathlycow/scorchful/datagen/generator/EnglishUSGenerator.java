@@ -129,25 +129,22 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         builder.add(ScorchfulModMenu.DISPLAY_CATEGORY, "Display Settings");
         builder.add(ScorchfulModMenu.DISPLAY_DESC, "Client-side display settings for Scorchful.");
 
+        builder.add(ScorchfulModMenu.TEMPERATURE_CATEGORY, "Temperature Settings");
+        builder.add(ScorchfulModMenu.TEMPERATURE_DESC, "Settings for the Scorchful temperature system.");
         builder.add(Translate.categoryKey(TemperatureConfig.HANDLER, TemperatureConfig.GENERAL_CATEGORY_NAME), "General Settings");
         builder.add(Translate.categoryKey(TemperatureConfig.HANDLER, TemperatureConfig.ENVIRONMENT_CATEGORY_NAME), "Environment Settings");
         builder.add(Translate.categoryKey(TemperatureConfig.HANDLER, TemperatureConfig.TEMPERATURE_SOURCES_CATEGORY_NAME), "Temperature Sources");
 
-        builder.add(ScorchfulModMenu.TEMPERATURE_CATEGORY, "Temperature Settings");
-        builder.add(ScorchfulModMenu.TEMPERATURE_DESC, "Settings for the Scorchful temperature system.");
-
-        builder.add(Translate.categoryKey(EntityConfig.HANDLER, EntityConfig.EFFECTS_CATEGORY), "Mob Effect Settings");
-        builder.add(Translate.categoryKey(EntityConfig.HANDLER, EntityConfig.SOAKING_CATEGORY), "Soaking Settings");
-
         builder.add(ScorchfulModMenu.ENTITY_CATEGORY, "Entity Settings");
         builder.add(ScorchfulModMenu.ENTITY_DESC, "Specific settings for entities and mobs.");
-
-        builder.add(Translate.categoryKey(ItemConfig.HANDLER, ItemConfig.TOOLS_AND_ARMOR_CATEGORY_NAME), "Tool & Armor Settings");
-        builder.add(Translate.categoryKey(ItemConfig.HANDLER, ItemConfig.CONSUMABLE_CATEGORY_NAME), "Consumable Settings");
-        builder.add(Translate.categoryKey(ItemConfig.HANDLER, ItemConfig.MISC_CATEGORY_NAME), "Miscellaneous Settings");
+        builder.add(Translate.categoryKey(EntityConfig.HANDLER, EntityConfig.SOAKING_CATEGORY), "Soaking Settings");
+        builder.add(Translate.mainGroupKey(EntityConfig.HANDLER, EntityConfig.EFFECTS_GROUP), "Mob Effects");
 
         builder.add(ScorchfulModMenu.ITEM_CATEGORY, "Item Settings");
         builder.add(ScorchfulModMenu.ITEM_DESC, "Specific settings for items.");
+        builder.add(Translate.categoryKey(ItemConfig.HANDLER, ItemConfig.TOOLS_AND_ARMOR_CATEGORY_NAME), "Tool & Armor Settings");
+        builder.add(Translate.categoryKey(ItemConfig.HANDLER, ItemConfig.CONSUMABLE_CATEGORY_NAME), "Consumable Settings");
+        builder.add(Translate.categoryKey(ItemConfig.HANDLER, ItemConfig.MISC_CATEGORY_NAME), "Miscellaneous Settings");
 
         builder.add(ScorchfulModMenu.WEATHER_CATEGORY, "Weather Settings");
         builder.add(ScorchfulModMenu.WEATHER_DESC, "Specific settings for Scorchful's weather-related effects.");
