@@ -73,6 +73,7 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         builder.add(SItemTags.IS_REFRESHING, "Refreshing Food and Drink");
         builder.add(SItemTags.IS_SUSTAINING, "Sustaining Food and Drink");
         builder.add(SItemTags.SAND_PILES, "Sand Piles");
+        builder.add(SItemTags.SAND_DUSTS, "Sand Dusts");
         builder.add(SItemTags.TURTLE_ARMOR, "Turtle Armor");
         builder.add(SItemTags.BLOCKS_RAIN_WHEN_HOLDING, "Rain blocker");
         builder.add(SItemTags.VERY_HARMFUL_HEAT_RESISTANCE, "Very Harmful Heat Resistance");
