@@ -80,6 +80,7 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         builder.add(SItemTags.PROTECTIVE_HEAT_RESISTANCE, "Protective Heat Resistance");
         builder.add(SItemTags.VERY_PROTECTIVE_HEAT_RESISTANCE, "Very Protective Heat Resistance");
         builder.add(SItemTags.COMMON_CACTUS_JUICE, "Cactus Juice");
+        builder.add(SItemTags.COMMON_SAND_DUSTS, "Sand Dusts");
 
         builder.add(SEntityAttributes.REHYDRATION_EFFICIENCY, "Rehydration Efficiency");
         builder.add(SEntityAttributes.LUNG_CAPACITY, "Lung Capacity");
