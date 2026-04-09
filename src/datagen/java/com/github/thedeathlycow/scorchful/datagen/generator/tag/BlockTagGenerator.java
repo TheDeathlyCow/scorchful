@@ -77,7 +77,8 @@ public class BlockTagGenerator extends FabricTagsProvider.BlockTagsProvider {
                 .add(SBlocks.RED_SAND_PILE);
 
         valueLookupBuilder(BlockTags.CAULDRONS)
-                .add(SBlocks.SAND_CAULDRON);
+                .add(SBlocks.SAND_CAULDRON)
+                .add(SBlocks.RED_SAND_CAULDRON);
 
         valueLookupBuilder(BlockTags.ENDERMAN_HOLDABLE)
                 .add(SBlocks.ROOTED_NETHERRACK)
