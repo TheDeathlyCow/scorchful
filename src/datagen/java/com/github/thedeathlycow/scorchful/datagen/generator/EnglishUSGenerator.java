@@ -121,7 +121,7 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         addStat(builder, SStats.USE_WARPED_LILY, "Harvest Warped Lily");
 
         // Config values
-        builder.add(ScorchfulModMenu.TITLE, "Scorchful Config");
+        builder.add(ScorchfulModMenu.TITLE, "Scorchful");
         builder.add(ScorchfulModMenu.CLIENT_TITLE, "Client Settings");
         builder.add(ScorchfulModMenu.COMMON_TITLE, "Common Settings");
         builder.add(ScorchfulModMenu.COMPAT_TITLE, "Compatibility Settings");
