@@ -13,7 +13,6 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 
 public class TurtleScuteLootTableModifier implements LootTableEvents.Modify {
-
     public static final ResourceKey<LootTable> EXTRA_SCUTE_IN_BURIED_TREASURE = registryKey("chests/extra_turtle_scute/buried_treasure");
     public static final ResourceKey<LootTable> EXTRA_SCUTE_IN_SHIPWRECK_SUPPLY = registryKey("chests/extra_turtle_scute/shipwreck_supply");
     public static final ResourceKey<LootTable> EXTRA_SCUTE_IN_SHIPWRECK_TREASURE = registryKey("chests/extra_turtle_scute/shipwreck_treasure");
@@ -47,7 +46,6 @@ public class TurtleScuteLootTableModifier implements LootTableEvents.Modify {
         if (pool != null) {
             tableBuilder.withPool(pool);
         }
-
     }
 
     private static ResourceKey<LootTable> registryKey(String name) {

@@ -12,6 +12,7 @@ import com.github.thedeathlycow.scorchful.item.component.DrinkLevel;
 import com.github.thedeathlycow.scorchful.item.component.HeatResistance;
 import com.github.thedeathlycow.scorchful.item.component.HeatResistanceModifier;
 import com.github.thedeathlycow.scorchful.item.enchantment.EnchantmentModifiers;
+import com.github.thedeathlycow.scorchful.item.loot.HuskLootModifier;
 import com.github.thedeathlycow.scorchful.item.loot.TurtleScuteLootTableModifier;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
@@ -21,6 +22,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -115,7 +117,12 @@ public final class SItems {
             }
         });
         HeatResistanceModifier.initialize();
+
         LootTableEvents.MODIFY.register(new TurtleScuteLootTableModifier());
+        LootTableEvents.MODIFY.register(new HuskLootModifier(EntityType.HUSK));
+        LootTableEvents.MODIFY.register(new HuskLootModifier(EntityType.PARCHED));
+        LootTableEvents.MODIFY.register(new HuskLootModifier(EntityType.CAMEL_HUSK));
+
         EnchantmentModifiers.initialize();
         TurtleArmorEffects.initialize();
     }
