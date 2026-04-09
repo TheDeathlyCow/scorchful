@@ -83,7 +83,7 @@ public abstract class GuiMixin {
             boolean half,
             Operation<Void> original
     ) {
-        boolean drewEngulfed = type != Gui.HeartType.NORMAL
+        boolean drewEngulfed = type == Gui.HeartType.NORMAL
                 && BurningHeartsOverlay.INSTANCE.extractEngulfedHeart(graphics, this.getCameraPlayer(), xo, yo, isHardcore, half);
 
         if (!drewEngulfed) {
