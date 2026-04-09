@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_sand_dust": {
+    "has_dust": {
       "conditions": {
         "items": [
           {
-            "items": "scorchful:sand_dust"
+            "items": "scorchful:dust"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_sand_dust"
+      "has_dust"
     ]
   ],
   "rewards": {

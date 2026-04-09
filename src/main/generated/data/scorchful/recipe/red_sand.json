@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "scorchful:red_sand_dust"
+    "#": "scorchful:red_dust"
   },
   "pattern": [
     "##",

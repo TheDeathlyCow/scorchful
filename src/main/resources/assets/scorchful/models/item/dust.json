@@ -1,6 +1,6 @@
 {
     "parent": "minecraft:item/generated",
     "textures": {
-        "layer0": "scorchful:item/sand_dust"
+        "layer0": "scorchful:item/dust"
     }
 }

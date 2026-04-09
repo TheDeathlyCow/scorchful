@@ -42,8 +42,8 @@ public class ScorchfulBlockLootGenerator extends FabricBlockLootSubProvider {
         add(SBlocks.ROOTED_CRIMSON_NYLIUM, block -> this.createSingleItemTableWithSilkTouch(block, Blocks.NETHERRACK));
         add(SBlocks.ROOTED_WARPED_NYLIUM, block -> this.createSingleItemTableWithSilkTouch(block, Blocks.NETHERRACK));
 
-        add(SBlocks.RED_SAND_PILE, block -> createSandLayers(block, SItems.RED_SAND_DUST, SItems.RED_SAND_PILE, Blocks.RED_SAND));
-        add(SBlocks.SAND_PILE, block -> createSandLayers(block, SItems.SAND_DUST, SItems.SAND_PILE, Blocks.SAND));
+        add(SBlocks.RED_SAND_PILE, block -> createSandLayers(block, SItems.RED_DUST, SItems.RED_SAND_PILE, Blocks.RED_SAND));
+        add(SBlocks.SAND_PILE, block -> createSandLayers(block, SItems.DUST, SItems.SAND_PILE, Blocks.SAND));
     }
 
     @Override
