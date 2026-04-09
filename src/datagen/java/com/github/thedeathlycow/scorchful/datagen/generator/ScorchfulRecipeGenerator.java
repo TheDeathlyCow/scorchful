@@ -57,13 +57,23 @@ public class ScorchfulRecipeGenerator extends FabricRecipeProvider {
 
                 SimpleCookingRecipeBuilder.smelting(
                                 this.tag(SItemTags.SAND_DUSTS),
-                                RecipeCategory.MISC,
+                                RecipeCategory.BUILDING_BLOCKS,
                                 CookingBookCategory.BLOCKS,
                                 Items.QUARTZ,
                                 0.1F, 200
                         )
                         .unlockedBy(getHasName(SItems.DUST), this.has(SItemTags.SAND_DUSTS))
                         .save(this.output, "quartz_from_dust");
+
+                shapeless(RecipeCategory.MISC, SItems.DUST, 1)
+                        .unlockedBy(getHasName(SItems.SAND_PILE), has(SItems.SAND_PILE))
+                        .requires(SItems.SAND_PILE)
+                        .save(this.output);
+
+                shapeless(RecipeCategory.MISC, SItems.RED_DUST, 1)
+                        .unlockedBy(getHasName(SItems.RED_SAND_PILE), has(SItems.RED_SAND_PILE))
+                        .requires(SItems.RED_SAND_PILE)
+                        .save(this.output);
 
                 shaped(RecipeCategory.BUILDING_BLOCKS, SItems.RED_SAND_PILE, 6)
                         .unlockedBy(getHasName(Items.RED_SAND), has(Items.RED_SAND))
