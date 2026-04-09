@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.datagen.generator.loot;
 
 import com.github.thedeathlycow.scorchful.block.SandPileBlock;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
+import com.github.thedeathlycow.scorchful.registry.SItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
@@ -41,8 +42,8 @@ public class ScorchfulBlockLootGenerator extends FabricBlockLootSubProvider {
         add(SBlocks.ROOTED_CRIMSON_NYLIUM, block -> this.createSingleItemTableWithSilkTouch(block, Blocks.NETHERRACK));
         add(SBlocks.ROOTED_WARPED_NYLIUM, block -> this.createSingleItemTableWithSilkTouch(block, Blocks.NETHERRACK));
 
-        add(SBlocks.RED_SAND_PILE, block -> createSandLayers(block, block, block, Blocks.RED_SAND));
-        add(SBlocks.SAND_PILE, block -> createSandLayers(block, block, block, Blocks.SAND));
+        add(SBlocks.RED_SAND_PILE, block -> createSandLayers(block, SItems.RED_SAND_DUST, SItems.RED_SAND_PILE, Blocks.RED_SAND));
+        add(SBlocks.SAND_PILE, block -> createSandLayers(block, SItems.SAND_DUST, SItems.SAND_PILE, Blocks.SAND));
     }
 
     @Override

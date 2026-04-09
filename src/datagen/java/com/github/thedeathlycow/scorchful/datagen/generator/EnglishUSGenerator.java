@@ -53,6 +53,9 @@ public class EnglishUSGenerator extends FabricLanguageProvider {
         builder.add(SItems.TURTLE_LEGGINGS, "Turtle Knee Pads");
         builder.add(SItems.TURTLE_BOOTS, "Turtle Flippers");
 
+        builder.add(SItems.SAND_DUST, "Sand Dust");
+        builder.add(SItems.RED_SAND_DUST, "Red Sand Dust");
+
         builder.add(genericTooltip("cooling"), "Cooling ❄");
         builder.add(genericTooltip("refreshing"), "Refreshing \uD83C\uDF0A");
         builder.add(genericTooltip("sustaining"), "Sustaining \uD83C\uDF0A\uD83C\uDF0A");

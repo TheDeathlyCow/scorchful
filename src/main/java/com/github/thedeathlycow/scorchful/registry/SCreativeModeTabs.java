@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.Contract;
 
-public class SItemGroups {
+public class SCreativeModeTabs {
     public static final CreativeModeTab SCORCHFUL = Registry.register(
             BuiltInRegistries.CREATIVE_MODE_TAB,
             Scorchful.id("main"),
@@ -35,6 +35,8 @@ public class SItemGroups {
                         entries.accept(SItems. ROOTED_CRIMSON_NYLIUM.getDefaultInstance());
                         entries.accept(SItems.ROOTED_WARPED_NYLIUM.getDefaultInstance());
 
+                        entries.accept(SItems.SAND_DUST.getDefaultInstance());
+                        entries.accept(SItems.RED_SAND_DUST.getDefaultInstance());
                         entries.accept(SItems.SAND_PILE.getDefaultInstance());
                         entries.accept(SItems.RED_SAND_PILE.getDefaultInstance());
                     }).build()
@@ -51,6 +53,6 @@ public class SItemGroups {
         return filledWaterSkin;
     }
 
-    private SItemGroups() {
+    private SCreativeModeTabs() {
     }
 }

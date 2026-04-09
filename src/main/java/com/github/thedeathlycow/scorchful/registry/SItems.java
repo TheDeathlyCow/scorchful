@@ -69,6 +69,9 @@ public final class SItems {
 
     public static final Item RED_SAND_PILE = register("red_sand_pile", SBlocks.RED_SAND_PILE);
 
+    public static final Item SAND_DUST = register("sand_dust");
+    public static final Item RED_SAND_DUST = register("red_sand_dust");
+
     public static final Item TURTLE_CHESTPLATE = register(
             "turtle_chestplate",
             settings -> new Item(
@@ -115,6 +118,10 @@ public final class SItems {
         LootTableEvents.MODIFY.register(new TurtleScuteLootTableModifier());
         EnchantmentModifiers.initialize();
         TurtleArmorEffects.initialize();
+    }
+
+    private static Item register(String id) {
+        return register(id, Item::new, new Item.Properties());
     }
 
     private static Item register(String id, Block block) {

@@ -38,6 +38,20 @@ public class ScorchfulRecipeGenerator extends FabricRecipeProvider {
                         .requires(Items.CACTUS)
                         .save(output);
 
+                shaped(RecipeCategory.BUILDING_BLOCKS, Items.SAND, 1)
+                        .unlockedBy(getHasName(SItems.SAND_DUST), has(SItems.SAND_DUST))
+                        .pattern("##")
+                        .pattern("##")
+                        .define('#', SItems.SAND_DUST)
+                        .save(output);
+
+                shaped(RecipeCategory.BUILDING_BLOCKS, Items.RED_SAND, 1)
+                        .unlockedBy(getHasName(SItems.RED_SAND_DUST), has(SItems.RED_SAND_DUST))
+                        .pattern("##")
+                        .pattern("##")
+                        .define('#', SItems.RED_SAND_DUST)
+                        .save(output);
+
                 shaped(RecipeCategory.BUILDING_BLOCKS, SItems.RED_SAND_PILE, 6)
                         .unlockedBy(getHasName(Items.RED_SAND), has(Items.RED_SAND))
                         .pattern("###")
