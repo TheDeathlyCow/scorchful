@@ -29,6 +29,7 @@ public class SItemTags {
     public static final TagKey<Item> BLOCKS_RAIN_WHEN_HOLDING = of("blocks_rain_when_holding");
 
     public static final TagKey<Item> COMMON_CACTUS_JUICE = ofCommon("drinks/cactus_juice");
+    public static final TagKey<Item> COMMON_SAND_DUSTS = ofCommon("dusts/sand");
 
     private static TagKey<Item> of(String path) {
         return TagKey.create(Registries.ITEM, Scorchful.id(path));

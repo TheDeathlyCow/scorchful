@@ -46,6 +46,10 @@ public class ItemTagGenerator extends FabricTagsProvider.ItemTagsProvider {
         valueLookupBuilder(SItemTags.COMMON_CACTUS_JUICE)
                 .add(SItems.CACTUS_JUICE);
 
+        valueLookupBuilder(SItemTags.COMMON_SAND_DUSTS)
+                .add(SItems.DUST)
+                .add(SItems.RED_DUST);
+
     }
 
     private void addCommonTags() {
@@ -57,6 +61,9 @@ public class ItemTagGenerator extends FabricTagsProvider.ItemTagsProvider {
 
         valueLookupBuilder(ConventionalItemTags.DRINK_CONTAINING_BOTTLE)
                 .add(SItems.CACTUS_JUICE);
+
+        valueLookupBuilder(ConventionalItemTags.DUSTS)
+                .addOptionalTag(SItemTags.COMMON_SAND_DUSTS);
     }
 
     private static TagKey<Item> commonKey(String path) {
