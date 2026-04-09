@@ -21,6 +21,11 @@ public class ItemTagGenerator extends FabricTagsProvider.ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider wrapperLookup) {
+        addScorchfulTags();
+        addCommonTags();
+    }
+
+    private void addScorchfulTags() {
         valueLookupBuilder(SItemTags.HEAT_RESISTANCE_MODIFIED)
                 .addOptionalTag(ConventionalItemTags.ARMORS);
 
@@ -41,6 +46,9 @@ public class ItemTagGenerator extends FabricTagsProvider.ItemTagsProvider {
         valueLookupBuilder(SItemTags.COMMON_CACTUS_JUICE)
                 .add(SItems.CACTUS_JUICE);
 
+    }
+
+    private void addCommonTags() {
         valueLookupBuilder(ConventionalItemTags.JUICE_DRINKS)
                 .addOptionalTag(SItemTags.COMMON_CACTUS_JUICE);
 
