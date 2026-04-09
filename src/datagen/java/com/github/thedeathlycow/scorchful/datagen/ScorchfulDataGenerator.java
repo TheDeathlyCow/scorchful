@@ -3,6 +3,7 @@ package com.github.thedeathlycow.scorchful.datagen;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.datagen.generator.*;
 import com.github.thedeathlycow.scorchful.datagen.generator.client.SModelGenerator;
+import com.github.thedeathlycow.scorchful.datagen.generator.loot.ScorchfulBlockLootGenerator;
 import com.github.thedeathlycow.scorchful.datagen.generator.registry.DamageTypeBootstrap;
 import com.github.thedeathlycow.scorchful.datagen.generator.registry.TemperatureStatusGenerator;
 import com.github.thedeathlycow.scorchful.datagen.generator.tag.*;
@@ -40,6 +41,7 @@ public class ScorchfulDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider((output, registriesFuture) -> new ItemTagGenerator(output, registriesFuture, blockTags));
 
         pack.addProvider(ScorchfulRecipeGenerator::new);
+        pack.addProvider(ScorchfulBlockLootGenerator::new);
         pack.addProvider(SModelGenerator::new);
         pack.addProvider(EnglishUSGenerator::new);
     }
