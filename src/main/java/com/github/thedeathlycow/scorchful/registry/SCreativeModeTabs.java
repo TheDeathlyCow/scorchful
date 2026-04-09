@@ -35,8 +35,8 @@ public class SCreativeModeTabs {
                         entries.accept(SItems. ROOTED_CRIMSON_NYLIUM.getDefaultInstance());
                         entries.accept(SItems.ROOTED_WARPED_NYLIUM.getDefaultInstance());
 
-                        entries.accept(SItems.SAND_DUST.getDefaultInstance());
-                        entries.accept(SItems.RED_SAND_DUST.getDefaultInstance());
+                        entries.accept(SItems.DUST.getDefaultInstance());
+                        entries.accept(SItems.RED_DUST.getDefaultInstance());
                         entries.accept(SItems.SAND_PILE.getDefaultInstance());
                         entries.accept(SItems.RED_SAND_PILE.getDefaultInstance());
                     }).build()

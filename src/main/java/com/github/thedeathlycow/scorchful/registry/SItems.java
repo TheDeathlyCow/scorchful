@@ -69,8 +69,8 @@ public final class SItems {
 
     public static final Item RED_SAND_PILE = register("red_sand_pile", SBlocks.RED_SAND_PILE);
 
-    public static final Item SAND_DUST = register("sand_dust");
-    public static final Item RED_SAND_DUST = register("red_sand_dust");
+    public static final Item DUST = register("dust");
+    public static final Item RED_DUST = register("red_dust");
 
     public static final Item TURTLE_CHESTPLATE = register(
             "turtle_chestplate",

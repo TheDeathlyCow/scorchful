@@ -31,8 +31,8 @@ public class SModelGenerator extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerators itemModelGenerator) {
         itemModelGenerator.declareCustomModelItem(SItems.CRIMSON_LILY);
         itemModelGenerator.declareCustomModelItem(SItems.WARPED_LILY);
-        itemModelGenerator.declareCustomModelItem(SItems.SAND_DUST);
-        itemModelGenerator.declareCustomModelItem(SItems.RED_SAND_DUST);
+        itemModelGenerator.declareCustomModelItem(SItems.DUST);
+        itemModelGenerator.declareCustomModelItem(SItems.RED_DUST);
         itemModelGenerator.declareCustomModelItem(SItems.SAND_PILE);
         itemModelGenerator.declareCustomModelItem(SItems.RED_SAND_PILE);
         itemModelGenerator.declareCustomModelItem(SItems.ROOTED_CRIMSON_NYLIUM);
