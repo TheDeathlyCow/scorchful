@@ -26,6 +26,10 @@ public class ItemTagGenerator extends FabricTagsProvider.ItemTagsProvider {
     }
 
     private void addScorchfulTags() {
+        valueLookupBuilder(SItemTags.SAND_DUSTS)
+                .add(SItems.DUST)
+                .add(SItems.RED_DUST);
+
         valueLookupBuilder(SItemTags.HEAT_RESISTANCE_MODIFIED)
                 .addOptionalTag(ConventionalItemTags.ARMORS);
 
@@ -47,9 +51,7 @@ public class ItemTagGenerator extends FabricTagsProvider.ItemTagsProvider {
                 .add(SItems.CACTUS_JUICE);
 
         valueLookupBuilder(SItemTags.COMMON_SAND_DUSTS)
-                .add(SItems.DUST)
-                .add(SItems.RED_DUST);
-
+                .addOptionalTag(SItemTags.SAND_DUSTS);
     }
 
     private void addCommonTags() {

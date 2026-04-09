@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.datagen.generator;
 
 import com.github.thedeathlycow.scorchful.registry.SItems;
+import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.github.thedeathlycow.thermoo.api.entity.v1.predicate.TemperatureLootCondition;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -14,7 +15,9 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
@@ -51,6 +54,16 @@ public class ScorchfulRecipeGenerator extends FabricRecipeProvider {
                         .pattern("##")
                         .define('#', SItems.RED_DUST)
                         .save(output);
+
+                SimpleCookingRecipeBuilder.smelting(
+                                this.tag(SItemTags.SAND_DUSTS),
+                                RecipeCategory.MISC,
+                                CookingBookCategory.BLOCKS,
+                                Items.QUARTZ,
+                                0.1F, 200
+                        )
+                        .unlockedBy(getHasName(SItems.DUST), this.has(SItemTags.SAND_DUSTS))
+                        .save(this.output, "quartz_from_dust");
 
                 shaped(RecipeCategory.BUILDING_BLOCKS, SItems.RED_SAND_PILE, 6)
                         .unlockedBy(getHasName(Items.RED_SAND), has(Items.RED_SAND))
