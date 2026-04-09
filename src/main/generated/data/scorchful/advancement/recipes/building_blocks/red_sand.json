@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_red_sand_dust": {
+      "conditions": {
+        "items": [
+          {
+            "items": "scorchful:red_sand_dust"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "scorchful:red_sand"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_red_sand_dust"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "scorchful:red_sand"
+    ]
+  }
+}

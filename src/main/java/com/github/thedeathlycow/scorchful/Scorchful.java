@@ -51,7 +51,7 @@ public class Scorchful implements ModInitializer {
         SItems.initialize();
         SEntityTypes.initialize();
         SPotions.initialize();
-        SItemGroups.initialize();
+        SCreativeModeTabs.initialize();
         SSoundEvents.initialize();
         STemperatureEffects.initialize();
         SMobEffects.initialize();

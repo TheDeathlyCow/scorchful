@@ -35,7 +35,7 @@
                       "function": "minecraft:set_count"
                     }
                   ],
-                  "name": "scorchful:sand_pile"
+                  "name": "scorchful:sand_dust"
                 },
                 {
                   "type": "minecraft:item",
@@ -55,7 +55,7 @@
                       "function": "minecraft:set_count"
                     }
                   ],
-                  "name": "scorchful:sand_pile"
+                  "name": "scorchful:sand_dust"
                 },
                 {
                   "type": "minecraft:item",
@@ -75,7 +75,7 @@
                       "function": "minecraft:set_count"
                     }
                   ],
-                  "name": "scorchful:sand_pile"
+                  "name": "scorchful:sand_dust"
                 },
                 {
                   "type": "minecraft:item",
@@ -95,7 +95,7 @@
                       "function": "minecraft:set_count"
                     }
                   ],
-                  "name": "scorchful:sand_pile"
+                  "name": "scorchful:sand_dust"
                 },
                 {
                   "type": "minecraft:item",
@@ -115,7 +115,7 @@
                       "function": "minecraft:set_count"
                     }
                   ],
-                  "name": "scorchful:sand_pile"
+                  "name": "scorchful:sand_dust"
                 },
                 {
                   "type": "minecraft:item",
@@ -135,7 +135,7 @@
                       "function": "minecraft:set_count"
                     }
                   ],
-                  "name": "scorchful:sand_pile"
+                  "name": "scorchful:sand_dust"
                 },
                 {
                   "type": "minecraft:item",
@@ -155,7 +155,7 @@
                       "function": "minecraft:set_count"
                     }
                   ],
-                  "name": "scorchful:sand_pile"
+                  "name": "scorchful:sand_dust"
                 },
                 {
                   "type": "minecraft:item",
