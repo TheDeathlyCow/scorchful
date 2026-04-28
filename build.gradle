@@ -27,7 +27,30 @@ sourceSets.main.resources {
 }
 
 repositories {
-    // Add here additional repositories if required by some of the dependencies below.
+    mavenCentral()
+    mavenLocal()
+
+    maven {
+        url "https://maven.su5ed.dev/releases"
+    }
+    maven {
+        url "https://maven.shedaniel.me/"
+    }
+    maven { url 'https://maven.fabricmc.net' }
+    maven { url 'https://maven.wispforest.io/releases' }
+    maven { url "https://jitpack.io/" }
+    maven { url "https://maven.terraformersmc.com/releases/" }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
 }
 
 base {
@@ -36,6 +59,27 @@ base {
 
 // Mojang ships Java 21 to end users in 1.21.1, so mods should target Java 21.
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+sourceSets {
+    test {
+        compileClasspath += main.compileClasspath
+        runtimeClasspath += main.runtimeClasspath
+    }
+    testmod {
+        compileClasspath += main.compileClasspath
+        runtimeClasspath += main.runtimeClasspath
+        compileClasspath += main.output
+        runtimeClasspath += main.output
+    }
+}
+
+java {
+    withSourcesJar()
+}
+
+test {
+    useJUnitPlatform()
+}
 
 neoForge {
     // Specify the version of NeoForge to use.
@@ -118,27 +162,33 @@ configurations {
 }
 
 dependencies {
-    // Example optional mod dependency with JEI
-    // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
-    // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
-    // compileOnly "mezz.jei:jei-${mc_version}-neoforge-api:${jei_version}"
-    // We add the full version to localRuntime, not runtimeOnly, so that we do not publish a dependency on it
-    // localRuntime "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
+    // fabric-like development
+    implementation("org.sinytra.forgified-fabric-api:forgified-fabric-api:${project.ffapi_version}")
 
-    // Example mod dependency using a mod jar from ./libs with a flat dir repository
-    // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
-    // The group id is ignored when searching -- in this case, it is "blank"
-    // implementation "blank:coolmod-${mc_version}:${coolmod_version}"
+    // config lib
+    implementation("me.shedaniel.cloth:cloth-config-neoforge:${project.cloth_config_version}")
 
-    // Example mod dependency using a file as dependency
-    // implementation files("libs/coolmod-${mc_version}-${coolmod_version}.jar")
+    // thermoo temperature lib
+    implementation("com.github.thedeathlycow:thermoo:v${project.thermoo_version}")
+    // i hate neoforge
+//    interfaceInjectionData "com.github.thedeathlycow:thermoo:v${project.thermoo_version}"
 
-    // Example project dependency using a sister or child project:
-    // implementation project(":myproject")
+    implementation("io.wispforest:accessories-neoforge:${project.accessories_version}")
+    compileOnly("maven.modrinth:colorful-hearts:${project.colorful_hearts_version}")
 
-    // For more info:
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
+    // fabric-style registries and init
+    jarJar(implementation("dev.yumi.mc.core:yumi-mc-foundation:${project.yumi_mc_version}") {
+        attributes {
+            attribute(Attribute.of("net.minecraft.mappings", String), "mojmap")
+        }
+    })
+
+    // testing stuff
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
+    testImplementation "net.neoforged:testframework:${project.neo_version}"
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation "org.mockito:mockito-core:3.+"
+    testmodImplementation "org.mockito:mockito-core:3.+"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -153,6 +203,9 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_name               : mod_name,
             mod_license            : mod_license,
             mod_version            : mod_version,
+            ffapi_version          : ffapi_version,
+            cloth_config_version   : cloth_config_version,
+            thermoo_version        : thermoo_version
     ]
     inputs.properties replaceProperties
     expand replaceProperties
