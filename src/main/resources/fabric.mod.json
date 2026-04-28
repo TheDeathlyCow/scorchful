@@ -16,7 +16,7 @@
         "aiocringe (Russian Translation)"
 	],
 	"contact": {
-		"homepage": "https://modded.wiki/w/Mod:Scorchful",
+		"homepage": "https://www.thedeathlycow.com/scorchful",
 		"sources": "https://github.com/TheDeathlyCow/scorchful",
 		"issues": "https://github.com/TheDeathlyCow/scorchful/issues"
 	},
@@ -72,7 +72,7 @@
 		"modmenu": {
 			"links": {
 				"modmenu.discord": "https://discord.gg/aqASuWebRU",
-				"modmenu.wiki": "https://modded.wiki/w/Mod:Scorchful",
+				"modmenu.wiki": "https://modded.wiki/w/Scorchful",
 				"modmenu.kofi": "https://ko-fi.com/thedeathlycow",
 				"modmenu.modrinth": "https://modrinth.com/mod/scorchful"
 			}
