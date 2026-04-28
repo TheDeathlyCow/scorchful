@@ -2,63 +2,63 @@ package com.github.thedeathlycow.scorchful.testmod.common.soaking;
 
 import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
 import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.mob.ZombieEntity;
-import net.minecraft.item.Items;
-import net.minecraft.test.GameTest;
-import net.minecraft.test.TestContext;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.gametest.framework.GameTest;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.item.Items;
 
 @SuppressWarnings("unused")
 public class UmbrellaTests {
     @GameTest(
-            templateName = FabricGameTest.EMPTY_STRUCTURE,
+            template = FabricGameTest.EMPTY_STRUCTURE,
             skyAccess = true,
-            batchId = "scorchful.rainy_night"
+            batch = "scorchful.rainy_night"
     )
-    public void holding_leather_in_mainhand_blocks_rain(TestContext context) {
-        context.getWorld().setWeather(0, 1000, true, false);
-        long time = context.getWorld().getTimeOfDay();
-        context.setTime(18_000);
+    public void holding_leather_in_mainhand_blocks_rain(GameTestHelper context) {
+        context.getLevel().setWeatherParameters(0, 1000, true, false);
+        long time = context.getLevel().getDayTime();
+        context.setDayTime(18_000);
 
         var pos = new BlockPos(1, 1, 1);
-        ZombieEntity zombie = context.spawnMob(EntityType.ZOMBIE, pos);
+        Zombie zombie = context.spawnWithNoFreeWill(EntityType.ZOMBIE, pos);
 
-        zombie.setStackInHand(Hand.MAIN_HAND, Items.LEATHER.getDefaultStack());
+        zombie.setItemInHand(InteractionHand.MAIN_HAND, Items.LEATHER.getDefaultInstance());
         zombie.thermoo$setWetTicks(0);
 
-        context.waitAndRun(20L, () -> {
-            context.expectEntityWithData(pos, EntityType.ZOMBIE, Soakable::thermoo$getWetTicks, 0);
+        context.runAfterDelay(20L, () -> {
+            context.assertEntityData(pos, EntityType.ZOMBIE, Soakable::thermoo$getWetTicks, 0);
 
-            context.setTime(0);
-            context.getWorld().resetWeather();
-            context.complete();
+            context.setDayTime(0);
+            context.getLevel().resetWeatherCycle();
+            context.succeed();
         });
     }
 
     @GameTest(
-            templateName = FabricGameTest.EMPTY_STRUCTURE,
+            template = FabricGameTest.EMPTY_STRUCTURE,
             skyAccess = true,
-            batchId = "scorchful.rainy_night"
+            batch = "scorchful.rainy_night"
     )
-    public void holding_leather_in_offhand_blocks_rain(TestContext context) {
-        context.getWorld().setWeather(0, 1000, true, false);
-        long time = context.getWorld().getTimeOfDay();
-        context.setTime(18_000);
+    public void holding_leather_in_offhand_blocks_rain(GameTestHelper context) {
+        context.getLevel().setWeatherParameters(0, 1000, true, false);
+        long time = context.getLevel().getDayTime();
+        context.setDayTime(18_000);
 
         var pos = new BlockPos(1, 1, 1);
-        ZombieEntity zombie = context.spawnMob(EntityType.ZOMBIE, pos);
+        Zombie zombie = context.spawnWithNoFreeWill(EntityType.ZOMBIE, pos);
 
-        zombie.setStackInHand(Hand.OFF_HAND, Items.LEATHER.getDefaultStack());
+        zombie.setItemInHand(InteractionHand.OFF_HAND, Items.LEATHER.getDefaultInstance());
         zombie.thermoo$setWetTicks(0);
 
-        context.waitAndRun(20L, () -> {
-            context.expectEntityWithData(pos, EntityType.ZOMBIE, Soakable::thermoo$getWetTicks, 0);
+        context.runAfterDelay(20L, () -> {
+            context.assertEntityData(pos, EntityType.ZOMBIE, Soakable::thermoo$getWetTicks, 0);
 
-            context.setTime(0);
-            context.getWorld().resetWeather();
-            context.complete();
+            context.setDayTime(0);
+            context.getLevel().resetWeatherCycle();
+            context.succeed();
         });
     }
 }

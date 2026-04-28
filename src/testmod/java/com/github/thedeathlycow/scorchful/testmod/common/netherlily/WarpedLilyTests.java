@@ -4,32 +4,31 @@ import com.github.thedeathlycow.scorchful.block.NetherLilyBlock;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
 import com.github.thedeathlycow.scorchful.registry.SItems;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.test.GameTest;
-import net.minecraft.test.TestContext;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.GameMode;
-
 import java.util.function.BooleanSupplier;
+import net.minecraft.core.BlockPos;
+import net.minecraft.gametest.framework.GameTest;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.GameType;
 
 @SuppressWarnings("unused")
 public class WarpedLilyTests {
 
     @GameTest(
-            templateName = "scorchful-test:nether_lily/warped_wet"
+            template = "scorchful-test:nether_lily/warped_wet"
     )
-    public void using_glass_bottle_on_wet_warped_lily_fills_it(TestContext context) {
+    public void using_glass_bottle_on_wet_warped_lily_fills_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 2, 2);
-        context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
-        context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
+        context.assertBlockPresent(SBlocks.WARPED_LILY, lilyPos);
+        context.assertBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
 
-        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
-        player.setStackInHand(Hand.MAIN_HAND, Items.GLASS_BOTTLE.getDefaultStack());
+        Player player = context.makeMockPlayer(GameType.SURVIVAL);
+        player.setItemInHand(InteractionHand.MAIN_HAND, Items.GLASS_BOTTLE.getDefaultInstance());
 
-        BooleanSupplier playerHasWaterBottle = () -> player.getInventory().containsAny(stack -> stack.isOf(Items.POTION));
-        BooleanSupplier playerHasGlassBottle = () -> player.getInventory().containsAny(stack -> stack.isOf(Items.GLASS_BOTTLE));
+        BooleanSupplier playerHasWaterBottle = () -> player.getInventory().hasAnyMatching(stack -> stack.is(Items.POTION));
+        BooleanSupplier playerHasGlassBottle = () -> player.getInventory().hasAnyMatching(stack -> stack.is(Items.GLASS_BOTTLE));
 
         context.assertFalse(
                 playerHasWaterBottle.getAsBoolean(),
@@ -48,24 +47,24 @@ public class WarpedLilyTests {
                 playerHasGlassBottle.getAsBoolean(),
                 "Player should NOT have a glass bottle"
         );
-        context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
-        context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
-        context.complete();
+        context.assertBlockPresent(SBlocks.WARPED_LILY, lilyPos);
+        context.assertBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
+        context.succeed();
     }
 
     @GameTest(
-            templateName = "scorchful-test:nether_lily/warped_dry"
+            template = "scorchful-test:nether_lily/warped_dry"
     )
-    public void using_glass_bottle_on_dry_warped_lily_does_not_fill_it(TestContext context) {
+    public void using_glass_bottle_on_dry_warped_lily_does_not_fill_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 2, 2);
-        context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
-        context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
+        context.assertBlockPresent(SBlocks.WARPED_LILY, lilyPos);
+        context.assertBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
 
-        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
-        player.setStackInHand(Hand.MAIN_HAND, Items.GLASS_BOTTLE.getDefaultStack());
+        Player player = context.makeMockPlayer(GameType.SURVIVAL);
+        player.setItemInHand(InteractionHand.MAIN_HAND, Items.GLASS_BOTTLE.getDefaultInstance());
 
-        BooleanSupplier playerHasWaterBottle = () -> player.getInventory().containsAny(stack -> stack.isOf(Items.POTION));
-        BooleanSupplier playerHasGlassBottle = () -> player.getInventory().containsAny(stack -> stack.isOf(Items.GLASS_BOTTLE));
+        BooleanSupplier playerHasWaterBottle = () -> player.getInventory().hasAnyMatching(stack -> stack.is(Items.POTION));
+        BooleanSupplier playerHasGlassBottle = () -> player.getInventory().hasAnyMatching(stack -> stack.is(Items.GLASS_BOTTLE));
 
         context.assertFalse(
                 playerHasWaterBottle.getAsBoolean(),
@@ -83,24 +82,24 @@ public class WarpedLilyTests {
                 playerHasGlassBottle.getAsBoolean(),
                 "Player should have a glass bottle"
         );
-        context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
-        context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
-        context.complete();
+        context.assertBlockPresent(SBlocks.WARPED_LILY, lilyPos);
+        context.assertBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
+        context.succeed();
     }
 
     @GameTest(
-            templateName = "scorchful-test:nether_lily/warped_partially_wet"
+            template = "scorchful-test:nether_lily/warped_partially_wet"
     )
-    public void using_glass_bottle_on_partially_wet_warped_lily_does_not_fill_it(TestContext context) {
+    public void using_glass_bottle_on_partially_wet_warped_lily_does_not_fill_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 2, 2);
-        context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
-        context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, 2);
+        context.assertBlockPresent(SBlocks.WARPED_LILY, lilyPos);
+        context.assertBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, 2);
 
-        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
-        player.setStackInHand(Hand.MAIN_HAND, Items.GLASS_BOTTLE.getDefaultStack());
+        Player player = context.makeMockPlayer(GameType.SURVIVAL);
+        player.setItemInHand(InteractionHand.MAIN_HAND, Items.GLASS_BOTTLE.getDefaultInstance());
 
-        BooleanSupplier playerHasWaterBottle = () -> player.getInventory().containsAny(stack -> stack.isOf(Items.POTION));
-        BooleanSupplier playerHasGlassBottle = () -> player.getInventory().containsAny(stack -> stack.isOf(Items.GLASS_BOTTLE));
+        BooleanSupplier playerHasWaterBottle = () -> player.getInventory().hasAnyMatching(stack -> stack.is(Items.POTION));
+        BooleanSupplier playerHasGlassBottle = () -> player.getInventory().hasAnyMatching(stack -> stack.is(Items.GLASS_BOTTLE));
 
         context.assertFalse(
                 playerHasWaterBottle.getAsBoolean(),
@@ -118,24 +117,24 @@ public class WarpedLilyTests {
                 playerHasGlassBottle.getAsBoolean(),
                 "Player should have a glass bottle"
         );
-        context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
-        context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, 2);
-        context.complete();
+        context.assertBlockPresent(SBlocks.WARPED_LILY, lilyPos);
+        context.assertBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, 2);
+        context.succeed();
     }
 
     @GameTest(
-            templateName = "scorchful-test:nether_lily/warped_wet"
+            template = "scorchful-test:nether_lily/warped_wet"
     )
-    public void using_water_skin_on_wet_warped_lily_fills_it(TestContext context) {
+    public void using_water_skin_on_wet_warped_lily_fills_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 2, 2);
-        context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
-        context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
+        context.assertBlockPresent(SBlocks.WARPED_LILY, lilyPos);
+        context.assertBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
 
-        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
-        player.setStackInHand(Hand.MAIN_HAND, SItems.WATER_SKIN.getDefaultStack());
+        Player player = context.makeMockPlayer(GameType.SURVIVAL);
+        player.setItemInHand(InteractionHand.MAIN_HAND, SItems.WATER_SKIN.getDefaultStack());
 
         BooleanSupplier isWaterSkinEmpty = () -> {
-            return !WaterSkinItem.hasDrink(player.getStackInHand(Hand.MAIN_HAND));
+            return !WaterSkinItem.hasDrink(player.getItemInHand(InteractionHand.MAIN_HAND));
         };
 
         context.assertTrue(
@@ -146,24 +145,24 @@ public class WarpedLilyTests {
         context.useBlock(lilyPos, player);
 
         context.assertFalse(isWaterSkinEmpty.getAsBoolean(), "Water Skin should NOT be empty!");
-        context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
-        context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
-        context.complete();
+        context.assertBlockPresent(SBlocks.WARPED_LILY, lilyPos);
+        context.assertBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
+        context.succeed();
     }
 
     @GameTest(
-            templateName = "scorchful-test:nether_lily/warped_dry"
+            template = "scorchful-test:nether_lily/warped_dry"
     )
-    public void using_water_skin_on_dry_warped_lily_does_not_fill_it(TestContext context) {
+    public void using_water_skin_on_dry_warped_lily_does_not_fill_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 2, 2);
-        context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
-        context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
+        context.assertBlockPresent(SBlocks.WARPED_LILY, lilyPos);
+        context.assertBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
 
-        PlayerEntity player = context.createMockPlayer(GameMode.SURVIVAL);
-        player.setStackInHand(Hand.MAIN_HAND, SItems.WATER_SKIN.getDefaultStack());
+        Player player = context.makeMockPlayer(GameType.SURVIVAL);
+        player.setItemInHand(InteractionHand.MAIN_HAND, SItems.WATER_SKIN.getDefaultStack());
 
         BooleanSupplier isWaterSkinEmpty = () -> {
-            return !WaterSkinItem.hasDrink(player.getStackInHand(Hand.MAIN_HAND));
+            return !WaterSkinItem.hasDrink(player.getItemInHand(InteractionHand.MAIN_HAND));
         };
 
         context.assertTrue(
@@ -174,9 +173,9 @@ public class WarpedLilyTests {
         context.useBlock(lilyPos, player);
 
         context.assertTrue(isWaterSkinEmpty.getAsBoolean(), "Water Skin should be empty!");
-        context.expectBlock(SBlocks.WARPED_LILY, lilyPos);
-        context.expectBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
-        context.complete();
+        context.assertBlockPresent(SBlocks.WARPED_LILY, lilyPos);
+        context.assertBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
+        context.succeed();
     }
 
 }
