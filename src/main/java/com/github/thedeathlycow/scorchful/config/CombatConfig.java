@@ -5,7 +5,7 @@ import com.github.thedeathlycow.scorchful.item.FireChargeThrower;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 
 @Config(name = Scorchful.MODID + ".combat_config")
 public class CombatConfig implements ConfigData {
@@ -45,7 +45,7 @@ public class CombatConfig implements ConfigData {
     @Override
     public void validatePostLoad() throws ValidationException {
         ConfigData.super.validatePostLoad();
-        this.fearDetectionRangeMultiplier = MathHelper.clamp(fearDetectionRangeMultiplier, 0, 128);
+        this.fearDetectionRangeMultiplier = Mth.clamp(fearDetectionRangeMultiplier, 0, 128);
         this.impalingDamagePerLevel = Math.max(0f, impalingDamagePerLevel);
     }
 }

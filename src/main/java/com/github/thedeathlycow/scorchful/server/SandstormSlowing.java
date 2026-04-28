@@ -3,31 +3,31 @@ package com.github.thedeathlycow.scorchful.server;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.WeatherConfig;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.level.Level;
 
 public class SandstormSlowing {
 
-    private static final Identifier SPEED_MODIFIER_ID = Scorchful.id("sandstorm_slowing");
-    private static final Identifier FOLLOW_RANGE_MODIFIER_ID = Scorchful.id("sandstorm_reduced_visibility");
+    private static final ResourceLocation SPEED_MODIFIER_ID = Scorchful.id("sandstorm_slowing");
+    private static final ResourceLocation FOLLOW_RANGE_MODIFIER_ID = Scorchful.id("sandstorm_reduced_visibility");
 
     public static boolean tickSandstormSlow(LivingEntity entity, boolean wasInSandstorm) {
 
-        if (entity.getType().isIn(SEntityTypeTags.DOES_NOT_SLOW_IN_SANDSTORM)) {
+        if (entity.getType().is(SEntityTypeTags.DOES_NOT_SLOW_IN_SANDSTORM)) {
             return false;
         }
 
-        World world = entity.getWorld();
-        BlockPos pos = entity.getBlockPos();
+        Level world = entity.level();
+        BlockPos pos = entity.blockPosition();
 
-        if (world.isClient) {
+        if (world.isClientSide) {
             return false;
         }
 
@@ -46,39 +46,39 @@ public class SandstormSlowing {
     }
 
     private static void removeModifiers(LivingEntity entity) {
-        removeModifier(entity, EntityAttributes.GENERIC_MOVEMENT_SPEED, SPEED_MODIFIER_ID);
-        removeModifier(entity, EntityAttributes.GENERIC_FOLLOW_RANGE, FOLLOW_RANGE_MODIFIER_ID);
+        removeModifier(entity, Attributes.MOVEMENT_SPEED, SPEED_MODIFIER_ID);
+        removeModifier(entity, Attributes.FOLLOW_RANGE, FOLLOW_RANGE_MODIFIER_ID);
     }
 
     private static void addSlow(LivingEntity entity) {
         WeatherConfig config = Scorchful.getConfig().weatherConfig;
         addModifier(
                 entity,
-                EntityAttributes.GENERIC_MOVEMENT_SPEED,
+                Attributes.MOVEMENT_SPEED,
                 SPEED_MODIFIER_ID,
                 config.getSandstormSlownessAmountPercent(),
-                EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
         addModifier(
                 entity,
-                EntityAttributes.GENERIC_FOLLOW_RANGE,
+                Attributes.FOLLOW_RANGE,
                 FOLLOW_RANGE_MODIFIER_ID,
                 config.getSandstormFollowRangeReductionPercent(),
-                EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
     }
 
     private static void addModifier(
             LivingEntity entity,
-            RegistryEntry<EntityAttribute> attribute,
-            Identifier modifierID,
+            Holder<Attribute> attribute,
+            ResourceLocation modifierID,
             double value,
-            EntityAttributeModifier.Operation operation
+            AttributeModifier.Operation operation
     ) {
-        EntityAttributeInstance instance = entity.getAttributeInstance(attribute);
+        AttributeInstance instance = entity.getAttribute(attribute);
         if (instance != null) {
-            instance.addTemporaryModifier(
-                    new EntityAttributeModifier(
+            instance.addTransientModifier(
+                    new AttributeModifier(
                             modifierID,
                             value,
                             operation
@@ -89,10 +89,10 @@ public class SandstormSlowing {
 
     private static void removeModifier(
             LivingEntity entity,
-            RegistryEntry<EntityAttribute> attribute,
-            Identifier modifierID
+            Holder<Attribute> attribute,
+            ResourceLocation modifierID
     ) {
-        EntityAttributeInstance instance = entity.getAttributeInstance(attribute);
+        AttributeInstance instance = entity.getAttribute(attribute);
         if (instance != null && instance.getModifier(modifierID) != null) {
             instance.removeModifier(modifierID);
         }

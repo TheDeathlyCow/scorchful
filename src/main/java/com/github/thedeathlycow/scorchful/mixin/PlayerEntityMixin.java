@@ -5,24 +5,24 @@ import com.github.thedeathlycow.scorchful.registry.SEntityAttributes;
 import com.github.thedeathlycow.scorchful.temperature.heatvision.VisionSpawner;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(PlayerEntity.class)
+@Mixin(Player.class)
 public class PlayerEntityMixin {
 
     @Inject(
-            method = "updateTurtleHelmet",
+            method = "turtleHelmetTick",
             at = @At("HEAD"),
             cancellable = true
     )
     private void scorchfulTurtleArmorUpdate(CallbackInfo ci) {
-        TurtleArmorEffects.update((PlayerEntity) (Object) this);
+        TurtleArmorEffects.update((Player) (Object) this);
         ci.cancel();
     }
 
@@ -31,14 +31,14 @@ public class PlayerEntityMixin {
             at = @At("TAIL")
     )
     private void afterTick(CallbackInfo ci) {
-        VisionSpawner.tick((PlayerEntity) (Object) this);
+        VisionSpawner.tick((Player) (Object) this);
     }
 
     @WrapMethod(
-            method = "createPlayerAttributes"
+            method = "createAttributes"
     )
-    private static DefaultAttributeContainer.Builder appendAttributes(Operation<DefaultAttributeContainer.Builder> original) {
-        DefaultAttributeContainer.Builder builder = original.call();
+    private static AttributeSupplier.Builder appendAttributes(Operation<AttributeSupplier.Builder> original) {
+        AttributeSupplier.Builder builder = original.call();
         builder.add(SEntityAttributes.REHYDRATION_EFFICIENCY);
         return builder;
     }

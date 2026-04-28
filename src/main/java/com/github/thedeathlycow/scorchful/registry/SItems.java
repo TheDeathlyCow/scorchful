@@ -12,14 +12,13 @@ import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import java.util.function.Function;
 
 public final class SItems {
@@ -27,7 +26,7 @@ public final class SItems {
             "water_skin",
             settings -> new WaterSkinItem(
                     settings
-                            .maxCount(1)
+                            .stacksTo(1)
                             .component(SDataComponentTypes.NUM_DRINKS, 0)
                             .component(SDataComponentTypes.DRINK_LEVEL, DrinkLevelComponent.HYDRATING)
             )
@@ -38,8 +37,8 @@ public final class SItems {
             settings -> new SunHatItem(
                     settings
                             .equipmentSlot((entity, stack) -> EquipmentSlot.HEAD)
-                            .attributeModifiers(SunHatItem.attributeModifiers())
-                            .maxCount(1)
+                            .attributes(SunHatItem.attributeModifiers())
+                            .stacksTo(1)
             )
     );
 
@@ -47,10 +46,10 @@ public final class SItems {
             "cactus_juice",
             settings -> new SingleDrinkItem(
                     settings
-                            .maxCount(16)
-                            .recipeRemainder(Items.GLASS_BOTTLE)
+                            .stacksTo(16)
+                            .craftRemainder(Items.GLASS_BOTTLE)
                             .component(SDataComponentTypes.DRINK_LEVEL, DrinkLevelComponent.HYDRATING),
-                    Items.GLASS_BOTTLE::getDefaultStack
+                    Items.GLASS_BOTTLE::getDefaultInstance
             )
     );
 
@@ -95,7 +94,7 @@ public final class SItems {
                     SArmorMaterials.TURTLE,
                     ArmorItem.Type.CHESTPLATE,
                     settings
-                            .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(25))
+                            .durability(ArmorItem.Type.CHESTPLATE.getDurability(25))
                             .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE)
             )
     );
@@ -106,7 +105,7 @@ public final class SItems {
                     SArmorMaterials.TURTLE,
                     ArmorItem.Type.LEGGINGS,
                     settings
-                            .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(25))
+                            .durability(ArmorItem.Type.LEGGINGS.getDurability(25))
                             .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE)
             )
     );
@@ -117,7 +116,7 @@ public final class SItems {
                     SArmorMaterials.TURTLE,
                     ArmorItem.Type.BOOTS,
                     settings
-                            .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(25))
+                            .durability(ArmorItem.Type.BOOTS.getDurability(25))
                             .component(SDataComponentTypes.HEAT_RESISTANCE, HeatResistanceComponent.VERY_PROTECTIVE)
             )
     );
@@ -128,7 +127,7 @@ public final class SItems {
         ScorchfulItemEvents.GET_DEFAULT_STACK.register(DrinkLevelComponent::applyToNewStack);
         ScorchfulItemEvents.CONSUME_ITEM.register(DrinkItem::applyWater);
         ScorchfulItemEvents.CONSUME_ITEM.register((stack, player) -> {
-            if (stack.isIn(SItemTags.IS_COOLING_FOOD)) {
+            if (stack.is(SItemTags.IS_COOLING_FOOD)) {
                 player.thermoo$addTemperature(
                         Scorchful.getConfig().heatingConfig.getTemperatureFromCoolingFood(),
                         HeatingModes.ACTIVE
@@ -140,14 +139,14 @@ public final class SItems {
         EnchantmentModifiers.initialize();
     }
 
-    public static Item register(String id, Function<Item.Settings, Item> itemFactory) {
-        return register(id, itemFactory, new Item.Settings());
+    public static Item register(String id, Function<Item.Properties, Item> itemFactory) {
+        return register(id, itemFactory, new Item.Properties());
     }
 
-    public static Item register(String id, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
+    public static Item register(String id, Function<Item.Properties, Item> itemFactory, Item.Properties settings) {
         Item item = itemFactory.apply(settings);
 
-        return Registry.register(Registries.ITEM, Scorchful.id(id), item);
+        return Registry.register(BuiltInRegistries.ITEM, Scorchful.id(id), item);
     }
 
     private SItems() {

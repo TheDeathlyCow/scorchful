@@ -8,13 +8,13 @@ import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProv
 import com.github.thedeathlycow.thermoo.api.util.TemperatureRecord;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.component.ComponentMap;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.world.ServerChunkManager;
-import net.minecraft.util.dynamic.Codecs;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.server.level.ServerChunkCache;
+import net.minecraft.util.ExtraCodecs;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 
 public record SeaLevelAltitudeTemperatureEnvironmentProvider(
         TemperatureRecord temperatureAtSeaLevel,
@@ -29,7 +29,7 @@ public record SeaLevelAltitudeTemperatureEnvironmentProvider(
                     TemperatureRecord.CODEC
                             .fieldOf("temperature_decrease_per_block")
                             .forGetter(SeaLevelAltitudeTemperatureEnvironmentProvider::temperatureDecreasePerBlock),
-                    Codecs.POSITIVE_INT
+                    ExtraCodecs.POSITIVE_INT
                             .fieldOf("max_elevation")
                             .orElse(Integer.MAX_VALUE)
                             .forGetter(SeaLevelAltitudeTemperatureEnvironmentProvider::maxElevation)
@@ -37,14 +37,14 @@ public record SeaLevelAltitudeTemperatureEnvironmentProvider(
     );
 
     @Override
-    public void buildCurrentComponents(World world, BlockPos pos, RegistryEntry<Biome> biome, ComponentMap.Builder builder) {
+    public void buildCurrentComponents(Level world, BlockPos pos, Holder<Biome> biome, DataComponentMap.Builder builder) {
         // assume no sea level
         int distanceToSeaLevel = Integer.MAX_VALUE;
 
         // generally this should be true, since we always execute on the server
-        if (world.getChunkManager() instanceof ServerChunkManager serverChunkManager) {
+        if (world.getChunkSource() instanceof ServerChunkCache serverChunkManager) {
             int height = pos.getY();
-            int seaLevel = serverChunkManager.getChunkGenerator().getSeaLevel();
+            int seaLevel = serverChunkManager.getGenerator().getSeaLevel();
 
             distanceToSeaLevel = Math.clamp(height - seaLevel, 0, maxElevation);
         }
@@ -55,7 +55,7 @@ public record SeaLevelAltitudeTemperatureEnvironmentProvider(
             temperature += distanceToSeaLevel * temperatureDecreasePerBlock.value();
         }
 
-        builder.add(
+        builder.set(
                 EnvironmentComponentTypes.TEMPERATURE,
                 new TemperatureRecord(temperature, temperatureDecreasePerBlock.unit())
         );

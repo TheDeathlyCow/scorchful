@@ -5,23 +5,22 @@ import com.github.thedeathlycow.scorchful.block.SandPileBlock;
 import com.github.thedeathlycow.scorchful.config.WeatherConfig;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
 import com.google.common.base.Suppliers;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SnowBlock;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Util;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.WorldChunk;
-import net.minecraft.world.event.GameEvent;
-
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Supplier;
+import net.minecraft.Util;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SnowLayerBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.levelgen.Heightmap;
 
 public class SandAccumulation {
     public static final Map<Sandstorms.SandstormType, Block> SAND_PILES = Util.make(
@@ -42,12 +41,12 @@ public class SandAccumulation {
             }
     );
 
-    public static void tickChunk(ServerWorld world, WorldChunk chunk, int randomTickSpeed) {
+    public static void tickChunk(ServerLevel world, LevelChunk chunk, int randomTickSpeed) {
         // choose position
         final ChunkPos chunkPos = chunk.getPos();
-        final BlockPos topPos = world.getTopPosition(
-                Heightmap.Type.MOTION_BLOCKING,
-                world.getRandomPosInChunk(chunkPos.getStartX(), 0, chunkPos.getStartZ(), 15)
+        final BlockPos topPos = world.getHeightmapPos(
+                Heightmap.Types.MOTION_BLOCKING,
+                world.getBlockRandomPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ(), 15)
         );
 
         // control fail conditions
@@ -55,7 +54,7 @@ public class SandAccumulation {
         if (sandstorm == Sandstorms.SandstormType.NONE) {
             return;
         }
-        Random random = world.random;
+        RandomSource random = world.random;
         if (random.nextInt(16) != 0) {
             return;
         }
@@ -71,27 +70,27 @@ public class SandAccumulation {
         placeSandPile(world, topPos, sandPile, config);
 
         // cauldron tick
-        BlockPos groundPos = topPos.down();
+        BlockPos groundPos = topPos.below();
         BlockState groundState = world.getBlockState(groundPos);
         Block groundBlock = groundState.getBlock();
-        groundBlock.precipitationTick(groundState, world, groundPos, Biome.Precipitation.NONE);
+        groundBlock.handlePrecipitation(groundState, world, groundPos, Biome.Precipitation.NONE);
     }
 
-    public static boolean cauldronSandstormTick(BlockState state, World world, BlockPos pos) {
-        Sandstorms.SandstormType sandstorm = Sandstorms.getCurrentSandStorm(world, pos.up());
+    public static boolean cauldronSandstormTick(BlockState state, Level world, BlockPos pos) {
+        Sandstorms.SandstormType sandstorm = Sandstorms.getCurrentSandStorm(world, pos.above());
 
         Block cauldron = SAND_CAULDRONS.get(sandstorm);
 
         if (cauldron != null) {
-            world.setBlockState(pos, cauldron.getDefaultState());
-            world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
+            world.setBlockAndUpdate(pos, cauldron.defaultBlockState());
+            world.gameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             return true;
         }
 
         return false;
     }
 
-    private static void placeSandPile(ServerWorld world, BlockPos topPos, Block sandPileBlock, WeatherConfig config) {
+    private static void placeSandPile(ServerLevel world, BlockPos topPos, Block sandPileBlock, WeatherConfig config) {
 
         int accumulationHeight = config.getSandPileAccumulationHeight();
         if (!config.isSandPileAccumulationEnabled() || accumulationHeight <= 0) {
@@ -99,28 +98,28 @@ public class SandAccumulation {
         }
 
         if (canSetSand(world, topPos, sandPileBlock)) {
-            BlockState sandPileState = sandPileBlock.getDefaultState();
+            BlockState sandPileState = sandPileBlock.defaultBlockState();
             BlockState currentState = world.getBlockState(topPos);
 
-            if (currentState.isOf(sandPileBlock)) {
-                int currentLayers = currentState.get(SandPileBlock.LAYERS);
+            if (currentState.is(sandPileBlock)) {
+                int currentLayers = currentState.getValue(SandPileBlock.LAYERS);
 
                 if (currentLayers < Math.min(accumulationHeight, SandPileBlock.MAX_LAYERS)) {
-                    sandPileState = currentState.with(SnowBlock.LAYERS, currentLayers + 1);
-                    Block.pushEntitiesUpBeforeBlockChange(currentState, sandPileState, world, topPos);
+                    sandPileState = currentState.setValue(SnowLayerBlock.LAYERS, currentLayers + 1);
+                    Block.pushEntitiesUp(currentState, sandPileState, world, topPos);
                 }
 
             }
-            world.setBlockState(topPos, sandPileState);
+            world.setBlockAndUpdate(topPos, sandPileState);
         }
     }
 
-    private static boolean canSetSand(ServerWorld world, BlockPos pos, Block sandPileBlock) {
+    private static boolean canSetSand(ServerLevel world, BlockPos pos, Block sandPileBlock) {
         BlockState current = world.getBlockState(pos);
-        return pos.getY() >= world.getBottomY()
-                && pos.getY() < world.getTopY()
-                && (current.isAir() || current.isOf(sandPileBlock))
-                && sandPileBlock.getDefaultState().canPlaceAt(world, pos);
+        return pos.getY() >= world.getMinBuildHeight()
+                && pos.getY() < world.getMaxBuildHeight()
+                && (current.isAir() || current.is(sandPileBlock))
+                && sandPileBlock.defaultBlockState().canSurvive(world, pos);
     }
 
     private SandAccumulation() {

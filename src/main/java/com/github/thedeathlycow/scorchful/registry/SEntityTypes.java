@@ -4,9 +4,9 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.registry.tag.SDamageTypeTags;
 import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.minecraft.entity.EntityType;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.EntityType;
 
 public final class SEntityTypes {
     public static void initialize() {
@@ -14,7 +14,7 @@ public final class SEntityTypes {
 
         ServerLivingEntityEvents.AFTER_DAMAGE.register(
                 (entity, source, baseDamageTaken, damageTaken, blocked) -> {
-                    if (!blocked && source.isIn(SDamageTypeTags.FIREBALL)) {
+                    if (!blocked && source.is(SDamageTypeTags.FIREBALL)) {
                         entity.thermoo$addTemperature(
                                 Scorchful.getConfig().heatingConfig.getFireballHeat(),
                                 HeatingModes.ACTIVE
@@ -25,7 +25,7 @@ public final class SEntityTypes {
     }
 
     private static void register(String id, EntityType<?> type) {
-        Registry.register(Registries.ENTITY_TYPE, Scorchful.id(id), type);
+        Registry.register(BuiltInRegistries.ENTITY_TYPE, Scorchful.id(id), type);
     }
 
     private SEntityTypes() {

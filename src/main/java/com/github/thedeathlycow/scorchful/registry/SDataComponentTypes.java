@@ -4,48 +4,47 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.item.component.HeatResistanceComponent;
-import net.minecraft.component.ComponentType;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.dynamic.Codecs;
-
 import java.util.function.UnaryOperator;
+import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.util.ExtraCodecs;
 
 public class SDataComponentTypes {
 
-    public static final ComponentType<DrinkLevelComponent> DRINK_LEVEL = register(
+    public static final DataComponentType<DrinkLevelComponent> DRINK_LEVEL = register(
             "drink_level",
             builder -> builder
-                    .codec(DrinkLevelComponent.CODEC)
-                    .packetCodec(DrinkLevelComponent.PACKET_CODEC)
-                    .cache()
+                    .persistent(DrinkLevelComponent.CODEC)
+                    .networkSynchronized(DrinkLevelComponent.PACKET_CODEC)
+                    .cacheEncoding()
     );
 
-    public static final ComponentType<Integer> NUM_DRINKS = register(
+    public static final DataComponentType<Integer> NUM_DRINKS = register(
             "num_drinks",
             builder -> builder
-                    .codec(Codecs.rangedInt(0, WaterSkinItem.MAX_DRINKS))
-                    .packetCodec(PacketCodecs.VAR_INT)
+                    .persistent(ExtraCodecs.intRange(0, WaterSkinItem.MAX_DRINKS))
+                    .networkSynchronized(ByteBufCodecs.VAR_INT)
     );
 
-    public static final ComponentType<HeatResistanceComponent> HEAT_RESISTANCE = register(
+    public static final DataComponentType<HeatResistanceComponent> HEAT_RESISTANCE = register(
             "heat_resistance",
             builder -> builder
-                    .codec(HeatResistanceComponent.CODEC)
-                    .packetCodec(HeatResistanceComponent.PACKET_CODEC)
-                    .cache()
+                    .persistent(HeatResistanceComponent.CODEC)
+                    .networkSynchronized(HeatResistanceComponent.PACKET_CODEC)
+                    .cacheEncoding()
     );
 
     public static void initialize() {
         Scorchful.LOGGER.debug("Initialized Scorchful item components");
     }
 
-    private static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
+    private static <T> DataComponentType<T> register(String id, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
         return Registry.register(
-                Registries.DATA_COMPONENT_TYPE,
+                BuiltInRegistries.DATA_COMPONENT_TYPE,
                 Scorchful.id(id),
-                builderOperator.apply(ComponentType.builder()).build()
+                builderOperator.apply(DataComponentType.builder()).build()
         );
     }
 

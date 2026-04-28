@@ -1,9 +1,9 @@
 package com.github.thedeathlycow.scorchful.registry.tag;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import net.minecraft.block.Block;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 
 public class SBlockTags {
 
@@ -16,7 +16,7 @@ public class SBlockTags {
     public static final TagKey<Block> SAND_PILE_CANNOT_SURVIVE_ON = of("sand_pile_cannot_survive_on");
 
     private static TagKey<Block> of(String path) {
-        return TagKey.of(RegistryKeys.BLOCK, Scorchful.id(path));
+        return TagKey.create(Registries.BLOCK, Scorchful.id(path));
     }
 
 }

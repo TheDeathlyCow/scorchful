@@ -4,11 +4,11 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.particle.DustGrainParticleEffect;
 import com.github.thedeathlycow.scorchful.particle.SpurtingWaterParticleEffect;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleType;
-import net.minecraft.particle.SimpleParticleType;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
 
 public final class SParticleTypes {
 
@@ -34,12 +34,12 @@ public final class SParticleTypes {
         Scorchful.LOGGER.debug("Initialized Scorchful particle types");
     }
 
-    private static <T extends ParticleEffect> ParticleType<T> register(String name, ParticleType<T> particle) {
-        return Registry.register(Registries.PARTICLE_TYPE, Scorchful.id(name), particle);
+    private static <T extends ParticleOptions> ParticleType<T> register(String name, ParticleType<T> particle) {
+        return Registry.register(BuiltInRegistries.PARTICLE_TYPE, Scorchful.id(name), particle);
     }
 
     private static SimpleParticleType registerSimple(String name, SimpleParticleType particle) {
-        return Registry.register(Registries.PARTICLE_TYPE, Scorchful.id(name), particle);
+        return Registry.register(BuiltInRegistries.PARTICLE_TYPE, Scorchful.id(name), particle);
     }
 
     private SParticleTypes() {

@@ -2,33 +2,33 @@ package com.github.thedeathlycow.scorchful.components;
 
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 import org.ladysnake.cca.api.v3.component.Component;
 
 public class RehydrationComponent implements Component {
-    private final PlayerEntity provider;
+    private final Player provider;
     private int waterCaptured = 0;
     private static final String WATER_CAPTURED_KEY = "water_captured";
 
-    public RehydrationComponent(PlayerEntity provider) {
+    public RehydrationComponent(Player provider) {
         this.provider = provider;
     }
 
     @Override
-    public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        if (tag.contains(WATER_CAPTURED_KEY, NbtElement.INT_TYPE)) {
+    public void readFromNbt(CompoundTag tag, HolderLookup.Provider registryLookup) {
+        if (tag.contains(WATER_CAPTURED_KEY, Tag.TAG_INT)) {
             this.waterCaptured = tag.getInt(WATER_CAPTURED_KEY);
         }
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
+    public void writeToNbt(CompoundTag tag, HolderLookup.Provider registryLookup) {
         if (this.waterCaptured > 0) {
             tag.putInt(WATER_CAPTURED_KEY, this.waterCaptured);
         }
@@ -54,7 +54,7 @@ public class RehydrationComponent implements Component {
 
     private void tickRehydrate(double rehydrationEfficiency) {
         int rehydrationCapacity = ServerThirstPlugin.getActivePlugin().getRehydrationThreshold();
-        if (this.waterCaptured >= rehydrationCapacity && this.provider.getWorld() instanceof ServerWorld serverWorld) {
+        if (this.waterCaptured >= rehydrationCapacity && this.provider.level() instanceof ServerLevel serverWorld) {
             ServerThirstPlugin plugin = ServerThirstPlugin.getActivePlugin();
             plugin.rehydrateFromEnchantment(this.provider, this.waterCaptured, rehydrationEfficiency);
             this.playRehydrationEffects(serverWorld);
@@ -66,23 +66,23 @@ public class RehydrationComponent implements Component {
         this.waterCaptured = 0;
     }
 
-    private void playRehydrationEffects(ServerWorld serverWorld) {
-        Vec3d pos = this.provider.getPos();
+    private void playRehydrationEffects(ServerLevel serverWorld) {
+        Vec3 pos = this.provider.position();
 
-        if (!this.provider.isSilent() && !this.provider.isSneaking()) {
+        if (!this.provider.isSilent() && !this.provider.isShiftKeyDown()) {
             serverWorld.playSound(
                     null,
-                    this.provider.getBlockPos(),
+                    this.provider.blockPosition(),
                     SSoundEvents.REHYDRATE,
-                    this.provider.getSoundCategory()
+                    this.provider.getSoundSource()
             );
         }
 
         if (!this.provider.isInvisible()) {
-            float height = this.provider.getHeight();
-            float width = this.provider.getWidth();
+            float height = this.provider.getBbHeight();
+            float width = this.provider.getBbWidth();
 
-            serverWorld.spawnParticles(
+            serverWorld.sendParticles(
                     ParticleTypes.BUBBLE_POP,
                     pos.x, pos.y, pos.z,
                     50,

@@ -1,10 +1,10 @@
 package com.github.thedeathlycow.scorchful.registry.tag;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 
 public class SItemTags {
 
@@ -33,11 +33,11 @@ public class SItemTags {
 
 
     private static TagKey<Item> of(String path) {
-        return TagKey.of(RegistryKeys.ITEM, Scorchful.id(path));
+        return TagKey.create(Registries.ITEM, Scorchful.id(path));
     }
 
     private static TagKey<Item> ofCommon(String path) {
-        return TagKey.of(RegistryKeys.ITEM, Identifier.of("c", path));
+        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", path));
     }
 
     private SItemTags() {

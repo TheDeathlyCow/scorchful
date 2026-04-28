@@ -1,10 +1,9 @@
 package com.github.thedeathlycow.scorchful.registry.tag;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.biome.Biome;
 
 public class SBiomeTags {
 
@@ -31,7 +30,7 @@ public class SBiomeTags {
     public static final TagKey<Biome> HEAT_VISION_SQUID = SBiomeTags.register("heat_vision/squid");
 
     static TagKey<Biome> register(String id) {
-        return TagKey.of(RegistryKeys.BIOME, Scorchful.id(id));
+        return TagKey.create(Registries.BIOME, Scorchful.id(id));
     }
 
     private SBiomeTags() {

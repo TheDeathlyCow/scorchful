@@ -2,23 +2,22 @@ package com.github.thedeathlycow.scorchful.server;
 
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.mojang.serialization.Codec;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.StringIdentifiable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.Heightmap;
 
 public class Sandstorms {
 
-    public enum SandstormType implements StringIdentifiable {
+    public enum SandstormType implements StringRepresentable {
         NONE("no_sandstorm"),
         REGULAR("regular_sandstorm"),
         RED("red_sandstorm"),
         PINK("pink_sandstorm");
 
-        public static final Codec<SandstormType> CODEC = StringIdentifiable.createCodec(SandstormType::values);
+        public static final Codec<SandstormType> CODEC = StringRepresentable.fromEnum(SandstormType::values);
 
         private final String id;
 
@@ -27,7 +26,7 @@ public class Sandstorms {
         }
 
         @Override
-        public String asString() {
+        public String getSerializedName() {
             return this.id;
         }
     }
@@ -41,17 +40,17 @@ public class Sandstorms {
      * Returns {@link SandstormType#REGULAR} if it is raining in a desert and {@link SandstormType#RED} if it is raining
      * in a badlands.
      */
-    public static SandstormType getCurrentSandStorm(World world, BlockPos pos, boolean includeSurface) {
-        if (!world.isRaining() || (includeSurface && world.hasRain(pos))) {
+    public static SandstormType getCurrentSandStorm(Level world, BlockPos pos, boolean includeSurface) {
+        if (!world.isRaining() || (includeSurface && world.isRainingAt(pos))) {
             return SandstormType.NONE;
         }
-        if (includeSurface && !world.isSkyVisible(pos)) {
+        if (includeSurface && !world.canSeeSky(pos)) {
             return SandstormType.NONE;
         }
-        if (includeSurface && world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, pos).getY() > pos.getY()) {
+        if (includeSurface && world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, pos).getY() > pos.getY()) {
             return SandstormType.NONE;
         }
-        RegistryEntry<Biome> biome = world.getBiome(pos);
+        Holder<Biome> biome = world.getBiome(pos);
         if (hasRedSandStorms(biome)) {
             return SandstormType.RED;
         } else if (hasPinkSandStorms(biome)) {
@@ -63,11 +62,11 @@ public class Sandstorms {
         }
     }
 
-    public static SandstormType getCurrentSandStorm(World world, BlockPos pos) {
+    public static SandstormType getCurrentSandStorm(Level world, BlockPos pos) {
         return getCurrentSandStorm(world, pos, true);
     }
 
-    public static boolean isSandStorming(World world, BlockPos pos) {
+    public static boolean isSandStorming(Level world, BlockPos pos) {
         return getCurrentSandStorm(world, pos, false) != SandstormType.NONE;
     }
 
@@ -78,21 +77,21 @@ public class Sandstorms {
      * @param biome
      * @return
      */
-    public static boolean hasSandStorms(RegistryEntry<Biome> biome) {
-        return !biome.value().hasPrecipitation() && biome.isIn(SBiomeTags.HAS_SAND_STORMS);
+    public static boolean hasSandStorms(Holder<Biome> biome) {
+        return !biome.value().hasPrecipitation() && biome.is(SBiomeTags.HAS_SAND_STORMS);
     }
 
 
-    public static boolean hasRegularSandStorms(RegistryEntry<Biome> biome) {
-        return !biome.value().hasPrecipitation() && biome.isIn(SBiomeTags.HAS_REGULAR_SAND_STORMS);
+    public static boolean hasRegularSandStorms(Holder<Biome> biome) {
+        return !biome.value().hasPrecipitation() && biome.is(SBiomeTags.HAS_REGULAR_SAND_STORMS);
     }
 
-    public static boolean hasRedSandStorms(RegistryEntry<Biome> biome) {
-        return !biome.value().hasPrecipitation() && biome.isIn(SBiomeTags.HAS_RED_SAND_STORMS);
+    public static boolean hasRedSandStorms(Holder<Biome> biome) {
+        return !biome.value().hasPrecipitation() && biome.is(SBiomeTags.HAS_RED_SAND_STORMS);
     }
 
-    public static boolean hasPinkSandStorms(RegistryEntry<Biome> biome) {
-        return !biome.value().hasPrecipitation() && biome.isIn(SBiomeTags.HAS_PINK_SAND_STORMS);
+    public static boolean hasPinkSandStorms(Holder<Biome> biome) {
+        return !biome.value().hasPrecipitation() && biome.is(SBiomeTags.HAS_PINK_SAND_STORMS);
     }
 
     private Sandstorms() {

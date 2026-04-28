@@ -1,9 +1,9 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.sound.SoundEvent;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.sounds.SoundEvent;
 
 public class SSoundEvents {
 
@@ -21,9 +21,9 @@ public class SSoundEvents {
     }
 
     private static SoundEvent register(String name) {
-        SoundEvent event = SoundEvent.of(Scorchful.id(name));
+        SoundEvent event = SoundEvent.createVariableRangeEvent(Scorchful.id(name));
 
-        return Registry.register(Registries.SOUND_EVENT, event.getId(), event);
+        return Registry.register(BuiltInRegistries.SOUND_EVENT, event.getLocation(), event);
     }
 
     private SSoundEvents() {

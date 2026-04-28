@@ -3,10 +3,10 @@ package com.github.thedeathlycow.scorchful.temperature;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.thermoo.api.temperature.event.LivingEntityTemperatureTickEvents;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentTickContext;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffects;
 
 public final class ActiveTemperatureEffects {
     public static void initialize() {
@@ -31,8 +31,8 @@ public final class ActiveTemperatureEffects {
     }
 
     private static int getOnFireTemperatureChange(LivingEntity entity, ScorchfulConfig config) {
-        if (entity.thermoo$canOverheat() && entity.isOnFire() && !entity.isFireImmune()) {
-            return entity.hasStatusEffect(StatusEffects.FIRE_RESISTANCE)
+        if (entity.thermoo$canOverheat() && entity.isOnFire() && !entity.fireImmune()) {
+            return entity.hasEffect(MobEffects.FIRE_RESISTANCE)
                     ? config.heatingConfig.getOnFireWarmRateWithFireResistance()
                     : config.heatingConfig.getOnFireWarmRate();
         }

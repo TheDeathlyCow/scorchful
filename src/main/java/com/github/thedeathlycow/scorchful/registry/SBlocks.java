@@ -6,13 +6,16 @@ import com.github.thedeathlycow.scorchful.mixin.accessor.PointOfInterestTypeAcce
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.*;
-import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.world.poi.PointOfInterestType;
-import net.minecraft.world.poi.PointOfInterestTypes;
-
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.NetherrackBlock;
+import net.minecraft.world.level.block.SnowLayerBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import java.util.function.Function;
 
 public final class SBlocks {
@@ -21,12 +24,12 @@ public final class SBlocks {
             settings -> new CrimsonLilyBlock(
                     NetherLilyBehaviours.CRIMSON_LILY_BEHAVIOUR,
                     settings
-                            .mapColor(MapColor.DARK_RED)
-                            .breakInstantly()
-                            .noCollision()
-                            .sounds(BlockSoundGroup.WEEPING_VINES)
-                            .pistonBehavior(PistonBehavior.DESTROY)
-                            .ticksRandomly()
+                            .mapColor(MapColor.NETHER)
+                            .instabreak()
+                            .noCollission()
+                            .sound(SoundType.WEEPING_VINES)
+                            .pushReaction(PushReaction.DESTROY)
+                            .randomTicks()
             )
     );
 
@@ -35,19 +38,19 @@ public final class SBlocks {
             settings -> new NetherLilyBlock(
                     NetherLilyBehaviours.WARPED_LILY_BEHAVIOUR,
                     settings
-                            .mapColor(MapColor.CYAN)
-                            .breakInstantly()
-                            .noCollision()
-                            .sounds(BlockSoundGroup.WEEPING_VINES)
-                            .pistonBehavior(PistonBehavior.DESTROY)
-                            .ticksRandomly()
+                            .mapColor(MapColor.COLOR_CYAN)
+                            .instabreak()
+                            .noCollission()
+                            .sound(SoundType.WEEPING_VINES)
+                            .pushReaction(PushReaction.DESTROY)
+                            .randomTicks()
             )
     );
 
     public static final Block ROOTED_NETHERRACK = register(
             "rooted_netherrack",
             settings -> new NetherrackBlock(settings),
-            AbstractBlock.Settings.copy(Blocks.NETHERRACK)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK)
     );
 
     public static final Block ROOTED_CRIMSON_NYLIUM = register(
@@ -56,7 +59,7 @@ public final class SBlocks {
                     Blocks.CRIMSON_ROOTS,
                     settings
             ),
-            AbstractBlock.Settings.copy(Blocks.CRIMSON_NYLIUM)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_NYLIUM)
     );
 
     public static final Block ROOTED_WARPED_NYLIUM = register(
@@ -65,7 +68,7 @@ public final class SBlocks {
                     Blocks.WARPED_ROOTS,
                     settings
             ),
-            AbstractBlock.Settings.copy(Blocks.WARPED_NYLIUM)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_NYLIUM)
     );
 
     public static final Block SAND_PILE = register(
@@ -74,11 +77,11 @@ public final class SBlocks {
                     0xDBD3A0,
                     settings
                             .replaceable()
-                            .notSolid()
-                            .blockVision((state, world, pos) -> state.get(SnowBlock.LAYERS) >= SandPileBlock.MAX_LAYERS)
-                            .pistonBehavior(PistonBehavior.DESTROY)
+                            .forceSolidOff()
+                            .isViewBlocking((state, world, pos) -> state.getValue(SnowLayerBlock.LAYERS) >= SandPileBlock.MAX_LAYERS)
+                            .pushReaction(PushReaction.DESTROY)
             ),
-            AbstractBlock.Settings.copy(Blocks.SAND)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SAND)
     );
 
     public static final Block RED_SAND_PILE = register(
@@ -87,11 +90,11 @@ public final class SBlocks {
                     0xA95821,
                     settings
                             .replaceable()
-                            .notSolid()
-                            .blockVision((state, world, pos) -> state.get(SnowBlock.LAYERS) >= SandPileBlock.MAX_LAYERS)
-                            .pistonBehavior(PistonBehavior.DESTROY)
+                            .forceSolidOff()
+                            .isViewBlocking((state, world, pos) -> state.getValue(SnowLayerBlock.LAYERS) >= SandPileBlock.MAX_LAYERS)
+                            .pushReaction(PushReaction.DESTROY)
             ),
-            AbstractBlock.Settings.copy(Blocks.RED_SAND)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.RED_SAND)
     );
 
     public static final Block SAND_CAULDRON = register(
@@ -101,7 +104,7 @@ public final class SBlocks {
                     SandCauldronBehaviours.SAND_CAULDRON_BEHAVIOUR,
                     settings
             ),
-            AbstractBlock.Settings.copy(Blocks.CAULDRON)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)
     );
 
     public static final Block RED_SAND_CAULDRON = register(
@@ -111,7 +114,7 @@ public final class SBlocks {
                     SandCauldronBehaviours.RED_SAND_CAULDRON_BEHAVIOUR,
                     settings
             ),
-            AbstractBlock.Settings.copy(Blocks.CAULDRON)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)
     );
 
     public static void initialize() {
@@ -120,13 +123,13 @@ public final class SBlocks {
         NetherLilyBehaviours.initialize();
     }
 
-    public static Block register(String id, Function<AbstractBlock.Settings, Block> blockFactory) {
-        return register(id, blockFactory, AbstractBlock.Settings.create());
+    public static Block register(String id, Function<BlockBehaviour.Properties, Block> blockFactory) {
+        return register(id, blockFactory, BlockBehaviour.Properties.of());
     }
 
-    public static Block register(String id, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings) {
+    public static Block register(String id, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties settings) {
         Block block = blockFactory.apply(settings);
-        return Registry.register(Registries.BLOCK, Scorchful.id(id), block);
+        return Registry.register(BuiltInRegistries.BLOCK, Scorchful.id(id), block);
     }
 
     private SBlocks() {

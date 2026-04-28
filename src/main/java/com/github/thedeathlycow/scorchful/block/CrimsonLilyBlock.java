@@ -5,57 +5,57 @@ import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.SStats;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
 import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 
 @SuppressWarnings("deprecation")
 public class CrimsonLilyBlock extends NetherLilyBlock {
-    public CrimsonLilyBlock(NetherLilyBehaviour.NetherLilyBehaviourMap behaviorMap, Settings settings) {
+    public CrimsonLilyBlock(NetherLilyBehaviour.NetherLilyBehaviourMap behaviorMap, Properties settings) {
         super(behaviorMap, settings);
     }
 
     @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (state.get(WATER_SATURATION_LEVEL) != 3) {
+    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
+        if (state.getValue(WATER_SATURATION_LEVEL) != 3) {
             return;
         }
-        if (!world.isClient) {
+        if (!world.isClientSide) {
             soakEntity(state, world, pos, entity);
         } else {
             createSplash(world, pos);
         }
     }
 
-    private static void soakEntity(BlockState state, World world, BlockPos pos, Entity entity) {
+    private static void soakEntity(BlockState state, Level world, BlockPos pos, Entity entity) {
         world.playSound(
                 null,
                 pos,
                 SSoundEvents.CRIMSON_LILY_SQUELCH,
-                SoundCategory.BLOCKS
+                SoundSource.BLOCKS
         );
 
         if (entity instanceof Soakable soakable) {
             soakable.thermoo$addWetTicks(soakable.thermoo$getMaxWetTicks());
         }
 
-        if (entity instanceof PlayerEntity player) {
-            player.incrementStat(SStats.SOAKED_BY_CRIMSON_LILY);
+        if (entity instanceof Player player) {
+            player.awardStat(SStats.SOAKED_BY_CRIMSON_LILY);
         }
 
-        if (entity.getType().isIn(SEntityTypeTags.CRIMSON_LILY_HURTS)) {
-            entity.damage(
-                    world.getDamageSources().generic(),
+        if (entity.getType().is(SEntityTypeTags.CRIMSON_LILY_HURTS)) {
+            entity.hurt(
+                    world.damageSources().generic(),
                     10f
             );
             entity.playSound(
-                    SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE,
+                    SoundEvents.GENERIC_EXTINGUISH_FIRE,
                     1f, 1f
             );
         }
@@ -63,9 +63,9 @@ public class CrimsonLilyBlock extends NetherLilyBlock {
         NetherLilyBlock.setWater(state, world, pos, 0);
     }
 
-    private static void createSplash(World world, BlockPos pos) {
-        Random random = world.getRandom();
-        Vec3d center = pos.toCenterPos();
+    private static void createSplash(Level world, BlockPos pos) {
+        RandomSource random = world.getRandom();
+        Vec3 center = pos.getCenter();
 
         for (int i = 0; i < 40; i++) {
 

@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.registry.tag;
 
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.biome.Biome;
 
 public final class SClimateBiomeTags {
     public static final TagKey<Biome> IS_NEVER_WARM = SBiomeTags.register("is_never_warm");

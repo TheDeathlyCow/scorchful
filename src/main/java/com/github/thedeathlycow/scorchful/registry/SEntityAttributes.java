@@ -2,22 +2,22 @@ package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
-import net.minecraft.entity.attribute.ClampedEntityAttribute;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 
 public class SEntityAttributes {
     public static final double BASE_MAX_TEMPERATURE = 45.0;
 
-    public static final RegistryEntry<EntityAttribute> REHYDRATION_EFFICIENCY = register(
+    public static final Holder<Attribute> REHYDRATION_EFFICIENCY = register(
             "player.rehydration_efficiency",
-            new ClampedEntityAttribute(
+            new RangedAttribute(
                     "attribute.name.player.rehydration_efficiency",
                     0.0,
                     0.0, 1.0
-            ).setTracked(true)
+            ).setSyncable(true)
     );
 
     public static void initialize() {
@@ -26,8 +26,8 @@ public class SEntityAttributes {
         ThermooAttributes.baseValueEvent(ThermooAttributes.MAX_TEMPERATURE).register((entity, baseValue) -> BASE_MAX_TEMPERATURE);
     }
 
-    private static RegistryEntry<EntityAttribute> register(String id, EntityAttribute attribute) {
-        return Registry.registerReference(Registries.ATTRIBUTE, Scorchful.id(id), attribute);
+    private static Holder<Attribute> register(String id, Attribute attribute) {
+        return Registry.registerForHolder(BuiltInRegistries.ATTRIBUTE, Scorchful.id(id), attribute);
     }
 
     private SEntityAttributes() {

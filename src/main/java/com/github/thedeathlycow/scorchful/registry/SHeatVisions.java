@@ -6,9 +6,9 @@ import com.github.thedeathlycow.scorchful.temperature.heatvision.ApproachEffects
 import com.github.thedeathlycow.scorchful.temperature.heatvision.BlockDisplayHeatVision;
 import com.github.thedeathlycow.scorchful.temperature.heatvision.EntityHeatVision;
 import com.github.thedeathlycow.scorchful.temperature.heatvision.HeatVision;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
-import net.minecraft.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.block.Blocks;
 
 public final class SHeatVisions {
 
@@ -33,7 +33,7 @@ public final class SHeatVisions {
             new BlockDisplayHeatVision(
                     SBiomeTags.HEAT_VISION_POPPY,
                     3,
-                    Blocks.POPPY::getDefaultState
+                    Blocks.POPPY::defaultBlockState
             )
     );
     public static final HeatVision BLUE_ORCHID = register(
@@ -41,7 +41,7 @@ public final class SHeatVisions {
             new BlockDisplayHeatVision(
                     SBiomeTags.HEAT_VISION_BLUE_ORCHID,
                     3,
-                    Blocks.BLUE_ORCHID::getDefaultState
+                    Blocks.BLUE_ORCHID::defaultBlockState
             )
     );
     public static final HeatVision SALMON = register(

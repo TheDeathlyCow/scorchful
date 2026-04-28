@@ -3,29 +3,22 @@ package com.github.thedeathlycow.scorchful.block;
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.AbstractCauldronBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.LeveledCauldronBlock;
-import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.IntProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.event.GameEvent;
-
 import java.util.function.Predicate;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.cauldron.CauldronInteraction;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.AbstractCauldronBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.material.Fluid;
 
 public class SandCauldronBlock extends AbstractCauldronBlock {
 
@@ -34,17 +27,17 @@ public class SandCauldronBlock extends AbstractCauldronBlock {
                             Sandstorms.SandstormType.CODEC
                                     .fieldOf("sandstorm_type")
                                     .forGetter(block -> block.sandstormType),
-                            CauldronBehavior.CODEC
+                            CauldronInteraction.CODEC
                                     .fieldOf("interactions")
-                                    .forGetter(block -> block.behaviorMap),
-                            createSettingsCodec()
+                                    .forGetter(block -> block.interactions),
+                            propertiesCodec()
                     )
                     .apply(instance, SandCauldronBlock::new)
     );
 
     public static final int MIN_LEVEL = 1;
     public static final int MAX_LEVEL = 3;
-    public static final IntProperty LEVEL = Properties.LEVEL_3;
+    public static final IntegerProperty LEVEL = BlockStateProperties.LEVEL_CAULDRON;
     private static final int BASE_FLUID_HEIGHT = 6;
     private static final double FLUID_HEIGHT_PER_LEVEL = 3.0;
 
@@ -61,18 +54,18 @@ public class SandCauldronBlock extends AbstractCauldronBlock {
      */
     public SandCauldronBlock(
             Sandstorms.SandstormType sandstormType,
-            CauldronBehavior.CauldronBehaviorMap behaviorMap,
-            Settings settings
+            CauldronInteraction.InteractionMap behaviorMap,
+            Properties settings
     ) {
         super(settings, behaviorMap);
         this.sandstormType = sandstormType;
-        this.setDefaultState(
-                this.getDefaultState()
-                        .with(LEVEL, 3)
+        this.registerDefaultState(
+                this.defaultBlockState()
+                        .setValue(LEVEL, 3)
         );
     }
 
-    public static boolean canFillWithSand(World world, Sandstorms.SandstormType sandstormType) {
+    public static boolean canFillWithSand(Level world, Sandstorms.SandstormType sandstormType) {
         if (sandstormType != Sandstorms.SandstormType.NONE) {
             return world.getRandom().nextFloat() < FILL_WITH_SAND_CHANCE;
         }
@@ -81,33 +74,33 @@ public class SandCauldronBlock extends AbstractCauldronBlock {
     }
 
     @Override
-    public MapCodec<SandCauldronBlock> getCodec() {
+    public MapCodec<SandCauldronBlock> codec() {
         return CODEC;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
-        return state.get(LEVEL);
+    public int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos) {
+        return state.getValue(LEVEL);
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(LEVEL);
     }
 
     @Override
-    public void precipitationTick(BlockState state, World world, BlockPos pos, Biome.Precipitation precipitation) {
-        Sandstorms.SandstormType type = Sandstorms.getCurrentSandStorm(world, pos.up());
+    public void handlePrecipitation(BlockState state, Level world, BlockPos pos, Biome.Precipitation precipitation) {
+        Sandstorms.SandstormType type = Sandstorms.getCurrentSandStorm(world, pos.above());
 
-        if (this.sandstormType != type || !canFillWithSand(world, type) || state.get(LEVEL) == MAX_LEVEL) {
+        if (this.sandstormType != type || !canFillWithSand(world, type) || state.getValue(LEVEL) == MAX_LEVEL) {
             return;
         }
 
         BlockState filled = state.cycle(LEVEL);
-        world.setBlockState(pos, filled);
-        world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(filled));
+        world.setBlockAndUpdate(pos, filled);
+        world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(filled));
     }
 
     @Override
@@ -116,22 +109,22 @@ public class SandCauldronBlock extends AbstractCauldronBlock {
     }
 
     @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
         // stub: don't extinguish entities on fire
     }
 
     @Override
-    protected boolean canBeFilledByDripstone(Fluid fluid) {
+    protected boolean canReceiveStalactiteDrip(Fluid fluid) {
         return false;
     }
 
     @Override
     public boolean isFull(BlockState state) {
-        return state.get(LEVEL) == MAX_LEVEL;
+        return state.getValue(LEVEL) == MAX_LEVEL;
     }
 
     @Override
-    protected double getFluidHeight(BlockState state) {
-        return (BASE_FLUID_HEIGHT + state.get(LEVEL) * FLUID_HEIGHT_PER_LEVEL) / 16.0;
+    protected double getContentHeight(BlockState state) {
+        return (BASE_FLUID_HEIGHT + state.getValue(LEVEL) * FLUID_HEIGHT_PER_LEVEL) / 16.0;
     }
 }

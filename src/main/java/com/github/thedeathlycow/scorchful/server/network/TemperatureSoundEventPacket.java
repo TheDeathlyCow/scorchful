@@ -1,41 +1,41 @@
 package com.github.thedeathlycow.scorchful.server.network;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.network.packet.CustomPayload;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 
 public record TemperatureSoundEventPacket(
         SoundEvent soundEvent,
-        SoundCategory category,
+        SoundSource category,
         float volume,
         float pitch,
         long seed
-) implements CustomPayload {
+) implements CustomPacketPayload {
 
-    public static final CustomPayload.Id<TemperatureSoundEventPacket> PACKET_ID = new CustomPayload.Id<>(
+    public static final CustomPacketPayload.Type<TemperatureSoundEventPacket> PACKET_ID = new CustomPacketPayload.Type<>(
             Scorchful.id("temperature_sound_event")
     );
 
-    public static final PacketCodec<PacketByteBuf, TemperatureSoundEventPacket> PACKET_CODEC = PacketCodec.tuple(
-            SoundEvent.PACKET_CODEC,
+    public static final StreamCodec<FriendlyByteBuf, TemperatureSoundEventPacket> PACKET_CODEC = StreamCodec.composite(
+            SoundEvent.DIRECT_STREAM_CODEC,
             TemperatureSoundEventPacket::soundEvent,
-            PacketCodecs.indexed(ord -> SoundCategory.values()[ord], SoundCategory::ordinal),
+            ByteBufCodecs.idMapper(ord -> SoundSource.values()[ord], SoundSource::ordinal),
             TemperatureSoundEventPacket::category,
-            PacketCodecs.FLOAT,
+            ByteBufCodecs.FLOAT,
             TemperatureSoundEventPacket::volume,
-            PacketCodecs.FLOAT,
+            ByteBufCodecs.FLOAT,
             TemperatureSoundEventPacket::pitch,
-            PacketCodecs.VAR_LONG,
+            ByteBufCodecs.VAR_LONG,
             TemperatureSoundEventPacket::seed,
             TemperatureSoundEventPacket::new
     );
 
     @Override
-    public Id<? extends CustomPayload> getId() {
+    public Type<? extends CustomPacketPayload> type() {
         return PACKET_ID;
     }
 }

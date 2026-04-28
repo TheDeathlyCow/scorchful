@@ -5,21 +5,21 @@ import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProv
 import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProviderType;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.component.ComponentMap;
-import net.minecraft.predicate.NumberRange;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 
 public record CheckTimeEnvironmentProvider(
-        NumberRange.IntRange timeRange,
-        RegistryEntry<EnvironmentProvider> in,
-        RegistryEntry<EnvironmentProvider> out
+        MinMaxBounds.Ints timeRange,
+        Holder<EnvironmentProvider> in,
+        Holder<EnvironmentProvider> out
 ) implements EnvironmentProvider {
     public static final MapCodec<CheckTimeEnvironmentProvider> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
-                    NumberRange.IntRange.CODEC
+                    MinMaxBounds.Ints.CODEC
                             .fieldOf("time_range")
                             .forGetter(CheckTimeEnvironmentProvider::timeRange),
                     EnvironmentProvider.ENTRY_CODEC
@@ -32,9 +32,9 @@ public record CheckTimeEnvironmentProvider(
     );
 
     @Override
-    public void buildCurrentComponents(World world, BlockPos pos, RegistryEntry<Biome> biome, ComponentMap.Builder builder) {
-        long time = world.getTimeOfDay();
-        if (timeRange.test((int) time)) {
+    public void buildCurrentComponents(Level world, BlockPos pos, Holder<Biome> biome, DataComponentMap.Builder builder) {
+        long time = world.getDayTime();
+        if (timeRange.matches((int) time)) {
             in.value().buildCurrentComponents(world, pos, biome, builder);
         } else {
             out.value().buildCurrentComponents(world, pos, biome, builder);

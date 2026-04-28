@@ -5,30 +5,26 @@ import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleType;
-import net.minecraft.registry.Registries;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.dynamic.Codecs;
-
 import java.util.Locale;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.util.ExtraCodecs;
 
-public class SpurtingWaterParticleEffect implements ParticleEffect {
+public class SpurtingWaterParticleEffect implements ParticleOptions {
 
     public static final MapCodec<SpurtingWaterParticleEffect> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
-                            Codecs.NONNEGATIVE_INT
+                            ExtraCodecs.NON_NEGATIVE_INT
                                     .fieldOf("delay")
                                     .forGetter(SpurtingWaterParticleEffect::getDelay)
                     )
                     .apply(instance, SpurtingWaterParticleEffect::new)
     );
-    public static final PacketCodec<RegistryByteBuf, SpurtingWaterParticleEffect> PACKET_CODEC = PacketCodec.tuple(
-            PacketCodecs.VAR_INT,
+    public static final StreamCodec<RegistryFriendlyByteBuf, SpurtingWaterParticleEffect> PACKET_CODEC = StreamCodec.composite(
+            ByteBufCodecs.VAR_INT,
             SpurtingWaterParticleEffect::getDelay,
             SpurtingWaterParticleEffect::new
     );

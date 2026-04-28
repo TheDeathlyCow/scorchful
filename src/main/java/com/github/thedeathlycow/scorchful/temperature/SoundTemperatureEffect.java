@@ -6,13 +6,13 @@ import com.github.thedeathlycow.thermoo.api.temperature.effects.TemperatureEffec
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.registry.Registries;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.math.floatprovider.FloatProvider;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.valueproviders.FloatProvider;
+import net.minecraft.world.entity.LivingEntity;
 
 public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEffect.Config> {
 
@@ -24,25 +24,25 @@ public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEf
     }
 
     @Override
-    public void apply(LivingEntity victim, ServerWorld serverWorld, Config config) {
+    public void apply(LivingEntity victim, ServerLevel serverWorld, Config config) {
         if (config.onlyPlayToSource) {
             this.playSoundToSource(victim, serverWorld, config);
         } else {
             victim.playSound(
                     config.sound,
-                    config.volume.get(serverWorld.random),
-                    config.pitch.get(serverWorld.random)
+                    config.volume.sample(serverWorld.random),
+                    config.pitch.sample(serverWorld.random)
             );
         }
     }
 
     @Override
     public boolean shouldApply(LivingEntity victim, Config config) {
-        return victim.age % config.interval == 0;
+        return victim.tickCount % config.interval == 0;
     }
 
-    private void playSoundToSource(LivingEntity victim, ServerWorld world, Config config) {
-        if (victim instanceof ServerPlayerEntity serverPlayer) {
+    private void playSoundToSource(LivingEntity victim, ServerLevel world, Config config) {
+        if (victim instanceof ServerPlayer serverPlayer) {
             var random = victim.getRandom();
 
             ServerPlayNetworking.send(
@@ -50,8 +50,8 @@ public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEf
                     new TemperatureSoundEventPacket(
                             config.sound,
                             config.category,
-                            config.volume.get(random),
-                            config.pitch.get(random),
+                            config.volume.sample(random),
+                            config.pitch.sample(random),
                             world.getSeed()
                     )
             );
@@ -60,7 +60,7 @@ public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEf
 
     public record Config(
             SoundEvent sound,
-            SoundCategory category,
+            SoundSource category,
             boolean onlyPlayToSource,
             FloatProvider volume,
             FloatProvider pitch,
@@ -68,21 +68,21 @@ public class SoundTemperatureEffect extends TemperatureEffect<SoundTemperatureEf
     ) {
         public static final Codec<Config> CODEC = RecordCodecBuilder.create(
                 instance -> instance.group(
-                        Registries.SOUND_EVENT.getCodec()
+                        BuiltInRegistries.SOUND_EVENT.byNameCodec()
                                 .fieldOf("sound")
                                 .forGetter(Config::sound),
-                        ThermooCodecs.createEnumCodec(SoundCategory.class)
+                        ThermooCodecs.createEnumCodec(SoundSource.class)
                                 .fieldOf("category")
-                                .orElse(SoundCategory.MASTER)
+                                .orElse(SoundSource.MASTER)
                                 .forGetter(Config::category),
                         Codec.BOOL
                                 .fieldOf("only_play_to_source")
                                 .orElse(false)
                                 .forGetter(Config::onlyPlayToSource),
-                        FloatProvider.VALUE_CODEC
+                        FloatProvider.CODEC
                                 .fieldOf("volume")
                                 .forGetter(Config::volume),
-                        FloatProvider.VALUE_CODEC
+                        FloatProvider.CODEC
                                 .fieldOf("pitch")
                                 .forGetter(Config::pitch),
                         Codec.INT

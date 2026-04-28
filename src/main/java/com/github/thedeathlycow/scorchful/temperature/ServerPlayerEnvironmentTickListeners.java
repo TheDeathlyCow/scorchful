@@ -10,8 +10,8 @@ import com.github.thedeathlycow.thermoo.api.temperature.event.EnvironmentTickCon
 import com.github.thedeathlycow.thermoo.api.util.TemperatureRecord;
 import com.github.thedeathlycow.thermoo.api.util.TemperatureUnit;
 import net.fabricmc.fabric.api.util.TriState;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 
 public final class ServerPlayerEnvironmentTickListeners {
     public static void initialize() {
@@ -19,7 +19,7 @@ public final class ServerPlayerEnvironmentTickListeners {
         ServerPlayerEnvironmentTickEvents.ALLOW_TEMPERATURE_CHANGE.register(ServerPlayerEnvironmentTickListeners::allowTemperatureChange);
     }
 
-    private static int getTemperatureChange(EnvironmentTickContext<ServerPlayerEntity> context) {
+    private static int getTemperatureChange(EnvironmentTickContext<ServerPlayer> context) {
         if (context.affected().isSpectator()) {
             return 0;
         }
@@ -29,23 +29,23 @@ public final class ServerPlayerEnvironmentTickListeners {
 
         int total = environmentTemperatureToTemperatureChange(temperature, Scorchful.getConfig().heatingConfig);
 
-        if (context.affected().age % 20 == 0 && Scorchful.LOGGER.isDebugEnabled()) {
-            Scorchful.LOGGER.debug("Adding {} temperature to {}", total, context.affected().getNameForScoreboard());
+        if (context.affected().tickCount % 20 == 0 && Scorchful.LOGGER.isDebugEnabled()) {
+            Scorchful.LOGGER.debug("Adding {} temperature to {}", total, context.affected().getScoreboardName());
         }
 
         return total;
     }
 
-    private static TriState allowTemperatureChange(EnvironmentTickContext<ServerPlayerEntity> context, int temperatureChange) {
+    private static TriState allowTemperatureChange(EnvironmentTickContext<ServerPlayer> context, int temperatureChange) {
         if (temperatureChange <= 0) {
             return TriState.DEFAULT;
         }
 
-        ServerPlayerEntity player = context.affected();
+        ServerPlayer player = context.affected();
         ScorchfulConfig config = Scorchful.getConfig();
 
         int tickInterval = config.heatingConfig.getPassiveHeatingTickInterval();
-        if (tickInterval > 1 && player.age % tickInterval != 0) {
+        if (tickInterval > 1 && player.tickCount % tickInterval != 0) {
             return TriState.FALSE;
         }
 
@@ -67,6 +67,6 @@ public final class ServerPlayerEnvironmentTickListeners {
         }
         // Graphical proof: https://www.desmos.com/calculator/42rvcpnxwx
         double base = (temperatureC - thresholdC + degreesPerTemperatureIncrease) / degreesPerTemperatureIncrease;
-        return MathHelper.floor(config.getEnvironmentTemperatureMultiplier() * base);
+        return Mth.floor(config.getEnvironmentTemperatureMultiplier() * base);
     }
 }

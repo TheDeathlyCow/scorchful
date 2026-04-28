@@ -6,22 +6,22 @@ import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import com.github.thedeathlycow.thermoo.api.predicate.SoakedLootCondition;
 import net.fabricmc.fabric.api.item.v1.EnchantmentEvents;
 import net.fabricmc.fabric.api.item.v1.EnchantmentSource;
-import net.minecraft.component.EnchantmentEffectComponentTypes;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentLevelBasedValue;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.enchantment.effect.AttributeEnchantmentEffect;
-import net.minecraft.enchantment.effect.value.AddEnchantmentEffect;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.loot.condition.AllOfLootCondition;
-import net.minecraft.loot.condition.EntityPropertiesLootCondition;
-import net.minecraft.loot.condition.InvertedLootCondition;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.predicate.NumberRange;
-import net.minecraft.predicate.entity.EntityPredicate;
-import net.minecraft.predicate.entity.EntityTypePredicate;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.tag.EntityTypeTags;
+import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.EntityTypePredicate;
+import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.enchantment.LevelBasedValue;
+import net.minecraft.world.item.enchantment.effects.AddValue;
+import net.minecraft.world.item.enchantment.effects.EnchantmentAttributeEffect;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.predicates.AllOfCondition;
+import net.minecraft.world.level.storage.loot.predicates.InvertedLootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 
 public class EnchantmentModifiers {
 
@@ -30,44 +30,44 @@ public class EnchantmentModifiers {
         EnchantmentEvents.MODIFY.register(EnchantmentModifiers::modifyImpaling);
     }
 
-    private static void modifyImpaling(RegistryKey<Enchantment> key, Enchantment.Builder builder, EnchantmentSource source) {
+    private static void modifyImpaling(ResourceKey<Enchantment> key, Enchantment.Builder builder, EnchantmentSource source) {
         if (!source.isBuiltin() || key != Enchantments.IMPALING) {
             return;
         }
 
         CombatConfig config = Scorchful.getConfig().combatConfig;
-        builder.addEffect(
-                EnchantmentEffectComponentTypes.DAMAGE,
-                new AddEnchantmentEffect(EnchantmentLevelBasedValue.linear(config.getImpalingDamagePerLevel())),
-                AllOfLootCondition.builder(
+        builder.withEffect(
+                EnchantmentEffectComponents.DAMAGE,
+                new AddValue(LevelBasedValue.perLevel(config.getImpalingDamagePerLevel())),
+                AllOfCondition.allOf(
                         () -> new SoakedLootCondition(
-                                NumberRange.IntRange.atLeast(1),
-                                NumberRange.DoubleRange.ANY
+                                MinMaxBounds.Ints.atLeast(1),
+                                MinMaxBounds.Doubles.ANY
                         ),
-                        InvertedLootCondition.builder(
-                                EntityPropertiesLootCondition.builder(
+                        InvertedLootItemCondition.invert(
+                                LootItemEntityPropertyCondition.hasProperties(
                                         LootContext.EntityTarget.THIS,
-                                        EntityPredicate.Builder.create()
-                                                .type(EntityTypePredicate.create(EntityTypeTags.SENSITIVE_TO_IMPALING))
+                                        EntityPredicate.Builder.entity()
+                                                .entityType(EntityTypePredicate.of(EntityTypeTags.SENSITIVE_TO_IMPALING))
                                 )
                         )
                 )
         );
     }
 
-    private static void modifyFireProtection(RegistryKey<Enchantment> key, Enchantment.Builder builder, EnchantmentSource source) {
+    private static void modifyFireProtection(ResourceKey<Enchantment> key, Enchantment.Builder builder, EnchantmentSource source) {
         if (!source.isBuiltin() || key != Enchantments.FIRE_PROTECTION) {
             return;
         }
 
         double valuePerLevel = Scorchful.getConfig().combatConfig.getFireProtectionHeatResistancePerLevel();
-        builder.addEffect(
-                EnchantmentEffectComponentTypes.ATTRIBUTES,
-                new AttributeEnchantmentEffect(
+        builder.withEffect(
+                EnchantmentEffectComponents.ATTRIBUTES,
+                new EnchantmentAttributeEffect(
                         Scorchful.id("enchantment.fire_protection.heat_resistance"),
                         ThermooAttributes.HEAT_RESISTANCE,
-                        EnchantmentLevelBasedValue.linear((float) valuePerLevel),
-                        EntityAttributeModifier.Operation.ADD_VALUE
+                        LevelBasedValue.perLevel((float) valuePerLevel),
+                        AttributeModifier.Operation.ADD_VALUE
                 )
         );
     }

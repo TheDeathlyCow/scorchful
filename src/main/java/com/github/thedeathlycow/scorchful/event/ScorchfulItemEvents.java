@@ -2,10 +2,8 @@ package com.github.thedeathlycow.scorchful.event;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
-import net.minecraft.component.type.AttributeModifiersComponent;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
 
 public class ScorchfulItemEvents {
 
@@ -34,6 +32,6 @@ public class ScorchfulItemEvents {
 
     @FunctionalInterface
     public interface ConsumeItemCallback {
-        void consume(ItemStack stack, ServerPlayerEntity player);
+        void consume(ItemStack stack, ServerPlayer player);
     }
 }

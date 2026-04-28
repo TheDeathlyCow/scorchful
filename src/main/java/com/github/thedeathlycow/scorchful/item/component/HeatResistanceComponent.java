@@ -5,9 +5,9 @@ import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.item.ItemStack;
 
 public record HeatResistanceComponent(
         double heatResistance,
@@ -24,10 +24,10 @@ public record HeatResistanceComponent(
             ).apply(instance, HeatResistanceComponent::new)
     );
 
-    public static final PacketCodec<ByteBuf, HeatResistanceComponent> PACKET_CODEC = PacketCodec.tuple(
-            PacketCodecs.DOUBLE,
+    public static final StreamCodec<ByteBuf, HeatResistanceComponent> PACKET_CODEC = StreamCodec.composite(
+            ByteBufCodecs.DOUBLE,
             HeatResistanceComponent::heatResistance,
-            PacketCodecs.DOUBLE,
+            ByteBufCodecs.DOUBLE,
             HeatResistanceComponent::environmentHeatResistance,
             HeatResistanceComponent::new
     );
@@ -44,14 +44,14 @@ public record HeatResistanceComponent(
     }
 
     public static HeatResistanceComponent byTag(ItemStack stack) {
-        if (stack.isIn(SItemTags.HEAT_RESISTANCE_MODIFIED)) {
-            if (stack.isIn(SItemTags.VERY_PROTECTIVE_HEAT_RESISTANCE)) {
+        if (stack.is(SItemTags.HEAT_RESISTANCE_MODIFIED)) {
+            if (stack.is(SItemTags.VERY_PROTECTIVE_HEAT_RESISTANCE)) {
                 return VERY_PROTECTIVE;
-            } else if (stack.isIn(SItemTags.PROTECTIVE_HEAT_RESISTANCE)) {
+            } else if (stack.is(SItemTags.PROTECTIVE_HEAT_RESISTANCE)) {
                 return PROTECTIVE;
-            } else if (stack.isIn(SItemTags.VERY_HARMFUL_HEAT_RESISTANCE)) {
+            } else if (stack.is(SItemTags.VERY_HARMFUL_HEAT_RESISTANCE)) {
                 return VERY_HARMFUL;
-            } else if (stack.isIn(SItemTags.NEUTRAL_HEAT_RESISTANCE)) {
+            } else if (stack.is(SItemTags.NEUTRAL_HEAT_RESISTANCE)) {
                 return NEUTRAL;
             } else {
                 return DEFAULT;

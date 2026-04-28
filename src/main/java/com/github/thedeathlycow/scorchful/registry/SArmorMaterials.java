@@ -1,25 +1,24 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Util;
-
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
+import net.minecraft.Util;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 
 public class SArmorMaterials {
 
-    public static final RegistryEntry<ArmorMaterial> STRAW = register(
+    public static final Holder<ArmorMaterial> STRAW = register(
             "straw",
             Util.make(
                     new EnumMap<>(ArmorItem.Type.class),
@@ -31,13 +30,13 @@ public class SArmorMaterials {
                     }
             ),
             9,
-            SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,
+            SoundEvents.ARMOR_EQUIP_LEATHER,
             0.0f,
             0.0f,
-            () -> Ingredient.ofItems(Items.WHEAT)
+            () -> Ingredient.of(Items.WHEAT)
     );
 
-    public static final RegistryEntry<ArmorMaterial> TURTLE = register(
+    public static final Holder<ArmorMaterial> TURTLE = register(
             "turtle",
             Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
                 map.put(ArmorItem.Type.BOOTS, 2);
@@ -47,10 +46,10 @@ public class SArmorMaterials {
                 map.put(ArmorItem.Type.BODY, 5);
             }),
             9,
-            SoundEvents.ITEM_ARMOR_EQUIP_TURTLE,
+            SoundEvents.ARMOR_EQUIP_TURTLE,
             0.0F,
             0.0F,
-            () -> Ingredient.ofItems(Items.TURTLE_SCUTE)
+            () -> Ingredient.of(Items.TURTLE_SCUTE)
     );
 
     public static void initialize() {
@@ -58,11 +57,11 @@ public class SArmorMaterials {
     }
 
 
-    private static RegistryEntry<ArmorMaterial> register(
+    private static Holder<ArmorMaterial> register(
             String id,
             EnumMap<ArmorItem.Type, Integer> defense,
             int enchantability,
-            RegistryEntry<SoundEvent> equipSound,
+            Holder<SoundEvent> equipSound,
             float toughness,
             float knockbackResistance,
             Supplier<Ingredient> repairIngredient
@@ -71,11 +70,11 @@ public class SArmorMaterials {
         return register(id, defense, enchantability, equipSound, toughness, knockbackResistance, repairIngredient, list);
     }
 
-    private static RegistryEntry<ArmorMaterial> register(
+    private static Holder<ArmorMaterial> register(
             String id,
             EnumMap<ArmorItem.Type, Integer> defense,
             int enchantability,
-            RegistryEntry<SoundEvent> equipSound,
+            Holder<SoundEvent> equipSound,
             float toughness,
             float knockbackResistance,
             Supplier<Ingredient> repairIngredient,
@@ -87,8 +86,8 @@ public class SArmorMaterials {
             enumMap.put(type, defense.get(type));
         }
 
-        return Registry.registerReference(
-                Registries.ARMOR_MATERIAL,
+        return Registry.registerForHolder(
+                BuiltInRegistries.ARMOR_MATERIAL,
                 Scorchful.id(id),
                 new ArmorMaterial(
                         enumMap,
