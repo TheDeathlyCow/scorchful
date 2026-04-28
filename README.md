@@ -1,5 +1,67 @@
-# Scorchful for 1.21.1
+# Scorchful
 
 A Dune-inspired Minecraft mod focused on Heat-based survival and combat. Sister mod of [Frostiful](https://github.com/TheDeathlyCow/frostiful/)!
 
-This branch is for the 1.21.1 version of Scorchful. The full and up-to-date README can be found on the [main branch](https://github.com/TheDeathlyCow/scorchful/). This version will only be supported according to the [LTS Policy](https://github.com/TheDeathlyCow/scorchful?tab=readme-ov-file#lts-policy).
+
+> [!WARNING]
+> This is an experimental Neoforge port of Scorchful. It is still in alpha, and therefore may contain bugs and cause crashes. This port has also been created in a 'Fabric-like' manner using Forgified Fabric API and custom entry points to minimize the changes needed from the original version, which means that it may not work very well with the Neoforge ecosystem. Proceed with mild caution and please feel free to report issues to the [issue tracker](https://github.com/TheDeathlyCow/frostiful/issues). Scorchful remains a Fabric-first mod and this port is not likely to be updated to new Minecraft versions regularly.
+
+## Mod Pages
+
+* Modrinth: https://modrinth.com/mod/scorchful
+* CurseForge: https://www.curseforge.com/minecraft/mc-mods/scorchful
+
+The above mod pages and this Git repository are the only official sources for this mod. Other sources may contain out of date or even maliciously modified versions of this mod.
+
+## Wiki and Documentation
+
+Scorchful has a soon-to-be comprehensive player and developer wiki available at https://modded.wiki/w/Mod:Scorchful. Thanks to Patbox for hosting this!
+
+If you have questions or problems, tech support is also provided on my [community Discord](https://discord.thedeathlycow.com). However, it is preferred that bug reports are submitted to the [issue tracker](https://github.com/TheDeathlyCow/scorchful/issues).
+
+## Mod Integrations
+
+This documents mod integrations that have been created specifically for Scorchful and are included with Scorchful out of the box.
+
+Many other patches that are also relevant for Scorchful are provided by the standalone [Thermoo Patches](https://modrinth.com/mod/thermoo-patches) mod, including season integration, heart bar fixes, and more.
+
+* [Enchantment Descriptions](https://modrinth.com/mod/enchantment-descriptions): Descriptions are provided for Scorchful's enchantments
+* [Farmer's Delight](https://modrinth.com/mod/farmers-delight-refabricated): Foods and drinks provide water for sweating
+* [Immersive Weathering](https://modrinth.com/mod/immersive-weathering): Icicles are cooling
+* [Let's Do: Beach Party](https://modrinth.com/mod/lets-do-beachparty): Alcoholic drinks are parching, ice creams are cooling
+* [Let's Do: Brewery](https://modrinth.com/mod/lets-do-brewery): Alcoholic drinks are parching
+* [Let's Do: Herbal Brews](https://modrinth.com/mod/lets-do-herbalbrews): Teas provide water for sweating
+* [Let's Do: Candlelight](https://modrinth.com/mod/lets-do-candlelight): Foods and drinks provide water for sweating
+* [Let's Do: Vinery](https://modrinth.com/mod/lets-do-vinery): Alcoholic drinks are parching, grapes are refreshing
+* [Let's Do: Meadow](https://modrinth.com/mod/lets-do-meadow): Milk is rehydrating
+
+## Technical info
+
+Scorchful is a mod for [Minecraft: Java Edition](https://www.minecraft.net/en-us/store/minecraft-deluxe-collection-pc), written using the [Fabric Mod Loader](https://fabricmc.net/), with support also provided for the [Quilt Mod Loader](https://quiltmc.org/en/). Scorchful depends on [Fabric API](https://github.com/FabricMC/fabric), [Thermoo](https://github.com/TheDeathlyCow/thermoo/), and [Cloth Config](https://github.com/shedaniel/cloth-config), and has integrations for its sister mod, [Frostiful](https://github.com/TheDeathlyCow/frostiful/). If using Quilt, then Fabric API should be replaced with [Quilt Standard Libraries](https://github.com/QuiltMC/quilt-standard-libraries).
+
+## License
+
+Scorchful is licensed under LGPL-3.0.
+
+## Additional Credits
+
+Thanks to everyone who has contributed to Scorchful, no matter how big or small! See the [Credits](./CREDITS.md) for the full list of contributors.
+
+## Building
+
+Scorchful is built using [Gradle](https://gradle.org/) using the [Fabric Loom Gradle plugin](https://github.com/FabricMC/fabric-loom).
+
+```bash
+# builds a production jar of Frostiful
+./gradlew build 
+
+# runs Frostiful's unit tests
+./gradlew check
+
+# runs Frostiful's game tests
+./gradlew runGametest
+```
+
+# LTS Policy
+
+The LTS policy for Scorchful is available at https://www.thedeathlycow.com/scorchful/#lts-policy

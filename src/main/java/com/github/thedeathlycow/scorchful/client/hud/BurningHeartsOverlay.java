@@ -1,0 +1,97 @@
+package com.github.thedeathlycow.scorchful.client.hud;
+
+import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.ScorchfulClient;
+import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
+import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.joml.Vector2i;
+
+@Environment(EnvType.CLIENT)
+public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.RenderHealthBarCallback {
+
+    public static final BurningHeartsOverlay INSTANCE = new BurningHeartsOverlay();
+
+    public static final ResourceLocation HEART_OVERLAY_TEXTURE = Scorchful.id("textures/gui/fire_heart_overlay.png");
+
+    public static final int TEXTURE_WIDTH = 18;
+    public static final int TEXTURE_HEIGHT = 30;
+
+    public boolean drawEngulfedHeart(
+            GuiGraphics context,
+            @Nullable Player player,
+            int x, int y,
+            boolean hardcore, boolean halfHeart
+    ) {
+        BurningHeartType type = BurningHeartType.forPlayer(player, hardcore);
+        if (type != null) {
+            context.blit(
+                    HEART_OVERLAY_TEXTURE,
+                    x, y - 1,
+                    halfHeart ? 9 : 0, type.textureV,
+                    9, 10,
+                    TEXTURE_WIDTH, TEXTURE_HEIGHT
+            );
+
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void render(
+            GuiGraphics context,
+            Player player,
+            Vector2i[] heartPositions,
+            int displayHealth, int maxDisplayHealth
+    ) {
+        ScorchfulConfig config = Scorchful.getConfig();
+        if (!config.clientConfig.doBurningHeartOverlay() || player.thermoo$isCold()) {
+            return;
+        }
+
+        int burningHealthPoints = getNumBurningPoints(player, maxDisplayHealth);
+        int burningHealthHearts = getNumBurningHeartsFromPoints(burningHealthPoints);
+        for (int i = 0; i < burningHealthHearts; i++) {
+            Vector2i pos = heartPositions[i];
+            if (pos == null) {
+                continue;
+            }
+            // is half heart if this is the last heart being rendered and we have an odd
+            // number of frozen health points
+            boolean isHalfHeart = i + 1 >= burningHealthHearts && (burningHealthPoints & 1) == 1; // is odd check
+
+            int u = isHalfHeart ? 9 : 0;
+            context.blit(
+                    HEART_OVERLAY_TEXTURE,
+                    pos.x, pos.y - 1,
+                    u, 0,
+                    9, 10,
+                    TEXTURE_WIDTH, TEXTURE_HEIGHT
+            );
+        }
+
+    }
+
+    static int getNumBurningPoints(@NotNull LivingEntity entity, int maxDisplayHealth) {
+        float overheatProgress = entity.thermoo$getTemperatureScale();
+        return Math.round(overheatProgress * maxDisplayHealth);
+    }
+
+    static int getNumBurningHeartsFromPoints(int burningPoints) {
+        // number of whole hearts
+        return Mth.ceil(burningPoints / 2.0f);
+    }
+
+
+    private BurningHeartsOverlay() {
+    }
+}

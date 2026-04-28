@@ -1,0 +1,20 @@
+{
+    "required": true,
+    "package": "com.github.thedeathlycow.scorchful.client.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "plugin": "com.github.thedeathlycow.scorchful.client.mixin.compat.Plugin",
+    "client": [
+        "ClientPlayNetworkHandlerMixin",
+        "DrippingWetPlayerMixin",
+        "HeadFeatureRendererMixin",
+        "InGameHudMixin",
+        "sandstorm.BackgroundRendererMixin",
+        "sandstorm.WorldRendererMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    },
+    "mixins": [
+        "EntityRendererMixin"
+    ]
+}
