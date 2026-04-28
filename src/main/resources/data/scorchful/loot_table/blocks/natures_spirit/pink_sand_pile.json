@@ -150,7 +150,7 @@
                         },
                         {
                             "type": "minecraft:item",
-                            "name": "minecraft:sand"
+                            "name": "natures_spirit:pink_sand"
                         }
                     ]
                 }
