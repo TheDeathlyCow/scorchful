@@ -131,7 +131,7 @@ public class WarpedLilyTests {
         context.assertBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
 
         Player player = context.makeMockPlayer(GameType.SURVIVAL);
-        player.setItemInHand(InteractionHand.MAIN_HAND, SItems.WATER_SKIN.getDefaultStack());
+        player.setItemInHand(InteractionHand.MAIN_HAND, SItems.WATER_SKIN.getDefaultInstance());
 
         BooleanSupplier isWaterSkinEmpty = () -> {
             return !WaterSkinItem.hasDrink(player.getItemInHand(InteractionHand.MAIN_HAND));
@@ -159,7 +159,7 @@ public class WarpedLilyTests {
         context.assertBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
 
         Player player = context.makeMockPlayer(GameType.SURVIVAL);
-        player.setItemInHand(InteractionHand.MAIN_HAND, SItems.WATER_SKIN.getDefaultStack());
+        player.setItemInHand(InteractionHand.MAIN_HAND, SItems.WATER_SKIN.getDefaultInstance());
 
         BooleanSupplier isWaterSkinEmpty = () -> {
             return !WaterSkinItem.hasDrink(player.getItemInHand(InteractionHand.MAIN_HAND));

@@ -5,7 +5,6 @@ import com.github.thedeathlycow.scorchful.block.*;
 import com.github.thedeathlycow.scorchful.mixin.accessor.PointOfInterestTypeAccessor;
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
 import com.google.common.collect.ImmutableSet;
-import net.minecraft.block.*;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;

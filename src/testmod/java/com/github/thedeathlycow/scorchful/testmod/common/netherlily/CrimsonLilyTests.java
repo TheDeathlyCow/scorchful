@@ -165,7 +165,7 @@ public class CrimsonLilyTests {
         context.assertBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MIN_LEVEL);
 
         Player player = context.makeMockPlayer(GameType.SURVIVAL);
-        ItemStack filledWaterSkin = SItems.WATER_SKIN.getDefaultStack();
+        ItemStack filledWaterSkin = SItems.WATER_SKIN.getDefaultInstance();
         WaterSkinItem.addDrinks(filledWaterSkin, 1);
         player.setItemInHand(InteractionHand.MAIN_HAND, filledWaterSkin);
 
@@ -223,7 +223,7 @@ public class CrimsonLilyTests {
         context.assertBlockProperty(lilyPos, NetherLilyBlock.WATER_SATURATION_LEVEL, NetherLilyBlock.MAX_LEVEL);
 
         Player player = context.makeMockPlayer(GameType.SURVIVAL);
-        var waterSkin = SItems.WATER_SKIN.getDefaultStack();
+        var waterSkin = SItems.WATER_SKIN.getDefaultInstance();
         ((WaterSkinItem) SItems.WATER_SKIN).addDrinks(waterSkin, 1);
         player.setItemInHand(InteractionHand.MAIN_HAND, waterSkin);
 

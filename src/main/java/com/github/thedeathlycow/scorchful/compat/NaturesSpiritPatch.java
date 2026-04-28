@@ -15,7 +15,6 @@ import com.google.common.collect.ImmutableSet;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.hibiscus.naturespirit.registration.NSMiscBlocks;
-import net.minecraft.block.*;
 import net.minecraft.core.Holder;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.registries.BuiltInRegistries;

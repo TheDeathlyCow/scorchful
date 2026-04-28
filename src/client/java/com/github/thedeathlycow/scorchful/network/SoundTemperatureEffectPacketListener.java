@@ -4,6 +4,7 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.minecraft.client.Minecraft;
 
 public final class SoundTemperatureEffectPacketListener implements ClientPlayNetworking.PlayPayloadHandler<TemperatureSoundEventPacket> {
 
@@ -14,13 +15,13 @@ public final class SoundTemperatureEffectPacketListener implements ClientPlayNet
         }
 
         context.client().execute(() -> {
-            MinecraftClient client = context.client();
+            Minecraft client = context.client();
 
-            if (client.world == null || client.player == null) {
+            if (client.level == null || client.player == null) {
                 return;
             }
 
-            client.world.playSound(
+            client.level.playSeededSound(
                     client.player,
                     client.player.getX(),
                     client.player.getY(),

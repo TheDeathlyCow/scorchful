@@ -25,6 +25,10 @@ repositories {
         name = "Ladysnake Mods"
         url = 'https://maven.ladysnake.org/releases'
     }
+    maven {
+        name = 'ParchmentMC'
+        url = 'https://maven.parchmentmc.org'
+    }
     exclusiveContent {
         forRepository {
             maven {
@@ -119,7 +123,10 @@ loom {
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    mappings loom.layered() {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${project.parchment_version}:${project.parchment_mappings}")
+    }
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     // Fabric API.
@@ -138,16 +145,11 @@ dependencies {
 
     modImplementation "maven.modrinth:thermoo:${project.thermoo_version}"
 
-
-    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"
-    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
+    modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-base:${project.cca_version}"
+    modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
     modImplementation "org.ladysnake:satin:${satin_version}"
 
     testmodImplementation "org.mockito:mockito-core:3.+"
-
-    include "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"
-    include "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
-    include "org.ladysnake:satin:${satin_version}"
 
     modCompileOnly "dev.emi:trinkets:${project.trinkets_version}"
     modCompileOnly("maven.modrinth:dehydration:${project.dehydration_version}") { transitive = false }
