@@ -5,23 +5,22 @@ import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.registry.Registries;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
-
 import java.util.List;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 
 public class ItemTooltips {
 
-    private static final Text COOLING_TOOLTIP = Text.translatable("item.scorchful.tooltip.cooling")
-            .setStyle(Style.EMPTY.withColor(Formatting.AQUA));
+    private static final Component COOLING_TOOLTIP = Component.translatable("item.scorchful.tooltip.cooling")
+            .setStyle(Style.EMPTY.withColor(ChatFormatting.AQUA));
 
-    public static void appendDrinkTooltip(ItemStack stack, Item.TooltipContext context, TooltipType tooltipType, List<Text> tooltip) {
+    public static void appendDrinkTooltip(ItemStack stack, Item.TooltipContext context, TooltipFlag tooltipType, List<Component> tooltip) {
         if (ServerThirstPlugin.isCustomPluginLoaded()) {
             return;
         }
@@ -36,8 +35,8 @@ public class ItemTooltips {
         }
     }
 
-    public static void appendCoolingTooltip(ItemStack stack, Item.TooltipContext context, TooltipType tooltipType, List<Text> tooltip) {
-        if (stack.isIn(SItemTags.IS_COOLING_FOOD)) {
+    public static void appendCoolingTooltip(ItemStack stack, Item.TooltipContext context, TooltipFlag tooltipType, List<Component> tooltip) {
+        if (stack.is(SItemTags.IS_COOLING_FOOD)) {
             if (tooltipType.isAdvanced()) {
                 addTooltipBeforeAdvanced(stack, tooltip, COOLING_TOOLTIP);
             } else {
@@ -46,9 +45,9 @@ public class ItemTooltips {
         }
     }
 
-    private static void addTooltipBeforeAdvanced(ItemStack stack, List<Text> tooltip, Text tooltipText) {
-        Identifier identifier = Registries.ITEM.getId(stack.getItem());
-        Text idAsText = Text.literal(identifier.toString());
+    private static void addTooltipBeforeAdvanced(ItemStack stack, List<Component> tooltip, Component tooltipText) {
+        ResourceLocation identifier = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        Component idAsText = Component.literal(identifier.toString());
 
         for (int i = tooltip.size() - 1; i >= 0; i--) {
             if (tooltip.get(i).contains(idAsText)) {

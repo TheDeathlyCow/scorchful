@@ -5,10 +5,6 @@ import com.github.thedeathlycow.scorchful.entity.model.SunHatModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
-import net.minecraft.client.render.entity.ArmorStandEntityRenderer;
-import net.minecraft.client.render.entity.BipedEntityRenderer;
-import net.minecraft.client.render.entity.GiantEntityRenderer;
-import net.minecraft.client.render.entity.PlayerEntityRenderer;
 
 @Environment(EnvType.CLIENT)
 public class SFeatureRenderers {

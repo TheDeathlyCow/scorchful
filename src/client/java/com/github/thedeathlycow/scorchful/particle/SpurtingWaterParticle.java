@@ -2,25 +2,25 @@ package com.github.thedeathlycow.scorchful.particle;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
-import net.minecraft.client.world.ClientWorld;
 import org.jetbrains.annotations.Nullable;
 
-public class SpurtingWaterParticle extends SpriteBillboardParticle {
+public class SpurtingWaterParticle extends TextureSheetParticle {
 
     private static final float STARTING_Y_SPEED = 30f;
 
     private final int delay;
 
     protected SpurtingWaterParticle(
-            ClientWorld clientWorld,
+            ClientLevel clientWorld,
             double x, double y, double z,
             double velocityX, double velocityY, double velocityZ,
             int delay
     ) {
         super(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
-        this.gravityStrength = 0.75f;
-        this.maxAge += delay;
+        this.gravity = 0.75f;
+        this.lifetime += delay;
         this.delay = delay;
     }
 
@@ -29,21 +29,21 @@ public class SpurtingWaterParticle extends SpriteBillboardParticle {
         super.tick();
 
         if (this.age == delay) {
-            this.velocityY = STARTING_Y_SPEED;
+            this.yd = STARTING_Y_SPEED;
         }
     }
 
     @Override
-    public ParticleTextureSheet getType() {
-        return ParticleTextureSheet.PARTICLE_SHEET_OPAQUE;
+    public ParticleRenderType getRenderType() {
+        return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
     }
 
     @Environment(EnvType.CLIENT)
-    public static class Factory implements ParticleFactory<SpurtingWaterParticleEffect> {
+    public static class Factory implements ParticleProvider<SpurtingWaterParticleEffect> {
 
-        private final SpriteProvider spriteProvider;
+        private final SpriteSet spriteProvider;
 
-        public Factory(SpriteProvider spriteProvider) {
+        public Factory(SpriteSet spriteProvider) {
             this.spriteProvider = spriteProvider;
         }
 
@@ -51,7 +51,7 @@ public class SpurtingWaterParticle extends SpriteBillboardParticle {
         @Override
         public Particle createParticle(
                 SpurtingWaterParticleEffect parameters,
-                ClientWorld world,
+                ClientLevel world,
                 double x, double y, double z,
                 double velocityX, double velocityY, double velocityZ
         ) {
@@ -61,7 +61,7 @@ public class SpurtingWaterParticle extends SpriteBillboardParticle {
                     velocityX, velocityY, velocityZ,
                     parameters.getDelay()
             );
-            particle.setSprite(this.spriteProvider);
+            particle.pickSprite(this.spriteProvider);
             particle.setColor(0.2f, 0.3f, 1.0f);
             return particle;
         }

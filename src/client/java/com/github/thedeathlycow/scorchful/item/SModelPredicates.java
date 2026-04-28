@@ -4,13 +4,13 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
+import net.minecraft.client.renderer.item.ItemProperties;
 
 @Environment(EnvType.CLIENT)
 public class SModelPredicates {
 
     public static void onInitialize() {
-        ModelPredicateProviderRegistry.register(
+        ItemProperties.register(
                 SItems.WATER_SKIN, Scorchful.id("is_drink_empty"),
                 (stack, world, entity, seed) -> {
                     return WaterSkinItem.getNumDrinks(stack) == 0

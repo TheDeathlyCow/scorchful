@@ -4,14 +4,14 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ClientConfig;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.network.packet.s2c.play.EntityStatusEffectS2CPacket;
-import net.minecraft.network.packet.s2c.play.RemoveEntityStatusEffectS2CPacket;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.Holder;
+import net.minecraft.network.protocol.game.ClientboundRemoveMobEffectPacket;
+import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.Entity;
 import org.ladysnake.satin.api.event.ShaderEffectRenderCallback;
 import org.ladysnake.satin.api.managed.ManagedShaderEffect;
 import org.ladysnake.satin.api.managed.ShaderEffectManager;
@@ -47,18 +47,18 @@ public final class ShaderStatusEffectManagers {
         return TRACKED_MANAGERS;
     }
 
-    public static void onEffectAdded(EntityStatusEffectS2CPacket packet, ClientWorld world) {
-        Entity entity = world.getEntityById(packet.getEntityId());
-        if (entity instanceof ClientPlayerEntity player && player.isMainPlayer()) {
-            RegistryEntry<StatusEffect> potionEffect = packet.getEffectId();
+    public static void onEffectAdded(ClientboundUpdateMobEffectPacket packet, ClientLevel world) {
+        Entity entity = world.getEntity(packet.getEntityId());
+        if (entity instanceof LocalPlayer player && player.isLocalPlayer()) {
+            Holder<MobEffect> potionEffect = packet.getEffect();
             getTrackedManagers().forEach(manager -> manager.onEffectAdded(potionEffect));
         }
     }
 
-    public static void onEffectRemoved(RemoveEntityStatusEffectS2CPacket packet, ClientWorld world) {
+    public static void onEffectRemoved(ClientboundRemoveMobEffectPacket packet, ClientLevel world) {
         Entity entity = packet.getEntity(world);
-        if (entity instanceof ClientPlayerEntity player && player.isMainPlayer()) {
-            RegistryEntry<StatusEffect> potionEffect = packet.effect();
+        if (entity instanceof LocalPlayer player && player.isLocalPlayer()) {
+            Holder<MobEffect> potionEffect = packet.effect();
             getTrackedManagers().forEach(manager -> manager.onEffectRemoved(potionEffect));
         }
     }
@@ -68,8 +68,8 @@ public final class ShaderStatusEffectManagers {
     }
 
     public static ShaderStatusEffectManager createAndTrack(
-            Identifier shaderID,
-            RegistryEntry<StatusEffect> potionEffect,
+            ResourceLocation shaderID,
+            Holder<MobEffect> potionEffect,
             Predicate<ClientConfig> enabledPredicate
     ) {
         ManagedShaderEffect managedShaderEffect = ShaderEffectManager.getInstance().manage(shaderID);

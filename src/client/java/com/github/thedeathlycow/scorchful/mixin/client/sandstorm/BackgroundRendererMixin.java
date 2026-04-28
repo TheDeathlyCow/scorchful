@@ -1,11 +1,11 @@
 package com.github.thedeathlycow.scorchful.mixin.client.sandstorm;
 
 import com.github.thedeathlycow.scorchful.client.SandstormEffects;
-import net.minecraft.block.enums.CameraSubmersionType;
-import net.minecraft.client.render.BackgroundRenderer;
-import net.minecraft.client.render.Camera;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.Camera;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.FogRenderer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.material.FogType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,47 +13,47 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-@Mixin(BackgroundRenderer.class)
+@Mixin(FogRenderer.class)
 public class BackgroundRendererMixin { //NOSONAR
 
     @Shadow
-    private static float red;
+    private static float fogRed;
 
     @Shadow
-    private static float green;
+    private static float fogGreen;
 
     @Shadow
-    private static float blue;
+    private static float fogBlue;
 
     @Inject(
-            method = "render",
+            method = "setupColor",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/world/ClientWorld$Properties;getHorizonShadingRatio()F",
+                    target = "Lnet/minecraft/client/multiplayer/ClientLevel$ClientLevelData;getClearColorScale()F",
                     shift = At.Shift.AFTER
             )
     )
     private static void setFogColorForSandstorm(
             Camera camera,
             float tickDelta,
-            ClientWorld world,
+            ClientLevel world,
             int viewDistance,
             float skyDarkness,
             CallbackInfo ci
     ) {
         SandstormEffects.getFogColor(
                 world, camera,
-                red, green, blue,
+                fogRed, fogGreen, fogBlue,
                 tickDelta
         ).ifPresent(color -> {
-            red = (float) color.x;
-            green = (float) color.y;
-            blue = (float) color.z;
+            fogRed = (float) color.x;
+            fogGreen = (float) color.y;
+            fogBlue = (float) color.z;
         });
     }
 
     @Inject(
-            method = "applyFog",
+            method = "setupFog",
             at = @At(
                     value = "INVOKE",
                     target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderFogStart(F)V",
@@ -63,14 +63,14 @@ public class BackgroundRendererMixin { //NOSONAR
     )
     private static void setFogDistanceForSandstorm(
             Camera camera,
-            BackgroundRenderer.FogType fogType,
+            FogRenderer.FogMode fogType,
             float viewDistance,
             boolean thickFog,
             float tickDelta,
             CallbackInfo ci,
-            CameraSubmersionType cameraSubmersionType,
+            FogType cameraSubmersionType,
             Entity entity,
-            BackgroundRenderer.FogData fogData
+            FogRenderer.FogData fogData
     ) {
         SandstormEffects.updateFogDistance(camera, viewDistance, cameraSubmersionType, fogData);
     }

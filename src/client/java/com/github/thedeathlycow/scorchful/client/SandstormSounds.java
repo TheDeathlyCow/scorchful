@@ -3,14 +3,12 @@ package com.github.thedeathlycow.scorchful.client;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.Camera;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Heightmap;
-
 import java.util.Optional;
+import net.minecraft.client.Camera;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundSource;
 
 public class SandstormSounds {
 
@@ -22,14 +20,14 @@ public class SandstormSounds {
 
     private int timer = 0;
 
-    public void tick(ClientWorld world) {
+    public void tick(ClientLevel world) {
 
-        if (world.getTickManager().isFrozen() || !Scorchful.getConfig().clientConfig.isSandstormSoundsEnabled()) {
+        if (world.tickRateManager().isFrozen() || !Scorchful.getConfig().clientConfig.isSandstormSoundsEnabled()) {
             return;
         }
 
-        final MinecraftClient gameClient = MinecraftClient.getInstance();
-        final Camera camera = gameClient.gameRenderer.getCamera();
+        final Minecraft gameClient = Minecraft.getInstance();
+        final Camera camera = gameClient.gameRenderer.getMainCamera();
         if (camera == null) {
             return; // no camera for whatever reason
         }
@@ -46,10 +44,10 @@ public class SandstormSounds {
 
         this.chooseSpotForWindSound(world, camera).ifPresent(
                 pos -> {
-                    world.playSoundAtBlockCenter(
+                    world.playLocalSound(
                             pos,
                             SSoundEvents.WEATHER_SANDSTORM,
-                            SoundCategory.WEATHER,
+                            SoundSource.WEATHER,
                             0.1f, 0.5f,
                             false
                     );
@@ -58,14 +56,14 @@ public class SandstormSounds {
 
     }
 
-    private Optional<BlockPos> chooseSpotForWindSound(ClientWorld world, Camera camera) {
+    private Optional<BlockPos> chooseSpotForWindSound(ClientLevel world, Camera camera) {
 
-        BlockPos cameraPos = camera.getBlockPos();
+        BlockPos cameraPos = camera.getBlockPosition();
 
-        int dx = world.random.nextBetween(-MAX_XZ_OFFSET, MAX_SOUND_Y_DIFF);
-        int dy = world.random.nextBetween(-MAX_XZ_OFFSET, MAX_SOUND_Y_DIFF);
-        int dz = world.random.nextBetween(-MAX_XZ_OFFSET, MAX_SOUND_Y_DIFF);
-        BlockPos soundPos = cameraPos.add(dx, dy, dz);
+        int dx = world.random.nextIntBetweenInclusive(-MAX_XZ_OFFSET, MAX_SOUND_Y_DIFF);
+        int dy = world.random.nextIntBetweenInclusive(-MAX_XZ_OFFSET, MAX_SOUND_Y_DIFF);
+        int dz = world.random.nextIntBetweenInclusive(-MAX_XZ_OFFSET, MAX_SOUND_Y_DIFF);
+        BlockPos soundPos = cameraPos.offset(dx, dy, dz);
 
         if (Sandstorms.getCurrentSandStorm(world, soundPos) != Sandstorms.SandstormType.NONE) {
             return Optional.of(soundPos);

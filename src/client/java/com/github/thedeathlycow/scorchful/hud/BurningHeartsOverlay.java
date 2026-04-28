@@ -6,11 +6,11 @@ import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector2i;
@@ -20,20 +20,20 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
 
     public static final BurningHeartsOverlay INSTANCE = new BurningHeartsOverlay();
 
-    public static final Identifier HEART_OVERLAY_TEXTURE = Scorchful.id("textures/gui/fire_heart_overlay.png");
+    public static final ResourceLocation HEART_OVERLAY_TEXTURE = Scorchful.id("textures/gui/fire_heart_overlay.png");
 
     public static final int TEXTURE_WIDTH = 18;
     public static final int TEXTURE_HEIGHT = 30;
 
     public boolean drawEngulfedHeart(
-            DrawContext context,
-            @Nullable PlayerEntity player,
+            GuiGraphics context,
+            @Nullable Player player,
             int x, int y,
             boolean hardcore, boolean halfHeart
     ) {
         BurningHeartType type = BurningHeartType.forPlayer(player, hardcore);
         if (type != null) {
-            context.drawTexture(
+            context.blit(
                     HEART_OVERLAY_TEXTURE,
                     x, y - 1,
                     halfHeart ? 9 : 0, type.textureV,
@@ -48,8 +48,8 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
 
     @Override
     public void render(
-            DrawContext context,
-            PlayerEntity player,
+            GuiGraphics context,
+            Player player,
             Vector2i[] heartPositions,
             int displayHealth, int maxDisplayHealth
     ) {
@@ -70,7 +70,7 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
             boolean isHalfHeart = i + 1 >= burningHealthHearts && (burningHealthPoints & 1) == 1; // is odd check
 
             int u = isHalfHeart ? 9 : 0;
-            context.drawTexture(
+            context.blit(
                     HEART_OVERLAY_TEXTURE,
                     pos.x, pos.y - 1,
                     u, 0,
@@ -88,7 +88,7 @@ public final class BurningHeartsOverlay implements StatusBarOverlayRenderEvents.
 
     static int getNumBurningHeartsFromPoints(int burningPoints) {
         // number of whole hearts
-        return MathHelper.ceil(burningPoints / 2.0f);
+        return Mth.ceil(burningPoints / 2.0f);
     }
 
 

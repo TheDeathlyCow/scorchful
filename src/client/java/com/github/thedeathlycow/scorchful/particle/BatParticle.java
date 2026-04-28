@@ -2,53 +2,53 @@ package com.github.thedeathlycow.scorchful.particle;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.SimpleParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
 
-public class BatParticle extends SpriteBillboardParticle {
+public class BatParticle extends TextureSheetParticle {
 
-    private final SpriteProvider spriteProvider;
+    private final SpriteSet spriteProvider;
 
-    public BatParticle(ClientWorld world, double x, double y, double z, SpriteProvider spriteProvider) {
+    public BatParticle(ClientLevel world, double x, double y, double z, SpriteSet spriteProvider) {
         super(world, x, y, z);
         this.spriteProvider = spriteProvider;
-        this.setSpriteForAge(spriteProvider);
-        this.maxAge = 12 + this.random.nextInt(4);
-        this.scale = 0.15f;
-        this.setBoundingBoxSpacing(1.0f, 1.0f);
+        this.setSpriteFromAge(spriteProvider);
+        this.lifetime = 12 + this.random.nextInt(4);
+        this.quadSize = 0.15f;
+        this.setSize(1.0f, 1.0f);
     }
 
     @Override
-    public ParticleTextureSheet getType() {
-        return ParticleTextureSheet.PARTICLE_SHEET_LIT;
+    public ParticleRenderType getRenderType() {
+        return ParticleRenderType.PARTICLE_SHEET_LIT;
     }
 
     @Override
-    public int getBrightness(float tint) {
+    public int getLightColor(float tint) {
         return 0xF000F0;
     }
 
     @Override
     public void tick() {
-        if (this.age++ >= this.maxAge) {
-            this.markDead();
+        if (this.age++ >= this.lifetime) {
+            this.remove();
         } else {
-            this.setSpriteForAge(this.spriteProvider);
+            this.setSpriteFromAge(this.spriteProvider);
         }
     }
 
     @Environment(EnvType.CLIENT)
-    public static class Factory implements ParticleFactory<SimpleParticleType> {
-        private final SpriteProvider spriteProvider;
+    public static class Factory implements ParticleProvider<SimpleParticleType> {
+        private final SpriteSet spriteProvider;
 
-        public Factory(SpriteProvider spriteProvider) {
+        public Factory(SpriteSet spriteProvider) {
             this.spriteProvider = spriteProvider;
         }
 
         public Particle createParticle(
                 SimpleParticleType simpleParticleType,
-                ClientWorld clientWorld,
+                ClientLevel clientWorld,
                 double x, double y, double z,
                 double velocityX, double velocityY, double velocityZ
         ) {
