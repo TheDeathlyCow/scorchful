@@ -6,21 +6,20 @@ import com.github.thedeathlycow.thermoo.api.ThermooRegistryKeys;
 import com.github.thedeathlycow.thermoo.api.environment.provider.EnvironmentProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.registry.RegistryWrapper;
-
+import net.minecraft.core.HolderLookup;
 import java.util.concurrent.CompletableFuture;
 
 public class EnvironmentProviderTagGenerator extends FabricTagProvider<EnvironmentProvider> {
-    public EnvironmentProviderTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+    public EnvironmentProviderTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, ThermooRegistryKeys.ENVIRONMENT_PROVIDER, registriesFuture);
     }
 
     @Override
-    protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        getOrCreateTagBuilder(SEnvironmentProviderTags.TEMPERATURE_MODIFIERS)
+    protected void addTags(HolderLookup.Provider wrapperLookup) {
+        tag(SEnvironmentProviderTags.TEMPERATURE_MODIFIERS)
                 .addOptional(SEnvironmentProviders.APPLY_SHADE_FOR_TIME);
 
-        getOrCreateTagBuilder(SEnvironmentProviderTags.NETHER_MODIFIERS)
+        tag(SEnvironmentProviderTags.NETHER_MODIFIERS)
                 .addOptional(SEnvironmentProviders.NETHER_BLOCK_LIGHT);
     }
 }
