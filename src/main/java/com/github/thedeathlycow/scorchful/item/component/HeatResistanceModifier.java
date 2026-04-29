@@ -9,6 +9,7 @@ import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
 import com.github.thedeathlycow.thermoo.api.armor.material.ArmorMaterialTags;
 import com.github.thedeathlycow.thermoo.api.item.ModifyItemAttributeModifiersCallback;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
+import net.fabricmc.fabric.api.item.v1.FabricComponentMapBuilder;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -20,6 +21,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+
 import javax.xml.crypto.Data;
 import java.util.EnumMap;
 import java.util.List;
@@ -59,7 +61,7 @@ public final class HeatResistanceModifier {
             context.modify(
                     Items.WOLF_ARMOR,
                     builder -> {
-                        ItemAttributeModifiers attributes = builder.getOrDefault(
+                        ItemAttributeModifiers attributes = ((FabricComponentMapBuilder) builder).getOrDefault(
                                 DataComponents.ATTRIBUTE_MODIFIERS,
                                 ItemAttributeModifiers.EMPTY
                         );

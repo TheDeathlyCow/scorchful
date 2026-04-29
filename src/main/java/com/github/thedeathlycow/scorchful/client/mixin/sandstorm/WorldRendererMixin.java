@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.client.mixin.sandstorm;
 
-import com.github.thedeathlycow.scorchful.client.SandstormEffects;
+import com.github.thedeathlycow.scorchful.client.client.SandstormEffects;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.LevelRenderer;

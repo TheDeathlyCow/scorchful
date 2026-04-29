@@ -1,9 +1,8 @@
 package com.github.thedeathlycow.scorchful.client.entity.feature;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.entity.model.SunHatModel;
+import com.github.thedeathlycow.scorchful.client.entity.model.SunHatModel;
 import com.github.thedeathlycow.scorchful.item.SunHatItem;
-import com.github.thedeathlycow.scorchful.registry.SItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.fabricmc.api.EnvType;

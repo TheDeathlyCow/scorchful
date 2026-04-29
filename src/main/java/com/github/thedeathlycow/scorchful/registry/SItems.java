@@ -11,6 +11,7 @@ import com.github.thedeathlycow.scorchful.item.loot.TurtleScuteLootTableModifier
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.fabricmc.fabric.api.item.v1.FabricItem;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -35,10 +36,8 @@ public final class SItems {
     public static final Item SUN_HAT = register(
             "sun_hat",
             settings -> new SunHatItem(
-                    settings
+                    ((FabricItem.Settings)(settings.attributes(SunHatItem.attributeModifiers()).stacksTo(1)))
                             .equipmentSlot((entity, stack) -> EquipmentSlot.HEAD)
-                            .attributes(SunHatItem.attributeModifiers())
-                            .stacksTo(1)
             )
     );
 

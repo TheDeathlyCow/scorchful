@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.client.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.entity.model.SunHatModel;
+import com.github.thedeathlycow.scorchful.client.entity.model.SunHatModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;

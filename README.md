@@ -8,6 +8,7 @@ A Dune-inspired Minecraft mod focused on Heat-based survival and combat. Sister 
 
 ## Mod Pages
 
+* Website: https://www.thedeathlycow.com/scorchful
 * Modrinth: https://modrinth.com/mod/scorchful
 * CurseForge: https://www.curseforge.com/minecraft/mc-mods/scorchful
 

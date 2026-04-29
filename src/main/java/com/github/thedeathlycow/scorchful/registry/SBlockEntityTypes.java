@@ -12,14 +12,14 @@ public final class SBlockEntityTypes {
         Scorchful.LOGGER.debug("Initialized Scorchful block entity types");
     }
 
-    public static <T extends BlockEntity> BlockEntityType<T> register(
-            String name,
-            BlockEntityType.BlockEntitySupplier<T> factory,
-            Block... blocks
-    ) {
-        BlockEntityType<T> type = BlockEntityType.Builder.of(factory, blocks).build();
-        return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, Scorchful.id(name), type);
-    }
+//    public static <T extends BlockEntity> BlockEntityType<T> register(
+//            String name,
+//            BlockEntityType.BlockEntitySupplier<T> factory,
+//            Block... blocks
+//    ) {
+//        BlockEntityType<T> type = BlockEntityType.Builder.of(factory, blocks).build();
+//        return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, Scorchful.id(name), type);
+//    }
 
     private SBlockEntityTypes() {
 

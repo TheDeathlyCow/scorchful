@@ -1,7 +1,7 @@
 package com.github.thedeathlycow.scorchful.client.mixin;
 
-import com.github.thedeathlycow.scorchful.hud.BurningHeartsOverlay;
-import com.github.thedeathlycow.scorchful.hud.ShadeOverlay;
+import com.github.thedeathlycow.scorchful.client.hud.BurningHeartsOverlay;
+import com.github.thedeathlycow.scorchful.client.hud.ShadeOverlay;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;

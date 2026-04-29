@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.client.mixin;
 
-import com.github.thedeathlycow.scorchful.client.ShaderStatusEffectManagers;
+import com.github.thedeathlycow.scorchful.client.client.ShaderStatusEffectManagers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientCommonPacketListenerImpl;
 import net.minecraft.client.multiplayer.ClientLevel;

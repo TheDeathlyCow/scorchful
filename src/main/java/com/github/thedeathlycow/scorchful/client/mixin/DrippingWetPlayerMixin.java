@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.client.mixin;
 
-import com.github.thedeathlycow.scorchful.client.SoakedEffects;
+import com.github.thedeathlycow.scorchful.client.client.SoakedEffects;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.world.entity.EntityType;
