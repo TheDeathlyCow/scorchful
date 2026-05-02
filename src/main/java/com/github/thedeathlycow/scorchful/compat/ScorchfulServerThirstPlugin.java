@@ -2,8 +2,9 @@ package com.github.thedeathlycow.scorchful.compat;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
-import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
-import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
+import com.github.thedeathlycow.scorchful.attachment.PlayerWaterAttachment;
+import com.github.thedeathlycow.scorchful.attachment.RehydrationAttachment;
+import com.github.thedeathlycow.scorchful.attachment.ScorchfulEntityAttachments;
 import com.github.thedeathlycow.scorchful.config.ThirstConfig;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
@@ -21,7 +22,7 @@ public final class ScorchfulServerThirstPlugin implements ServerThirstPlugin {
      */
     @Override
     public boolean dehydrateFromSweating(Player player) {
-        PlayerWaterComponent waterComponent = ScorchfulComponents.PLAYER_WATER.get(player);
+        PlayerWaterAttachment waterComponent = player.getData(ScorchfulEntityAttachments.PLAYER_WATER);
         if (waterComponent.getWaterDrunk() > 0 && player.thermoo$getTemperature() > 0) {
             waterComponent.drink(-1);
             return true;
@@ -31,7 +32,7 @@ public final class ScorchfulServerThirstPlugin implements ServerThirstPlugin {
     }
 
     /**
-     * Rehydrates the player from {@linkplain com.github.thedeathlycow.scorchful.components.RehydrationComponent Rehydration}.
+     * Rehydrates the player from {@linkplain RehydrationAttachment Rehydration}.
      * <p>
      * Rehydration is usually provided as an {@link net.minecraft.world.item.enchantment.Enchantment}, but is internally based on an
      * {@linkplain com.github.thedeathlycow.scorchful.registry.SEntityAttributes#REHYDRATION_EFFICIENCY attribute}.
@@ -44,7 +45,7 @@ public final class ScorchfulServerThirstPlugin implements ServerThirstPlugin {
     @Override
     public void rehydrateFromEnchantment(Player player, int waterCaptured, double rehydrationEfficiency) {
         // don't drink if we already have water (and dont need to) - prevents rehydration spam
-        PlayerWaterComponent waterComponent = ScorchfulComponents.PLAYER_WATER.get(player);
+        PlayerWaterAttachment waterComponent = player.getData(ScorchfulEntityAttachments.PLAYER_WATER);
         if (waterComponent.getWaterDrunk() > 1) {
             return;
         }

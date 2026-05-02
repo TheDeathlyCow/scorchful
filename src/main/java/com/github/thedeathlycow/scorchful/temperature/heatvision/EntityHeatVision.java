@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
-import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
+import com.github.thedeathlycow.scorchful.attachment.ScorchfulEntityAttachments;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
@@ -27,10 +27,10 @@ public class EntityHeatVision<E extends Entity> extends HeatVision {
         if (entity != null) {
             entity.moveTo(pos, 0f, 0f);
             this.initializeEntity(entity);
-            ScorchfulComponents.ENTITY_DESERT_VISION.get(entity).applyDesertVision(this, player);
+            entity.getData(ScorchfulEntityAttachments.ENTITY_DESERT_VISION).applyDesertVision(this, player);
             boolean spawned = world.addFreshEntity(entity);
             if (spawned) {
-                ScorchfulComponents.ENTITY_DESERT_VISION.sync(entity);
+                entity.syncData(ScorchfulEntityAttachments.ENTITY_DESERT_VISION);
             }
             return spawned;
         }

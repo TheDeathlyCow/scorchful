@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.api;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.attachment.RehydrationAttachment;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.compat.ServerThirstPluginManager;
 import org.jetbrains.annotations.NotNull;
@@ -31,7 +32,7 @@ public interface ServerThirstPlugin {
     boolean dehydrateFromSweating(Player player);
 
     /**
-     * Rehydrates the player from {@linkplain com.github.thedeathlycow.scorchful.components.RehydrationComponent Rehydration}.
+     * Rehydrates the player from {@linkplain RehydrationAttachment Rehydration}.
      * <p>
      * Rehydration is usually provided as an {@link net.minecraft.world.item.enchantment.Enchantment}, but is internally based on an
      * {@linkplain com.github.thedeathlycow.scorchful.registry.SEntityAttributes#REHYDRATION_EFFICIENCY attribute}.

@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.components;
+package com.github.thedeathlycow.scorchful.attachment;
 
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
 import net.minecraft.core.HolderLookup;
@@ -6,10 +6,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
-import org.ladysnake.cca.api.v3.component.Component;
-import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
+import net.neoforged.neoforge.attachment.IAttachmentHolder;
+import net.neoforged.neoforge.common.util.INBTSerializable;
 
-public class PlayerWaterComponent implements Component, ServerTickingComponent {
+import java.util.Objects;
+
+public class PlayerWaterAttachment implements INBTSerializable<CompoundTag> {
 
     public static final int MAX_WATER = 300;
 
@@ -22,8 +24,10 @@ public class PlayerWaterComponent implements Component, ServerTickingComponent {
 
     private int waterDrunk = 0;
 
-    public PlayerWaterComponent(Player provider) {
-        this.provider = provider;
+    public PlayerWaterAttachment(IAttachmentHolder holder) {
+        this.provider = holder instanceof Player player ? player : null;
+
+        Objects.requireNonNull(this.provider, "Player water attachment created on non-player, this will cause a crash later.");
     }
 
     public int getWaterDrunk() {
@@ -35,20 +39,23 @@ public class PlayerWaterComponent implements Component, ServerTickingComponent {
     }
 
     @Override
-    public void readFromNbt(CompoundTag tag, HolderLookup.Provider registryLookup) {
+    public CompoundTag serializeNBT(HolderLookup.Provider provider) {
+        var tag = new CompoundTag();
+
         if (tag.contains(WATER_KEY, Tag.TAG_INT)) {
             this.waterDrunk = tag.getInt(WATER_KEY);
         }
+
+        return tag;
     }
 
     @Override
-    public void writeToNbt(CompoundTag tag, HolderLookup.Provider registryLookup) {
+    public void deserializeNBT(HolderLookup.Provider provider, CompoundTag tag) {
         if (this.waterDrunk > 0) {
             tag.putInt(WATER_KEY, this.waterDrunk);
         }
     }
 
-    @Override
     public void serverTick() {
         if (!this.provider.thermoo$isCold() && ServerThirstPlugin.getActivePlugin().dehydrateFromSweating(this.provider)) {
             // sweating: move thirst water to wetness

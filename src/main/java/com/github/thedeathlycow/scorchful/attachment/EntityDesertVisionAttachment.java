@@ -1,28 +1,23 @@
-package com.github.thedeathlycow.scorchful.components;
+package com.github.thedeathlycow.scorchful.attachment;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.event.HeatVisionActivation;
 import com.github.thedeathlycow.scorchful.registry.SStatusEffects;
 import com.github.thedeathlycow.scorchful.temperature.heatvision.HeatVision;
-import org.ladysnake.cca.api.v3.component.Component;
-import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
-import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.attachment.AttachmentSyncHandler;
+import net.neoforged.neoforge.attachment.IAttachmentHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 
-public class EntityDesertVisionComponent implements Component, AutoSyncedComponent, ServerTickingComponent {
-
-
+public class EntityDesertVisionAttachment {
     private final Entity provider;
 
     @Nullable
@@ -33,8 +28,15 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
 
     private int timeToLive = 30 * 20;
 
-    public EntityDesertVisionComponent(Entity provider) {
-        this.provider = provider;
+    public EntityDesertVisionAttachment(IAttachmentHolder holder) {
+        this(holder, null);
+    }
+
+    private EntityDesertVisionAttachment(IAttachmentHolder holder, Player cause) {
+        this.provider = holder instanceof Entity entity ? entity : null;
+        this.cause = cause;
+
+        Objects.requireNonNull(this.provider, "Entity desert vision attachment created on non-entity, this will cause a crash later.");
     }
 
     public boolean hasDesertVision() {
@@ -46,35 +48,6 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
         this.vision = vision;
     }
 
-    @Override
-    public void readFromNbt(CompoundTag tag, HolderLookup.Provider registryLookup) {
-        // visions should be transient, so not saved to NBT
-    }
-
-    @Override
-    public void writeToNbt(CompoundTag tag, HolderLookup.Provider registryLookup) {
-        // visions should be transient, so not saved to NBT
-    }
-
-    @Override
-    public void writeSyncPacket(RegistryFriendlyByteBuf buf, ServerPlayer recipient) {
-        buf.writeOptional(Optional.ofNullable(cause), (pBuf, player) -> pBuf.writeUUID(player.getUUID()));
-
-        Scorchful.LOGGER.debug("Writing sync packet to entity desert vision");
-    }
-
-    @Override
-    public void applySyncPacket(RegistryFriendlyByteBuf buf) {
-        UUID uuid = buf.readOptional(RegistryFriendlyByteBuf::readUUID).orElse(null);
-
-        this.cause = uuid != null
-                ? this.provider.level().getPlayerByUUID(uuid)
-                : null;
-
-        Scorchful.LOGGER.debug("Applying sync packet to entity desert vision");
-    }
-
-    @Override
     public void serverTick() {
         if (!this.tickCanLive()) {
             Scorchful.LOGGER.debug("Discarding entity desert vision " + this.provider);
@@ -103,6 +76,26 @@ public class EntityDesertVisionComponent implements Component, AutoSyncedCompone
                 return false;
             }
             return cause.hasEffect(SStatusEffects.HEAT_STROKE);
+        }
+    }
+
+    public static final class SyncHandler implements AttachmentSyncHandler<EntityDesertVisionAttachment> {
+        @Override
+        public void write(RegistryFriendlyByteBuf buf, EntityDesertVisionAttachment attachment, boolean initialSync) {
+            buf.writeOptional(Optional.ofNullable(attachment.cause), (pBuf, player) -> pBuf.writeUUID(player.getUUID()));
+
+            Scorchful.LOGGER.debug("Writing sync packet to entity desert vision");
+        }
+
+        @Override
+        public EntityDesertVisionAttachment read(IAttachmentHolder holder, RegistryFriendlyByteBuf buf, EntityDesertVisionAttachment previousValue) {
+            UUID uuid = buf.readOptional(RegistryFriendlyByteBuf::readUUID).orElse(null);
+
+            Player cause = uuid != null
+                    ? previousValue.provider.level().getPlayerByUUID(uuid)
+                    : null;
+
+            return new EntityDesertVisionAttachment(holder, cause);
         }
     }
 }

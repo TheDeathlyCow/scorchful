@@ -2,8 +2,8 @@ package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
-import com.github.thedeathlycow.scorchful.components.PlayerWaterComponent;
-import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
+import com.github.thedeathlycow.scorchful.attachment.PlayerWaterAttachment;
+import com.github.thedeathlycow.scorchful.attachment.ScorchfulEntityAttachments;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
@@ -85,12 +85,12 @@ public abstract class DrinkItem extends Item {
             return;
         }
 
-        PlayerWaterComponent component = ScorchfulComponents.PLAYER_WATER.get(player);
+        PlayerWaterAttachment component = player.getData(ScorchfulEntityAttachments.PLAYER_WATER);
 
         int water = drink.getDrinkingWater(Scorchful.getConfig().thirstConfig);
         component.drink(water);
 
-        if (component.getWaterDrunk() >= PlayerWaterComponent.MAX_WATER * 0.9) {
+        if (component.getWaterDrunk() >= PlayerWaterAttachment.MAX_WATER * 0.9) {
             player.playSound(SSoundEvents.ENTITY_GULP, 1f, 1f);
         }
     }

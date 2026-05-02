@@ -14,7 +14,7 @@ import com.github.thedeathlycow.thermoo.impl.compat.init.DependentModInitializer
 import com.google.common.collect.ImmutableSet;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.hibiscus.naturespirit.registration.NSMiscBlocks;
+import net.hibiscus.naturespirit.registration.NSBlocks;
 import net.minecraft.core.Holder;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -34,10 +34,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import java.util.Collection;
+
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class NaturesSpiritPatch implements DependentModInitializer {
     @Override
@@ -82,7 +81,7 @@ public class NaturesSpiritPatch implements DependentModInitializer {
         });
 
         CauldronInteraction.EMPTY.map().put(
-                NSMiscBlocks.PINK_SAND.asItem(),
+                NSBlocks.PINK_SAND.asItem(),
                 SandCauldronBehaviours.fillWithSand(
                         pinkSandCauldronBlock.defaultBlockState()
                                 .setValue(SandCauldronBlock.LEVEL, SandCauldronBlock.MAX_LEVEL)
@@ -121,7 +120,7 @@ public class NaturesSpiritPatch implements DependentModInitializer {
                         pos,
                         player,
                         stack,
-                        NSMiscBlocks.PINK_SAND.asItem().getDefaultInstance(),
+                        NSBlocks.PINK_SAND.asItem().getDefaultInstance(),
                         SoundEvents.SAND_PLACE
                 );
             });

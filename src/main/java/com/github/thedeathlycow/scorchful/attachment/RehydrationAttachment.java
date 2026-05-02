@@ -1,4 +1,4 @@
-package com.github.thedeathlycow.scorchful.components;
+package com.github.thedeathlycow.scorchful.attachment;
 
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
@@ -7,30 +7,40 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
-import org.ladysnake.cca.api.v3.component.Component;
+import net.neoforged.neoforge.attachment.IAttachmentHolder;
+import net.neoforged.neoforge.common.util.INBTSerializable;
 
-public class RehydrationComponent implements Component {
+import java.util.Objects;
+
+public class RehydrationAttachment implements INBTSerializable<CompoundTag> {
     private final Player provider;
     private int waterCaptured = 0;
     private static final String WATER_CAPTURED_KEY = "water_captured";
 
-    public RehydrationComponent(Player provider) {
-        this.provider = provider;
+    public RehydrationAttachment(IAttachmentHolder holder) {
+        this.provider = holder instanceof Player player ? player : null;
+
+        Objects.requireNonNull(this.provider, "Player rehydration attachment created on non-player, this will cause a crash later.");
     }
 
     @Override
-    public void readFromNbt(CompoundTag tag, HolderLookup.Provider registryLookup) {
-        if (tag.contains(WATER_CAPTURED_KEY, Tag.TAG_INT)) {
-            this.waterCaptured = tag.getInt(WATER_CAPTURED_KEY);
-        }
-    }
+    public CompoundTag serializeNBT(HolderLookup.Provider provider) {
+        var tag = new CompoundTag();
 
-    @Override
-    public void writeToNbt(CompoundTag tag, HolderLookup.Provider registryLookup) {
         if (this.waterCaptured > 0) {
             tag.putInt(WATER_CAPTURED_KEY, this.waterCaptured);
+        }
+
+        return tag;
+    }
+
+    @Override
+    public void deserializeNBT(HolderLookup.Provider provider, CompoundTag tag) {
+        if (tag.contains(WATER_CAPTURED_KEY, Tag.TAG_INT)) {
+            this.waterCaptured = tag.getInt(WATER_CAPTURED_KEY);
         }
     }
 

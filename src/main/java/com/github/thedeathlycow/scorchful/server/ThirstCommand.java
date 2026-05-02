@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.server;
 
-import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
+import com.github.thedeathlycow.scorchful.attachment.ScorchfulEntityAttachments;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.commands.CommandSourceStack;
@@ -42,7 +42,7 @@ public class ThirstCommand {
             CommandSourceStack source,
             Player target
     ) {
-        return ScorchfulComponents.PLAYER_WATER.get(target).getWaterDrunk();
+        return target.getData(ScorchfulEntityAttachments.PLAYER_WATER).getWaterDrunk();
     }
 
 }

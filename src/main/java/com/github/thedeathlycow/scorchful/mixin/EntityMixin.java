@@ -1,6 +1,6 @@
 package com.github.thedeathlycow.scorchful.mixin;
 
-import com.github.thedeathlycow.scorchful.components.ScorchfulComponents;
+import com.github.thedeathlycow.scorchful.attachment.ScorchfulEntityAttachments;
 import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,7 +17,7 @@ public class EntityMixin {
     )
     private void cancelSaveIfDesertVisionChild(CallbackInfoReturnable<Boolean> cir) {
         Entity instance = (Entity) (Object) this;
-        if (ScorchfulComponents.ENTITY_DESERT_VISION.get(instance).hasDesertVision()) {
+        if (instance.getData(ScorchfulEntityAttachments.ENTITY_DESERT_VISION).hasDesertVision()) {
             cir.setReturnValue(false);
         }
     }

@@ -27,7 +27,7 @@ public record CheckBiomeEnvironmentProvider(
                     RegistryCodecs.homogeneousList(Registries.BIOME)
                             .fieldOf("exclude_biomes")
                             .forGetter(CheckBiomeEnvironmentProvider::excludeBiomes),
-                    EnvironmentProvider.ENTRY_CODEC
+                    EnvironmentProvider.HOLDER_CODEC
                             .fieldOf("provider")
                             .forGetter(CheckBiomeEnvironmentProvider::provider)
             ).apply(instance, CheckBiomeEnvironmentProvider::new)

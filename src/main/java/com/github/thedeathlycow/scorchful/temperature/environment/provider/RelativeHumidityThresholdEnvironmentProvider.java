@@ -24,10 +24,10 @@ public record RelativeHumidityThresholdEnvironmentProvider(
                 RelativeHumidityComponent.CODEC
                         .fieldOf("relative_humidity_threshold")
                         .forGetter(RelativeHumidityThresholdEnvironmentProvider::relativeHumidityThreshold),
-                    EnvironmentProvider.ENTRY_CODEC
+                    EnvironmentProvider.HOLDER_CODEC
                             .fieldOf("above")
                             .forGetter(RelativeHumidityThresholdEnvironmentProvider::above),
-                    EnvironmentProvider.ENTRY_CODEC
+                    EnvironmentProvider.HOLDER_CODEC
                             .fieldOf("below")
                             .forGetter(RelativeHumidityThresholdEnvironmentProvider::below)
             ).apply(instance, RelativeHumidityThresholdEnvironmentProvider::new)
