@@ -85,3 +85,10 @@ file="META-INF/accesstransformer.cfg"
     versionRange="[${thermoo_version},)"
     ordering="AFTER"
     side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="velvet"
+    type="required"
+    versionRange = "[${velvet_version},)"
+    ordering = "AFTER"
+    side = "CLIENT"

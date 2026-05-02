@@ -40,6 +40,10 @@ repositories {
     maven { url 'https://maven.wispforest.io/releases' }
     maven { url "https://jitpack.io/" }
     maven { url "https://maven.terraformersmc.com/releases/" }
+    maven {
+        name = "Up-Mods & Cammie's Corner"
+        url = "https://maven.uuid.gg/releases"
+    }
     exclusiveContent {
         forRepository {
             maven {
@@ -176,6 +180,9 @@ dependencies {
     // i hate neoforge
 //    interfaceInjectionData "com.github.thedeathlycow:thermoo:v${project.thermoo_version}"
 
+    implementation "dev.cammiescorner.velvet:Velvet-Common:${project.velvet_version}"
+    implementation "dev.cammiescorner.velvet:Velvet-NeoForge:${project.velvet_version}"
+
     implementation("io.wispforest:accessories-neoforge:${project.accessories_version}")
     compileOnly("maven.modrinth:colorful-hearts:${project.colorful_hearts_version}")
     compileOnly("maven.modrinth:natures-spirit:${project.natures_spirit_version}")
@@ -209,7 +216,8 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_version            : mod_version,
             ffapi_version          : ffapi_version,
             cloth_config_version   : cloth_config_version,
-            thermoo_version        : thermoo_version
+            thermoo_version        : thermoo_version,
+            velvet_version         : velvet_version
     ]
     inputs.properties replaceProperties
     expand replaceProperties

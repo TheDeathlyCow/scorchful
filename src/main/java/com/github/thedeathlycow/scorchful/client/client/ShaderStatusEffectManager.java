@@ -2,18 +2,17 @@ package com.github.thedeathlycow.scorchful.client.client;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.config.ClientConfig;
+import dev.cammiescorner.velvet.api.event.ShaderEffectRenderCallback;
+import dev.cammiescorner.velvet.api.managed.ManagedShaderEffect;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
-import org.ladysnake.satin.api.event.ShaderEffectRenderCallback;
-import org.ladysnake.satin.api.managed.ManagedShaderEffect;
 
 import java.util.function.Predicate;
 
 public final class ShaderStatusEffectManager implements ShaderEffectRenderCallback, ClientPlayConnectionEvents.Disconnect {
-
     private final ManagedShaderEffect managedShaderEffect;
 
     private final Holder<MobEffect> potionEffect;
