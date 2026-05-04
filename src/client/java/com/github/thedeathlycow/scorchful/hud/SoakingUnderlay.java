@@ -30,16 +30,17 @@ public final class SoakingUnderlay implements StatusBarOverlayRenderEvents.Rende
             return;
         }
 
-        int burningHealthPoints = getNumBurningPoints(player, maxDisplayHealth);
-        int burningHealthHearts = getNumBurningHeartsFromPoints(burningHealthPoints);
-        for (int i = 0; i < burningHealthHearts; i++) {
+        int soakingHealthPoints = getNumSoakingPoints(player, maxDisplayHealth);
+        int soakingHealthHearts = getNumSoakingHeartsFromPoints(soakingHealthPoints);
+
+        for (int i = 0; i < soakingHealthHearts; i++) {
             Vector2i pos = heartPositions[i];
             if (pos == null) {
                 continue;
             }
             // is half heart if this is the last heart being rendered and we have an odd
             // number of frozen health points
-            boolean isHalfHeart = i + 1 >= burningHealthHearts && (burningHealthPoints & 1) == 1; // is odd check
+            boolean isHalfHeart = i + 1 >= soakingHealthHearts && (soakingHealthPoints & 1) == 1; // is odd check
 
             int width = isHalfHeart ? 5 : 9;
             context.blit(
@@ -53,14 +54,14 @@ public final class SoakingUnderlay implements StatusBarOverlayRenderEvents.Rende
 
     }
 
-    private static int getNumBurningPoints(@NotNull Player player, int maxDisplayHealth) {
-        float overheatProgress = player.thermoo$getSoakedScale();
-        return Mth.ceil(overheatProgress * maxDisplayHealth);
+    private static int getNumSoakingPoints(@NotNull Player player, int maxDisplayHealth) {
+        float soakingProgress = player.thermoo$getSoakedScale();
+        return Math.round(soakingProgress * maxDisplayHealth);
     }
 
-    private static int getNumBurningHeartsFromPoints(int burningPoints) {
+    private static int getNumSoakingHeartsFromPoints(int soakingPoints) {
         // number of whole hearts
-        return Mth.ceil(burningPoints / 2.0f);
+        return Mth.ceil(soakingPoints / 2.0f);
     }
 
     private SoakingUnderlay() {
