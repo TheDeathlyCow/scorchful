@@ -10,8 +10,10 @@ import com.github.thedeathlycow.scorchful.registry.SItems;
 import com.github.thedeathlycow.scorchful.registry.SPointsOfInterest;
 import com.github.thedeathlycow.scorchful.server.SandAccumulation;
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
-import com.github.thedeathlycow.thermoo.impl.compat.init.DependentModInitializer;
 import com.google.common.collect.ImmutableSet;
+import dev.yumi.mc.core.api.ModContainer;
+import dev.yumi.mc.core.api.YumiMods;
+import dev.yumi.mc.core.api.entrypoint.ModInitializer;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.hibiscus.naturespirit.registration.NSBlocks;
@@ -38,9 +40,15 @@ import net.minecraft.world.level.material.PushReaction;
 import java.util.HashSet;
 import java.util.Set;
 
-public class NaturesSpiritPatch implements DependentModInitializer {
+public class NaturesSpiritPatch implements ModInitializer {
     @Override
-    public void onInitialize() {
+    public void onInitialize(ModContainer mod) {
+        if (YumiMods.get().isModLoaded(ScorchfulIntegrations.NATURES_SPIRIT_ID)) {
+            this.initializePatch();
+        }
+    }
+
+    private void initializePatch() {
         Block pinkSandPileBlock = SBlocks.register(
                 "natures_spirit/pink_sand_pile",
                 settings -> new SandPileBlock(
@@ -102,11 +110,6 @@ public class NaturesSpiritPatch implements DependentModInitializer {
         );
 
         SPointsOfInterest.registerStates(leatherWorkerPOI, blockStates);
-    }
-
-    @Override
-    public String[] getRequiredModIds() {
-        return new String[]{ScorchfulIntegrations.NATURES_SPIRIT_ID};
     }
 
     private static CauldronInteraction.InteractionMap getPinkSandCauldronBehavior() {

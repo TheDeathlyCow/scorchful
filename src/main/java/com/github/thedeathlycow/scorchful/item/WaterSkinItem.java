@@ -2,9 +2,12 @@ package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.api.CollectWaterCallback;
 import com.github.thedeathlycow.scorchful.block.NetherLilyBlock;
+import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.registry.SDataComponentTypes;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import com.github.thedeathlycow.scorchful.registry.SStats;
+import dev.ghen.thirst.content.purity.WaterPurity;
+import dev.ghen.thirst.content.registry.ThirstComponent;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
@@ -187,6 +190,15 @@ public class WaterSkinItem extends DrinkItem {
         addDrinks(stack, amount);
 
         CollectWaterCallback.EVENT.invoker().onWaterCollected(player, stack, sourcePos);
+
+        if (ScorchfulIntegrations.isThirstWasTakenLoaded()) {
+            int collectionPurity = WaterPurity.getBlockPurity(world, sourcePos);
+            int currentPurity = stack.getOrDefault(ThirstComponent.PURITY, 0);
+
+            if (collectionPurity <= currentPurity) {
+                stack.set(ThirstComponent.PURITY, collectionPurity);
+            }
+        }
     }
 
     @Nullable

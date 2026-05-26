@@ -2,7 +2,11 @@ package com.github.thedeathlycow.scorchful.neoforge;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.attachment.ScorchfulEntityAttachments;
+import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.datagen.ScorchfulDataGenerator;
+import com.github.thedeathlycow.scorchful.registry.SItems;
+import dev.ghen.thirst.content.purity.ContainerWithPurity;
+import dev.ghen.thirst.foundation.common.event.RegisterThirstValueEvent;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
@@ -15,7 +19,11 @@ public class ScorchfulMod {
         ScorchfulEntityAttachments.REGISTRY.register(modBus);
 
         NeoForge.EVENT_BUS.addListener(ScorchfulMod::onTick);
-        modBus.addListener(ScorchfulMod::onDatagen);
+        modBus.addListener(ScorchfulMod::runDatagen);
+
+        if (ScorchfulIntegrations.isThirstWasTakenLoaded()) {
+            NeoForge.EVENT_BUS.addListener(ScorchfulMod::registerDrinks);
+        }
     }
 
     private static void onTick(PlayerTickEvent.Post event) {
@@ -24,12 +32,19 @@ public class ScorchfulMod {
         }
     }
 
-    private static void onDatagen(GatherDataEvent event) {
+    private static void runDatagen(GatherDataEvent event) {
         FabricDataGenHelper.runDatagenForMod(
                 Scorchful.MODID,
                 Scorchful.MODID,
                 new ScorchfulDataGenerator(),
                 event
         );
+    }
+
+    private static void registerDrinks(RegisterThirstValueEvent event) {
+        event.addContainer(new ContainerWithPurity(SItems.WATER_SKIN, SItems.WATER_SKIN));
+        event.addContainer(SItems.CACTUS_JUICE);
+        event.addDrink(SItems.WATER_SKIN, 4, 5);
+        event.addDrink(SItems.CACTUS_JUICE, 8, 13);
     }
 }

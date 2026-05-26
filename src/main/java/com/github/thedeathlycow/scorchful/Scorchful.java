@@ -12,6 +12,7 @@ import com.github.thedeathlycow.scorchful.temperature.PassiveTemperatureEffects;
 import com.github.thedeathlycow.scorchful.temperature.ServerPlayerEnvironmentTickListeners;
 import com.github.thedeathlycow.scorchful.temperature.SoakingEffects;
 import com.github.thedeathlycow.scorchful.worldgen.NetherBiomeModifications;
+import dev.ghen.thirst.api.ThirstHelper;
 import dev.yumi.mc.core.api.ModContainer;
 import dev.yumi.mc.core.api.YumiMods;
 import dev.yumi.mc.core.api.entrypoint.ModInitializer;

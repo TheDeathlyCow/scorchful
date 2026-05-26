@@ -28,14 +28,10 @@ public class ThirstWasTakenPlugin implements ServerThirstPlugin {
         PlayerThirst thirst = player.getData(ModAttachment.PLAYER_THIRST);
 
         ThirstWasTakenConfig thirstWasTakenConfig = Scorchful.getConfig().integrationConfig.thirstWasTakenConfig;
-        // dont drink if dont have to - prevents rehydration spam
-        if (thirst.getThirst() > thirstWasTakenConfig.getMinWaterLevelForSweat()) {
-            return;
-        }
 
         int maxWater = Mth.floor(rehydrationEfficiency * thirstWasTakenConfig.getMaxWaterLost());
         int waterToAdd = player.getRandom().nextIntBetweenInclusive(1, maxWater);
-        thirst.drink(waterToAdd, 0);
+        thirst.drink(waterToAdd, waterToAdd);
     }
 
     @Override
