@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.server;
 
 import com.github.thedeathlycow.scorchful.attachment.ScorchfulEntityAttachments;
 import com.mojang.brigadier.CommandDispatcher;
+import dev.yumi.mc.core.api.YumiMods;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -13,8 +14,7 @@ import static net.minecraft.commands.Commands.literal;
 public class ThirstCommand {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-
-        if (!FabricLoader.getInstance().isDevelopmentEnvironment()) {
+        if (!YumiMods.get().isDevelopmentEnvironment()) {
             return;
         }
 

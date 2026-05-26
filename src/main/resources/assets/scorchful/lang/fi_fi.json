@@ -124,10 +124,10 @@
     
     "text.autoconfig.scorchful.option.integrationConfig": "Modi-integrointiasetukset",
     
-    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig": "Dehydration Asetukset",
-    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.@Tooltip": "Vaatii Dehydration-modit toimimaan",
-    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.minWaterLevelForSweat": "Minimi vesitaso vaadittu hikoiluun",
-    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.maxRehydrationWaterAddedPerLevel": "Maksimivesi lisätty yksi taso Uudelleennesteytystä",
+    "text.autoconfig.scorchful.option.integrationConfig.thirstWasTakenConfig": "Dehydration Asetukset",
+    "text.autoconfig.scorchful.option.integrationConfig.thirstWasTakenConfig.@Tooltip": "Vaatii Dehydration-modit toimimaan",
+    "text.autoconfig.scorchful.option.integrationConfig.thirstWasTakenConfig.minWaterLevelForSweat": "Minimi vesitaso vaadittu hikoiluun",
+    "text.autoconfig.scorchful.option.integrationConfig.thirstWasTakenConfig.maxRehydrationWaterAddedPerLevel": "Maksimivesi lisätty yksi taso Uudelleennesteytystä",
     
     "text.autoconfig.scorchful.option.updateConfig": "Päivitysasetukset",
     "text.autoconfig.scorchful.option.updateConfig.currentConfigVersion": "Nykyinen asetusversio",

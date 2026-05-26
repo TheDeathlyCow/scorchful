@@ -152,9 +152,9 @@
   "text.autoconfig.scorchful.option.weatherConfig.sandstormFollowRangeReductionPercent": "Tỷ lệ giảm phạm vi theo dõi trong bão cát (phần trăm từ -1 đến +1)",
 
   "text.autoconfig.scorchful.option.integrationConfig": "Cấu hình Tích hợp Mod",
-  "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig": "Cấu hình Mất nước",
-  "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.@Tooltip": "Yêu cầu Mất nước để có hiệu lực",
-  "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.minWaterLevelForSweat": "Mức nước tối thiểu cần thiết để đổ mồ hôi",
+  "text.autoconfig.scorchful.option.integrationConfig.thirstWasTakenConfig": "Cấu hình Mất nước",
+  "text.autoconfig.scorchful.option.integrationConfig.thirstWasTakenConfig.@Tooltip": "Yêu cầu Mất nước để có hiệu lực",
+  "text.autoconfig.scorchful.option.integrationConfig.thirstWasTakenConfig.minWaterLevelForSweat": "Mức nước tối thiểu cần thiết để đổ mồ hôi",
   
   "text.autoconfig.scorchful.option.integrationConfig.seasonsConfig": "Cấu Hình Mùa",
   "text.autoconfig.scorchful.option.integrationConfig.seasonsConfig.@Tooltip": "Yêu cầu Fabric Seasons hoặc Serene Seasons và Thermoo Patches",

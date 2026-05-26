@@ -160,9 +160,9 @@
     "text.autoconfig.scorchful.option.weatherConfig.sandstormFollowRangeReductionPercent": "Sandstorm Follow Range reduction amount (percent from -1 to +1)",
     
     "text.autoconfig.scorchful.option.integrationConfig": "Mod Integration Config",
-    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig": "Dehydration Config",
-    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.@Tooltip": "Requires Dehydration to have any effect",
-    "text.autoconfig.scorchful.option.integrationConfig.dehydrationConfig.minWaterLevelForSweat": "Minimum water level required for sweating",
+    "text.autoconfig.scorchful.option.integrationConfig.thirstWasTakenConfig": "Thirst Was Taken Config",
+    "text.autoconfig.scorchful.option.integrationConfig.thirstWasTakenConfig.@Tooltip": "Requires Thirst Was Taken to have any effect",
+    "text.autoconfig.scorchful.option.integrationConfig.thirstWasTakenConfig.minWaterLevelForSweat": "Minimum water level required for sweating",
     
     "text.autoconfig.scorchful.option.updateConfig": "Update Config",
     "text.autoconfig.scorchful.option.updateConfig.currentConfigVersion": "Current config version",

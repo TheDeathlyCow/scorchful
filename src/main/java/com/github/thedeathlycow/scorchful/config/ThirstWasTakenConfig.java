@@ -9,7 +9,7 @@ import me.shedaniel.autoconfig.annotation.Config;
  * Config for changes to thirst system when using Dehydration
  */
 @Config(name = Scorchful.MODID + ".dehydrationConfig")
-public class DehydrationConfig implements ConfigData {
+public class ThirstWasTakenConfig implements ConfigData {
 
     /**
      * Don't lose water to sweat when below this level.

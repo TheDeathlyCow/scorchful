@@ -9,5 +9,5 @@ import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
 public class ModIntegrationConfig extends PartitioningSerializer.GlobalData {
     @ConfigEntry.Gui.CollapsibleObject
     @ConfigEntry.Gui.Tooltip
-    public DehydrationConfig dehydrationConfig = new DehydrationConfig();
+    public ThirstWasTakenConfig thirstWasTakenConfig = new ThirstWasTakenConfig();
 }

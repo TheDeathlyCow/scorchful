@@ -1,6 +1,7 @@
 package com.github.thedeathlycow.scorchful.client.mixin.compat;
 
 
+import dev.yumi.mc.core.api.YumiMods;
 import net.fabricmc.loader.api.FabricLoader;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
@@ -12,7 +13,6 @@ import java.util.Set;
 public class Plugin implements IMixinConfigPlugin {
     private static final String COMPAT_PACKAGE_ROOT;
     private static final String COMPAT_PRESENT_KEY = "present";
-    private static final FabricLoader LOADER = FabricLoader.getInstance();
 
     static {
         // Shorthand getting the plugin package to ensure not making trouble with other mixins
@@ -42,9 +42,9 @@ public class Plugin implements IMixinConfigPlugin {
 
         if (isPresentMixin) {
             // We only load the mixin if the mod we want to be present is found
-            return LOADER.isModLoaded(compatModId);
+            return YumiMods.get().isModLoaded(compatModId);
         }
-        return !LOADER.isModLoaded(compatModId);
+        return !YumiMods.get().isModLoaded(compatModId);
     }
 
     @Override

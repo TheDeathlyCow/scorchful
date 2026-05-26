@@ -1,8 +1,8 @@
 package com.github.thedeathlycow.scorchful;
 
 import com.github.thedeathlycow.scorchful.api.ServerThirstPlugin;
-import com.github.thedeathlycow.scorchful.compat.DehydrationServerThirstPlugin;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
+import com.github.thedeathlycow.scorchful.compat.ThirstWasTakenPlugin;
 import com.github.thedeathlycow.scorchful.config.ScorchfulConfig;
 import com.github.thedeathlycow.scorchful.registry.*;
 import com.github.thedeathlycow.scorchful.server.ThirstCommand;
@@ -13,6 +13,7 @@ import com.github.thedeathlycow.scorchful.temperature.ServerPlayerEnvironmentTic
 import com.github.thedeathlycow.scorchful.temperature.SoakingEffects;
 import com.github.thedeathlycow.scorchful.worldgen.NetherBiomeModifications;
 import dev.yumi.mc.core.api.ModContainer;
+import dev.yumi.mc.core.api.YumiMods;
 import dev.yumi.mc.core.api.entrypoint.ModInitializer;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
@@ -47,7 +48,7 @@ public class Scorchful implements ModInitializer {
         configHolder = AutoConfig.getConfigHolder(ScorchfulConfig.class); //NOSONAR: this is correct usage for mods
         ScorchfulConfig.updateConfig(configHolder);
 
-        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+        if (YumiMods.get().isDevelopmentEnvironment()) {
             CommandRegistrationCallback.EVENT.register(
                     (dispatcher, registryAccess, environment) -> {
                         ThirstCommand.register(dispatcher);
@@ -74,10 +75,10 @@ public class Scorchful implements ModInitializer {
         SEntityAttributes.initialize();
         SPointsOfInterest.initialize();
 
-//        if (ScorchfulIntegrations.isDehydrationLoaded() && !ServerThirstPlugin.isCustomPluginLoaded()) {
-//            LOGGER.debug("Applying Dehydration thirst plugin");
-//            ServerThirstPlugin.registerPlugin(new DehydrationServerThirstPlugin());
-//        }
+        if (ScorchfulIntegrations.isThirstWasTakenLoaded() && !ServerThirstPlugin.isCustomPluginLoaded()) {
+            LOGGER.debug("Applying Thirst Was Taken thirst plugin");
+            ServerThirstPlugin.registerPlugin(new ThirstWasTakenPlugin());
+        }
 
         this.registerThermooEventListeners();
 
