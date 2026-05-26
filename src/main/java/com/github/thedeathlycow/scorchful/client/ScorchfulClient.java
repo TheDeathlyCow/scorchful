@@ -15,18 +15,15 @@ import com.github.thedeathlycow.scorchful.client.registry.SFeatureRenderers;
 import com.github.thedeathlycow.scorchful.client.registry.SParticleFactories;
 import com.github.thedeathlycow.scorchful.server.network.TemperatureSoundEventPacket;
 import com.github.thedeathlycow.thermoo.api.client.StatusBarOverlayRenderEvents;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import dev.yumi.mc.core.api.ModContainer;
+import dev.yumi.mc.core.api.entrypoint.client.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 
-@Environment(EnvType.CLIENT)
 public class ScorchfulClient implements ClientModInitializer {
-
     @Override
-    public void onInitializeClient() {
+    public void onInitializeClient(ModContainer mod) {
         SModelPredicates.onInitialize();
         SEntityModelLayers.registerAll();
         SFeatureRenderers.registerAll();

@@ -180,6 +180,7 @@ dependencies {
     // i hate neoforge
 //    interfaceInjectionData "com.github.thedeathlycow:thermoo:v${project.thermoo_version}"
 
+    implementation "dev.upcraft.sparkweave:Sparkweave-Common:${project.sparkweave_version}"
     implementation "dev.cammiescorner.velvet:Velvet-Common:${project.velvet_version}"
     implementation "dev.cammiescorner.velvet:Velvet-NeoForge:${project.velvet_version}"
 

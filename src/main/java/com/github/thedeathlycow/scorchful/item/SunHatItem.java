@@ -4,7 +4,6 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
-import dev.emi.trinkets.api.TrinketsApi;
 import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -48,14 +47,14 @@ public class SunHatItem extends Item implements Equipable {
     }
 
     public static boolean isWearingSunHat(LivingEntity entity) {
-        boolean isWearingInTrinketSlot = false;
-        if (ScorchfulIntegrations.isModLoaded(ScorchfulIntegrations.TRINKETS_ID)) {
-            isWearingInTrinketSlot = TrinketsApi.getTrinketComponent(entity)
-                    .map(trinketComponent -> trinketComponent.isEquipped(stack -> stack.is(SItemTags.IS_SUN_PROTECTING_HAT)))
-                    .orElse(false);
-        }
-        return isWearingInTrinketSlot
-                || entity.getItemBySlot(EquipmentSlot.HEAD).is(SItemTags.IS_SUN_PROTECTING_HAT);
+        // TODO: accessories
+//        boolean isWearingInTrinketSlot = false;
+//        if (ScorchfulIntegrations.isModLoaded(ScorchfulIntegrations.TRINKETS_ID)) {
+//            isWearingInTrinketSlot = TrinketsApi.getTrinketComponent(entity)
+//                    .map(trinketComponent -> trinketComponent.isEquipped(stack -> stack.is(SItemTags.IS_SUN_PROTECTING_HAT)))
+//                    .orElse(false);
+//        }
+        return entity.getItemBySlot(EquipmentSlot.HEAD).is(SItemTags.IS_SUN_PROTECTING_HAT);
     }
 
     @Override

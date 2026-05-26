@@ -74,10 +74,10 @@ public class Scorchful implements ModInitializer {
         SEntityAttributes.initialize();
         SPointsOfInterest.initialize();
 
-        if (ScorchfulIntegrations.isDehydrationLoaded() && !ServerThirstPlugin.isCustomPluginLoaded()) {
-            LOGGER.debug("Applying Dehydration thirst plugin");
-            ServerThirstPlugin.registerPlugin(new DehydrationServerThirstPlugin());
-        }
+//        if (ScorchfulIntegrations.isDehydrationLoaded() && !ServerThirstPlugin.isCustomPluginLoaded()) {
+//            LOGGER.debug("Applying Dehydration thirst plugin");
+//            ServerThirstPlugin.registerPlugin(new DehydrationServerThirstPlugin());
+//        }
 
         this.registerThermooEventListeners();
 
