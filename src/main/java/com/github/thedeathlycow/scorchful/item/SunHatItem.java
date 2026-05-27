@@ -1,10 +1,17 @@
 package com.github.thedeathlycow.scorchful.item;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+import com.github.thedeathlycow.scorchful.compat.AccessoriesIntegration;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
 import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
+
 import java.util.List;
+
+import io.wispforest.accessories.api.AccessoriesCapability;
+import io.wispforest.accessories.api.components.AccessoriesDataComponents;
+import io.wispforest.accessories.api.components.AccessoryItemAttributeModifiers;
+import net.fabricmc.fabric.api.item.v1.FabricItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -32,6 +39,38 @@ public class SunHatItem extends Item implements Equipable {
         super(settings);
     }
 
+    public static Properties applySettings(Properties settings) {
+        settings.attributes(attributeModifiers());
+        settings.stacksTo(1);
+        accessoriesModifiers(settings);
+
+        FabricItem.Settings fSettings = (FabricItem.Settings) settings;
+        fSettings.equipmentSlot((entity, stack) -> EquipmentSlot.HEAD);
+
+        return settings;
+    }
+
+    public static void accessoriesModifiers(Properties settings) {
+        if (ScorchfulIntegrations.isAccessoriesLoaded()) {
+            settings.component(
+                    AccessoriesDataComponents.ATTRIBUTES,
+                    AccessoryItemAttributeModifiers.builder()
+                            .addForSlot(
+                                    ThermooAttributes.ENVIRONMENT_HEAT_RESISTANCE,
+                                    new AttributeModifier(
+                                            Scorchful.id("sun_hat_resistance/hat"),
+                                            0.25,
+                                            AttributeModifier.Operation.ADD_VALUE
+                                    ),
+                                    "hat",
+                                    false
+                            )
+                            .showInTooltip(false)
+                            .build()
+            );
+        }
+    }
+
     public static ItemAttributeModifiers attributeModifiers() {
         return ItemAttributeModifiers.builder()
                 .add(
@@ -47,14 +86,8 @@ public class SunHatItem extends Item implements Equipable {
     }
 
     public static boolean isWearingSunHat(LivingEntity entity) {
-        // TODO: accessories
-//        boolean isWearingInTrinketSlot = false;
-//        if (ScorchfulIntegrations.isModLoaded(ScorchfulIntegrations.TRINKETS_ID)) {
-//            isWearingInTrinketSlot = TrinketsApi.getTrinketComponent(entity)
-//                    .map(trinketComponent -> trinketComponent.isEquipped(stack -> stack.is(SItemTags.IS_SUN_PROTECTING_HAT)))
-//                    .orElse(false);
-//        }
-        return entity.getItemBySlot(EquipmentSlot.HEAD).is(SItemTags.IS_SUN_PROTECTING_HAT);
+        return AccessoriesIntegration.isEquipped(entity, stack -> stack.is(SItemTags.IS_SUN_PROTECTING_HAT))
+                || entity.getItemBySlot(EquipmentSlot.HEAD).is(SItemTags.IS_SUN_PROTECTING_HAT);
     }
 
     @Override

@@ -35,10 +35,7 @@ public final class SItems {
 
     public static final Item SUN_HAT = register(
             "sun_hat",
-            settings -> new SunHatItem(
-                    ((FabricItem.Settings)(settings.attributes(SunHatItem.attributeModifiers()).stacksTo(1)))
-                            .equipmentSlot((entity, stack) -> EquipmentSlot.HEAD)
-            )
+            settings -> new SunHatItem(SunHatItem.applySettings(settings))
     );
 
     public static final Item CACTUS_JUICE = register(

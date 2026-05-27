@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.neoforge;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.attachment.ScorchfulEntityAttachments;
+import com.github.thedeathlycow.scorchful.compat.AccessoriesIntegration;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.datagen.ScorchfulDataGenerator;
 import com.github.thedeathlycow.scorchful.registry.SItems;
@@ -24,6 +25,8 @@ public class ScorchfulMod {
         if (ScorchfulIntegrations.isThirstWasTakenLoaded()) {
             NeoForge.EVENT_BUS.addListener(ScorchfulMod::registerDrinks);
         }
+
+        AccessoriesIntegration.removeAccessoriesRenderer();
     }
 
     private static void onTick(PlayerTickEvent.Post event) {

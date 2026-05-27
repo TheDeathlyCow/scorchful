@@ -1,13 +1,12 @@
 package com.github.thedeathlycow.scorchful.compat;
 
 import dev.yumi.mc.core.api.YumiMods;
-import net.fabricmc.loader.api.FabricLoader;
 
 public class ScorchfulIntegrations {
 
     public static final String FROSTIFUL_ID = "frostiful";
 
-    public static final String TRINKETS_ID = "trinkets";
+    public static final String ACCESSORIES_ID = "accessories";
 
     public static final String THIRST_WAS_TAKEN_ID = "thirst";
 
@@ -15,6 +14,10 @@ public class ScorchfulIntegrations {
 
     public static boolean isThirstWasTakenLoaded() {
         return isModLoaded(THIRST_WAS_TAKEN_ID);
+    }
+
+    public static boolean isAccessoriesLoaded() {
+        return isModLoaded(ACCESSORIES_ID);
     }
 
     public static boolean isModLoaded(String id) {
