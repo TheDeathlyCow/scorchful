@@ -1,0 +1,25 @@
+modLoader="javafml"
+
+loaderVersion="[1,)"
+
+license="LGPL-3.0"
+
+issueTrackerURL="https://www.github.com/TheDeathlyCow/scorchful/issues"
+
+[[mods]] #mandatory
+modId="scorchful_test"
+version="1.0.0"
+displayName="Scorchful Test Mod"
+
+displayURL="https://scorchful.thedeathlycow.com"
+
+authors="TheDeathlyCow"
+
+description='''Testmod for Scorchful'''
+
+[[dependencies.scorchful_test]]
+modId="scorchful"
+type="required"
+versionRange="[1.0.0,)"
+ordering="AFTER"
+side="BOTH"

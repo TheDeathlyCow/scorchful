@@ -16,4 +16,4 @@ jobs:
           architecture: x64
 
       - name: Build and run game tests
-        run: ./gradlew runGameTest
+        run: ./gradlew runGameTestServer

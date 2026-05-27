@@ -6,6 +6,8 @@ import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import java.util.function.BooleanSupplier;
+
+import com.github.thedeathlycow.scorchful.testmod.common.ScorchfulTestMod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -17,12 +19,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.gametest.GameTestHolder;
+import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
 @SuppressWarnings("unused")
+@GameTestHolder(ScorchfulTestMod.MODID)
+@PrefixGameTestTemplate(false)
 public class CrimsonLilyTests {
 
     @GameTest(
-            template = "scorchful-test:nether_lily/crimson_wet"
+            template = "nether_lily/crimson_wet"
     )
     public void stepping_on_wet_crimson_lily_soaks_player(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 2, 2);
@@ -45,7 +51,7 @@ public class CrimsonLilyTests {
     }
 
     @GameTest(
-            template = "scorchful-test:nether_lily/crimson_dry"
+            template = "nether_lily/crimson_dry"
     )
     public void stepping_on_dry_crimson_lily_does_not_soak_player(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 2, 2);
@@ -68,7 +74,7 @@ public class CrimsonLilyTests {
     }
 
     @GameTest(
-            template = "scorchful-test:nether_lily/crimson_partially_wet"
+            template = "nether_lily/crimson_partially_wet"
     )
     public void stepping_on_partially_wet_crimson_lily_does_not_soak_player(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 2, 2);
@@ -91,7 +97,7 @@ public class CrimsonLilyTests {
     }
 
     @GameTest(
-            template = "scorchful-test:nether_lily/crimson_wet"
+            template = "nether_lily/crimson_wet"
     )
     public void stepping_on_wet_crimson_lily_soaks_and_hurts_strider(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 2, 2);
@@ -129,7 +135,7 @@ public class CrimsonLilyTests {
     }
 
     @GameTest(
-            template = "scorchful-test:nether_lily/crimson_dry"
+            template = "nether_lily/crimson_dry"
     )
     public void using_water_bottle_on_dry_crimson_lily_saturates_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 2, 2);
@@ -157,7 +163,7 @@ public class CrimsonLilyTests {
     }
 
     @GameTest(
-            template = "scorchful-test:nether_lily/crimson_dry"
+            template = "nether_lily/crimson_dry"
     )
     public void using_water_skin_on_dry_crimson_lily_saturates_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 2, 2);
@@ -187,7 +193,7 @@ public class CrimsonLilyTests {
     }
 
     @GameTest(
-            template = "scorchful-test:nether_lily/crimson_wet"
+            template = "nether_lily/crimson_wet"
     )
     public void using_water_bottle_on_wet_crimson_lily_does_not_consume_bottle(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 2, 2);
@@ -215,7 +221,7 @@ public class CrimsonLilyTests {
     }
 
     @GameTest(
-            template = "scorchful-test:nether_lily/crimson_wet"
+            template = "nether_lily/crimson_wet"
     )
     public void using_water_skin_on_wet_crimson_lily_does_not_consume_skin(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 2, 2);

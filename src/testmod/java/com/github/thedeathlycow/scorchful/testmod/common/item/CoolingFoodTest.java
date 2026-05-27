@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.testmod.common.item;
 
 import com.github.thedeathlycow.scorchful.event.ScorchfulItemEvents;
 import com.github.thedeathlycow.scorchful.registry.tag.SItemTags;
+import com.github.thedeathlycow.scorchful.testmod.common.ScorchfulTestMod;
 import com.github.thedeathlycow.thermoo.api.temperature.HeatingModes;
 import com.github.thedeathlycow.thermoo.api.temperature.TemperatureAware;
 import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
@@ -13,17 +14,21 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.neoforged.neoforge.gametest.GameTestHolder;
+import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import org.jetbrains.annotations.NotNull;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 
 
 @SuppressWarnings("unused")
+@GameTestHolder(ScorchfulTestMod.MODID)
+@PrefixGameTestTemplate(false)
 public class CoolingFoodTest {
 
     private static final String TEMPERATURE_PROPERTY = "Temperature";
 
-    @GameTest(template = FabricGameTest.EMPTY_STRUCTURE)
+    @GameTest(template = ScorchfulTestMod.EMPTY_STRUCTURE)
     public void consume_cooling_steak_applies_cooling(GameTestHelper context) {
         final int originalTemperature = 6300;
         final Item testItem = Items.COOKED_BEEF;
@@ -43,7 +48,7 @@ public class CoolingFoodTest {
         context.succeed();
     }
 
-    @GameTest(template = FabricGameTest.EMPTY_STRUCTURE)
+    @GameTest(template = ScorchfulTestMod.EMPTY_STRUCTURE)
     public void consume_not_cooling_pork_does_not_apply_cooling(GameTestHelper context) {
         final int originalTemperature = 6300;
         final Item testItem = Items.PORKCHOP;

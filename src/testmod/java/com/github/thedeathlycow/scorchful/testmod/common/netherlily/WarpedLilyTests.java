@@ -5,6 +5,8 @@ import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import java.util.function.BooleanSupplier;
+
+import com.github.thedeathlycow.scorchful.testmod.common.ScorchfulTestMod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -12,12 +14,16 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
+import net.neoforged.neoforge.gametest.GameTestHolder;
+import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
 @SuppressWarnings("unused")
+@GameTestHolder(ScorchfulTestMod.MODID)
+@PrefixGameTestTemplate(false)
 public class WarpedLilyTests {
 
     @GameTest(
-            template = "scorchful-test:nether_lily/warped_wet"
+            template = "nether_lily/warped_wet"
     )
     public void using_glass_bottle_on_wet_warped_lily_fills_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 2, 2);
@@ -53,7 +59,7 @@ public class WarpedLilyTests {
     }
 
     @GameTest(
-            template = "scorchful-test:nether_lily/warped_dry"
+            template = "nether_lily/warped_dry"
     )
     public void using_glass_bottle_on_dry_warped_lily_does_not_fill_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 2, 2);
@@ -88,7 +94,7 @@ public class WarpedLilyTests {
     }
 
     @GameTest(
-            template = "scorchful-test:nether_lily/warped_partially_wet"
+            template = "nether_lily/warped_partially_wet"
     )
     public void using_glass_bottle_on_partially_wet_warped_lily_does_not_fill_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 2, 2);
@@ -123,7 +129,7 @@ public class WarpedLilyTests {
     }
 
     @GameTest(
-            template = "scorchful-test:nether_lily/warped_wet"
+            template = "nether_lily/warped_wet"
     )
     public void using_water_skin_on_wet_warped_lily_fills_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 2, 2);
@@ -151,7 +157,7 @@ public class WarpedLilyTests {
     }
 
     @GameTest(
-            template = "scorchful-test:nether_lily/warped_dry"
+            template = "nether_lily/warped_dry"
     )
     public void using_water_skin_on_dry_warped_lily_does_not_fill_it(GameTestHelper context) {
         final BlockPos lilyPos = new BlockPos(2, 2, 2);

@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.testmod.common.cauldron;
 
 import com.github.thedeathlycow.scorchful.block.SandCauldronBlock;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
+import com.github.thedeathlycow.scorchful.testmod.common.ScorchfulTestMod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -9,12 +10,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.gametest.GameTestHolder;
+import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
 @SuppressWarnings("unused")
+@GameTestHolder(ScorchfulTestMod.MODID)
+@PrefixGameTestTemplate(false)
 public class SandCauldronTests {
 
     @GameTest(
-            template = "scorchful-test:cauldron/sand_cauldron"
+            template = "cauldron/sand_cauldron"
     )
     public void remove_sand_from_sand_cauldron(GameTestHelper context) {
         final BlockPos cauldronPos = new BlockPos(2, 2, 2);
@@ -34,7 +39,7 @@ public class SandCauldronTests {
     }
 
     @GameTest(
-            template = "scorchful-test:cauldron/red_sand_cauldron"
+            template = "cauldron/red_sand_cauldron"
     )
     public void remove_red_sand_from_red_sand_cauldron(GameTestHelper context) {
         final BlockPos cauldronPos = new BlockPos(2, 2, 2);
@@ -54,7 +59,7 @@ public class SandCauldronTests {
     }
 
     @GameTest(
-            template = "scorchful-test:cauldron/partially_filled_sand_cauldron"
+            template = "cauldron/partially_filled_sand_cauldron"
     )
     public void try_remove_sand_from_partially_filled_sand_cauldron(GameTestHelper context) {
         final BlockPos cauldronPos = new BlockPos(2, 2, 2);

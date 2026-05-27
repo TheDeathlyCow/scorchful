@@ -1,5 +1,6 @@
 package com.github.thedeathlycow.scorchful.testmod.common.soaking;
 
+import com.github.thedeathlycow.scorchful.testmod.common.ScorchfulTestMod;
 import com.github.thedeathlycow.thermoo.api.temperature.Soakable;
 import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
 import net.minecraft.core.BlockPos;
@@ -9,11 +10,15 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.item.Items;
+import net.neoforged.neoforge.gametest.GameTestHolder;
+import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
 @SuppressWarnings("unused")
+@GameTestHolder(ScorchfulTestMod.MODID)
+@PrefixGameTestTemplate(false)
 public class UmbrellaTests {
     @GameTest(
-            template = FabricGameTest.EMPTY_STRUCTURE,
+            template = ScorchfulTestMod.EMPTY_STRUCTURE,
             skyAccess = true,
             batch = "scorchful.rainy_night"
     )
@@ -38,7 +43,7 @@ public class UmbrellaTests {
     }
 
     @GameTest(
-            template = FabricGameTest.EMPTY_STRUCTURE,
+            template = ScorchfulTestMod.EMPTY_STRUCTURE,
             skyAccess = true,
             batch = "scorchful.rainy_night"
     )

@@ -2,6 +2,7 @@ package com.github.thedeathlycow.scorchful.testmod.common.cauldron;
 
 import com.github.thedeathlycow.scorchful.block.SandCauldronBlock;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
+import com.github.thedeathlycow.scorchful.testmod.common.ScorchfulTestMod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -10,12 +11,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.gametest.GameTestHolder;
+import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
 @SuppressWarnings("unused")
+@GameTestHolder(ScorchfulTestMod.MODID)
+@PrefixGameTestTemplate(false)
 public class CauldronInteractionTests {
 
     @GameTest(
-            template = "scorchful-test:cauldron/empty_cauldron"
+            template = "cauldron/empty_cauldron"
     )
     public void add_sand_to_empty_cauldron(GameTestHelper context) {
         final BlockPos cauldronPos = new BlockPos(2, 2, 2);
@@ -38,7 +43,7 @@ public class CauldronInteractionTests {
     }
 
     @GameTest(
-            template = "scorchful-test:cauldron/empty_cauldron"
+            template = "cauldron/empty_cauldron"
     )
     public void add_red_sand_to_empty_cauldron(GameTestHelper context) {
         final BlockPos cauldronPos = new BlockPos(2, 2, 2);
