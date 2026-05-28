@@ -5,6 +5,7 @@ import com.github.thedeathlycow.scorchful.attachment.ScorchfulEntityAttachments;
 import com.github.thedeathlycow.scorchful.compat.AccessoriesIntegration;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.datagen.ScorchfulDataGenerator;
+import com.github.thedeathlycow.scorchful.registry.SItemGroups;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import dev.ghen.thirst.content.purity.ContainerWithPurity;
 import dev.ghen.thirst.foundation.common.event.RegisterThirstValueEvent;
@@ -18,6 +19,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 public class ScorchfulMod {
     public ScorchfulMod(IEventBus modBus) {
         ScorchfulEntityAttachments.REGISTRY.register(modBus);
+        SItemGroups.REGISTRY.register(modBus);
 
         NeoForge.EVENT_BUS.addListener(ScorchfulMod::onTick);
         modBus.addListener(ScorchfulMod::runDatagen);

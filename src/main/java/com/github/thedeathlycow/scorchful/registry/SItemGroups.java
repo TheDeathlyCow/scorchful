@@ -1,7 +1,6 @@
 package com.github.thedeathlycow.scorchful.registry;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
-import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.core.Registry;
@@ -10,13 +9,17 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.Contract;
 
+import java.util.function.Supplier;
+
 public class SItemGroups {
-    public static final CreativeModeTab SCORCHFUL = Registry.register(
-            BuiltInRegistries.CREATIVE_MODE_TAB,
-            Scorchful.id("main"),
-            FabricItemGroup.builder()
+    public static final DeferredRegister<CreativeModeTab> REGISTRY = DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, Scorchful.MODID);
+
+    public static final Supplier<CreativeModeTab> SCORCHFUL = REGISTRY.register(
+            "main",
+            () -> CreativeModeTab.builder()
                     .icon(SItems.SUN_HAT::getDefaultInstance)
                     .title(Component.translatable("item_group.scorchful"))
                     .displayItems((context, entries) -> {

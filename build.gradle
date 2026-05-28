@@ -291,8 +291,6 @@ publishMods {
         requires("forgified-fabric-api", "thermoo", "cloth-config", "velvet")
 
         optional("thermoo-patches", "frostiful", "thirst-was-taken")
-
-        embeds("immersive-storms")
     }
 
     modrinth {
@@ -300,7 +298,7 @@ publishMods {
         projectId = "SZQ5qcdn"
         minecraftVersions.addAll("1.21.1")
 
-        requires("forgified-fabric-api", "thermoo", "cloth-config", "velvet")
+        requires("forgified-fabric-api", "thermoo", "cloth-config", "velvet-api")
 
         optional("thermoo-patches", "frostiful", "thirst-was-taken")
     }
