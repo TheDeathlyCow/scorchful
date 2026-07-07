@@ -142,7 +142,7 @@ public final class SItems {
     public static Item register(String id, Function<Item.Properties, Item> itemFactory, Item.Properties settings) {
         Item item = itemFactory.apply(settings);
 
-        return Registry.register(BuiltInRegistries.ITEM, Scorchful.id(id), item);
+        return Items.registerItem(Scorchful.id(id), item);
     }
 
     private SItems() {
