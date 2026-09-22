@@ -3,11 +3,10 @@ package com.github.thedeathlycow.scorchful.client.item;
 import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.registry.SItems;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+
 import net.minecraft.client.renderer.item.ItemProperties;
 
-@Environment(EnvType.CLIENT)
+
 public class SModelPredicates {
 
     public static void onInitialize() {

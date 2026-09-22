@@ -40,6 +40,8 @@ A mod focused on Heat based survival and combat. Also try Frostiful!
 "yumi:init" = "com.github.thedeathlycow.scorchful.Scorchful"
 "yumi:client_init" = "com.github.thedeathlycow.scorchful.client.ScorchfulClient"
 
+[modproperties.${mod_id}."fabric:entrypoints"]
+fabric-datagen = ["com.github.thedeathlycow.scorchful.datagen.ScorchfulDataGenerator"]
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
 [[mixins]]

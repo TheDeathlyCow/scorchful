@@ -1,8 +1,7 @@
 package com.github.thedeathlycow.scorchful.client.particle;
 
 import com.github.thedeathlycow.scorchful.particle.SpurtingWaterParticleEffect;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +38,7 @@ public class SpurtingWaterParticle extends TextureSheetParticle {
         return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
     }
 
-    @Environment(EnvType.CLIENT)
+
     public static class Factory implements ParticleProvider<SpurtingWaterParticleEffect> {
 
         private final SpriteSet spriteProvider;

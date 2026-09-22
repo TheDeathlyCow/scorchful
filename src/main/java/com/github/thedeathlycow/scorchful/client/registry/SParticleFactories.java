@@ -4,11 +4,10 @@ import com.github.thedeathlycow.scorchful.client.particle.BatParticle;
 import com.github.thedeathlycow.scorchful.client.particle.DustGrainParticle;
 import com.github.thedeathlycow.scorchful.client.particle.SpurtingWaterParticle;
 import com.github.thedeathlycow.scorchful.registry.SParticleTypes;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 
-@Environment(EnvType.CLIENT)
+
 public class SParticleFactories {
 
     public static void registerFactories() {

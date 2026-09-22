@@ -1,8 +1,7 @@
 package com.github.thedeathlycow.scorchful.client.mixin;
 
 import com.github.thedeathlycow.scorchful.client.client.SoakedEffects;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -14,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Player.class)
-@Environment(EnvType.CLIENT)
+
 public abstract class DrippingWetPlayerMixin extends LivingEntity {
 
     @Shadow

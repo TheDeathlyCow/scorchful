@@ -1,8 +1,7 @@
 package com.github.thedeathlycow.scorchful.client.particle;
 
 import com.github.thedeathlycow.scorchful.particle.DustGrainParticleEffect;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.DustParticleBase;
 import net.minecraft.client.particle.Particle;
@@ -30,7 +29,7 @@ public class DustGrainParticle extends DustParticleBase<DustGrainParticleEffect>
         this.bCol = this.randomizeColor(parameters.getColor().z(), multiplier);
     }
 
-    @Environment(EnvType.CLIENT)
+
     public static class Factory implements ParticleProvider<DustGrainParticleEffect> {
 
         private final SpriteSet spriteProvider;

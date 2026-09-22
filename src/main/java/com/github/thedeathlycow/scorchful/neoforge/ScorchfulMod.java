@@ -4,16 +4,24 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.attachment.ScorchfulEntityAttachments;
 import com.github.thedeathlycow.scorchful.compat.AccessoriesIntegration;
 import com.github.thedeathlycow.scorchful.compat.ScorchfulIntegrations;
-import com.github.thedeathlycow.scorchful.datagen.ScorchfulDataGenerator;
+import com.github.thedeathlycow.scorchful.datagen.generator.BlockTagGenerator;
+import com.github.thedeathlycow.scorchful.datagen.generator.ClimateBiomeTagGenerator;
+import com.github.thedeathlycow.scorchful.datagen.generator.ItemTagGenerator;
 import com.github.thedeathlycow.scorchful.registry.SItemGroups;
 import com.github.thedeathlycow.scorchful.registry.SItems;
 import dev.ghen.thirst.content.purity.ContainerWithPurity;
 import dev.ghen.thirst.foundation.common.event.RegisterThirstValueEvent;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+
+import java.util.concurrent.CompletableFuture;
 
 @Mod(Scorchful.MODID)
 public class ScorchfulMod {
@@ -38,12 +46,19 @@ public class ScorchfulMod {
     }
 
     private static void runDatagen(GatherDataEvent event) {
-        FabricDataGenHelper.runDatagenForMod(
-                Scorchful.MODID,
-                Scorchful.MODID,
-                new ScorchfulDataGenerator(),
-                event
+        DataGenerator generator = event.getGenerator();
+        PackOutput packOutput = generator.getPackOutput();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+
+        generator.addProvider(
+                event.includeServer(),
+                new ClimateBiomeTagGenerator(packOutput, lookupProvider, existingFileHelper)
         );
+
+        BlockTagGenerator blockTags = new BlockTagGenerator(packOutput, lookupProvider, existingFileHelper);
+        generator.addProvider(event.includeServer(), blockTags);
+        generator.addProvider(event.includeServer(), new ItemTagGenerator(packOutput, lookupProvider, blockTags.contentsGetter(), existingFileHelper));
     }
 
     private static void registerDrinks(RegisterThirstValueEvent event) {

@@ -1,0 +1,8 @@
+{
+    "values": [
+        {
+            "id": "scorchful:modifier/apply_shade_for_time",
+            "required": false
+        }
+    ]
+}

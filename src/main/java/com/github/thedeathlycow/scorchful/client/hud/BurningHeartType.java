@@ -1,11 +1,10 @@
 package com.github.thedeathlycow.scorchful.client.hud;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
 
-@Environment(EnvType.CLIENT)
+
 public enum BurningHeartType {
 
 
