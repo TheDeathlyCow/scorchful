@@ -89,10 +89,12 @@ public class EntityDesertVisionAttachment {
 
         @Override
         public EntityDesertVisionAttachment read(IAttachmentHolder holder, RegistryFriendlyByteBuf buf, EntityDesertVisionAttachment previousValue) {
-            UUID uuid = buf.readOptional(RegistryFriendlyByteBuf::readUUID).orElse(null);
+            Entity provider = holder instanceof Entity entity ? entity : null;
+            Objects.requireNonNull(provider, "Entity desert vision attachment received for non-entity");
 
+            UUID uuid = buf.readOptional(RegistryFriendlyByteBuf::readUUID).orElse(null);
             Player cause = uuid != null
-                    ? previousValue.provider.level().getPlayerByUUID(uuid)
+                    ? provider.level().getPlayerByUUID(uuid)
                     : null;
 
             return new EntityDesertVisionAttachment(holder, cause);
