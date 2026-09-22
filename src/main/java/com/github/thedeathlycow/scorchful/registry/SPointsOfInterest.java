@@ -4,9 +4,11 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.mixin.accessor.PointOfInterestTypeAccessor;
 import com.github.thedeathlycow.scorchful.mixin.accessor.PointOfInterestTypesAccessor;
 import com.google.common.collect.ImmutableSet;
+
 import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Stream;
+
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;

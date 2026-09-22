@@ -5,6 +5,7 @@ import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
+
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;

@@ -5,9 +5,11 @@ import com.github.thedeathlycow.scorchful.block.SandPileBlock;
 import com.github.thedeathlycow.scorchful.config.WeatherConfig;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
 import com.google.common.base.Suppliers;
+
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Supplier;
+
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;

@@ -1,7 +1,9 @@
 package com.github.thedeathlycow.scorchful.client.client;
 
 import com.github.thedeathlycow.scorchful.Scorchful;
+
 import java.util.concurrent.ThreadLocalRandom;
+
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.player.Player;

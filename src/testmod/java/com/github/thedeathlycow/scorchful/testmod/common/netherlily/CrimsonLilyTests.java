@@ -5,6 +5,7 @@ import com.github.thedeathlycow.scorchful.block.NetherLilyBlock;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.registry.SBlocks;
 import com.github.thedeathlycow.scorchful.registry.SItems;
+
 import java.util.function.BooleanSupplier;
 
 import com.github.thedeathlycow.scorchful.testmod.common.ScorchfulTestMod;

@@ -21,9 +21,9 @@ public record RelativeHumidityThresholdEnvironmentProvider(
 ) implements EnvironmentProvider {
     public static final MapCodec<RelativeHumidityThresholdEnvironmentProvider> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
-                RelativeHumidityComponent.CODEC
-                        .fieldOf("relative_humidity_threshold")
-                        .forGetter(RelativeHumidityThresholdEnvironmentProvider::relativeHumidityThreshold),
+                    RelativeHumidityComponent.CODEC
+                            .fieldOf("relative_humidity_threshold")
+                            .forGetter(RelativeHumidityThresholdEnvironmentProvider::relativeHumidityThreshold),
                     EnvironmentProvider.HOLDER_CODEC
                             .fieldOf("above")
                             .forGetter(RelativeHumidityThresholdEnvironmentProvider::above),

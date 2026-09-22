@@ -3,7 +3,6 @@ package com.github.thedeathlycow.scorchful.server;
 import com.github.thedeathlycow.scorchful.attachment.ScorchfulEntityAttachments;
 import com.mojang.brigadier.CommandDispatcher;
 import dev.yumi.mc.core.api.YumiMods;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.world.entity.player.Player;

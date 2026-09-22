@@ -1,7 +1,9 @@
 package com.github.thedeathlycow.scorchful.temperature.heatvision;
 
 import com.github.thedeathlycow.scorchful.mixin.accessor.BlockDisplayAccess;
+
 import java.util.function.Supplier;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;

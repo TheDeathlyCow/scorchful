@@ -3,7 +3,9 @@ package com.github.thedeathlycow.scorchful.block;
 import com.github.thedeathlycow.scorchful.server.Sandstorms;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+
 import java.util.function.Predicate;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.world.entity.Entity;
@@ -49,8 +51,8 @@ public class SandCauldronBlock extends AbstractCauldronBlock {
      * Constructs a leveled cauldron block.
      *
      * @param settings
-     * @param sandstormType     The type of sandstorm this will fill in
-     * @param behaviorMap       other behaviours for this cauldron
+     * @param sandstormType The type of sandstorm this will fill in
+     * @param behaviorMap   other behaviours for this cauldron
      */
     public SandCauldronBlock(
             Sandstorms.SandstormType sandstormType,

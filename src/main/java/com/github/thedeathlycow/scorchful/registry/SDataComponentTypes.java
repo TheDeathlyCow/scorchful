@@ -4,7 +4,9 @@ import com.github.thedeathlycow.scorchful.Scorchful;
 import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.item.component.DrinkLevelComponent;
 import com.github.thedeathlycow.scorchful.item.component.HeatResistanceComponent;
+
 import java.util.function.UnaryOperator;
+
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;

@@ -6,6 +6,7 @@ import com.github.thedeathlycow.scorchful.util.SMth;
 import org.joml.Vector2i;
 
 import java.util.OptionalInt;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;

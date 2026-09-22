@@ -10,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.IntFunction;
 import java.util.function.ToIntFunction;
+
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

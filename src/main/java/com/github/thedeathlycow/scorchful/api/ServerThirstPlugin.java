@@ -7,6 +7,7 @@ import com.github.thedeathlycow.scorchful.compat.ServerThirstPluginManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
+
 import net.minecraft.world.entity.player.Player;
 
 /**
