@@ -106,8 +106,8 @@ dependencies {
 
     implementation "dev.isxander:yet-another-config-lib:${project.yacl_version}"
 
-    api("dev.yumi.mc.core:yumi-mc-foundation:${project.yumi_mc_foundation_version}")
-    implementation "com.github.TheDeathlyCow.thermoo:thermoo-fabric:v${project.thermoo_version}"
+    compileOnly "com.github.TheDeathlyCow.thermoo:thermoo-common:v${project.thermoo_version}"
+    localRuntime "com.github.TheDeathlyCow.thermoo:thermoo-fabric:v${project.thermoo_version}"
 
     implementation "org.ladysnake.cardinal-components-api:cardinal-components-base:${project.cca_version}"
     implementation "org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
