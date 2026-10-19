@@ -12,7 +12,8 @@ import com.github.thedeathlycow.scorchful.temperature.tick.ActiveTemperatureTick
 import com.github.thedeathlycow.scorchful.temperature.tick.PassiveTemperatureTickListeners;
 import com.github.thedeathlycow.scorchful.temperature.tick.ServerPlayerEnvironmentTickListeners;
 import com.github.thedeathlycow.scorchful.world.gen.NetherBiomeModifications;
-import net.fabricmc.api.ModInitializer;
+import dev.yumi.mc.core.api.ModContainer;
+import dev.yumi.mc.core.api.entrypoint.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
@@ -35,7 +36,7 @@ public class Scorchful implements ModInitializer {
     }
 
     @Override
-    public void onInitialize() {
+    public void onInitialize(ModContainer mod) {
         ScorchfulConfig.initialize();
 
         if (FabricLoader.getInstance().isDevelopmentEnvironment()) {

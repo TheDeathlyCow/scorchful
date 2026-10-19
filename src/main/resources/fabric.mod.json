@@ -24,10 +24,10 @@
 	"icon": "assets/scorchful/icon.png",
 	"environment": "*",
 	"entrypoints": {
-		"main": [
+		"yumi:init": [
 			"com.github.thedeathlycow.scorchful.Scorchful"
 		],
-		"client": [
+		"yumi:client_init": [
 			"com.github.thedeathlycow.scorchful.ScorchfulClient"
 		],
 		"modmenu": [
