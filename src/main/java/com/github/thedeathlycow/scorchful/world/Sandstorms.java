@@ -2,8 +2,6 @@ package com.github.thedeathlycow.scorchful.world;
 
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.mojang.serialization.Codec;
-import com.thedeathlycow.immersive.storms.util.WeatherEffectType;
-import com.thedeathlycow.immersive.storms.util.WeatherEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.util.StringRepresentable;
@@ -38,31 +36,18 @@ public class Sandstorms {
      * Returns {@link SandstormType#REGULAR} if it is raining in a desert and {@link SandstormType#RED} if it is raining
      * in a badlands.
      */
-    public static SandstormType getCurrentSandStorm(Level world, BlockPos pos, boolean includeSurface) {
-        WeatherEffectType type = WeatherEffects.getCurrentType(world, pos, includeSurface);
+    public static SandstormType getCurrentSandStorm(Level world, BlockPos pos) {
+        Holder<Biome> biome = world.getBiomeManager().getNoiseBiomeAtPosition(pos);
 
-        if (type == WeatherEffectType.SANDSTORM) {
-            Holder<Biome> biome = world.getBiomeManager().getNoiseBiomeAtPosition(pos);
-            if (hasRedSandStorms(biome)) {
+        if (!biome.value().hasPrecipitation() && biome.is(SBiomeTags.HAS_SANDSTORMS)) {
+            if (biome.is(SBiomeTags.HAS_RED_SAND_STORMS)) {
                 return SandstormType.RED;
-            } else if (hasRegularSandStorms(biome)) {
+            } else if (biome.is(SBiomeTags.HAS_REGULAR_SAND_STORMS)) {
                 return SandstormType.REGULAR;
             }
         }
 
         return SandstormType.NONE;
-    }
-
-    public static SandstormType getCurrentSandStorm(Level world, BlockPos pos) {
-        return getCurrentSandStorm(world, pos, true);
-    }
-
-    public static boolean hasRegularSandStorms(Holder<Biome> biome) {
-        return !biome.value().hasPrecipitation() && biome.is(SBiomeTags.HAS_REGULAR_SAND_STORMS);
-    }
-
-    public static boolean hasRedSandStorms(Holder<Biome> biome) {
-        return !biome.value().hasPrecipitation() && biome.is(SBiomeTags.HAS_RED_SAND_STORMS);
     }
 
     private Sandstorms() {

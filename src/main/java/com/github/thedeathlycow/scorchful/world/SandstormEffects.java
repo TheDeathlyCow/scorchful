@@ -6,7 +6,7 @@ import com.github.thedeathlycow.scorchful.config.section.WeatherConfig;
 import com.github.thedeathlycow.scorchful.mixin.accessor.LivingEntityAccessor;
 import com.github.thedeathlycow.scorchful.registry.tag.SBiomeTags;
 import com.github.thedeathlycow.scorchful.registry.tag.SEntityTypeTags;
-import com.thedeathlycow.immersive.storms.registry.ISBiomeTags;
+import com.thedeathlycow.immersive.storms.registry.tag.ISBiomeTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;

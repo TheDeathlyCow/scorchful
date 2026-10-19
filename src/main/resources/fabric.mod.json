@@ -45,13 +45,13 @@
 		}
 	],
 	"depends": {
-		"fabricloader": ">=0.18.4",
-		"minecraft": ">=1.21.11",
-		"java": ">=21",
-		"fabric-api": ">=0.145.1",
-		"yet_another_config_lib_v3": ">=3.8.1",
-		"cardinal-components-base": ">=7.3.0",
-		"thermoo": ">=9.0.0"
+		"fabricloader": "*",
+		"minecraft": "~26.1-",
+		"java": ">=25",
+		"fabric-api": "*",
+		"yet_another_config_lib_v3": "*",
+		"cardinal-components-base": "*",
+		"thermoo": "*"
 	},
 	"suggests": {
 		"frostiful": "*",

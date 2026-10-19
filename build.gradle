@@ -1,5 +1,5 @@
 plugins {
-    id 'net.fabricmc.fabric-loom' version '1.15-SNAPSHOT'
+    id 'net.fabricmc.fabric-loom' version '1.17-SNAPSHOT'
     id 'maven-publish'
     id "me.modmuss50.mod-publish-plugin" version "0.8.4"
 }
@@ -106,7 +106,8 @@ dependencies {
 
     implementation "dev.isxander:yet-another-config-lib:${project.yacl_version}"
 
-    implementation "com.github.thedeathlycow:thermoo:v${project.thermoo_version}"
+    api("dev.yumi.mc.core:yumi-mc-foundation:${project.yumi_mc_foundation_version}")
+    implementation "com.github.TheDeathlyCow.thermoo:thermoo-fabric:v${project.thermoo_version}"
 
     implementation "org.ladysnake.cardinal-components-api:cardinal-components-base:${project.cca_version}"
     implementation "org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
